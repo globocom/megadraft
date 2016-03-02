@@ -1,0 +1,21 @@
+.heading {
+  font-size: 28px;
+}
+
+.example {
+  display: flex;
+}
+
+.box {
+  width: 46%;
+}
+
+.divider {
+  width: 8%;
+}
+
+.jsonpreview {
+  width: 100%;
+  height: 300px;
+  font-family: monospace;
+}
