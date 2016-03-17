@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import SideBar from "./SideBar";
 import {
   Editor,
@@ -7,6 +6,7 @@ import {
   RichUtils,
   convertFromRaw,
   ContentState} from 'draft-js';
+import MegaToolbar from './mega-toolbar'
 
 
 export default class Megadraft extends Component {
@@ -36,6 +36,9 @@ export default class Megadraft extends Component {
             editorState={editorState}
             onChange={this.onChange} />
         </div>
+        <MegaToolbar
+          editorState={editorState}
+          onChange={this.onChange} />
       </div>
     );
   }
