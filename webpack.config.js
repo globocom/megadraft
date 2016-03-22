@@ -1,3 +1,17 @@
+const applyCurrentColorPlugin = {
+    type: 'perItem',
+    fn: function (item, params) {
+        if (item.attrs && item.attrs.fill) {
+            if (item.attrs.fill.value != 'none') {
+                item.attrs.fill.value = 'currentColor';
+            }
+            else {
+                item.removeAttr('fill');
+            }
+        }
+    }
+};
+
 module.exports = {
   devtool: 'source-map',
   entry: [
@@ -18,7 +32,17 @@ module.exports = {
     }, {
       test: /\.md$/,
       loader: "html!markdown"
+    }, {
+      test: /\.svg$/,
+      loaders: ['babel', 'react-svg', 'svgo-loader?useConfig=svgoConfig']
     }]
+  },
+  svgoConfig: {
+    plugins: [
+      {removeTitle: true},
+      {transformsWithOnePath: true},
+      {applyCurrentColorPlugin: applyCurrentColorPlugin}
+    ]
   },
   resolve: {
     extensions: ['', '.js', '.jsx']

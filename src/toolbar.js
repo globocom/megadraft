@@ -16,15 +16,27 @@ export default class DraftToolbar extends Component {
     }
   }
 
+  renderButton(action) {
+    const actionClass = `action-${action.style.style.toLowerCase()}`;
+    const activeClass = action.active ? ' active': '';
+    const className = `item ${activeClass} ${actionClass}`;
+
+    const Icon = action.style.icon;
+
+    return (
+      <li key={action.style.label} className={className}>
+        <button onClick={() => this.toggleAction(action)}><Icon /></button>
+      </li>
+    );
+  }
+
   render() {
     return (
       <Tooltip {...this.props}>
         <div className="draft-toolbar" onMouseDown={(x) => {x.preventDefault()}}>
-          {this.props.actions.map(action =>
-            <div key={action.label} className={action.active ? 'item active': 'item'}>
-              <button onClick={() => this.toggleAction(action)}>{action.button}</button>
-            </div>
-          )}
+          <ul>
+            {this.props.actions.map(this.renderButton.bind(this))}
+          </ul>
         </div>
       </Tooltip>
     );

@@ -8,6 +8,8 @@
 import React, {Component} from "react";
 import {RichUtils} from "draft-js";
 import Toolbar from "./toolbar";
+import BoldIcon from "./icons/bold.svg";
+import ItalicIcon from "./icons/italic.svg";
 
 
 export default class MegaToolbar extends Component {
@@ -15,9 +17,8 @@ export default class MegaToolbar extends Component {
     super(props);
 
     this.inlineStyles = [
-      {label: 'Bold', button: <b>B</b>, style: 'BOLD'},
-      {label: 'Italic', button: <i>I</i>, style: 'ITALIC'},
-      {label: 'Underline', button: <u>U</u>, style: 'UNDERLINE'}
+      {label: 'Bold', style: 'BOLD', icon: BoldIcon},
+      {label: 'Italic', style: 'ITALIC', icon: ItalicIcon},
     ];
   }
 
@@ -54,6 +55,57 @@ export default class MegaToolbar extends Component {
     )
   }
 
+  rawStyle() {
+    return {__html: `
+      .draft-toolbar {
+        background-color: #181818;
+        position: relative;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
+      }
+      .draft-toolbar:after {
+        display: inline-block;
+        top: 100%;
+        left: 50%;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border: solid transparent;
+        border-top-color: #181818;
+        border-width: 8px;
+        margin-left: -8px;
+      }
+
+      .draft-toolbar ul {
+        padding: 0;
+      }
+
+      .draft-toolbar .item {
+        display: inline-block;
+      }
+
+      .draft-toolbar .item button {
+        color: #ccc;
+        cursor: pointer;
+        font-size: 18px;
+        border: 0;
+        height: 56px;
+        width: 56px;
+        background: transparent;
+      }
+      .draft-toolbar .item.active button:hover,
+      .draft-toolbar .item.active button {
+        color: #3192e7;
+      }
+      .draft-toolbar .item button:hover {
+        color: #fff;
+      }
+      `
+    };
+  }
+
   render() {
     const {editorState} = this.props;
 
@@ -71,65 +123,16 @@ export default class MegaToolbar extends Component {
     const info = {left: rect.left, top: rect.top, width: rect.width};
     const currentStyle = editorState.getCurrentInlineStyle();
     const items = [
-      ...this.inlineStyles.map(x => ({
-        button: x.button,
-        label: x.label,
-        active: currentStyle.has(x.style),
-        toggle: () => this.toggleInlineStyle(x.style)
+      ...this.inlineStyles.map(inlineStyle => ({
+        style: inlineStyle,
+        active: currentStyle.has(inlineStyle.style),
+        toggle: () => this.toggleInlineStyle(inlineStyle.style)
       })),
     ];
 
     return (
       <div>
-        <style>{`
-          .draft-toolbar .item button {
-              background-color: transparent;
-              border: 0;
-              color: #ccc;
-              box-sizing: border-box;
-              cursor: pointer;
-              display: block;
-              font-size: 14px;
-              line-height: 1.33;
-              margin: 0;
-              padding: 15px;
-              text-decoration: none;
-          }
-          .draft-toolbar {
-              background-color: #181818;
-              border: none;
-              border-radius: 50px;
-              font-size: 16px;
-          }
-          .draft-toolbar .item {
-              float: left;
-              list-style: none;
-              margin: 0;
-              padding: 0;
-              background-color: #181818;
-              box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
-          }
-          .draft-toolbar .item:first-child {
-              border-bottom-left-radius: 4px;
-              border-top-left-radius: 4px;
-              padding-left: 6px;
-          }
-          .draft-toolbar .item:last-child {
-              border-bottom-right-radius: 4px;
-              border-top-right-radius: 4px;
-              padding-right: 6px;
-          }
-
-          .draft-toolbar .item.active button:hover,
-          .draft-toolbar .item.active button {
-              color: #3192e7;
-          }
-
-          .draft-toolbar .item button:hover {
-            color: #fff;
-          }
-          `}
-        </style>
+        <style dangerouslySetInnerHTML={this.rawStyle()}></style>
         <Toolbar
           {...info}
           actions={items}

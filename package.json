@@ -26,8 +26,11 @@
     "react-dom": "^0.14.0",
     "react-router": "^2.0.1",
     "react-tap-event-plugin": "^0.2.2",
+    "react-svg-loader": "^0.1.0",
     "rimraf": "^2.5.2",
     "style-loader": "^0.13.0",
+    "svgo": "^0.6.3",
+    "svgo-loader": "^1.1.0",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   },
