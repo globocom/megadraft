@@ -39,7 +39,7 @@
     "build:lib": "rimraf lib && babel -d lib/ src/",
     "build:dist": "rimraf dist && webpack --config webpack.config.dist.js --optimize-minimize",
     "build": "npm run build:lib && npm run build:dist",
-    "site": "webpack --config webpack.config.js",
+    "site": "webpack --config webpack.config.site.js --optimize-minimize",
     "watch": "babel -d lib/ src/ --watch"
   },
   "repository": {
