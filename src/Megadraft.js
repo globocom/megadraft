@@ -1,12 +1,7 @@
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
+import React, {Component} from "react";
+
 import SideBar from "./SideBar";
-import {
-  Editor,
-  EditorState,
-  RichUtils,
-  convertFromRaw,
-  ContentState} from 'draft-js';
+import {Editor, RichUtils} from "draft-js";
 
 
 export default class Megadraft extends Component {

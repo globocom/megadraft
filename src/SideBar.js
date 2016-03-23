@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 import {RichUtils} from "draft-js";
 
 
@@ -28,7 +28,7 @@ class BlockButton extends Component {
       cursor: "pointer",
       display: "inline-block",
       padding: "5px"
-    }
+    };
     if (this.props.active) {
       style.color = "blue";
     }
@@ -36,7 +36,7 @@ class BlockButton extends Component {
       <li style={style} onMouseDown={::this.onMouseDown}>
         {this.props.blockType.name}
       </li>
-    )
+    );
   }
 }
 
@@ -51,7 +51,7 @@ class BlockStyles extends Component {
       top: "-33px",
       backgroundColor: "#FCFCFC",
       boxShadow: "1px 1px 2px 0px #CCC"
-    }
+    };
     return (
       <ul style={style}>
         {BLOCK_TYPES.map((item) => {
@@ -62,31 +62,31 @@ class BlockStyles extends Component {
               key={item.style}
               onToggle={::this.props.onToggle}
               blockType={item} />
-          )
+          );
         })}
       </ul>
-    )
+    );
   }
 }
 
 class PopOverMenu extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       open: false
-    }
+    };
   }
 
   handleMouseOver() {
     this.setState({
       open: true
-    })
+    });
   }
 
   handleMouseOut() {
     this.setState({
       open: false
-    })
+    });
   }
 
   render() {
@@ -109,21 +109,24 @@ function getSelectedBlockElement() {
   // Finds the block parent of the current selection
   // https://github.com/facebook/draft-js/issues/45
   const selection = window.getSelection();
-  if (selection.rangeCount === 0) return null;
+  if (selection.rangeCount === 0) {
+    return null;
+  }
   var node = selection.getRangeAt(0).startContainer;
 
   do {
-    if (node.getAttribute && node.getAttribute('data-block') == 'true')
-      return node
-    node = node.parentNode
-  } while (node != null)
+    if (node.getAttribute && node.getAttribute("data-block") == "true") {
+      return node;
+    }
+    node = node.parentNode;
+  } while (node != null);
 
 }
 
 export default class SideBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {top: 0}
+    this.state = {top: 0};
   }
 
   onToggle(blockType) {
@@ -136,8 +139,9 @@ export default class SideBar extends Component {
   }
 
   componentDidUpdate() {
-    if (this.updatingPosition)
+    if (this.updatingPosition) {
       clearImmediate(this.updatingPosition);
+    }
     this.updatingPosition = null ;
     this.updatingPosition = setImmediate(() => {
       return this.setBarPostion();
@@ -149,17 +153,20 @@ export default class SideBar extends Component {
 
     const element = getSelectedBlockElement();
 
-    if (!element) return;
+    if (!element) {
+      return;
+    }
 
     const top = Math.floor(
       element.getBoundingClientRect().top - 21 -
       (container.getBoundingClientRect().top -
-        document.documentElement.clientTop))
+        document.documentElement.clientTop));
 
-    if (this.state.top !== top)
+    if (this.state.top !== top) {
       this.setState({
         top: top
       });
+    }
   }
 
   render() {
@@ -194,6 +201,6 @@ export default class SideBar extends Component {
           </ul>
         </div>
       </div>
-    )
+    );
   }
 }

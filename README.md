@@ -14,6 +14,18 @@ make run
 
 Then visit localhost:8080 on your browser.
 
+To run local tests:
+
+```
+make test
+```
+
+To lint local source files:
+
+```
+make lint
+```
+
 ## License
 
 Megadraft is MIT licensed.

@@ -2,7 +2,7 @@ import {
   convertToRaw,
   convertFromRaw,
   EditorState,
-  ContentState} from "draft-js"
+  ContentState} from "draft-js";
 
 export function editorStateToJSON(editorState) {
   if (editorState) {
