@@ -16,4 +16,4 @@ Then visit localhost:8080 on your browser.
 
 ## License
 
-Megadraft is MIT licensed.
+Megadraft is licensed under the [MIT license](LICENSE).
