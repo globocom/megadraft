@@ -3,14 +3,15 @@
 cd "$(dirname "$0")"
 cd ..
 npm run site
-mv website website_new
-git fetch origin gh-pages
-git checkout origin/gh-pages
-git checkout -b gh-pages
-git branch --set-upstream-to=origin/gh-pages
-rm -rf website
+git clone --branch gh-pages --depth=50 \
+        "https://$GH_TOKEN@github.com/globocom/megadraft.git"
+rm -rf megadraft/website
+mv website megadraft
+cd megadraft
 rm index.html
-mv website_new website
 mv website/index.html index.html
 git add -A .
-git commit -m "Update github pages"
+if ! git diff-index --quiet HEAD --; then
+  git commit -m "Update github pages"
+  git push origin gh-pages
+fi

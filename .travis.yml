@@ -9,7 +9,6 @@ script:
         git config --global user.name "Travis CI"
         git config --global user.email "travis@globo.com"
         sh website/publish.sh
-        git push "https://${GH_TOKEN}@github.com/globocom/megadraft.git" gh-pages
       fi
     elif [ "$TEST_TYPE" = lint ]; then
       echo "Checking code lint."
@@ -25,3 +24,6 @@ env:
     - TEST_TYPE=build_website
   global:
     secure: "cDcKkhdnoBAzL0M+GflcyU0gW+80eei2nuTg9DErji8BFVrL3xMUcCIz5hvTqqjOrP24wRchvEuOGmTa0A0IjyFLYxG4wPpfGLn7rt569ANngzPndyQqwti1EVFWVEnwjT4LLZZfL5x5JOp2MUwDDjNFc4jxRqvVMueHXWusjdyFWgKObn7O9T8uPC483ClgmxY9KLP9mgN1pNJ06jXk5VE0QgNKtMJngFb6ytNMOpzKmICzxf9IX2VRd1dYRqQ5iF1uBkxXTecZDJHKSGG9t27sZL7We5AyhR2C3uEtarPtG6ioz1swBMQlLf4LBNNamBs+LdzSZGm0UslEjq/CCvX6aoQ/NpqkAsYbWqarNv/S8YKSdvQczeP/ALP2uPJDWBhswyiaJmsBfU7s6QLtuLOhk/gZH9jS+yY1EQwqrB4rzIIVScXqnZDOaO1tEvEkltSdOFhL/5OuWXAZArISxnuXysCgXAbpDv9kncLoGx3D7aJ2F3ACaMzjMvGW0dYcyBXU8rW+hUw2IWWDZRw07gtprp3jMtcDiCpQMfOPLU2xhElO+XrPLBXizCEXTrx0SZYPzjbv+jmdVcrIkSY7gPQjJNyI97pEi4UcDm8P+gcY1Rx9LwVSolT6fqOjUhoLhO4t/1hQZC0uurYXI6LLh+ehZ6nJ9k8Kc7CF4znJ+Wk="
+cache:
+  directories:
+    - node_modules
