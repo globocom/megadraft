@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { hashHistory, Router, Route, Link, IndexRoute } from 'react-router'
 
 import AppBar from 'material-ui/lib/app-bar';
 
 import styles from './App.css';
 
+import Home from './components/home';
+import Docs from './components/docs';
 import LeftNavMenu from './components/leftnavmenu';
-import Example from './components/example';
-
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -17,8 +18,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 // https://github.com/zilverline/react-tap-event-plugin
 injectTapEventPlugin();
 
-
-import Overview from '../docs/overview.md';
 
 class Page extends React.Component {
   constructor(props) {
@@ -38,14 +37,7 @@ class Page extends React.Component {
           title="Megadraft"
           onLeftIconButtonTouchTap={::this.onMenuToggle} />
         <div className="content">
-          <h1 className={styles.heading} >Megadraft</h1>
-          <p>
-            Megadraft is a Rich Text editor built on top of Facebook's
-            draft.js featuring a nice default base of plugins and
-            extensibility
-          </p>
-          <Example />
-          <div dangerouslySetInnerHTML={{__html: Overview}}></div>
+          {this.props.children}
         </div>
       </div>
     )
@@ -53,7 +45,12 @@ class Page extends React.Component {
 }
 
 
-ReactDOM.render(
-  <Page />,
+ReactDOM.render((
+  <Router history={hashHistory}>
+    <Route path="/" component={Page}>
+      <IndexRoute component={Home}/>
+      <Route path="/docs/:doc" component={Docs}/>
+    </Route>
+  </Router>),
   document.getElementById('container')
 );

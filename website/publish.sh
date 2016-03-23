@@ -12,4 +12,4 @@ mv website_new website
 mv website/index.html index.html
 git add -A .
 git commit -m "Update github pages"
-
+git push origin gh-pages
