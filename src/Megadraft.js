@@ -4,15 +4,11 @@
  * License: MIT
  */
 
-import React, {Component} from 'react';
+import MegaToolbar from "./mega-toolbar";
+import React, {Component} from "react";
+
 import SideBar from "./SideBar";
-import {
-  Editor,
-  EditorState,
-  RichUtils,
-  convertFromRaw,
-  ContentState} from 'draft-js';
-import MegaToolbar from './mega-toolbar'
+import {Editor, RichUtils} from "draft-js";
 
 
 export default class Megadraft extends Component {
