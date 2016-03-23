@@ -36,7 +36,7 @@ export default class LeftNavMenu extends React.Component {
               containerElement={<a href="https://facebook.github.io/react"/>}>
                 React</ListItem>
             <ListItem
-              containerElement={<a href="https://facebook.github.io/draft-js"/>}>
+              containerElement={<a href="draftjs.org"/>}>
                 Draft.js</ListItem>
           </List>
         </LeftNav>
