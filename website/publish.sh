@@ -11,7 +11,7 @@ cd megadraft
 rm index.html
 mv website/index.html index.html
 git add -A .
-# if ! git diff-index --quiet HEAD --; then
+if ! git diff-index --quiet HEAD --; then
   git commit -m "Update github pages"
   git push origin gh-pages
-# fi
+fi
