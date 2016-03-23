@@ -3,12 +3,12 @@
 cd "$(dirname "$0")"
 cd ..
 npm run site
-mv website website_new
-git fetch
-git checkout gh-pages
-rm -rf website
+git clone --branch gh-pages --depth=50 \
+        "https://vierno@github.com/globocom/megadraft.git"
+rm -rf megadraft/website
+mv website megadraft
+cd megadraft
 rm index.html
-mv website_new website
 mv website/index.html index.html
 git add -A .
 git commit -m "Update github pages"
