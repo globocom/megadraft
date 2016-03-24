@@ -140,11 +140,11 @@ export default class SideBar extends Component {
       clearImmediate(this.updatingPosition);
     this.updatingPosition = null ;
     this.updatingPosition = setImmediate(() => {
-      return this.setBarPostion();
+      return this.setBarPosition();
     });
   }
 
-  setBarPostion() {
+  setBarPosition() {
     const container = ReactDOM.findDOMNode(this.refs.container);
 
     const element = getSelectedBlockElement();
