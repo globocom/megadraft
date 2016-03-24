@@ -1,4 +1,4 @@
-# Megadraft
+# Megadraft [![Build Status](https://secure.travis-ci.org/globocom/megadraft.png?branch=master)](https://travis-ci.org/globocom/megadraft)
 
 Rich Text editor built on top of draft.js (Work in Progress)
 
