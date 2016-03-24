@@ -1,16 +1,4 @@
-const applyCurrentColorPlugin = {
-    type: 'perItem',
-    fn: function (item, params) {
-        if (item.attrs && item.attrs.fill) {
-            if (item.attrs.fill.value != 'none') {
-                item.attrs.fill.value = 'currentColor';
-            }
-            else {
-                item.removeAttr('fill');
-            }
-        }
-    }
-};
+var commonConfig = require("./webpack.common.js");
 
 module.exports = {
   devtool: 'source-map',
@@ -32,18 +20,10 @@ module.exports = {
     }, {
       test: /\.md$/,
       loader: "html!markdown"
-    }, {
-      test: /\.svg$/,
-      loaders: ['babel', 'react-svg', 'svgo-loader?useConfig=svgoConfig']
-    }]
+    },
+    commonConfig.svgo.loader]
   },
-  svgoConfig: {
-    plugins: [
-      {removeTitle: true},
-      {transformsWithOnePath: true},
-      {applyCurrentColorPlugin: applyCurrentColorPlugin}
-    ]
-  },
+  svgoConfig: commonConfig.svgo.config,
   resolve: {
     extensions: ['', '.js', '.jsx']
   },

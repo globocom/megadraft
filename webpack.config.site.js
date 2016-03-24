@@ -1,4 +1,5 @@
 var webpack = require("webpack");
+var commonConfig = require("./webpack.common.js");
 
 module.exports = {
   entry: [
@@ -26,6 +27,8 @@ module.exports = {
     }, {
       test: /\.md$/,
       loader: "html!markdown"
-    }]
-  }
+    },
+    commonConfig.svgo.loader]
+  },
+  svgoConfig: commonConfig.svgo.config,
 };
