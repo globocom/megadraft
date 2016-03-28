@@ -6,3 +6,6 @@ run:
 
 test:
 	@npm test
+
+lint:
+	@npm run --silent lint

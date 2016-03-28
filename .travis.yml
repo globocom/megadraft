@@ -13,7 +13,6 @@ script:
     elif [ "$TEST_TYPE" = lint ]; then
       echo "Checking code lint."
       make lint
-      exit
     elif [ "$TEST_TYPE" = test ]; then
       make test
     fi
