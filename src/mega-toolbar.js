@@ -17,13 +17,13 @@ export default class MegaToolbar extends Component {
     super(props);
 
     this.inlineStyles = [
-      {label: 'Bold', style: 'BOLD', icon: BoldIcon},
-      {label: 'Italic', style: 'ITALIC', icon: ItalicIcon},
+      {label: "Bold", style: "BOLD", icon: BoldIcon},
+      {label: "Italic", style: "ITALIC", icon: ItalicIcon}
     ];
   }
 
   getSelected() {
-    let t = '';
+    let t = "";
     if (window.getSelection) {
       t = window.getSelection();
     } else if (document.getSelection) {
@@ -52,7 +52,7 @@ export default class MegaToolbar extends Component {
   toggleInlineStyle(inlineStyle) {
     this.props.onChange(
       RichUtils.toggleInlineStyle(this.props.editorState, inlineStyle)
-    )
+    );
   }
 
   rawStyle() {
@@ -127,7 +127,7 @@ export default class MegaToolbar extends Component {
         style: inlineStyle,
         active: currentStyle.has(inlineStyle.style),
         toggle: () => this.toggleInlineStyle(inlineStyle.style)
-      })),
+      }))
     ];
 
     return (

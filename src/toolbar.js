@@ -6,7 +6,7 @@
  */
 
 import React, {Component} from "react";
-import Tooltip from "./tooltip"
+import Tooltip from "./tooltip";
 
 
 export default class DraftToolbar extends Component {
@@ -18,7 +18,7 @@ export default class DraftToolbar extends Component {
 
   renderButton(action) {
     const actionClass = `action-${action.style.style.toLowerCase()}`;
-    const activeClass = action.active ? ' active': '';
+    const activeClass = action.active ? " active": "";
     const className = `item ${activeClass} ${actionClass}`;
 
     const Icon = action.style.icon;
@@ -33,7 +33,7 @@ export default class DraftToolbar extends Component {
   render() {
     return (
       <Tooltip {...this.props}>
-        <div className="draft-toolbar" onMouseDown={(x) => {x.preventDefault()}}>
+        <div className="draft-toolbar" onMouseDown={(x) => {x.preventDefault();}}>
           <ul>
             {this.props.actions.map(this.renderButton.bind(this))}
           </ul>

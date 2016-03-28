@@ -64,7 +64,7 @@ export default class Tooltip extends Component {
       const scrollX = window.scrollX ? window.scrollX : window.pageXOffset;
       // Set state
       this.setState({
-        top: top - (position === 'left' ? 0 : refRect.height) + scrollY - (position === 'left' ? 0 : 5),
+        top: top - (position === "left" ? 0 : refRect.height) + scrollY - (position === "left" ? 0 : 5),
         left: forceLeft || (left - (refRect.width / 2) + (width / 2) + scrollX)
       });
     }
@@ -80,12 +80,12 @@ export default class Tooltip extends Component {
 
   render() {
     // Is server?
-    if (typeof window === 'undefined' || this.props.active === false) {
+    if (typeof window === "undefined" || this.props.active === false) {
       return null;
     }
     return (
       <Portal isOpened={true}>
-        <div ref="tooltip" style={{zIndex:3, position: 'absolute', left: this.state.left+'px', top: this.state.top+'px'}}>
+        <div ref="tooltip" style={{zIndex:3, position: "absolute", left: this.state.left+"px", top: this.state.top+"px"}}>
           {this.props.children}
         </div>
       </Portal>
