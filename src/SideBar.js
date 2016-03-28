@@ -10,16 +10,16 @@ import {RichUtils} from "draft-js";
 
 
 const BLOCK_TYPES = [{
-  "name": "h2",
+  "name": "H2",
   "style": "header-two"
 }, {
-  "name": "ol",
+  "name": "OL",
   "style": "ordered-list-item"
 }, {
-  "name": "ul",
+  "name": "UL",
   "style": "unordered-list-item"
 }, {
-  "name": "''",
+  "name": "QT",
   "style": "blockquote"
 }];
 
@@ -56,6 +56,7 @@ class BlockStyles extends Component {
       border: "1px solid #CCC",
       top: "-33px",
       backgroundColor: "#FCFCFC",
+      fontSize: "14px",
       boxShadow: "1px 1px 2px 0px #CCC"
     }
     return (
@@ -101,7 +102,7 @@ class PopOverMenu extends Component {
         style={{position: "relative"}}
         onMouseOver={::this.handleMouseOver}
         onMouseOut={::this.handleMouseOut}>
-        T
+        Select Block
         <BlockStyles
           open={this.state.open}
           onToggle={this.props.onToggle}
