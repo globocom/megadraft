@@ -10,10 +10,10 @@ import TestUtils from "react-addons-test-utils";
 import chai from "chai";
 
 import Megadraft from "../src/Megadraft";
-import {editorStateToJSON, editorStateFromRaw} from "../src/utils";
+import {editorStateFromRaw} from "../src/utils";
 
 
-let expect = chai.expect
+let expect = chai.expect;
 
 
 describe("Megadraft Component", () => {

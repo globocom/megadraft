@@ -62,7 +62,7 @@
     "build:dist": "rimraf dist && webpack --config webpack.config.dist.js --optimize-minimize",
     "build": "npm run build:lib && npm run build:dist",
     "site": "webpack --config webpack.config.site.js --optimize-minimize",
-    "lint": "eslint src",
+    "lint": "eslint src tests",
     "watch": "babel -d lib/ src/ --watch"
   },
   "repository": {
