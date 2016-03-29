@@ -13,12 +13,12 @@ script:
     elif [ "$TEST_TYPE" = lint ]; then
       echo "Checking code lint."
       make lint
-    elif [ "$TEST_TYPE" = test ]; then
-      make test
+    elif [ "$TEST_TYPE" = unit ]; then
+      make unit
     fi
 env:
   matrix:
-    - TEST_TYPE=test
+    - TEST_TYPE=unit
     - TEST_TYPE=lint
     - TEST_TYPE=build_website
   global:

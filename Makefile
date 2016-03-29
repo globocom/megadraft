@@ -4,12 +4,16 @@ setup:
 run:
 	@npm start
 
-test:
+unit:
 	@rm -rf coverage
 	@npm test
 
 lint:
 	@npm run --silent lint
+
+test:
+	@$(MAKE) lint
+	@$(MAKE) unit
 
 show-coverage:
 	@open coverage/PhantomJS*/index.html
