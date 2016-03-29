@@ -7,10 +7,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
-
 import chai from "chai";
 
 import Megadraft from "../src/Megadraft";
+import {editorStateToJSON, editorStateFromRaw} from "../src/utils";
 
 
 let expect = chai.expect
@@ -18,7 +18,32 @@ let expect = chai.expect
 
 describe("Megadraft Component", () => {
   beforeEach(function() {
-    this.component = TestUtils.renderIntoDocument(<Megadraft />);
+    const INITIAL_CONTENT = {
+      "entityMap": {},
+      "blocks": [
+        {
+          "key": "ag6qs",
+          "text": "Hello World!",
+          "type": "unstyled",
+          "depth": 0,
+          "inlineStyleRanges": [
+            {
+              "offset": 0,
+              "length": 12,
+              "style": "BOLD"
+            },
+            {
+              "offset": 6,
+              "length": 6,
+              "style": "ITALIC"
+            }
+          ],
+          "entityRanges": []
+        }
+      ]
+    };
+    const content = editorStateFromRaw(INITIAL_CONTENT);
+    this.component = TestUtils.renderIntoDocument(<Megadraft editorState={content} />);
   });
 
   afterEach(function() {
@@ -28,13 +53,5 @@ describe("Megadraft Component", () => {
   it("renders without problems", function() {
     expect(this.component).to.exist;
   });
-
-  it("should have click on bold button", function() {
-    let buttons = TestUtils.findRenderedDOMComponentWithTag(this.component, "button");
-    expect(buttons.textContent).to.equal("Bold");
-
-  });
-
-
 });
 
