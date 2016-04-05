@@ -11,18 +11,18 @@
    height="24"
    viewBox="0 0 24 24"
    version="1.1"
-   id="svg3875"
+   id="svg4193"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="italic.svg">
+   sodipodi:docname="h2.svg">
   <metadata
-     id="metadata3894">
+     id="metadata4212">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title>ic_format_italic_24px</dc:title>
+        <dc:title>ic_title_24px</dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -37,33 +37,33 @@
      inkscape:pageshadow="2"
      inkscape:window-width="640"
      inkscape:window-height="480"
-     id="namedview3892"
+     id="namedview4210"
      showgrid="false"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
      inkscape:zoom="16.857143"
-     inkscape:cx="12"
+     inkscape:cx="11.5"
      inkscape:cy="12"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg3875" />
+     inkscape:current-layer="svg4193" />
   <!-- Generator: sketchtool 3.6.1 (26313) - http://www.bohemiancoding.com/sketch -->
   <title
-     id="title3877">ic_format_italic_24px</title>
+     id="title4195">ic_title_24px</title>
   <desc
-     id="desc3879">Created with sketchtool.</desc>
+     id="desc4197">Created with sketchtool.</desc>
   <defs
-     id="defs3881" />
+     id="defs4199" />
   <g
      id="FINAL"
      style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:1"
-     transform="translate(6,5)">
+     transform="translate(5,5)">
     <g
        id="1.-Flow-Edição-Contextual"
-       transform="translate(-324,-53)">
+       transform="translate(-500,-53)">
       <g
          id="tooltip-padrao"
          transform="translate(262,32)">
@@ -71,17 +71,17 @@
            id="icons"
            transform="translate(16,16)">
           <g
-             id="ic_format_italic_24px"
-             transform="translate(40,0)">
+             id="ic_title_24px"
+             transform="translate(217,0)">
             <g
                id="Group">
               <path
-                 d="M 0,0 24,0 24,24 0,24 0,0 Z"
+                 d="M 0,0 24,0 24,24 0,24 0,0 0,0 Z"
                  id="Shape"
                  inkscape:connector-curvature="0" />
               <path
-                 d="m 10,5 0,3 2.21,0 -3.42,8 -2.79,0 0,3 8,0 0,-3 -2.21,0 3.42,-8 2.79,0 0,-3 -8,0 z"
-                 id="path3890"
+                 d="m 5,5 0,3 5,0 0,11 3,0 0,-11 5,0 0,-3 -13,0 z"
+                 id="path4208"
                  inkscape:connector-curvature="0"
                  style="fill:#cccccc" />
             </g>
