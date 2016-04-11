@@ -25,7 +25,7 @@
     "html-loader": "^0.4.3",
     "isparta": "^4.0.0",
     "istanbul-instrumenter-loader": "^0.2.0",
-    "jsdom": "^8.1.0",
+    "jsdom": "^8.3.1",
     "karma": "^0.13.22",
     "karma-babel-preprocessor": "^6.0.1",
     "karma-coverage": "^0.5.5",
@@ -59,6 +59,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "test": "babel-node node_modules/isparta/bin/isparta cover karma -- start",
+    "test:mocha": "mocha --opts mocha.opts -- tests/*_test.js",
     "build:lib": "rimraf lib && babel -d lib/ src/",
     "build:dist": "rimraf dist && webpack --config webpack.config.dist.js --optimize-minimize",
     "build": "npm run build:lib && npm run build:dist",
