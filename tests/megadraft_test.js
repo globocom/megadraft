@@ -71,7 +71,7 @@ describe("Megadraft Component", () => {
 
     it("is not collapsed", function() {
 
-      expect(this.editorStat.getSelection().isCollapsed(), true);
+      expect(this.editorState.getSelection().isCollapsed(), true);
 
       /*
       var selectionState = new SelectionState({
