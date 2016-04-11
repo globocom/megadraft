@@ -31,21 +31,6 @@ export default class Megadraft extends Component {
   }
 
   onChange(editorState) {
-    if (!editorState.getSelection().isCollapsed()) {
-      const selectionRange = getSelectionRange();
-      const selectionCoords = getSelectionCoords(selectionRange);
-      this.setState({
-        toolbar: {
-          show: true,
-          position: {
-            top: selectionCoords.offsetTop,
-            left: selectionCoords.offsetLeft
-          }
-        }
-      });
-    } else {
-      this.setState({toolbar: {show: false}});
-    }
 
     const selectionRange = getSelectionRange();
     let selectedBlock;
@@ -55,6 +40,41 @@ export default class Megadraft extends Component {
 
     this.setState({selectedBlock, selectionRange});
     this.props.onChange(editorState);
+  }
+
+  setBarPosition() {
+    if (!this.props.editorState.getSelection().isCollapsed()) {
+      const selectionRange = getSelectionRange();
+      const selectionCoords = getSelectionCoords(selectionRange);
+
+      if (!this.state.toolbar.position ||
+          this.state.toolbar.position.top !== selectionCoords.offsetTop ||
+          this.state.toolbar.position.left !== selectionCoords.offsetLeft) {
+        this.setState({
+          toolbar: {
+            show: true,
+            position: {
+              top: selectionCoords.offsetTop,
+              left: selectionCoords.offsetLeft
+            }
+          }
+        });
+      }
+    } else {
+      if (this.state.toolbar.show) {
+        this.setState({toolbar: {show: false}});
+      }
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.updatingPosition) {
+      clearImmediate(this.updatingPosition);
+    }
+    this.updatingPosition = null ;
+    this.updatingPosition = setImmediate(() => {
+      return this.setBarPosition();
+    });
   }
 
   handleKeyCommand(command) {
