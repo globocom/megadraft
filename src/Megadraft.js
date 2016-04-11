@@ -55,7 +55,8 @@ export default class Megadraft extends Component {
             show: true,
             position: {
               top: selectionCoords.offsetTop,
-              left: selectionCoords.offsetLeft
+              left: selectionCoords.offsetLeft,
+              right: selectionCoords.offsetRight
             }
           }
         });
