@@ -5,13 +5,19 @@
  */
 
 import React, {Component} from "react";
+import ReactDOM from "react-dom";
 import {RichUtils} from "draft-js";
 import ToolbarItem from "./toolbar_item";
+
+import {getSelectionRange, getSelectedBlockElement, getSelectionCoords} from "./utils";
 
 
 export default class Toolbar extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      show: false
+    }
   }
 
   toggleInlineStyle(inlineStyle) {
@@ -105,11 +111,49 @@ export default class Toolbar extends Component {
     );
   }
 
-  render() {
-    const style = this.props.toolbar.position || {};
+  setBarPosition() {
+    const selectionRange = getSelectionRange();
+    const editor = this.props.editor;
+    const toolbar = this.refs.toolbar;
+    const selectionCoords = getSelectionCoords(
+      selectionRange, editor, toolbar);
 
-    if (!this.props.toolbar.show) {
-      style.display = "none"
+    if (!this.state.position ||
+        this.state.position.top !== selectionCoords.offsetTop ||
+        this.state.position.left !== selectionCoords.offsetLeft) {
+      this.setState({
+        show: true,
+        position: {
+          top: selectionCoords.offsetTop,
+          left: selectionCoords.offsetLeft
+        }
+      });
+    }
+  }
+
+  componentDidUpdate() {
+    if (!this.props.editorState.getSelection().isCollapsed() &&
+        this.props.editorState.getSelection().getHasFocus()) {
+      this.props.editorState.getSelection();
+      if (this.updatingPosition) {
+        clearImmediate(this.updatingPosition);
+      }
+      this.updatingPosition = null ;
+      this.updatingPosition = setImmediate(() => {
+        return this.setBarPosition();
+      });
+    } else {
+      if (this.state.show) {
+        this.setState({show: false});
+      }
+    }
+  }
+
+  render() {
+    var style = this.state.position || {};
+
+    if (!this.state.show) {
+      style = {...style, display: "none"}
     }
 
     return (

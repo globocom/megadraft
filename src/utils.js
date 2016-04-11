@@ -9,7 +9,8 @@ import {
   convertToRaw,
   convertFromRaw,
   EditorState,
-  ContentState} from "draft-js";
+  ContentState,
+  getVisibleSelectionRect} from "draft-js";
 
 export function editorStateToJSON(editorState) {
   if (editorState) {
@@ -48,7 +49,8 @@ export function getSelectedBlockElement(range) {
 
 export function getSelectionCoords(selectionRange, editor, toolbar) {
   const editorBounds = editor.getBoundingClientRect();
-  const rangeBounds = selectionRange.getBoundingClientRect();
+  const rangeBounds = getVisibleSelectionRect(window);
+
   const rangeWidth = rangeBounds.right - rangeBounds.left;
 
   const toolbarWidth = toolbar.offsetWidth;
