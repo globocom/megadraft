@@ -33,6 +33,7 @@ export default class Toolbar extends Component {
         border-radius: 4px;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
         position: absolute;
+        white-space: nowrap;
       }
       .draft-toolbar:after {
         display: inline-block;
@@ -105,8 +106,18 @@ export default class Toolbar extends Component {
   }
 
   render() {
+    const style = this.props.toolbar.position || {};
+
+    if (!this.props.toolbar.show) {
+      style.display = "none"
+    }
+
     return (
-      <div className="draft-toolbar" style={this.props.toolbar.position} onMouseDown={(x) => {x.preventDefault();}}>
+      <div
+        className="draft-toolbar"
+        style={style}
+        ref="toolbar"
+        onMouseDown={(x) => {x.preventDefault();}}>
         <style dangerouslySetInnerHTML={this.rawStyle()}></style>
         <ul>
           {this.props.actions.map(::this.renderButton)}

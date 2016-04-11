@@ -5,6 +5,7 @@
  */
 
 import React, {Component} from "react";
+import ReactDOM from "react-dom";
 import {Editor, RichUtils} from "draft-js";
 
 import Icons from "./icons";
@@ -43,39 +44,41 @@ export default class Megadraft extends Component {
   }
 
   setBarPosition() {
-    if (!this.props.editorState.getSelection().isCollapsed()) {
-      const selectionRange = getSelectionRange();
-      const selectionCoords = getSelectionCoords(selectionRange);
+    const selectionRange = getSelectionRange();
+    const editor = this.refs.editor;
+    const toolbar = ReactDOM.findDOMNode(this.refs.toolbar);
+    const selectionCoords = getSelectionCoords(
+      selectionRange, editor, toolbar);
 
-      if (!this.state.toolbar.position ||
-          this.state.toolbar.position.top !== selectionCoords.offsetTop ||
-          this.state.toolbar.position.left !== selectionCoords.offsetLeft) {
-        this.setState({
-          toolbar: {
-            show: true,
-            position: {
-              top: selectionCoords.offsetTop,
-              left: selectionCoords.offsetLeft,
-              right: selectionCoords.offsetRight
-            }
+    if (!this.state.toolbar.position ||
+        this.state.toolbar.position.top !== selectionCoords.offsetTop ||
+        this.state.toolbar.position.left !== selectionCoords.offsetLeft) {
+      this.setState({
+        toolbar: {
+          show: true,
+          position: {
+            top: selectionCoords.offsetTop,
+            left: selectionCoords.offsetLeft
           }
-        });
+        }
+      });
+    }
+  }
+
+  componentDidUpdate() {
+    if (!this.props.editorState.getSelection().isCollapsed()) {
+      if (this.updatingPosition) {
+        clearImmediate(this.updatingPosition);
       }
+      this.updatingPosition = null ;
+      this.updatingPosition = setImmediate(() => {
+        return this.setBarPosition();
+      });
     } else {
       if (this.state.toolbar.show) {
         this.setState({toolbar: {show: false}});
       }
     }
-  }
-
-  componentDidUpdate() {
-    if (this.updatingPosition) {
-      clearImmediate(this.updatingPosition);
-    }
-    this.updatingPosition = null ;
-    this.updatingPosition = setImmediate(() => {
-      return this.setBarPosition();
-    });
   }
 
   handleKeyCommand(command) {
@@ -88,30 +91,22 @@ export default class Megadraft extends Component {
     return false;
   }
 
-  showToolbar(editorState) {
-    if (this.state.toolbar.show) {
-      return (
-        <Toolbar
-          editorState={editorState}
-          onChange={::this.onChange}
-          toolbar={this.state.toolbar}
-          actions={this.actions}/>
-      );
-    } else {
-      return null;
-    }
-  }
-
   render() {
     const {editorState} = this.props;
     return (
       <div className="megadraft">
-        <div className="megadraft-editor" id="megadraft-editor">
+        <div className="megadraft-editor" id="megadraft-editor" ref="editor">
           <Editor
             handleKeyCommand={::this.handleKeyCommand}
             editorState={editorState}
             onChange={::this.onChange} />
-          {::this.showToolbar(editorState)}
+          <Toolbar
+            ref="toolbar"
+            editor={this.refs.editor}
+            editorState={editorState}
+            onChange={::this.onChange}
+            toolbar={this.state.toolbar}
+            actions={this.actions}/>
         </div>
       </div>
     );

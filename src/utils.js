@@ -46,20 +46,17 @@ export function getSelectedBlockElement(range) {
   return null;
 }
 
-export function getSelectionCoords(selectionRange) {
-  const editorBounds = document.getElementById("megadraft-editor").getBoundingClientRect();
+export function getSelectionCoords(selectionRange, editor, toolbar) {
+  const editorBounds = editor.getBoundingClientRect();
   const rangeBounds = selectionRange.getBoundingClientRect();
   const rangeWidth = rangeBounds.right - rangeBounds.left;
+
+  const toolbarWidth = toolbar.offsetWidth;
+  const toolbarHeight = toolbar.offsetHeight;
   // const rangeHeight = rangeBounds.bottom - rangeBounds.top;
   const offsetLeft = (rangeBounds.left - editorBounds.left)
             + (rangeWidth / 2)
-            /* 72px is width of inline toolbar */
-            - (394 / 2);
-  const offsetRight = (editorBounds.right - rangeBounds.right)
-            + (rangeWidth / 2)
-            /* 72px is width of inline toolbar */
-            - (394 / 2);
-  // 42px is height of inline toolbar (35px) + 5px center triangle and 2px for spacing
-  const offsetTop = rangeBounds.top - editorBounds.top - 70;
-  return { offsetLeft, offsetTop, offsetRight };
+            - (toolbarWidth / 2);
+  const offsetTop = rangeBounds.top - editorBounds.top - (toolbarHeight + 14);
+  return { offsetLeft, offsetTop };
 }
