@@ -124,5 +124,14 @@ describe("Toolbar Component", function() {
       const toolbarNode = this.wrapper.refs.toolbar.refs.toolbar;
       expect(toolbarNode.style.display).to.be.equal("none");
     });
+
+    it("should center toolbar above the selection", function() {
+      replaceSelection({focusOffset: 0, anchorOffset: 5}, this.wrapper);
+
+      const toolbarNode = this.wrapper.refs.toolbar.refs.toolbar;
+
+      expect(toolbarNode.style.top).to.be.equal("-64px");
+      expect(toolbarNode.style.left).to.be.equal("-24.5px");
+    });
   });
 });
