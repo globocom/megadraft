@@ -6,7 +6,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import {EditorState} from 'draft-js';
+import {EditorState} from "draft-js";
 import TestUtils from "react-addons-test-utils";
 import chai from "chai";
 
@@ -86,10 +86,10 @@ describe("Megadraft Component", () => {
       */
       var selectionState = this.editorState.getSelection();
       const targetSelection = selectionState.merge({
-         anchorKey: 'ag6qs',
-         anchorOffset: 6,
-         focusKey: 'ag6qs',
-         focusOffset: 11,
+        anchorKey: "ag6qs",
+        anchorOffset: 6,
+        focusKey: "ag6qs",
+        focusOffset: 11
       });
       const targetEditor = EditorState.forceSelection(
         this.editorState,

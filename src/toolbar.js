@@ -133,14 +133,7 @@ export default class Toolbar extends Component {
   componentDidUpdate() {
     if (!this.props.editorState.getSelection().isCollapsed() &&
         this.props.editorState.getSelection().getHasFocus()) {
-      this.props.editorState.getSelection();
-      if (this.updatingPosition) {
-        clearImmediate(this.updatingPosition);
-      }
-      this.updatingPosition = null ;
-      this.updatingPosition = setImmediate(() => {
-        return this.setBarPosition();
-      });
+      return this.setBarPosition();
     } else {
       if (this.state.show) {
         this.setState({show: false});
