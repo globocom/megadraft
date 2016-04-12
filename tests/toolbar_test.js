@@ -19,7 +19,7 @@ let expect = chai.expect;
 export default class ToolbarWrapper extends Component {
   constructor(props) {
     super(props);
-    this.state = {...props}
+    this.state = {...props};
   }
   render() {
     return (
@@ -31,25 +31,25 @@ export default class ToolbarWrapper extends Component {
 }
 
 
-var draft = require("draft-js")
+var draft = require("draft-js");
 
 draft.getVisibleSelectionRect = () => {
   return {
     top: 0,
     left: 0,
     right: 1
-  }
-}
+  };
+};
 
 
 function replaceSelection(newSelection, wrapper) {
-  const selectionState = SelectionState.createEmpty('ag6qs');
+  const selectionState = SelectionState.createEmpty("ag6qs");
   const updatedSelection = selectionState.merge(newSelection);
   const oldState = wrapper.state.editorState;
 
   const editorState = EditorState.forceSelection(oldState, updatedSelection);
 
-  wrapper.setState({editorState: editorState})
+  wrapper.setState({editorState: editorState});
 }
 
 
@@ -81,7 +81,7 @@ describe("Toolbar Component", function() {
     };
 
     this.actions = [
-      {type: "inline", label: "B", style: "BOLD", icon: 'svg'}
+      {type: "inline", label: "B", style: "BOLD", icon: "svg"}
     ];
 
     this.editorState = editorStateFromRaw(INITIAL_CONTENT);
@@ -97,32 +97,32 @@ describe("Toolbar Component", function() {
 
     it("starts hidden", function() {
       const toolbarNode = this.wrapper.refs.toolbar.refs.toolbar;
-      expect(toolbarNode.style.display).to.be.equal('none');
+      expect(toolbarNode.style.display).to.be.equal("none");
     });
 
     it("shows after selection", function() {
       replaceSelection({
         focusOffset: 0,
         anchorOffset: 5
-      }, this.wrapper)
+      }, this.wrapper);
 
       const toolbarNode = this.wrapper.refs.toolbar.refs.toolbar;
-      expect(toolbarNode.style.display).to.be.equal('');
+      expect(toolbarNode.style.display).to.be.equal("");
     });
 
     it("should hide after deselection", function() {
       replaceSelection({
         focusOffset: 0,
         anchorOffset: 5
-      }, this.wrapper)
+      }, this.wrapper);
 
       replaceSelection({
         focusOffset: 0,
         anchorOffset: 0
-      }, this.wrapper)
+      }, this.wrapper);
 
       const toolbarNode = this.wrapper.refs.toolbar.refs.toolbar;
-      expect(toolbarNode.style.display).to.be.equal('none');
-    })
+      expect(toolbarNode.style.display).to.be.equal("none");
+    });
   });
 });
