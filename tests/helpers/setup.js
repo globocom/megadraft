@@ -31,3 +31,19 @@ global.self = global;
     global[key] = window[key];
   }
 })(global.window);
+
+
+Object.defineProperties(global.window.HTMLElement.prototype, {
+  offsetLeft: {
+    get: function() { return 0; }
+  },
+  offsetTop: {
+    get: function() { return 0; }
+  },
+  offsetHeight: {
+    get: function() { return 50; }
+  },
+  offsetWidth: {
+    get: function() { return 50; }
+  }
+});

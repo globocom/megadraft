@@ -8,7 +8,7 @@ import React, {Component} from "react";
 import {RichUtils} from "draft-js";
 import ToolbarItem from "./toolbar_item";
 
-import {getSelectionRange, getSelectionCoords} from "./utils";
+import {getSelectionCoords} from "./utils";
 
 
 export default class Toolbar extends Component {
@@ -111,11 +111,9 @@ export default class Toolbar extends Component {
   }
 
   setBarPosition() {
-    const selectionRange = getSelectionRange();
     const editor = this.props.editor;
     const toolbar = this.refs.toolbar;
-    const selectionCoords = getSelectionCoords(
-      selectionRange, editor, toolbar);
+    const selectionCoords = getSelectionCoords(editor, toolbar);
 
     if (!this.state.position ||
         this.state.position.top !== selectionCoords.offsetTop ||

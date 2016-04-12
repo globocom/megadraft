@@ -47,7 +47,7 @@ export function getSelectedBlockElement(range) {
   return null;
 }
 
-export function getSelectionCoords(selectionRange, editor, toolbar) {
+export function getSelectionCoords(editor, toolbar) {
   const editorBounds = editor.getBoundingClientRect();
   const rangeBounds = getVisibleSelectionRect(window);
 
