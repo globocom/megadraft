@@ -6,7 +6,7 @@ run:
 
 unit:
 	@rm -rf coverage
-	@npm test
+	@npm run -s test:mocha
 
 lint:
 	@npm run --silent lint
