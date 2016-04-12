@@ -5,11 +5,10 @@
  */
 
 import React, {Component} from "react";
-import ReactDOM from "react-dom";
 import {RichUtils} from "draft-js";
 import ToolbarItem from "./toolbar_item";
 
-import {getSelectionRange, getSelectedBlockElement, getSelectionCoords} from "./utils";
+import {getSelectionRange, getSelectionCoords} from "./utils";
 
 
 export default class Toolbar extends Component {
@@ -17,7 +16,7 @@ export default class Toolbar extends Component {
     super(props);
     this.state = {
       show: false
-    }
+    };
   }
 
   toggleInlineStyle(inlineStyle) {
@@ -153,7 +152,7 @@ export default class Toolbar extends Component {
     var style = this.state.position || {};
 
     if (!this.state.show) {
-      style = {...style, display: "none"}
+      style = {...style, display: "none"};
     }
 
     return (

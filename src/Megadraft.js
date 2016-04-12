@@ -5,12 +5,11 @@
  */
 
 import React, {Component} from "react";
-import ReactDOM from "react-dom";
-import {Editor, RichUtils, getVisibleSelectionRect} from "draft-js";
+import {Editor, RichUtils} from "draft-js";
 
 import Icons from "./icons";
 import Toolbar from "./toolbar";
-import {getSelectionRange, getSelectedBlockElement, getSelectionCoords} from "./utils";
+import {getSelectionRange, getSelectedBlockElement} from "./utils";
 
 
 export default class Megadraft extends Component {
