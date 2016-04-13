@@ -9,7 +9,6 @@ import {Editor, RichUtils} from "draft-js";
 
 import Icons from "./icons";
 import Toolbar from "./toolbar";
-import {getSelectionRange, getSelectedBlockElement} from "./utils";
 
 
 export default class Megadraft extends Component {
