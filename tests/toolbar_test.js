@@ -13,6 +13,7 @@ import chai from "chai";
 import Toolbar from "../src/toolbar";
 import ToolbarItem from "../src/toolbar_item";
 import {editorStateFromRaw} from "../src/utils";
+import Separator from "../src/separator";
 
 let expect = chai.expect;
 
@@ -82,6 +83,7 @@ describe("Toolbar Component", function() {
 
     this.actions = [
       {type: "inline", label: "B", style: "BOLD", icon: "svg"},
+      {type: "separator"},
       {type: "block", label: "H2", style: "header-two", icon: "svg"}
     ];
 
@@ -98,7 +100,12 @@ describe("Toolbar Component", function() {
 
     it("renders toolbar items from actions", function() {
       const items = TestUtils.scryRenderedComponentsWithType(this.wrapper, ToolbarItem);
-      expect(items).to.have.length(2);
+      expect(items).to.have.length(3);
+    });
+
+    it("renders separator", function() {
+      const items = TestUtils.scryRenderedComponentsWithType(this.wrapper, Separator);
+      expect(items).to.have.length(1);
     });
 
     describe("actions", function () {
@@ -115,7 +122,7 @@ describe("Toolbar Component", function() {
 
       it("toggles block style", function() {
         const items = TestUtils.scryRenderedComponentsWithType(this.wrapper, ToolbarItem);
-        const titleItem = items[1];
+        const titleItem = items[2];
         const button = TestUtils.findRenderedDOMComponentWithTag(titleItem, "button");
 
         TestUtils.Simulate.click(button);
