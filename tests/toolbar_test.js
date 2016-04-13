@@ -165,8 +165,8 @@ describe("Toolbar Component", function() {
 
       const toolbarNode = this.wrapper.refs.toolbar.refs.toolbar;
 
-      expect(toolbarNode.style.top).to.be.equal("-64px");
-      expect(toolbarNode.style.left).to.be.equal("-24.5px");
+      expect(toolbarNode.style.top).to.be.equal("-14px");
+      expect(toolbarNode.style.left).to.be.equal("0.5px");
     });
   });
 });

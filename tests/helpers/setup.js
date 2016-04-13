@@ -41,9 +41,9 @@ Object.defineProperties(global.window.HTMLElement.prototype, {
     get: function() { return 0; }
   },
   offsetHeight: {
-    get: function() { return 50; }
+    get: function() { return 0; }
   },
   offsetWidth: {
-    get: function() { return 50; }
+    get: function() { return 0; }
   }
 });
