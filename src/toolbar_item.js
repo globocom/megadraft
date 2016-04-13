@@ -29,9 +29,8 @@ export default class ToolbarItem extends Component {
       );
     }
 
-    const actionClass = `action-${this.props.item.style.toLowerCase()}`;
     const activeClass = this.props.active ? " active": "";
-    const className = `item ${activeClass} ${actionClass}`;
+    const className = `item ${activeClass}`;
 
     return (
       <li className={className}>
