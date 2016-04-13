@@ -20,9 +20,8 @@ export default class Toolbar extends Component {
   }
 
   toggleInlineStyle(inlineStyle) {
-    this.props.onChange(
-      RichUtils.toggleInlineStyle(this.props.editorState, inlineStyle)
-    );
+    const newEditorState = RichUtils.toggleInlineStyle(this.props.editorState, inlineStyle)
+    this.props.onChange(newEditorState);
   }
 
   toggleBlockStyle(blockType) {
