@@ -4,7 +4,7 @@
   "description": "Rich Text editor built on top of draft.js",
   "main": "lib/Megadraft.js",
   "dependencies": {
-    "draft-js": "^0.2.2",
+    "draft-js": "^0.4.0",
     "react-portal": "^2.1.0"
   },
   "devDependencies": {
@@ -25,7 +25,7 @@
     "html-loader": "^0.4.3",
     "isparta": "^4.0.0",
     "istanbul-instrumenter-loader": "^0.2.0",
-    "jsdom": "^8.1.0",
+    "jsdom": "^8.3.1",
     "karma": "^0.13.22",
     "karma-babel-preprocessor": "^6.0.1",
     "karma-coverage": "^0.5.5",
@@ -53,12 +53,13 @@
     "webpack-dev-server": "^1.14.1"
   },
   "peerDependencies": {
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0"
+    "react": "^0.14.0 || ^15.0.0-rc",
+    "react-dom": "^0.14.0 || ^15.0.0-rc"
   },
   "scripts": {
     "start": "webpack-dev-server",
     "test": "babel-node node_modules/isparta/bin/isparta cover karma -- start",
+    "test:mocha": "mocha --opts mocha.opts -- tests/*_test.js",
     "build:lib": "rimraf lib && babel -d lib/ src/",
     "build:dist": "rimraf dist && webpack --config webpack.config.dist.js --optimize-minimize",
     "build": "npm run build:lib && npm run build:dist",
