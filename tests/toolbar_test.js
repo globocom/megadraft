@@ -105,18 +105,18 @@ describe("Toolbar Component", function() {
       it("toggles inline style", function() {
         const items = TestUtils.scryRenderedComponentsWithType(this.wrapper, ToolbarItem);
         const boldItem = items[0];
-        const button = TestUtils.findRenderedDOMComponentWithTag(boldItem, 'button');
+        const button = TestUtils.findRenderedDOMComponentWithTag(boldItem, "button");
 
         TestUtils.Simulate.click(button);
 
         const current = this.wrapper.state.editorState.getCurrentInlineStyle();
-        expect(current.has('BOLD')).to.be.true;
+        expect(current.has("BOLD")).to.be.true;
       });
 
       it("toggles block style", function() {
         const items = TestUtils.scryRenderedComponentsWithType(this.wrapper, ToolbarItem);
         const titleItem = items[1];
-        const button = TestUtils.findRenderedDOMComponentWithTag(titleItem, 'button');
+        const button = TestUtils.findRenderedDOMComponentWithTag(titleItem, "button");
 
         TestUtils.Simulate.click(button);
 
@@ -126,7 +126,7 @@ describe("Toolbar Component", function() {
           .getBlockForKey(selection.getStartKey())
           .getType();
 
-        expect(current).to.be.equal('header-two');
+        expect(current).to.be.equal("header-two");
       });
     });
 
