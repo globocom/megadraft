@@ -15,9 +15,6 @@ import {getSelectionRange, getSelectedBlockElement} from "./utils";
 export default class Megadraft extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      toolbar: {show: false}
-    };
 
     this.actions = [
       {type: "inline", label: "B", style: "BOLD", icon: Icons.BoldIcon},
@@ -31,14 +28,6 @@ export default class Megadraft extends Component {
   }
 
   onChange(editorState) {
-
-    const selectionRange = getSelectionRange();
-    let selectedBlock;
-    if (selectionRange) {
-      selectedBlock = getSelectedBlockElement(selectionRange);
-    }
-
-    this.setState({selectedBlock, selectionRange});
     this.props.onChange(editorState);
   }
 
@@ -62,11 +51,9 @@ export default class Megadraft extends Component {
             editorState={editorState}
             onChange={::this.onChange} />
           <Toolbar
-            ref="toolbar"
             editor={this.refs.editor}
             editorState={editorState}
             onChange={::this.onChange}
-            toolbar={this.state.toolbar}
             actions={this.actions}/>
         </div>
       </div>

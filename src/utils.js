@@ -25,14 +25,6 @@ export function editorStateFromRaw(rawContent) {
   return EditorState.createWithContent(content);
 }
 
-export function getSelectionRange() {
-  const selection = window.getSelection();
-  if (selection.rangeCount === 0) {
-    return null;
-  }
-  return selection.getRangeAt(0);
-}
-
 export function getSelectedBlockElement(range) {
   let node = range.startContainer;
   do {
