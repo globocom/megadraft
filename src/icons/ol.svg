@@ -1,93 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="24"
-   height="24"
-   viewBox="0 0 24 24"
-   version="1.1"
-   id="svg4112"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="ol.svg">
-  <metadata
-     id="metadata4131">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title>ic_format_list_numbered_24px</dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="640"
-     inkscape:window-height="480"
-     id="namedview4129"
-     showgrid="false"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0"
-     inkscape:zoom="14.75"
-     inkscape:cx="11.5"
-     inkscape:cy="12"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg4112" />
-  <!-- Generator: sketchtool 3.6.1 (26313) - http://www.bohemiancoding.com/sketch -->
-  <title
-     id="title4114">ic_format_list_numbered_24px</title>
-  <desc
-     id="desc4116">Created with sketchtool.</desc>
-  <defs
-     id="defs4118" />
-  <g
-     id="FINAL"
-     style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:1"
-     transform="translate(2,4)">
-    <g
-       id="1.-Flow-Edição-Contextual"
-       transform="translate(-457,-52)">
-      <g
-         id="tooltip-padrao"
-         transform="translate(262,32)">
-        <g
-           id="icons"
-           transform="translate(16,16)">
-          <g
-             id="ic_format_list_numbered_24px"
-             transform="translate(177,0)">
-            <g
-               id="Group">
-              <path
-                 d="M 0,0 24,0 24,24 0,24 0,0 Z"
-                 id="Shape"
-                 inkscape:connector-curvature="0" />
-              <path
-                 d="m 4,17 0,0.5 -1,0 0,1 1,0 0,0.5 -2,0 0,1 3,0 0,-4 -3,0 0,1 2,0 z M 3,8 4,8 4,4 2,4 2,5 3,5 3,8 3,8 Z M 2,11 3.8,11 2,13.1 2,14 5,14 5,13 3.2,13 5,10.9 5,10 2,10 2,11 2,11 Z M 7,5 7,7 21,7 21,5 7,5 7,5 Z m 0,14 14,0 0,-2 -14,0 0,2 0,0 z m 0,-6 14,0 0,-2 -14,0 0,2 0,0 z"
-                 id="path4127"
-                 inkscape:connector-curvature="0"
-                 style="fill:#cccccc" />
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.7 (28169) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard 6</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-6" fill="#CCCCCC">
+            <g id="lista1" transform="translate(2.000000, 4.000000)">
+                <g id="Group">
+                    <path d="M2,13 L2,13.5 L1,13.5 L1,14.5 L2,14.5 L2,15 L0,15 L0,16 L3,16 L3,12 L0,12 L0,13 L2,13 Z M1,4 L2,4 L2,0 L0,0 L0,1 L1,1 L1,4 L1,4 Z M0,7 L1.8,7 L0,9.1 L0,10 L3,10 L3,9 L1.2,9 L3,6.9 L3,6 L0,6 L0,7 L0,7 Z M5,1 L5,3 L19,3 L19,1 L5,1 L5,1 Z M5,15 L19,15 L19,13 L5,13 L5,15 L5,15 Z M5,9 L19,9 L19,7 L5,7 L5,9 L5,9 Z" id="Shape"></path>
+                </g>
             </g>
-          </g>
         </g>
-      </g>
     </g>
-  </g>
 </svg>
