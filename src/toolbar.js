@@ -54,19 +54,19 @@ export default class Toolbar extends Component {
         margin-left: -8px;
       }
       .draft-toolbar ul {
-        padding: 0;
+        padding: 0 8px;
         margin: 0;
       }
       .draft-toolbar .item {
         display: inline-block;
       }
       .draft-toolbar .item button {
+        padding: 0;
         color: #ccc;
         cursor: pointer;
-        font-size: 18px;
         border: 0;
         height: 56px;
-        width: 56px;
+        width: 40px;
         background: transparent;
       }
       .draft-toolbar .item.active button:hover,
