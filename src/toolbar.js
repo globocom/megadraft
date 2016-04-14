@@ -54,19 +54,19 @@ export default class Toolbar extends Component {
         margin-left: -8px;
       }
       .draft-toolbar ul {
-        padding: 0;
+        padding: 0 8px;
         margin: 0;
       }
       .draft-toolbar .item {
         display: inline-block;
       }
       .draft-toolbar .item button {
+        padding: 0;
         color: #ccc;
         cursor: pointer;
-        font-size: 18px;
         border: 0;
         height: 56px;
-        width: 56px;
+        width: 40px;
         background: transparent;
       }
       .draft-toolbar .item.active button:hover,
@@ -76,14 +76,20 @@ export default class Toolbar extends Component {
       .draft-toolbar .item button:hover {
         color: #fff;
       }
+      .draft-toolbar .separator {
+        border-right: 1px solid #333;
+        height: 20px;
+        margin: 0 8px;
+      }
       `
     };
   }
 
-  renderButton(item) {
+  renderButton(item, position) {
     let current = null;
     let toggle = null;
     let active = null;
+    let key = item.label;
 
     switch(item.type) {
       case "inline": {
@@ -102,10 +108,14 @@ export default class Toolbar extends Component {
         active = item.style === current;
         break;
       }
+      case "separator": {
+        key = "sep-" + position;
+        break;
+      }
     }
 
     return (
-      <ToolbarItem key={item.label} active={active} toggle={toggle} item={item} />
+      <ToolbarItem key={key} active={active} toggle={toggle} item={item} />
     );
   }
 

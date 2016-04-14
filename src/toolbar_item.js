@@ -6,6 +6,8 @@
 
 import React, {Component} from "react";
 
+import Separator from "./separator";
+
 
 export default class ToolbarItem extends Component {
   constructor(props) {
@@ -23,9 +25,7 @@ export default class ToolbarItem extends Component {
 
     if (this.props.item.type == "separator") {
       return (
-        <li className="item">
-          <button><Icon /></button>
-        </li>
+        <Separator />
       );
     }
 
