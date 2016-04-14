@@ -1,4 +1,5 @@
 var webpack = require("webpack");
+var commonConfig = require("./webpack.common.js");
 
 module.exports = {
   cache: true,
@@ -23,7 +24,15 @@ module.exports = {
       {
         test: /\.js$/,
         loaders: ["babel"],
-      }
+        exclude: ["node_modules"]
+      },
+      commonConfig.svgo.loader
     ]
+  },
+  svgoConfig: commonConfig.svgo.config,
+
+  externals: {
+      "react": "React",
+      "react-dom": "ReactDOM"
   }
 };
