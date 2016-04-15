@@ -6,7 +6,7 @@
 
 import React, {Component} from "react";
 
-import Separator from "./separator";
+import Separator from "./Separator";
 
 
 export default class ToolbarItem extends Component {

@@ -6,7 +6,7 @@
 
 import React, {Component} from "react";
 import {RichUtils} from "draft-js";
-import ToolbarItem from "./toolbar_item";
+import ToolbarItem from "./ToolbarItem";
 
 import {getSelectionCoords} from "./utils";
 

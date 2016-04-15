@@ -7,7 +7,7 @@
 import React, {Component} from "react";
 import {Editor, RichUtils} from "draft-js";
 
-import Icons from "./icons";
+import icons from "./icons";
 import Toolbar from "./toolbar";
 
 
@@ -16,13 +16,13 @@ export default class Megadraft extends Component {
     super(props);
 
     this.actions = [
-      {type: "inline", label: "B", style: "BOLD", icon: Icons.BoldIcon},
-      {type: "inline", label: "I", style: "ITALIC", icon: Icons.ItalicIcon},
+      {type: "inline", label: "B", style: "BOLD", icon: icons.BoldIcon},
+      {type: "inline", label: "I", style: "ITALIC", icon: icons.ItalicIcon},
       {type: "separator"},
-      {type: "block", label: "UL", style: "unordered-list-item", icon: Icons.ULIcon},
-      {type: "block", label: "OL", style: "ordered-list-item", icon: Icons.OLIcon},
-      {type: "block", label: "H2", style: "header-two", icon: Icons.H2Icon},
-      {type: "block", label: "QT", style: "blockquote", icon: Icons.BlockQuoteIcon}
+      {type: "block", label: "UL", style: "unordered-list-item", icon: icons.ULIcon},
+      {type: "block", label: "OL", style: "ordered-list-item", icon: icons.OLIcon},
+      {type: "block", label: "H2", style: "header-two", icon: icons.H2Icon},
+      {type: "block", label: "QT", style: "blockquote", icon: icons.BlockQuoteIcon}
     ];
   }
 

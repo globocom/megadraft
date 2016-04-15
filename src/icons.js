@@ -12,8 +12,8 @@ import H2Icon from "./icons/h2.svg";
 import BlockQuoteIcon from "./icons/blockquote.svg";
 
 
-const Icons = {
+const icons = {
   BoldIcon, ItalicIcon, ULIcon, OLIcon, H2Icon, BlockQuoteIcon
 };
 
-export default Icons;
+export default icons;
