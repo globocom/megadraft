@@ -60,6 +60,6 @@ export default class Example extends React.Component {
             className={styles.jsonpreview}/>
         </div>
       </div>
-    )
+    );
   }
 }

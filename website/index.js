@@ -6,18 +6,16 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import { hashHistory, Router, Route, Link, IndexRoute } from 'react-router'
+import { hashHistory, Router, Route, IndexRoute } from "react-router";
 
-import AppBar from 'material-ui/AppBar';
+import AppBar from "material-ui/AppBar";
 
-import styles from './App.css';
+import Home from "./components/home";
+import Docs from "./components/docs";
+import LeftNavMenu from "./components/leftnavmenu";
+import getMuiTheme from "material-ui/styles/getMuiTheme";
 
-import Home from './components/home';
-import Docs from './components/docs';
-import LeftNavMenu from './components/leftnavmenu';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import injectTapEventPlugin from "react-tap-event-plugin";
 
 // Needed for onTouchTap
 // Can go away when react 1.0 release
@@ -35,7 +33,7 @@ class Page extends React.Component {
     return {muiTheme: getMuiTheme()};
   }
   onMenuToggle() {
-    this.setState({open: !this.state.open})
+    this.setState({open: !this.state.open});
   }
   render() {
     return (
@@ -50,13 +48,13 @@ class Page extends React.Component {
           {this.props.children}
         </div>
       </div>
-    )
+    );
   }
 }
 
 
 Page.childContextTypes = {
-  muiTheme: React.PropTypes.object.isRequired,
+  muiTheme: React.PropTypes.object.isRequired
 };
 
 ReactDOM.render((
@@ -66,5 +64,5 @@ ReactDOM.render((
       <Route path="/docs/:doc" component={Docs}/>
     </Route>
   </Router>),
-  document.getElementById('container')
+  document.getElementById("container")
 );

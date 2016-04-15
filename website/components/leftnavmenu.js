@@ -1,10 +1,10 @@
 import React from "react";
-import {Link} from "react-router"
+import {Link} from "react-router";
 
 import Divider from "material-ui/Divider";
 import Drawer from "material-ui/Drawer";
 import {List, ListItem} from "material-ui/List";
-import Subheader from 'material-ui/Subheader';
+import Subheader from "material-ui/Subheader";
 
 export default class LeftNavMenu extends React.Component {
 

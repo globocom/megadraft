@@ -1,6 +1,6 @@
 import React from "react";
 
-import Example from '../components/example';
+import Example from "../components/example";
 
 
 export default class Home extends React.Component {
@@ -15,6 +15,6 @@ export default class Home extends React.Component {
         </p>
         <Example />
       </div>
-    )
+    );
   }
 }
