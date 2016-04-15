@@ -53,5 +53,8 @@ describe("Megadraft Component", () => {
   it("renders without problems", function() {
     expect(this.component).to.exist;
   });
+  it("has the initial text", function() {
+    expect(this.component.refs.editor.textContent).to.have.string("Hello World!");
+  })
 });
 
