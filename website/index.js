@@ -8,13 +8,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { hashHistory, Router, Route, Link, IndexRoute } from 'react-router'
 
-import AppBar from 'material-ui/lib/app-bar';
+import AppBar from 'material-ui/AppBar';
 
 import styles from './App.css';
 
 import Home from './components/home';
 import Docs from './components/docs';
 import LeftNavMenu from './components/leftnavmenu';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -29,6 +30,9 @@ class Page extends React.Component {
   constructor(props) {
     super(props);
     this.state = {open: false};
+  }
+  getChildContext() {
+    return {muiTheme: getMuiTheme()};
   }
   onMenuToggle() {
     this.setState({open: !this.state.open})
@@ -50,6 +54,10 @@ class Page extends React.Component {
   }
 }
 
+
+Page.childContextTypes = {
+  muiTheme: React.PropTypes.object.isRequired,
+};
 
 ReactDOM.render((
   <Router history={hashHistory}>

@@ -1,18 +1,17 @@
 import React from "react";
-import {Link} from 'react-router'
+import {Link} from "react-router"
 
-import Divider from 'material-ui/lib/divider';
-import LeftNav from 'material-ui/lib/left-nav';
-import List from 'material-ui/lib/lists/list';
-import ListItem from 'material-ui/lib/lists/list-item';
-
+import Divider from "material-ui/divider";
+import Drawer from "material-ui/Drawer";
+import {List, ListItem} from "material-ui/List";
+import Subheader from 'material-ui/Subheader';
 
 export default class LeftNavMenu extends React.Component {
 
   render() {
     return (
       <div>
-        <LeftNav
+        <Drawer
           open={this.props.open}
           docked={false}
           onRequestChange={open => this.props.toggleMenu()}>
@@ -25,7 +24,8 @@ export default class LeftNavMenu extends React.Component {
                 Overview</ListItem>
           </List>
           <Divider />
-          <List subheader="Resources">
+          <List>
+            <Subheader>Resources</Subheader>
             <ListItem
               containerElement={<Link to="/docs/overview"/>}>Docs</ListItem>
             <ListItem
@@ -39,7 +39,7 @@ export default class LeftNavMenu extends React.Component {
               containerElement={<a href="draftjs.org"/>}>
                 Draft.js</ListItem>
           </List>
-        </LeftNav>
+        </Drawer>
       </div>
     );
   }
