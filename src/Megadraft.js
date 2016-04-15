@@ -31,7 +31,6 @@ export default class Megadraft extends Component {
   }
 
   handleKeyCommand(command) {
-    debugger;
     const {editorState} = this.props;
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
