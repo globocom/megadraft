@@ -8,7 +8,7 @@ import React, {Component} from "react";
 import {Editor, RichUtils} from "draft-js";
 
 import icons from "./icons";
-import Toolbar from "./toolbar";
+import Toolbar from "./Toolbar";
 
 
 export default class Megadraft extends Component {
