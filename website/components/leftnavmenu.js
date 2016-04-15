@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router"
 
-import Divider from "material-ui/divider";
+import Divider from "material-ui/Divider";
 import Drawer from "material-ui/Drawer";
 import {List, ListItem} from "material-ui/List";
 import Subheader from 'material-ui/Subheader';
