@@ -6,7 +6,7 @@
 
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
-import {EditorState, SelectionState} from "draft-js";
+import {EditorState, SelectionState, Entity} from "draft-js";
 import TestUtils from "react-addons-test-utils";
 import chai from "chai";
 
@@ -84,7 +84,8 @@ describe("Toolbar Component", function() {
     this.actions = [
       {type: "inline", label: "B", style: "BOLD", icon: "svg"},
       {type: "separator"},
-      {type: "block", label: "H2", style: "header-two", icon: "svg"}
+      {type: "block", label: "H2", style: "header-two", icon: "svg"},
+      {type: "entity", label: "Link", style: "link", icon: "svg"}
     ];
 
     this.editorState = editorStateFromRaw(INITIAL_CONTENT);
@@ -100,7 +101,7 @@ describe("Toolbar Component", function() {
 
     it("renders toolbar items from actions", function() {
       const items = TestUtils.scryRenderedComponentsWithType(this.wrapper, ToolbarItem);
-      expect(items).to.have.length(3);
+      expect(items).to.have.length(this.actions.length);
     });
 
     it("renders separator", function() {
@@ -174,6 +175,101 @@ describe("Toolbar Component", function() {
 
       expect(toolbarNode.style.top).to.be.equal("-14px");
       expect(toolbarNode.style.left).to.be.equal("0.5px");
+    });
+
+    describe("Link", function() {
+      beforeEach(function() {
+        replaceSelection({
+          anchorOffset: 0,
+          focusOffset: 5
+        }, this.wrapper);
+        const items = TestUtils.scryRenderedComponentsWithType(this.wrapper, ToolbarItem);
+        const titleItem = items[3]; // Link
+        this.button = TestUtils.findRenderedDOMComponentWithTag(titleItem, "button");
+      });
+
+      it("starts with the link input hidden", function() {
+        const textInput = TestUtils.findRenderedDOMComponentWithClass(this.wrapper, "textInput");
+
+        expect(textInput.style.display).to.be.equal("none");
+      });
+
+      it("shows the link input on click", function() {
+
+        TestUtils.Simulate.click(this.button);
+
+        const textInput = TestUtils.findRenderedDOMComponentWithClass(this.wrapper, "textInput");
+
+        expect(textInput.style.display).to.be.equal("");
+
+      });
+
+      it("should add a link to the selection", function() {
+
+        TestUtils.Simulate.click(this.button);
+
+        const text = TestUtils.findRenderedDOMComponentWithClass(this.wrapper, "textInput");
+        text.value = "http://www.globo.com";
+        TestUtils.Simulate.change(text);
+        TestUtils.Simulate.keyDown(text, {key: "Enter", keyCode: 13, which: 13});
+
+        const contentState = this.wrapper.state.editorState.getCurrentContent();
+
+        const blockWithLinkAtBeginning = contentState.getBlockForKey("ag6qs");
+        const linkKey = blockWithLinkAtBeginning.getEntityAt(0);
+        const linkInstance = Entity.get(linkKey);
+        const {url} = linkInstance.getData();
+
+        expect(url).to.be.equal("http://www.globo.com");
+      });
+
+      it("esc key should cancel the link", function() {
+        TestUtils.Simulate.click(this.button);
+
+        const text = TestUtils.findRenderedDOMComponentWithClass(this.wrapper, "textInput");
+        text.value = "http://www.globo.com";
+        TestUtils.Simulate.change(text);
+        TestUtils.Simulate.keyDown(text, {key: "Escape", keyCode: 27, which: 27});
+
+        expect(text.style.display).to.be.equal("none");
+
+      });
+
+      it("should remove a link", function() {
+
+        TestUtils.Simulate.click(this.button);
+
+        const text = TestUtils.findRenderedDOMComponentWithClass(this.wrapper, "textInput");
+        text.value = "http://www.globo.com";
+        TestUtils.Simulate.change(text);
+        TestUtils.Simulate.keyDown(text, {key: "Enter", keyCode: 13, which: 13});
+
+        TestUtils.Simulate.click(this.button);
+        const contentState = this.wrapper.state.editorState.getCurrentContent();
+
+        const blockWithLinkAtBeginning = contentState.getBlockForKey("ag6qs");
+        const linkKey = blockWithLinkAtBeginning.getEntityAt(0);
+
+        expect(linkKey).to.be.null;
+      });
+
+      it("should add protocol to links", function() {
+        TestUtils.Simulate.click(this.button);
+
+        const text = TestUtils.findRenderedDOMComponentWithClass(this.wrapper, "textInput");
+        text.value = "www.globo.com";
+        TestUtils.Simulate.change(text);
+        TestUtils.Simulate.keyDown(text, {key: "Enter", keyCode: 13, which: 13});
+
+        const contentState = this.wrapper.state.editorState.getCurrentContent();
+
+        const blockWithLinkAtBeginning = contentState.getBlockForKey("ag6qs");
+        const linkKey = blockWithLinkAtBeginning.getEntityAt(0);
+        const linkInstance = Entity.get(linkKey);
+        const {url} = linkInstance.getData();
+
+        expect(url).to.be.equal("http://www.globo.com");
+      });
     });
   });
 });

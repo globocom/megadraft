@@ -5,17 +5,19 @@
  */
 
 import React, {Component} from "react";
-import {RichUtils} from "draft-js";
+import {RichUtils, Entity} from "draft-js";
 import ToolbarItem from "./ToolbarItem";
 
 import {getSelectionCoords} from "./utils";
-
+import LinkInput from "./components/LinkInput";
 
 export default class Toolbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: false
+      show: false,
+      editingLink: false,
+      link: ""
     };
   }
 
@@ -28,6 +30,14 @@ export default class Toolbar extends Component {
     this.props.onChange(
       RichUtils.toggleBlockType(this.props.editorState, blockType)
     );
+  }
+
+  toggleLink() {
+    if (this.hasLink()) {
+      this.unlink();
+    } else {
+      this.setState({editingLink: true});
+    }
   }
 
   rawStyle() {
@@ -81,6 +91,21 @@ export default class Toolbar extends Component {
         height: 20px;
         margin: 0 8px;
       }
+      .textInput::placeholder {
+        color: #ccc;
+      }
+      .textInput {
+        background-color: transparent;
+        border: none;
+        font-size: 14px;
+        color: #fafafa;
+        width: 250px;
+        margin: 20px;
+        padding: 0;
+      }
+      .textInput:focus {
+        outline: none;
+      }
       `
     };
   }
@@ -112,6 +137,11 @@ export default class Toolbar extends Component {
         key = "sep-" + position;
         break;
       }
+      case "entity": {
+        toggle = () => this.toggleLink();
+        active = this.hasLink();
+        break;
+      }
     }
 
     return (
@@ -124,7 +154,12 @@ export default class Toolbar extends Component {
     const toolbar = this.refs.toolbar;
     const selectionCoords = getSelectionCoords(editor, toolbar);
 
-    if (!this.state.position ||
+    if (!selectionCoords) {
+      return null;
+    }
+
+    if (selectionCoords &&
+        !this.state.position ||
         this.state.position.top !== selectionCoords.offsetTop ||
         this.state.position.left !== selectionCoords.offsetLeft) {
       this.setState({
@@ -138,14 +173,46 @@ export default class Toolbar extends Component {
   }
 
   componentDidUpdate() {
-    if (!this.props.editorState.getSelection().isCollapsed() &&
-        this.props.editorState.getSelection().getHasFocus()) {
+    if (!this.props.editorState.getSelection().isCollapsed()) {
       return this.setBarPosition();
     } else {
       if (this.state.show) {
-        this.setState({show: false});
+        this.setState({
+          show: false,
+          editingLink: false,
+          link: ""
+        });
       }
     }
+  }
+
+  hasLink() {
+    const selection = this.props.editorState.getSelection();
+    const anchorKey = selection.getAnchorKey();
+    const contentState = this.props.editorState.getCurrentContent();
+    const anchorBlock = contentState.getBlockForKey(anchorKey);
+    const entityKey = anchorBlock.getEntityAt(selection.anchorOffset);
+    if (entityKey) {
+      const entity = Entity.get(entityKey);
+      if (entity.getType() === "LINK") {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  unlink() {
+    const {editorState} = this.props;
+    const selection = editorState.getSelection();
+    if (!selection.isCollapsed()) {
+      this.props.onChange(RichUtils.toggleLink(editorState, selection, null));
+    }
+  }
+
+  cancelLink() {
+    this.setState({
+      editingLink: false
+    });
   }
 
   render() {
@@ -159,12 +226,19 @@ export default class Toolbar extends Component {
       <div
         className="draft-toolbar"
         style={style}
-        ref="toolbar"
-        onMouseDown={(x) => {x.preventDefault();}}>
+        ref="toolbar">
         <style dangerouslySetInnerHTML={this.rawStyle()}></style>
-        <ul>
+        <ul style={this.state.editingLink? {display: "none"}: {}}
+            onMouseDown={(x) => {x.preventDefault();}}>
           {this.props.actions.map(::this.renderButton)}
         </ul>
+        <LinkInput
+          ref="textInput"
+          editorState={this.props.editorState}
+          onChange={this.props.onChange}
+          editingLink={this.state.editingLink}
+          editor={this.props.editor}
+          cancelLink={::this.cancelLink}/>
       </div>
     );
   }
