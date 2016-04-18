@@ -43,7 +43,11 @@ describe("Megadraft Component", () => {
       ]
     };
     this.editorState = editorStateFromRaw(INITIAL_CONTENT);
-    this.component = TestUtils.renderIntoDocument(<Megadraft editorState={this.editorState} />);
+    this.component = TestUtils.renderIntoDocument(
+      <Megadraft
+        editorState={this.editorState}
+        onChange={() => null}/>
+    );
   });
 
   afterEach(function() {

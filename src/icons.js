@@ -10,10 +10,11 @@ import ULIcon from "./icons/ul.svg";
 import OLIcon from "./icons/ol.svg";
 import H2Icon from "./icons/h2.svg";
 import BlockQuoteIcon from "./icons/blockquote.svg";
+import LinkIcon from "./icons/link.svg";
 
 
 const icons = {
-  BoldIcon, ItalicIcon, ULIcon, OLIcon, H2Icon, BlockQuoteIcon
+  BoldIcon, ItalicIcon, ULIcon, OLIcon, H2Icon, BlockQuoteIcon, LinkIcon
 };
 
 export default icons;

@@ -12,6 +12,9 @@ import {
   ContentState,
   getVisibleSelectionRect} from "draft-js";
 
+import decorator from "./decorator";
+
+
 export function editorStateToJSON(editorState) {
   if (editorState) {
     const content = editorState.getCurrentContent();
@@ -22,7 +25,7 @@ export function editorStateToJSON(editorState) {
 export function editorStateFromRaw(rawContent) {
   const blocks = convertFromRaw(rawContent);
   const content = ContentState.createFromBlockArray(blocks);
-  return EditorState.createWithContent(content);
+  return EditorState.createWithContent(content, decorator);
 }
 
 export function getSelectedBlockElement(range) {
@@ -42,6 +45,10 @@ export function getSelectedBlockElement(range) {
 export function getSelectionCoords(editor, toolbar) {
   const editorBounds = editor.getBoundingClientRect();
   const rangeBounds = getVisibleSelectionRect(window);
+
+  if (!rangeBounds) {
+    return null;
+  }
 
   const rangeWidth = rangeBounds.right - rangeBounds.left;
 

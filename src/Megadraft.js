@@ -18,6 +18,7 @@ export default class Megadraft extends Component {
     this.actions = [
       {type: "inline", label: "B", style: "BOLD", icon: icons.BoldIcon},
       {type: "inline", label: "I", style: "ITALIC", icon: icons.ItalicIcon},
+      {type: "entity", label: "Link", style: "link", icon: icons.LinkIcon},
       {type: "separator"},
       {type: "block", label: "UL", style: "unordered-list-item", icon: icons.ULIcon},
       {type: "block", label: "OL", style: "ordered-list-item", icon: icons.OLIcon},
