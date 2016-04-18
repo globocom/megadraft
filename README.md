@@ -8,6 +8,7 @@ To run the development server and see the examples:
 
 ```
 git clone <REPO_URL>
+cd megadraft
 make setup
 make run
 ```
