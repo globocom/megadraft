@@ -61,7 +61,7 @@
     "test": "babel-node node_modules/isparta/bin/isparta cover karma -- start",
     "test:mocha": "mocha --opts mocha.opts -- tests/*_test.js",
     "test:watch": "mocha -w --opts mocha.opts -- tests/*_test.js",
-    "build:lib": "rimraf lib && babel -d lib/ src/",
+    "build:lib": "./bin/build-lib.js",
     "build:dist": "rimraf dist && webpack --config webpack.config.dist.js --optimize-minimize",
     "build": "npm run build:lib && npm run build:dist",
     "site": "webpack --config webpack.config.site.js --optimize-minimize",
