@@ -15,5 +15,8 @@ test:
 	@$(MAKE) lint
 	@$(MAKE) unit
 
+build:
+	@npm run --silent build
+
 show-coverage:
 	@open coverage/PhantomJS*/index.html
