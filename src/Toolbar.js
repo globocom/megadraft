@@ -4,14 +4,17 @@
  * License: MIT
  */
 
+import Radium from "radium";
 import React, {Component} from "react";
 import {RichUtils, Entity} from "draft-js";
-import ToolbarItem from "./ToolbarItem";
 
-import {getSelectionCoords} from "./utils";
 import LinkInput from "./components/LinkInput";
+import ToolbarItem from "./ToolbarItem";
+import ToolbarStyle from "./styles/ToolbarStyles";
+import {getSelectionCoords} from "./utils";
 
-export default class Toolbar extends Component {
+export default @Radium
+class Toolbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,76 +41,6 @@ export default class Toolbar extends Component {
     } else {
       this.setState({editingLink: true});
     }
-  }
-
-  rawStyle() {
-    return {__html: `
-      .draft-toolbar {
-        background-color: #181818;
-        border-radius: 4px;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
-        position: absolute;
-        white-space: nowrap;
-      }
-      .draft-toolbar:after {
-        display: inline-block;
-        top: 100%;
-        left: 50%;
-        content: " ";
-        height: 0;
-        width: 0;
-        position: absolute;
-        pointer-events: none;
-        border: solid transparent;
-        border-top-color: #181818;
-        border-width: 8px;
-        margin-left: -8px;
-      }
-      .draft-toolbar ul {
-        padding: 0 8px;
-        margin: 0;
-      }
-      .draft-toolbar .item {
-        display: inline-block;
-      }
-      .draft-toolbar .item button {
-        padding: 0;
-        color: #ccc;
-        cursor: pointer;
-        border: 0;
-        height: 56px;
-        width: 40px;
-        background: transparent;
-      }
-      .draft-toolbar .item.active button:hover,
-      .draft-toolbar .item.active button {
-        color: #3192e7;
-      }
-      .draft-toolbar .item button:hover {
-        color: #fff;
-      }
-      .draft-toolbar .separator {
-        border-right: 1px solid #333;
-        height: 20px;
-        margin: 0 8px;
-      }
-      .textInput::placeholder {
-        color: #ccc;
-      }
-      .textInput {
-        background-color: transparent;
-        border: none;
-        font-size: 14px;
-        color: #fafafa;
-        width: 250px;
-        margin: 20px;
-        padding: 0;
-      }
-      .textInput:focus {
-        outline: none;
-      }
-      `
-    };
   }
 
   renderButton(item, position) {
@@ -216,20 +149,20 @@ export default class Toolbar extends Component {
   }
 
   render() {
-    var style = this.state.position || {};
+    const style = [
+      ToolbarStyle.base,
+      this.state.position,
+      !this.state.show && {display: "none"}
+    ];
 
-    if (!this.state.show) {
-      style = {...style, display: "none"};
-    }
+    const listStyle = [
+      ToolbarStyle.list,
+      this.state.editingLink && {display: "none"}
+    ];
 
     return (
-      <div
-        className="draft-toolbar"
-        style={style}
-        ref="toolbar">
-        <style dangerouslySetInnerHTML={this.rawStyle()}></style>
-        <ul style={this.state.editingLink? {display: "none"}: {}}
-            onMouseDown={(x) => {x.preventDefault();}}>
+      <div style={style} ref="toolbar">
+        <ul style={listStyle} onMouseDown={(x) => {x.preventDefault();}}>
           {this.props.actions.map(::this.renderButton)}
         </ul>
         <LinkInput
@@ -239,6 +172,7 @@ export default class Toolbar extends Component {
           editingLink={this.state.editingLink}
           editor={this.props.editor}
           cancelLink={::this.cancelLink}/>
+        <span style={ToolbarStyle.arrow} />
       </div>
     );
   }
