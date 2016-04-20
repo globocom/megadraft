@@ -9,9 +9,6 @@ import {Entity} from "draft-js";
 import React, {Component} from "react";
 
 export default class Link extends Component {
-  _onClick() {
-
-  }
   render() {
     const style = {
       color: "#3192e7",
