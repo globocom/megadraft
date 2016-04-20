@@ -36,13 +36,13 @@ export default class LeftNavMenu extends React.Component {
               containerElement={<Link to="/docs/overview"/>}>Docs</ListItem>
             <ListItem
               containerElement={
-                <a href="https://github.com/globocom/megadraft"/>}>
+                <a href="https://github.com/globocom/megadraft" target="_blank"/>}>
                   Github</ListItem>
             <ListItem
-              containerElement={<a href="https://facebook.github.io/react"/>}>
+              containerElement={<a href="https://facebook.github.io/react" target="_blank"/>}>
                 React</ListItem>
             <ListItem
-              containerElement={<a href="http://draftjs.org"/>}>
+              containerElement={<a href="http://draftjs.org" target="_blank"/>}>
                 Draft.js</ListItem>
           </List>
         </Drawer>
