@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2016, Globo.com (https://github.com/globocom)
+ *
+ * License: MIT
+ */
+
 import {Entity, CompositeDecorator} from "draft-js";
 
 import Link from "./components/Link";
