@@ -24,8 +24,10 @@ export default class LeftNavMenu extends React.Component {
           <Divider />
           <List>
             <ListItem
+              onClick={open => this.props.toggleMenu()}
               containerElement={<Link to="/"/>}>Home</ListItem>
             <ListItem
+              onClick={open => this.props.toggleMenu()}
               containerElement={<Link to="/docs/overview"/>}>
                 Overview</ListItem>
           </List>
@@ -33,15 +35,19 @@ export default class LeftNavMenu extends React.Component {
           <List>
             <Subheader>Resources</Subheader>
             <ListItem
+              onClick={open => this.props.toggleMenu()}
               containerElement={<Link to="/docs/overview"/>}>Docs</ListItem>
             <ListItem
+              onClick={open => this.props.toggleMenu()}
               containerElement={
                 <a href="https://github.com/globocom/megadraft" target="_blank"/>}>
                   Github</ListItem>
             <ListItem
+              onClick={open => this.props.toggleMenu()}
               containerElement={<a href="https://facebook.github.io/react" target="_blank"/>}>
                 React</ListItem>
             <ListItem
+              onClick={open => this.props.toggleMenu()}
               containerElement={<a href="http://draftjs.org" target="_blank"/>}>
                 Draft.js</ListItem>
           </List>
