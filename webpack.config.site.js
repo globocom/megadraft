@@ -1,3 +1,4 @@
+var webpack = require("webpack");
 var makeConfig = require("./makewebpackconfig.js");
 
 module.exports = makeConfig({
