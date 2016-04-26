@@ -5,12 +5,18 @@
  */
 
 export default {
+  wrapper: {
+    background: "yellow",
+    height: 0,
+    position: "absolute"
+  },
+
   base: {
     backgroundColor: "#181818",
     borderRadius: "4px",
     boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.4)",
-    position: "absolute",
-    whiteSpace: "nowrap"
+    left: "-50%",
+    position: "relative"
   },
 
   arrow: {
@@ -29,6 +35,7 @@ export default {
 
   list: {
     padding: "0 8px",
-    margin: 0
+    margin: 0,
+    whiteSpace: "nowrap"
   }
 };

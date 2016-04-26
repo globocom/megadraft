@@ -140,7 +140,7 @@ describe("Toolbar Component", function() {
     });
 
     it("starts hidden", function() {
-      const toolbarNode = this.wrapper.refs.toolbar.refs.toolbar;
+      const toolbarNode = this.wrapper.refs.toolbar.refs.toolbarWrapper;
       expect(toolbarNode.style.display).to.be.equal("none");
     });
 
@@ -150,7 +150,7 @@ describe("Toolbar Component", function() {
         anchorOffset: 5
       }, this.wrapper);
 
-      const toolbarNode = this.wrapper.refs.toolbar.refs.toolbar;
+      const toolbarNode = this.wrapper.refs.toolbar.refs.toolbarWrapper;
       expect(toolbarNode.style.display).to.be.equal("");
     });
 
@@ -165,14 +165,14 @@ describe("Toolbar Component", function() {
         anchorOffset: 0
       }, this.wrapper);
 
-      const toolbarNode = this.wrapper.refs.toolbar.refs.toolbar;
+      const toolbarNode = this.wrapper.refs.toolbar.refs.toolbarWrapper;
       expect(toolbarNode.style.display).to.be.equal("none");
     });
 
     it("should center toolbar above the selection", function() {
       replaceSelection({focusOffset: 0, anchorOffset: 5}, this.wrapper);
 
-      const toolbarNode = this.wrapper.refs.toolbar.refs.toolbar;
+      const toolbarNode = this.wrapper.refs.toolbar.refs.toolbarWrapper;
 
       expect(toolbarNode.style.top).to.be.equal("-14px");
       expect(toolbarNode.style.left).to.be.equal("0.5px");
