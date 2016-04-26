@@ -1,3 +1,3 @@
---compilers js:babel-core/register,svg:tests/helpers/null-compiler.js
+--compilers js:babel-core/register
 --require ./tests/helpers/setup.js
 tests/*_test.js

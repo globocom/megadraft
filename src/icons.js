@@ -4,13 +4,13 @@
  * License: MIT
  */
 
-import BoldIcon from "./icons/bold.svg";
-import ItalicIcon from "./icons/italic.svg";
-import ULIcon from "./icons/ul.svg";
-import OLIcon from "./icons/ol.svg";
-import H2Icon from "./icons/h2.svg";
-import BlockQuoteIcon from "./icons/blockquote.svg";
-import LinkIcon from "./icons/link.svg";
+import BoldIcon from "./icons/bold";
+import ItalicIcon from "./icons/italic";
+import ULIcon from "./icons/ul";
+import OLIcon from "./icons/ol";
+import H2Icon from "./icons/h2";
+import BlockQuoteIcon from "./icons/blockquote";
+import LinkIcon from "./icons/link";
 
 
 const icons = {
