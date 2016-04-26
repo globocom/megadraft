@@ -1,20 +1,6 @@
 var webpack = require("webpack");
 var merge = require("merge");
 
-const applyCurrentColorPlugin = {
-  type: "perItem",
-  fn: function (item, params) {
-    if (item.attrs && item.attrs.fill) {
-      if (item.attrs.fill.value != "none") {
-        item.attrs.fill.value = "currentColor";
-      }
-      else {
-        item.removeAttr("fill");
-      }
-    }
-  }
-};
-
 
 const defaultConfig = {
   entry: [
@@ -47,22 +33,7 @@ const defaultConfig = {
       {
         test: /\.md$/,
         loader: "html!markdown"
-      },
-      {
-        test: /\.svg$/,
-        loaders: [
-          "babel",
-          "react-svg",
-          "svgo-loader?useConfig=svgoConfig"
-        ]
       }
-    ]
-  },
-  svgoConfig: {
-    plugins: [
-      {removeTitle: true},
-      {transformsWithOnePath: true},
-      {applyCurrentColorPlugin: applyCurrentColorPlugin}
     ]
   }
 };
