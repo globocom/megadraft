@@ -12,6 +12,7 @@ import chai from "chai";
 
 import Toolbar from "../src/Toolbar";
 import ToolbarItem from "../src/ToolbarItem";
+import LinkInput from "../src/components/LinkInput";
 import {editorStateFromRaw} from "../src/utils";
 import Separator from "../src/Separator";
 
@@ -189,7 +190,8 @@ describe("Toolbar Component", function() {
       });
 
       it("starts with the link input hidden", function() {
-        const textInput = TestUtils.findRenderedDOMComponentWithClass(this.wrapper, "textInput");
+        const linkInput = TestUtils.findRenderedComponentWithType(this.wrapper, LinkInput);
+        const textInput = linkInput.refs.textInput;
 
         expect(textInput.style.display).to.be.equal("none");
       });
@@ -198,7 +200,8 @@ describe("Toolbar Component", function() {
 
         TestUtils.Simulate.click(this.button);
 
-        const textInput = TestUtils.findRenderedDOMComponentWithClass(this.wrapper, "textInput");
+        const linkInput = TestUtils.findRenderedComponentWithType(this.wrapper, LinkInput);
+        const textInput = linkInput.refs.textInput;
 
         expect(textInput.style.display).to.be.equal("");
 
@@ -208,10 +211,12 @@ describe("Toolbar Component", function() {
 
         TestUtils.Simulate.click(this.button);
 
-        const text = TestUtils.findRenderedDOMComponentWithClass(this.wrapper, "textInput");
-        text.value = "http://www.globo.com";
-        TestUtils.Simulate.change(text);
-        TestUtils.Simulate.keyDown(text, {key: "Enter", keyCode: 13, which: 13});
+        const linkInput = TestUtils.findRenderedComponentWithType(this.wrapper, LinkInput);
+        const textInput = linkInput.refs.textInput;
+
+        textInput.value = "http://www.globo.com";
+        TestUtils.Simulate.change(textInput);
+        TestUtils.Simulate.keyDown(textInput, {key: "Enter", keyCode: 13, which: 13});
 
         const contentState = this.wrapper.state.editorState.getCurrentContent();
 
@@ -226,12 +231,15 @@ describe("Toolbar Component", function() {
       it("esc key should cancel the link", function() {
         TestUtils.Simulate.click(this.button);
 
-        const text = TestUtils.findRenderedDOMComponentWithClass(this.wrapper, "textInput");
-        text.value = "http://www.globo.com";
-        TestUtils.Simulate.change(text);
-        TestUtils.Simulate.keyDown(text, {key: "Escape", keyCode: 27, which: 27});
+        const linkInput = TestUtils.findRenderedComponentWithType(this.wrapper, LinkInput);
+        const textInput = linkInput.refs.textInput;
 
-        expect(text.style.display).to.be.equal("none");
+        textInput.value = "http://www.globo.com";
+
+        TestUtils.Simulate.change(textInput);
+        TestUtils.Simulate.keyDown(textInput, {key: "Escape", keyCode: 27, which: 27});
+
+        expect(textInput.style.display).to.be.equal("none");
 
       });
 
@@ -239,10 +247,12 @@ describe("Toolbar Component", function() {
 
         TestUtils.Simulate.click(this.button);
 
-        const text = TestUtils.findRenderedDOMComponentWithClass(this.wrapper, "textInput");
-        text.value = "http://www.globo.com";
-        TestUtils.Simulate.change(text);
-        TestUtils.Simulate.keyDown(text, {key: "Enter", keyCode: 13, which: 13});
+        const linkInput = TestUtils.findRenderedComponentWithType(this.wrapper, LinkInput);
+        const textInput = linkInput.refs.textInput;
+
+        textInput.value = "http://www.globo.com";
+        TestUtils.Simulate.change(textInput);
+        TestUtils.Simulate.keyDown(textInput, {key: "Enter", keyCode: 13, which: 13});
 
         TestUtils.Simulate.click(this.button);
         const contentState = this.wrapper.state.editorState.getCurrentContent();
@@ -256,10 +266,11 @@ describe("Toolbar Component", function() {
       it("should add protocol to links", function() {
         TestUtils.Simulate.click(this.button);
 
-        const text = TestUtils.findRenderedDOMComponentWithClass(this.wrapper, "textInput");
-        text.value = "www.globo.com";
-        TestUtils.Simulate.change(text);
-        TestUtils.Simulate.keyDown(text, {key: "Enter", keyCode: 13, which: 13});
+        const linkInput = TestUtils.findRenderedComponentWithType(this.wrapper, LinkInput);
+        const textInput = linkInput.refs.textInput;
+        textInput.value = "www.globo.com";
+        TestUtils.Simulate.change(textInput);
+        TestUtils.Simulate.keyDown(textInput, {key: "Enter", keyCode: 13, which: 13});
 
         const contentState = this.wrapper.state.editorState.getCurrentContent();
 

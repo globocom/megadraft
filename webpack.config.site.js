@@ -1,34 +1,11 @@
-var webpack = require("webpack");
-var commonConfig = require("./webpack.common.js");
+var makeConfig = require("./makewebpackconfig.js");
 
-module.exports = {
-  entry: [
-    './website/index.js'
-  ],
-  output: {
-    path: __dirname,
-    publicPath: '/',
-    filename: 'website/bundle.js'
-  },
+module.exports = makeConfig({
   plugins: [
-    new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify("production")
-      }
-    })
-  ],
-  module: {
-    loaders: [{
-      exclude: /node_modules/,
-      loader: 'babel'
-    }, {
-      test: /\.css$/,
-      loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]|css-saas|'
-    }, {
-      test: /\.md$/,
-      loader: "html!markdown"
-    },
-    commonConfig.svgo.loader]
-  },
-  svgoConfig: commonConfig.svgo.config,
-};
+      new webpack.DefinePlugin({
+        "process.env": {
+          NODE_ENV: JSON.stringify("production")
+        }
+      })
+  ]
+});

@@ -4,12 +4,15 @@
  * License: MIT
  */
 
+import Radium from "radium";
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import {EditorState, RichUtils, Entity} from "draft-js";
 
+import LinkInputStyles from "../styles/components/LinkInputStyles";
 
-export default class LinkInput extends Component {
+export default @Radium
+class LinkInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,11 +71,15 @@ export default class LinkInput extends Component {
   }
 
   render() {
+    const style = [
+      LinkInputStyles.base,
+      !this.props.editingLink && {display: "none"}
+    ];
+
     return (
       <input
         ref="textInput"
-        className="textInput"
-        style={this.props.editingLink? {}: {display: "none"}}
+        style={style}
         type="text"
         onChange={::this.onLinkChange}
         value={this.state.link}
