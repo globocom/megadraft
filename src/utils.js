@@ -9,7 +9,6 @@ import {
   convertToRaw,
   convertFromRaw,
   EditorState,
-  ContentState,
   getVisibleSelectionRect} from "draft-js";
 
 import decorator from "./decorator";
