@@ -23,11 +23,10 @@ const defaultConfig = {
         loader: "babel"
       },
       {
-        test: /\.s?css$/,
+        test: /\.css$/,
         loaders: [
           "style",
-          "css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]",
-          "sass"
+          "css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]"
         ]
       },
       {
