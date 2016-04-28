@@ -150,9 +150,7 @@ class Toolbar extends Component {
 
   render() {
     const style = [
-      ToolbarStyle.base,
-      this.state.position,
-      !this.state.show && {display: "none"}
+      ToolbarStyle.base
     ];
 
     const listStyle = [
@@ -160,19 +158,27 @@ class Toolbar extends Component {
       this.state.editingLink && {display: "none"}
     ];
 
+    const wrapperStyle = [
+      ToolbarStyle.wrapper,
+      !this.state.show && {display: "none"},
+      this.state.position
+    ];
+
     return (
-      <div style={style} ref="toolbar">
-        <ul style={listStyle} onMouseDown={(x) => {x.preventDefault();}}>
-          {this.props.actions.map(::this.renderButton)}
-        </ul>
-        <LinkInput
-          ref="textInput"
-          editorState={this.props.editorState}
-          onChange={this.props.onChange}
-          editingLink={this.state.editingLink}
-          editor={this.props.editor}
-          cancelLink={::this.cancelLink}/>
-        <span style={ToolbarStyle.arrow} />
+      <div style={wrapperStyle} ref="toolbarWrapper">
+        <div style={style} ref="toolbar">
+          <ul style={listStyle} onMouseDown={(x) => {x.preventDefault();}}>
+            {this.props.actions.map(::this.renderButton)}
+          </ul>
+          <LinkInput
+            ref="textInput"
+            editorState={this.props.editorState}
+            onChange={this.props.onChange}
+            editingLink={this.state.editingLink}
+            editor={this.props.editor}
+            cancelLink={::this.cancelLink}/>
+          <span style={ToolbarStyle.arrow} />
+        </div>
       </div>
     );
   }
