@@ -3,13 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <title>Megadraft - draftjs Rich Text Editor</title>
-    <style type="text/css">
+
+      <style type="text/css">
         body {
             margin: 0;
+            background-color: #f0f0f0;
         }
-        * {
-            box-sizing: border-box;
-        }
+        /** {*/
+            /*box-sizing: border-box;*/
+        /*}*/
         html {
             font-family: 'Roboto', sans-serif;
             -webkit-font-smoothing: antialiased;
@@ -31,6 +33,14 @@
             padding: 10px;
             outline: none;
         }
+        .public-DraftEditor-content {
+            background-color: white;
+            border: 1px solid #333;
+            border-top: 0;
+            min-height: 300px;
+            padding: 10px;
+            outline: none;
+        }
         .public-DraftStyleDefault-block {
             margin: 10px 0;
         }
@@ -42,6 +52,9 @@
       href='https://fonts.googleapis.com/css?family=Roboto:400,300,600'
       rel='stylesheet'
       type='text/css'>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
   </head>
   <body>
     <div id="container"></div>

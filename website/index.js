@@ -15,6 +15,10 @@ import Docs from "./components/docs";
 import LeftNavMenu from "./components/leftnavmenu";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 
+import MyRawTheme from "./components/megadrafttheme";
+
+
+
 import injectTapEventPlugin from "react-tap-event-plugin";
 
 // Needed for onTouchTap
@@ -25,13 +29,17 @@ injectTapEventPlugin();
 
 
 class Page extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {open: false};
   }
   getChildContext() {
-    return {muiTheme: getMuiTheme()};
+    return {
+      muiTheme: getMuiTheme(MyRawTheme)
+    };
   }
+
   onMenuToggle() {
     this.setState({open: !this.state.open});
   }
@@ -54,7 +62,7 @@ class Page extends React.Component {
 
 
 Page.childContextTypes = {
-  muiTheme: React.PropTypes.object.isRequired
+  muiTheme: React.PropTypes.object
 };
 
 ReactDOM.render((
