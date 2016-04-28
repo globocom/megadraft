@@ -10,7 +10,7 @@ import React from "react";
 export default class extends React.Component {
   render() {
     return (
-      <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 5v3h2.21l-3.42 8H6v3h8v-3h-2.21l3.42-8H18V5z" fill="currentColor" fill-rule="evenodd"/></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M18 16l-4-3.2V16H6V8h8v3.2L18 8z" fillRule="evenodd"/></svg>
     );
   }
 }
