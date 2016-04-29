@@ -53,7 +53,9 @@ class Megadraft extends Component {
         component: Atomic,
         editable: false,
         props: {
-          plugins: this.props.plugins || getDefaultPlugins()
+          plugins: this.props.plugins || getDefaultPlugins(),
+          onChange: ::this.onChange,
+          editorState: this.props.editorState
         }
       };
     }

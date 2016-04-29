@@ -14,11 +14,18 @@ import LinkIcon from "./icons/link";
 import CrossIcon from "./icons/cross";
 import ImageIcon from "./icons/image";
 import VideoIcon from "./icons/video";
+import EditIcon from "./icons/edit";
+import DeleteIcon from "./icons/delete";
+import CropIcon from "./icons/crop";
+import MediaBigIcon from "./icons/mediaBig";
+import MediaMediumIcon from "./icons/mediaMedium";
+import MediaSmallIcon from "./icons/mediaSmall";
 
 
 const icons = {
   BoldIcon, ItalicIcon, ULIcon, OLIcon, H2Icon, BlockQuoteIcon, LinkIcon,
-  CrossIcon, ImageIcon, VideoIcon
+  CrossIcon, ImageIcon, VideoIcon, EditIcon, DeleteIcon, CropIcon, MediaBigIcon,
+  MediaMediumIcon, MediaSmallIcon
 };
 
 export default icons;
