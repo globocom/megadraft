@@ -4,14 +4,20 @@
  * License: MIT
  */
 
+import Radium from "radium";
 import React, {Component} from "react";
-import {Editor, RichUtils} from "draft-js";
+import Draft, {Editor, RichUtils} from "draft-js";
 
 import icons from "./icons";
 import Toolbar from "./Toolbar";
+import Sidebar from "./components/Sidebar";
+import {getDefaultPlugins} from "./utils";
+import Atomic from "./components/Media";
+import EditorStyle from "./styles/EditorStyle";
 
 
-export default class Megadraft extends Component {
+export default @Radium
+class Megadraft extends Component {
   constructor(props) {
     super(props);
 
@@ -41,12 +47,38 @@ export default class Megadraft extends Component {
     return false;
   }
 
+  mediaBlockRenderer(block) {
+    if (block.getType() === "atomic") {
+      return {
+        component: Atomic,
+        editable: false,
+        props: {
+          plugins: this.props.plugins || getDefaultPlugins()
+        }
+      };
+    }
+
+    return null;
+  }
+
   render() {
     const {editorState} = this.props;
+    const plugins = this.props.plugins || getDefaultPlugins();
+
     return (
       <div className="megadraft">
-        <div className="megadraft-editor" id="megadraft-editor" ref="editor">
+        <div
+          className="megadraft-editor"
+          style={EditorStyle.editor}
+          id="megadraft-editor"
+          ref="editor">
+          <Sidebar
+            plugins={plugins}
+            editorState={editorState}
+            onChange={::this.onChange}/>
           <Editor
+            plugins={plugins}
+            blockRendererFn={::this.mediaBlockRenderer}
             handleKeyCommand={::this.handleKeyCommand}
             editorState={editorState}
             onChange={::this.onChange} />
@@ -60,3 +92,5 @@ export default class Megadraft extends Component {
     );
   }
 }
+
+export const DraftJS = Draft;
