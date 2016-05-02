@@ -41,6 +41,7 @@
     "react-router": "^2.4.0",
     "react-tap-event-plugin": "^1.0.0",
     "rimraf": "^2.5.2",
+    "svgo": "^0.6.6",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   },
