@@ -11,6 +11,6 @@ export default {
   zIndex: zIndex,
   palette: {
     primary1Color: Colors.darkBlack,
-    accent1Color: Colors.grey300
+    accent1Color: Colors.grey900
   }
 };
