@@ -1,7 +1,7 @@
 # Overview
 
 Megadraft is a Rich Text Editor built on top of Facebook's
-[draft.js](draftjs.org) framework
+[draft.js](https://facebook.github.io/draft-js/) framework
 
 ## How to use
 
