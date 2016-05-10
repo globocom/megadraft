@@ -12,7 +12,7 @@ import icons from "./icons";
 import Toolbar from "./Toolbar";
 import Sidebar from "./components/Sidebar";
 import {getDefaultPlugins} from "./utils";
-import Atomic from "./components/Media";
+import Media from "./components/Media";
 import EditorStyle from "./styles/EditorStyle";
 
 
@@ -50,7 +50,7 @@ class Megadraft extends Component {
   mediaBlockRenderer(block) {
     if (block.getType() === "atomic") {
       return {
-        component: Atomic,
+        component: Media,
         editable: false,
         props: {
           plugins: this.props.plugins || getDefaultPlugins(),
