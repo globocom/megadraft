@@ -18,7 +18,10 @@ export default @Radium
 class Media extends Component {
   constructor(props) {
     super(props);
+
     this.remove = ::this.remove;
+    this.updateEntity = ::this.updateEntity;
+
     this.onChange = this.props.blockProps.onChange;
     this.block = this.props.block;
     this.entityKey = this.block.getEntityAt(0);
@@ -71,11 +74,18 @@ class Media extends Component {
     this.refresh();
   }
 
+  updateEntity(data) {
+    Entity.mergeData(this.entityKey, data);
+    // FIXME
+    this.refresh();
+  }
+
   render() {
     const entity = Entity.get(this.entityKey);
     const data = entity.getData();
     const type = entity.getType();
     const plugins = this.props.blockProps.plugins;
+    const setReadOnly = this.props.blockProps.setReadOnly;
     for (let plugin of plugins) {
       if (type === plugin.type) {
         const Block = plugin.blockComponent;
@@ -89,7 +99,7 @@ class Media extends Component {
                 selectedFeatured={data.featured || this.defaultFeatured}
                 setFeatured={::this.setFeatured} />
               <Block style={MediaStyle.block} data={data} />
-              <MediaCaption />
+              <MediaCaption setReadOnly={setReadOnly} updateEntity={this.updateEntity} data={data} />
             </div>
           </div>
         );

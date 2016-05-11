@@ -5,14 +5,16 @@
  */
 
 export default {
-  captionBlock: {
-    padding: "5px 25px"
+  dataBlock: {
+    padding: "8px 16px"
   },
-  captionText: {
-    margin: 0,
-    fontFamily: "OpenSans",
+  field: {
+    display: "block",
+    width: "100%",
+    border: 0,
     fontSize: "12px",
-    lineHeight: 1.3,
-    userSelect: "none"
+    padding: "8px 0",
+    color: "#333333",
+    lineHeight: 1.3
   }
 };

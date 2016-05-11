@@ -5,8 +5,8 @@
  */
 
 export default {
-  editor: {
+  base: {
     position: "relative",
-    fontFamily: "OpenSans"
+    fontFamily: "OpenSans, Arial"
   }
 };

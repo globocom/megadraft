@@ -19,6 +19,7 @@ export default {
     border: "solid 1px #ddd"
   },
   block: {
+    display: "block", // Eliminates whitespace between block and data fields block
     maxWidth: "100%",
     userSelect: "none"
   },

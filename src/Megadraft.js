@@ -13,13 +13,19 @@ import Toolbar from "./Toolbar";
 import Sidebar from "./components/Sidebar";
 import {getDefaultPlugins} from "./utils";
 import Media from "./components/Media";
-import EditorStyle from "./styles/EditorStyle";
+import MegadraftStyles from "./styles/MegadraftStyles";
 
 
 export default @Radium
 class Megadraft extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      readOnly: false
+    };
+
+    this.setReadOnly = ::this.setReadOnly;
 
     this.actions = [
       {type: "inline", label: "B", style: "BOLD", icon: icons.BoldIcon},
@@ -47,6 +53,10 @@ class Megadraft extends Component {
     return false;
   }
 
+  setReadOnly(readOnly) {
+    this.setState({readOnly});
+  }
+
   mediaBlockRenderer(block) {
     if (block.getType() === "atomic") {
       return {
@@ -55,7 +65,8 @@ class Megadraft extends Component {
         props: {
           plugins: this.props.plugins || getDefaultPlugins(),
           onChange: ::this.onChange,
-          editorState: this.props.editorState
+          editorState: this.props.editorState,
+          setReadOnly: this.setReadOnly
         }
       };
     }
@@ -75,7 +86,7 @@ class Megadraft extends Component {
       <div className="megadraft">
         <div
           className="megadraft-editor"
-          style={EditorStyle.editor}
+          style={MegadraftStyles.base}
           id="megadraft-editor"
           ref="editor">
           <Sidebar
@@ -83,6 +94,7 @@ class Megadraft extends Component {
             editorState={editorState}
             onChange={::this.onChange}/>
           <Editor
+            readOnly={this.state.readOnly}
             plugins={plugins}
             blockRendererFn={::this.mediaBlockRenderer}
             handleKeyCommand={::this.handleKeyCommand}
