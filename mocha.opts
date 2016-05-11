@@ -1,3 +1,5 @@
 --compilers js:babel-core/register
 --require ./tests/helpers/setup.js
+--recursive
 tests/*_test.js
+tests/**/*_test.js
