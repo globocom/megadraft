@@ -11,61 +11,101 @@ import {editorStateToJSON, editorStateFromRaw} from "../../src/utils";
 
 import styles from "../App.css";
 
+import Tabs from "material-ui/Tabs/tabs";
+import Tab from "material-ui/Tabs/tab";
+import FontIcon from "material-ui/FontIcon";
 
-const INITIAL_CONTENT = {
-  "entityMap": {},
-  "blocks": [
-    {
-      "key": "ag6qs",
-      "text": "Hello World!",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [
-        {
-          "offset": 0,
-          "length": 12,
-          "style": "BOLD"
-        },
-        {
-          "offset": 6,
-          "length": 6,
-          "style": "ITALIC"
-        }
-      ],
-      "entityRanges": []
-    }
-  ]
-};
+import getMuiTheme from "material-ui/styles/getMuiTheme";
 
-export default class Example extends React.Component {
+var Colors = require("material-ui/styles/colors");
+
+
+import INITIAL_CONTENT from "./contentExample";
+
+
+
+const muiTheme = getMuiTheme({
+  fontFamily: "Roboto, sans-serif",
+  tabs: {
+    textColor: Colors.grey300,
+    selectedTextColor: Colors.grey900
+  },
+  palette: {
+    primary1Color: Colors.white,
+    accent1Color: Colors.indigo500
+  }
+});
+
+
+class Example extends React.Component {
+  //childContextTypes : {
+  //  muiTheme: React.PropTypes.object,
+  //},
+
+  getChildContext() {
+    return {muiTheme: getMuiTheme(muiTheme)};
+  }
+
   constructor(props) {
     super(props);
     const content = editorStateFromRaw(INITIAL_CONTENT);
-    this.state = {value: content};
+    this.state = {
+      value: content,
+      activeTab: "a"
+    };
   }
 
+
+
+  handleChange = (tab) => {
+    this.setState({
+      activeTab: tab
+    });
+  };
+
   onChange(value) {
-    this.setState({value});
+    this.setState({
+      value
+    }
+    );
   }
 
   render() {
+
+
     return (
-      <div className={styles.example}>
-        <div className={styles.box}>
-          <h2>Default editor behavior:</h2>
-          <Megadraft
-            editorState={this.state.value}
-            onChange={::this.onChange}/>
-        </div>
-        <div className={styles.divider} ></div>
-        <div className={styles.box}>
-          <h2>Content JSON: </h2>
-          <textarea
-            value={editorStateToJSON(this.state.value)}
-            readOnly={true}
-            className={styles.jsonpreview}/>
-        </div>
-      </div>
+        <Tabs tab={this.state.activeTab} onChange={this.handleChange}>
+          <Tab label="Editor"
+               tab="a"
+               icon={<FontIcon className="material-icons">mode_edit</FontIcon>}>
+
+            <div className="tab-container-editor">
+              <Megadraft
+                  editorState={this.state.value}
+                  onChange={::this.onChange} />
+            </div>
+          </Tab>
+          <Tab label="Content JSON"
+               value="b"
+               icon={<FontIcon className="material-icons">code</FontIcon>}>
+            <div className="tab-container-json">
+              <textarea
+                  value={editorStateToJSON(this.state.value)}
+                  readOnly={true}
+                  className={styles.jsonpreview}/>
+            </div>
+          </Tab>
+        </Tabs>
+
+
+
     );
   }
 }
+
+
+Example.childContextTypes = {
+  muiTheme: React.PropTypes.object.isRequired
+};
+
+export default Example;
