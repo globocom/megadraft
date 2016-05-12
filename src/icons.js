@@ -20,12 +20,13 @@ import CropIcon from "./icons/crop";
 import MediaBigIcon from "./icons/mediaBig";
 import MediaMediumIcon from "./icons/mediaMedium";
 import MediaSmallIcon from "./icons/mediaSmall";
+import DropdownArrow from "./icons/dropdownArrow";
 
 
 const icons = {
   BoldIcon, ItalicIcon, ULIcon, OLIcon, H2Icon, BlockQuoteIcon, LinkIcon,
   CrossIcon, ImageIcon, VideoIcon, EditIcon, DeleteIcon, CropIcon, MediaBigIcon,
-  MediaMediumIcon, MediaSmallIcon
+  MediaMediumIcon, MediaSmallIcon, DropdownArrow
 };
 
 export default icons;

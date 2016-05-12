@@ -48,7 +48,7 @@ describe("Dropdown Component", function() {
     const items = TestUtils.scryRenderedComponentsWithType(
       this.component, DropdownItem
     );
-    expect(items).to.have.length(2);
+    expect(items).to.have.length(4);
   });
 
 });

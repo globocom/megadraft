@@ -16,7 +16,7 @@ class MediaControlsActions extends Component {
     const Icon = item.icon;
     return(
       <li key={item.key} style={Style.actionsGroupItem} onClick={item.action}>
-        <Icon />
+        <Icon style={Style.actionsGroupItemIcon} />
       </li>
     );
   }

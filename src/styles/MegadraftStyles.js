@@ -7,6 +7,6 @@
 export default {
   base: {
     position: "relative",
-    fontFamily: "OpenSans, Arial"
+    fontFamily: "OpenSans, sans-serif"
   }
 };

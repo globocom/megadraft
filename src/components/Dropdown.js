@@ -8,7 +8,8 @@ import Radium from "radium";
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
 
-import Style  from "../styles/components/DropdownStyle";
+import Style from "../styles/components/DropdownStyle";
+import icons from "../icons";
 
 
 @Radium
@@ -16,10 +17,18 @@ export class DropdownItem extends Component {
   render() {
     const Icon = this.props.item.icon;
     return(
-      <li onClick={() => this.props.onChange(this.props.item.key)} style={Style.dropdownOption}>
-        <div style={Style.dropdownImage}><Icon /></div>
-        <span>{this.props.item.label}</span>
-      </li>
+      <div
+        style={[Style.item, this.props.style]}
+        onClick={this.props.onClick}
+        onMouseDown={this.props.onMouseDown}
+        onMouseUp={this.props.onMouseDown}
+        >
+
+        <Icon style={Style.itemIcon} />
+        <span style={Style.itemText}>{this.props.item.label}</span>
+
+        {this.props.children}
+      </div>
     );
   }
 }
@@ -39,15 +48,20 @@ class Dropdown extends Component {
   }
 
   renderItem(item) {
-    if (item.key == this.props.selected) {
-      return;
-    }
     return(
-      <DropdownItem key={item.key} item={item} onChange={::this.onChange} />
+      <li key={item.key}>
+        <DropdownItem item={item}
+          style={Style.option}
+          onClick={() => this.onChange(item.key)} />
+      </li>
     );
   }
 
-  toggleDropDown() {
+  preventSelection(event) {
+    event.preventDefault();
+  }
+
+  toggleDropDown(event) {
     this.setState({isOpen: !this.state.isOpen});
   }
 
@@ -66,26 +80,37 @@ class Dropdown extends Component {
   }
 
   render() {
-    const selected = this.props.items.filter(
+    const selectedItem = this.props.items.filter(
       (obj) => {return obj.key === this.props.selected;}
     )[0];
 
-    const Icon = selected.icon;
+    const wrapperStyle = [
+      Style.wrapper,
+      this.state.isOpen && Style.wrapperOpened
+    ];
 
-    let dropdownOpened = null;
-    let showOptionsStyle = Style.dropdownInactive;
-    if (this.state.isOpen) {
-      dropdownOpened = [Style.wrapperDropdownOpened, Style.selectedContainerOpened];
-      showOptionsStyle = null;
-    }
+    const dropdownStyle = [
+      Style.dropdown,
+      this.state.isOpen && Style.dropdownOpened
+    ];
+
+    const arrowStyle = [
+      Style.itemIcon,
+      Style.arrow,
+      this.state.isOpen && Style.arrowOpened
+    ];
 
     return(
-      <div style={[Style.wrapperDropdown, dropdownOpened]} onClick={::this.toggleDropDown}>
-        <div style={Style.selectedContainer}>
-          <div style={Style.dropdownImage}><Icon /></div>
-          <span style={Style.selectedText}>{selected.label}</span>
-        </div>
-        <ul style={[Style.dropdown, showOptionsStyle]}>
+      <div style={wrapperStyle} onClick={::this.toggleDropDown}>
+        <DropdownItem
+          item={selectedItem}
+          style={Style.selectedItem}
+          onMouseDown={::this.preventSelection}>
+
+          <icons.DropdownArrow style={arrowStyle} />
+        </DropdownItem>
+
+        <ul style={dropdownStyle}>
           {this.props.items.map(::this.renderItem)}
         </ul>
       </div>

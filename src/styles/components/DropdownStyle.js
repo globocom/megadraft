@@ -5,48 +5,61 @@
  */
 
 export default {
-  wrapperDropdown: {
+  wrapper: {
+    borderRadius: "2px",
     position: "absolute",
     background: "#fff",
     color: "#999",
-    outline: "none",
     cursor: "pointer",
     fontSize: "12px",
-    width: "170px",
-    ":hover": {
-      color: "#000"
-    }
+    fontWeight: "bold"
   },
-  wrapperDropdownOpened: {
-    boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.5)"
+  wrapperOpened: {
+    boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.5)",
+    color: "#333"
   },
+
   dropdown: {
+    display: "none",
     listStyle: "none",
-    borderRadius: "2px",
-    backgroundColor: "#fff",
-    padding: 0,
     margin: 0,
-    borderTop: "1px solid #ddd"
+    borderTop: "1px solid #ddd",
+    padding: "8px 0"
   },
-  dropdownInactive: {
-    display: "none"
+  dropdownOpened: {
+    display: "block"
   },
-  dropdownImage: {
-    display: "inline-block",
-    verticalAlign: "middle",
-    margin: "5px",
-    fontSize: 0
-  },
-  dropdownOption: {
+
+  option: {
     color: "#999",
     ":hover": {
       backgroundColor: "#0669de",
       color: "#fff"
     }
   },
-  selectedContainerOpened: {
-    color: "#000"
+
+  item: {
+    padding: "0 8px",
+    userSelect: "none",
+    lineHeight: "40px"
   },
-  selectedContainer: {
+  itemText: {
+    verticalAlign: "middle",
+    marginLeft: "8px"
+  },
+  itemIcon: {
+    verticalAlign: "middle"
+  },
+
+  selectedItem: {
+    ":hover": {
+      color: "#333"
+    }
+  },
+  arrow: {
+    marginLeft: "5px"
+  },
+  arrowOpened: {
+    transform: "rotate(180deg)"
   }
 };

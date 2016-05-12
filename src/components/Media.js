@@ -21,10 +21,16 @@ class Media extends Component {
 
     this.remove = ::this.remove;
     this.updateEntity = ::this.updateEntity;
+    this.setFeatured = ::this.setFeatured;
 
     this.onChange = this.props.blockProps.onChange;
     this.block = this.props.block;
     this.entityKey = this.block.getEntityAt(0);
+
+    const entity = Entity.get(this.entityKey);
+    this.state = {
+      entityData: entity.getData()
+    };
 
     this.dropdownItems = [
       {"key": "small", "icon": icons.MediaSmallIcon, "label": "MENOR DESTAQUE"},
@@ -69,20 +75,20 @@ class Media extends Component {
   }
 
   setFeatured(key) {
-    Entity.mergeData(this.entityKey, {"featured": key});
-    // FIXME
-    this.refresh();
+    this.updateEntity({featured: key});
   }
 
   updateEntity(data) {
-    Entity.mergeData(this.entityKey, data);
-    // FIXME
+    // Entity doesn't change editor state
+    // We have to merge data, update the local state and refresh the editor state
+    const newEntity = Entity.mergeData(this.entityKey, data);
+    this.setState({entityData: newEntity.getData()});
     this.refresh();
   }
 
   render() {
     const entity = Entity.get(this.entityKey);
-    const data = entity.getData();
+    const data = this.state.entityData;
     const type = entity.getType();
     const plugins = this.props.blockProps.plugins;
     const setReadOnly = this.props.blockProps.setReadOnly;
@@ -93,11 +99,10 @@ class Media extends Component {
           <div style={MediaStyle.blockHover}>
             <div style={MediaStyle.blockWrapper}>
               <MediaControls
-                refresh={::this.refresh}
                 dropdownItems={this.dropdownItems}
                 actionsItems={this.actionsItems}
                 selectedFeatured={data.featured || this.defaultFeatured}
-                setFeatured={::this.setFeatured} />
+                setFeatured={this.setFeatured} />
               <Block style={MediaStyle.block} data={data} />
               <MediaCaption setReadOnly={setReadOnly} updateEntity={this.updateEntity} data={data} />
             </div>
