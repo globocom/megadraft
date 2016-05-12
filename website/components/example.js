@@ -11,8 +11,7 @@ import {editorStateToJSON, editorStateFromRaw} from "../../src/utils";
 
 import styles from "../App.css";
 
-import Tabs from "material-ui/Tabs/tabs";
-import Tab from "material-ui/Tabs/tab";
+import {Tabs, Tab} from "material-ui/Tabs";
 import FontIcon from "material-ui/FontIcon";
 
 import getMuiTheme from "material-ui/styles/getMuiTheme";
