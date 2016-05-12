@@ -12,6 +12,7 @@ import Drawer from "material-ui/Drawer";
 import {List, ListItem} from "material-ui/List";
 import Subheader from "material-ui/Subheader";
 
+
 export default class LeftNavMenu extends React.Component {
 
   render() {
@@ -56,4 +57,3 @@ export default class LeftNavMenu extends React.Component {
     );
   }
 }
-

@@ -8,13 +8,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { hashHistory, Router, Route, IndexRoute } from "react-router";
 
+import getMuiTheme from "material-ui/styles/getMuiTheme";
 import AppBar from "material-ui/AppBar";
 
 import Home from "./components/home";
 import Docs from "./components/docs";
 import LeftNavMenu from "./components/leftnavmenu";
-import getMuiTheme from "material-ui/styles/getMuiTheme";
-
 import MyRawTheme from "./components/megadrafttheme";
 
 import injectTapEventPlugin from "react-tap-event-plugin";
@@ -44,23 +43,23 @@ class Page extends React.Component {
   render() {
     return (
       <div>
-          <LeftNavMenu
-              open={this.state.open}
-              toggleMenu={::this.onMenuToggle}/>
-          <AppBar
-              //title="Megadraft"
-              onLeftIconButtonTouchTap={::this.onMenuToggle}/>
-          <div className="home-title">
-              <div className="content">
-                  <h1>Megadraft</h1>
-                  <p>Megadraft is a Rich Text editor built on top of Facebook's
-                  draft.js featuring a nice default base of plugins and extensibility
-                      </p>
-              </div>
+        <LeftNavMenu
+          open={this.state.open}
+          toggleMenu={::this.onMenuToggle}/>
+        <AppBar
+          //title="Megadraft"
+          onLeftIconButtonTouchTap={::this.onMenuToggle}/>
+        <div className="home-title">
+          <div className="content">
+            <h1>Megadraft</h1>
+            <p>Megadraft is a Rich Text editor built on top of Facebook's
+            draft.js featuring a nice default base of plugins and extensibility
+              </p>
           </div>
-          <div className="home">
-              {this.props.children}
-          </div>
+        </div>
+        <div className="home">
+          {this.props.children}
+        </div>
       </div>
     );
   }
@@ -71,6 +70,7 @@ Page.childContextTypes = {
   muiTheme: React.PropTypes.object
 };
 
+
 ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={Page}>
@@ -80,6 +80,7 @@ ReactDOM.render((
   </Router>),
   document.getElementById("container")
 );
+
 
 if (process.env.NODE_ENV === "production") {
   (function(i,s,o,g,r,a,m){

@@ -12,9 +12,9 @@ import Example from "../components/example";
 export default class Home extends React.Component {
   render() {
     return (
-            <div className="content">
-                <Example />
-            </div>
+      <div className="content">
+          <Example />
+      </div>
     );
   }
 }
