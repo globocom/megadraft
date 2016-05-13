@@ -7,10 +7,12 @@
 export default {
   "entityMap": {
     "0": {
-      "type": "LINK",
-      "mutability": "MUTABLE",
+      "type": "image",
+      "mutability": "IMMUTABLE",
       "data": {
-        "url": "http://globocom.github.io/megadraft/#/docs/overview"
+        "src": "images/media.jpg",
+        "caption": "Picture from StockSnap.io",
+        "rightsHolder": "By Tim Marshall"
       }
     },
     "1": {
@@ -71,7 +73,21 @@ export default {
       "entityRanges": []
     },
     {
-      "key": "43m8u",
+      "key": "9vgd",
+      "text": "🍺",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ]
+    },
+    {
+      "key": "350ub",
       "text": "Docs",
       "type": "header-two",
       "depth": 0,
