@@ -9,8 +9,9 @@ import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 import chai from "chai";
 
-import icons from "../src/icons";
-import Dropdown, {DropdownItem} from "../src/components/Dropdown";
+import icons from "../../src/icons";
+import Dropdown from "../../src/components/Dropdown";
+import DropdownItem from "../../src/components/DropdownItem";
 
 
 let expect = chai.expect;
@@ -51,4 +52,15 @@ describe("Dropdown Component", function() {
     expect(items).to.have.length(4);
   });
 
+  it("toggles `isOpen` on click", function () {
+    const wrapper = TestUtils.scryRenderedDOMComponentsWithTag(
+      this.component, "div"
+    )[0];
+
+    TestUtils.Simulate.click(wrapper);
+    expect(this.component.state.isOpen).to.be.true;
+
+    TestUtils.Simulate.click(wrapper);
+    expect(this.component.state.isOpen).to.be.false;
+  });
 });
