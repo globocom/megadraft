@@ -8,30 +8,10 @@ import Radium from "radium";
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
 
-import Style from "../styles/components/DropdownStyle";
+import DropdownItem from "./DropdownItem";
+import DropdownStyle from "../styles/components/DropdownStyle";
 import icons from "../icons";
 
-
-@Radium
-export class DropdownItem extends Component {
-  render() {
-    const Icon = this.props.item.icon;
-    return(
-      <div
-        style={[Style.item, this.props.style]}
-        onClick={this.props.onClick}
-        onMouseDown={this.props.onMouseDown}
-        onMouseUp={this.props.onMouseDown}
-        >
-
-        <Icon style={Style.itemIcon} />
-        <span style={Style.itemText}>{this.props.item.label}</span>
-
-        {this.props.children}
-      </div>
-    );
-  }
-}
 
 export default @Radium
 class Dropdown extends Component {
@@ -51,7 +31,7 @@ class Dropdown extends Component {
     return(
       <li key={item.key}>
         <DropdownItem item={item}
-          style={Style.option}
+          style={DropdownStyle.option}
           onClick={() => this.onChange(item.key)} />
       </li>
     );
@@ -85,26 +65,25 @@ class Dropdown extends Component {
     )[0];
 
     const wrapperStyle = [
-      Style.wrapper,
-      this.state.isOpen && Style.wrapperOpened
+      DropdownStyle.wrapper,
+      this.state.isOpen && DropdownStyle.wrapperOpened
     ];
 
     const dropdownStyle = [
-      Style.dropdown,
-      this.state.isOpen && Style.dropdownOpened
+      DropdownStyle.dropdown,
+      this.state.isOpen && DropdownStyle.dropdownOpened
     ];
 
     const arrowStyle = [
-      Style.itemIcon,
-      Style.arrow,
-      this.state.isOpen && Style.arrowOpened
+      DropdownStyle.arrow,
+      this.state.isOpen && DropdownStyle.arrowOpened
     ];
 
     return(
       <div style={wrapperStyle} onClick={::this.toggleDropDown}>
         <DropdownItem
           item={selectedItem}
-          style={Style.selectedItem}
+          style={DropdownStyle.selectedItem}
           onMouseDown={::this.preventSelection}>
 
           <icons.DropdownArrow style={arrowStyle} />

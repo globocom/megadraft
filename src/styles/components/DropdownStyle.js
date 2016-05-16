@@ -38,26 +38,14 @@ export default {
     }
   },
 
-  item: {
-    padding: "0 8px",
-    userSelect: "none",
-    lineHeight: "40px"
-  },
-  itemText: {
-    verticalAlign: "middle",
-    marginLeft: "8px"
-  },
-  itemIcon: {
-    verticalAlign: "middle"
-  },
-
   selectedItem: {
     ":hover": {
       color: "#333"
     }
   },
   arrow: {
-    marginLeft: "5px"
+    marginLeft: "5px",
+    verticalAlign: "middle"
   },
   arrowOpened: {
     transform: "rotate(180deg)"
