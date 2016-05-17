@@ -8,7 +8,7 @@ export default {
   dataBlock: {
     padding: "8px 16px"
   },
-  field: {
+  dataField: {
     display: "block",
     width: "100%",
     border: 0,

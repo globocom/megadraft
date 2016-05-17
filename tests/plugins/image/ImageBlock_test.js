@@ -9,11 +9,11 @@ import TestUtils from "react-addons-test-utils";
 import chai from "chai";
 import sinon from "sinon";
 
-import MediaCaption from "../../src/components/MediaCaption";
+import ImageBlock from "../../../src/plugins/image/ImageBlock";
 
 let expect = chai.expect;
 
-describe("MediaCaption", function() {
+describe("ImageBlock", function() {
   beforeEach(function() {
     this.data = {
       caption: "media caption",
@@ -24,7 +24,7 @@ describe("MediaCaption", function() {
     this.updateEntity = sinon.spy();
 
     this.wrapper = TestUtils.renderIntoDocument(
-      <MediaCaption
+      <ImageBlock
         setReadOnly={this.setReadOnly}
         updateEntity={this.updateEntity}
         data={this.data} />

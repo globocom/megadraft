@@ -104,7 +104,6 @@ class Media extends Component {
                 setFeatured={this.setFeatured} />
               <Block
                 data={data}
-                style={MediaStyle.block}
                 setReadOnly={setReadOnly}
                 updateEntity={this.updateEntity} />
             </div>
