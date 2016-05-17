@@ -12,8 +12,6 @@ import {
   getVisibleSelectionRect} from "draft-js";
 
 import decorator from "./decorator";
-import image from "./components/buttons/image";
-import video from "./components/buttons/video";
 
 
 export function editorStateToJSON(editorState) {
@@ -58,8 +56,4 @@ export function getSelectionCoords(editor, toolbar) {
             + (rangeWidth / 2);
   const offsetTop = rangeBounds.top - editorBounds.top - (toolbarHeight + 14);
   return { offsetLeft, offsetTop };
-}
-
-export function getDefaultPlugins() {
-  return [image, video];
 }

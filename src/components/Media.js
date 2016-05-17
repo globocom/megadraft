@@ -11,7 +11,6 @@ import {Entity, EditorState, SelectionState, Modifier} from "draft-js";
 import icons from "../icons";
 import MediaStyle from "../styles/components/MediaStyle";
 import MediaControls from "../components/MediaControls";
-import MediaCaption from "../components/MediaCaption";
 
 
 export default @Radium
@@ -103,8 +102,11 @@ class Media extends Component {
                 actionsItems={this.actionsItems}
                 selectedFeatured={data.featured || this.defaultFeatured}
                 setFeatured={this.setFeatured} />
-              <Block style={MediaStyle.block} data={data} />
-              <MediaCaption setReadOnly={setReadOnly} updateEntity={this.updateEntity} data={data} />
+              <Block
+                data={data}
+                style={MediaStyle.block}
+                setReadOnly={setReadOnly}
+                updateEntity={this.updateEntity} />
             </div>
           </div>
         );

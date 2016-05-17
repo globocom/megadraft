@@ -6,14 +6,14 @@
 
 import Radium from "radium";
 import React, {Component} from "react";
-import Draft, {Editor, RichUtils, EditorState} from "draft-js";
+import Draft, {Editor, RichUtils} from "draft-js";
 
 import icons from "./icons";
 import Toolbar from "./Toolbar";
 import Sidebar from "./components/Sidebar";
-import {getDefaultPlugins} from "./utils";
 import Media from "./components/Media";
 import MegadraftStyles from "./styles/MegadraftStyles";
+import DEFAULT_PLUGINS from "./plugins/default";
 
 
 export default @Radium
@@ -37,6 +37,8 @@ class Megadraft extends Component {
       {type: "block", label: "H2", style: "header-two", icon: icons.H2Icon},
       {type: "block", label: "QT", style: "blockquote", icon: icons.BlockQuoteIcon}
     ];
+
+    this.plugins = this.props.plugins || DEFAULT_PLUGINS;
   }
 
   onChange(editorState) {
@@ -63,7 +65,7 @@ class Megadraft extends Component {
         component: Media,
         editable: false,
         props: {
-          plugins: this.props.plugins || getDefaultPlugins(),
+          plugins: this.plugins,
           onChange: ::this.onChange,
           editorState: this.props.editorState,
           setReadOnly: this.setReadOnly
@@ -75,12 +77,8 @@ class Megadraft extends Component {
   }
 
   render() {
-    let {editorState} = this.props;
-    if (!editorState) {
-      editorState = EditorState.createEmpty();
-    }
-
-    const plugins = this.props.plugins || getDefaultPlugins();
+    const {editorState} = this.props;
+    const plugins = this.plugins;
 
     return (
       <div className="megadraft">
