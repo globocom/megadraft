@@ -6,10 +6,8 @@
 
 import Radium from "radium";
 import React, {Component} from "react";
-import ReactDOM from "react-dom";
 
 import DropdownItemStyle from "../styles/components/DropdownItemStyle";
-import icons from "../icons";
 
 
 export default @Radium
