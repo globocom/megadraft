@@ -8,17 +8,13 @@ import Radium from "radium";
 import React, {Component} from "react";
 
 import Style  from "../styles/components/MediaControlsActionsStyle";
+import MediaControlsActionsItem from "../components/MediaControlsActionsItem";
 
 
 export default @Radium
 class MediaControlsActions extends Component {
   renderItem(item) {
-    const Icon = item.icon;
-    return(
-      <li key={item.key} style={Style.actionsGroupItem} onClick={item.action}>
-        <Icon style={Style.actionsGroupItemIcon} />
-      </li>
-    );
+    return(<MediaControlsActionsItem item={item} key={item.key} />);
   }
 
   render() {
