@@ -63,6 +63,19 @@ describe("Dropdown Component", function() {
     expect(text.innerHTML).to.equal("Metal");
   });
 
+  it("is possible to click on the dropdrown item", function() {
+    const item = TestUtils.scryRenderedComponentsWithType(
+      this.component, DropdownItem
+    )[1];
+    const domItem = TestUtils.findRenderedDOMComponentWithTag(item, "div");
+
+    expect(this.onChange).to.not.have.been.called;
+
+    TestUtils.Simulate.click(domItem);
+
+    expect(this.onChange).to.have.been.called;
+  });
+
   it("toggles `isOpen` on click", function () {
     const wrapper = TestUtils.scryRenderedDOMComponentsWithTag(
       this.component, "div"
