@@ -32,9 +32,9 @@ class Media extends Component {
     };
 
     this.dropdownItems = [
-      {"key": "small", "icon": icons.MediaSmallIcon, "label": "MENOR DESTAQUE"},
-      {"key": "medium", "icon": icons.MediaMediumIcon, "label": "MÉDIO DESTAQUE"},
-      {"key": "big", "icon": icons.MediaBigIcon, "label": "MAIOR DESTAQUE"}
+      {"key": "small", "icon": icons.MediaSmallIcon, "label": "SMALL"},
+      {"key": "medium", "icon": icons.MediaMediumIcon, "label": "MEDIUM"},
+      {"key": "big", "icon": icons.MediaBigIcon, "label": "BIG"}
     ];
     this.actionsItems = [
       {"key": "crop", "icon": icons.CropIcon, "action": ""},

@@ -55,14 +55,14 @@ class ImageBlock extends Component {
 
         <div style={BlockStyle.dataBlock}>
           <input type="text"
-            placeholder="Legenda"
+            placeholder="Caption"
             style={BlockStyle.dataField}
             value={this.state.caption}
             onFocus={this._handleFocus}
             onBlur={this._handleBlur}
             onChange={this._handleCaptionChange} />
           <input type="text"
-            placeholder="Créditos"
+            placeholder="Rights Holder"
             style={BlockStyle.dataField}
             value={this.state.rightsHolder}
             onFocus={this._handleFocus}
