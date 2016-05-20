@@ -64,7 +64,7 @@ export default {
     },
     {
       "key": "c4sc5",
-      "text": "It is easy to customize the sidebar, disabling or including new itens, and the media blocks are rendered with a beautiful component:",
+      "text": "It is easy to customize the sidebar, disabling or including new items, and the media blocks are rendered with a beautiful component:",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
