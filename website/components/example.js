@@ -14,7 +14,6 @@ import {grey300, grey900, white, indigo500} from "material-ui/styles/colors";
 import Megadraft from "../../src/Megadraft";
 import {editorStateToJSON, editorStateFromRaw} from "../../src/utils";
 
-import styles from "../App.css";
 import INITIAL_CONTENT from "./contentExample";
 
 
@@ -80,7 +79,7 @@ class Example extends React.Component {
             <textarea
                 value={editorStateToJSON(this.state.value)}
                 readOnly={true}
-                className={styles.jsonpreview}/>
+                className="jsonpreview"/>
           </div>
         </Tab>
       </Tabs>

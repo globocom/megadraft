@@ -11,18 +11,27 @@ import Divider from "material-ui/Divider";
 import Drawer from "material-ui/Drawer";
 import {List, ListItem} from "material-ui/List";
 import Subheader from "material-ui/Subheader";
-
+import {darkBlack} from "material-ui/styles/colors";
 
 export default class LeftNavMenu extends React.Component {
 
   render() {
+    const titleStyle = {
+      fontSize: 24,
+      color: "#FFF",
+      lineHeight: "64px",
+      fontWeight: 300,
+      paddingLeft: 24,
+      marginBottom: 8,
+      backgroundColor: darkBlack
+    };
     return (
       <div>
         <Drawer
-          open={this.props.open}
-          docked={false}
+          open={this.props.open || this.props.docked}
+          docked={this.props.docked}
           onRequestChange={open => this.props.toggleMenu()}>
-          <Divider />
+          <div style={titleStyle}>Megadraft</div>
           <List>
             <ListItem
               onClick={open => this.props.toggleMenu()}

@@ -10,148 +10,109 @@ export default {
       "type": "LINK",
       "mutability": "MUTABLE",
       "data": {
-        "url": "http://mussumipsum.com/"
+        "url": "http://globocom.github.io/megadraft/#/docs/overview"
+      }
+    },
+    "1": {
+      "type": "LINK",
+      "mutability": "MUTABLE",
+      "data": {
+        "url": "https://raw.githubusercontent.com/globocom/megadraft/master/LICENSE"
       }
     }
   },
   "blocks": [
     {
       "key": "ag6qs",
-      "text": "Mussum ipsum cacilds, vidis litro abertis",
+      "text": "Megadraft",
       "type": "header-two",
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": []
     },
     {
-      "key": "64emu",
-      "text": "Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Interagi no mé, cursus quis, vehicula ac nisi. Aenean vel dui dui.",
-      "type": "blockquote",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": []
-    },
-    {
-      "key": "60itd",
-      "text": "Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [
-        {
-          "offset": 0,
-          "length": 13,
-          "style": "BOLD"
-        }
-      ],
-      "entityRanges": []
-    },
-    {
-      "key": "8a8ui",
-      "text": "Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Interagi no mé, cursus quis, vehicula ac nisi. Aenean vel dui dui. Nullam leo erat, aliquet quis tempus a, posuere ut mi. Ut scelerisque neque et turpis posuere pulvinar pellentesque nibh ullamcorper. ",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [
-        {
-          "offset": 0,
-          "length": 147,
-          "style": "ITALIC"
-        }
-      ],
-      "entityRanges": []
-    },
-    {
-      "key": "a48os",
-      "text": "Pharetra in mattis molestie, volutpat elementum justo. Aenean ut ante turpis. ",
-      "type": "unordered-list-item",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": []
-    },
-    {
-      "key": "agcpa",
-      "text": "Pellentesque laoreet mé vel lectus scelerisque interdum cursus velit auctor. ",
-      "type": "unordered-list-item",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": []
-    },
-    {
-      "key": "3j9gr",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
-      "type": "unordered-list-item",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": []
-    },
-    {
-      "key": "8fl4c",
-      "text": "Etiam ac mauris lectus, non scelerisque augue. Aenean justo massa.",
-      "type": "unordered-list-item",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": []
-    },
-    {
-      "key": "meq8",
-      "text": "Casamentiss faiz malandris se pirulitá, Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.",
+      "key": "59kd9",
+      "text": "Megadraft is a ReactJS Rich Text editor built on top of Facebook's draft.js featuring:",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": []
     },
     {
-      "key": "9f7g0",
-      "text": "Lorem ipsum dolor sit amet, consectetuer Ispecialista im mé intende tudis nuam golada, vinho, uiski, carirí, rum da jamaikis, só num pode ser mijis. ",
+      "key": "bqjdr",
+      "text": "Good usability",
       "type": "ordered-list-item",
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": []
     },
     {
-      "key": "aji8q",
-      "text": "Adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. ",
+      "key": "1pdm1",
+      "text": "A nice default base of plugins",
       "type": "ordered-list-item",
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": []
     },
     {
-      "key": "ebvpf",
-      "text": "Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.",
+      "key": "1sd0p",
+      "text": "Extensibility.",
       "type": "ordered-list-item",
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": []
     },
     {
-      "key": "61dr7",
-      "text": "Cevadis im ampola pa arma uma pindureta. Nam varius eleifend orci, sed viverra nisl condimentum ut. Donec eget justis enim. Atirei o pau no gatis. Viva Forevis aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Copo furadis é disculpa de babadis, arcu quam euismod magna, bibendum egestas augue arcu ut est. Delegadis gente finis. In sit amet mattis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis. Pellentesque viverra accumsan ipsum elementum gravidis.",
+      "key": "c4sc5",
+      "text": "It is easy to customize the sidebar, disabling or including new itens, and the media blocks are rendered with a beautiful component:",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": []
     },
     {
-      "key": "alcbv",
-      "text": "Ipsum by Mussum ipsum!",
+      "key": "43m8u",
+      "text": "Docs",
+      "type": "header-two",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": []
+    },
+    {
+      "key": "cc4j7",
+      "text": "You can find the docs here.",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [
         {
-          "offset": 0,
-          "length": 22,
+          "offset": 22,
+          "length": 4,
           "key": 0
         }
       ]
     },
     {
-      "key": "cfhg7",
-      "text": "",
-      "type": "unstyled",
+      "key": "gcc6",
+      "text": "License",
+      "type": "header-two",
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": []
+    },
+    {
+      "key": "kst0",
+      "text": "Megadraft is MIT licensed.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 13,
+          "length": 3,
+          "key": 1
+        }
+      ]
     }
   ]
 };
