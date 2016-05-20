@@ -11,27 +11,20 @@ import chai from "chai";
 import sinon from "sinon";
 
 import icons from "../../src/icons";
-import MediaControlsActions from "../../src/components/MediaControlsActions";
 import MediaControlsActionsItem from "../../src/components/MediaControlsActionsItem";
 
 let expect = chai.expect;
 
 
-describe("MediaControlsActions Component", function() {
+describe("MediaControlsActionsItem Component", function() {
 
   beforeEach(function() {
     this.crop = sinon.spy();
-    this.edit = sinon.spy();
-    this.delete = sinon.spy();
 
-    const actionsItems = [
-      {"key": "crop", "icon": icons.CropIcon, "action": this.crop},
-      {"key": "edit", "icon": icons.EditIcon, "action": this.edit},
-      {"key": "delete", "icon": icons.DeleteIcon, "action": this.delete}
-    ];
+    const item = {"key": "crop", "icon": icons.CropIcon, "action": this.crop};
 
     this.component = TestUtils.renderIntoDocument(
-      <MediaControlsActions items={actionsItems} />
+      <MediaControlsActionsItem item={item} key={item.key} />
     );
   });
 
@@ -45,11 +38,14 @@ describe("MediaControlsActions Component", function() {
     expect(this.component).to.exist;
   });
 
-  it("renders actions items", function() {
-    const items = TestUtils.scryRenderedComponentsWithType(
-      this.component, MediaControlsActionsItem
-    );
+  it("is possible to click on the action item", function() {
+    const itemDOM = TestUtils.findRenderedDOMComponentWithTag(this.component, "li");
 
-    expect(items).to.have.length(3);
+    expect(this.crop).to.not.have.been.called;
+
+    TestUtils.Simulate.click(itemDOM);
+
+    expect(this.crop).to.have.been.called;
   });
 });
+
