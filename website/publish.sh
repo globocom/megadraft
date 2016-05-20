@@ -12,6 +12,7 @@ mv website megadraft
 cd megadraft
 rm index.html
 mv website/index.html index.html
+mv website/app.css app.css
 git add -A .
 if ! git diff-index --quiet HEAD --; then
   git commit -m "Update github pages"
