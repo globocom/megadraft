@@ -27,9 +27,10 @@ export default class Docs extends React.Component {
 
   highlightCode () {
     const domNode = ReactDOM.findDOMNode(this);
-    const nodes = domNode.querySelectorAll('pre code');
+    const nodes = domNode.querySelectorAll("pre code");
     if (nodes.length > 0) {
       for (let i = 0; i < nodes.length; i=i+1) {
+        /* global hljs */
         hljs.highlightBlock(nodes[i]);
       }
     }
