@@ -6,7 +6,7 @@
 
 import Radium from "radium";
 import React, {Component} from "react";
-import Draft, {Editor, RichUtils} from "draft-js";
+import Draft, {Editor, RichUtils, EditorState} from "draft-js";
 
 import icons from "./icons";
 import Toolbar from "./Toolbar";
@@ -62,7 +62,11 @@ class Megadraft extends Component {
   }
 
   render() {
-    const {editorState} = this.props;
+    let {editorState} = this.props;
+    if (!editorState) {
+      editorState = EditorState.createEmpty();
+    }
+
     const plugins = this.props.plugins || getDefaultPlugins();
 
     return (

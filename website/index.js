@@ -6,7 +6,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import { hashHistory, Router, Route, IndexRoute } from "react-router";
+import {withRouter, hashHistory, Router, Route, IndexRoute } from "react-router";
 
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import AppBar from "material-ui/AppBar";
@@ -38,26 +38,23 @@ class Page extends React.Component {
   }
 
   onMenuToggle() {
-    this.setState({open: !this.state.open});
+    if (this.isHome) {
+      this.setState({open: !this.state.open});
+    }
   }
   render() {
+    const {router} = this.props;
+    this.isHome = router.isActive("/", true);
+
     return (
       <div>
         <LeftNavMenu
-          open={this.state.open}
+          docked={!this.isHome}
+          open={!this.isHome || this.state.open}
           toggleMenu={::this.onMenuToggle}/>
         <AppBar
-          //title="Megadraft"
           onLeftIconButtonTouchTap={::this.onMenuToggle}/>
-        <div className="home-title">
-          <div className="content">
-            <h1>Megadraft</h1>
-            <p>Megadraft is a Rich Text editor built on top of Facebook's
-            draft.js featuring a nice default base of plugins and extensibility
-              </p>
-          </div>
-        </div>
-        <div className="home">
+        <div style={{paddingLeft: this.isHome? 0 : 256}}>
           {this.props.children}
         </div>
       </div>
@@ -73,7 +70,7 @@ Page.childContextTypes = {
 
 ReactDOM.render((
   <Router history={hashHistory}>
-    <Route path="/" component={Page}>
+    <Route path="/" component={withRouter(Page)}>
       <IndexRoute component={Home}/>
       <Route path="/docs/:doc" component={Docs}/>
     </Route>
@@ -81,6 +78,8 @@ ReactDOM.render((
   document.getElementById("container")
 );
 
+/* global hljs */
+hljs.initHighlightingOnLoad();
 
 if (process.env.NODE_ENV === "production") {
   (function(i,s,o,g,r,a,m){

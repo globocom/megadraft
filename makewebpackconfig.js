@@ -23,15 +23,12 @@ const defaultConfig = {
         loader: "babel"
       },
       {
-        test: /\.css$/,
-        loaders: [
-          "style",
-          "css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]"
-        ]
+        test: /\.md$/,
+        loader: "raw"
       },
       {
-        test: /\.md$/,
-        loader: "html!markdown"
+        test: /\.json$/,
+        loader: 'json'
       }
     ]
   }
