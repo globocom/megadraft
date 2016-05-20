@@ -5,7 +5,7 @@
  */
 
 import Radium from "radium";
-import React, {Component} from "react";
+import React, {Component, PropTypes} from "react";
 import ReactDOM from "react-dom";
 
 import DropdownItem from "./DropdownItem";
@@ -15,6 +15,19 @@ import icons from "../icons";
 
 export default @Radium
 class Dropdown extends Component {
+
+  static propTypes = {
+    items: React.PropTypes.arrayOf(
+      React.PropTypes.shape({
+        key: PropTypes.string.isRequired,
+        icon: PropTypes.func.isRequired,
+        label: PropTypes.string.isRequired
+      })
+    ),
+    selected: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired
+  }
+
   constructor(props) {
     super(props);
     this.state = {

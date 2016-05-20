@@ -5,13 +5,23 @@
  */
 
 import Radium from "radium";
-import React, {Component} from "react";
+import React, {Component, PropTypes} from "react";
 
 import DropdownItemStyle from "../styles/components/DropdownItemStyle";
 
 
 export default @Radium
 class DropdownItem extends Component {
+
+  static propTypes = {
+    item: PropTypes.object.isRequired,
+    style: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.array
+    ]),
+    onClick: PropTypes.func
+  }
+
   render() {
     const Icon = this.props.item.icon;
     return(
