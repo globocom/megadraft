@@ -37,11 +37,19 @@ class Media extends Component {
       {"key": "big", "icon": icons.MediaBigIcon, "label": "BIG"}
     ];
     this.actionsItems = [
-      {"key": "crop", "icon": icons.CropIcon, "action": ""},
-      {"key": "edit", "icon": icons.EditIcon, "action": ""},
+      {"key": "crop", "icon": icons.CropIcon, "action": this.crop},
+      {"key": "edit", "icon": icons.EditIcon, "action": this.edit},
       {"key": "delete", "icon": icons.DeleteIcon, "action": this.remove}
     ];
     this.defaultFeatured = "medium";
+  }
+
+  edit() {
+    return;
+  }
+
+  crop() {
+    return;
   }
 
   refresh() {
