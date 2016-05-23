@@ -52,7 +52,7 @@ class Media extends Component {
     return;
   }
 
-  refresh() {
+  _refreshEditor() {
     const {editorState} = this.props.blockProps;
     this.onChange(editorState);
   }
@@ -90,7 +90,7 @@ class Media extends Component {
     // We have to merge data, update the local state and refresh the editor state
     const newEntity = Entity.mergeData(this.entityKey, data);
     this.setState({entityData: newEntity.getData()});
-    this.refresh();
+    this._refreshEditor();
   }
 
   render() {
