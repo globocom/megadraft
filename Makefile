@@ -20,3 +20,6 @@ build:
 
 show-coverage:
 	@open coverage/PhantomJS*/index.html
+
+svg-converter:
+	@bash scripts/convert_svgo.sh $(FILE)

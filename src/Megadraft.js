@@ -6,20 +6,26 @@
 
 import Radium from "radium";
 import React, {Component} from "react";
-import Draft, {Editor, RichUtils, EditorState} from "draft-js";
+import Draft, {Editor, RichUtils} from "draft-js";
 
 import icons from "./icons";
 import Toolbar from "./Toolbar";
 import Sidebar from "./components/Sidebar";
-import {getDefaultPlugins} from "./utils";
-import Atomic from "./components/Media";
-import EditorStyle from "./styles/EditorStyle";
+import Media from "./components/Media";
+import MegadraftStyles from "./styles/MegadraftStyles";
+import DEFAULT_PLUGINS from "./plugins/default";
 
 
 export default @Radium
 class Megadraft extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      readOnly: false
+    };
+
+    this.setReadOnly = ::this.setReadOnly;
 
     this.actions = [
       {type: "inline", label: "B", style: "BOLD", icon: icons.BoldIcon},
@@ -31,6 +37,8 @@ class Megadraft extends Component {
       {type: "block", label: "H2", style: "header-two", icon: icons.H2Icon},
       {type: "block", label: "QT", style: "blockquote", icon: icons.BlockQuoteIcon}
     ];
+
+    this.plugins = this.props.plugins || DEFAULT_PLUGINS;
   }
 
   onChange(editorState) {
@@ -47,13 +55,20 @@ class Megadraft extends Component {
     return false;
   }
 
+  setReadOnly(readOnly) {
+    this.setState({readOnly});
+  }
+
   mediaBlockRenderer(block) {
     if (block.getType() === "atomic") {
       return {
-        component: Atomic,
+        component: Media,
         editable: false,
         props: {
-          plugins: this.props.plugins || getDefaultPlugins()
+          plugins: this.plugins,
+          onChange: ::this.onChange,
+          editorState: this.props.editorState,
+          setReadOnly: this.setReadOnly
         }
       };
     }
@@ -62,18 +77,14 @@ class Megadraft extends Component {
   }
 
   render() {
-    let {editorState} = this.props;
-    if (!editorState) {
-      editorState = EditorState.createEmpty();
-    }
-
-    const plugins = this.props.plugins || getDefaultPlugins();
+    const {editorState} = this.props;
+    const plugins = this.plugins;
 
     return (
       <div className="megadraft">
         <div
           className="megadraft-editor"
-          style={EditorStyle.editor}
+          style={MegadraftStyles.base}
           id="megadraft-editor"
           ref="editor">
           <Sidebar
@@ -81,6 +92,7 @@ class Megadraft extends Component {
             editorState={editorState}
             onChange={::this.onChange}/>
           <Editor
+            readOnly={this.state.readOnly}
             plugins={plugins}
             blockRendererFn={::this.mediaBlockRenderer}
             handleKeyCommand={::this.handleKeyCommand}

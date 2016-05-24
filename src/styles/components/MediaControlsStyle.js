@@ -5,7 +5,8 @@
  */
 
 export default {
-  editor: {
-    position: "relative"
+  controls: {
+    padding: "8px",
+    overflow: "auto"
   }
 };

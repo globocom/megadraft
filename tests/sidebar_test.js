@@ -11,8 +11,9 @@ import TestUtils from "react-addons-test-utils";
 import chai from "chai";
 
 import Sidebar, {ToggleButton, PopOverMenu} from "../src/components/Sidebar";
-import image from "../src/components/buttons/image";
-import {editorStateFromRaw, getDefaultPlugins} from "../src/utils";
+import image from "../src/plugins/image/plugin";
+import {editorStateFromRaw} from "../src/utils";
+import DEFAULT_PLUGINS from "../src/plugins/default.js";
 
 let expect = chai.expect;
 
@@ -21,7 +22,7 @@ class SidebarWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {...props};
-    this.plugins = getDefaultPlugins();
+    this.plugins = DEFAULT_PLUGINS;
   }
 
   onChange(editorState) {

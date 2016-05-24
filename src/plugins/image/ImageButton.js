@@ -11,7 +11,7 @@ import Radium from "radium";
 import icons from "../../icons";
 
 
-@Radium
+export default @Radium
 class BlockButton extends Component {
   onClick(e) {
     e.preventDefault();
@@ -20,7 +20,7 @@ class BlockButton extends Component {
       return;
     }
 
-    const entityKey = Entity.create("video", "IMMUTABLE", {src});
+    const entityKey = Entity.create("image", "IMMUTABLE", {src});
 
     this.props.onChange(AtomicBlockUtils.insertAtomicBlock(
       this.props.editorState,
@@ -32,20 +32,8 @@ class BlockButton extends Component {
   render() {
     return (
       <button style={this.props.style} onClick={::this.onClick}>
-        <icons.VideoIcon/>
+        <icons.ImageIcon/>
       </button>
     );
   }
 }
-
-const Video = (props) => {
-  return <video controls style={props.style} src={props.data.src} alt=""/>;
-};
-
-const video = {
-  type: "video",
-  buttonComponent: BlockButton,
-  blockComponent: Video
-};
-
-export default video;
