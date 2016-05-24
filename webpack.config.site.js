@@ -8,5 +8,8 @@ module.exports = makeConfig({
           NODE_ENV: JSON.stringify("production")
         }
       })
-  ]
+  ],
+  output: {
+    filename: "./bundle.js"
+  }
 });

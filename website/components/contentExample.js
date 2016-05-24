@@ -10,7 +10,7 @@ export default {
       "type": "image",
       "mutability": "IMMUTABLE",
       "data": {
-        "src": "images/media.jpg",
+        "src": "./images/media.jpg",
         "caption": "Picture from StockSnap.io",
         "rightsHolder": "By Tim Marshall"
       }

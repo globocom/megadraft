@@ -9,12 +9,12 @@ const defaultConfig = {
   output: {
     path: __dirname,
     publicPath: "/",
-    filename: "website/bundle.js"
+    filename: "./website/bundle.js"
   },
   devtool: "source-map",
   devServer: {
     inline: true,
-    contentBase: "./website"
+    contentBase: "./"
   },
   module: {
     loaders: [
@@ -35,7 +35,7 @@ const defaultConfig = {
 };
 
 function makeConfig (extra) {
-  var config = merge(defaultConfig, extra || {});
+  var config = merge.recursive(true, defaultConfig, extra || {});
 
   return config;
 }
