@@ -5,8 +5,16 @@
  */
 
 export default {
+  wrapper: {
+    backgroundColor: "#eee",
+  },
   image: {
-    display: "block", // Eliminates whitespace between block and data fields block
-    maxWidth: "100%"
+    display: "inline-block", // Eliminates whitespace between block and data fields block
+    maxWidth: "100%",
+    verticalAlign: "middle"
+  },
+  imageWrapper: {
+    lineHeight: "100px",
+    textAlign: "center"
   }
 };

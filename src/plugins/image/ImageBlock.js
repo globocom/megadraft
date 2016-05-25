@@ -50,9 +50,10 @@ class ImageBlock extends Component {
 
   render(){
     return (
-      <div>
-        <img style={ImageBlockStyle.image} src={this.props.data.src} alt=""/>
-
+      <div style={ImageBlockStyle.wrapper}>
+        <div style={ImageBlockStyle.imageWrapper}>
+          <img style={ImageBlockStyle.image} src={this.props.data.src} alt=""/>
+        </div>
         <div style={BlockStyle.dataBlock}>
           <input type="text"
             placeholder="Caption"

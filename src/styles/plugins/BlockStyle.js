@@ -6,7 +6,8 @@
 
 export default {
   dataBlock: {
-    padding: "8px 16px"
+    padding: "8px 16px",
+    backgroundColor: "#fff"
   },
   dataField: {
     display: "block",
