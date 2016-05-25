@@ -6,7 +6,7 @@
 
 export default {
   wrapper: {
-    backgroundColor: "#eee",
+    backgroundColor: "#eee"
   },
   image: {
     display: "inline-block", // Eliminates whitespace between block and data fields block
