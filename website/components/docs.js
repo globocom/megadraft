@@ -5,35 +5,26 @@
  */
 
 import React from "react";
-import ReactDOM from "react-dom";
 
 import Overview from "../../docs/overview.md";
 import ReactMarkdown from "react-markdown";
+
+import {highlightCode} from "./highlightCode";
 
 
 const DOCS = {
   overview: Overview
 };
 
+
 export default class Docs extends React.Component {
 
   componentDidMount() {
-    this.highlightCode();
+    highlightCode(this);
   }
 
   componentDidUpdate() {
-    this.highlightCode();
-  }
-
-  highlightCode () {
-    const domNode = ReactDOM.findDOMNode(this);
-    const nodes = domNode.querySelectorAll("pre code");
-    if (nodes.length > 0) {
-      for (let i = 0; i < nodes.length; i=i+1) {
-        /* global hljs */
-        hljs.highlightBlock(nodes[i]);
-      }
-    }
+    highlightCode(this);
   }
 
   render() {
