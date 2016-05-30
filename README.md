@@ -7,7 +7,7 @@ Rich Text editor built on top of draft.js (Work in Progress)
 To run the development server and see the examples:
 
 ```
-git clone <REPO_URL>
+git clone https://github.com/globocom/megadraft.git
 make setup
 make run
 ```
@@ -17,7 +17,7 @@ Then visit localhost:8080 on your browser.
 To run local tests:
 
 ```
-make test
+make unit
 ```
 
 To lint local source files:
@@ -25,6 +25,13 @@ To lint local source files:
 ```
 make lint
 ```
+
+To run tests and lint:
+
+```
+make test
+```
+
 
 ## License
 
