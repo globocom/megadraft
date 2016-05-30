@@ -40,6 +40,6 @@ Megadraft is licensed under the [MIT license](LICENSE).
 
 ## Third Party
 
-The Megradraft website uses a picture from
+The Megadraft website uses a picture from
 [Stocksnap.io by Tim Marshall](https://stocksnap.io/photo/K148YZIFJ3) licensed
 under [CC0 license](https://stocksnap.io/license).
