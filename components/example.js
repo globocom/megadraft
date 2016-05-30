@@ -13,6 +13,7 @@ import {grey300, grey900, white, indigo500} from "material-ui/styles/colors";
 
 import Megadraft from "../../src/Megadraft";
 import {editorStateToJSON, editorStateFromRaw} from "../../src/utils";
+import {highlightCode} from "./highlightCode";
 
 import INITIAL_CONTENT from "./contentExample";
 
@@ -34,6 +35,14 @@ class Example extends React.Component {
 
   getChildContext() {
     return {muiTheme: getMuiTheme(muiTheme)};
+  }
+
+  componentDidMount() {
+    highlightCode(this);
+  }
+
+  componentDidUpdate() {
+    highlightCode(this);
   }
 
   constructor(props) {
@@ -76,10 +85,11 @@ class Example extends React.Component {
              value="b"
              icon={<FontIcon className="material-icons">code</FontIcon>}>
           <div className="tab-container-json">
-            <textarea
-                value={editorStateToJSON(this.state.value)}
-                readOnly={true}
-                className="jsonpreview"/>
+            <pre className="jsonpreview">
+              <code className="json hljs">
+                {editorStateToJSON(this.state.value)}
+              </code>
+            </pre>
           </div>
         </Tab>
       </Tabs>
