@@ -6,9 +6,11 @@
 
 import React from "react";
 
+import VideoBlockStyle from "./VideoBlockStyle";
+
 
 const VideoBlock = (props) => {
-  return <video controls style={props.style} src={props.data.src} alt=""/>;
+  return <video controls style={VideoBlockStyle.video} src={props.data.src} alt=""/>;
 };
 
 export default VideoBlock;
