@@ -6,7 +6,13 @@
 
 export default {
   video: {
-    width: "100%",
-    display: "block"
+    display: "inline-block", // Eliminates whitespace between block and data fields block
+    maxWidth: "100%",
+    verticalAlign: "middle"
+  },
+  videoWrapper: {
+    lineHeight: "100px",
+    textAlign: "center",
+    backgroundColor: "#eee"
   }
 };

@@ -10,7 +10,11 @@ import VideoBlockStyle from "./VideoBlockStyle";
 
 
 const VideoBlock = (props) => {
-  return <video controls style={VideoBlockStyle.video} src={props.data.src} alt=""/>;
+  return (
+    <div style={VideoBlockStyle.videoWrapper}>
+      <video controls style={VideoBlockStyle.video} src={props.data.src} alt=""/>
+    </div>
+  );
 };
 
 export default VideoBlock;
