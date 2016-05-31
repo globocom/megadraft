@@ -8,10 +8,10 @@ import Radium from "radium";
 import React, {Component} from "react";
 import {RichUtils, Entity} from "draft-js";
 
-import LinkInput from "./components/LinkInput";
+import LinkInput from "./LinkInput";
 import ToolbarItem from "./ToolbarItem";
-import ToolbarStyle from "./styles/ToolbarStyles";
-import {getSelectionCoords} from "./utils";
+import ToolbarStyle from "../styles/components/ToolbarStyles";
+import {getSelectionCoords} from "../utils";
 
 export default @Radium
 class Toolbar extends Component {

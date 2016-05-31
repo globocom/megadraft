@@ -7,8 +7,8 @@
 import React, {Component} from "react";
 import Radium from "radium";
 
-import ToolbarItemStyles from "./styles/ToolbarItemStyles";
-import SeparatorStyles from "./styles/SeparatorStyles";
+import ToolbarItemStyles from "../styles/components/ToolbarItemStyles";
+import SeparatorStyles from "../styles/components/SeparatorStyles";
 
 export default @Radium
 class Separator extends Component {

@@ -9,7 +9,7 @@ import React, {Component} from "react";
 import Draft, {Editor, RichUtils} from "draft-js";
 
 import icons from "./icons";
-import Toolbar from "./Toolbar";
+import Toolbar from "./components/Toolbar";
 import Sidebar from "./components/Sidebar";
 import Media from "./components/Media";
 import MegadraftStyles from "./styles/MegadraftStyles";

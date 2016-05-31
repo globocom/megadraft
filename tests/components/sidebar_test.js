@@ -10,10 +10,10 @@ import {Entity} from "draft-js";
 import TestUtils from "react-addons-test-utils";
 import chai from "chai";
 
-import Sidebar, {ToggleButton, PopOverMenu} from "../src/components/Sidebar";
-import image from "../src/plugins/image/plugin";
-import {editorStateFromRaw} from "../src/utils";
-import DEFAULT_PLUGINS from "../src/plugins/default.js";
+import Sidebar, {ToggleButton, PopOverMenu} from "../../src/components/Sidebar";
+import image from "../../src/plugins/image/plugin";
+import {editorStateFromRaw} from "../../src/utils";
+import DEFAULT_PLUGINS from "../../src/plugins/default.js";
 
 let expect = chai.expect;
 

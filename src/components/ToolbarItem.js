@@ -9,7 +9,7 @@ import Radium from "radium";
 
 import Separator from "./Separator";
 
-import ToolbarItemStyles from "./styles/ToolbarItemStyles";
+import ToolbarItemStyles from "../styles/components/ToolbarItemStyles";
 
 
 export default @Radium

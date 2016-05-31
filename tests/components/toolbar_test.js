@@ -10,11 +10,11 @@ import {EditorState, SelectionState, Entity} from "draft-js";
 import TestUtils from "react-addons-test-utils";
 import chai from "chai";
 
-import Toolbar from "../src/Toolbar";
-import ToolbarItem from "../src/ToolbarItem";
-import LinkInput from "../src/components/LinkInput";
-import {editorStateFromRaw} from "../src/utils";
-import Separator from "../src/Separator";
+import Toolbar from "../../src/components/Toolbar";
+import ToolbarItem from "../../src/components/ToolbarItem";
+import LinkInput from "../../src/components/LinkInput";
+import {editorStateFromRaw} from "../../src/utils";
+import Separator from "../../src/components/Separator";
 
 let expect = chai.expect;
 
