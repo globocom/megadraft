@@ -22,12 +22,10 @@ describe("ImageBlock", function() {
 
     this.setReadOnly = sinon.spy();
     this.updateEntity = sinon.spy();
+    this.remove = sinon.spy();
 
     this.wrapper = TestUtils.renderIntoDocument(
-      <ImageBlock
-        setReadOnly={this.setReadOnly}
-        updateEntity={this.updateEntity}
-        data={this.data} />
+      <ImageBlock container={this} blockProps={this} data={this.data} />
     );
 
     this.caption = TestUtils.scryRenderedDOMComponentsWithTag(this.wrapper, "input")[0];
@@ -63,22 +61,10 @@ describe("ImageBlock", function() {
     expect(this.setReadOnly.calledWith(false)).to.be.true;
   });
 
-  it("updates state on caption change", function () {
-    this.caption.value = "new caption";
-    TestUtils.Simulate.change(this.caption);
-    expect(this.wrapper.state.caption).to.be.equal("new caption");
-  });
-
   it("updates entity on caption change", function () {
     this.caption.value = "new caption";
     TestUtils.Simulate.change(this.caption);
     expect(this.updateEntity.calledWith({caption: "new caption"})).to.be.true;
-  });
-
-  it("updates state on rightsHolder change", function () {
-    this.rights.value = "new rights";
-    TestUtils.Simulate.change(this.rights);
-    expect(this.wrapper.state.rightsHolder).to.be.equal("new rights");
   });
 
   it("updates entity on rightsHolder change", function () {

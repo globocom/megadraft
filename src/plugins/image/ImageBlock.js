@@ -6,8 +6,24 @@
 
 import Radium from "radium";
 import React, {Component} from "react";
-import BlockStyle from "../../styles/plugins/BlockStyle";
+
+import Dropdown from "../../components/Dropdown";
+import {
+  BlockActionGroup,
+  BlockContent,
+  BlockControls,
+  BlockData,
+  BlockWrapper
+} from "../../components/plugin";
+
+import icons from "../../icons";
+
+import BlockDataStyle from "../../styles/components/plugin/BlockDataStyle";
 import ImageBlockStyle from "./ImageBlockStyle";
+
+
+const DEFAULT_FEATURED = "medium";
+
 
 export default @Radium
 class ImageBlock extends Component {
@@ -18,26 +34,42 @@ class ImageBlock extends Component {
     this._handleBlur = ::this._handleBlur;
     this._handleCaptionChange = ::this._handleCaptionChange;
     this._handleRightsHolderChange = ::this._handleRightsHolderChange;
+    this._handleFeaturedChange = ::this._handleFeaturedChange;
 
-    this.state = {
-      caption: this.props.data.caption,
-      rightsHolder: this.props.data.rightsHolder
-    };
+    this.dropdownItems = [
+      {"key": "small", "icon": icons.MediaSmallIcon, "label": "SMALL"},
+      {"key": "medium", "icon": icons.MediaMediumIcon, "label": "MEDIUM"},
+      {"key": "big", "icon": icons.MediaBigIcon, "label": "BIG"}
+    ];
+    this.actionsItems = [
+      {"key": "crop", "icon": icons.CropIcon, "action": this._handleCrop},
+      {"key": "edit", "icon": icons.EditIcon, "action": this._handleEdit},
+      {"key": "delete", "icon": icons.DeleteIcon, "action": this.props.container.remove}
+    ];
+  }
+
+  _handleCrop() {
+  }
+
+  _handleEdit() {
   }
 
   _handleFocus() {
-    this.props.setReadOnly(true);
+    this.props.blockProps.setReadOnly(true);
   }
 
   _handleBlur() {
-    this.props.setReadOnly(false);
+    this.props.blockProps.setReadOnly(false);
   }
 
   _handleDataChange(key, event) {
     const newState = {};
     newState[key] = event.target.value;
-    this.setState(newState);
-    this.props.updateEntity(newState);
+    this.props.container.updateEntity(newState);
+  }
+
+  _handleFeaturedChange(newValue) {
+    this.props.container.updateEntity({featured: newValue});
   }
 
   _handleCaptionChange(event) {
@@ -49,28 +81,40 @@ class ImageBlock extends Component {
   }
 
   render(){
+    const data = this.props.data;
+
     return (
-      <div style={ImageBlockStyle.wrapper}>
-        <div style={ImageBlockStyle.imageWrapper}>
-          <img style={ImageBlockStyle.image} src={this.props.data.src} alt=""/>
-        </div>
-        <div style={BlockStyle.dataBlock}>
+      <BlockWrapper>
+        <BlockControls>
+          <Dropdown
+            items={this.dropdownItems}
+            selected={data.featured || DEFAULT_FEATURED}
+            onChange={this._handleFeaturedChange} />
+
+          <BlockActionGroup items={this.actionsItems} />
+        </BlockControls>
+
+        <BlockContent>
+          <img style={ImageBlockStyle.image} src={data.src} alt=""/>
+        </BlockContent>
+
+        <BlockData>
           <input type="text"
             placeholder="Caption"
-            style={BlockStyle.dataField}
-            value={this.state.caption}
+            style={BlockDataStyle.dataField}
+            value={data.caption}
             onFocus={this._handleFocus}
             onBlur={this._handleBlur}
             onChange={this._handleCaptionChange} />
           <input type="text"
             placeholder="Rights Holder"
-            style={BlockStyle.dataField}
-            value={this.state.rightsHolder}
+            style={BlockDataStyle.dataField}
+            value={data.rightsHolder}
             onFocus={this._handleFocus}
             onBlur={this._handleBlur}
             onChange={this._handleRightsHolderChange} />
-        </div>
-      </div>
+        </BlockData>
+      </BlockWrapper>
     );
   }
 };

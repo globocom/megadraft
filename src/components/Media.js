@@ -8,10 +8,6 @@ import Radium from "radium";
 import React, {Component} from "react";
 import {Entity, EditorState, SelectionState, Modifier} from "draft-js";
 
-import icons from "../icons";
-import MediaStyle from "../styles/components/MediaStyle";
-import MediaControls from "../components/MediaControls";
-
 
 export default @Radium
 class Media extends Component {
@@ -20,7 +16,6 @@ class Media extends Component {
 
     this.remove = ::this.remove;
     this.updateEntity = ::this.updateEntity;
-    this.setFeatured = ::this.setFeatured;
 
     this.onChange = this.props.blockProps.onChange;
     this.block = this.props.block;
@@ -30,26 +25,6 @@ class Media extends Component {
     this.state = {
       entityData: entity.getData()
     };
-
-    this.dropdownItems = [
-      {"key": "small", "icon": icons.MediaSmallIcon, "label": "SMALL"},
-      {"key": "medium", "icon": icons.MediaMediumIcon, "label": "MEDIUM"},
-      {"key": "big", "icon": icons.MediaBigIcon, "label": "BIG"}
-    ];
-    this.actionsItems = [
-      {"key": "crop", "icon": icons.CropIcon, "action": this.crop},
-      {"key": "edit", "icon": icons.EditIcon, "action": this.edit},
-      {"key": "delete", "icon": icons.DeleteIcon, "action": this.remove}
-    ];
-    this.defaultFeatured = "medium";
-  }
-
-  edit() {
-    return;
-  }
-
-  crop() {
-    return;
   }
 
   _refreshEditor() {
@@ -81,10 +56,6 @@ class Media extends Component {
     this.onChange(newEditorState);
   }
 
-  setFeatured(key) {
-    this.updateEntity({featured: key});
-  }
-
   updateEntity(data) {
     // Entity doesn't change editor state
     // We have to merge data, update the local state and refresh the editor state
@@ -98,24 +69,12 @@ class Media extends Component {
     const data = this.state.entityData;
     const type = entity.getType();
     const plugins = this.props.blockProps.plugins;
-    const setReadOnly = this.props.blockProps.setReadOnly;
+
     for (let plugin of plugins) {
       if (type === plugin.type) {
         const Block = plugin.blockComponent;
         return (
-          <div style={MediaStyle.blockHover}>
-            <div style={MediaStyle.blockWrapper}>
-              <MediaControls
-                dropdownItems={this.dropdownItems}
-                actionsItems={this.actionsItems}
-                selectedFeatured={data.featured || this.defaultFeatured}
-                setFeatured={this.setFeatured} />
-              <Block
-                data={data}
-                setReadOnly={setReadOnly}
-                updateEntity={this.updateEntity} />
-            </div>
-          </div>
+          <Block data={data} container={this} blockProps={this.props.blockProps} />
         );
       }
     }

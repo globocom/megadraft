@@ -10,14 +10,15 @@ import TestUtils from "react-addons-test-utils";
 import chai from "chai";
 import sinon from "sinon";
 
-import icons from "../../src/icons";
-import MediaControlsActions from "../../src/components/MediaControlsActions";
-import MediaControlsActionsItem from "../../src/components/MediaControlsActionsItem";
+import icons from "../../../src/icons";
+
+import BlockActionGroup from "../../../src/components/plugin/BlockActionGroup";
+import BlockAction from "../../../src/components/plugin/BlockAction";
 
 let expect = chai.expect;
 
 
-describe("MediaControlsActions Component", function() {
+describe("BlockActionGroup Component", function() {
 
   beforeEach(function() {
     this.crop = sinon.spy();
@@ -31,7 +32,7 @@ describe("MediaControlsActions Component", function() {
     ];
 
     this.component = TestUtils.renderIntoDocument(
-      <MediaControlsActions items={actionsItems} />
+      <BlockActionGroup items={actionsItems} />
     );
   });
 
@@ -47,7 +48,7 @@ describe("MediaControlsActions Component", function() {
 
   it("renders actions items", function() {
     const items = TestUtils.scryRenderedComponentsWithType(
-      this.component, MediaControlsActionsItem
+      this.component, BlockAction
     );
 
     expect(items).to.have.length(3);

@@ -10,13 +10,13 @@ import TestUtils from "react-addons-test-utils";
 import chai from "chai";
 import sinon from "sinon";
 
-import icons from "../../src/icons";
-import MediaControlsActionsItem from "../../src/components/MediaControlsActionsItem";
+import icons from "../../../src/icons";
+import BlockAction from "../../../src/components/plugin/BlockAction";
 
 let expect = chai.expect;
 
 
-describe("MediaControlsActionsItem Component", function() {
+describe("BlockAction Component", function() {
 
   beforeEach(function() {
     this.crop = sinon.spy();
@@ -24,7 +24,7 @@ describe("MediaControlsActionsItem Component", function() {
     const item = {"key": "crop", "icon": icons.CropIcon, "action": this.crop};
 
     this.component = TestUtils.renderIntoDocument(
-      <MediaControlsActionsItem item={item} key={item.key} />
+      <BlockAction item={item} key={item.key} />
     );
   });
 
