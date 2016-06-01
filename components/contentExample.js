@@ -12,7 +12,8 @@ export default {
       "data": {
         "src": "./images/media.jpg",
         "caption": "Picture from StockSnap.io",
-        "rightsHolder": "By Tim Marshall"
+        "rightsHolder": "By Tim Marshall",
+        "featured": "big"
       }
     },
     "1": {
