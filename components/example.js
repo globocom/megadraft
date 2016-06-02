@@ -67,8 +67,8 @@ class Example extends React.Component {
   }
 
   render() {
-    const icon_edit = <FontIcon className="material-icons">mode_edit</FontIcon>
-    const icon_code = <FontIcon className="material-icons">code</FontIcon>
+    const icon_edit = <FontIcon className="material-icons">mode_edit</FontIcon>;
+    const icon_code = <FontIcon className="material-icons">code</FontIcon>;
 
     return (
       <Tabs tab={this.state.activeTab} onChange={this.handleChange}>
