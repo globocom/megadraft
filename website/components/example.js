@@ -63,27 +63,21 @@ class Example extends React.Component {
   onChange(value) {
     this.setState({
       value
-    }
-    );
+    });
   }
 
   render() {
+    const icon_edit = <FontIcon className="material-icons">mode_edit</FontIcon>;
+    const icon_code = <FontIcon className="material-icons">code</FontIcon>;
 
     return (
       <Tabs tab={this.state.activeTab} onChange={this.handleChange}>
-        <Tab label="Editor"
-             tab="a"
-             icon={<FontIcon className="material-icons">mode_edit</FontIcon>}>
-
+        <Tab label="Editor" tab="a" icon={icon_edit}>
           <div className="tab-container-editor">
-            <Megadraft
-                editorState={this.state.value}
-                onChange={::this.onChange} />
+            <Megadraft editorState={this.state.value} onChange={::this.onChange} />
           </div>
         </Tab>
-        <Tab label="Content JSON"
-             value="b"
-             icon={<FontIcon className="material-icons">code</FontIcon>}>
+        <Tab label="Content JSON" value="b" icon={icon_code}>
           <div className="tab-container-json">
             <pre className="jsonpreview">
               <code className="json hljs">
