@@ -83,15 +83,6 @@ describe("Media Component", function() {
     expect(this.component).to.exist;
   });
 
-  it("calls updateEntity when featured changes", function() {
-    this.component.updateEntity = sinon.spy();
-
-    this.component.setFeatured("big");
-
-    const data = {featured: "big"};
-    expect(this.component.updateEntity).to.have.been.calledWith(data);
-  });
-
   it("updates entity data", function() {
     let entityKey = this.block.getEntityAt(0);
     let entity = Entity.get(entityKey);

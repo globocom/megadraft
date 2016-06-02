@@ -7,11 +7,11 @@
 import Radium from "radium";
 import React, {Component, PropTypes} from "react";
 
-import Style  from "../styles/components/MediaControlsActionsStyle";
+import BlockActionStyle from "../../styles/components/plugin/BlockActionStyle";
 
 
 export default @Radium
-class MediaControlsActionsItem extends Component {
+class BlockAction extends Component {
 
   static propTypes = {
     item: React.PropTypes.shape({
@@ -24,8 +24,8 @@ class MediaControlsActionsItem extends Component {
   render() {
     const Icon = this.props.item.icon;
     return(
-      <li style={Style.actionsGroupItem} onClick={this.props.item.action}>
-        <Icon style={Style.actionsGroupItemIcon} />
+      <li style={BlockActionStyle.item} onClick={this.props.item.action}>
+        <Icon style={BlockActionStyle.icon} />
       </li>
     );
   }

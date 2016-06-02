@@ -7,12 +7,12 @@
 import Radium from "radium";
 import React, {Component, PropTypes} from "react";
 
-import Style  from "../styles/components/MediaControlsActionsStyle";
-import MediaControlsActionsItem from "../components/MediaControlsActionsItem";
+import BlockAction from "./BlockAction";
+import BlockActionGroupStyle from "../../styles/components/plugin/BlockActionGroupStyle";
 
 
 export default @Radium
-class MediaControlsActions extends Component {
+class BlockActionGroup extends Component {
 
   static propTypes = {
     items: React.PropTypes.arrayOf(
@@ -25,12 +25,12 @@ class MediaControlsActions extends Component {
   }
 
   renderItem(item) {
-    return(<MediaControlsActionsItem item={item} key={item.key} />);
+    return(<BlockAction item={item} key={item.key} />);
   }
 
   render() {
     return(
-      <ul style={Style.actionsGroup}>
+      <ul style={BlockActionGroupStyle.group}>
         {this.props.items.map(this.renderItem)}
       </ul>
     );
