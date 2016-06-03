@@ -40,27 +40,6 @@ describe("ImageBlock", function() {
     expect(this.rights.value).to.be.equal(this.data.rightsHolder);
   });
 
-  it("enables readOnly on caption focus", function () {
-    const caption = TestUtils.scryRenderedDOMComponentsWithTag(this.wrapper, "input")[0];
-    TestUtils.Simulate.focus(caption);
-    expect(this.setReadOnly.calledWith(true)).to.be.true;
-  });
-
-  it("enables readOnly on rightsHolder focus", function () {
-    TestUtils.Simulate.focus(this.rights);
-    expect(this.setReadOnly.calledWith(true)).to.be.true;
-  });
-
-  it("disables readOnly on caption blur", function () {
-    TestUtils.Simulate.blur(this.caption);
-    expect(this.setReadOnly.calledWith(false)).to.be.true;
-  });
-
-  it("disables readOnly on rightsHolder blur", function () {
-    TestUtils.Simulate.blur(this.rights);
-    expect(this.setReadOnly.calledWith(false)).to.be.true;
-  });
-
   it("updates entity on caption change", function () {
     this.caption.value = "new caption";
     TestUtils.Simulate.change(this.caption);

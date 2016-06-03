@@ -4,17 +4,60 @@
  * License: MIT
  */
 
-import React from "react";
+import Radium from "radium";
+import React, {Component} from "react";
+
+import {
+  BlockContent,
+  BlockData,
+  BlockInput,
+  CommonBlock
+} from "../../components/plugin";
+
+import icons from "../../icons";
 
 import VideoBlockStyle from "./VideoBlockStyle";
 
 
-const VideoBlock = (props) => {
-  return (
-    <div style={VideoBlockStyle.videoWrapper}>
-      <video controls style={VideoBlockStyle.video} src={props.data.src} alt=""/>
-    </div>
-  );
-};
+export default @Radium
+class VideoBlock extends Component {
+  constructor(props) {
+    super(props);
 
-export default VideoBlock;
+    this._handleCaptionChange = ::this._handleCaptionChange;
+
+    this.defaultFeatured = "medium";
+    this.featuredOptions = [
+      {"key": "small", "icon": icons.MediaSmallIcon, "label": "SMALL"},
+      {"key": "medium", "icon": icons.MediaMediumIcon, "label": "MEDIUM"}
+    ];
+    this.actions = [
+      {"key": "edit", "icon": icons.EditIcon, "action": this._handleEdit},
+      {"key": "delete", "icon": icons.DeleteIcon, "action": this.props.container.remove}
+    ];
+  }
+
+  _handleEdit() {
+  }
+
+  _handleCaptionChange(event) {
+    this.props.container.updateEntity({caption: event.target.value});
+  }
+
+  render() {
+    return (
+      <CommonBlock {...this.props} featuredOptions={this.featuredOptions} actions={this.actions} defaultFeatured={this.defaultFeatured}>
+        <BlockContent>
+          <video controls style={VideoBlockStyle.video} src={this.props.data.src} alt=""/>
+        </BlockContent>
+
+        <BlockData>
+          <BlockInput
+            placeholder="Caption"
+            value={this.props.data.caption}
+            onChange={this._handleCaptionChange} />
+        </BlockData>
+      </CommonBlock>
+    );
+  }
+};

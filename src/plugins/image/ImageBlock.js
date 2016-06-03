@@ -7,22 +7,16 @@
 import Radium from "radium";
 import React, {Component} from "react";
 
-import Dropdown from "../../components/Dropdown";
 import {
-  BlockActionGroup,
   BlockContent,
-  BlockControls,
   BlockData,
-  BlockWrapper
+  BlockInput,
+  CommonBlock
 } from "../../components/plugin";
 
 import icons from "../../icons";
 
-import BlockDataStyle from "../../styles/components/plugin/BlockDataStyle";
 import ImageBlockStyle from "./ImageBlockStyle";
-
-
-const DEFAULT_FEATURED = "medium";
 
 
 export default @Radium
@@ -30,18 +24,16 @@ class ImageBlock extends Component {
   constructor(props) {
     super(props);
 
-    this._handleFocus = ::this._handleFocus;
-    this._handleBlur = ::this._handleBlur;
     this._handleCaptionChange = ::this._handleCaptionChange;
     this._handleRightsHolderChange = ::this._handleRightsHolderChange;
-    this._handleFeaturedChange = ::this._handleFeaturedChange;
 
-    this.dropdownItems = [
+    this.defaultFeatured = "medium";
+    this.featuredOptions = [
       {"key": "small", "icon": icons.MediaSmallIcon, "label": "SMALL"},
       {"key": "medium", "icon": icons.MediaMediumIcon, "label": "MEDIUM"},
       {"key": "big", "icon": icons.MediaBigIcon, "label": "BIG"}
     ];
-    this.actionsItems = [
+    this.actions = [
       {"key": "crop", "icon": icons.CropIcon, "action": this._handleCrop},
       {"key": "edit", "icon": icons.EditIcon, "action": this._handleEdit},
       {"key": "delete", "icon": icons.DeleteIcon, "action": this.props.container.remove}
@@ -54,67 +46,33 @@ class ImageBlock extends Component {
   _handleEdit() {
   }
 
-  _handleFocus() {
-    this.props.blockProps.setReadOnly(true);
-  }
-
-  _handleBlur() {
-    this.props.blockProps.setReadOnly(false);
-  }
-
-  _handleDataChange(key, event) {
-    const newState = {};
-    newState[key] = event.target.value;
-    this.props.container.updateEntity(newState);
-  }
-
-  _handleFeaturedChange(newValue) {
-    this.props.container.updateEntity({featured: newValue});
-  }
-
   _handleCaptionChange(event) {
-    this._handleDataChange("caption", event);
+    this.props.container.updateEntity({caption: event.target.value});
   }
 
   _handleRightsHolderChange(event) {
-    this._handleDataChange("rightsHolder", event);
+    this.props.container.updateEntity({rightsHolder: event.target.value});
   }
 
   render(){
-    const data = this.props.data;
-
     return (
-      <BlockWrapper>
-        <BlockControls>
-          <Dropdown
-            items={this.dropdownItems}
-            selected={data.featured || DEFAULT_FEATURED}
-            onChange={this._handleFeaturedChange} />
-
-          <BlockActionGroup items={this.actionsItems} />
-        </BlockControls>
-
+      <CommonBlock {...this.props} featuredOptions={this.featuredOptions} actions={this.actions} defaultFeatured={this.defaultFeatured}>
         <BlockContent>
-          <img style={ImageBlockStyle.image} src={data.src} alt=""/>
+          <img style={ImageBlockStyle.image} src={this.props.data.src} alt=""/>
         </BlockContent>
 
         <BlockData>
-          <input type="text"
+          <BlockInput
             placeholder="Caption"
-            style={BlockDataStyle.dataField}
-            value={data.caption}
-            onFocus={this._handleFocus}
-            onBlur={this._handleBlur}
+            value={this.props.data.caption}
             onChange={this._handleCaptionChange} />
-          <input type="text"
+
+          <BlockInput
             placeholder="Rights Holder"
-            style={BlockDataStyle.dataField}
-            value={data.rightsHolder}
-            onFocus={this._handleFocus}
-            onBlur={this._handleBlur}
+            value={this.props.data.rightsHolder}
             onChange={this._handleRightsHolderChange} />
         </BlockData>
-      </BlockWrapper>
+      </CommonBlock>
     );
   }
 };

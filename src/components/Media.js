@@ -8,6 +8,8 @@ import Radium from "radium";
 import React, {Component} from "react";
 import {Entity, EditorState, SelectionState, Modifier} from "draft-js";
 
+import MediaWrapper from "./MediaWrapper";
+
 
 export default @Radium
 class Media extends Component {
@@ -68,13 +70,15 @@ class Media extends Component {
     const entity = Entity.get(this.entityKey);
     const data = this.state.entityData;
     const type = entity.getType();
-    const plugins = this.props.blockProps.plugins;
+    const {plugins, setReadOnly} = this.props.blockProps;
 
     for (let plugin of plugins) {
       if (type === plugin.type) {
         const Block = plugin.blockComponent;
         return (
-          <Block data={data} container={this} blockProps={this.props.blockProps} />
+          <MediaWrapper setReadOnly={setReadOnly}>
+            <Block data={data} container={this} blockProps={this.props.blockProps} />
+          </MediaWrapper>
         );
       }
     }
