@@ -13,12 +13,12 @@ import {
   BlockContent,
   BlockControls,
   BlockData,
+  BlockInput,
   BlockWrapper
 } from "../../components/plugin";
 
 import icons from "../../icons";
 
-import BlockDataStyle from "../../styles/components/plugin/BlockDataStyle";
 import ImageBlockStyle from "./ImageBlockStyle";
 
 
@@ -30,8 +30,6 @@ class ImageBlock extends Component {
   constructor(props) {
     super(props);
 
-    this._handleFocus = ::this._handleFocus;
-    this._handleBlur = ::this._handleBlur;
     this._handleCaptionChange = ::this._handleCaptionChange;
     this._handleRightsHolderChange = ::this._handleRightsHolderChange;
     this._handleFeaturedChange = ::this._handleFeaturedChange;
@@ -52,14 +50,6 @@ class ImageBlock extends Component {
   }
 
   _handleEdit() {
-  }
-
-  _handleFocus() {
-    this.props.blockProps.setReadOnly(true);
-  }
-
-  _handleBlur() {
-    this.props.blockProps.setReadOnly(false);
   }
 
   _handleDataChange(key, event) {
@@ -99,19 +89,14 @@ class ImageBlock extends Component {
         </BlockContent>
 
         <BlockData>
-          <input type="text"
+          <BlockInput
             placeholder="Caption"
-            style={BlockDataStyle.dataField}
             value={data.caption}
-            onFocus={this._handleFocus}
-            onBlur={this._handleBlur}
             onChange={this._handleCaptionChange} />
-          <input type="text"
+
+          <BlockInput
             placeholder="Rights Holder"
-            style={BlockDataStyle.dataField}
             value={data.rightsHolder}
-            onFocus={this._handleFocus}
-            onBlur={this._handleBlur}
             onChange={this._handleRightsHolderChange} />
         </BlockData>
       </BlockWrapper>

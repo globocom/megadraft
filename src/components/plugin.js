@@ -9,6 +9,7 @@ import BlockActionGroup from "./plugin/BlockActionGroup";
 import BlockContent from "./plugin/BlockContent";
 import BlockControls from "./plugin/BlockControls";
 import BlockData from "./plugin/BlockData";
+import BlockInput from "./plugin/BlockInput";
 import BlockWrapper from "./plugin/BlockWrapper";
 
 export {
@@ -17,5 +18,6 @@ export {
   BlockContent,
   BlockControls,
   BlockData,
+  BlockInput,
   BlockWrapper
 };
