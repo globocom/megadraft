@@ -13,8 +13,9 @@ import BlockInputStyle from "../../styles/components/plugin/BlockInputStyle";
 export default @Radium
 class BlockInput extends Component {
   render(){
+    const {value, ...props} = this.props;
     return (
-      <input {...this.props} type="text" style={BlockInputStyle.field} />
+      <input {...props} defaultValue={value} type="text" style={BlockInputStyle.field} />
     );
   }
 };

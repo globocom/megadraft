@@ -11,6 +11,7 @@ import BlockControls from "./plugin/BlockControls";
 import BlockData from "./plugin/BlockData";
 import BlockInput from "./plugin/BlockInput";
 import BlockWrapper from "./plugin/BlockWrapper";
+import CommonBlock from "./plugin/CommonBlock";
 
 export {
   BlockAction,
@@ -19,5 +20,6 @@ export {
   BlockControls,
   BlockData,
   BlockInput,
-  BlockWrapper
+  BlockWrapper,
+  CommonBlock
 };
