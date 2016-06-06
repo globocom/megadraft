@@ -22,8 +22,12 @@ export function editorStateToJSON(editorState) {
 }
 
 export function editorStateFromRaw(rawContent) {
-  const content = convertFromRaw(rawContent);
-  return EditorState.createWithContent(content, decorator);
+  if (rawContent) {
+    const content = convertFromRaw(rawContent);
+    return EditorState.createWithContent(content, decorator);
+  } else {
+    return EditorState.createEmpty();
+  }
 }
 
 export function getSelectedBlockElement(range) {
