@@ -76,6 +76,13 @@ class Megadraft extends Component {
     return null;
   }
 
+  blockStyleFn(contentBlock) {
+    const type = contentBlock.getType();
+    if (type === "unstyled") {
+      return "paragraph";
+    }
+  }
+
   render() {
     const {editorState} = this.props;
     const plugins = this.plugins;
@@ -95,6 +102,7 @@ class Megadraft extends Component {
             readOnly={this.state.readOnly}
             plugins={plugins}
             blockRendererFn={::this.mediaBlockRenderer}
+            blockStyleFn={this.blockStyleFn}
             handleKeyCommand={::this.handleKeyCommand}
             editorState={editorState}
             onChange={::this.onChange} />
