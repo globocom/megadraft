@@ -132,7 +132,7 @@ class SideBar extends Component {
     }
 
     const top = Math.floor(
-      element.getBoundingClientRect().top - 21 -
+      element.getBoundingClientRect().top - 4 -
       (container.getBoundingClientRect().top -
         document.documentElement.clientTop));
 

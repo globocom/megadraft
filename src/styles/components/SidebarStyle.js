@@ -26,7 +26,8 @@ export default {
   },
   dropdown: {
     padding: 0,
-    listStyle: "none"
+    listStyle: "none",
+    margin: 0
   },
   listItem: {
     marginTop: "6px"
