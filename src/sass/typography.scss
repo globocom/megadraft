@@ -1,0 +1,55 @@
+/*
+ * Copyright (c) 2016, Globo.com (https://github.com/globocom)
+ *
+ * License: MIT
+ */
+
+/* Sorry, not following BEM here, we are using drafjs structure */
+
+.DraftEditor-root {
+    font-family: "Open Sans, sans-serif";
+    color: #181818;
+    font-size: 18px;
+    letter-spacing: -0.6px;
+    line-height: 1.6;
+    font-family: OpenSans, sans-serif;
+}
+
+.paragraph {
+    margin-top: 40px;
+}
+
+.public-DraftStyleDefault-ul {
+    list-style-type: disc;
+}
+
+.public-DraftStyleDefault-ol {
+    list-style-type: decimal;
+}
+
+.public-DraftStyleDefault-ol,
+.public-DraftStyleDefault-ul {
+    line-height: 2;
+    margin-top: 24px;
+    padding-left: 40px;
+}
+
+.public-DraftStyleDefault-ol li,
+.public-DraftStyleDefault-ul li {
+    padding-left: 10px;
+}
+
+blockquote {
+    border-left: 2px solid #ddd;
+    color: #999;
+    font-style: italic;
+    margin: 24px 0 0 2px;
+    padding-left: 18px;
+}
+
+h2 {
+    color: #262626;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 64px;
+}
