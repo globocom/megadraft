@@ -4,7 +4,6 @@
  * License: MIT
  */
 
-import Radium from "radium";
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import {EditorState, RichUtils, Entity} from "draft-js";

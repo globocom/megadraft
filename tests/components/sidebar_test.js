@@ -10,7 +10,8 @@ import {Entity} from "draft-js";
 import TestUtils from "react-addons-test-utils";
 import chai from "chai";
 
-import Sidebar, {ToggleButton, PopOverMenu} from "../../src/components/Sidebar";
+import Sidebar,
+  {ToggleButton, DropdownMenu} from "../../src/components/Sidebar";
 import image from "../../src/plugins/image/plugin";
 import {editorStateFromRaw} from "../../src/utils";
 import DEFAULT_PLUGINS from "../../src/plugins/default.js";
@@ -84,9 +85,10 @@ describe("Sidebar Component", function() {
 
   it("has the menu hidden by default", function() {
     const menu = TestUtils.findRenderedComponentWithType(
-      this.wrapper, PopOverMenu);
+      this.wrapper, DropdownMenu);
     const domMenu = TestUtils.findRenderedDOMComponentWithTag(menu, "ul");
-    expect(domMenu.style["max-height"]).to.be.equal("0");
+    // expect(domMenu.style["max-height"]).to.be.equal("0");
+    expect(domMenu.classList.contains("dropdown__items--open")).to.be.false;
   });
 
   it("opens the menu on click", function() {
@@ -96,9 +98,10 @@ describe("Sidebar Component", function() {
       toggleButton, "button");
     TestUtils.Simulate.click(domButton);
     const menu = TestUtils.findRenderedComponentWithType(
-      this.wrapper, PopOverMenu);
+      this.wrapper, DropdownMenu);
     const domMenu = TestUtils.findRenderedDOMComponentWithTag(menu, "ul");
-    expect(domMenu.style["max-height"]).to.be.equal("100px");
+    console.log(domMenu.classList);
+    expect(domMenu.classList.contains("dropdown__items--open")).to.be.true;
   });
 
   it("is possible to click on the button", function() {
