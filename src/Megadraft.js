@@ -12,12 +12,10 @@ import icons from "./icons";
 import Toolbar from "./components/Toolbar";
 import Sidebar from "./components/Sidebar";
 import Media from "./components/Media";
-import MegadraftStyles from "./styles/MegadraftStyles";
 import DEFAULT_PLUGINS from "./plugins/default";
 
 
-export default @Radium
-class Megadraft extends Component {
+export default class Megadraft extends Component {
   constructor(props) {
     super(props);
 
@@ -91,7 +89,6 @@ class Megadraft extends Component {
       <div className="megadraft">
         <div
           className="megadraft-editor"
-          style={MegadraftStyles.base}
           id="megadraft-editor"
           ref="editor">
           <Sidebar
