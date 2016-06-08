@@ -4,15 +4,12 @@
  * License: MIT
  */
 
-import Radium from "radium";
 import React, {Component, PropTypes} from "react";
 
 import BlockAction from "./BlockAction";
-import BlockActionGroupStyle from "../../styles/components/plugin/BlockActionGroupStyle";
 
 
-export default @Radium
-class BlockActionGroup extends Component {
+export default class BlockActionGroup extends Component {
 
   static propTypes = {
     items: React.PropTypes.arrayOf(
@@ -30,7 +27,7 @@ class BlockActionGroup extends Component {
 
   render() {
     return(
-      <ul style={BlockActionGroupStyle.group}>
+      <ul className="block__action-group">
         {this.props.items.map(this.renderItem)}
       </ul>
     );

@@ -4,13 +4,10 @@
  * License: MIT
  */
 
-import Radium from "radium";
 import React, {Component, PropTypes} from "react";
 
-import BlockActionStyle from "../../styles/components/plugin/BlockActionStyle";
 
-
-export default @Radium
+export default
 class BlockAction extends Component {
 
   static propTypes = {
@@ -24,8 +21,8 @@ class BlockAction extends Component {
   render() {
     const Icon = this.props.item.icon;
     return(
-      <li style={BlockActionStyle.item} onClick={this.props.item.action}>
-        <Icon style={BlockActionStyle.icon} />
+      <li className="block__action" onClick={this.props.item.action}>
+        <Icon className="block__action__icon" />
       </li>
     );
   }
