@@ -53,7 +53,7 @@ html {
 .tab-container-editor {
     border-top: 1px solid #d8d8d8;
     background-color: #fff;
-    padding: 10px 10px 100px 80px;
+    padding: 40px 80px 100px 80px;
 }
 
 .tab-container-json {

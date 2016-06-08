@@ -100,7 +100,6 @@ describe("Sidebar Component", function() {
     const menu = TestUtils.findRenderedComponentWithType(
       this.wrapper, DropdownMenu);
     const domMenu = TestUtils.findRenderedDOMComponentWithTag(menu, "ul");
-    console.log(domMenu.classList);
     expect(domMenu.classList.contains("dropdown__items--open")).to.be.true;
   });
 

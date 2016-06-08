@@ -15,7 +15,7 @@
     font-family: OpenSans, sans-serif;
 }
 
-.paragraph {
+.paragraph + .paragraph {
     margin-top: 40px;
 }
 
@@ -30,7 +30,7 @@
 .public-DraftStyleDefault-ol,
 .public-DraftStyleDefault-ul {
     line-height: 2;
-    margin-top: 24px;
+    margin: 24px 0 40px 0;
     padding-left: 40px;
 }
 
@@ -43,15 +43,19 @@ blockquote {
     border-left: 2px solid #ddd;
     color: #999;
     font-style: italic;
-    margin: 24px 0 0 2px;
-    padding-left: 18px;
+    margin: 12px 0 40px 0;
+    padding: 6px 0 5px 18px;
+}
+
+.paragraph + blockquote {
+    margin-top: 40px
 }
 
 h2 {
     color: #262626;
     font-size: 20px;
     font-weight: bold;
-    margin-top: 64px;
+    margin: 64px 0 24px 0;
 }
 
 .editor__link {
