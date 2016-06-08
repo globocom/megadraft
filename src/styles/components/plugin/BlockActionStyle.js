@@ -7,7 +7,7 @@
 export default {
   item: {
     display: "inline-block",
-    padding: "0 9px",
+    padding: "0 8px",
     lineHeight: "40px",
     cursor: "pointer",
     textAlign: "center",

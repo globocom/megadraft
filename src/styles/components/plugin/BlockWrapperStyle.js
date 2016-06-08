@@ -15,7 +15,7 @@ export default {
   blockWrapper: {
     borderRadius: "3px",
     backgroundColor: "#fff",
-    boxShadow: "0 1px 1px 0 #000",
+    boxShadow: "0 1px 1px 0 rgba(0, 0, 0, 0.1)",
     border: "solid 1px #ddd"
   }
 };
