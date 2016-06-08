@@ -13,54 +13,54 @@
         position: absolute;
     }
 
-    &__dropdown {
+    &__dropdown-wrapper {
         padding: 0;
         list-style: none;
         margin: 0;
     }
+}
 
-    .dropdown {
-        position: relative;
+.dropdown {
+    position: relative;
 
-        &__button {
-            background-color: #181818;
-            border: 0;
-            border-radius: 32px;
-            color: #fff;
-            cursor: pointer;
-            height: 32px;
-            padding: 1px 0 0 0;
-            width: 32px;
-            transition: all 0.5s ease;
+    &__button {
+        background-color: #181818;
+        border: 0;
+        border-radius: 32px;
+        color: #fff;
+        cursor: pointer;
+        height: 32px;
+        padding: 1px 0 0 0;
+        width: 32px;
+        transition: all 0.5s ease;
 
+        &:hover {
+            background-color: #333333;
+        }
+
+        &--open {
+            transform: rotate(45deg);
+            background-color: #0669de;
             &:hover {
-                background-color: #333333;
-            }
-
-            &-open {
-                transform: rotate(45deg);
-                background-color: #0669de;
-                &:hover {
-                  background-color: #0669de;
-                }
+              background-color: #0669de;
             }
         }
+    }
 
-        &__items {
-            list-style: none;
-            padding: 0;
-            margin: 8px 0px;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-            max-height: 0;
+    &__items {
+        list-style: none;
+        padding: 0;
+        margin: 8px 0px;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+        max-height: 0;
 
-            &-open {
-                max-height: 100px;
-            }
+        &--open {
+            max-height: 100px;
         }
+    }
 
-        &__item {
-            margin-top: 6px;
-        }
+    &__item {
+        margin-top: 6px;
     }
 }

@@ -6,13 +6,11 @@
 
 import React, {Component} from "react";
 import {Entity, AtomicBlockUtils} from "draft-js";
-import Radium from "radium";
 
 import icons from "../../icons";
 
 
-export default @Radium
-class VideoButton extends Component {
+export default class VideoButton extends Component {
   onClick(e) {
     e.preventDefault();
     const src = window.prompt("Enter a URL");
@@ -31,7 +29,7 @@ class VideoButton extends Component {
 
   render() {
     return (
-      <button style={this.props.style} onClick={::this.onClick}>
+      <button className={this.props.className} onClick={::this.onClick}>
         <icons.VideoIcon/>
       </button>
     );

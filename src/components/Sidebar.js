@@ -15,7 +15,7 @@ class BlockStyles extends Component {
     let className = "dropdown__items";
 
     if (this.props.open) {
-      className += " dropdown__items-open";
+      className += " dropdown__items--open";
     }
 
     return (
@@ -43,7 +43,7 @@ export class ToggleButton extends Component {
     let className = "dropdown__button";
 
     if (this.props.open) {
-      className += " dropdown__button-open";
+      className += " dropdown__button--open";
     }
 
     return (
@@ -144,7 +144,7 @@ export default class SideBar extends Component {
     return (
       <div ref="container" className="sidebar">
         <div style={{top: `${this.state.top}px`}} className="sidebar__menu">
-          <ul className="sidebar__dropdown">
+          <ul className="sidebar__dropdown-wrapper">
             <DropdownMenu
               editorState={this.props.editorState}
               onChange={::this.props.onChange}
