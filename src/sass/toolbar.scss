@@ -1,0 +1,95 @@
+.toolbar {
+    background: yellow;
+    height: 0;
+    position: absolute;
+    display: none;
+
+    &--open {
+        display: block;
+    }
+
+    &__wrapper {
+        background-color: #181818;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
+        left: -50%;
+        position: relative;
+    }
+
+    &__list {
+        padding: 0 8px;
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    &__arrow {
+        display: inline-block;
+        top: 100%;
+        left: 50%;
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-width: 8px;
+        border-style: solid;
+        border-color: #181818 transparent transparent;
+        margin-left: -8px;
+    }
+
+    &--editing-link {
+        .toolbar__list {
+            display: none;
+        }
+        .toolbar__input {
+            display: block;
+        }
+    }
+
+    &__item {
+        display: inline-block;
+        color: #ccc;
+
+        &:hover {
+            color: #fff;
+        }
+
+        &--active {
+            color: #3192e7;
+
+            &:hover {
+                color: #3192e7;
+            }
+        }
+
+        &--separator {
+            border-right: 1px solid #333;
+            height: 20px;
+            margin: 0 8px
+        }
+    }
+
+    &__button {
+        padding: 0;
+        color: inherit;
+        cursor: pointer;
+        border: 0;
+        height: 56px;
+        width: 40px;
+        background: transparent;
+    }
+
+    &__input {
+        background-color: transparent;
+        border: none;
+        color: #fafafa;
+        display: none;
+        font-size: 14px;
+        margin: 0;
+        padding: 20px;
+        width: 250px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}

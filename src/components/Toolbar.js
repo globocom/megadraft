@@ -10,11 +10,10 @@ import {RichUtils, Entity} from "draft-js";
 
 import LinkInput from "./LinkInput";
 import ToolbarItem from "./ToolbarItem";
-import ToolbarStyle from "../styles/components/ToolbarStyles";
 import {getSelectionCoords} from "../utils";
 
-export default @Radium
-class Toolbar extends Component {
+
+export default class Toolbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -149,25 +148,22 @@ class Toolbar extends Component {
   }
 
   render() {
-    const style = [
-      ToolbarStyle.base
-    ];
+    let toolbarClass = "toolbar";
 
-    const listStyle = [
-      ToolbarStyle.list,
-      this.state.editingLink && {display: "none"}
-    ];
+    if (this.state.show) {
+      toolbarClass += " toolbar--open";
+    }
 
-    const wrapperStyle = [
-      ToolbarStyle.wrapper,
-      !this.state.show && {display: "none"},
-      this.state.position
-    ];
+    if (this.state.editingLink) {
+      toolbarClass += " toolbar--editing-link";
+    }
 
     return (
-      <div style={wrapperStyle} ref="toolbarWrapper">
-        <div style={style} ref="toolbar">
-          <ul style={listStyle} onMouseDown={(x) => {x.preventDefault();}}>
+      <div className={toolbarClass}
+           style={this.state.position}
+           ref="toolbarWrapper">
+        <div className="toolbar__wrapper" ref="toolbar">
+          <ul className="toolbar__list" onMouseDown={(x) => {x.preventDefault();}}>
             {this.props.actions.map(::this.renderButton)}
           </ul>
           <LinkInput
@@ -177,7 +173,7 @@ class Toolbar extends Component {
             editingLink={this.state.editingLink}
             editor={this.props.editor}
             cancelLink={::this.cancelLink}/>
-          <span style={ToolbarStyle.arrow} />
+          <span className="toolbar__arrow" />
         </div>
       </div>
     );

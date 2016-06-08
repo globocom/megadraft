@@ -5,8 +5,11 @@
  */
 
 .megadraft-editor {
+    position: relative;
 
     @import 'typography.scss';
 
     @import 'sidebar.scss';
+
+    @import 'toolbar.scss';
 }

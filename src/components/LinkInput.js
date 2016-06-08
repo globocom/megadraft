@@ -9,10 +9,8 @@ import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import {EditorState, RichUtils, Entity} from "draft-js";
 
-import LinkInputStyles from "../styles/components/LinkInputStyles";
 
-export default @Radium
-class LinkInput extends Component {
+export default class LinkInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,15 +69,10 @@ class LinkInput extends Component {
   }
 
   render() {
-    const style = [
-      LinkInputStyles.base,
-      !this.props.editingLink && {display: "none"}
-    ];
-
     return (
       <input
+        className="toolbar__input"
         ref="textInput"
-        style={style}
         type="text"
         onChange={::this.onLinkChange}
         value={this.state.link}
