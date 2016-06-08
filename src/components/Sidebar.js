@@ -8,24 +8,24 @@ import Radium from "radium";
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import icons from "../icons";
-import SidebarStyle  from "../styles/components/SidebarStyle";
 
 
-@Radium
 class BlockStyles extends Component {
   render() {
-    const style = [
-      SidebarStyle.block,
-      {maxHeight: this.props.open? "100px": 0}
-    ];
+    let className = "dropdown__items";
+
+    if (this.props.open) {
+      className += " dropdown__items-open";
+    }
+
     return (
-      <ul style={style}>
+      <ul className={className}>
         {this.props.plugins.map((item) => {
           const Button = item.buttonComponent;
           return (
-            <li key={item.type} style={SidebarStyle.listItem}>
+            <li key={item.type} className="dropdown__item">
               <Button
-                style={SidebarStyle.button}
+                className="dropdown__button"
                 editorState={this.props.editorState}
                 onChange={::this.props.onChange}/>
             </li>
@@ -36,27 +36,25 @@ class BlockStyles extends Component {
   }
 }
 
-@Radium
 export class ToggleButton extends Component {
   render() {
     const Icon = icons.CrossIcon;
 
-    let style = [SidebarStyle.button];
+    let className = "dropdown__button";
 
     if (this.props.open) {
-      style.push(SidebarStyle.toggleClose);
+      className += " dropdown__button-open";
     }
 
     return (
-      <button style={style} onClick={this.props.toggle}>
+      <button className={className} onClick={this.props.toggle}>
         <Icon/>
       </button>
     );
   }
 }
 
-@Radium
-export class PopOverMenu extends Component {
+export class DropdownMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -72,7 +70,7 @@ export class PopOverMenu extends Component {
 
   render() {
     return (
-      <li style={SidebarStyle.menu}>
+      <li className="dropdown">
         <ToggleButton
           toggle={::this.toggle}
           open={this.state.open} />
@@ -105,8 +103,7 @@ function getSelectedBlockElement() {
 
 }
 
-export default @Radium
-class SideBar extends Component {
+export default class SideBar extends Component {
   constructor(props) {
     super(props);
     this.state = {top: 0};
@@ -145,10 +142,10 @@ class SideBar extends Component {
 
   render() {
     return (
-      <div ref="container" style={SidebarStyle.container}>
-        <div style={[SidebarStyle.popover, {top: `${this.state.top}px`}]}>
-          <ul style={SidebarStyle.dropdown}>
-            <PopOverMenu
+      <div ref="container" className="sidebar">
+        <div style={{top: `${this.state.top}px`}} className="sidebar__menu">
+          <ul className="sidebar__dropdown">
+            <DropdownMenu
               editorState={this.props.editorState}
               onChange={::this.props.onChange}
               plugins={this.props.plugins}/>
