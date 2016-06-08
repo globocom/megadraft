@@ -5,16 +5,12 @@
  */
 
 import React, {Component} from "react";
-import Radium from "radium";
 
-import ToolbarItemStyles from "../styles/components/ToolbarItemStyles";
-import SeparatorStyles from "../styles/components/SeparatorStyles";
 
-export default @Radium
-class Separator extends Component {
+export default class Separator extends Component {
   render() {
     return (
-      <li style={[ToolbarItemStyles.base, SeparatorStyles]}></li>
+      <li className="toolbar__item toolbar__item--separator"></li>
     );
   }
 }
