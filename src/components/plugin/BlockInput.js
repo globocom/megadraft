@@ -4,18 +4,14 @@
  * License: MIT
  */
 
-import Radium from "radium";
 import React, {Component} from "react";
 
-import BlockInputStyle from "../../styles/components/plugin/BlockInputStyle";
 
-
-export default @Radium
-class BlockInput extends Component {
+export default class BlockInput extends Component {
   render(){
     const {value, ...props} = this.props;
     return (
-      <input {...props} defaultValue={value} type="text" style={BlockInputStyle.field} />
+      <input {...props} defaultValue={value} type="text" className="block__input" />
     );
   }
-};
+}

@@ -4,20 +4,14 @@
  * License: MIT
  */
 
-import Radium from "radium";
 import React, {Component} from "react";
 
-import BlockContentStyle from "../../styles/components/plugin/BlockContentStyle";
 
-
-export default @Radium
-class BlockContent extends Component {
+export default class BlockContent extends Component {
   render() {
     return (
-      <div style={BlockContentStyle.wrapper}>
-        <div style={BlockContentStyle.imageWrapper}>
-          {this.props.children}
-        </div>
+      <div className="block__content">
+        {this.props.children}
       </div>
     );
   }

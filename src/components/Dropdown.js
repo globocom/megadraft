@@ -4,17 +4,14 @@
  * License: MIT
  */
 
-import Radium from "radium";
 import React, {Component, PropTypes} from "react";
 import ReactDOM from "react-dom";
 
 import DropdownItem from "./DropdownItem";
-import DropdownStyle from "../styles/components/DropdownStyle";
 import icons from "../icons";
 
 
-export default @Radium
-class Dropdown extends Component {
+export default class Dropdown extends Component {
 
   static propTypes = {
     items: React.PropTypes.arrayOf(
@@ -44,7 +41,7 @@ class Dropdown extends Component {
     return(
       <li key={item.key}>
         <DropdownItem item={item}
-          style={DropdownStyle.option}
+          className="dropdown__option"
           onClick={() => this.onChange(item.key)} />
       </li>
     );
@@ -77,32 +74,27 @@ class Dropdown extends Component {
       (obj) => {return obj.key === this.props.selected;}
     )[0];
 
-    const wrapperStyle = [
-      DropdownStyle.wrapper,
-      this.state.isOpen && DropdownStyle.wrapperOpened
-    ];
+    let wrapperClassName = "dropdown__wrapper";
+    let dropdownClassName = "dropdown";
+    let arrowClassName = "dropdown__arrow";
 
-    const dropdownStyle = [
-      DropdownStyle.dropdown,
-      this.state.isOpen && DropdownStyle.dropdownOpened
-    ];
-
-    const arrowStyle = [
-      DropdownStyle.arrow,
-      this.state.isOpen && DropdownStyle.arrowOpened
-    ];
+    if (this.state.isOpen) {
+      wrapperClassName += " dropdown__wrapper--open";
+      dropdownClassName += " dropdown--open";
+      arrowClassName += " dropdown__arrow--open";
+    }
 
     return(
-      <div style={wrapperStyle} onClick={::this.toggleDropDown}>
+      <div className={wrapperClassName} onClick={::this.toggleDropDown}>
         <DropdownItem
           item={selectedItem}
-          style={DropdownStyle.selectedItem}
+          className="dropdown__item--selected"
           onMouseDown={::this.preventSelection}>
 
-          <icons.DropdownArrow style={arrowStyle} />
+          <icons.DropdownArrow className={arrowClassName} />
         </DropdownItem>
 
-        <ul style={dropdownStyle}>
+        <ul className={dropdownClassName}>
           {this.props.items.map(::this.renderItem)}
         </ul>
       </div>

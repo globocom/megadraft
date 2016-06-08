@@ -4,17 +4,13 @@
  * License: MIT
  */
 
-import Radium from "radium";
 import React, {Component} from "react";
 
-import BlockControlsStyle from "../../styles/components/plugin/BlockControlsStyle";
 
-
-export default @Radium
-class BlockControls extends Component {
+export default class BlockControls extends Component {
   render() {
     return (
-      <div style={BlockControlsStyle.controls}>
+      <div className="block__controls">
         {this.props.children}
       </div>
     );
