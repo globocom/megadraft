@@ -11,10 +11,10 @@ import icons from "../icons";
 
 class BlockStyles extends Component {
   render() {
-    let className = "dropdown__items";
+    let className = "sidemenu__items";
 
     if (this.props.open) {
-      className += " dropdown__items--open";
+      className += " sidemenu__items--open";
     }
 
     return (
@@ -22,9 +22,9 @@ class BlockStyles extends Component {
         {this.props.plugins.map((item) => {
           const Button = item.buttonComponent;
           return (
-            <li key={item.type} className="dropdown__item">
+            <li key={item.type} className="sidemenu__item">
               <Button
-                className="dropdown__button"
+                className="sidemenu__button"
                 editorState={this.props.editorState}
                 onChange={::this.props.onChange}/>
             </li>
@@ -39,10 +39,10 @@ export class ToggleButton extends Component {
   render() {
     const Icon = icons.CrossIcon;
 
-    let className = "dropdown__button";
+    let className = "sidemenu__button";
 
     if (this.props.open) {
-      className += " dropdown__button--open";
+      className += " sidemenu__button--open";
     }
 
     return (
@@ -53,7 +53,7 @@ export class ToggleButton extends Component {
   }
 }
 
-export class DropdownMenu extends Component {
+export class SideMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -69,7 +69,7 @@ export class DropdownMenu extends Component {
 
   render() {
     return (
-      <li className="dropdown">
+      <li className="sidemenu">
         <ToggleButton
           toggle={::this.toggle}
           open={this.state.open} />
@@ -143,8 +143,8 @@ export default class SideBar extends Component {
     return (
       <div ref="container" className="sidebar">
         <div style={{top: `${this.state.top}px`}} className="sidebar__menu">
-          <ul className="sidebar__dropdown-wrapper">
-            <DropdownMenu
+          <ul className="sidebar__sidemenu-wrapper">
+            <SideMenu
               editorState={this.props.editorState}
               onChange={::this.props.onChange}
               plugins={this.props.plugins}/>
