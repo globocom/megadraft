@@ -54,9 +54,7 @@
   line-height: 40px;
   font-size: 0;
 
-  // TODO: check prefixes
-  -webkit-user-select: none;
-
+  user-select: none;
 
   &--selected {
     &:hover {
