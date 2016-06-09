@@ -15,4 +15,4 @@ export default class BlockData extends Component {
       </div>
     );
   }
-};
+}

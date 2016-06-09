@@ -15,4 +15,4 @@ export default class BlockContent extends Component {
       </div>
     );
   }
-};
+}
