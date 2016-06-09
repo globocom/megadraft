@@ -13,7 +13,7 @@ import {BlockInput} from "../../../src/components/plugin";
 let expect = chai.expect;
 
 
-describe.only("BlockInput Component", function() {
+describe("BlockInput Component", function() {
 
   beforeEach(function() {
     this.renderComponent = function (props) {
