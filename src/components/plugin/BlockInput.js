@@ -6,12 +6,37 @@
 
 import React, {Component} from "react";
 
+import icons from "../../../src/icons";
+
 
 export default class BlockInput extends Component {
-  render(){
-    const {value, ...props} = this.props;
+  renderError(error) {
+    if (!error) {
+      return;
+    }
     return (
-      <input {...props} defaultValue={value} type="text" className="block__input" />
+      <div className="block__input__error-text">{error}</div>
+    );
+  }
+
+  render(){
+    const {value, error, ...props} = this.props;
+    let className = "block__input";
+    if (!value) {
+      className += " block__input--empty";
+    }
+    if (error) {
+      className += " block__input--error";
+    }
+
+    return (
+      <div className="block__input__row">
+        <div className="block__input__wrapper">
+          <input {...props} defaultValue={value} type="text" className={className} />
+          <icons.EditIcon className="block__input__icon" />
+        </div>
+        {this.renderError(error)}
+      </div>
     );
   }
 }
