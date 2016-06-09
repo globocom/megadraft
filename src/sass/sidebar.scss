@@ -30,7 +30,9 @@
         color: #fff;
         cursor: pointer;
         height: 32px;
-        padding: 1px 0 0 0;
+        line-height: 32px;
+        font-size: 0;
+        padding: 0;
         width: 32px;
         transition: all 0.5s ease;
 
@@ -44,6 +46,10 @@
             &:hover {
               background-color: #0669de;
             }
+        }
+
+        &__icon {
+            vertical-align: middle;
         }
     }
 

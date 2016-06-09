@@ -30,7 +30,7 @@ export default class VideoButton extends Component {
   render() {
     return (
       <button className={this.props.className} onClick={::this.onClick}>
-        <icons.VideoIcon/>
+        <icons.VideoIcon className="sidemenu__button__icon" />
       </button>
     );
   }
