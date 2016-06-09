@@ -14,6 +14,7 @@
 }
 
 .block__wrapper {
+  user-select: none;
   background-color: #fff;
   border-radius: 3px;
   border: solid 1px #ddd;
