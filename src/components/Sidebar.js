@@ -47,7 +47,7 @@ export class ToggleButton extends Component {
 
     return (
       <button className={className} onClick={this.props.toggle}>
-        <Icon/>
+        <Icon className="sidemenu__button__icon" />
       </button>
     );
   }

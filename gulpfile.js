@@ -7,9 +7,11 @@
 var gulp = require("gulp");
 var gutil = require("gulp-util");
 var sass = require("gulp-sass");
+var autoprefixer = require("gulp-autoprefixer");
 var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
 var webpackConfig = require("./webpack.config.js");
+
 
 
 // The development server (the recommended option for development)
@@ -19,6 +21,7 @@ gulp.task("default", ["dev-server"]);
 gulp.task("sass", function () {
   return gulp.src("./src/sass/**/*.scss")
     .pipe(sass.sync().on("error", sass.logError))
+    .pipe(autoprefixer())
     .pipe(gulp.dest("./dist/css"));
 });
 

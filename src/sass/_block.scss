@@ -104,17 +104,24 @@
     right: 0;
     width: 16px;
     height: 16px;
+    display: none;
   }
 
   // Non-empty
   &:hover {
     border-color: #999;
   }
+  &:hover + svg.block__input__icon {
+    display: inline-block;
+  }
 
   // Editing
   &:focus {
     border-color: #0072de;
     border-style: solid;
+  }
+  &:focus + svg.block__input__icon {
+    display: inline-block;
   }
 
   // Empty
@@ -130,6 +137,7 @@
   }
   &--empty + svg.block__input__icon {
     color: #999;
+    display: inline-block;
   }
 
   // Error
@@ -141,6 +149,7 @@
   }
   &--error + svg.block__input__icon {
     color: #ff351e;
+    display: inline-block;
   }
   &__error-text {
     color: #ff351e;

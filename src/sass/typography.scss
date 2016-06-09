@@ -19,6 +19,11 @@
     margin-top: 40px;
 }
 
+.public-DraftEditor-content figure {
+    margin: 0;
+    margin-top: 40px;
+}
+
 .public-DraftStyleDefault-ul {
     list-style-type: disc;
 }
@@ -56,6 +61,10 @@ h2 {
     font-size: 20px;
     font-weight: bold;
     margin: 64px 0 24px 0;
+}
+
+h2:first-child {
+  margin-top: 0;
 }
 
 .editor__link {
