@@ -7,12 +7,13 @@
 /* Sorry, not using BEM here, we are using drafjs structure */
 
 .DraftEditor-root {
-    font-family: "Open Sans, sans-serif";
+    font-family: Open Sans, sans-serif;
     color: #181818;
-    font-size: 18px;
-    letter-spacing: -0.6px;
-    line-height: 1.6;
-    font-family: OpenSans, sans-serif;
+    font-size: 1.125rem;
+    letter-spacing: -0.037rem;
+    line-height: 1.75rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .paragraph + .paragraph {
@@ -52,9 +53,11 @@ blockquote {
 }
 
 h2 {
-    color: #262626;
-    font-size: 20px;
-    font-weight: bold;
+    font-family: Open Sans, Sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.056rem;
+    line-height: 2rem;
     margin: 64px 0 24px 0;
 }
 
