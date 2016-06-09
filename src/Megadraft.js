@@ -9,6 +9,7 @@ import React, {Component} from "react";
 import Draft, {Editor, RichUtils} from "draft-js";
 
 import icons from "./icons";
+import * as plugin from "./components/plugin";
 import Toolbar from "./components/Toolbar";
 import Sidebar from "./components/Sidebar";
 import Media from "./components/Media";
@@ -118,3 +119,5 @@ class Megadraft extends Component {
 }
 
 export const DraftJS = Draft;
+export const MegadraftIcons = icons;
+export const MegadraftPlugin = plugin;
