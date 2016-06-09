@@ -74,7 +74,8 @@
 }
 
 .block__data {
-  padding: 8px 16px;
+  padding: 16px;
+  padding-top: 8px;
   background-color: #fff;
 }
 
@@ -131,6 +132,7 @@
 
   // Error
   &--error,
+  &--error.block__input--empty,
   &--error:hover {
     border-color: #ff351e;
     border-style: solid;
