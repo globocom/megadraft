@@ -41,6 +41,7 @@ gulp.task("site-watch", function() {
 
 
 gulp.task("dev-server", function(callback) {
+  gulp.start("site-sass");
   gulp.start("site-watch");
 
   // Start a webpack-dev-server

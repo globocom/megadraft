@@ -4,15 +4,13 @@
  * License: MIT
  */
 
-import Radium from "radium";
 import React, {Component} from "react";
 import {Entity, EditorState, SelectionState, Modifier} from "draft-js";
 
 import MediaWrapper from "./MediaWrapper";
 
 
-export default @Radium
-class Media extends Component {
+export default class Media extends Component {
   constructor(props) {
     super(props);
 

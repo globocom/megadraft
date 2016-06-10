@@ -4,7 +4,6 @@
  * License: MIT
  */
 
-import Radium from "radium";
 import React, {Component} from "react";
 
 import {
@@ -19,8 +18,7 @@ import icons from "../../icons";
 import ImageBlockStyle from "./ImageBlockStyle";
 
 
-export default @Radium
-class ImageBlock extends Component {
+export default class ImageBlock extends Component {
   constructor(props) {
     super(props);
 
@@ -75,4 +73,4 @@ class ImageBlock extends Component {
       </CommonBlock>
     );
   }
-};
+}
