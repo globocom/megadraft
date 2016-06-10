@@ -29,6 +29,7 @@ gulp.task("sass", function () {
 gulp.task("site-sass", function () {
   return gulp.src("./website/app.scss")
     .pipe(sass.sync().on("error", sass.logError))
+    .pipe(autoprefixer())
     .pipe(gulp.dest("./website"));
 });
 
