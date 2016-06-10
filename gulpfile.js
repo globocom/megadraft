@@ -26,9 +26,20 @@ gulp.task("sass", function () {
 });
 
 
+gulp.task("site-sass", function () {
+  return gulp.src("./website/app.scss")
+    .pipe(sass.sync().on("error", sass.logError))
+    .pipe(gulp.dest("./website"));
+});
+
+
+gulp.task("site-watch", function() {
+  gulp.watch("./website/app.scss", ["site-sass"]);
+});
+
+
 gulp.task("dev-server", function(callback) {
-  gulp.start("sass");
-  gulp.watch("./src/sass/**/*.scss", ["sass"]);
+  gulp.start("site-watch");
 
   // Start a webpack-dev-server
   new WebpackDevServer(webpack(webpackConfig), {
