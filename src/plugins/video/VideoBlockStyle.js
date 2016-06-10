@@ -9,10 +9,5 @@ export default {
     display: "inline-block", // Eliminates whitespace between block and data fields block
     maxWidth: "100%",
     verticalAlign: "middle"
-  },
-  videoWrapper: {
-    lineHeight: "100px",
-    textAlign: "center",
-    backgroundColor: "#eee"
   }
 };

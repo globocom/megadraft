@@ -1,0 +1,150 @@
+/*
+ * Copyright (c) 2016, Globo.com (https://github.com/globocom)
+ *
+ * License: MIT
+ */
+
+.block__hover {
+  padding: 8px;
+  margin: -8px;
+
+  &:hover {
+    background-color: #eee;
+    border-radius: 4px;
+  }
+}
+
+.block__wrapper {
+  user-select: none;
+  background-color: #fff;
+  border-radius: 3px;
+  border: solid 1px #ddd;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.block__controls {
+  overflow: auto;
+  padding: 8px;
+}
+
+.block__action-group {
+  color: #999;
+  float: right;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.block__action {
+  display: inline-block;
+  padding: 0 8px;
+  line-height: 40px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 0;
+
+  &:hover {
+    color: #000;
+  }
+
+  &__icon {
+    vertical-align: middle;
+  }
+}
+
+.block__content {
+  background-color: #eee;
+  line-height: 100px;
+  text-align: center;
+  position: relative;
+
+  &:before,
+  &:after {
+    position: absolute;
+    width: 100%;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    content: "";
+    left: 0;
+  }
+  &:before {
+    top: 0;
+  }
+  &:after {
+    bottom: 0;
+  }
+}
+
+.block__data {
+  padding: 16px;
+  padding-top: 8px;
+  background-color: #fff;
+}
+
+.block__input {
+  border: 0;
+  border-bottom: 1px dashed transparent;
+  color: #333;
+  display: block;
+  padding: 8px 0;
+  width: 100%;
+  font-size: 0.75rem;
+
+  &__row {
+    line-height: 1rem;
+  }
+
+  &__wrapper {
+    position: relative;
+  }
+  &__icon {
+    position: absolute;
+    top: 50%;
+    margin-top: -8px;
+    right: 0;
+    width: 16px;
+    height: 16px;
+  }
+
+  // Non-empty
+  &:hover {
+    border-color: #999;
+  }
+
+  // Editing
+  &:focus {
+    border-color: #0072de;
+    border-style: solid;
+  }
+
+  // Empty
+  &:placeholder {
+    color: #999;
+  }
+  &--empty {
+    border-color: #ccc;
+
+    :hover {
+      border-color: #999;
+    }
+  }
+  &--empty + svg.block__input__icon {
+    color: #999;
+  }
+
+  // Error
+  &--error,
+  &--error.block__input--empty,
+  &--error:hover {
+    border-color: #ff351e;
+    border-style: solid;
+  }
+  &--error + svg.block__input__icon {
+    color: #ff351e;
+  }
+  &__error-text {
+    color: #ff351e;
+    margin-top: 6px;
+    font-size: 0.75rem;
+  }
+}

@@ -4,12 +4,10 @@
  * License: MIT
  */
 
-import Radium from "radium";
 import React, {Component} from "react";
 
 
-export default @Radium
-class MediaWrapper extends Component {
+export default class MediaWrapper extends Component {
 
   constructor(props){
     super(props);
@@ -33,4 +31,4 @@ class MediaWrapper extends Component {
       </div>
     );
   }
-};
+}

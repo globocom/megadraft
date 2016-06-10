@@ -4,14 +4,10 @@
  * License: MIT
  */
 
-import Radium from "radium";
 import React, {Component, PropTypes} from "react";
 
-import DropdownItemStyle from "../styles/components/DropdownItemStyle";
 
-
-export default @Radium
-class DropdownItem extends Component {
+export default class DropdownItem extends Component {
 
   static propTypes = {
     item: PropTypes.object.isRequired,
@@ -24,15 +20,16 @@ class DropdownItem extends Component {
 
   render() {
     const Icon = this.props.item.icon;
+    const className = "dropdown__item " + (this.props.className || "");
     return(
       <div
-        style={[DropdownItemStyle.base, this.props.style]}
+        className={className}
         onClick={this.props.onClick}
         onMouseDown={this.props.onMouseDown}
         onMouseUp={this.props.onMouseDown}>
 
-        <Icon style={DropdownItemStyle.icon} />
-        <span style={DropdownItemStyle.text}>{this.props.item.label}</span>
+        <Icon className="dropdown__item__icon" />
+        <span className="dropdown__item__text">{this.props.item.label}</span>
 
         {this.props.children}
       </div>

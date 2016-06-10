@@ -4,7 +4,6 @@
  * License: MIT
  */
 
-import Radium from "radium";
 import React, {Component} from "react";
 
 import {
@@ -19,8 +18,7 @@ import icons from "../../icons";
 import VideoBlockStyle from "./VideoBlockStyle";
 
 
-export default @Radium
-class VideoBlock extends Component {
+export default class VideoBlock extends Component {
   constructor(props) {
     super(props);
 
@@ -60,4 +58,4 @@ class VideoBlock extends Component {
       </CommonBlock>
     );
   }
-};
+}

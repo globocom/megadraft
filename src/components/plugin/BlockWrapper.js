@@ -4,21 +4,17 @@
  * License: MIT
  */
 
-import Radium from "radium";
 import React, {Component} from "react";
 
-import BlockWrapperStyle from "../../styles/components/plugin/BlockWrapperStyle";
 
-
-export default @Radium
-class BlockWrapper extends Component {
+export default class BlockWrapper extends Component {
   render() {
     return (
-      <div style={BlockWrapperStyle.blockHover}>
-        <div style={BlockWrapperStyle.blockWrapper}>
+      <div className="block__hover">
+        <div className="block__wrapper">
           {this.props.children}
         </div>
       </div>
     );
   }
-};
+}
