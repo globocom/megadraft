@@ -66,6 +66,10 @@ h2 {
     margin: 64px 0 24px 0;
 }
 
+h2:first-child {
+  margin-top: 0;
+}
+
 .editor__link {
     color: #3192e7;
     text-decoration: none;
