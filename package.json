@@ -5,9 +5,7 @@
   "main": "lib/Megadraft.js",
   "dependencies": {
     "draft-js": "^0.7.0",
-    "radium": "^0.17.1",
-    "react-markdown": "^2.2.0",
-    "react-portal": "^2.1.0"
+    "react-markdown": "^2.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
