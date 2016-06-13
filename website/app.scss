@@ -3,6 +3,9 @@
  *
  * License: MIT
  */
+
+@import '../src/styles/megadraft.scss';
+
 .jsonpreview {
     font-family: monospace;
     color: #333;
@@ -50,14 +53,10 @@ html {
     outline: none;
 }
 
-.public-DraftStyleDefault-block {
-    margin: 10px 0;
-}
-
 .tab-container-editor {
     border-top: 1px solid #d8d8d8;
     background-color: #fff;
-    padding: 10px 10px 100px 80px;
+    padding: 40px 80px 100px 80px;
 }
 
 .tab-container-json {

@@ -6,13 +6,11 @@
 
 import React, {Component} from "react";
 import {Entity, AtomicBlockUtils} from "draft-js";
-import Radium from "radium";
 
 import icons from "../../icons";
 
 
-export default @Radium
-class BlockButton extends Component {
+export default class BlockButton extends Component {
   onClick(e) {
     e.preventDefault();
     const src = window.prompt("Enter a URL");
@@ -31,8 +29,8 @@ class BlockButton extends Component {
 
   render() {
     return (
-      <button style={this.props.style} onClick={::this.onClick}>
-        <icons.ImageIcon/>
+      <button className={this.props.className} onClick={::this.onClick}>
+        <icons.ImageIcon className="sidemenu__button__icon" />
       </button>
     );
   }

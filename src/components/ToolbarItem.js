@@ -5,15 +5,11 @@
  */
 
 import React, {Component} from "react";
-import Radium from "radium";
 
 import Separator from "./Separator";
 
-import ToolbarItemStyles from "../styles/components/ToolbarItemStyles";
 
-
-export default @Radium
-class ToolbarItem extends Component {
+export default class ToolbarItem extends Component {
   constructor(props) {
     super(props);
   }
@@ -33,14 +29,16 @@ class ToolbarItem extends Component {
       );
     }
 
-    const style = [
-      ToolbarItemStyles.base,
-      this.props.active && ToolbarItemStyles.active
-    ];
+    let className = "toolbar__item";
+
+    if (this.props.active) {
+      className += " toolbar__item--active";
+    }
 
     return (
-      <li style={style}>
-        <button onClick={() => this.toggleAction(this.props)} style={ToolbarItemStyles.button}>
+      <li className={className}>
+        <button onClick={() => this.toggleAction(this.props)}
+                className="toolbar__button">
           <Icon />
         </button>
       </li>

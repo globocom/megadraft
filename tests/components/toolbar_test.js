@@ -141,7 +141,7 @@ describe("Toolbar Component", function() {
 
     it("starts hidden", function() {
       const toolbarNode = this.wrapper.refs.toolbar.refs.toolbarWrapper;
-      expect(toolbarNode.style.display).to.be.equal("none");
+      expect(toolbarNode.classList.contains("toolbar--open")).to.be.false;
     });
 
     it("shows after selection", function() {
@@ -151,7 +151,7 @@ describe("Toolbar Component", function() {
       }, this.wrapper);
 
       const toolbarNode = this.wrapper.refs.toolbar.refs.toolbarWrapper;
-      expect(toolbarNode.style.display).to.be.equal("");
+      expect(toolbarNode.classList.contains("toolbar--open")).to.be.true;
     });
 
     it("should hide after deselection", function() {
@@ -166,7 +166,7 @@ describe("Toolbar Component", function() {
       }, this.wrapper);
 
       const toolbarNode = this.wrapper.refs.toolbar.refs.toolbarWrapper;
-      expect(toolbarNode.style.display).to.be.equal("none");
+      expect(toolbarNode.classList.contains("toolbar--open")).to.be.false;
     });
 
     it("should center toolbar above the selection", function() {
@@ -190,20 +190,18 @@ describe("Toolbar Component", function() {
       });
 
       it("starts with the link input hidden", function() {
-        const linkInput = TestUtils.findRenderedComponentWithType(this.wrapper, LinkInput);
-        const textInput = linkInput.refs.textInput;
+        const toolbarNode = this.wrapper.refs.toolbar.refs.toolbarWrapper;
 
-        expect(textInput.style.display).to.be.equal("none");
+        expect(toolbarNode.classList.contains("toolbar--editing-link")).to.be.false;
       });
 
       it("shows the link input on click", function() {
 
         TestUtils.Simulate.click(this.button);
 
-        const linkInput = TestUtils.findRenderedComponentWithType(this.wrapper, LinkInput);
-        const textInput = linkInput.refs.textInput;
+        const toolbarNode = this.wrapper.refs.toolbar.refs.toolbarWrapper;
 
-        expect(textInput.style.display).to.be.equal("");
+        expect(toolbarNode.classList.contains("toolbar--editing-link")).to.be.true;
 
       });
 
@@ -239,7 +237,9 @@ describe("Toolbar Component", function() {
         TestUtils.Simulate.change(textInput);
         TestUtils.Simulate.keyDown(textInput, {key: "Escape", keyCode: 27, which: 27});
 
-        expect(textInput.style.display).to.be.equal("none");
+        const toolbarNode = this.wrapper.refs.toolbar.refs.toolbarWrapper;
+
+        expect(toolbarNode.classList.contains("toolbar--editing-link")).to.be.false;
 
       });
 

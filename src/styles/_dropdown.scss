@@ -1,0 +1,74 @@
+/*
+ * Copyright (c) 2016, Globo.com (https://github.com/globocom)
+ *
+ * License: MIT
+ */
+
+.dropdown__wrapper {
+  border-radius: 2px;
+  position: absolute;
+  background: #fff;
+  color: #999;
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 10;
+
+  &--open {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    color: #333;
+  }
+}
+
+.dropdown {
+  display: none;
+  list-style: none;
+  margin: 0;
+  border-top: 1px solid #ddd;
+  padding: 8px 0;
+
+  &--open {
+    display: block;
+  }
+}
+
+.dropdown__arrow {
+  margin-left: 5px;
+  vertical-align: middle;
+
+  &--open {
+    transform: rotate(180deg);
+  }
+}
+
+.dropdown__option {
+  color: #999;
+
+  &:hover {
+    background-color: #0669de;
+    color: #fff;
+  }
+}
+
+.dropdown__item {
+  padding: 0 8px;
+  line-height: 40px;
+  font-size: 0;
+
+  user-select: none;
+
+  &--selected {
+    &:hover {
+      color: #333;
+    }
+  }
+
+  &__text {
+    vertical-align: middle;
+    margin-left: 8px;
+    font-size: 0.75rem;
+  }
+
+  &__icon {
+    vertical-align: middle;
+  }
+}

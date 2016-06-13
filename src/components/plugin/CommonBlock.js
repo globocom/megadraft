@@ -4,7 +4,6 @@
  * License: MIT
  */
 
-import Radium from "radium";
 import React, {Component} from "react";
 
 import Dropdown from "../../components/Dropdown";
@@ -15,8 +14,7 @@ import {
 } from "../../components/plugin";
 
 
-export default @Radium
-class CommonBlock extends Component {
+export default class CommonBlock extends Component {
   constructor(props) {
     super(props);
 
@@ -45,4 +43,4 @@ class CommonBlock extends Component {
       </BlockWrapper>
     );
   }
-};
+}

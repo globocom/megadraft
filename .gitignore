@@ -37,3 +37,4 @@ dist/
 lib/
 .DS_Store
 .idea/
+app.css
