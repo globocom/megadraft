@@ -20,7 +20,7 @@ gulp.task("default", ["dev-server"]);
 
 gulp.task("sass", function () {
   return gulp.src("./src/styles/**/*.scss")
-    .pipe(sass.sync().on("error", sass.logError))
+    .pipe(sass.sync({outputStyle: 'expanded'}).on('error', sass.logError))
     .pipe(autoprefixer())
     .pipe(gulp.dest("./dist/css"));
 });
