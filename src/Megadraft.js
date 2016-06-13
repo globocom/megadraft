@@ -30,6 +30,7 @@ export default class Megadraft extends Component {
     this.mediaBlockRenderer = ::this.mediaBlockRenderer;
 
     this.handleKeyCommand = ::this.handleKeyCommand;
+    this.handleReturn = ::this.handleReturn;
 
     this.setReadOnly = ::this.setReadOnly;
 
@@ -65,6 +66,16 @@ export default class Megadraft extends Component {
     const {editorState} = this.props;
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
+      this.props.onChange(newState);
+      return true;
+    }
+    return false;
+  }
+
+  handleReturn(event) {
+    if (event.shiftKey) {
+      const {editorState} = this.props;
+      const newState = RichUtils.insertSoftNewline(editorState);
       this.props.onChange(newState);
       return true;
     }
@@ -119,6 +130,7 @@ export default class Megadraft extends Component {
             blockRendererFn={this.mediaBlockRenderer}
             blockStyleFn={this.blockStyleFn}
             handleKeyCommand={this.handleKeyCommand}
+            handleReturn={this.handleReturn}
             stripPastedStyles={stripPastedStyles}
             spellCheck={spellCheck}
             keyBindingFn={this.externalKeyBindings}

@@ -74,11 +74,12 @@ describe("Megadraft Component", () => {
         { name: "save", isKeyBound: (e) => { return e.keyCode === 83 && e.ctrlKey; }, action: kba }
     ];
 
+    this.onChange = sinon.spy();
     this.editorState = editorStateFromRaw(INITIAL_CONTENT);
     this.component = TestUtils.renderIntoDocument(
       <Megadraft
         editorState={this.editorState}
-        onChange={() => null}
+        onChange={this.onChange}
         keyBindings={keyBindings}/>
     );
   });
@@ -119,6 +120,16 @@ describe("Megadraft Component", () => {
     this.component.setReadOnly(true);
 
     expect(items[0].props.readOnly).to.be.true;
+  });
+
+  it("is capable of inserting soft line breaks", function() {
+    this.component.handleReturn({shiftKey: true});
+
+    const content = this.onChange.args[0][0].getCurrentContent();
+
+    const text = content.getFirstBlock().getText();
+
+    expect(text).to.be.equal("\nHello World!");
   });
 
   it("recognizes external key binding", function() {
