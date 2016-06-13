@@ -38,7 +38,7 @@ ReactDOM.render(
 );
 ```
 
-Then link the css (dist/megadraft.css) on your page, you can use the Sass
+Then link the css (dist/css/megadraft.css) on your page, you can use the Sass
 source on your build, if you wish.
 
 
