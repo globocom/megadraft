@@ -2,6 +2,8 @@
 
 Rich Text editor built on top of draft.js (Work in Progress)
 
+[DEMO](http://globocom.github.io/megadraft/)
+
 ## Developing
 
 To run the development server and see the examples:
@@ -13,7 +15,7 @@ make setup
 make run
 ```
 
-Then visit localhost:8080 on your browser.
+Then visit http://localhost:8080/website on your browser.
 
 To run local tests:
 
