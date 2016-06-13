@@ -55,7 +55,7 @@
     "test": "mocha --opts mocha.opts",
     "test:watch": "mocha -w --opts mocha.opts",
     "build:lib": "babel src/ -d lib/",
-    "build": "npm run build:lib",
+    "build": "npm run build:lib && gulp sass",
     "site": "webpack --config webpack.config.site.js --optimize-minimize && gulp site-sass",
     "lint": "eslint src tests website",
     "lint:watch": "esw -w src tests website",
