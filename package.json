@@ -4,8 +4,7 @@
   "description": "Rich Text editor built on top of draft.js",
   "main": "lib/Megadraft.js",
   "dependencies": {
-    "draft-js": "^0.7.0",
-    "react-markdown": "^2.2.0"
+    "draft-js": "^0.7.0"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
@@ -38,6 +37,7 @@
     "react-addons-test-utils": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.4.0",
+    "react-markdown": "^2.2.0",
     "react-tap-event-plugin": "^1.0.0",
     "rimraf": "^2.5.2",
     "sinon": "^1.17.4",
