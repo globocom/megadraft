@@ -74,7 +74,10 @@ class Example extends React.Component {
       <Tabs tab={this.state.activeTab} onChange={this.handleChange}>
         <Tab label="Editor" tab="a" icon={icon_edit}>
           <div className="tab-container-editor">
-            <Megadraft editorState={this.state.value} onChange={::this.onChange} />
+            <Megadraft
+              editorState={this.state.value}
+              placeholder="Text"
+              onChange={::this.onChange} />
           </div>
         </Tab>
         <Tab label="Content JSON" value="b" icon={icon_code}>

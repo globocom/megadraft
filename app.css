@@ -61,6 +61,9 @@
   .megadraft-editor .public-DraftStyleDefault-ol li,
   .megadraft-editor .public-DraftStyleDefault-ul li {
     padding-left: 10px; }
+  .megadraft-editor .public-DraftEditorPlaceholder-root {
+    color: #999;
+    position: absolute; }
   .megadraft-editor blockquote {
     border-left: 2px solid #ddd;
     color: #999;
