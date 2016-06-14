@@ -35,6 +35,10 @@ To run tests and lint:
 make test
 ```
 
+## Dependencies
+
+Megadraft depends on sass to build style assets.
+
 
 ## License
 
