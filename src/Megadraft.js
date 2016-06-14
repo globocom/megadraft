@@ -102,6 +102,7 @@ export default class Megadraft extends Component {
             blockStyleFn={this.blockStyleFn}
             handleKeyCommand={::this.handleKeyCommand}
             editorState={editorState}
+            placeholder={this.props.placeholder}
             onChange={::this.onChange} />
           <Toolbar
             editor={this.refs.editor}
