@@ -45,8 +45,13 @@ export default class LeftNavMenu extends React.Component {
           <List>
             <Subheader>Resources</Subheader>
             <ListItem
-              onClick={open => this.props.toggleMenu()}
-              containerElement={<Link to="/docs/overview"/>}>Docs</ListItem>
+              primaryTogglesNestedList={true}
+              nestedItems={[
+                <ListItem primaryText="Overview" containerElement={<Link to="/docs/overview"/>}/>,
+                <ListItem primaryText="Plugins" containerElement={<Link to="/docs/plugins"/>}/>,
+                <ListItem primaryText="Saving & Loading"
+                          containerElement={<Link to="/docs/saving-loading"/>}/>
+              ]}>Docs</ListItem>
             <ListItem
               onClick={open => this.props.toggleMenu()}
               containerElement={

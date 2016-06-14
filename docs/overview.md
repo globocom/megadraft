@@ -16,7 +16,7 @@ npm install --save megadraft
 To use it in your application you'll just need to import the Megadraft
 component and use it in your application.
 
-```jsx
+```js
 import React from "react";
 import ReactDOM from "react-dom";
 import Megadraft from "megadraft";
