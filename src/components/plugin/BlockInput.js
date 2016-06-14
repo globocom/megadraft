@@ -6,7 +6,7 @@
 
 import React, {Component} from "react";
 
-import icons from "../../../src/icons";
+import icons from "../../icons";
 
 
 export default class BlockInput extends Component {
