@@ -26,7 +26,7 @@ export function editorStateFromRaw(rawContent) {
     const content = convertFromRaw(rawContent);
     return EditorState.createWithContent(content, decorator);
   } else {
-    return EditorState.createEmpty();
+    return EditorState.createEmpty(decorator);
   }
 }
 
