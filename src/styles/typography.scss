@@ -12,8 +12,14 @@
     font-size: 1.125rem;
     letter-spacing: -0.037rem;
     line-height: 1.75rem;
+    position: relative;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.DraftEditor-editorContainer {
+    position: relative;
+    z-index: 1;
 }
 
 .paragraph + .paragraph {
@@ -48,6 +54,7 @@
 .public-DraftEditorPlaceholder-root {
     color: #999;
     position: absolute;
+    z-index: 0;
 }
 
 blockquote {
