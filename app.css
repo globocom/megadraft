@@ -163,7 +163,8 @@
     background: yellow;
     height: 0;
     position: absolute;
-    display: none; }
+    display: none;
+    z-index: 10; }
     .megadraft-editor .toolbar--open {
       display: block; }
     .megadraft-editor .toolbar__wrapper {
