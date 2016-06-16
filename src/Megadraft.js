@@ -82,7 +82,7 @@ export default class Megadraft extends Component {
   }
 
   render() {
-    const {editorState} = this.props;
+    const {editorState, stripPastedStyles, spellCheck} = this.props;
     const plugins = this.plugins;
 
     return (
@@ -101,6 +101,8 @@ export default class Megadraft extends Component {
             blockRendererFn={::this.mediaBlockRenderer}
             blockStyleFn={this.blockStyleFn}
             handleKeyCommand={::this.handleKeyCommand}
+            stripPastedStyles={stripPastedStyles}
+            spellCheck={spellCheck}
             editorState={editorState}
             placeholder={this.props.placeholder}
             onChange={::this.onChange} />
