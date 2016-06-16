@@ -42,8 +42,12 @@
     font-size: 1.125rem;
     letter-spacing: -0.037rem;
     line-height: 1.75rem;
+    position: relative;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale; }
+  .megadraft-editor .DraftEditor-editorContainer {
+    position: relative;
+    z-index: 1; }
   .megadraft-editor .paragraph + .paragraph {
     margin-top: 40px; }
   .megadraft-editor .public-DraftEditor-content figure {
@@ -63,7 +67,8 @@
     padding-left: 10px; }
   .megadraft-editor .public-DraftEditorPlaceholder-root {
     color: #999;
-    position: absolute; }
+    position: absolute;
+    z-index: 0; }
   .megadraft-editor blockquote {
     border-left: 2px solid #ddd;
     color: #999;
@@ -214,6 +219,8 @@
       color: #fafafa;
       display: none;
       font-size: 0.875rem;
+      height: auto;
+      line-height: 0.875rem;
       margin: 0;
       padding: 20px;
       width: 250px; }
