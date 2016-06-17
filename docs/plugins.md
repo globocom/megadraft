@@ -18,7 +18,7 @@ class Example extends React.Component {
 
 ## Plugin Structure
 
-An example of plugin is the [default image plugin,](https://github.com/globocom/megadraft/tree/master/src/plugins/image)
+An example of plugin is the [default image plugin](https://github.com/globocom/megadraft/tree/master/src/plugins/image),
 it needs to follow a simple structure:
 
 ```js
