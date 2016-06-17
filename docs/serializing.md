@@ -21,6 +21,8 @@ class Example extends React.Component {
     const myContent = {"entityMap": {}, "blocks": []};
     const editorState = editorStateFromRaw(INITIAL_CONTENT);
     this.state = {editorState};
+    this.onChange = ::this.onChange;
+    this.onSaveClick = ::this.onSaveClick;
   }
 
   onChange(editorState) {
@@ -40,8 +42,8 @@ class Example extends React.Component {
       <div>
         <Megadraft
           editorState={this.state.editorState}
-          onChange={::this.onChange} />
-        <button onClick={::this.onSaveClick}>
+          onChange={this.onChange} />
+        <button onClick={this.onSaveClick}>
           Save
         </button>
       </div>
