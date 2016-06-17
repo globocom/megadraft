@@ -7,13 +7,17 @@
 import React from "react";
 
 import Overview from "../../docs/overview.md";
+import Plugins from "../../docs/plugins.md";
+import Serializing from "../../docs/serializing.md";
 import ReactMarkdown from "react-markdown";
 
 import {highlightCode} from "./highlightCode";
 
 
 const DOCS = {
-  overview: Overview
+  overview: Overview,
+  plugins: Plugins,
+  "saving-loading": Serializing
 };
 
 
