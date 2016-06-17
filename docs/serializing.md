@@ -1,7 +1,7 @@
 # Saving and loading content
 
 It is easy to use JSON to save and load content into the editor, Megadraft
-comes with two auxiliary functions to help in the proccess:
+comes with two auxiliary functions to help in the process:
 
 - `editorStateToJSON(EditorState)`: Converts the EditorState to JSON, which
 can be saved in a database.
