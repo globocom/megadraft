@@ -8,15 +8,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 import chai from "chai";
+import sinon from "sinon";
 import {Editor} from "draft-js";
 
 import Megadraft from "../src/Megadraft";
 import Media from "../src/components/Media";
 import {editorStateFromRaw} from "../src/utils";
 
-
 let expect = chai.expect;
-
+let kba = function keyBindingAction() {};
 
 describe("Megadraft Component", () => {
   beforeEach(function() {
@@ -68,11 +68,18 @@ describe("Megadraft Component", () => {
         }
       ]
     };
+
+    kba = sinon.spy();
+    const keyBindings = [
+        { name: "save", isKeyBound: (e) => { return e.keyCode === 83 && e.ctrlKey; }, action: kba }
+    ];
+    
     this.editorState = editorStateFromRaw(INITIAL_CONTENT);
     this.component = TestUtils.renderIntoDocument(
       <Megadraft
         editorState={this.editorState}
-        onChange={() => null}/>
+        onChange={() => null}
+        keyBindings={keyBindings}/>
     );
   });
 
@@ -113,5 +120,27 @@ describe("Megadraft Component", () => {
 
     expect(items[0].props.readOnly).to.be.true;
   });
-});
 
+  it("recognizes external key binding", function() {
+    const defaultKeyBinding = { keyCode: 66, ctrlKey: true };
+    expect(this.component.externalKeyBindings(defaultKeyBinding)).to.equal("bold");
+
+    const unknownKeyBinding = { keyCode: 70, ctrlKey: true };
+    expect(this.component.externalKeyBindings(unknownKeyBinding)).to.not.exist;
+
+    const externalKeyBinding = { keyCode: 83, ctrlKey: true };
+    expect(this.component.externalKeyBindings(externalKeyBinding)).to.equal("save");
+  });
+
+  it("handles external commands", function() {
+    const defaultCommand = "bold";
+    expect(this.component.handleKeyCommand(defaultCommand)).to.be.true;
+
+    const unknownCommand = "foo";
+    expect(this.component.handleKeyCommand(unknownCommand)).to.be.false;
+
+    const externalCommand = "save";
+    expect(this.component.handleKeyCommand(externalCommand)).to.be.true;
+    expect(kba).to.have.been.called;
+  });
+});

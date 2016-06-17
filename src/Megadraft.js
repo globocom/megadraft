@@ -5,7 +5,7 @@
  */
 
 import React, {Component} from "react";
-import Draft, {Editor, RichUtils} from "draft-js";
+import Draft, {Editor, RichUtils, getDefaultKeyBinding } from "draft-js";
 
 import icons from "./icons";
 import * as plugin from "./components/plugin";
@@ -25,6 +25,8 @@ export default class Megadraft extends Component {
 
     this.setReadOnly = ::this.setReadOnly;
 
+    this.externalKeyBindings = ::this.externalKeyBindings;
+
     this.actions = [
       {type: "inline", label: "B", style: "BOLD", icon: icons.BoldIcon},
       {type: "inline", label: "I", style: "ITALIC", icon: icons.ItalicIcon},
@@ -37,13 +39,31 @@ export default class Megadraft extends Component {
     ];
 
     this.plugins = this.props.plugins || DEFAULT_PLUGINS;
+
+    this.keyBindings = this.props.keyBindings || [];
   }
 
   onChange(editorState) {
     this.props.onChange(editorState);
   }
 
+  externalKeyBindings(e): string {
+    for (const kb of this.keyBindings) {
+      if (kb.isKeyBound(e)) {
+        return kb.name;
+      }
+    }
+    return getDefaultKeyBinding(e);
+  }
+
   handleKeyCommand(command) {
+    // external key bindings
+    var extKb = this.keyBindings.find(kb => kb.name === command);
+    if(extKb) {
+      extKb.action();
+      return true;
+    }
+
     const {editorState} = this.props;
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
@@ -103,6 +123,7 @@ export default class Megadraft extends Component {
             handleKeyCommand={::this.handleKeyCommand}
             stripPastedStyles={stripPastedStyles}
             spellCheck={spellCheck}
+            keyBindingFn={this.externalKeyBindings}
             editorState={editorState}
             placeholder={this.props.placeholder}
             onChange={::this.onChange} />
