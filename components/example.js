@@ -30,7 +30,6 @@ const muiTheme = getMuiTheme({
   }
 });
 
-
 class Example extends React.Component {
 
   getChildContext() {
@@ -48,6 +47,9 @@ class Example extends React.Component {
   constructor(props) {
     super(props);
     const content = editorStateFromRaw(INITIAL_CONTENT);
+    this.keyBindings = [
+        { name: "save", isKeyBound: (e) => { return e.keyCode === 83 && e.ctrlKey; }, action: () => { this.onSave(); } }
+    ];
     this.state = {
       value: content,
       activeTab: "a"
@@ -66,6 +68,10 @@ class Example extends React.Component {
     });
   }
 
+  onSave() {
+    console.log("save");
+  }
+
   render() {
     const icon_edit = <FontIcon className="material-icons">mode_edit</FontIcon>;
     const icon_code = <FontIcon className="material-icons">code</FontIcon>;
@@ -77,7 +83,8 @@ class Example extends React.Component {
             <Megadraft
               editorState={this.state.value}
               placeholder="Text"
-              onChange={::this.onChange} />
+              onChange={::this.onChange}
+              keyBindings={this.keyBindings}/>
           </div>
         </Tab>
         <Tab label="Content JSON" value="b" icon={icon_code}>
