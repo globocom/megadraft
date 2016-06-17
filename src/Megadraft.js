@@ -13,7 +13,7 @@ import Toolbar from "./components/Toolbar";
 import Sidebar from "./components/Sidebar";
 import Media from "./components/Media";
 import DEFAULT_PLUGINS from "./plugins/default";
-
+import DEFAULT_ACTIONS from "./actions/default";
 
 export default class Megadraft extends Component {
   constructor(props) {
@@ -27,17 +27,7 @@ export default class Megadraft extends Component {
 
     this.externalKeyBindings = ::this.externalKeyBindings;
 
-    this.actions = [
-      {type: "inline", label: "B", style: "BOLD", icon: icons.BoldIcon},
-      {type: "inline", label: "I", style: "ITALIC", icon: icons.ItalicIcon},
-      {type: "entity", label: "Link", style: "link", icon: icons.LinkIcon},
-      {type: "separator"},
-      {type: "block", label: "UL", style: "unordered-list-item", icon: icons.ULIcon},
-      {type: "block", label: "OL", style: "ordered-list-item", icon: icons.OLIcon},
-      {type: "block", label: "H2", style: "header-two", icon: icons.H2Icon},
-      {type: "block", label: "QT", style: "blockquote", icon: icons.BlockQuoteIcon}
-    ];
-
+    this.actions = this.props.actions || DEFAULT_ACTIONS;
     this.plugins = this.props.plugins || DEFAULT_PLUGINS;
 
     this.keyBindings = this.props.keyBindings || [];
