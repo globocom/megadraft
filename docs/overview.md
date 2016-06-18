@@ -27,6 +27,11 @@ class App extends React.Component {
     this.state = {editorState: null};
     this.onChange = ::this.onChange;
   }
+
+  onChange(editorState) {
+    this.setState({editorState});
+  }
+
   render() {
     return (
       <Megadraft
