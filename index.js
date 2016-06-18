@@ -30,6 +30,7 @@ class Page extends React.Component {
   constructor(props) {
     super(props);
     this.state = {open: false};
+    this.onMenuToggle = ::this.onMenuToggle;
   }
   getChildContext() {
     return {
@@ -51,9 +52,9 @@ class Page extends React.Component {
         <LeftNavMenu
           docked={!this.isHome}
           open={!this.isHome || this.state.open}
-          toggleMenu={::this.onMenuToggle}/>
+          toggleMenu={this.onMenuToggle}/>
         <AppBar
-          onLeftIconButtonTouchTap={::this.onMenuToggle}/>
+          onLeftIconButtonTouchTap={this.onMenuToggle}/>
         <div style={{paddingLeft: this.isHome? 0 : 256}}>
           {this.props.children}
         </div>
