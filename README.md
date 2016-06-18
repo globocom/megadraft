@@ -2,7 +2,9 @@
 
 Rich Text editor built on top of draft.js (Work in Progress)
 
-[DEMO](http://globocom.github.io/megadraft/)
+## Live Example & Documentation
+
+Checkout the [website](http://globocom.github.io/megadraft/)!
 
 ## Developing
 
@@ -37,7 +39,12 @@ make test
 
 ## Dependencies
 
-Megadraft depends on sass to build style assets.
+Megadraft depends on [Sass](http://sass-lang.com/) to build style assets.
+
+
+## Importing the default styles
+
+Megadraft ships with a default styling available at this location in the installed package: node_modules/megadraft/dist/css/megadraft.css.
 
 
 ## License
