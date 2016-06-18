@@ -32,18 +32,6 @@ const muiTheme = getMuiTheme({
 
 class Example extends React.Component {
 
-  getChildContext() {
-    return {muiTheme: getMuiTheme(muiTheme)};
-  }
-
-  componentDidMount() {
-    highlightCode(this);
-  }
-
-  componentDidUpdate() {
-    highlightCode(this);
-  }
-
   constructor(props) {
     super(props);
     const content = editorStateFromRaw(INITIAL_CONTENT);
@@ -54,6 +42,19 @@ class Example extends React.Component {
       value: content,
       activeTab: "a"
     };
+    this.onChange = ::this.onChange;
+  }
+
+  getChildContext() {
+    return {muiTheme: getMuiTheme(muiTheme)};
+  }
+
+  componentDidMount() {
+    highlightCode(this);
+  }
+
+  componentDidUpdate() {
+    highlightCode(this);
   }
 
   handleChange = (tab) => {
@@ -83,7 +84,7 @@ class Example extends React.Component {
             <Megadraft
               editorState={this.state.value}
               placeholder="Text"
-              onChange={::this.onChange}
+              onChange={this.onChange}
               keyBindings={this.keyBindings}/>
           </div>
         </Tab>

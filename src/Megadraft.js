@@ -23,6 +23,12 @@ export default class Megadraft extends Component {
       readOnly: false
     };
 
+    this.onChange = ::this.onChange;
+
+    this.mediaBlockRenderer = ::this.mediaBlockRenderer;
+
+    this.handleKeyCommand = ::this.handleKeyCommand;
+
     this.setReadOnly = ::this.setReadOnly;
 
     this.externalKeyBindings = ::this.externalKeyBindings;
@@ -74,7 +80,7 @@ export default class Megadraft extends Component {
         editable: false,
         props: {
           plugins: this.plugins,
-          onChange: ::this.onChange,
+          onChange: this.onChange,
           editorState: this.props.editorState,
           setReadOnly: this.setReadOnly
         }
@@ -104,23 +110,23 @@ export default class Megadraft extends Component {
           <Sidebar
             plugins={plugins}
             editorState={editorState}
-            onChange={::this.onChange}/>
+            onChange={this.onChange}/>
           <Editor
             readOnly={this.state.readOnly}
             plugins={plugins}
-            blockRendererFn={::this.mediaBlockRenderer}
+            blockRendererFn={this.mediaBlockRenderer}
             blockStyleFn={this.blockStyleFn}
-            handleKeyCommand={::this.handleKeyCommand}
+            handleKeyCommand={this.handleKeyCommand}
             stripPastedStyles={stripPastedStyles}
             spellCheck={spellCheck}
             keyBindingFn={this.externalKeyBindings}
             editorState={editorState}
             placeholder={this.props.placeholder}
-            onChange={::this.onChange} />
+            onChange={this.onChange} />
           <Toolbar
             editor={this.refs.editor}
             editorState={editorState}
-            onChange={::this.onChange}
+            onChange={this.onChange}
             actions={this.actions}/>
         </div>
       </div>

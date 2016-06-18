@@ -22,12 +22,16 @@ import ReactDOM from "react-dom";
 import Megadraft from "megadraft";
 
 class App extends React.Component {
-  this.state = {editorState: null};
+  constructor(props) {
+    super(props);
+    this.state = {editorState: null};
+    this.onChange = ::this.onChange;
+  }
   render() {
     return (
       <Megadraft
         editorState={this.state.editorState}
-        onChange={::this.onChange}/>
+        onChange={this.onChange}/>
     )
   }
 }

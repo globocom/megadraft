@@ -20,6 +20,8 @@ export default class Toolbar extends Component {
       editingLink: false,
       link: ""
     };
+    this.renderButton = ::this.renderButton;
+    this.cancelLink = ::this.cancelLink;
   }
 
   toggleInlineStyle(inlineStyle) {
@@ -163,7 +165,7 @@ export default class Toolbar extends Component {
            ref="toolbarWrapper">
         <div className="toolbar__wrapper" ref="toolbar">
           <ul className="toolbar__list" onMouseDown={(x) => {x.preventDefault();}}>
-            {this.props.actions.map(::this.renderButton)}
+            {this.props.actions.map(this.renderButton)}
           </ul>
           <LinkInput
             ref="textInput"
@@ -171,7 +173,7 @@ export default class Toolbar extends Component {
             onChange={this.props.onChange}
             editingLink={this.state.editingLink}
             editor={this.props.editor}
-            cancelLink={::this.cancelLink}/>
+            cancelLink={this.cancelLink}/>
           <span className="toolbar__arrow" />
         </div>
       </div>

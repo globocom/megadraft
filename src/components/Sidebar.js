@@ -12,6 +12,15 @@ import "setimmediate";
 
 
 class BlockStyles extends Component {
+  constructor(props) {
+    super(props);
+    this.onChange = ::this.onChange;
+  }
+
+  onChange(editorState) {
+    this.props.onChange(editorState);
+  }
+
   render() {
     let className = "sidemenu__items";
 
@@ -28,7 +37,7 @@ class BlockStyles extends Component {
               <Button
                 className="sidemenu__button"
                 editorState={this.props.editorState}
-                onChange={::this.props.onChange}/>
+                onChange={this.onChange}/>
             </li>
           );
         })}
@@ -61,6 +70,12 @@ export class SideMenu extends Component {
     this.state = {
       open: false
     };
+    this.toggle = ::this.toggle;
+    this.onChange = ::this.onChange;
+  }
+
+  onChange(editorState) {
+    this.props.onChange(editorState);
   }
 
   toggle() {
@@ -73,14 +88,14 @@ export class SideMenu extends Component {
     return (
       <li className="sidemenu">
         <ToggleButton
-          toggle={::this.toggle}
+          toggle={this.toggle}
           open={this.state.open} />
 
         <BlockStyles
           editorState={this.props.editorState}
           plugins={this.props.plugins}
           open={this.state.open}
-          onChange={this.props.onChange}/>
+          onChange={this.onChange}/>
       </li>
     );
   }
@@ -108,6 +123,11 @@ export default class SideBar extends Component {
   constructor(props) {
     super(props);
     this.state = {top: 0};
+    this.onChange = ::this.onChange;
+  }
+
+  onChange(editorState) {
+    this.props.onChange(editorState);
   }
 
   componentDidUpdate() {
@@ -148,7 +168,7 @@ export default class SideBar extends Component {
           <ul className="sidebar__sidemenu-wrapper">
             <SideMenu
               editorState={this.props.editorState}
-              onChange={::this.props.onChange}
+              onChange={this.onChange}
               plugins={this.props.plugins}/>
           </ul>
         </div>

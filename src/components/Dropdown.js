@@ -31,6 +31,9 @@ export default class Dropdown extends Component {
       isOpen: false
     };
     this.handleDocumentClick = ::this.handleDocumentClick;
+    this.toggleDropDown = ::this.toggleDropDown;
+    this.preventSelection = ::this.preventSelection;
+    this.renderItem = ::this.renderItem;
   }
 
   onChange(selected) {
@@ -85,17 +88,17 @@ export default class Dropdown extends Component {
     }
 
     return(
-      <div className={wrapperClassName} onClick={::this.toggleDropDown}>
+      <div className={wrapperClassName} onClick={this.toggleDropDown}>
         <DropdownItem
           item={selectedItem}
           className="dropdown__item--selected"
-          onMouseDown={::this.preventSelection}>
+          onMouseDown={this.preventSelection}>
 
           <icons.DropdownArrow className={arrowClassName} />
         </DropdownItem>
 
         <ul className={dropdownClassName}>
-          {this.props.items.map(::this.renderItem)}
+          {this.props.items.map(this.renderItem)}
         </ul>
       </div>
     );

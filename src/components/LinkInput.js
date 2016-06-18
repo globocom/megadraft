@@ -15,6 +15,8 @@ export default class LinkInput extends Component {
     this.state = {
       link: ""
     };
+    this.onLinkChange = ::this.onLinkChange;
+    this.onLinkKeyDown = ::this.onLinkKeyDown;
   }
 
   setLink() {
@@ -73,9 +75,9 @@ export default class LinkInput extends Component {
         className="toolbar__input"
         ref="textInput"
         type="text"
-        onChange={::this.onLinkChange}
+        onChange={this.onLinkChange}
         value={this.state.link}
-        onKeyDown={::this.onLinkKeyDown}
+        onKeyDown={this.onLinkKeyDown}
         placeholder="Type the link and press enter"/>
     );
   }

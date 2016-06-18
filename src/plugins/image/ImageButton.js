@@ -11,6 +11,11 @@ import icons from "../../icons";
 
 
 export default class BlockButton extends Component {
+  constructor(props) {
+    super(props);
+    this.onClick = ::this.onClick;
+  }
+
   onClick(e) {
     e.preventDefault();
     const src = window.prompt("Enter a URL");
@@ -29,7 +34,7 @@ export default class BlockButton extends Component {
 
   render() {
     return (
-      <button className={this.props.className} onClick={::this.onClick}>
+      <button className={this.props.className} onClick={this.onClick}>
         <icons.ImageIcon className="sidemenu__button__icon" />
       </button>
     );

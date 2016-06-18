@@ -23,6 +23,7 @@ export default class ToolbarWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {...props};
+    this.onChange = ::this.onChange;
   }
 
   onChange(editorState) {
@@ -37,7 +38,7 @@ export default class ToolbarWrapper extends Component {
           editor={this.refs.editor}
           editorState={this.state.editorState}
           actions={this.props.actions}
-          onChange={::this.onChange} />
+          onChange={this.onChange} />
       </div>
     );
   }

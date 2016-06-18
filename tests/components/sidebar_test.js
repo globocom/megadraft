@@ -24,6 +24,7 @@ class SidebarWrapper extends Component {
     super(props);
     this.state = {...props};
     this.plugins = DEFAULT_PLUGINS;
+    this.onChange = ::this.onChange;
   }
 
   onChange(editorState) {
@@ -37,7 +38,7 @@ class SidebarWrapper extends Component {
           ref="sidebar"
           plugins={this.plugins}
           editorState={this.state.editorState}
-          onChange={::this.onChange} />
+          onChange={this.onChange} />
       </div>
     );
   }
