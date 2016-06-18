@@ -1,4 +1,4 @@
-# Megadraft [![Build Status](https://secure.travis-ci.org/globocom/megadraft.png?branch=master)](https://travis-ci.org/globocom/megadraft)
+# Megadraft [![Build Status](https://secure.travis-ci.org/globocom/megadraft.png?branch=master)](https://travis-ci.org/globocom/megadraft) [![npm version](https://img.shields.io/npm/v/megadraft.svg?style=flat)](https://www.npmjs.com/package/megadraft)
 
 Rich Text editor built on top of draft.js (Work in Progress)
 
