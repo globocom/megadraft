@@ -14,6 +14,8 @@ import Sidebar from "./components/Sidebar";
 import Media from "./components/Media";
 import DEFAULT_PLUGINS from "./plugins/default";
 import DEFAULT_ACTIONS from "./actions/default";
+import MediaMessage from "./components/MediaMessage";
+
 
 export default class Megadraft extends Component {
   constructor(props) {
@@ -137,3 +139,4 @@ export default class Megadraft extends Component {
 export const DraftJS = Draft;
 export const MegadraftIcons = icons;
 export const MegadraftPlugin = plugin;
+export const MegadraftMediaMessage = MediaMessage;
