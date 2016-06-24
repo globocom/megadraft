@@ -5,6 +5,7 @@
  */
 
 import React, {Component} from "react";
+import classNames from "classnames";
 
 import Separator from "./Separator";
 
@@ -29,11 +30,9 @@ export default class ToolbarItem extends Component {
       );
     }
 
-    let className = "toolbar__item";
-
-    if (this.props.active) {
-      className += " toolbar__item--active";
-    }
+    const className = classNames("toolbar__item", {
+      "toolbar__item--active": this.props.active
+    });
 
     return (
       <li className={className}>
