@@ -5,6 +5,7 @@
  */
 
 import React, {Component, PropTypes} from "react";
+import classNames from "classnames";
 
 
 export default class DropdownItem extends Component {
@@ -20,7 +21,8 @@ export default class DropdownItem extends Component {
 
   render() {
     const Icon = this.props.item.icon;
-    const className = "dropdown__item " + (this.props.className || "");
+    const className = classNames("dropdown__item ", this.props.className);
+
     return(
       <div
         className={className}

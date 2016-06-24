@@ -6,6 +6,7 @@
 
 import React, {Component} from "react";
 import {RichUtils, Entity} from "draft-js";
+import classNames from "classnames";
 
 import LinkInput from "./LinkInput";
 import ToolbarItem from "./ToolbarItem";
@@ -149,15 +150,10 @@ export default class Toolbar extends Component {
   }
 
   render() {
-    let toolbarClass = "toolbar";
-
-    if (this.state.show) {
-      toolbarClass += " toolbar--open";
-    }
-
-    if (this.state.editingLink) {
-      toolbarClass += " toolbar--editing-link";
-    }
+    const toolbarClass = classNames("toolbar", {
+      "toolbar--open": this.state.show,
+      "toolbar--editing-link": this.state.editingLink
+    });
 
     return (
       <div className={toolbarClass}

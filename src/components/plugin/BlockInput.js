@@ -5,6 +5,7 @@
  */
 
 import React, {Component} from "react";
+import classNames from "classnames";
 
 import icons from "../../icons";
 
@@ -21,13 +22,10 @@ export default class BlockInput extends Component {
 
   render(){
     const {value, error, ...props} = this.props;
-    let className = "block__input";
-    if (!value) {
-      className += " block__input--empty";
-    }
-    if (error) {
-      className += " block__input--error";
-    }
+    const className = classNames("block__input", {
+      "block__input--empty": !value,
+      "block__input--error": error
+    });
 
     return (
       <div className="block__input__row">

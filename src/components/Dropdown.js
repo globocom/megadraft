@@ -6,6 +6,7 @@
 
 import React, {Component, PropTypes} from "react";
 import ReactDOM from "react-dom";
+import classNames from "classnames";
 
 import DropdownItem from "./DropdownItem";
 import icons from "../icons";
@@ -77,15 +78,19 @@ export default class Dropdown extends Component {
       (obj) => {return obj.key === this.props.selected;}
     )[0];
 
-    let wrapperClassName = "dropdown__wrapper";
-    let dropdownClassName = "dropdown";
-    let arrowClassName = "dropdown__arrow";
+    const {isOpen} = this.state;
 
-    if (this.state.isOpen) {
-      wrapperClassName += " dropdown__wrapper--open";
-      dropdownClassName += " dropdown--open";
-      arrowClassName += " dropdown__arrow--open";
-    }
+    const wrapperClassName = classNames("dropdown__wrapper", {
+      "dropdown__wrapper--open": isOpen
+    });
+
+    const dropdownClassName = classNames("dropdown", {
+      "dropdown--open": isOpen
+    });
+
+    const arrowClassName = classNames("dropdown__arrow", {
+      "dropdown__arrow--open": isOpen
+    });
 
     return(
       <div className={wrapperClassName} onClick={this.toggleDropDown}>

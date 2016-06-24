@@ -6,6 +6,7 @@
 
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
+import classNames  from "classnames";
 import icons from "../icons";
 
 import "setimmediate";
@@ -22,11 +23,9 @@ class BlockStyles extends Component {
   }
 
   render() {
-    let className = "sidemenu__items";
-
-    if (this.props.open) {
-      className += " sidemenu__items--open";
-    }
+    const className = classNames("sidemenu__items", {
+      "sidemenu__items--open": this.props.open
+    });
 
     return (
       <ul className={className}>
@@ -50,11 +49,9 @@ export class ToggleButton extends Component {
   render() {
     const Icon = icons.CrossIcon;
 
-    let className = "sidemenu__button";
-
-    if (this.props.open) {
-      className += " sidemenu__button--open";
-    }
+    const className = classNames("sidemenu__button", {
+      "sidemenu__button--open": this.props.open
+    });
 
     return (
       <button type="button" className={className} onClick={this.props.toggle}>
