@@ -73,7 +73,7 @@ describe("Megadraft Component", () => {
     const keyBindings = [
         { name: "save", isKeyBound: (e) => { return e.keyCode === 83 && e.ctrlKey; }, action: kba }
     ];
-    
+
     this.editorState = editorStateFromRaw(INITIAL_CONTENT);
     this.component = TestUtils.renderIntoDocument(
       <Megadraft
