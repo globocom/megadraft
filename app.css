@@ -35,6 +35,11 @@
  * Copyright (c) 2016, Globo.com (https://github.com/globocom)
  *
  * License: MIT
+ */
+  /*
+ * Copyright (c) 2016, Globo.com (https://github.com/globocom)
+ *
+ * License: MIT
  */ }
   .megadraft-editor .DraftEditor-root {
     font-family: Open Sans, sans-serif;
@@ -375,6 +380,19 @@
       font-size: 0.75rem; }
     .megadraft-editor .dropdown__item__icon {
       vertical-align: middle; }
+  .megadraft-editor .media__message--error {
+    background-color: #e83f26;
+    color: #fff; }
+  .megadraft-editor .media__message--warning {
+    background-color: #fff7d8;
+    color: #b59223;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+  .megadraft-editor .media__message-text {
+    text-align: left;
+    padding: 8px;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: bold; }
 
 .jsonpreview {
   font-family: monospace;
