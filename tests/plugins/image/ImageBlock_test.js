@@ -10,8 +10,11 @@ import chai from "chai";
 import sinon from "sinon";
 
 import ImageBlock from "../../../src/plugins/image/ImageBlock";
+import icons from "../../../src/icons";
+
 
 let expect = chai.expect;
+
 
 describe("ImageBlock", function() {
   beforeEach(function() {
@@ -24,8 +27,15 @@ describe("ImageBlock", function() {
     this.updateEntity = sinon.spy();
     this.remove = sinon.spy();
 
+    const featuredOptions = [
+      {key: "small", icon: icons.MediaSmallIcon, label: "SMALL"},
+      {key: "medium", icon: icons.MediaMediumIcon, label: "MEDIUM"}
+    ];
+    const defaultFeatured = "medium";
+    const blockProps = {plugin: {options: {featuredOptions, defaultFeatured}}};
+
     this.wrapper = TestUtils.renderIntoDocument(
-      <ImageBlock container={this} blockProps={this} data={this.data} />
+      <ImageBlock container={this} blockProps={blockProps} data={this.data} />
     );
 
     this.caption = TestUtils.scryRenderedDOMComponentsWithTag(this.wrapper, "input")[0];

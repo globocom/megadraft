@@ -59,7 +59,7 @@ describe("Media Component", function() {
 
     this.blockProps = sinon.spy();
     this.blockProps.editorState = this.editorState;
-    this.blockProps.plugins = DEFAULT_PLUGINS;
+    this.blockProps.plugin = DEFAULT_PLUGINS[0];
     this.blockProps.onChange = sinon.spy();
     this.blockProps.setRea = sinon.spy();
 

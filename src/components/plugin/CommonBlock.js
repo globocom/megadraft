@@ -12,6 +12,10 @@ import {
   BlockControls,
   BlockWrapper
 } from "../../components/plugin";
+import {
+  DEFAULT_FEATURED_OPTIONS,
+  DEFAULT_FEATURED_KEY
+} from "../../components/plugin/defaults";
 
 
 export default class CommonBlock extends Component {
@@ -27,13 +31,19 @@ export default class CommonBlock extends Component {
 
   render(){
     const data = this.props.data;
+    const defaults = {
+      defaultFeatured: DEFAULT_FEATURED_KEY,
+      featuredOptions: DEFAULT_FEATURED_OPTIONS
+    };
+    let options = this.props.blockProps.plugin.options || {};
+    options = {...defaults, ...options};
 
     return (
       <BlockWrapper>
         <BlockControls>
           <Dropdown
-            items={this.props.featuredOptions}
-            selected={data.featured || this.props.defaultFeatured}
+            items={options.featuredOptions}
+            selected={data.featured || options.defaultFeatured}
             onChange={this._handleFeaturedChange} />
 
           <BlockActionGroup items={this.props.actions} />

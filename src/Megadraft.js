@@ -5,7 +5,7 @@
  */
 
 import React, {Component} from "react";
-import Draft, {Editor, RichUtils, getDefaultKeyBinding } from "draft-js";
+import Draft, {Entity, Editor, RichUtils, getDefaultKeyBinding } from "draft-js";
 
 import icons from "./icons";
 import * as plugin from "./components/plugin";
@@ -94,18 +94,25 @@ export default class Megadraft extends Component {
 
   mediaBlockRenderer(block) {
     if (block.getType() === "atomic") {
-      return {
-        component: Media,
-        editable: false,
-        props: {
-          plugins: this.plugins,
-          onChange: this.onChange,
-          editorState: this.props.editorState,
-          setReadOnly: this.setReadOnly
-        }
-      };
-    }
+      const entityKey = block.getEntityAt(0);
+      const entity = Entity.get(entityKey);
+      const type = entity.getType();
 
+      for (let plugin of this.plugins) {
+        if (type === plugin.type) {
+          return {
+            component: Media,
+            editable: false,
+            props: {
+              plugin: plugin,
+              onChange: this.onChange,
+              editorState: this.props.editorState,
+              setReadOnly: this.setReadOnly
+            }
+          };
+        }
+      }
+    }
     return null;
   }
 
