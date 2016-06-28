@@ -74,6 +74,11 @@ export default class Dropdown extends Component {
   }
 
   render() {
+
+    if (!this.props.items || this.props.items && this.props.items.length <= 0) {
+      return null;
+    }
+
     const selectedItem = this.props.items.filter(
       (obj) => {return obj.key === this.props.selected;}
     )[0];
