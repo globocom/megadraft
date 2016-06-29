@@ -44,7 +44,7 @@ export default class Megadraft extends Component {
 
   componentWillReceiveProps(nextProps){
     if (this.props.readOnly !== nextProps.readOnly) {
-      this.setState({readOnly: nextProps.readOnly})
+      this.setState({readOnly: nextProps.readOnly});
     }
   }
 
