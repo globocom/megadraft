@@ -16,32 +16,50 @@ class Example extends React.Component {
 
 ```
 
+## Plugin Generator
+
+There is a [Yeoman Megadraft Plugin Generator][plugin-generator] that helps
+creating the basic boilerplate code for a new plugin.
+
+The following commands will install [Yeoman][yeoman], the plugin generator and will run
+the generator. A few questions will be asked and the code will be generated.
+
+```sh
+npm install -g yo
+npm install -g generator-megadraft-plugin
+yo megadraft-plugin
+```
+
 ## Plugin Structure
 
-An example of plugin is the [default image plugin](https://github.com/globocom/megadraft/tree/master/src/plugins/image),
-it needs to follow a simple structure:
+A plugin should have the following structure:
 
 ```js
 export default {
-  // Name used to identify the plugin, needed to be unique
+  // A unique plugin name used to identify the plugin and its blocks
   type: "image",
-  // React component to be rendered in the sidebar
+  // React component to be rendered in the block sidebar
   buttonComponent: ImageButton,
-  // React component responsible for the block rendering in the content
+  // React component for rendering the content block
   blockComponent: ImageBlock
 };
 ```
 
+Megadraft comes with [built-in plugins][repo-plugins], and you can look for
+more Megadraft plugins on [Globo.com's organization page][github-globocom].
+
+
 ### buttonComponent
 
 The button component, if defined, is rendered as a button on Megadraft's
-sidebar, it receives two props that can be useful:
+sidebar, it receives the following props that can be useful:
 
-- `onChange`: Editor onChange props;
+- `onChange`: Editor onChange prop;
 - `editorState`: Current editorState;
-- `className`: An class to be used to render with the default layout;
+- `className`: A css class-name to be applied on the element.
 
-In the example below, we show a button that create an image entity:
+In the example below, we show a button that creates an image block using
+a DraftJS' entity:
 
 ```js
 import React, {Component} from "react";
@@ -61,14 +79,14 @@ export default class BlockButton extends Component {
     this.props.onChange(DraftJS.AtomicBlockUtils.insertAtomicBlock(
       this.props.editorState,
       entityKey,
-      "📷"
+      "*"
     ));
   }
 
   render() {
     return (
       <button className={this.props.className} onClick={this.onClick}>
-        📷
+        <SomeIcon className="sidemenu__button__icon" />
       </button>
     );
   }
@@ -78,9 +96,10 @@ export default class BlockButton extends Component {
 ### blockComponent
 
 When defined, blockComponent will be rendered everytime Megadraft encounters
-an atomic block with type 'type'.
+an atomic block with the same `type` of the plugin.
 
-In the example below, we render an img tag with the src from the above example:
+In the example below, we render an `img` tag with the `src` from the above
+example:
 
 ```js
 import React, {Component} from "react";
@@ -96,3 +115,8 @@ export default class ImageBlock extends Component {
 }
 
 ```
+
+[plugin-generator]: https://github.com/globocom/generator-megadraft-plugin
+[repo-plugins]: https://github.com/globocom/megadraft/tree/master/src/plugins
+[github-globocom]: https://github.com/globocom
+[yeoman]: http://yeoman.io
