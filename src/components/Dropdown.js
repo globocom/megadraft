@@ -75,7 +75,8 @@ export default class Dropdown extends Component {
 
   render() {
 
-    if (!this.props.items || this.props.items && this.props.items.length <= 0) {
+    const items = this.props.items || [];
+    if (items.length == 0) {
       return null;
     }
 
