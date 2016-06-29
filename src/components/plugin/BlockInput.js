@@ -22,9 +22,15 @@ export default class BlockInput extends Component {
 
   render(){
     const {value, error, ...props} = this.props;
-    const className = classNames("block__input", {
+
+    const styles = this.props.styles || {};
+
+    let className = classNames({
+      "block__input": true,
       "block__input--empty": !value,
-      "block__input--error": error
+      "block__input--error": error,
+      [`block__input--${styles.padding}-padding`]: styles.padding,
+      [`block__input--${styles.text}-text`]: styles.text
     });
 
     return (
