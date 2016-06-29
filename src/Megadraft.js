@@ -22,7 +22,7 @@ export default class Megadraft extends Component {
     super(props);
 
     this.state = {
-      readOnly: false
+      readOnly: this.props.readOnly || false
     };
 
     this.onChange = ::this.onChange;
@@ -40,6 +40,12 @@ export default class Megadraft extends Component {
     this.plugins = this.props.plugins || DEFAULT_PLUGINS;
 
     this.keyBindings = this.props.keyBindings || [];
+  }
+
+  componentWillReceiveProps(nextProps){
+    if (this.props.readOnly !== nextProps.readOnly) {
+      this.setState({readOnly: nextProps.readOnly});
+    }
   }
 
   onChange(editorState) {
