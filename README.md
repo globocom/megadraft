@@ -47,6 +47,12 @@ Megadraft depends on [Sass](http://sass-lang.com/) to build style assets.
 Megadraft ships with a default styling available at this location in the installed package: node_modules/megadraft/dist/css/megadraft.css.
 
 
+## Plugins
+
+Checkout the [docs][docs-plugins] for information about plugin structure.
+To help in this process there is a [Yeoman Megadraft Plugin Generator][plugin-generator].
+
+
 ## License
 
 Megadraft is licensed under the [MIT license](LICENSE).
@@ -57,3 +63,7 @@ Megadraft is licensed under the [MIT license](LICENSE).
 The Megadraft website uses a picture from
 [Stocksnap.io by Tim Marshall](https://stocksnap.io/photo/K148YZIFJ3) licensed
 under [CC0 license](https://stocksnap.io/license).
+
+
+[plugin-generator]: https://github.com/globocom/generator-megadraft-plugin
+[docs-plugins]: http://globocom.github.io/megadraft/#/docs/plugins
