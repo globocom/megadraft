@@ -15,8 +15,10 @@ import Megadraft from "../src/Megadraft";
 import Media from "../src/components/Media";
 import {editorStateFromRaw} from "../src/utils";
 
+
 let expect = chai.expect;
 let kba = function keyBindingAction() {};
+
 
 describe("Megadraft Component", () => {
   beforeEach(function() {
@@ -71,7 +73,7 @@ describe("Megadraft Component", () => {
 
     kba = sinon.spy();
     const keyBindings = [
-        { name: "save", isKeyBound: (e) => { return e.keyCode === 83 && e.ctrlKey; }, action: kba }
+      {name: "save", isKeyBound: (e) => {return e.keyCode === 83 && e.ctrlKey;}, action: kba}
     ];
 
     this.onChange = sinon.spy();
@@ -133,13 +135,13 @@ describe("Megadraft Component", () => {
   });
 
   it("recognizes external key binding", function() {
-    const defaultKeyBinding = { keyCode: 66, ctrlKey: true };
+    const defaultKeyBinding = {keyCode: 66, ctrlKey: true};
     expect(this.component.externalKeyBindings(defaultKeyBinding)).to.equal("bold");
 
-    const unknownKeyBinding = { keyCode: 70, ctrlKey: true };
+    const unknownKeyBinding = {keyCode: 70, ctrlKey: true};
     expect(this.component.externalKeyBindings(unknownKeyBinding)).to.not.exist;
 
-    const externalKeyBinding = { keyCode: 83, ctrlKey: true };
+    const externalKeyBinding = {keyCode: 83, ctrlKey: true};
     expect(this.component.externalKeyBindings(externalKeyBinding)).to.equal("save");
   });
 
