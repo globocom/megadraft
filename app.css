@@ -151,7 +151,7 @@
       width: 36px;
       text-align: center; }
       .megadraft-editor .sidemenu__items--open {
-        max-height: 100px; }
+        max-height: 114px; }
     .megadraft-editor .sidemenu__items .sidemenu__button {
       background: none; }
       .megadraft-editor .sidemenu__items .sidemenu__button:before {
@@ -271,6 +271,8 @@
     line-height: 100px;
     text-align: center;
     position: relative; }
+    .megadraft-editor .block__content--with-padding {
+      padding: 16px; }
     .megadraft-editor .block__content:before, .megadraft-editor .block__content:after {
       position: absolute;
       width: 100%;
@@ -294,6 +296,11 @@
     padding: 8px 0;
     width: 100%;
     font-size: 0.75rem; }
+    .megadraft-editor .block__input--small-padding {
+      padding: 8px 0 5px 0; }
+    .megadraft-editor .block__input--big-text {
+      font-size: 1rem;
+      font-weight: bold; }
     .megadraft-editor .block__input__row {
       line-height: 1rem; }
     .megadraft-editor .block__input__wrapper {
