@@ -24,11 +24,6 @@ export default class VideoBlock extends Component {
 
     this._handleCaptionChange = ::this._handleCaptionChange;
 
-    this.defaultFeatured = "medium";
-    this.featuredOptions = [
-      {"key": "small", "icon": icons.MediaSmallIcon, "label": "SMALL"},
-      {"key": "medium", "icon": icons.MediaMediumIcon, "label": "MEDIUM"}
-    ];
     this.actions = [
       {"key": "edit", "icon": icons.EditIcon, "action": this._handleEdit},
       {"key": "delete", "icon": icons.DeleteIcon, "action": this.props.container.remove}
@@ -44,7 +39,7 @@ export default class VideoBlock extends Component {
 
   render() {
     return (
-      <CommonBlock {...this.props} featuredOptions={this.featuredOptions} actions={this.actions} defaultFeatured={this.defaultFeatured}>
+      <CommonBlock {...this.props} actions={this.actions}>
         <BlockContent>
           <video controls style={VideoBlockStyle.video} src={this.props.data.src} alt=""/>
         </BlockContent>

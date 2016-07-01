@@ -27,6 +27,8 @@ describe("CommonBlock Component", function() {
       {key: "small", icon: icons.MediaSmallIcon, label: "SMALL"},
       {key: "medium", icon: icons.MediaMediumIcon, label: "MEDIUM"}
     ];
+    const defaultFeatured = "medium";
+    const blockProps = {plugin: {options: {featuredOptions, defaultFeatured}}};
 
     this.container = {
       updateEntity: sinon.spy()
@@ -35,8 +37,7 @@ describe("CommonBlock Component", function() {
     this.renderComponent = function (data) {
       return TestUtils.renderIntoDocument(
         <CommonBlock
-          defaultFeatured="medium"
-          featuredOptions={featuredOptions}
+          blockProps={blockProps}
           actions={actions}
           container={this.container}
           data={data} />

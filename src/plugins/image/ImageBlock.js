@@ -25,12 +25,6 @@ export default class ImageBlock extends Component {
     this._handleCaptionChange = ::this._handleCaptionChange;
     this._handleRightsHolderChange = ::this._handleRightsHolderChange;
 
-    this.defaultFeatured = "medium";
-    this.featuredOptions = [
-      {"key": "small", "icon": icons.MediaSmallIcon, "label": "SMALL"},
-      {"key": "medium", "icon": icons.MediaMediumIcon, "label": "MEDIUM"},
-      {"key": "big", "icon": icons.MediaBigIcon, "label": "BIG"}
-    ];
     this.actions = [
       {"key": "crop", "icon": icons.CropIcon, "action": this._handleCrop},
       {"key": "edit", "icon": icons.EditIcon, "action": this._handleEdit},
@@ -54,7 +48,7 @@ export default class ImageBlock extends Component {
 
   render(){
     return (
-      <CommonBlock {...this.props} featuredOptions={this.featuredOptions} actions={this.actions} defaultFeatured={this.defaultFeatured}>
+      <CommonBlock {...this.props} actions={this.actions}>
         <BlockContent>
           <img style={ImageBlockStyle.image} src={this.props.data.src} alt=""/>
         </BlockContent>

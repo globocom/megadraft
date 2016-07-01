@@ -14,6 +14,7 @@ import {Editor} from "draft-js";
 import Megadraft from "../src/Megadraft";
 import Media from "../src/components/Media";
 import {editorStateFromRaw} from "../src/utils";
+import DEFAULT_PLUGINS from "../src/plugins/default";
 
 
 let expect = chai.expect;
@@ -104,6 +105,33 @@ describe("Megadraft Component", () => {
     );
 
     expect(items).to.have.length(1);
+  });
+
+  it("runs mediaBlockRenderer with non-atomic block", function() {
+    const block = {getType: function() {return "metal";}};
+    const result = this.component.mediaBlockRenderer(block);
+    expect(result).to.be.null;
+  });
+
+  it("runs mediaBlockRenderer with atomic block", function() {
+    function atomic() {}
+    atomic.prototype.getType = function() {return "atomic";};
+    atomic.prototype.getEntityAt = function(position) {return "1";};
+    const block = new atomic();
+    const result = this.component.mediaBlockRenderer(block);
+    const plugin = DEFAULT_PLUGINS[0];
+
+    expect(result).to.deep.equal({
+      "component": Media,
+      "editable": false,
+      "props": {
+        "plugin": plugin,
+        "onChange": this.component.onChange,
+        "editorState": this.editorState,
+        "setReadOnly": this.component.setReadOnly
+      }
+    });
+
   });
 
   it("starts with default readOnly status", function() {

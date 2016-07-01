@@ -65,20 +65,13 @@ export default class Media extends Component {
   }
 
   render() {
-    const entity = Entity.get(this.entityKey);
     const data = this.state.entityData;
-    const type = entity.getType();
-    const {plugins, setReadOnly} = this.props.blockProps;
-
-    for (let plugin of plugins) {
-      if (type === plugin.type) {
-        const Block = plugin.blockComponent;
-        return (
-          <MediaWrapper setReadOnly={setReadOnly}>
-            <Block data={data} container={this} blockProps={this.props.blockProps} />
-          </MediaWrapper>
-        );
-      }
-    }
+    const {plugin, setReadOnly} = this.props.blockProps;
+    const Block = plugin.blockComponent;
+    return (
+      <MediaWrapper setReadOnly={setReadOnly}>
+        <Block data={data} container={this} blockProps={this.props.blockProps} />
+      </MediaWrapper>
+    );
   }
 }
