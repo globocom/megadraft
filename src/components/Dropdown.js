@@ -22,7 +22,7 @@ export default class Dropdown extends Component {
         label: PropTypes.string.isRequired
       })
     ),
-    selected: PropTypes.string.isRequired,
+    selected: PropTypes.string,
     onChange: PropTypes.func.isRequired
   }
 
