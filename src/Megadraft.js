@@ -5,7 +5,7 @@
  */
 
 import React, {Component} from "react";
-import Draft, {Entity, Editor, RichUtils, getDefaultKeyBinding } from "draft-js";
+import Draft, {Entity, Editor, RichUtils, getDefaultKeyBinding} from "draft-js";
 
 import icons from "./icons";
 import * as plugin from "./components/plugin";
