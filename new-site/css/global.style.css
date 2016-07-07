@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+/*--------------------------------------------
+
+FONT
+
+---------------------------------------------*/
+
+@font-face {
+    font-family:'Abril Fatface';
+    src: url("../fonts/AbrilFatface-Regular.otf");
+}
+
+@import url(https://www.google.com/fonts#UsePlace:use/Collection:Roboto+Slab:300);
+
+/*--------------------------------------------
+
+BACKGROUND
+
+---------------------------------------------*/
+
+.bg-img {
+	position: absolute;
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+.bg-img img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 100vw;
+	height: 100vh;
+}
+
+
+/*--------------------------------------------
+
+TYPOGRAPHY
+
+---------------------------------------------*/
+
+h1 {
+  font-family:'Abril Fatface', sans-serif;
+  font-weight: normal;
+  font-size: 180px;
+  line-height: 160px;
+  letter-spacing: -5.22px;
+  color: #FFCF00;
+  -webkit-font-smoothing: antialiased;
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: -1px;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+.title {
+	z-index: 1000;
+	margin: 0 auto;
+	padding: 0 1.25em;
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+}
