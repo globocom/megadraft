@@ -54,7 +54,7 @@ class Page extends React.Component {
           open={!this.isHome || this.state.open}
           toggleMenu={this.onMenuToggle}/>
         <AppBar
-          onLeftIconButtonTouchTap={this.onMenuToggle}/>
+         onLeftIconButtonTouchTap={this.onMenuToggle}/>
         <div style={{paddingLeft: this.isHome? 0 : 256}}>
           {this.props.children}
         </div>
