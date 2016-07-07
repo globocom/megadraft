@@ -1,79 +1,96 @@
+/*
+ * Copyright (c) 2016, Globo.com (https://github.com/globocom)
+ *
+ * License: MIT
+ */
+
 @charset "UTF-8";
 
-/*--------------------------------------------
-
-FONT
-
----------------------------------------------*/
-
 @font-face {
-    font-family:'Abril Fatface';
-    src: url("../fonts/AbrilFatface-Regular.otf");
+  font-family: "Abril Fatface";
+  src: url("../fonts/AbrilFatface-Regular.otf");
 }
 
-@import url(https://www.google.com/fonts#UsePlace:use/Collection:Roboto+Slab:300);
-
-/*--------------------------------------------
-
-BACKGROUND
-
----------------------------------------------*/
-
-.bg-img {
-	position: absolute;
-	overflow: hidden;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	-webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
 }
 
-.bg-img img {
-	position: absolute;
-	top: 0;
-	left: 0;
-	display: block;
-	width: 100vw;
-	height: 100vh;
-}
-
-
-/*--------------------------------------------
-
-TYPOGRAPHY
-
----------------------------------------------*/
-
-h1 {
-  font-family:'Abril Fatface', sans-serif;
-  font-weight: normal;
-  font-size: 180px;
-  line-height: 160px;
-  letter-spacing: -5.22px;
-  color: #FFCF00;
+body {
   -webkit-font-smoothing: antialiased;
+  color: #000;
 }
 
-p {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  font-size: 28px;
-  line-height: 36px;
-  letter-spacing: -1px;
-  color: #fff;
-  -webkit-font-smoothing: antialiased;
+.contents {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+header {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  background: none 0 0 no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-image: url("../images/megadraft-cover.jpg");
+}
+
+.logo {
+  background-size: cover;
+  background-image: url("../images/white_version.png");
+  width: 153.4px;
+  height: 146.4px;
+  position: absolute;
+  right: 10px;
+  top: 25px;
 }
 
 .title {
-	z-index: 1000;
-	margin: 0 auto;
-	padding: 0 1.25em;
-	width: 100%;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	-webkit-transform: translateX(-50%) translateY(-50%);
-	transform: translateX(-50%) translateY(-50%);
+  color: #ffcf00;
+  font-family:'Abril Fatface', sans-serif;
+  font-weight: normal;
+  font-size: 130px;
+  line-height: 115px;
+  letter-spacing: -5.22px;
+  text-align: left;
+  margin: 130px 100px auto;
+}
+
+.description {
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  letter-spacing: -1px;
+  line-height: 36px;
+  text-align: left;
+  margin: 20px 100px auto;
+}
+
+.lets-rock {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.1;
+  text-align: center;
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  width: 100%;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.lets-rock span {
+  text-decoration: none;
+  border-bottom: 1px solid  #ffcf00;
 }
