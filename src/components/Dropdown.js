@@ -37,6 +37,11 @@ export default class Dropdown extends Component {
     this.renderItem = ::this.renderItem;
   }
 
+  isEmpty() {
+    const items = this.props.items || [];
+    return (items.length == 0) ? true : false;
+  }
+
   onChange(selected) {
     this.props.onChange(selected);
   }
@@ -60,6 +65,9 @@ export default class Dropdown extends Component {
   }
 
   handleDocumentClick(event) {
+    if (this.isEmpty()) {
+      return null;
+    }
     if (!ReactDOM.findDOMNode(this).contains(event.target)) {
       this.setState({isOpen: false});
     }
@@ -74,9 +82,7 @@ export default class Dropdown extends Component {
   }
 
   render() {
-
-    const items = this.props.items || [];
-    if (items.length == 0) {
+    if (this.isEmpty()) {
       return null;
     }
 
