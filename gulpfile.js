@@ -31,16 +31,16 @@ gulp.task("sass-copy", function () {
 });
 
 gulp.task("site-sass", function () {
-  return gulp.src("./website/app.scss")
+  return gulp.src("./website/styles/*.scss")
     .pipe(sass.sync().on("error", sass.logError))
     .pipe(autoprefixer())
-    .pipe(gulp.dest("./website"));
+    .pipe(gulp.dest("./website/styles/"));
 });
 
 
 gulp.task("site-watch", function() {
   gulp.watch("./src/styles/**/*.scss", ["site-sass"]);
-  gulp.watch("./website/app.scss", ["site-sass"]);
+  gulp.watch("./website/styles/*.scss", ["site-sass"]);
 });
 
 
