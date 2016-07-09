@@ -76,7 +76,7 @@ ReactDOM.render((
       <Route path="/docs/:doc" component={Docs}/>
     </Route>
   </Router>),
-  document.getElementById("container")
+  document.getElementById("react-container")
 );
 
 /* global hljs */

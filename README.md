@@ -1,6 +1,6 @@
 # Megadraft [![Build Status](https://secure.travis-ci.org/globocom/megadraft.png?branch=master)](https://travis-ci.org/globocom/megadraft) [![npm version](https://img.shields.io/npm/v/megadraft.svg?style=flat)](https://www.npmjs.com/package/megadraft)
 
-Rich Text editor built on top of draft.js (Work in Progress)
+Rich Text editor built on top of [Facebook's draft.js](https://github.com/facebook/draft-js) (Work in Progress)
 
 ## Discussion and Support
 
@@ -8,7 +8,7 @@ Join the [#megadraft][megadraft-slack] channel on the DraftJS [Slack team][draft
 
 ## Live Example & Documentation
 
-Checkout the [website](http://globocom.github.io/megadraft/)!
+Checkout our website with a [live demo](http://globocom.github.io/megadraft/)!
 
 ## Developing
 
