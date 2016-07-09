@@ -34,7 +34,7 @@ export default class Docs extends React.Component {
   render() {
     const {doc} = this.props.params;
     return (
-      <div className="content docs">
+      <div className="page__content docs">
         <ReactMarkdown source={DOCS[doc]} />
       </div>
     );
