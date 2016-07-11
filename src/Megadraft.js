@@ -63,10 +63,12 @@ export default class Megadraft extends Component {
 
   handleKeyCommand(command) {
     // external key bindings
-    var extKb = this.keyBindings.find(kb => kb.name === command);
-    if(extKb) {
-      extKb.action();
-      return true;
+    if (this.keyBindings.length) {
+      var extKb = this.keyBindings.find(kb => kb.name === command);
+      if (extKb) {
+        extKb.action();
+        return true;
+      }
     }
 
     const {editorState} = this.props;
@@ -79,13 +81,14 @@ export default class Megadraft extends Component {
   }
 
   handleReturn(event) {
-    if (event.shiftKey) {
-      const {editorState} = this.props;
-      const newState = RichUtils.insertSoftNewline(editorState);
-      this.props.onChange(newState);
-      return true;
+    if (!event.shiftKey) {
+      return false;
     }
-    return false;
+
+    const {editorState} = this.props;
+    const newState = RichUtils.insertSoftNewline(editorState);
+    this.props.onChange(newState);
+    return true;
   }
 
   setReadOnly(readOnly) {
@@ -93,26 +96,29 @@ export default class Megadraft extends Component {
   }
 
   mediaBlockRenderer(block) {
-    if (block.getType() === "atomic") {
-      const entityKey = block.getEntityAt(0);
-      const entity = Entity.get(entityKey);
-      const type = entity.getType();
+    if (!(block.getType() === "atomic")) {
+      return null;
+    }
 
-      for (let plugin of this.plugins) {
-        if (type === plugin.type) {
-          return {
-            component: Media,
-            editable: false,
-            props: {
-              plugin: plugin,
-              onChange: this.onChange,
-              editorState: this.props.editorState,
-              setReadOnly: this.setReadOnly
-            }
-          };
-        }
+    const entityKey = block.getEntityAt(0);
+    const entity = Entity.get(entityKey);
+    const type = entity.getType();
+
+    for (let plugin of this.plugins) {
+      if (type === plugin.type) {
+        return {
+          component: Media,
+          editable: false,
+          props: {
+            plugin: plugin,
+            onChange: this.onChange,
+            editorState: this.props.editorState,
+            setReadOnly: this.setReadOnly
+          }
+        };
       }
     }
+
     return null;
   }
 
