@@ -39,7 +39,19 @@ export default class Megadraft extends Component {
     this.actions = this.props.actions || DEFAULT_ACTIONS;
     this.plugins = this.props.plugins || DEFAULT_PLUGINS;
 
+    this.pluginsByType = this.getPluginsByType();
+
     this.keyBindings = this.props.keyBindings || [];
+  }
+
+  getPluginsByType() {
+    let pluginsByType = {};
+
+    for (let plugin of this.plugins) {
+      pluginsByType[plugin.type] = plugin;
+    }
+
+    return pluginsByType;
   }
 
   componentWillReceiveProps(nextProps){
@@ -104,19 +116,19 @@ export default class Megadraft extends Component {
     const entity = Entity.get(entityKey);
     const type = entity.getType();
 
-    for (let plugin of this.plugins) {
-      if (type === plugin.type) {
-        return {
-          component: Media,
-          editable: false,
-          props: {
-            plugin: plugin,
-            onChange: this.onChange,
-            editorState: this.props.editorState,
-            setReadOnly: this.setReadOnly
-          }
-        };
-      }
+    let typedPlugin = this.pluginsByType[type];
+
+    if (typedPlugin) {
+      return {
+        component: Media,
+        editable: false,
+        props: {
+          plugin: typedPlugin,
+          onChange: this.onChange,
+          editorState: this.props.editorState,
+          setReadOnly: this.setReadOnly
+        }
+      };
     }
 
     return null;
