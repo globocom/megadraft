@@ -78,8 +78,8 @@ class Example extends React.Component {
     const icon_code = <FontIcon className="material-icons">code</FontIcon>;
 
     return (
-      <Tabs tab={this.state.activeTab} onChange={this.handleChange}>
-        <Tab label="Editor" tab="a" icon={icon_edit}>
+      <Tabs value={this.state.activeTab} onChange={this.handleChange}>
+        <Tab label="Editor" value="a" icon={icon_edit}>
           <div className="tab-container-editor">
             <Megadraft
               editorState={this.state.value}
