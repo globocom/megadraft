@@ -35,7 +35,7 @@ export default class VideoButton extends Component {
 
   render() {
     return (
-      <button className={this.props.className} onClick={this.onClick}>
+      <button className={this.props.className} type="button" onClick={this.onClick}>
         <icons.VideoIcon className="sidemenu__button__icon" />
       </button>
     );
