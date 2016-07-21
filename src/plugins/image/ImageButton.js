@@ -5,9 +5,9 @@
  */
 
 import React, {Component} from "react";
-import {Entity, AtomicBlockUtils} from "draft-js";
 
 import icons from "../../icons";
+import {insertMediaBlock} from "../../utils";
 
 
 export default class BlockButton extends Component {
@@ -23,13 +23,7 @@ export default class BlockButton extends Component {
       return;
     }
 
-    const entityKey = Entity.create("image", "IMMUTABLE", {src});
-
-    this.props.onChange(AtomicBlockUtils.insertAtomicBlock(
-      this.props.editorState,
-      entityKey,
-      "🍺"
-    ));
+    this.props.onChange(insertMediaBlock(this.props.editorState, "image", {src}));
   }
 
   render() {

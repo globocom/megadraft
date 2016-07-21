@@ -5,9 +5,9 @@
  */
 
 import React, {Component} from "react";
-import {Entity, AtomicBlockUtils} from "draft-js";
 
 import icons from "../../icons";
+import {insertMediaBlock} from "../../utils";
 
 
 export default class VideoButton extends Component {
@@ -24,13 +24,7 @@ export default class VideoButton extends Component {
       return;
     }
 
-    const entityKey = Entity.create("video", "IMMUTABLE", {src});
-
-    this.props.onChange(AtomicBlockUtils.insertAtomicBlock(
-      this.props.editorState,
-      entityKey,
-      "🍺"
-    ));
+    this.props.onChange(insertMediaBlock(this.props.editorState, "video", {src}));
   }
 
   render() {
