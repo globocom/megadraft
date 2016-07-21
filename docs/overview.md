@@ -20,11 +20,12 @@ component and use it in your application.
 import React from "react";
 import ReactDOM from "react-dom";
 import Megadraft from "megadraft";
+import {editorStateFromRaw} from "megadraft/lib/utils";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {editorState: null};
+    this.state = {editorState: editorStateFromRaw(null)};
     this.onChange = ::this.onChange;
   }
 
