@@ -64,6 +64,7 @@ a DraftJS' entity:
 ```js
 import React, {Component} from "react";
 import {DraftJS} from "megadraft";
+import {insertMediaBlock} from "megadraft/lib/utils"
 
 export default class BlockButton extends Component {
   constructor(props) {
@@ -73,14 +74,8 @@ export default class BlockButton extends Component {
   onClick(e) {
     e.preventDefault();
     const src = window.prompt("Enter a URL");
-    // Creates a new entity
-    const entityKey = DraftJS.Entity.create("image", "IMMUTABLE", {src});
     // Calls the onChange method with the new state.
-    this.props.onChange(DraftJS.AtomicBlockUtils.insertAtomicBlock(
-      this.props.editorState,
-      entityKey,
-      "*"
-    ));
+    this.props.onChange(insertMediaBlock(this.props.editorState, "image", {src}));
   }
 
   render() {
@@ -104,9 +99,7 @@ example:
 ```js
 import React, {Component} from "react";
 
-
 export default class ImageBlock extends Component {
-
   render(){
     return (
       <img src={this.props.data.src} />
