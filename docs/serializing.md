@@ -11,7 +11,7 @@ generated with the above function or create an empty one if content is null.
 In the example below, we use those functions to save and initialize the editor:
 
 ```js
-import {editorStateFromRaw, editorStateToJSON} from "megadraft/lib/utils";
+import {editorStateFromRaw, editorStateToJSON} from "megadraft";
 
 class Example extends React.Component {
   constructor(props) {

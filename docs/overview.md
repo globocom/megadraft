@@ -20,7 +20,7 @@ component and use it in your application.
 import React from "react";
 import ReactDOM from "react-dom";
 import Megadraft from "megadraft";
-import {editorStateFromRaw} from "megadraft/lib/utils";
+import {editorStateFromRaw} from "megadraft";
 
 class App extends React.Component {
   constructor(props) {

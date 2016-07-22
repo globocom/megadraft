@@ -14,6 +14,7 @@ export Media from "./components/Media";
 export DEFAULT_PLUGINS from "./plugins/default";
 export DEFAULT_ACTIONS from "./actions/default";
 export MediaMessage from "./components/MediaMessage";
+export * from "./utils";
 
 import MegadraftEditor from "./components/MegadraftEditor";
 

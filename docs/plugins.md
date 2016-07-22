@@ -64,7 +64,7 @@ a DraftJS' entity:
 ```js
 import React, {Component} from "react";
 import {DraftJS} from "megadraft";
-import {insertMediaBlock} from "megadraft/lib/utils"
+import {insertMediaBlock} from "megadraft"
 
 export default class BlockButton extends Component {
   constructor(props) {
@@ -106,7 +106,6 @@ export default class ImageBlock extends Component {
     );
   }
 }
-
 ```
 
 [plugin-generator]: https://github.com/globocom/generator-megadraft-plugin
