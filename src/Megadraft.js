@@ -6,15 +6,14 @@
 
 export DraftJS from "draft-js";
 
-export MegadraftIcons from "./icons";
-export * as MegadraftPlugin from "./components/plugin";
-export Toolbar from "./components/Toolbar";
-export Sidebar from "./components/Sidebar";
-export Media from "./components/Media";
-export DEFAULT_PLUGINS from "./plugins/default";
-export DEFAULT_ACTIONS from "./actions/default";
-export MediaMessage from "./components/MediaMessage";
 export * from "./utils";
+export * as MegadraftPlugin from "./components/plugin";
+
+export Media from "./components/Media";
+export MegadraftIcons from "./icons";
+export MegadraftMediaMessage from "./components/MediaMessage";
+export Sidebar from "./components/Sidebar";
+export Toolbar from "./components/Toolbar";
 
 import MegadraftEditor from "./components/MegadraftEditor";
 
