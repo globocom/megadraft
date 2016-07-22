@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-export Draft from "draft-js";
+export DraftJS from "draft-js";
 
 export MegadraftIcons from "./icons";
 export * as MegadraftPlugin from "./components/plugin";
