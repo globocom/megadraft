@@ -37,6 +37,7 @@ export default class LinkInput extends Component {
   }
 
   onLinkChange(event) {
+    event.stopPropagation();
     this.setState({link: event.target.value});
   }
 
