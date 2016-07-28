@@ -24,17 +24,7 @@ let kba = function keyBindingAction() {};
 describe("Megadraft Component", () => {
   beforeEach(function() {
     const INITIAL_CONTENT = {
-      "entityMap": {
-        "0": {
-          "type": "image",
-          "mutability": "IMMUTABLE",
-          "data": {
-            "src": "images/media.jpg",
-            "caption": "Picture from StockSnap.io",
-            "rightsHolder": "By Tim Marshall"
-          }
-        }
-      },
+      "entityMap": {},
       "blocks": [
         {
           "key": "ag6qs",
@@ -61,13 +51,13 @@ describe("Megadraft Component", () => {
           "type": "atomic",
           "depth": 0,
           "inlineStyleRanges": [],
-          "entityRanges": [
-            {
-              "offset": 0,
-              "length": 1,
-              "key": 0
-            }
-          ]
+          "data": {
+            "type": "image",
+            "src": "images/media.jpg",
+            "caption": "Picture from StockSnap.io",
+            "rightsHolder": "By Tim Marshall"
+          },
+          "entityRanges": []
         }
       ]
     };
@@ -116,7 +106,14 @@ describe("Megadraft Component", () => {
   it("runs mediaBlockRenderer with atomic block", function() {
     function atomic() {}
     atomic.prototype.getType = function() {return "atomic";};
-    atomic.prototype.getEntityAt = function(position) {return "1";};
+    atomic.prototype.getData = function(position) {
+      return {
+        toObject: function(){
+          return {type: "image"};
+        }
+      }
+    };
+
     const block = new atomic();
     const result = this.component.mediaBlockRenderer(block);
     const plugin = DEFAULT_PLUGINS[0];
