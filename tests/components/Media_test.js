@@ -38,7 +38,7 @@ describe("Media Component", function() {
             "src": "images/media.jpg",
             "caption": "Picture from StockSnap.io",
             "rightsHolder": "By Tim Marshall",
-            "featured": "medium"
+            "display": "medium"
           }
         }
       ]
@@ -75,19 +75,19 @@ describe("Media Component", function() {
   it("updates data", function() {
     let data = this.block.getData();
 
-    expect(data.get("featured")).to.equal("medium");
+    expect(data.get("display")).to.equal("medium");
 
-    this.component.updateData({featured: "big"});
+    this.component.updateData({display: "big"});
 
     const content = this.blockProps.onChange.args[0][0].toJS().currentContent;
 
     const nextData = content.blockMap["9vgd"].data;
 
-    expect(nextData.featured).to.equal("big");
+    expect(nextData.display).to.equal("big");
   });
 
   it("refreshes editor state", function() {
-    this.component.updateData({featured: "big"});
+    this.component.updateData({display: "big"});
     expect(this.blockProps.onChange).to.have.been.called;
   });
 
