@@ -111,7 +111,7 @@ describe("Megadraft Component", () => {
         toObject: function(){
           return {type: "image"};
         }
-      }
+      };
     };
 
     const block = new atomic();

@@ -6,7 +6,6 @@
 
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
-import {Entity} from "draft-js";
 import TestUtils from "react-addons-test-utils";
 import chai from "chai";
 
@@ -112,7 +111,7 @@ describe("Sidebar Component", function() {
     window.prompt = () => "http://www.globo.com";
     TestUtils.Simulate.click(domButton);
     const contentState = this.wrapper.state.editorState.getCurrentContent();
-    let data = null
+    let data = null;
     contentState.getBlockMap().forEach((block) => {
       if (block.getType() === "atomic") {
         data = block.getData();
