@@ -105,7 +105,7 @@ export default class MegadraftEditor extends Component {
   }
 
   mediaBlockRenderer(block) {
-    if (!(block.getType() === "atomic")) {
+    if (block.getType() !== "atomic") {
       return null;
     }
 
