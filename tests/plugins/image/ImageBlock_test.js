@@ -27,12 +27,12 @@ describe("ImageBlock", function() {
     this.updateData = sinon.spy();
     this.remove = sinon.spy();
 
-    const featuredOptions = [
+    const displayOptions = [
       {key: "small", icon: icons.MediaSmallIcon, label: "SMALL"},
       {key: "medium", icon: icons.MediaMediumIcon, label: "MEDIUM"}
     ];
-    const defaultFeatured = "medium";
-    const blockProps = {plugin: {options: {featuredOptions, defaultFeatured}}};
+    const defaultDisplay = "medium";
+    const blockProps = {plugin: {options: {displayOptions, defaultDisplay}}};
 
     this.wrapper = TestUtils.renderIntoDocument(
       <ImageBlock container={this} blockProps={blockProps} data={this.data} />
