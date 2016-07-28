@@ -40,12 +40,12 @@ export default class ImageBlock extends Component {
 
   _handleCaptionChange(event) {
     event.stopPropagation();
-    this.props.container.updateEntity({caption: event.target.value});
+    this.props.container.updateData({caption: event.target.value});
   }
 
   _handleRightsHolderChange(event) {
     event.stopPropagation();
-    this.props.container.updateEntity({rightsHolder: event.target.value});
+    this.props.container.updateData({rightsHolder: event.target.value});
   }
 
   render(){

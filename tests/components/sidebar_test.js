@@ -112,14 +112,12 @@ describe("Sidebar Component", function() {
     window.prompt = () => "http://www.globo.com";
     TestUtils.Simulate.click(domButton);
     const contentState = this.wrapper.state.editorState.getCurrentContent();
-    let entityKey = null;
+    let data = null
     contentState.getBlockMap().forEach((block) => {
       if (block.getType() === "atomic") {
-        entityKey = block.getEntityAt(0);
+        data = block.getData();
       }
     });
-    const imageEntity = Entity.get(entityKey);
-    const {src} = imageEntity.getData();
-    expect(src).to.be.equal("http://www.globo.com");
+    expect(data.get("src")).to.be.equal("http://www.globo.com");
   });
 });

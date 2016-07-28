@@ -7,16 +7,6 @@
 export default {
   "entityMap": {
     "0": {
-      "type": "image",
-      "mutability": "IMMUTABLE",
-      "data": {
-        "src": "./images/media.jpg",
-        "caption": "Picture from StockSnap.io",
-        "rightsHolder": "By Tim Marshall",
-        "featured": "big"
-      }
-    },
-    "1": {
       "type": "LINK",
       "mutability": "MUTABLE",
       "data": {
@@ -75,17 +65,18 @@ export default {
     },
     {
       "key": "9vgd",
-      "text": "🍺",
+      "text": "",
       "type": "atomic",
       "depth": 0,
       "inlineStyleRanges": [],
-      "entityRanges": [
-        {
-          "offset": 0,
-          "length": 1,
-          "key": 0
-        }
-      ]
+      "entityRanges": [],
+      "data": {
+        "type": "image",
+        "src": "./images/media.jpg",
+        "caption": "Picture from StockSnap.io",
+        "rightsHolder": "By Tim Marshall",
+        "featured": "big"
+      }
     },
     {
       "key": "350ub",
@@ -123,13 +114,7 @@ export default {
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
-      "entityRanges": [
-        {
-          "offset": 13,
-          "length": 3,
-          "key": 1
-        }
-      ]
+      "entityRanges": []
     }
   ]
 };

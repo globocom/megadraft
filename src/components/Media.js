@@ -5,7 +5,7 @@
  */
 
 import React, {Component} from "react";
-import {Entity, EditorState, SelectionState, Modifier} from "draft-js";
+import {EditorState, SelectionState, Modifier} from "draft-js";
 
 import MediaWrapper from "./MediaWrapper";
 
@@ -15,31 +15,19 @@ export default class Media extends Component {
     super(props);
 
     this.remove = ::this.remove;
-    this.updateEntity = ::this.updateEntity;
+    this.updateData = ::this.updateData;
 
     this.onChange = this.props.blockProps.onChange;
-    this.block = this.props.block;
-    this.entityKey = this.block.getEntityAt(0);
-
-    const entity = Entity.get(this.entityKey);
-    this.state = {
-      entityData: entity.getData()
-    };
-  }
-
-  _refreshEditor() {
-    const {editorState} = this.props.blockProps;
-    this.onChange(editorState);
   }
 
   remove() {
     const {editorState} = this.props.blockProps;
     const content = editorState.getCurrentContent();
     const targetRange = new SelectionState({
-      anchorKey: this.block.key,
+      anchorKey: this.props.block.key,
       anchorOffset: 0,
-      focusKey: this.block.key,
-      focusOffset: this.block.getLength()
+      focusKey: this.props.block.key,
+      focusOffset: this.props.block.getLength()
     });
 
     const withoutMedia = Modifier.removeRange(content, targetRange, "backward");
@@ -56,16 +44,25 @@ export default class Media extends Component {
     this.onChange(newEditorState);
   }
 
-  updateEntity(data) {
-    // Entity doesn't change editor state
-    // We have to merge data, update the local state and refresh the editor state
-    const newEntity = Entity.mergeData(this.entityKey, data);
-    this.setState({entityData: newEntity.getData()});
-    this._refreshEditor();
+  updateData(data) {
+    const {editorState} = this.props.blockProps;
+    const content = editorState.getCurrentContent();
+    const selection = new SelectionState({
+      anchorKey: this.props.block.key,
+      anchorOffset: 0,
+      focusKey: this.props.block.key,
+      focusOffset: this.props.block.getLength()
+    });
+
+    const newContentState = Modifier.mergeBlockData(content, selection, data);
+    const newEditorState =  EditorState.push(editorState, newContentState);
+
+    this.onChange(newEditorState);
   }
 
   render() {
-    const data = this.state.entityData;
+    // Should we use immutables?
+    const data = this.props.block.getData().toJS();
     const {plugin, setReadOnly} = this.props.blockProps;
     const Block = plugin.blockComponent;
     return (

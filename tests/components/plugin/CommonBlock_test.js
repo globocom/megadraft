@@ -31,7 +31,7 @@ describe("CommonBlock Component", function() {
     const blockProps = {plugin: {options: {featuredOptions, defaultFeatured}}};
 
     this.container = {
-      updateEntity: sinon.spy()
+      updateData: sinon.spy()
     };
 
     this.renderComponent = function (data) {
@@ -71,7 +71,7 @@ describe("CommonBlock Component", function() {
 
     dropdown.onChange("small");
 
-    expect(this.container.updateEntity).to.have.been.calledWith({featured: "small"});
+    expect(this.container.updateData).to.have.been.calledWith({featured: "small"});
   });
 });
 

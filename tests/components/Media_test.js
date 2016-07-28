@@ -6,7 +6,6 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import {Entity} from "draft-js";
 import TestUtils from "react-addons-test-utils";
 import chai from "chai";
 import sinon from "sinon";
@@ -25,32 +24,22 @@ describe("Media Component", function() {
 
   beforeEach(function() {
     const INITIAL_CONTENT = {
-      "entityMap": {
-        "0": {
-          "type": "image",
-          "mutability": "IMMUTABLE",
+      "entityMap": {},
+      "blocks": [
+        {
+          "key": "9vgd",
+          "text": "",
+          "type": "atomic",
+          "depth": 0,
+          "inlineStyleRanges": [],
+          "entityRanges": [],
           "data": {
+            "type": "image",
             "src": "images/media.jpg",
             "caption": "Picture from StockSnap.io",
             "rightsHolder": "By Tim Marshall",
             "featured": "medium"
           }
-        }
-      },
-      "blocks": [
-        {
-          "key": "9vgd",
-          "text": "🍺",
-          "type": "atomic",
-          "depth": 0,
-          "inlineStyleRanges": [],
-          "entityRanges": [
-            {
-              "offset": 0,
-              "length": 1,
-              "key": 0
-            }
-          ]
         }
       ]
     };
@@ -83,24 +72,22 @@ describe("Media Component", function() {
     expect(this.component).to.exist;
   });
 
-  it("updates entity data", function() {
-    let entityKey = this.block.getEntityAt(0);
-    let entity = Entity.get(entityKey);
-    let data = entity.getData();
+  it("updates data", function() {
+    let data = this.block.getData();
 
-    expect(data.featured).to.equal("medium");
+    expect(data.get("featured")).to.equal("medium");
 
-    this.component.updateEntity({featured: "big"});
+    this.component.updateData({featured: "big"});
 
-    entityKey = this.block.getEntityAt(0);
-    entity = Entity.get(entityKey);
-    data = entity.getData();
+    const content = this.blockProps.onChange.args[0][0].toJS().currentContent;
 
-    expect(data.featured).to.equal("big");
+    const nextData = content.blockMap['9vgd'].data;
+
+    expect(nextData.featured).to.equal("big");
   });
 
   it("refreshes editor state", function() {
-    this.component.updateEntity({featured: "big"});
+    this.component.updateData({featured: "big"});
     expect(this.blockProps.onChange).to.have.been.called;
   });
 
