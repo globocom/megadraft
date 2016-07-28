@@ -7,7 +7,7 @@
 import React, {Component} from "react";
 
 import icons from "../../icons";
-import {insertMediaBlock} from "../../utils";
+import insertDataBlock from "../../insertDataBlock";
 
 
 export default class VideoButton extends Component {
@@ -24,7 +24,9 @@ export default class VideoButton extends Component {
       return;
     }
 
-    this.props.onChange(insertMediaBlock(this.props.editorState, "video", {src}));
+    const data = {src: src, type: "video"};
+
+    this.props.onChange(insertDataBlock(this.props.editorState, data));
   }
 
   render() {

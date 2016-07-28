@@ -24,7 +24,7 @@ describe("ImageBlock", function() {
     };
 
     this.setReadOnly = sinon.spy();
-    this.updateEntity = sinon.spy();
+    this.updateData = sinon.spy();
     this.remove = sinon.spy();
 
     const featuredOptions = [
@@ -53,12 +53,12 @@ describe("ImageBlock", function() {
   it("updates entity on caption change", function () {
     this.caption.value = "new caption";
     TestUtils.Simulate.change(this.caption);
-    expect(this.updateEntity.calledWith({caption: "new caption"})).to.be.true;
+    expect(this.updateData.calledWith({caption: "new caption"})).to.be.true;
   });
 
   it("updates entity on rightsHolder change", function () {
     this.rights.value = "new rights";
     TestUtils.Simulate.change(this.rights);
-    expect(this.updateEntity.calledWith({rightsHolder: "new rights"})).to.be.true;
+    expect(this.updateData.calledWith({rightsHolder: "new rights"})).to.be.true;
   });
 });

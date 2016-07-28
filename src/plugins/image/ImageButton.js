@@ -7,7 +7,7 @@
 import React, {Component} from "react";
 
 import icons from "../../icons";
-import {insertMediaBlock} from "../../utils";
+import insertDataBlock from "../../insertDataBlock";
 
 
 export default class BlockButton extends Component {
@@ -23,7 +23,9 @@ export default class BlockButton extends Component {
       return;
     }
 
-    this.props.onChange(insertMediaBlock(this.props.editorState, "image", {src}));
+    const data = {src: src, type: "image"};
+
+    this.props.onChange(insertDataBlock(this.props.editorState, data));
   }
 
   render() {

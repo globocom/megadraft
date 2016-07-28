@@ -1,5 +1,6 @@
 var webpack = require("webpack");
 var merge = require("merge");
+var path = require("path");
 
 
 const defaultConfig = {
@@ -15,6 +16,13 @@ const defaultConfig = {
   devServer: {
     inline: true,
     contentBase: "./"
+  },
+  resolve: {
+    extensions: [ '', '.js', '.jsx' ],
+    fallback: path.join(__dirname, "node_modules")
+  },
+  resolveLoader: {
+    root: path.join(__dirname, "node_modules")
   },
   module: {
     loaders: [
