@@ -34,7 +34,7 @@ export default class VideoBlock extends Component {
   }
 
   _handleCaptionChange(event) {
-    this.props.container.updateEntity({caption: event.target.value});
+    this.props.container.updateData({caption: event.target.value});
   }
 
   render() {

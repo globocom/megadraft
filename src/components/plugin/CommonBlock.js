@@ -26,7 +26,7 @@ export default class CommonBlock extends Component {
   }
 
   _handleFeaturedChange(newValue) {
-    this.props.container.updateEntity({featured: newValue});
+    this.props.container.updateData({featured: newValue});
   }
 
   render(){

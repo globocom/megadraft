@@ -14,6 +14,7 @@ export MegadraftIcons from "./icons";
 export MegadraftMediaMessage from "./components/MediaMessage";
 export Sidebar from "./components/Sidebar";
 export Toolbar from "./components/Toolbar";
+export insertDataBlock from "./insertDataBlock";
 
 import MegadraftEditor from "./components/MegadraftEditor";
 

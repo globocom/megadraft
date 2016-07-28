@@ -5,7 +5,7 @@
  */
 
 import React, {Component} from "react";
-import {Entity, Editor, RichUtils, getDefaultKeyBinding} from "draft-js";
+import {Editor, RichUtils, getDefaultKeyBinding} from "draft-js";
 
 import Toolbar from "./Toolbar";
 import Sidebar from "./Sidebar";
@@ -109,9 +109,7 @@ export default class MegadraftEditor extends Component {
       return null;
     }
 
-    const entityKey = block.getEntityAt(0);
-    const entity = Entity.get(entityKey);
-    const type = entity.getType();
+    const type = block.getData().toObject().type;
 
     let typedPlugin = this.pluginsByType[type];
 
