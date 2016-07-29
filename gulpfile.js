@@ -25,6 +25,10 @@ gulp.task("sass", function () {
     .pipe(gulp.dest("./dist/css"));
 });
 
+gulp.task("sass-copy", function () {
+  return gulp.src("./src/styles/**/*.scss")
+    .pipe(gulp.dest("./lib/styles"));
+});
 
 gulp.task("site-sass", function () {
   return gulp.src("./website/app.scss")
