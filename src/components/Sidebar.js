@@ -151,7 +151,7 @@ export default class SideBar extends Component {
       (container.getBoundingClientRect().top -
         document.documentElement.clientTop));
 
-    if (this.state.top !== top) {
+    if (this.state.top !== top && top > 0) {
       this.setState({
         top: top
       });
