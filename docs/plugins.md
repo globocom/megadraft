@@ -9,7 +9,7 @@ class Example extends React.Component {
   ...
   render() {
     return (
-      <Megadraft plugins={[MyPlugin1, MyPlugin2]} .../>
+      <MegadraftEditor plugins={[MyPlugin1, MyPlugin2]} .../>
     );
   }
 }
@@ -63,8 +63,7 @@ a DraftJS' entity:
 
 ```js
 import React, {Component} from "react";
-import {DraftJS} from "megadraft";
-import {insertDataBlock} from "megadraft"
+import {DraftJS, insertDataBlock} from "megadraft";
 
 export default class BlockButton extends Component {
   constructor(props) {

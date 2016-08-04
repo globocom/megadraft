@@ -11,7 +11,7 @@ import chai from "chai";
 import sinon from "sinon";
 import {Editor} from "draft-js";
 
-import Megadraft from "../src/Megadraft";
+import {MegadraftEditor} from "../src/Megadraft";
 import Media from "../src/components/Media";
 import {editorStateFromRaw} from "../src/utils";
 import DEFAULT_PLUGINS from "../src/plugins/default";
@@ -70,7 +70,7 @@ describe("Megadraft Component", () => {
     this.onChange = sinon.spy();
     this.editorState = editorStateFromRaw(INITIAL_CONTENT);
     this.component = TestUtils.renderIntoDocument(
-      <Megadraft
+      <MegadraftEditor
         editorState={this.editorState}
         onChange={this.onChange}
         keyBindings={keyBindings}/>

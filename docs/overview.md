@@ -19,8 +19,7 @@ component and use it in your application.
 ```js
 import React from "react";
 import ReactDOM from "react-dom";
-import Megadraft from "megadraft";
-import {editorStateFromRaw} from "megadraft";
+import {MegadraftEditor, editorStateFromRaw} from "megadraft";
 
 class App extends React.Component {
   constructor(props) {
@@ -35,7 +34,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Megadraft
+      <MegadraftEditor
         editorState={this.state.editorState}
         onChange={this.onChange}/>
     )

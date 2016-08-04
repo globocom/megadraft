@@ -11,7 +11,7 @@ import FontIcon from "material-ui/FontIcon";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import {grey300, grey900, white, indigo500} from "material-ui/styles/colors";
 
-import Megadraft from "../../src/Megadraft";
+import {MegadraftEditor} from "../../src/Megadraft";
 import {editorStateToJSON, editorStateFromRaw} from "../../src/utils";
 import {highlightCode} from "./highlightCode";
 
@@ -81,7 +81,7 @@ class Example extends React.Component {
       <Tabs value={this.state.activeTab} onChange={this.handleChange}>
         <Tab label="Editor" value="a" icon={icon_edit}>
           <div className="tab-container-editor">
-            <Megadraft
+            <MegadraftEditor
               editorState={this.state.value}
               placeholder="Text"
               onChange={this.onChange}
