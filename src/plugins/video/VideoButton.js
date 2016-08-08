@@ -24,7 +24,7 @@ export default class VideoButton extends Component {
       return;
     }
 
-    const data = {src: src, type: "video"};
+    const data = {src: src, type: "video", display: "small"};
 
     this.props.onChange(insertDataBlock(this.props.editorState, data));
   }

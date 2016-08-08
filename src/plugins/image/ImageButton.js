@@ -23,7 +23,7 @@ export default class BlockButton extends Component {
       return;
     }
 
-    const data = {src: src, type: "image"};
+    const data = {src: src, type: "image", display: "medium"};
 
     this.props.onChange(insertDataBlock(this.props.editorState, data));
   }
