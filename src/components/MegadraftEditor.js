@@ -70,6 +70,10 @@ export default class MegadraftEditor extends Component {
     return getDefaultKeyBinding(e);
   }
 
+  onTab(event) {
+    event.preventDefault();
+  }
+
   handleKeyCommand(command) {
     // external key bindings
     if (this.keyBindings.length) {
@@ -157,6 +161,7 @@ export default class MegadraftEditor extends Component {
             plugins={plugins}
             blockRendererFn={this.mediaBlockRenderer}
             blockStyleFn={this.blockStyleFn}
+            onTab={this.onTab}
             handleKeyCommand={this.handleKeyCommand}
             handleReturn={this.handleReturn}
             stripPastedStyles={stripPastedStyles}
