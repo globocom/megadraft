@@ -5,7 +5,7 @@
   "main": "lib/Megadraft.js",
   "dependencies": {
     "classnames": "^2.2.5",
-    "draft-js": "^0.7.0",
+    "draft-js": "^0.8.0",
     "setimmediate": "^1.0.4"
   },
   "devDependencies": {
