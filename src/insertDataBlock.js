@@ -1,5 +1,6 @@
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
+ * Copyright (c) 2016, Globo.com (https://github.com/globocom)
  * All rights reserved.
  *
  * This source code is licensed under the BSD-style license found in the
