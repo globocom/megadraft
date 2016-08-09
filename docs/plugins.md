@@ -64,7 +64,7 @@ a DraftJS' entity:
 ```js
 import React, {Component} from "react";
 import {DraftJS} from "megadraft";
-import {insertMediaBlock} from "megadraft"
+import {insertDataBlock} from "megadraft"
 
 export default class BlockButton extends Component {
   constructor(props) {
@@ -74,8 +74,9 @@ export default class BlockButton extends Component {
   onClick(e) {
     e.preventDefault();
     const src = window.prompt("Enter a URL");
+    const data = {"type": "image", "src": src};
     // Calls the onChange method with the new state.
-    this.props.onChange(insertMediaBlock(this.props.editorState, "image", {src}));
+    this.props.onChange(insertDataBlock(this.props.editorState, data));
   }
 
   render() {

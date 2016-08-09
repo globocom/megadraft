@@ -9,9 +9,7 @@ import {
   convertToRaw,
   convertFromRaw,
   EditorState,
-  getVisibleSelectionRect,
-  Entity,
-  AtomicBlockUtils} from "draft-js";
+  getVisibleSelectionRect} from "draft-js";
 
 import decorator from "./decorator";
 
@@ -62,14 +60,4 @@ export function getSelectionCoords(editor, toolbar) {
             + (rangeWidth / 2);
   const offsetTop = rangeBounds.top - editorBounds.top - (toolbarHeight + 14);
   return { offsetLeft, offsetTop };
-}
-
-export function insertMediaBlock (editorState, blockType, data) {
-  const entityKey = Entity.create(blockType, "IMMUTABLE", data);
-
-  return AtomicBlockUtils.insertAtomicBlock(
-    editorState,
-    entityKey,
-    "🍺"
-  );
 }
