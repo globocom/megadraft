@@ -81,7 +81,7 @@ describe("Media Component", function() {
 
     const content = this.blockProps.onChange.args[0][0].toJS().currentContent;
 
-    const nextData = content.blockMap['9vgd'].data;
+    const nextData = content.blockMap["9vgd"].data;
 
     expect(nextData.display).to.equal("big");
   });
