@@ -43,6 +43,7 @@ class Example extends React.Component {
       activeTab: "a"
     };
     this.onChange = ::this.onChange;
+    this.onCodeActive = ::this.onCodeActive;
   }
 
   getChildContext() {
@@ -50,10 +51,6 @@ class Example extends React.Component {
   }
 
   componentDidMount() {
-    highlightCode(this);
-  }
-
-  componentDidUpdate() {
     highlightCode(this);
   }
 
@@ -73,6 +70,10 @@ class Example extends React.Component {
     console.log("save");
   }
 
+  onCodeActive() {
+    highlightCode(this);
+  }
+
   render() {
     const icon_edit = <FontIcon className="material-icons">mode_edit</FontIcon>;
     const icon_code = <FontIcon className="material-icons">code</FontIcon>;
@@ -88,7 +89,7 @@ class Example extends React.Component {
               keyBindings={this.keyBindings}/>
           </div>
         </Tab>
-        <Tab label="Content JSON" value="b" icon={icon_code}>
+        <Tab label="Content JSON" onActive={this.onCodeActive} value="b" icon={icon_code}>
           <div className="tab-container-json">
             <pre className="jsonpreview">
               <code className="json hljs">
