@@ -11,7 +11,7 @@ generated with the above function or create an empty one if content is null.
 In the example below, we use those functions to save and initialize the editor:
 
 ```js
-import {editorStateFromRaw, editorStateToJSON} from "megadraft";
+import {MegadraftEditor, editorStateFromRaw, editorStateToJSON} from "megadraft";
 
 class Example extends React.Component {
   constructor(props) {
@@ -40,7 +40,7 @@ class Example extends React.Component {
   render() {
     return (
       <div>
-        <Megadraft
+        <MegadraftEditor
           editorState={this.state.editorState}
           onChange={this.onChange} />
         <button onClick={this.onSaveClick}>

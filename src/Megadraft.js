@@ -4,18 +4,30 @@
  * License: MIT
  */
 
-export DraftJS from "draft-js";
+import DraftJS from "draft-js";
 
-export * from "./utils";
-export * as MegadraftPlugin from "./components/plugin";
-
-export Media from "./components/Media";
-export MegadraftIcons from "./icons";
-export MegadraftMediaMessage from "./components/MediaMessage";
-export Sidebar from "./components/Sidebar";
-export Toolbar from "./components/Toolbar";
-export insertDataBlock from "./insertDataBlock";
-
+import insertDataBlock from "./insertDataBlock";
+import Media from "./components/Media";
 import MegadraftEditor from "./components/MegadraftEditor";
+import MegadraftIcons from "./icons";
+import MegadraftMediaMessage from "./components/MediaMessage";
+import * as MegadraftPlugin from "./components/plugin";
+import Sidebar from "./components/Sidebar";
+import Toolbar from "./components/Toolbar";
+import * as utils from "./utils";
 
-export default MegadraftEditor;
+const Megadraft = {
+  DraftJS: DraftJS,
+  editorStateFromRaw: utils.editorStateFromRaw,
+  editorStateToJSON: utils.editorStateToJSON,
+  insertDataBlock: insertDataBlock,
+  Media: Media,
+  MegadraftEditor: MegadraftEditor,
+  MegadraftIcons: MegadraftIcons,
+  MegadraftMediaMessage: MegadraftMediaMessage,
+  MegadraftPlugin: MegadraftPlugin,
+  Sidebar: Sidebar,
+  Toolbar: Toolbar
+};
+
+module.exports = Megadraft;
