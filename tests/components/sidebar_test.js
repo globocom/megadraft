@@ -22,7 +22,7 @@ class SidebarWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {...props};
-    this.plugins = DEFAULT_PLUGINS;
+    this.plugins = this.props.plugins || DEFAULT_PLUGINS;
     this.onChange = ::this.onChange;
   }
 
@@ -81,6 +81,19 @@ describe("Sidebar Component", function() {
     const button = TestUtils.findRenderedComponentWithType(
       this.wrapper, image.buttonComponent);
     expect(ReactDOM.findDOMNode(button)).to.exist;
+  });
+
+  it("renders only valid plugins", function() {
+    const invalidPlugin = {
+      type: "invalid-plugin",
+      blockComponent: {}
+    };
+    const plugins = [image, invalidPlugin];
+    const wrapper = TestUtils.renderIntoDocument(
+      <SidebarWrapper editorState={this.editorState} plugins={plugins} />
+    );
+    const sidemenu = TestUtils.findRenderedComponentWithType(wrapper, SideMenu);
+    expect(sidemenu.props.plugins).to.have.length(1);
   });
 
   it("has the menu hidden by default", function() {

@@ -13,8 +13,9 @@ import {Editor} from "draft-js";
 
 import MegadraftEditor from "../../src/components/MegadraftEditor";
 import Media from "../../src/components/Media";
+import Sidebar from "../../src/components/Sidebar";
 import {editorStateFromRaw} from "../../src/utils";
-import DEFAULT_PLUGINS from "../../src/plugins/default";
+import image from "../../src/plugins/image/plugin";
 
 
 let expect = chai.expect;
@@ -116,13 +117,12 @@ describe("MegadraftEditor Component", () => {
 
     const block = new atomic();
     const result = this.component.mediaBlockRenderer(block);
-    const plugin = DEFAULT_PLUGINS[0];
 
     expect(result).to.deep.equal({
       "component": Media,
       "editable": false,
       "props": {
-        "plugin": plugin,
+        "plugin": image,
         "onChange": this.component.onChange,
         "editorState": this.editorState,
         "setReadOnly": this.component.setReadOnly
@@ -180,5 +180,42 @@ describe("MegadraftEditor Component", () => {
     const externalCommand = "save";
     expect(this.component.handleKeyCommand(externalCommand)).to.be.true;
     expect(kba).to.have.been.called;
+  });
+
+  it("renders only valid plugins", function() {
+    const invalidPlugin = {
+      buttonComponent: {},
+      blockComponent: {}
+    };
+
+    const component = TestUtils.renderIntoDocument(
+      <MegadraftEditor
+        editorState={this.editorState}
+        onChange={this.onChange}
+        plugins={[image, invalidPlugin]} />
+    );
+    const sidebar = TestUtils.findRenderedComponentWithType(component, Sidebar);
+
+    expect(sidebar.props.plugins).to.have.length(1);
+  });
+
+  it("shows warn for missing `type` field", function() {
+    console.warn = sinon.spy();
+
+    const plugin =  {
+      buttonComponent: {},
+      blockComponent: {}
+    };
+    const plugins = [plugin];
+
+    TestUtils.renderIntoDocument(
+      <MegadraftEditor
+        editorState={this.editorState}
+        onChange={this.onChange}
+        plugins={plugins} />
+    );
+    expect(console.warn.getCall(0).args[0]).to.equal(
+      "Plugin: Missing `type` field. Details: "
+    );
   });
 });

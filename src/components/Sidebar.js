@@ -123,6 +123,17 @@ export default class SideBar extends Component {
     this.onChange = ::this.onChange;
   }
 
+  getValidSidebarPlugins() {
+    let plugins = [];
+    for (let plugin of this.props.plugins) {
+      if (!plugin.buttonComponent || typeof plugin.buttonComponent !== "function") {
+        continue;
+      }
+      plugins.push(plugin);
+    }
+    return plugins;
+  }
+
   onChange(editorState) {
     this.props.onChange(editorState);
   }
@@ -166,7 +177,7 @@ export default class SideBar extends Component {
             <SideMenu
               editorState={this.props.editorState}
               onChange={this.onChange}
-              plugins={this.props.plugins}/>
+              plugins={this.getValidSidebarPlugins()}/>
           </ul>
         </div>
       </div>

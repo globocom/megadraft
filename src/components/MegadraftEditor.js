@@ -34,11 +34,23 @@ export default class MegadraftEditor extends Component {
     this.externalKeyBindings = ::this.externalKeyBindings;
 
     this.actions = this.props.actions || DEFAULT_ACTIONS;
-    this.plugins = this.props.plugins || DEFAULT_PLUGINS;
+    this.plugins = this.getValidPlugins();
 
     this.pluginsByType = this.getPluginsByType();
 
     this.keyBindings = this.props.keyBindings || [];
+  }
+
+  getValidPlugins() {
+    let plugins = [];
+    for (let plugin of this.props.plugins || DEFAULT_PLUGINS) {
+      if (!plugin || typeof plugin.type !== "string") {
+        console.warn("Plugin: Missing `type` field. Details: ", plugin);
+        continue;
+      }
+      plugins.push(plugin);
+    }
+    return plugins;
   }
 
   getPluginsByType() {
