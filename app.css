@@ -312,7 +312,8 @@
       right: 0;
       width: 16px;
       height: 16px;
-      display: none; }
+      display: none;
+      pointer-events: none; }
     .megadraft-editor .block__input:hover {
       border-color: #999; }
     .megadraft-editor .block__input:hover + svg.block__input__icon {
