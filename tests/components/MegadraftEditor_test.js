@@ -11,17 +11,17 @@ import chai from "chai";
 import sinon from "sinon";
 import {Editor} from "draft-js";
 
-import {MegadraftEditor} from "../src/Megadraft";
-import Media from "../src/components/Media";
-import {editorStateFromRaw} from "../src/utils";
-import DEFAULT_PLUGINS from "../src/plugins/default";
+import MegadraftEditor from "../../src/components/MegadraftEditor";
+import Media from "../../src/components/Media";
+import {editorStateFromRaw} from "../../src/utils";
+import DEFAULT_PLUGINS from "../../src/plugins/default";
 
 
 let expect = chai.expect;
 let kba = function keyBindingAction() {};
 
 
-describe("Megadraft Component", () => {
+describe("MegadraftEditor Component", () => {
   beforeEach(function() {
     const INITIAL_CONTENT = {
       "entityMap": {},
