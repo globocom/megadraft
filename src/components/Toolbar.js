@@ -125,8 +125,10 @@ export default class Toolbar extends Component {
     const anchorKey = selection.getAnchorKey();
     const contentState = this.props.editorState.getCurrentContent();
     const anchorBlock = contentState.getBlockForKey(anchorKey);
-    const entityKey = anchorBlock.getEntityAt(selection.anchorOffset);
-    if (entityKey) {
+    const offset = selection.anchorOffset;
+    const index = selection.isBackward ? offset - 1 : offset;
+    const entityKey = anchorBlock.getEntityAt(index);
+    if (entityKey !== null) {
       const entity = Entity.get(entityKey);
       if (entity.getType() === "LINK") {
         return true;

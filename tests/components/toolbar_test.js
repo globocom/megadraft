@@ -282,6 +282,32 @@ describe("Toolbar Component", function() {
 
         expect(url).to.be.equal("http://www.globo.com");
       });
+
+      it("should remove a link backwards", function() {
+
+        TestUtils.Simulate.click(this.button);
+
+        const linkInput = TestUtils.findRenderedComponentWithType(this.wrapper, LinkInput);
+        const textInput = linkInput.refs.textInput;
+
+        textInput.value = "http://www.globo.com";
+        TestUtils.Simulate.change(textInput);
+        TestUtils.Simulate.keyDown(textInput, {key: "Enter", keyCode: 13, which: 13});
+
+        replaceSelection({
+          anchorOffset: 5,
+          focusOffset: 0,
+          isBackward: true
+        }, this.wrapper);
+
+        TestUtils.Simulate.click(this.button);
+        const contentState = this.wrapper.state.editorState.getCurrentContent();
+
+        const blockWithLinkAtBeginning = contentState.getBlockForKey("ag6qs");
+        const linkKey = blockWithLinkAtBeginning.getEntityAt(0);
+
+        expect(linkKey).to.be.null;
+      });
     });
   });
 });
