@@ -6,6 +6,7 @@
 
 import React, {Component} from "react";
 import {Editor, RichUtils, getDefaultKeyBinding} from "draft-js";
+import PluginsEditor from "draft-js-plugins-editor";
 
 import Toolbar from "./Toolbar";
 import Sidebar from "./Sidebar";
@@ -166,9 +167,9 @@ export default class MegadraftEditor extends Component {
             plugins={plugins}
             editorState={editorState}
             onChange={this.onChange}/>
-          <Editor
+          <PluginsEditor
+            plugins={this.props.dpPlugins}
             readOnly={this.state.readOnly}
-            plugins={plugins}
             blockRendererFn={this.mediaBlockRenderer}
             blockStyleFn={this.blockStyleFn}
             onTab={this.onTab}

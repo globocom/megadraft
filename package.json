@@ -6,6 +6,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "draft-js": "^0.8.0",
+    "draft-js-plugins-editor": "^1.1.0",
     "immutable": "^3.8.1",
     "setimmediate": "^1.0.4"
   },
