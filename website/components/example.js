@@ -5,6 +5,7 @@
  */
 
 import React from "react";
+import createBlockBreakoutPlugin from "draft-js-block-breakout-plugin";
 
 import {Tabs, Tab} from "material-ui/Tabs";
 import FontIcon from "material-ui/FontIcon";
@@ -29,6 +30,8 @@ const muiTheme = getMuiTheme({
     accent1Color: indigo500
   }
 });
+
+const blockBreakoutPlugin = createBlockBreakoutPlugin()
 
 class Example extends React.Component {
 
@@ -83,6 +86,7 @@ class Example extends React.Component {
         <Tab label="Editor" value="a" icon={icon_edit}>
           <div className="tab-container-editor">
             <MegadraftEditor
+              dpPlugins={[blockBreakoutPlugin]}
               editorState={this.state.value}
               placeholder="Text"
               onChange={this.onChange}
