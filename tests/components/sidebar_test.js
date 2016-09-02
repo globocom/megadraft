@@ -5,15 +5,15 @@
  */
 
 import React, {Component} from "react";
-import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils";
 import chai from "chai";
+import {mount} from "enzyme";
 
 import Sidebar,
   {ToggleButton, SideMenu} from "../../src/components/Sidebar";
 import image from "../../src/plugins/image/plugin";
 import {editorStateFromRaw} from "../../src/utils";
 import DEFAULT_PLUGINS from "../../src/plugins/default.js";
+import ImageButton from "../../src/plugins/image/ImageButton";
 
 let expect = chai.expect;
 
@@ -61,26 +61,19 @@ describe("Sidebar Component", function() {
     };
 
     this.editorState = editorStateFromRaw(INITIAL_CONTENT);
-    this.wrapper = TestUtils.renderIntoDocument(
+    this.wrapper = mount(
       <SidebarWrapper editorState={this.editorState}/>
     );
   });
 
-  afterEach(function() {
-    ReactDOM.unmountComponentAtNode(
-      ReactDOM.findDOMNode(this.wrapper).parentNode);
-  });
-
   it("renders correctly on the page", function() {
-    const sidebar = TestUtils.findRenderedComponentWithType(
-      this.wrapper, Sidebar);
-    expect(ReactDOM.findDOMNode(sidebar)).to.exist;
+    const sidebar = this.wrapper.find(Sidebar);
+    expect(sidebar).to.have.length(1);
   });
 
-  it("renders the enabled plugins", function() {
-    const button = TestUtils.findRenderedComponentWithType(
-      this.wrapper, image.buttonComponent);
-    expect(ReactDOM.findDOMNode(button)).to.exist;
+  it("renders enabled plugins", function() {
+    const button = this.wrapper.find(image.buttonComponent);
+    expect(button).to.have.length(1);
   });
 
   it("renders only valid plugins", function() {
@@ -89,41 +82,38 @@ describe("Sidebar Component", function() {
       blockComponent: {}
     };
     const plugins = [image, invalidPlugin];
-    const wrapper = TestUtils.renderIntoDocument(
+    const wrapper = mount(
       <SidebarWrapper editorState={this.editorState} plugins={plugins} />
     );
-    const sidemenu = TestUtils.findRenderedComponentWithType(wrapper, SideMenu);
-    expect(sidemenu.props.plugins).to.have.length(1);
+    const sidemenu = wrapper.find(SideMenu);
+    expect(sidemenu.prop("plugins")).to.have.length(1);
   });
 
   it("has the menu hidden by default", function() {
-    const menu = TestUtils.findRenderedComponentWithType(
-      this.wrapper, SideMenu);
-    const domMenu = TestUtils.findRenderedDOMComponentWithTag(menu, "ul");
-    // expect(domMenu.style["max-height"]).to.be.equal("0");
-    expect(domMenu.classList.contains("sidemenu__items--open")).to.be.false;
+    const menu = this.wrapper.find(SideMenu);
+    const domMenu = menu.find("ul");
+    expect(domMenu.hasClass("sidemenu__items--open")).to.be.false;
   });
 
   it("opens the menu on click", function() {
-    const toggleButton = TestUtils.findRenderedComponentWithType(
-      this.wrapper, ToggleButton);
-    const domButton = TestUtils.findRenderedDOMComponentWithTag(
-      toggleButton, "button");
-    TestUtils.Simulate.click(domButton);
-    const menu = TestUtils.findRenderedComponentWithType(
-      this.wrapper, SideMenu);
-    const domMenu = TestUtils.findRenderedDOMComponentWithTag(menu, "ul");
-    expect(domMenu.classList.contains("sidemenu__items--open")).to.be.true;
+    const toggleButton = this.wrapper.find(ToggleButton);
+    const domButton = toggleButton.find("button");
+
+    domButton.simulate("click");
+
+    const menu = this.wrapper.find(SideMenu);
+    const domMenu = menu.find("ul");
+    expect(domMenu.hasClass("sidemenu__items--open")).to.be.true;
   });
 
   it("is possible to click on the button", function() {
-    const button = TestUtils.findRenderedComponentWithType(
-      this.wrapper, image.buttonComponent);
-    const domButton = TestUtils.findRenderedDOMComponentWithTag(
-      button, "button");
+    const toggleButton = this.wrapper.find(ImageButton);
+    const domButton = toggleButton.find("button");
+
     window.prompt = () => "http://www.globo.com";
-    TestUtils.Simulate.click(domButton);
-    const contentState = this.wrapper.state.editorState.getCurrentContent();
+    domButton.simulate("click");
+
+    const contentState = this.wrapper.state("editorState").getCurrentContent();
     let data = null;
     contentState.getBlockMap().forEach((block) => {
       if (block.getType() === "atomic") {

@@ -5,10 +5,10 @@
  */
 
 import React from "react";
-import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils";
 import chai from "chai";
 import sinon from "sinon";
+import {mount} from "enzyme";
+
 
 import icons from "../../src/icons";
 import Dropdown from "../../src/components/Dropdown";
@@ -29,17 +29,11 @@ describe("Dropdown Component", function() {
       {"key": "samba", "icon": icons.MediaSmallIcon, "label": "Samba"}
     ];
 
-    this.component = TestUtils.renderIntoDocument(
+    this.component = mount(
       <Dropdown
         items={dropdownItems}
         selected={this.selected}
         onChange={this.onChange} />
-    );
-  });
-
-  afterEach(function() {
-    ReactDOM.unmountComponentAtNode(
-      ReactDOM.findDOMNode(this.component).parentNode
     );
   });
 
@@ -48,43 +42,34 @@ describe("Dropdown Component", function() {
   });
 
   it("renders dropdown items", function() {
-    const items = TestUtils.scryRenderedComponentsWithType(
-      this.component, DropdownItem
-    );
+    const items = this.component.find(DropdownItem);
     expect(items).to.have.length(4);
   });
 
   it("renders default selected dropdown item", function() {
-    const selected = TestUtils.scryRenderedComponentsWithType(
-      this.component, DropdownItem
-    )[0];
+    const selected = this.component.find(DropdownItem).first();
 
-    const text = TestUtils.findRenderedDOMComponentWithTag(selected, "span");
-    expect(text.innerHTML).to.equal("Metal");
+    const text = selected.find("span");
+    expect(text.text()).to.equal("Metal");
   });
 
   it("is possible to click on the dropdrown item", function() {
-    const item = TestUtils.scryRenderedComponentsWithType(
-      this.component, DropdownItem
-    )[1];
-    const domItem = TestUtils.findRenderedDOMComponentWithTag(item, "div");
+    const item = this.component.find(DropdownItem).at(1);
 
     expect(this.onChange).to.not.have.been.called;
 
-    TestUtils.Simulate.click(domItem);
+    item.find("div").simulate("click");
 
     expect(this.onChange).to.have.been.called;
   });
 
   it("toggles `isOpen` on click", function () {
-    const wrapper = TestUtils.scryRenderedDOMComponentsWithTag(
-      this.component, "div"
-    )[0];
+    const wrapper = this.component.find("div").first();
 
-    TestUtils.Simulate.click(wrapper);
-    expect(this.component.state.isOpen).to.be.true;
+    wrapper.simulate("click");
+    expect(this.component.state("isOpen")).to.be.true;
 
-    TestUtils.Simulate.click(wrapper);
-    expect(this.component.state.isOpen).to.be.false;
+    wrapper.simulate("click");
+    expect(this.component.state("isOpen")).to.be.false;
   });
 });

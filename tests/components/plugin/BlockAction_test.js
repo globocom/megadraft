@@ -5,10 +5,9 @@
  */
 
 import React from "react";
-import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils";
 import chai from "chai";
 import sinon from "sinon";
+import {mount} from "enzyme";
 
 import icons from "../../../src/icons";
 import BlockAction from "../../../src/components/plugin/BlockAction";
@@ -23,29 +22,23 @@ describe("BlockAction Component", function() {
 
     const item = {"key": "crop", "icon": icons.CropIcon, "action": this.crop};
 
-    this.component = TestUtils.renderIntoDocument(
+    this.wrapper = mount(
       <BlockAction item={item} key={item.key} />
     );
   });
 
-  afterEach(function() {
-    ReactDOM.unmountComponentAtNode(
-      ReactDOM.findDOMNode(this.component).parentNode
-    );
-  });
-
   it("renders without problems", function() {
-    expect(this.component).to.exist;
+    const blockAction = this.wrapper.find(BlockAction);
+    expect(blockAction).to.have.length(1);
   });
 
   it("is possible to click on the action item", function() {
-    const itemDOM = TestUtils.findRenderedDOMComponentWithTag(this.component, "li");
+    const itemDOM = this.wrapper.find("li");
 
     expect(this.crop).to.not.have.been.called;
 
-    TestUtils.Simulate.click(itemDOM);
+    itemDOM.simulate("click");
 
     expect(this.crop).to.have.been.called;
   });
 });
-
