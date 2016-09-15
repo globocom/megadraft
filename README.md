@@ -2,6 +2,10 @@
 
 Rich Text editor built on top of draft.js (Work in Progress)
 
+## Discussion and Support
+
+Join the [#megadraft][megadraft-slack] channel on the DraftJS [Slack team][draftjs-slack]!
+
 ## Live Example & Documentation
 
 Checkout the [website](http://globocom.github.io/megadraft/)!
@@ -67,3 +71,5 @@ under [CC0 license](https://stocksnap.io/license).
 
 [plugin-generator]: https://github.com/globocom/generator-megadraft-plugin
 [docs-plugins]: http://globocom.github.io/megadraft/#/docs/plugins
+[megadraft-slack]: https://draftjs.slack.com/messages/megadraft/
+[draftjs-slack]: https://draftjs.herokuapp.com
