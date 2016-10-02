@@ -25,12 +25,8 @@ export default class VideoBlock extends Component {
     this._handleCaptionChange = ::this._handleCaptionChange;
 
     this.actions = [
-      {"key": "edit", "icon": icons.EditIcon, "action": this._handleEdit},
       {"key": "delete", "icon": icons.DeleteIcon, "action": this.props.container.remove}
     ];
-  }
-
-  _handleEdit() {
   }
 
   _handleCaptionChange(event) {

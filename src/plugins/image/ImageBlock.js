@@ -26,16 +26,8 @@ export default class ImageBlock extends Component {
     this._handleRightsHolderChange = ::this._handleRightsHolderChange;
 
     this.actions = [
-      {"key": "crop", "icon": icons.CropIcon, "action": this._handleCrop},
-      {"key": "edit", "icon": icons.EditIcon, "action": this._handleEdit},
       {"key": "delete", "icon": icons.DeleteIcon, "action": this.props.container.remove}
     ];
-  }
-
-  _handleCrop() {
-  }
-
-  _handleEdit() {
   }
 
   _handleCaptionChange(event) {
