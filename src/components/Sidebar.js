@@ -157,10 +157,9 @@ export default class SideBar extends Component {
       return;
     }
 
-    const top = Math.floor(
-      element.getBoundingClientRect().top - 4 -
-      (container.getBoundingClientRect().top -
-        document.documentElement.clientTop));
+    const containerTop = container.getBoundingClientRect().top - document.documentElement.clientTop;
+    let top = element.getBoundingClientRect().top - 4 - containerTop;
+    top = Math.max(0, Math.floor(top));
 
     if (this.state.top !== top) {
       this.setState({
