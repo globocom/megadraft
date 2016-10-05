@@ -1,3 +1,5 @@
+.SILENT:
+
 setup:
 	@npm install
 
