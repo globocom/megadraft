@@ -22,25 +22,23 @@ export default class Media extends Component {
 
   remove() {
     const {editorState} = this.props.blockProps;
+    const selection = editorState.getSelection();
     const content = editorState.getCurrentContent();
-    const targetRange = new SelectionState({
-      anchorKey: this.props.block.key,
+    const keyAfter = content.getKeyAfter(this.props.block.key);
+    const blockMap = content.getBlockMap().delete(this.props.block.key);
+    const withoutAtomicBlock = content.merge({
+      blockMap, selectionAfter: selection
+    });
+    const newState = EditorState.push(
+      editorState, withoutAtomicBlock, "remove-range"
+    );
+    const newSelection = new SelectionState({
+      anchorKey: keyAfter,
       anchorOffset: 0,
-      focusKey: this.props.block.key,
+      focusKey: keyAfter,
       focusOffset: this.props.block.getLength()
     });
-
-    const withoutMedia = Modifier.removeRange(content, targetRange, "backward");
-    const resetBlock = Modifier.setBlockType(
-      withoutMedia,
-      withoutMedia.getSelectionAfter(),
-      "unstyled"
-    );
-
-    const newState = EditorState.push(editorState, resetBlock, "remove-range");
-    const newEditorState = EditorState.forceSelection(
-      newState, resetBlock.getSelectionAfter()
-    );
+    const newEditorState = EditorState.forceSelection(newState, newSelection);
     this.onChange(newEditorState);
   }
 

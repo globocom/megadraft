@@ -98,6 +98,6 @@ describe("Media Component", function() {
     const currentContent = editorState.getCurrentContent();
     const block = currentContent.getBlockForKey("9vgd");
 
-    expect(block.type).to.equal("unstyled");
+    expect(block).to.be.undefined;
   });
 });
