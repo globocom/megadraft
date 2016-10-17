@@ -5,11 +5,10 @@
  */
 
 import React from "react";
-import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils";
 import chai from "chai";
 import sinon from "sinon";
 import {Editor} from "draft-js";
+import {mount} from "enzyme";
 
 import MegadraftEditor from "../../src/components/MegadraftEditor";
 import Media from "../../src/components/Media";
@@ -70,20 +69,17 @@ describe("MegadraftEditor Component", () => {
 
     this.onChange = sinon.spy();
     this.editorState = editorStateFromRaw(INITIAL_CONTENT);
-    this.component = TestUtils.renderIntoDocument(
+    this.wrapper = mount(
       <MegadraftEditor
         editorState={this.editorState}
         onChange={this.onChange}
         keyBindings={keyBindings}/>
     );
-  });
-
-  afterEach(function() {
-    ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(this.component).parentNode);
+    this.component = this.wrapper.get(0);
   });
 
   it("renders without problems", function() {
-    expect(this.component).to.exist;
+    expect(this.wrapper).to.have.length(1);
   });
 
   it("has the initial text", function() {
@@ -91,10 +87,7 @@ describe("MegadraftEditor Component", () => {
   });
 
   it("renders Media component", function() {
-    const items = TestUtils.scryRenderedComponentsWithType(
-      this.component, Media
-    );
-
+    const items = this.wrapper.find(Media);
     expect(items).to.have.length(1);
   });
 
@@ -132,21 +125,14 @@ describe("MegadraftEditor Component", () => {
   });
 
   it("starts with default readOnly status", function() {
-    const items = TestUtils.scryRenderedComponentsWithType(
-      this.component, Editor
-    );
-
-    expect(items[0].props.readOnly).to.be.false;
+    const items = this.wrapper.find(Editor);
+    expect(items.get(0).props.readOnly).to.be.false;
   });
 
   it("changes readOnly status", function() {
-    const items = TestUtils.scryRenderedComponentsWithType(
-      this.component, Editor
-    );
-
+    const items = this.wrapper.find(Editor);
     this.component.setReadOnly(true);
-
-    expect(items[0].props.readOnly).to.be.true;
+    expect(items.get(0).props.readOnly).to.be.true;
   });
 
   it("is capable of inserting soft line breaks", function() {
@@ -188,18 +174,17 @@ describe("MegadraftEditor Component", () => {
       blockComponent: {}
     };
 
-    const component = TestUtils.renderIntoDocument(
+    const wrapper = mount(
       <MegadraftEditor
         editorState={this.editorState}
         onChange={this.onChange}
         plugins={[image, invalidPlugin]} />
     );
-    const sidebar = TestUtils.findRenderedComponentWithType(component, Sidebar);
-
-    expect(sidebar.props.plugins).to.have.length(1);
+    const sidebar = wrapper.find(Sidebar);
+    expect(sidebar.prop("plugins")).to.have.length(1);
   });
 
-  it("shows warn for missing `type` field", function() {
+  it("shows warning for missing `type` field", function() {
     console.warn = sinon.spy();
 
     const plugin =  {
@@ -208,12 +193,13 @@ describe("MegadraftEditor Component", () => {
     };
     const plugins = [plugin];
 
-    TestUtils.renderIntoDocument(
+    mount(
       <MegadraftEditor
         editorState={this.editorState}
         onChange={this.onChange}
         plugins={plugins} />
     );
+
     expect(console.warn.getCall(0).args[0]).to.equal(
       "Plugin: Missing `type` field. Details: "
     );

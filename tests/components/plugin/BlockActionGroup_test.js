@@ -5,10 +5,9 @@
  */
 
 import React from "react";
-import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils";
 import chai from "chai";
 import sinon from "sinon";
+import {mount} from "enzyme";
 
 import icons from "../../../src/icons";
 
@@ -31,26 +30,17 @@ describe("BlockActionGroup Component", function() {
       {"key": "delete", "icon": icons.DeleteIcon, "action": this.delete}
     ];
 
-    this.component = TestUtils.renderIntoDocument(
+    this.component = mount(
       <BlockActionGroup items={actionsItems} />
     );
   });
 
-  afterEach(function() {
-    ReactDOM.unmountComponentAtNode(
-      ReactDOM.findDOMNode(this.component).parentNode
-    );
-  });
-
   it("renders without problems", function() {
-    expect(this.component).to.exist;
+    expect(this.component).to.have.length(1);
   });
 
   it("renders actions items", function() {
-    const items = TestUtils.scryRenderedComponentsWithType(
-      this.component, BlockAction
-    );
-
+    const items = this.component.find(BlockAction);
     expect(items).to.have.length(3);
   });
 });

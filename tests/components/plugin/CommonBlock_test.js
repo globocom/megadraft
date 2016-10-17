@@ -5,10 +5,9 @@
  */
 
 import React from "react";
-import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils";
 import chai from "chai";
 import sinon from "sinon";
+import {mount} from "enzyme";
 
 import icons from "../../../src/icons";
 import Dropdown from "../../../src/components/Dropdown";
@@ -35,7 +34,7 @@ describe("CommonBlock Component", function() {
     };
 
     this.renderComponent = function (data) {
-      return TestUtils.renderIntoDocument(
+      return mount(
         <CommonBlock
           blockProps={blockProps}
           actions={actions}
@@ -45,31 +44,25 @@ describe("CommonBlock Component", function() {
     };
   });
 
-  afterEach(function() {
-    ReactDOM.unmountComponentAtNode(
-      ReactDOM.findDOMNode(this.component).parentNode
-    );
-  });
-
   it("renders default display option when it is empty", function() {
     this.component = this.renderComponent({});
-    const dropdown = TestUtils.findRenderedComponentWithType(this.component, Dropdown);
-    expect(dropdown.props.selected).to.equal("medium");
+    const dropdown = this.component.find(Dropdown);
+    expect(dropdown.prop("selected")).to.equal("medium");
   });
 
   it("renders selected display option when it is present", function() {
     const data = {display: "small"};
     this.component = this.renderComponent(data);
 
-    const dropdown = TestUtils.findRenderedComponentWithType(this.component, Dropdown);
-    expect(dropdown.props.selected).to.equal("small");
+    const dropdown = this.component.find(Dropdown);
+    expect(dropdown.prop("selected")).to.equal("small");
   });
 
   it("updates selected display option on change", function () {
     this.component = this.renderComponent({});
-    const dropdown = TestUtils.findRenderedComponentWithType(this.component, Dropdown);
+    const dropdown = this.component.find(Dropdown);
 
-    dropdown.onChange("small");
+    dropdown.prop("onChange")("small");
 
     expect(this.container.updateData).to.have.been.calledWith({display: "small"});
   });
