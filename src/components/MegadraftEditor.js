@@ -162,10 +162,13 @@ export default class MegadraftEditor extends Component {
           className="megadraft-editor"
           id="megadraft-editor"
           ref="editor">
-          <Sidebar
-            plugins={plugins}
-            editorState={editorState}
-            onChange={this.onChange}/>
+          { !this.state.readOnly ?
+            <Sidebar
+              plugins={plugins}
+              editorState={editorState}
+              onChange={this.onChange} /> :
+            null
+          }
           <Editor
             readOnly={this.state.readOnly}
             plugins={plugins}
@@ -180,11 +183,14 @@ export default class MegadraftEditor extends Component {
             editorState={editorState}
             placeholder={this.props.placeholder}
             onChange={this.onChange} />
-          <Toolbar
-            editor={this.refs.editor}
-            editorState={editorState}
-            onChange={this.onChange}
-            actions={this.actions}/>
+          { !this.state.readOnly ?
+            <Toolbar
+              editor={this.refs.editor}
+              editorState={editorState}
+              onChange={this.onChange}
+              actions={this.actions}/> :
+              null
+          }
         </div>
       </div>
     );
