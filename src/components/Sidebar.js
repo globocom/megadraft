@@ -153,7 +153,7 @@ export default class SideBar extends Component {
 
     const element = getSelectedBlockElement();
 
-    if (!element) {
+    if (!element || !container) {
       return;
     }
 
@@ -169,6 +169,9 @@ export default class SideBar extends Component {
   }
 
   render() {
+    if(this.props.readOnly) {
+      return null;
+    }
     return (
       <div ref="container" className="sidebar">
         <div style={{top: `${this.state.top}px`}} className="sidebar__menu">
