@@ -37,6 +37,7 @@ export default class ToolbarWrapper extends Component {
           editor={this.refs.editor}
           editorState={this.state.editorState}
           actions={this.props.actions}
+          readOnly={this.props.readOnly}
           onChange={this.onChange} />
       </div>
     );
@@ -104,6 +105,13 @@ describe("Toolbar Component", function() {
     it("renders separator", function() {
       const items = this.wrapper.find(Separator);
       expect(items).to.have.length(1);
+    });
+    it("renders as null when readOnly is set", function() {
+      const wrapper = mount(
+        <ToolbarWrapper readOnly editorState={this.editorState} actions={this.actions} />
+      );
+      const toolbar = wrapper.find(Toolbar);
+      expect(toolbar.html()).to.be.null;
     });
 
     describe("actions", function () {
