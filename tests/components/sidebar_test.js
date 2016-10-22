@@ -72,6 +72,7 @@ describe("Sidebar Component", function() {
     expect(sidebar).to.have.length(1);
     expect(sidebar.html()).not.to.be.null;
   });
+  
   it("renders as null when readOnly is set", function() {
     const wrapper = mount(
       <SidebarWrapper readOnly editorState={this.editorState}/>

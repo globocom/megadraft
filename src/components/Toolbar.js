@@ -159,6 +159,7 @@ export default class Toolbar extends Component {
       "toolbar--open": this.state.show,
       "toolbar--editing-link": this.state.editingLink
     });
+    
     return (
       <div className={toolbarClass}
            style={this.state.position}

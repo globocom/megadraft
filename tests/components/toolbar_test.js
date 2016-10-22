@@ -106,6 +106,7 @@ describe("Toolbar Component", function() {
       const items = this.wrapper.find(Separator);
       expect(items).to.have.length(1);
     });
+    
     it("renders as null when readOnly is set", function() {
       const wrapper = mount(
         <ToolbarWrapper readOnly editorState={this.editorState} actions={this.actions} />
