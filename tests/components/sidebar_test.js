@@ -37,6 +37,7 @@ class SidebarWrapper extends Component {
           ref="sidebar"
           plugins={this.plugins}
           editorState={this.state.editorState}
+          readOnly={this.props.readOnly}
           onChange={this.onChange} />
       </div>
     );
@@ -69,6 +70,15 @@ describe("Sidebar Component", function() {
   it("renders correctly on the page", function() {
     const sidebar = this.wrapper.find(Sidebar);
     expect(sidebar).to.have.length(1);
+    expect(sidebar.html()).not.to.be.null;
+  });
+  
+  it("renders as null when readOnly is set", function() {
+    const wrapper = mount(
+      <SidebarWrapper readOnly editorState={this.editorState}/>
+    );
+    const sidebar = wrapper.find(Sidebar);
+    expect(sidebar.html()).to.be.null;
   });
 
   it("renders enabled plugins", function() {
