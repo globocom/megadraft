@@ -185,6 +185,7 @@ export default class MegadraftEditor extends Component {
           <Editor
             readOnly={this.state.readOnly}
             plugins={plugins}
+            blockRenderMap={this.props.blockRenderMap}
             blockRendererFn={this.mediaBlockRenderer}
             blockStyleFn={this.blockStyleFn}
             onTab={this.onTab}
@@ -199,6 +200,7 @@ export default class MegadraftEditor extends Component {
           <Toolbar
             editor={this.refs.editor}
             editorState={editorState}
+            readOnly={this.state.readOnly}
             onChange={this.onChange}
             actions={this.actions}/>
         </div>

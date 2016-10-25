@@ -152,6 +152,9 @@ export default class Toolbar extends Component {
   }
 
   render() {
+    if(this.props.readOnly) {
+      return null;
+    }
     const toolbarClass = classNames("toolbar", {
       "toolbar--open": this.state.show,
       "toolbar--editing-link": this.state.editingLink
