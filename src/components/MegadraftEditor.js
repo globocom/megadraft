@@ -165,7 +165,8 @@ export default class MegadraftEditor extends Component {
           <Sidebar
             plugins={plugins}
             editorState={editorState}
-            onChange={this.onChange}/>
+            readOnly={this.state.readOnly}
+            onChange={this.onChange} />
           <Editor
             readOnly={this.state.readOnly}
             plugins={plugins}
@@ -184,6 +185,7 @@ export default class MegadraftEditor extends Component {
           <Toolbar
             editor={this.refs.editor}
             editorState={editorState}
+            readOnly={this.state.readOnly}
             onChange={this.onChange}
             actions={this.actions}/>
         </div>

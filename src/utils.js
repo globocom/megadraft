@@ -48,7 +48,7 @@ export function getSelectionCoords(editor, toolbar) {
   const editorBounds = editor.getBoundingClientRect();
   const rangeBounds = getVisibleSelectionRect(window);
 
-  if (!rangeBounds) {
+  if (!rangeBounds || !toolbar) {
     return null;
   }
 
