@@ -157,7 +157,7 @@ export default class MegadraftEditor extends Component {
   getSidebarComponent = () => {
     const { sidebarRendererFn, editorState } = this.props;
     let SidebarComponent = null;
-    if(typeof sidebarRendererFn === 'function') {
+    if(typeof sidebarRendererFn === "function") {
       SidebarComponent = sidebarRendererFn(this.plugins, editorState);
     } else {
       SidebarComponent = (

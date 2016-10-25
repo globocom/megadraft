@@ -212,7 +212,7 @@ describe("MegadraftEditor Component", () => {
 
   it("calls sidebarRendererFn if it's provided", function() {
     const rcs = sinon.spy();
-    const wrapper = mount(
+    mount(
       <MegadraftEditor
         editorState={this.editorState}
         onChange={this.onChange}
@@ -232,7 +232,7 @@ describe("MegadraftEditor Component", () => {
       }
     }
     const renderCustomSidebar = function(plugins, editorState) {
-        return <MyCustomSidebar plugins={plugins} editorState={editorState}/>;
+      return <MyCustomSidebar plugins={plugins} editorState={editorState}/>;
     };
     const wrapper = mount(
       <MegadraftEditor
