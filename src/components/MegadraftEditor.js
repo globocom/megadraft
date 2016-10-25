@@ -39,6 +39,8 @@ export default class MegadraftEditor extends Component {
     this.pluginsByType = this.getPluginsByType();
 
     this.keyBindings = this.props.keyBindings || [];
+    this.Sidebar = this.getSidebarComponent();
+
   }
 
   getValidPlugins() {
@@ -152,6 +154,23 @@ export default class MegadraftEditor extends Component {
     }
   }
 
+  getSidebarComponent = () => {
+    const { sidebarRendererFn, editorState } = this.props;
+    let SidebarComponent = null;
+    if(typeof sidebarRendererFn === 'function') {
+      SidebarComponent = sidebarRendererFn(this.plugins, editorState);
+    } else {
+      SidebarComponent = (
+        <Sidebar
+          plugins={this.plugins}
+          editorState={editorState}
+          onChange={this.onChange}
+        />
+      );
+    }
+    return SidebarComponent;
+  }
+
   render() {
     const {editorState, stripPastedStyles, spellCheck} = this.props;
     const plugins = this.plugins;
@@ -162,10 +181,7 @@ export default class MegadraftEditor extends Component {
           className="megadraft-editor"
           id="megadraft-editor"
           ref="editor">
-          <Sidebar
-            plugins={plugins}
-            editorState={editorState}
-            onChange={this.onChange}/>
+          {this.Sidebar}
           <Editor
             readOnly={this.state.readOnly}
             plugins={plugins}

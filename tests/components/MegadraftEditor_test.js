@@ -204,4 +204,43 @@ describe("MegadraftEditor Component", () => {
       "Plugin: Missing `type` field. Details: "
     );
   });
+
+  it("renders default sidebar if sidebarRendererFn not provided", function() {
+    const sidebar = this.wrapper.find(Sidebar);
+    expect(sidebar).to.have.length(1);
+  });
+
+  it("calls sidebarRendererFn if it's provided", function() {
+    const rcs = sinon.spy();
+    const wrapper = mount(
+      <MegadraftEditor
+        editorState={this.editorState}
+        onChange={this.onChange}
+        sidebarRendererFn={rcs} />
+    );
+    expect(rcs.called).to.be.true;
+  });
+
+  it("renders custom sidebar if sidebarRendererFn is provided", function() {
+    class MyCustomSidebar extends React.Component {
+      render() {
+        return (
+          <div>
+            <span>My custom Sidebar</span>
+          </div>
+        );
+      }
+    }
+    const renderCustomSidebar = function(plugins, editorState) {
+        return <MyCustomSidebar plugins={plugins} editorState={editorState}/>;
+    };
+    const wrapper = mount(
+      <MegadraftEditor
+        editorState={this.editorState}
+        onChange={this.onChange}
+        sidebarRendererFn={renderCustomSidebar} />
+    );
+    const sidebar = wrapper.find(MyCustomSidebar);
+    expect(sidebar).to.have.length(1);
+  });
 });
