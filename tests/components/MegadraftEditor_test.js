@@ -211,14 +211,14 @@ describe("MegadraftEditor Component", () => {
   });
 
   it("calls sidebarRendererFn if it's provided", function() {
-    const rcs = sinon.spy();
+    const renderCustomSidebar = sinon.spy();
     mount(
       <MegadraftEditor
         editorState={this.editorState}
         onChange={this.onChange}
-        sidebarRendererFn={rcs} />
+        sidebarRendererFn={renderCustomSidebar} />
     );
-    expect(rcs.called).to.be.true;
+    expect(renderCustomSidebar.called).to.be.true;
   });
 
   it("renders custom sidebar if sidebarRendererFn is provided", function() {
