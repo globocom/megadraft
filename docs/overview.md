@@ -68,15 +68,13 @@ class App extends React.Component {
   onChange(editorState) {
     this.setState({editorState});
   }
-
-  getCustomSidebar(plugins, editorState) {
-    return(
-      <CustomSidebar
-        plugins={plugins}
-        editorState={editorState}
-        onChange={this.onChange}
-      />
-    )
+  /**
+   * @param props.plugins Array of valid plugins
+   * @param props.editorState DraftJS editorState object
+   * @param props.onChange You must use this handler for change events
+   */
+  getCustomSidebar(props) {
+    return <CustomSidebar {...props} />
   }
   render() {
     return (
