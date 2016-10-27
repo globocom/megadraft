@@ -39,6 +39,7 @@ export default class MegadraftEditor extends Component {
     this.pluginsByType = this.getPluginsByType();
 
     this.keyBindings = this.props.keyBindings || [];
+
   }
 
   getValidPlugins() {
@@ -152,6 +153,14 @@ export default class MegadraftEditor extends Component {
     }
   }
 
+  renderSidebar(props) {
+    const { sidebarRendererFn } = this.props;
+    if(typeof sidebarRendererFn === "function") {
+      return sidebarRendererFn(props);
+    }
+    return <Sidebar {...props} />;
+  }
+
   render() {
     const {editorState, stripPastedStyles, spellCheck} = this.props;
     const plugins = this.plugins;
@@ -162,11 +171,11 @@ export default class MegadraftEditor extends Component {
           className="megadraft-editor"
           id="megadraft-editor"
           ref="editor">
-          <Sidebar
-            plugins={plugins}
-            editorState={editorState}
-            readOnly={this.state.readOnly}
-            onChange={this.onChange} />
+          {this.renderSidebar({
+            plugins,
+            editorState,
+            onChange: this.onChange
+          })}
           <Editor
             readOnly={this.state.readOnly}
             plugins={plugins}
