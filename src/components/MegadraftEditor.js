@@ -174,6 +174,7 @@ export default class MegadraftEditor extends Component {
           {this.renderSidebar({
             plugins,
             editorState,
+            readOnly: this.state.readOnly,
             onChange: this.onChange
           })}
           <Editor
