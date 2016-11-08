@@ -161,6 +161,14 @@ export default class MegadraftEditor extends Component {
     return <Sidebar {...props} />;
   }
 
+  renderToolbar(props) {
+    const { toolbarRendererFn } = this.props;
+    if(typeof toolbarRendererFn === "function") {
+      return toolbarRendererFn(props);
+    }
+    return <Toolbar {...props} />;
+  }
+
   render() {
     const {editorState, stripPastedStyles, spellCheck} = this.props;
     const plugins = this.plugins;
@@ -192,12 +200,13 @@ export default class MegadraftEditor extends Component {
             editorState={editorState}
             placeholder={this.props.placeholder}
             onChange={this.onChange} />
-          <Toolbar
-            editor={this.refs.editor}
-            editorState={editorState}
-            readOnly={this.state.readOnly}
-            onChange={this.onChange}
-            actions={this.actions}/>
+          {this.renderToolbar({
+            editor: this.refs.editor,
+            editorState,
+            readOnly: this.state.readOnly,
+            onChange: this.onChange,
+            actions: this.actions
+          })}
         </div>
       </div>
     );

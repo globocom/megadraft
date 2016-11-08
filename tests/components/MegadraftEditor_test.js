@@ -13,6 +13,7 @@ import {mount} from "enzyme";
 import MegadraftEditor from "../../src/components/MegadraftEditor";
 import Media from "../../src/components/Media";
 import Sidebar from "../../src/components/Sidebar";
+import Toolbar from "../../src/components/Toolbar";
 import {editorStateFromRaw} from "../../src/utils";
 import image from "../../src/plugins/image/plugin";
 
@@ -259,4 +260,65 @@ describe("MegadraftEditor Component", () => {
     const sidebar = wrapper.find(MyCustomSidebar);
     expect(sidebar).to.have.length(1);
   });
+
+  it("renders default toolbar if toolbarRendererFn not provided", function() {
+    const toolbar = this.wrapper.find(Toolbar);
+    expect(toolbar).to.have.length(1);
+  });
+
+  it("passes required props to default toolbar", function() {
+    const toolbar = this.wrapper.find(Toolbar);
+    // editor is undefined :-/
+    //expect(toolbar.prop("editor")).to.equal(this.component.refs.editor);
+    expect(toolbar.prop("actions")).to.equal(this.component.actions);
+    expect(toolbar.prop("onChange")).to.equal(this.component.onChange);
+    expect(toolbar.prop("editorState")).to.equal(this.editorState);
+    expect(toolbar.prop("readOnly")).to.equal(false);
+  });
+
+  it("calls toolbarRendererFn if it's provided", function() {
+    const renderCustomToolbar = sinon.spy();
+    const wrapper = mount(
+      <MegadraftEditor
+        editorState={this.editorState}
+        onChange={this.onChange}
+        toolbarRendererFn={renderCustomToolbar} />
+    );
+
+    const component = wrapper.get(0);
+    const expectedProps = {
+      //editor: this.component.refs.editor,
+      editor: undefined, // editor is undefined :-/
+      actions: component.actions,
+      onChange: component.onChange,
+      editorState: this.editorState,
+      readOnly: false
+    };
+    expect(renderCustomToolbar.calledWith(expectedProps)).to.be.true;
+  });
+
+  it("renders custom toolbar if toolbarRendererFn is provided", function() {
+    class MyCustomToolbar extends React.Component {
+      render() {
+        return (
+          <div>
+            <span>My custom Toolbar</span>
+          </div>
+        );
+      }
+    }
+    const renderCustomToolbar = function(props) {
+      return <MyCustomToolbar {...props}/>;
+    };
+    const wrapper = mount(
+      <MegadraftEditor
+        editorState={this.editorState}
+        onChange={this.onChange}
+        toolbarRendererFn={renderCustomToolbar} />
+    );
+    const toolbar = wrapper.find(MyCustomToolbar);
+    expect(toolbar).to.have.length(1);
+  });
+
+
 });
