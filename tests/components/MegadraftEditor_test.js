@@ -204,4 +204,59 @@ describe("MegadraftEditor Component", () => {
       "Plugin: Missing `type` field. Details: "
     );
   });
+
+  it("renders default sidebar if sidebarRendererFn not provided", function() {
+    const sidebar = this.wrapper.find(Sidebar);
+    expect(sidebar).to.have.length(1);
+  });
+
+  it("passes required props to default sidebar", function() {
+    const sidebar = this.wrapper.find(Sidebar);
+    expect(sidebar.prop("plugins")).to.equal(this.component.plugins);
+    expect(sidebar.prop("onChange")).to.equal(this.component.onChange);
+    expect(sidebar.prop("editorState")).to.equal(this.editorState);
+    expect(sidebar.prop("readOnly")).to.equal(false);
+  });
+
+  it("calls sidebarRendererFn if it's provided", function() {
+    const renderCustomSidebar = sinon.spy();
+    const wrapper = mount(
+      <MegadraftEditor
+        editorState={this.editorState}
+        onChange={this.onChange}
+        sidebarRendererFn={renderCustomSidebar} />
+    );
+
+    const component = wrapper.get(0);
+    const expectedProps = {
+      plugins: component.plugins,
+      onChange: component.onChange,
+      editorState: this.editorState,
+      readOnly: false
+    };
+    expect(renderCustomSidebar.calledWith(expectedProps)).to.be.true;
+  });
+
+  it("renders custom sidebar if sidebarRendererFn is provided", function() {
+    class MyCustomSidebar extends React.Component {
+      render() {
+        return (
+          <div>
+            <span>My custom Sidebar</span>
+          </div>
+        );
+      }
+    }
+    const renderCustomSidebar = function(plugins, editorState) {
+      return <MyCustomSidebar plugins={plugins} editorState={editorState}/>;
+    };
+    const wrapper = mount(
+      <MegadraftEditor
+        editorState={this.editorState}
+        onChange={this.onChange}
+        sidebarRendererFn={renderCustomSidebar} />
+    );
+    const sidebar = wrapper.find(MyCustomSidebar);
+    expect(sidebar).to.have.length(1);
+  });
 });
