@@ -261,7 +261,7 @@ describe("MegadraftEditor Component", () => {
     expect(sidebar).to.have.length(1);
   });
 
-  it("renders default toolbar if toolbarRendererFn not provided", function() {
+  it("renders default toolbar if Tooolbar not provided", function() {
     const toolbar = this.wrapper.find(Toolbar);
     expect(toolbar).to.have.length(1);
   });
@@ -277,29 +277,7 @@ describe("MegadraftEditor Component", () => {
     expect(toolbar.prop("readOnly")).to.equal(false);
   });
 
-  it("calls toolbarRendererFn if it's provided", function() {
-    const renderCustomToolbar = sinon.spy();
-    const wrapper = mount(
-      <MegadraftEditor
-        editorState={this.editorState}
-        onChange={this.onChange}
-        toolbarRendererFn={renderCustomToolbar} />
-    );
-
-    const component = wrapper.get(0);
-    const expectedProps = {
-      //editor: this.component.refs.editor,
-      editor: undefined, // editor is undefined :-/
-      actions: component.actions,
-      entityInputs: component.entityInputs,
-      onChange: component.onChange,
-      editorState: this.editorState,
-      readOnly: false
-    };
-    expect(renderCustomToolbar.calledWith(expectedProps)).to.be.true;
-  });
-
-  it("renders custom toolbar if toolbarRendererFn is provided", function() {
+  it("renders custom toolbar if Toolbar is provided", function() {
     class MyCustomToolbar extends React.Component {
       render() {
         return (
@@ -309,18 +287,19 @@ describe("MegadraftEditor Component", () => {
         );
       }
     }
-    const renderCustomToolbar = function(props) {
-      return <MyCustomToolbar {...props}/>;
-    };
+
     const wrapper = mount(
       <MegadraftEditor
         editorState={this.editorState}
-        onChange={this.onChange}
-        toolbarRendererFn={renderCustomToolbar} />
+        onChange={this.component.onChange}
+        Toolbar={MyCustomToolbar} />
     );
     const toolbar = wrapper.find(MyCustomToolbar);
     expect(toolbar).to.have.length(1);
+    expect(toolbar.prop("actions")).to.equal(this.component.actions);
+    expect(toolbar.prop("entityInputs")).to.equal(this.component.entityInputs);
+    expect(toolbar.prop("editorState")).to.equal(this.editorState);
+    expect(toolbar.prop("readOnly")).to.equal(false);
   });
-
 
 });

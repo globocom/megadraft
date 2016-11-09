@@ -179,6 +179,7 @@ export default class Toolbar extends Component {
         <Component
           editorState={this.props.editorState}
           setEntity={setEntity}
+          entityType={entityType}
           onChange={this.props.onChange}
           cancelEntity={this.cancelEntity}/>
       );

@@ -7,7 +7,7 @@
 import React, {Component} from "react";
 import {Editor, RichUtils, getDefaultKeyBinding} from "draft-js";
 
-import Toolbar from "./Toolbar";
+import DefaultToolbar from "./Toolbar";
 import Sidebar from "./Sidebar";
 import Media from "./Media";
 import DEFAULT_PLUGINS from "../plugins/default";
@@ -163,10 +163,7 @@ export default class MegadraftEditor extends Component {
   }
 
   renderToolbar(props) {
-    const { toolbarRendererFn } = this.props;
-    if(typeof toolbarRendererFn === "function") {
-      return toolbarRendererFn(props);
-    }
+    const { Toolbar = DefaultToolbar } = this.props;
     return <Toolbar {...props} />;
   }
 
