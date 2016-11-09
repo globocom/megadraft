@@ -45,7 +45,7 @@ export default class LinkInput extends Component {
     if (event.key == "Enter") {
       event.preventDefault();
       this.setLink();
-      this.props.cancelLink();
+      this.props.cancelEntity();
       this.setState({
         show: false,
         link: ""
@@ -54,7 +54,7 @@ export default class LinkInput extends Component {
     } else if (event.key == "Escape") {
       event.preventDefault();
       ReactDOM.findDOMNode(this.props.editor.focus());
-      this.props.cancelLink();
+      this.props.cancelEntity();
       this.setState({
         link: ""
       });
@@ -64,18 +64,12 @@ export default class LinkInput extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.editingLink && !prevProps.editingLink) {
-      this.refs.textInput.focus();
-    }
-  }
-
   render() {
     return (
       <input
-        className="toolbar__input"
         ref="textInput"
         type="text"
+        className="toolbar__input"
         onChange={this.onLinkChange}
         value={this.state.link}
         onKeyDown={this.onLinkKeyDown}
