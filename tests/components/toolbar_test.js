@@ -278,7 +278,7 @@ describe("Toolbar Component", function() {
           isBackward: true
         }, this.wrapper);
 
-        this.button.simulate("click");
+        this.linkButton().simulate("click");
         const contentState = this.wrapper.state("editorState").getCurrentContent();
 
         const blockWithLinkAtBeginning = contentState.getBlockForKey("ag6qs");
