@@ -262,32 +262,30 @@ describe("Toolbar Component", function() {
         expect(linkKey).to.be.null;
       });
 
+      it("(integration) LinkInput should remove a link backwards", function() {
+        this.linkButton().simulate("click");
+
+        const input = this.wrapper.find(LinkEntityInput).find("input");
+        const inputNode = input.get(0);
+
+        inputNode.value = "www.globo.com";
+        input.simulate("change");
+        input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
+
+        replaceSelection({
+          anchorOffset: 5,
+          focusOffset: 0,
+          isBackward: true
+        }, this.wrapper);
+
+        this.button.simulate("click");
+        const contentState = this.wrapper.state("editorState").getCurrentContent();
+
+        const blockWithLinkAtBeginning = contentState.getBlockForKey("ag6qs");
+        const linkKey = blockWithLinkAtBeginning.getEntityAt(0);
+
+        expect(linkKey).to.be.null;
+      });
     });
-
-    it("(integration) LinkInput should remove a link backwards", function() {
-      this.linkButton().simulate("click");
-
-      const input = this.wrapper.find(LinkEntityInput).find("input");
-      const inputNode = input.get(0);
-
-      inputNode.value = "www.globo.com";
-      input.simulate("change");
-      input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
-
-      replaceSelection({
-        anchorOffset: 5,
-        focusOffset: 0,
-        isBackward: true
-      }, this.wrapper);
-
-      this.button.simulate("click");
-      const contentState = this.wrapper.state("editorState").getCurrentContent();
-
-      const blockWithLinkAtBeginning = contentState.getBlockForKey("ag6qs");
-      const linkKey = blockWithLinkAtBeginning.getEntityAt(0);
-
-      expect(linkKey).to.be.null;
-    });
-
   });
 });
