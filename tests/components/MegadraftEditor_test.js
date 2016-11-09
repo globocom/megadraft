@@ -271,6 +271,7 @@ describe("MegadraftEditor Component", () => {
     // editor is undefined :-/
     //expect(toolbar.prop("editor")).to.equal(this.component.refs.editor);
     expect(toolbar.prop("actions")).to.equal(this.component.actions);
+    expect(toolbar.prop("entityInputs")).to.equal(this.component.entityInputs);
     expect(toolbar.prop("onChange")).to.equal(this.component.onChange);
     expect(toolbar.prop("editorState")).to.equal(this.editorState);
     expect(toolbar.prop("readOnly")).to.equal(false);
@@ -290,6 +291,7 @@ describe("MegadraftEditor Component", () => {
       //editor: this.component.refs.editor,
       editor: undefined, // editor is undefined :-/
       actions: component.actions,
+      entityInputs: component.entityInputs,
       onChange: component.onChange,
       editorState: this.editorState,
       readOnly: false

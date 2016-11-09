@@ -5,7 +5,7 @@
  */
 
 import React, {Component} from "react";
-import {RichUtils, Entity} from "draft-js";
+import {EditorState, RichUtils, Entity} from "draft-js";
 import classNames from "classnames";
 import ToolbarItem from "./ToolbarItem";
 import {getSelectionCoords} from "../utils";
@@ -137,6 +137,21 @@ export default class Toolbar extends Component {
     return false;
   }
 
+  setEntity(entityType, data) {
+    const {editorState} = this.props;
+    const entityKey = Entity.create(entityType, "MUTABLE", data);
+    const newState = RichUtils.toggleLink(
+      editorState,
+      editorState.getSelection(),
+      entityKey
+    );
+    this.props.onChange(
+      EditorState.forceSelection(
+        newState, editorState.getSelection()
+      )
+    );
+  }
+
   removeEntity() {
     const {editorState} = this.props;
     const selection = editorState.getSelection();
@@ -147,22 +162,29 @@ export default class Toolbar extends Component {
   }
 
   cancelEntity() {
+    this.props.editor && this.props.editor.focus();
     this.setState({
-      editingLink: null
+      editingEntity: null
     });
   }
   renderEntityInput(entityType) {
+    if(!this.props.entityInputs) {
+      console.warn("no entityInputs provided");
+      return null;
+    }
     const Component = this.props.entityInputs[entityType];
+    const setEntity = data => this.setEntity(entityType, data);
     if(Component) {
       return (
         <Component
           editorState={this.props.editorState}
+          setEntity={setEntity}
           onChange={this.props.onChange}
-          editor={this.props.editor}
           cancelEntity={this.cancelEntity}/>
       );
     } else {
       console.warn("unknown entity type: "+entityType);
+      return null;
     }
   }
   renderToolList() {
