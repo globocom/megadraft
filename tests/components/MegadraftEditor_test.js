@@ -301,5 +301,4 @@ describe("MegadraftEditor Component", () => {
     expect(toolbar.prop("editorState")).to.equal(this.editorState);
     expect(toolbar.prop("readOnly")).to.equal(false);
   });
-
 });
