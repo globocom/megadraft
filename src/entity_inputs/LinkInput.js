@@ -50,6 +50,10 @@ export default class LinkInput extends Component {
     }
   }
 
+  componentDidMount() {
+    this.refs.textInput.focus();
+  }
+
   render() {
     return (
       <input
