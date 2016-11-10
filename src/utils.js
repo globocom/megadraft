@@ -6,12 +6,13 @@
  */
 
 import {
+  Entity,
   convertToRaw,
   convertFromRaw,
   EditorState,
   getVisibleSelectionRect} from "draft-js";
 
-import defaultDecorator from "./decorator/defaultDecorator";
+import defaultDecorator from "./decorators/defaultDecorator";
 
 
 export function editorStateToJSON(editorState) {
@@ -60,4 +61,19 @@ export function getSelectionCoords(editor, toolbar) {
             + (rangeWidth / 2);
   const offsetTop = rangeBounds.top - editorBounds.top - (toolbarHeight + 14);
   return { offsetLeft, offsetTop };
+}
+
+export function createTypeStrategy(type) {
+  return (contentBlock, callback) => {
+    contentBlock.findEntityRanges(
+      (character) => {
+        const entityKey = character.getEntity();
+        return (
+          entityKey !== null &&
+          Entity.get(entityKey).getType() === type
+        );
+      },
+      callback
+    );
+  };
 }

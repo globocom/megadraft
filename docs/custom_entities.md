@@ -40,10 +40,15 @@ const actions = [
   {type: "block", label: "QT", style: "blockquote", icon: icons.BlockQuoteIcon}
 ];
 
+const myDecorator = new DraftJS.CompositeDecorator(
+  // see section "Rendering a custom entity" below
+)
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {editorState: editorStateFromRaw(null)};
+    this.state = {editorState: editorStateFromRaw(null, myDecorator)};
     this.onChange = ::this.onChange;
     this.getCustomSidebar = ::this.getCustomSidebar;
   }
@@ -129,4 +134,51 @@ export default class PageLinkInput extends React.Component {
 
 ## Rendering a custom entity:
 
-In order to render custom entities, you need to define [Decorators](https://facebook.github.io/draft-js/docs/advanced-topics-decorators.html#content):
+In order to render custom entities, you need to define [Decorators](https://facebook.github.io/draft-js/docs/advanced-topics-decorators.html#content).
+
+Megadraft allows you to specify a custom decorator in the `editorStateFromRaw` function
+and provides a utils function `createTypeStrategy` to create a simple entity-type strategy
+
+
+```js
+
+import React from "react";
+import ReactDOM from "react-dom";
+import {DraftJS, MegadraftEditor, editorStateFromRaw, createTypeStrategy} from "megadraft";
+
+import MyLinkComponent from './path/to/MyLinkComponent';
+import MyInternalLinkComponent from './path/to/MyInternalLinkComponent';
+
+const myDecorator = new DraftJS.CompositeDecorator([
+  {
+    strategy: createTypeStrategy("LINK"),
+    component: MyLinkComponent,
+  },
+  {
+    strategy: createTypeStrategy("INTERNAL_PAGE_LINK"),
+    component: MyInternalLinkComponent,
+  }
+])
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {editorState: editorStateFromRaw(null, myDecorator)};
+    this.onChange = ::this.onChange;
+  }
+
+  onChange(editorState) {
+    this.setState({editorState});
+  }
+
+  render() {
+    return (
+      <MegadraftEditor
+        // ....
+        editorState={this.state.editorState}
+        onChange={this.onChange}/>
+    )
+  }
+}
+
+```
