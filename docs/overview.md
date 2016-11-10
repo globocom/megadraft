@@ -49,7 +49,8 @@ ReactDOM.render(
 
 ### Custom Sidebar
 
-You can provide your custom sidebar passing sidebarRendererFn prop
+You can provide your custom sidebar passing sidebarRendererFn prop.
+Notice: we plan to rename this property to just `Sidebar` in future versions.
 
 ```js
 import React from "react";
@@ -99,6 +100,54 @@ source on your build, if you wish.
 ```html
 <link href="node_modules/megadraft/dist/css/megadraft.css" rel="stylesheet">
 ```
+
+### Custom Toolbar
+
+You can provide a custom Toolbar as well with the `Toolbar` property:
+
+```js
+import React from "react";
+import ReactDOM from "react-dom";
+import {MegadraftEditor, editorStateFromRaw} from "megadraft";
+import CustomToolbar from 'my/toolbar/path';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {editorState: editorStateFromRaw(null)};
+    this.onChange = ::this.onChange;
+    this.getCustomSidebar = ::this.getCustomSidebar;
+  }
+
+  onChange(editorState) {
+    this.setState({editorState});
+  }
+  render() {
+    return (
+      <MegadraftEditor
+        editorState={this.state.editorState}
+        onChange={this.onChange}
+        Toolbar={CustomToolbar}/>
+    )
+  }
+}
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('container')
+);
+
+```
+
+It will receive the following properties:
+
+- `editor`: a reference to the editor-dom-node.
+- `editorState`: the current draft [editorState](https://facebook.github.io/draft-js/docs/api-reference-editor-state.html).
+- `readOnly`: whether the editor is in read-only mode. Usually, you might want to hide your toolbar if this property is set.
+`onChange`: function to pass a new editorState.
+`actions`: the action items to show in the toolbar. See https://github.com/globocom/megadraft/blob/master/src/actions/default.js
+
+
 
 
 ## Editor props
