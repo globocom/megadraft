@@ -137,7 +137,7 @@ export default class PageLinkInput extends React.Component {
 In order to render custom entities, you need to define [Decorators](https://facebook.github.io/draft-js/docs/advanced-topics-decorators.html#content).
 
 Megadraft allows you to specify a custom decorator in the `editorStateFromRaw` function
-and provides a utils function `createTypeStrategy` to create a simple entity-type strategy
+and provides a utils function `createTypeStrategy` to create a simple entity-type strategy.
 
 
 ```js
@@ -180,5 +180,21 @@ class App extends React.Component {
     )
   }
 }
+
+
+// MyLinkComponent
+
+import React from "react";
+import {DraftJS} from "draft-js";
+
+
+export default ({entityKey, children}) => {
+  const {url} = DraftJS.Entity.get(this.props.entityKey).getData();
+  return (
+    <a className="editor__link" href={url} title={url}>
+      {children}
+    </a>
+  );
+};
 
 ```
