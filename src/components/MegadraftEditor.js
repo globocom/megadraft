@@ -12,7 +12,7 @@ import Sidebar from "./Sidebar";
 import Media from "./Media";
 import DEFAULT_PLUGINS from "../plugins/default";
 import DEFAULT_ACTIONS from "../actions/default";
-
+import DEFAULT_ENTITY_INPUTS from "../entity_inputs/default";
 
 export default class MegadraftEditor extends Component {
   constructor(props) {
@@ -35,6 +35,7 @@ export default class MegadraftEditor extends Component {
 
     this.actions = this.props.actions || DEFAULT_ACTIONS;
     this.plugins = this.getValidPlugins();
+    this.entityInputs = this.props.entityInputs || DEFAULT_ENTITY_INPUTS;
 
     this.pluginsByType = this.getPluginsByType();
 
@@ -202,7 +203,8 @@ export default class MegadraftEditor extends Component {
             editorState,
             readOnly: this.state.readOnly,
             onChange: this.onChange,
-            actions: this.actions
+            actions: this.actions,
+            entityInputs: this.entityInputs
           })}
         </div>
       </div>

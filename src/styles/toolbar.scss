@@ -44,15 +44,6 @@
         margin-left: -8px;
     }
 
-    &--editing-link {
-        .toolbar__list {
-            display: none;
-        }
-        .toolbar__input {
-            display: block;
-        }
-    }
-
     &__item {
         display: inline-block;
         color: #ccc;
@@ -90,7 +81,6 @@
         background-color: transparent;
         border: none;
         color: #fafafa;
-        display: none;
         font-size: 0.875rem;
         height: auto;
         line-height: 0.875rem;

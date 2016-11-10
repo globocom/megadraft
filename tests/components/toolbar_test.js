@@ -11,9 +11,10 @@ import {mount} from "enzyme";
 
 import Toolbar from "../../src/components/Toolbar";
 import ToolbarItem from "../../src/components/ToolbarItem";
-import LinkInput from "../../src/components/LinkInput";
+
 import {editorStateFromRaw} from "../../src/utils";
 import Separator from "../../src/components/Separator";
+import LinkInput from "../../src/entity_inputs/LinkInput";
 
 let expect = chai.expect;
 
@@ -38,6 +39,7 @@ export default class ToolbarWrapper extends Component {
           editorState={this.state.editorState}
           actions={this.props.actions}
           readOnly={this.props.readOnly}
+          entityInputs={this.props.entityInputs}
           onChange={this.onChange} />
       </div>
     );
@@ -67,6 +69,9 @@ function replaceSelection(newSelection, wrapper) {
 }
 
 
+const FileEntityInput = (props) => <LinkInput {...props} />;
+const LinkEntityInput = (props) => <LinkInput {...props} />;
+
 describe("Toolbar Component", function() {
   beforeEach(function() {
     const INITIAL_CONTENT = {
@@ -87,12 +92,18 @@ describe("Toolbar Component", function() {
       {type: "inline", label: "B", style: "BOLD", icon: "svg"},
       {type: "separator"},
       {type: "block", label: "H2", style: "header-two", icon: "svg"},
-      {type: "entity", label: "Link", style: "link", icon: "svg"}
+      {type: "entity", label: "Link", style: "link", entity: "LINK", icon: "svg"},
+      {type: "entity", label: "File", style: "link", entity: "FILE_LINK", icon: "svg"}
     ];
+
+    this.entityInputs = {
+      LINK: LinkEntityInput,
+      FILE_LINK: FileEntityInput
+    };
 
     this.editorState = editorStateFromRaw(INITIAL_CONTENT);
     this.wrapper = mount(
-      <ToolbarWrapper editorState={this.editorState} actions={this.actions} />
+      <ToolbarWrapper editorState={this.editorState} actions={this.actions} entityInputs={this.entityInputs}/>
     );
   });
 
@@ -185,41 +196,46 @@ describe("Toolbar Component", function() {
       expect(toolbarWrapperNode.style.left).to.be.equal("0.5px");
     });
 
-    describe("Link", function() {
+    describe("entity inputs", function() {
       beforeEach(function() {
+        this.linkButton = () => this.wrapper.find(ToolbarItem).at(3).find("button");
+        this.fileButton = () => this.wrapper.find(ToolbarItem).at(4).find("button");
+        // select
         replaceSelection({
           anchorOffset: 0,
           focusOffset: 5
         }, this.wrapper);
-
-        const items = this.wrapper.find(ToolbarItem);
-        const titleItem = items.at(3); // Link
-        this.button = titleItem.find("button");
       });
 
-      it("starts with the link input hidden", function() {
+      it("starts with showing no entity input", function() {
         const toolbarWrapper = this.wrapper.find(".toolbar");
-        expect(toolbarWrapper.hasClass("toolbar--editing-link")).to.be.false;
+        expect(toolbarWrapper.find(LinkEntityInput)).to.have.length(0);
+        expect(toolbarWrapper.find(FileEntityInput)).to.have.length(0);
       });
 
-      it("shows the link input on click", function() {
-        this.button.simulate("click");
+      it("shows the first entity input on click on the corresponding button", function() {
+        this.linkButton().simulate("click");
         const toolbarWrapper = this.wrapper.find(".toolbar");
-        expect(toolbarWrapper.hasClass("toolbar--editing-link")).to.be.true;
+        expect(toolbarWrapper.find(LinkEntityInput)).to.have.length(1);
+        expect(toolbarWrapper.find(FileEntityInput)).to.have.length(0);
       });
 
-      it("should add a link to the selection", function() {
-        this.button.simulate("click");
+      it("shows second entity input on click on the corresponding button", function() {
+        this.fileButton().simulate("click");
+        const toolbarWrapper = this.wrapper.find(".toolbar");
+        expect(toolbarWrapper.find(LinkEntityInput)).to.have.length(0);
+        expect(toolbarWrapper.find(FileEntityInput)).to.have.length(1);
+      });
 
-        const input = this.wrapper.find(LinkInput).find("input");
+      it("(integration) LinkInput sets a entity on the current selection ", function() {
+        this.linkButton().simulate("click");
+        const input = this.wrapper.find(LinkEntityInput).find("input");
         const inputNode = input.get(0);
-
         inputNode.value = "http://www.globo.com";
         input.simulate("change");
         input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
 
         const contentState = this.wrapper.state("editorState").getCurrentContent();
-
         const blockWithLinkAtBeginning = contentState.getBlockForKey("ag6qs");
         const linkKey = blockWithLinkAtBeginning.getEntityAt(0);
         const linkInstance = Entity.get(linkKey);
@@ -228,32 +244,16 @@ describe("Toolbar Component", function() {
         expect(url).to.be.equal("http://www.globo.com");
       });
 
-      it("esc key should cancel the link", function() {
-        this.button.simulate("click");
+      it("(integration) LinkInput should remove an entity when button clicked is again", function() {
+        this.linkButton().simulate("click");
 
-        const input = this.wrapper.find(LinkInput).find("input");
-        const inputNode = input.get(0);
-
-        inputNode.value = "http://www.globo.com";
-        input.simulate("change");
-        input.simulate("keyDown", {key: "Escape", keyCode: 27, which: 27});
-
-        const toolbarWrapper = this.wrapper.find(".toolbar");
-
-        expect(toolbarWrapper.hasClass("toolbar--editing-link")).to.be.false;
-      });
-
-      it("should remove a link", function() {
-        this.button.simulate("click");
-
-        const input = this.wrapper.find(LinkInput).find("input");
+        const input = this.wrapper.find(LinkEntityInput).find("input");
         const inputNode = input.get(0);
 
         inputNode.value = "http://www.globo.com";
         input.simulate("change");
         input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
-
-        this.button.simulate("click");
+        this.linkButton().simulate("click");
         const contentState = this.wrapper.state("editorState").getCurrentContent();
 
         const blockWithLinkAtBeginning = contentState.getBlockForKey("ag6qs");
@@ -262,30 +262,10 @@ describe("Toolbar Component", function() {
         expect(linkKey).to.be.null;
       });
 
-      it("should add protocol to links", function() {
-        this.button.simulate("click");
+      it("(integration) LinkInput should remove a link backwards", function() {
+        this.linkButton().simulate("click");
 
-        const input = this.wrapper.find(LinkInput).find("input");
-        const inputNode = input.get(0);
-
-        inputNode.value = "www.globo.com";
-        input.simulate("change");
-        input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
-
-        const contentState = this.wrapper.state("editorState").getCurrentContent();
-
-        const blockWithLinkAtBeginning = contentState.getBlockForKey("ag6qs");
-        const linkKey = blockWithLinkAtBeginning.getEntityAt(0);
-        const linkInstance = Entity.get(linkKey);
-        const {url} = linkInstance.getData();
-
-        expect(url).to.be.equal("http://www.globo.com");
-      });
-
-      it("should remove a link backwards", function() {
-        this.button.simulate("click");
-
-        const input = this.wrapper.find(LinkInput).find("input");
+        const input = this.wrapper.find(LinkEntityInput).find("input");
         const inputNode = input.get(0);
 
         inputNode.value = "www.globo.com";
@@ -298,7 +278,7 @@ describe("Toolbar Component", function() {
           isBackward: true
         }, this.wrapper);
 
-        this.button.simulate("click");
+        this.linkButton().simulate("click");
         const contentState = this.wrapper.state("editorState").getCurrentContent();
 
         const blockWithLinkAtBeginning = contentState.getBlockForKey("ag6qs");
