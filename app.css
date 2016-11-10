@@ -193,10 +193,6 @@
       border-style: solid;
       border-color: #181818 transparent transparent;
       margin-left: -8px; }
-    .megadraft-editor .toolbar--editing-link .toolbar__list {
-      display: none; }
-    .megadraft-editor .toolbar--editing-link .toolbar__input {
-      display: block; }
     .megadraft-editor .toolbar__item {
       display: inline-block;
       color: #ccc; }
@@ -222,7 +218,6 @@
       background-color: transparent;
       border: none;
       color: #fafafa;
-      display: none;
       font-size: 0.875rem;
       height: auto;
       line-height: 0.875rem;
