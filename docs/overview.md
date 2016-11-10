@@ -57,12 +57,8 @@ source on your build, if you wish.
 
 ### Custom Sidebar
 
-<<<<<<< HEAD
 You can provide your custom sidebar passing sidebarRendererFn prop.
 Notice: we plan to rename this property to just `Sidebar` in future versions.
-=======
-You can provide your custom sidebar passing `sidebarRendererFn` prop.
->>>>>>> upstream/master
 
 ```js
 import React from "react";
