@@ -141,10 +141,10 @@ ReactDOM.render(
 
 It will receive the following properties:
 
-- `editor`: a reference to the editor-dom-node.
+- `editor`: a reference to the editor dom node.
 - `editorState`: the current draft [editorState](https://facebook.github.io/draft-js/docs/api-reference-editor-state.html).
 - `readOnly`: whether the editor is in read-only mode. Usually, you might want to hide your toolbar if this property is set.
-`onChange`: function to pass a new editorState.
+`onChange`: function to pass a new editorState when a change occured.
 `actions`: the action items to show in the toolbar. See https://github.com/globocom/megadraft/blob/master/src/actions/default.js
 
 
@@ -154,7 +154,7 @@ It will receive the following properties:
 
 - `placeholder` Editor's placeholder text
 - `plugins` List of plugins to be used by the editor
-- `editorState` DraftJS editor state
+- `editorState` DraftJS' [editorState](https://facebook.github.io/draft-js/docs/api-reference-editor-state.html)
 - `onChange` Function fired on editor state changes
 - `sidebarRendererFn` (optional) it is called to render a custom sidebar. This method must
 return a valid React element.
