@@ -47,9 +47,17 @@ ReactDOM.render(
 );
 ```
 
+Then link the main css (dist/css/megadraft.css) on your page, you can use the Sass
+source on your build, if you wish.
+
+```html
+<link href="node_modules/megadraft/dist/css/megadraft.css" rel="stylesheet">
+```
+
+
 ### Custom Sidebar
 
-You can provide your custom sidebar passing sidebarRendererFn prop
+You can provide your custom sidebar passing `sidebarRendererFn` prop.
 
 ```js
 import React from "react";
@@ -68,14 +76,11 @@ class App extends React.Component {
   onChange(editorState) {
     this.setState({editorState});
   }
-  /**
-   * @param props.plugins Array of valid plugins
-   * @param props.editorState DraftJS editorState object
-   * @param props.onChange You must use this handler for change events
-   */
+
   getCustomSidebar(props) {
     return <CustomSidebar {...props} />
   }
+
   render() {
     return (
       <MegadraftEditor
@@ -90,29 +95,28 @@ ReactDOM.render(
   <App />,
   document.getElementById('container')
 );
-
 ```
 
-Then link the main css (dist/css/megadraft.css) on your page, you can use the Sass
-source on your build, if you wish.
+The `sidebarRendererFn` takes a props object with the following properties:
 
-```html
-<link href="node_modules/megadraft/dist/css/megadraft.css" rel="stylesheet">
-```
+* `plugins`: array of valid plugins
+* `editorState`: DraftJS editorState object
+* `onChange`: handler for editorState changes
 
-### Custom Toolbar
 
-You can provide custom actions using MegadraftEditor `actions` property. Megadraft Toolbar provides [custom actions](https://github.com/globocom/megadraft/blob/master/src/actions/default.js) like **Bold** and *Italic*, additionaly you can provide your own custom actions or even add some custom actions to the default ones.
+### Custom Toolbar Actions
 
-Example: Add an underlined action
+You can provide custom actions using MegadraftEditor `actions` property.
+Megadraft Toolbar provides [custom actions](https://github.com/globocom/megadraft/blob/master/src/actions/default.js)
+like **Bold** and *Italic*, additionaly you can provide your own custom actions
+or even add some custom actions to the default ones.
+
+Example: Add an underline action.
 
 ```js
 import React from "react";
 import ReactDOM from "react-dom";
 import {MegadraftEditor, editorStateFromRaw} from "megadraft";
-import CustomSidebar from 'my/sidebar/path';
-
-import actions from "megadraft/actions/default";
 
 class App extends React.Component {
   constructor(props) {
@@ -124,8 +128,11 @@ class App extends React.Component {
   onChange(editorState) {
     this.setState({editorState});
   }
+
   render() {
-    const custom_actions = actions.concat([{type: "inline", label: "U", style: "UNDERLINE", icon: Underlined}]);
+    const custom_actions = actions.concat([
+      {type: "inline", label: "U", style: "UNDERLINE", icon: UnderlineIcon}
+    ]);
     return (
       <MegadraftEditor
         editorState={this.state.editorState}
@@ -135,17 +142,10 @@ class App extends React.Component {
   }
 }
 
-/**
- * Underlined Icon.
- * svg extracted from [Material UI underlined icon](https://material.io/icons/#ic_format_underlined)
- */
-class Underlined extends React.Component {
+class UnderlineIcon extends React.Component {
   render() {
     return (
-      <svg {...this.props} height="24" viewBox="0 0 24 24" width="24">
-        <path d="M0 0h24v24H0z" fill="none" />
-        <path fill="currentColor" fillRule="evenodd" d="M12 17c3.31 0 6-2.69 6-6V3h-2.5v8c0 1.93-1.57 3.5-3.5 3.5S8.5 12.93 8.5 11V3H6v8c0 3.31 2.69 6 6 6zm-7 2v2h14v-2H5z" />
-      </svg>
+      <svg {...this.props} height="24" viewBox="0 0 24 24" width="24"></svg>
     );
   }
 }
@@ -154,7 +154,6 @@ ReactDOM.render(
   <App />,
   document.getElementById('container')
 );
-
 ```
 
 ## Custom Keybindings
@@ -167,9 +166,6 @@ Example: Call a function when user presses control s
 import React from "react";
 import ReactDOM from "react-dom";
 import {MegadraftEditor, editorStateFromRaw} from "megadraft";
-import CustomSidebar from 'my/sidebar/path';
-
-import actions from "megadraft/actions/default";
 
 class App extends React.Component {
   constructor(props) {
@@ -197,27 +193,12 @@ class App extends React.Component {
   }
 }
 
-/**
- * Underlined Icon.
- * svg extracted from [Material UI underlined icon](https://material.io/icons/#ic_format_underlined)
- */
-class Underlined extends React.Component {
-  render() {
-    return (
-      <svg {...this.props} height="24" viewBox="0 0 24 24" width="24">
-        <path d="M0 0h24v24H0z" fill="none" />
-        <path fill="currentColor" fillRule="evenodd" d="M12 17c3.31 0 6-2.69 6-6V3h-2.5v8c0 1.93-1.57 3.5-3.5 3.5S8.5 12.93 8.5 11V3H6v8c0 3.31 2.69 6 6 6zm-7 2v2h14v-2H5z" />
-      </svg>
-    );
-  }
-}
-
 ReactDOM.render(
   <App />,
   document.getElementById('container')
 );
-
 ```
+
 ## Editor props
 
 - `placeholder` Editor's placeholder text
