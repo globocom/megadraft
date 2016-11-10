@@ -54,10 +54,12 @@ source on your build, if you wish.
 <link href="node_modules/megadraft/dist/css/megadraft.css" rel="stylesheet">
 ```
 
+##Customisation
 
 ### Custom Sidebar
 
-You can provide your custom sidebar passing `sidebarRendererFn` prop.
+You can provide your custom sidebar passing sidebarRendererFn prop.
+Notice: we plan to rename this property to just `Sidebar` in future versions.
 
 ```js
 import React from "react";
@@ -102,6 +104,7 @@ The `sidebarRendererFn` takes a props object with the following properties:
 * `plugins`: array of valid plugins
 * `editorState`: DraftJS editorState object
 * `onChange`: handler for editorState changes
+
 
 
 ### Custom Toolbar Actions
@@ -156,6 +159,40 @@ ReactDOM.render(
 );
 ```
 
+
+### Custom toolbar component
+
+If you need more control over the toolbar,
+you can provide a custom toolbar component as well with the `Toolbar` property:
+
+```js
+import React from "react";
+import ReactDOM from "react-dom";
+import {MegadraftEditor, editorStateFromRaw} from "megadraft";
+import CustomToolbar from 'my/toolbar/path';
+
+class App extends React.Component {
+  // ....
+  render() {
+    return (
+      <MegadraftEditor
+        editorState={this.state.editorState}
+        onChange={this.onChange}
+        Toolbar={CustomToolbar}/>
+    )
+  }
+}
+```
+
+It will receive the following properties:
+
+- `editor`: a reference to the editor dom node.
+- `editorState`: the current draft [editorState](https://facebook.github.io/draft-js/docs/api-reference-editor-state.html).
+- `readOnly`: whether the editor is in read-only mode. Usually, you might want to hide your toolbar if this property is set.
+- `onChange`: function to pass a new editorState when a change occured.
+- `actions`: the action items to show in the toolbar. See https://github.com/globocom/megadraft/blob/master/src/actions/default.js
+
+
 ## Custom Keybindings
 
 You can provide custom key bindings to Megadraft by setting the `keyBindingFn` property.
@@ -180,9 +217,11 @@ class App extends React.Component {
   onChange(editorState) {
     this.setState({editorState});
   }
+
   onSave() {
     console.log("save");
   }
+
   render() {
     return (
       <MegadraftEditor
@@ -197,13 +236,16 @@ ReactDOM.render(
   <App />,
   document.getElementById('container')
 );
+
+
 ```
+
 
 ## Editor props
 
 - `placeholder` Editor's placeholder text
 - `plugins` List of plugins to be used by the editor
-- `editorState` DraftJS editor state
+- `editorState` DraftJS' [editorState](https://facebook.github.io/draft-js/docs/api-reference-editor-state.html)
 - `onChange` Function fired on editor state changes
 - `sidebarRendererFn` (optional) it is called to render a custom sidebar. This method must
 return a valid React element.
