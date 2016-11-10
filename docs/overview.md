@@ -54,6 +54,7 @@ source on your build, if you wish.
 <link href="node_modules/megadraft/dist/css/megadraft.css" rel="stylesheet">
 ```
 
+##Customisation
 
 ### Custom Sidebar
 
@@ -103,6 +104,7 @@ The `sidebarRendererFn` takes a props object with the following properties:
 * `plugins`: array of valid plugins
 * `editorState`: DraftJS editorState object
 * `onChange`: handler for editorState changes
+
 
 
 ### Custom Toolbar Actions
@@ -158,7 +160,7 @@ ReactDOM.render(
 ```
 
 
-### Custom Toolbar
+### Custom toolbar component
 
 If you need more control over the toolbar,
 you can provide a custom toolbar component as well with the `Toolbar` property:
