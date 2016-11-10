@@ -11,7 +11,7 @@ import {
   EditorState,
   getVisibleSelectionRect} from "draft-js";
 
-import decorator from "./decorator";
+import defaultDecorator from "./decorator/defaultDecorator";
 
 
 export function editorStateToJSON(editorState) {
@@ -21,7 +21,7 @@ export function editorStateToJSON(editorState) {
   }
 }
 
-export function editorStateFromRaw(rawContent) {
+export function editorStateFromRaw(rawContent, decorator = defaultDecorator) {
   if (rawContent) {
     const content = convertFromRaw(rawContent);
     return EditorState.createWithContent(content, decorator);
