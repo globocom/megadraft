@@ -21,6 +21,7 @@ export default class Toolbar extends Component {
     };
     this.renderButton = ::this.renderButton;
     this.cancelEntity = ::this.cancelEntity;
+    this.removeEntity = ::this.removeEntity;
   }
 
   toggleInlineStyle(inlineStyle) {
@@ -35,11 +36,7 @@ export default class Toolbar extends Component {
   }
 
   toggleEntity(entity) {
-    if (this.hasEntity(entity)) {
-      this.removeEntity();
-    } else {
-      this.setState({editingEntity: entity});
-    }
+    this.setState({editingEntity: entity});
   }
 
   renderButton(item, position) {
@@ -120,19 +117,28 @@ export default class Toolbar extends Component {
     }
   }
 
-  hasEntity(entityType) {
+  getCurrentEntityKey() {
     const selection = this.props.editorState.getSelection();
     const anchorKey = selection.getAnchorKey();
     const contentState = this.props.editorState.getCurrentContent();
     const anchorBlock = contentState.getBlockForKey(anchorKey);
     const offset = selection.anchorOffset;
     const index = selection.isBackward ? offset - 1 : offset;
-    const entityKey = anchorBlock.getEntityAt(index);
-    if (entityKey !== null) {
-      const entity = Entity.get(entityKey);
-      if (entity.getType() === entityType) {
-        return true;
-      }
+    return anchorBlock.getEntityAt(index);
+  }
+
+  getCurrentEntity() {
+    const entityKey = this.getCurrentEntityKey();
+    if(entityKey) {
+      return Entity.get(entityKey);
+    }
+    return null;
+  }
+
+  hasEntity(entityType) {
+    const entity = this.getCurrentEntity();
+    if (entity && entity.getType() === entityType) {
+      return true;
     }
     return false;
   }
@@ -159,6 +165,7 @@ export default class Toolbar extends Component {
       // toggleLink should be named toggleEntity: https://github.com/facebook/draft-js/issues/737
       this.props.onChange(RichUtils.toggleLink(editorState, selection, null));
     }
+    this.cancelEntity();
   }
 
   cancelEntity() {
@@ -174,6 +181,13 @@ export default class Toolbar extends Component {
     }
     const Component = this.props.entityInputs[entityType];
     const setEntity = data => this.setEntity(entityType, data);
+    let entityData = {};
+    if(this.hasEntity(entityType)) {
+      const entity = this.getCurrentEntity();
+      if(entity) {
+        entityData = entity.getData();
+      }
+    }
     if(Component) {
       return (
         <Component
@@ -181,7 +195,10 @@ export default class Toolbar extends Component {
           setEntity={setEntity}
           entityType={entityType}
           onChange={this.props.onChange}
-          cancelEntity={this.cancelEntity}/>
+          cancelEntity={this.cancelEntity}
+          removeEntity={this.removeEntity}
+          {...entityData}
+          />
       );
     } else {
       console.warn("unknown entity type: "+entityType);
