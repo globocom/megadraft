@@ -81,6 +81,7 @@ Every entity input component will receive the following properties:
 - `entityType`: the entity type (string) like `LINK` or `INTERNAL_PAGE_LINK`
 - `setEntity`: call this function to set the entity on the current selection.
 You can pass an object that gets assigned as the data of the entity. (see example below)
+- `removeEntity`: call this to remove the entity. It will also call `cancelEntity` afterwards.
 - `cancelEntity`: call this if you want to close the entity input and show the normal toolbar.
 - `editorState`: the current draftjs `editorState`.
 - `onChange`: call this if you want to manually change the `editorState`.
