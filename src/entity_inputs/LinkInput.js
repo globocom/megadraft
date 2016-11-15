@@ -5,29 +5,30 @@
  */
 
 import React, {Component} from "react";
+import DeleteIcon from "../icons/delete";
 
 
 export default class LinkInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      link: ""
+      url: props && props.url || ""
     };
     this.onLinkChange = ::this.onLinkChange;
     this.onLinkKeyDown = ::this.onLinkKeyDown;
   }
 
   setLink() {
-    let {link} = this.state;
-    if (!link.startsWith("http://") && !link.startsWith("https://")) {
-      link = `http://${link}`;
+    let {url} = this.state;
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      url = `http://${url}`;
     }
-    this.props.setEntity({url: link});
+    this.props.setEntity({url});
   }
 
   onLinkChange(event) {
     event.stopPropagation();
-    this.setState({link: event.target.value});
+    this.setState({url: event.target.value});
   }
 
   onLinkKeyDown(event) {
@@ -35,7 +36,7 @@ export default class LinkInput extends Component {
       event.preventDefault();
       this.setLink();
       this.setState({
-        link: ""
+        url: ""
       });
       this.props.cancelEntity();
 
@@ -43,7 +44,7 @@ export default class LinkInput extends Component {
     } else if (event.key == "Escape") {
       event.preventDefault();
       this.setState({
-        link: ""
+        url: ""
       });
       this.props.cancelEntity();
 
@@ -57,14 +58,24 @@ export default class LinkInput extends Component {
   render() {
     /* global __ */
     return (
-      <input
-        ref="textInput"
-        type="text"
-        className="toolbar__input"
-        onChange={this.onLinkChange}
-        value={this.state.link}
-        onKeyDown={this.onLinkKeyDown}
-        placeholder={__("Type the link and press enter")}/>
+      <div style={{whiteSpace: "nowrap"}}>
+        <input
+          ref="textInput"
+          type="text"
+          className="toolbar__input"
+          onChange={this.onLinkChange}
+          value={this.state.url}
+          onKeyDown={this.onLinkKeyDown}
+          placeholder={__("Type the link and press enter")}/>
+        <span className="toolbar__item" style={{verticalAlign: "bottom"}}>
+          <button
+            onClick={this.props.removeEntity}
+            type="button"
+            className="toolbar__button">
+            <DeleteIcon />
+          </button>
+        </span>
+      </div>
     );
   }
 }

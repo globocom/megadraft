@@ -244,7 +244,7 @@ describe("Toolbar Component", function() {
         expect(url).to.be.equal("http://www.globo.com");
       });
 
-      it("(integration) LinkInput should remove an entity when button clicked is again", function() {
+      it("(integration) LinkInput should remove an entity when ", function() {
         this.linkButton().simulate("click");
 
         const input = this.wrapper.find(LinkEntityInput).find("input");
@@ -253,9 +253,13 @@ describe("Toolbar Component", function() {
         inputNode.value = "http://www.globo.com";
         input.simulate("change");
         input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
+        // show dialog again
         this.linkButton().simulate("click");
-        const contentState = this.wrapper.state("editorState").getCurrentContent();
+        // click on remove
+        const removeButton = this.wrapper.find(LinkEntityInput).find("button");
+        removeButton.simulate("click");
 
+        const contentState = this.wrapper.state("editorState").getCurrentContent();
         const blockWithLinkAtBeginning = contentState.getBlockForKey("ag6qs");
         const linkKey = blockWithLinkAtBeginning.getEntityAt(0);
 
@@ -271,6 +275,11 @@ describe("Toolbar Component", function() {
         inputNode.value = "www.globo.com";
         input.simulate("change");
         input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
+        // show dialog again
+        this.linkButton().simulate("click");
+        // click on remove
+        const removeButton = this.wrapper.find(LinkEntityInput).find("button");
+        removeButton.simulate("click");
 
         replaceSelection({
           anchorOffset: 5,
