@@ -65,13 +65,14 @@ export default class LinkInput extends Component {
           value={this.state.url}
           onKeyDown={this.onLinkKeyDown}
           placeholder="Type the url and press enter"/>
-        <button
-          onClick={this.props.removeEntity}
-          type="button"
-          style={{verticalAlign: "bottom"}}
-          className="toolbar__button toolbar__item">
-          <DeleteIcon />
-        </button>
+        <span className="toolbar__item" style={{verticalAlign: "bottom"}}>
+          <button
+            onClick={this.props.removeEntity}
+            type="button"
+            className="toolbar__button">
+            <DeleteIcon />
+          </button>
+        </span>
 
       </div>
     );
