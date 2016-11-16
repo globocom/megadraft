@@ -13,6 +13,9 @@ return a valid React element.
 - `Toolbar`: (optional) a custom toolbar component or a function that returns a rendered component
 - `actions`: (optional) List of actions to render in Toolbar
 - `keyBindings`: (optional) Custom key bindings
+- `handleBlockNotFound`: (optional) called when the `editorState` contains a block for a plugin that is no longer available
+
+Check the following sections for more info.
 
 
 ## Sidebar
@@ -188,6 +191,78 @@ class App extends React.Component {
         editorState={this.state.editorState}
         onChange={this.onChange}
         keyBindings={this.keyBindings}/>
+    )
+  }
+}
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('container')
+);
+```
+
+## Handling Missing Plugin (`handleBlockNotFound`)
+
+When the `editorState` contains an atomic block that is no longer available,
+an alternative block will be rendered as a fallback to indicate that the plugin
+is missing.
+
+This behavior is customizable using the `handleBlockNotFound` prop. It takes a
+[ContentBlock][ContentBlock] object and should return either of the following:
+
+* `null`: this will delegate the block rendering to DraftJS, resulting in an empty paragraph
+* a [valid plugin][plugins] with a `blockComponent` property to render the fallback interface
+
+
+[ContentBlock]: https://facebook.github.io/draft-js/docs/api-reference-content-block.html#content
+[plugins]: http://globocom.github.io/megadraft/#/docs/plugins?_k=h3n0a5
+
+The following example renders a `pre` element for the unregistered `missing-plugin` atomic block.
+
+```js
+import React from "react";
+import ReactDOM from "react-dom";
+import {MegadraftEditor, editorStateFromRaw} from "megadraft";
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {editorState: editorStateFromRaw({
+      entityMap: {
+      },
+      blocks: [
+        {
+          key: "8xut",
+          text: "",
+          type: "atomic",
+          depth: 0,
+          inlineStyleRanges: [],
+          entityRanges: [],
+          data: {
+            type: "missing-plugin"
+          }
+        }
+      ]
+    })};
+    this.onChange = ::this.onChange;
+  }
+
+  onChange(editorState) {
+    this.setState({editorState});
+  }
+
+  handleBlockNotFound(block) {
+    return {
+      blockComponent: (props) => <pre>plugin not found {props.data.type}</pre>
+    };
+  }
+
+  render() {
+    return (
+      <MegadraftEditor
+        editorState={this.state.editorState}
+        onChange={this.onChange}
+        handleBlockNotFound={this.handleBlockNotFound} />
     )
   }
 }

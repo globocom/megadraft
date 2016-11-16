@@ -79,6 +79,16 @@
   }
 }
 
+.block__notfound {
+  &__icon {
+    color: #999;
+    vertical-align: middle;
+    width: 64px;
+    height: 64px;
+    margin: 104px;
+  }
+}
+
 .block__data {
   padding: 16px;
   padding-top: 8px;

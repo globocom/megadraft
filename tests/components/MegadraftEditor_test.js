@@ -16,6 +16,7 @@ import Sidebar from "../../src/components/Sidebar";
 import Toolbar from "../../src/components/Toolbar";
 import {editorStateFromRaw} from "../../src/utils";
 import image from "../../src/plugins/image/plugin";
+import NotFoundPlugin from "../../src/plugins/not-found/plugin";
 
 
 let expect = chai.expect;
@@ -23,6 +24,24 @@ let kba = function keyBindingAction() {};
 
 
 describe("MegadraftEditor Component", () => {
+  class FakeAtomicBlock {
+    constructor(type){
+      this.type = type;
+    }
+
+    getType(){
+      return "atomic";
+    }
+
+    getData() {
+      return {
+        toObject: () => {
+          return {type: this.type};
+        }
+      };
+    }
+  }
+
   beforeEach(function() {
     const INITIAL_CONTENT = {
       "entityMap": {},
@@ -92,37 +111,74 @@ describe("MegadraftEditor Component", () => {
     expect(items).to.have.length(1);
   });
 
-  it("runs mediaBlockRenderer with non-atomic block", function() {
-    const block = {getType: function() {return "metal";}};
-    const result = this.component.mediaBlockRenderer(block);
-    expect(result).to.be.null;
-  });
-
-  it("runs mediaBlockRenderer with atomic block", function() {
-    function atomic() {}
-    atomic.prototype.getType = function() {return "atomic";};
-    atomic.prototype.getData = function(position) {
-      return {
-        toObject: function(){
-          return {type: "image"};
-        }
-      };
-    };
-
-    const block = new atomic();
-    const result = this.component.mediaBlockRenderer(block);
-
-    expect(result).to.deep.equal({
-      "component": Media,
-      "editable": false,
-      "props": {
-        "plugin": image,
-        "onChange": this.component.onChange,
-        "editorState": this.editorState,
-        "setReadOnly": this.component.setReadOnly
-      }
+  describe("mediaBlockRenderer", function () {
+    it("ignores non-atomic blocks", function() {
+      const block = {getType: function() {return "metal";}};
+      const result = this.component.mediaBlockRenderer(block);
+      expect(result).to.be.null;
     });
 
+    it("returns media renderer for registered plugin", function() {
+      const block = new FakeAtomicBlock("image");
+      const result = this.component.mediaBlockRenderer(block);
+
+      expect(result).to.deep.equal({
+        "component": Media,
+        "editable": false,
+        "props": {
+          "plugin": image,
+          "onChange": this.component.onChange,
+          "editorState": this.editorState,
+          "setReadOnly": this.component.setReadOnly
+        }
+      });
+    });
+
+    it("returns media renderer with fallback for unregistered plugin", function () {
+      const block = new FakeAtomicBlock("unregistered");
+      const result = this.component.mediaBlockRenderer(block);
+
+      expect(result).to.deep.equal({
+        "component": Media,
+        "editable": false,
+        "props": {
+          "plugin": NotFoundPlugin,
+          "onChange": this.component.onChange,
+          "editorState": this.editorState,
+          "setReadOnly": this.component.setReadOnly
+        }
+      });
+    });
+
+    it("returns media renderer with plugin from custom fallback", function () {
+      const customFallbackPlugin = {
+        blockComponent: (props) => <pre>{props.data.type}</pre>
+      };
+      this.wrapper.setProps({handleBlockNotFound: () => customFallbackPlugin});
+
+      const block = new FakeAtomicBlock("unregistered");
+      const result = this.component.mediaBlockRenderer(block);
+
+      expect(result).to.deep.equal({
+        "component": Media,
+        "editable": false,
+        "props": {
+          "plugin": customFallbackPlugin,
+          "onChange": this.component.onChange,
+          "editorState": this.editorState,
+          "setReadOnly": this.component.setReadOnly
+        }
+      });
+    });
+
+    it("ignores empty plugin from custom fallback", function () {
+      this.wrapper.setProps({handleBlockNotFound: () => null});
+
+      const block = new FakeAtomicBlock("unregistered");
+      const result = this.component.mediaBlockRenderer(block);
+
+      expect(result).to.equal(null);
+    });
   });
 
   it("starts with default readOnly status", function() {

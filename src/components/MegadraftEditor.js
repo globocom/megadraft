@@ -10,6 +10,7 @@ import {Editor, RichUtils, getDefaultKeyBinding} from "draft-js";
 import DefaultToolbar from "./Toolbar";
 import Sidebar from "./Sidebar";
 import Media from "./Media";
+import notFoundPlugin from "../plugins/not-found/plugin";
 import DEFAULT_PLUGINS from "../plugins/default";
 import DEFAULT_ACTIONS from "../actions/default";
 import DEFAULT_ENTITY_INPUTS from "../entity_inputs/default";
@@ -122,6 +123,13 @@ export default class MegadraftEditor extends Component {
     this.setState({readOnly});
   }
 
+  handleBlockNotFound(block) {
+    if (this.props.handleBlockNotFound) {
+      return this.props.handleBlockNotFound(block);
+    }
+    return notFoundPlugin;
+  }
+
   mediaBlockRenderer(block) {
     if (block.getType() !== "atomic") {
       return null;
@@ -129,22 +137,21 @@ export default class MegadraftEditor extends Component {
 
     const type = block.getData().toObject().type;
 
-    let typedPlugin = this.pluginsByType[type];
-
-    if (typedPlugin) {
-      return {
-        component: Media,
-        editable: false,
-        props: {
-          plugin: typedPlugin,
-          onChange: this.onChange,
-          editorState: this.props.editorState,
-          setReadOnly: this.setReadOnly
-        }
-      };
+    let plugin = this.pluginsByType[type] || this.handleBlockNotFound(block);
+    if (!plugin) {
+      return null;
     }
 
-    return null;
+    return {
+      component: Media,
+      editable: false,
+      props: {
+        plugin: plugin,
+        onChange: this.onChange,
+        editorState: this.props.editorState,
+        setReadOnly: this.setReadOnly
+      }
+    };
   }
 
   blockStyleFn(contentBlock) {
