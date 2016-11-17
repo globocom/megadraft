@@ -279,6 +279,12 @@
       top: 0; }
     .megadraft-editor .block__content:after {
       bottom: 0; }
+  .megadraft-editor .block__notfound__icon {
+    color: #999;
+    vertical-align: middle;
+    width: 64px;
+    height: 64px;
+    margin: 104px; }
   .megadraft-editor .block__data {
     padding: 16px;
     padding-top: 8px;
