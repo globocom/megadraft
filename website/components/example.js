@@ -75,12 +75,12 @@ class Example extends React.Component {
   }
 
   render() {
-    const icon_edit = <FontIcon className="material-icons">mode_edit</FontIcon>;
-    const icon_code = <FontIcon className="material-icons">code</FontIcon>;
+    const iconEdit = <FontIcon className="material-icons">mode_edit</FontIcon>;
+    const iconCode = <FontIcon className="material-icons">code</FontIcon>;
 
     return (
       <Tabs value={this.state.activeTab} onChange={this.handleChange}>
-        <Tab label="Editor" value="a" icon={icon_edit}>
+        <Tab label="Editor" value="a" icon={iconEdit}>
           <div className="tab-container-editor">
             <MegadraftEditor
               editorState={this.state.value}
@@ -89,7 +89,7 @@ class Example extends React.Component {
               keyBindings={this.keyBindings}/>
           </div>
         </Tab>
-        <Tab label="Content JSON" onActive={this.onCodeActive} value="b" icon={icon_code}>
+        <Tab label="Content JSON" onActive={this.onCodeActive} value="b" icon={iconCode}>
           <div className="tab-container-json">
             <pre className="jsonpreview">
               <code className="json hljs">

@@ -47,7 +47,7 @@ export default class ToolbarWrapper extends Component {
 }
 
 
-var draft = require("draft-js");
+const draft = require("draft-js");
 
 draft.getVisibleSelectionRect = () => {
   return {

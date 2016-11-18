@@ -6,7 +6,7 @@
 
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
-import classNames  from "classnames";
+import classNames from "classnames";
 import icons from "../icons";
 
 import "setimmediate";
@@ -105,7 +105,7 @@ function getSelectedBlockElement() {
   if (selection.rangeCount === 0) {
     return null;
   }
-  var node = selection.getRangeAt(0).startContainer;
+  let node = selection.getRangeAt(0).startContainer;
 
   do {
     if (node.getAttribute && node.getAttribute("data-block") == "true") {

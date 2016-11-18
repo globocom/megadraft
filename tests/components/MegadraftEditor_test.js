@@ -244,7 +244,7 @@ describe("MegadraftEditor Component", () => {
   it("shows warning for missing `type` field", function() {
     console.warn = sinon.spy();
 
-    const plugin =  {
+    const plugin = {
       buttonComponent: {},
       blockComponent: {}
     };
