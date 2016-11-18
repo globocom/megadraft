@@ -4,6 +4,12 @@
  * License: MIT
  */
 
+// i18n shim! I feel bad for doing this =(
+// https://github.com/megawac/async/blob/d2dd36b4558f483682f3c672630fdcb36a96d4d2/lib/async.js#L16
+((typeof self === "object" && self.self === self && self) ||
+  (typeof global === "object" && global.global === global && global) ||
+  this).__ = (x) => x;
+
 import React, {Component} from "react";
 import {Editor, RichUtils, getDefaultKeyBinding} from "draft-js";
 
