@@ -55,6 +55,7 @@ export default class LinkInput extends Component {
   }
 
   render() {
+    /* global __ */
     return (
       <input
         ref="textInput"
@@ -63,7 +64,7 @@ export default class LinkInput extends Component {
         onChange={this.onLinkChange}
         value={this.state.link}
         onKeyDown={this.onLinkKeyDown}
-        placeholder="Type the link and press enter"/>
+        placeholder={__("Type the link and press enter")}/>
     );
   }
 }
