@@ -57,6 +57,7 @@ export default class LeftNavMenu extends React.Component {
             <ListItem primaryText="Github" href="https://github.com/globocom/megadraft" target="_blank"/>
             <ListItem primaryText="React" href="https://facebook.github.io/react" target="_blank"/>
             <ListItem primaryText="Draft.js" href="http://draftjs.org" target="_blank"/>
+            <ListItem primaryText="Slack channel" href="https://draftjs.slack.com/messages/megadraft/" target="_blank"/>
           </List>
         </Drawer>
       </div>
