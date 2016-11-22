@@ -54,19 +54,9 @@ export default class LeftNavMenu extends React.Component {
                           key="saving"
                           containerElement={<Link to="/docs/saving-loading"/>}/>
               ]}>Docs</ListItem>
-            <ListItem
-              onClick={open => this.props.toggleMenu()}
-              containerElement={
-                <a href="https://github.com/globocom/megadraft" target="_blank"/>}>
-                  Github</ListItem>
-            <ListItem
-              onClick={open => this.props.toggleMenu()}
-              containerElement={<a href="https://facebook.github.io/react" target="_blank"/>}>
-                React</ListItem>
-            <ListItem
-              onClick={open => this.props.toggleMenu()}
-              containerElement={<a href="http://draftjs.org" target="_blank"/>}>
-                Draft.js</ListItem>
+            <ListItem primaryText="Github" href="https://github.com/globocom/megadraft" target="_blank"/>
+            <ListItem primaryText="React" href="https://facebook.github.io/react" target="_blank"/>
+            <ListItem primaryText="Draft.js" href="http://draftjs.org" target="_blank"/>
           </List>
         </Drawer>
       </div>
