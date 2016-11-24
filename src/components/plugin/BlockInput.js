@@ -20,6 +20,11 @@ export default class BlockInput extends Component {
     );
   }
 
+  _handleDrop(event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
   render(){
     let {value, error, styles, ...props} = this.props;
     styles = styles || {};
@@ -35,7 +40,7 @@ export default class BlockInput extends Component {
     return (
       <div className="block__input__row">
         <div className="block__input__wrapper">
-          <input {...props} defaultValue={value} type="text" className={className} />
+          <input {...props} defaultValue={value} type="text" className={className} onDrop={this._handleDrop}/>
           <icons.EditIcon className="block__input__icon" />
         </div>
         {this.renderError(error)}
