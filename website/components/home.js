@@ -12,8 +12,8 @@ import Example from "../components/example";
 export default class Home extends React.Component {
   render() {
     return (
-      <div className="page__content home">
-        <Example />
+      <div className="content home">
+        <Example activeContent={this.props.activeContent}/>
       </div>
     );
   }
