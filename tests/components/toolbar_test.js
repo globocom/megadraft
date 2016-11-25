@@ -192,7 +192,7 @@ describe("Toolbar Component", function() {
       const toolbarWrapper = this.wrapper.find(".toolbar");
       const toolbarWrapperNode = toolbarWrapper.get(0);
 
-      expect(toolbarWrapperNode.style.top).to.be.equal("-14px");
+      expect(toolbarWrapperNode.style.bottom).to.be.equal("14px");
       expect(toolbarWrapperNode.style.left).to.be.equal("0.5px");
     });
 

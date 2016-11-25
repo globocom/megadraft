@@ -18,6 +18,8 @@ describe("LinkInput Component", function() {
   beforeEach(function() {
     this.cancelEntity = sinon.spy();
     this.setEntity = sinon.spy();
+    this.setError = sinon.spy();
+    this.cancelError = sinon.spy();
 
     this.wrapper = mount(
       <LinkInput
@@ -25,6 +27,8 @@ describe("LinkInput Component", function() {
         editor={this.editor}
         cancelEntity={this.cancelEntity}
         setEntity={this.setEntity}
+        setError={this.setError}
+        cancelError={this.cancelError}
         />
     );
 
@@ -64,6 +68,35 @@ describe("LinkInput Component", function() {
     input.simulate("change");
     input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
     expect(this.setEntity).to.have.been.calledWith({url: "http://www.globo.com"});
+  });
+
+  it("should error on invalid link", function() {
+    const input = this.wrapper.find("input");
+    const inputNode = input.get(0);
+
+    inputNode.value = "globo";
+    input.simulate("change");
+    input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
+    expect(this.setError).to.have.been.calledWith("Invalid Link");
+
+    inputNode.value = "[12/12/2016] globo.com";
+    input.simulate("change");
+    input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
+    expect(this.setError).to.have.been.calledWith("Invalid Link");
+  });
+
+  it("should clear error on empty input", function() {
+    const input = this.wrapper.find("input");
+    const inputNode = input.get(0);
+
+    inputNode.value = "globo";
+    input.simulate("change");
+    input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
+
+    inputNode.value = "";
+    input.simulate("change");
+    input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
+    expect(this.cancelError).to.have.been.called;
   });
 
 });
