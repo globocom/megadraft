@@ -9,8 +9,8 @@
 .jsonpreview {
     font-family: monospace;
     color: #333;
-    background-color: #fff;
-    font-size: medium;
+    background-color: #ebdbb2;
+    font-size:16px;;
 }
 
 .public-DraftEditor-content {
@@ -23,20 +23,108 @@
     outline: none;
 }
 
-.tab-container-editor {
+
+.container--light{
+  background-color: #fff;
 }
 
-.tab-container-json {
-    border-top: 1px solid #d8d8d8;
-    background-color: #fff;
-    padding: 20px;
-    /*padding-left: 80px;*/
+.container--dark{
+  background-color: #282828;
 }
 
-.docs pre {
-    color: rgba(0, 0, 0, 0.87);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
-    border-radius: 2px;
-    background-color: #FFF;
-    padding: 16px;
+.appbar--fixed{
+  color:red;
+  background:red;
+}
+
+.docs {
+  padding-left: 256px;
+  padding-right: 256px;
+  padding-top: 64px;
+  padding-bottom: 64px;
+  background-color: #fafafa;
+}
+
+@media only screen and (max-width: 767px) {
+    .docs{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 64px;
+    padding-bottom: 64px}
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 3){
+    .docs {
+    padding-left: 65px;
+    padding-right: 65px;
+    padding-top: 95px;
+    padding-bottom: 128px;
+  }
+}
+
+.docs {
+  h1 {
+      display: block;
+      font-size: 2em;
+      -webkit-margin-before: 0.67em;
+      -webkit-margin-after: 0.67em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      font-weight: bold;
+  }
+
+  p {
+      display: block;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+  }
+
+  h2 {
+      display: block;
+      font-size: 1.5em;
+      -webkit-margin-before: 0.83em;
+      -webkit-margin-after: 0.83em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      font-weight: bold;
+  }
+
+  re, xmp, plaintext, listing {
+      display: block;
+      font-family: monospace;
+      white-space: pre;
+      margin: 1em 0px 1em;
+  }
+
+  ul, menu, dir {
+      display: block;
+      list-style-type: disc;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+  }
+
+  li {
+      display: list-item;
+      text-align: -webkit-match-parent;
+  }
+
+  pre {
+      color: rgba(0, 0, 0, 0.87);
+      box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+      border-radius: 2px;
+      background-color: #FFF;
+  }
+
+  a {
+    color: #000;
+  }
+}
+
+.content {
+  background-color: #fafafa;
 }

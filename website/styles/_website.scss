@@ -27,8 +27,8 @@ $hit-color: #ffcf00;
 
   &__content {
     margin: auto;
-    max-width: 960px;
     color: #333;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.6;
     word-wrap: break-word;
@@ -77,13 +77,169 @@ $hit-color: #ffcf00;
     font-weight: bold;
     font-size: 20px;
     position: absolute;
-    bottom: 30px;
+    bottom: -66px;
     color: #fff;
     cursor: pointer;
     text-decoration: none;
-    border-bottom: 1px solid $hit-color;
     left: 50%;
     text-shadow: 1px 1px 3px #333;
     transform: translateX(-50%);
   }
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 3){
+      &__call-to-action {
+        font-weight: bold;
+        font-size: 45px;
+        position: absolute;
+        bottom: -45px;
+        color: #fff;
+        cursor: pointer;
+        text-decoration: none;
+        left: 50%;
+        text-shadow: 1px 1px 3px #333;
+        transform: translateX(-50%);
+      }
+
+     &__arrow-call-to-action {
+      font-weight: bold;
+      position: relative;
+      color: $hit-color;
+      top: -22px;
+      cursor: pointer;
+      text-decoration: none;
+      left: 50%;
+      text-shadow: 1px 1px 3px #333;
+      transform: translateX(-50%);
+      height: 149px;
+      width: 147px;
+    }
+  }
+
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px){
+    &__call-to-action {
+        font-weight: bold;
+        font-size: 45px;
+        position: absolute;
+        bottom: -45px;
+        color: #fff;
+        cursor: pointer;
+        text-decoration: none;
+        left: 50%;
+        text-shadow: 1px 1px 3px #333;
+        transform: translateX(-50%);
+      }
+
+     &__arrow-call-to-action {
+      font-weight: bold;
+      position: relative;
+      color: $hit-color;
+      top: -22px;
+      cursor: pointer;
+      text-decoration: none;
+      left: 50%;
+      text-shadow: 1px 1px 3px #333;
+      transform: translateX(-50%);
+      height: 149px;
+      width: 147px;
+    }
+  }
+
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    &__call-to-action {
+        font-weight: bold;
+        font-size: 45px;
+        position: absolute;
+        bottom: -45px;
+        color: #fff;
+        cursor: pointer;
+        text-decoration: none;
+        left: 50%;
+        text-shadow: 1px 1px 3px #333;
+        transform: translateX(-50%);
+      }
+
+     &__arrow-call-to-action {
+      font-weight: bold;
+      position: relative;
+      color: $hit-color;
+      top: -22px;
+      cursor: pointer;
+      text-decoration: none;
+      left: 50%;
+      text-shadow: 1px 1px 3px #333;
+      transform: translateX(-50%);
+      height: 149px;
+      width: 147px;
+    }
+  }
+
+  &__arrow-call-to-action {
+    font-weight: bold;
+    position: relative;
+    color: $hit-color;
+    top: -15px;
+    cursor: pointer;
+    text-decoration: none;
+    left: 50%;
+    text-shadow: 1px 1px 3px #333;
+    transform: translateX(-50%);
+    height: 100px;
+    width: 68px;
+  }
+}
+
+.tab-container-editor {
+    padding-left: 256px;
+    padding-right: 256px;
+    padding-top: 95px;
+    padding-bottom: 128px;
+  }
+
+@media only screen and (-webkit-min-device-pixel-ratio: 3){
+  .tab-container-editor {
+    padding-left: 65px;
+    padding-right: 65px;
+    padding-top: 95px;
+    padding-bottom: 128px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .tab-container-editor {
+    padding-left: 65px;
+    padding-right: 65px;
+    padding-top: 95px;
+    padding-bottom: 64px;
+  }
+}
+
+.tab-container-json {
+  background-color: #282828;
+  padding-left: 256px;
+  padding-right: 256px;
+  padding-top: 64px;
+  padding-bottom: 128px;
+  /*padding-left: 80px;*/ }
+
+@media only screen and (max-width: 1000px) {
+  .tab-container-json {
+    background-color: #282828;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 64px;
+    padding-bottom: 256px;
+    /*padding-left: 80px;*/ }
+
+  .hljs {
+    background-color: #fff;
+    padding: 1em;
+    font-family: monospace;
+    font-size: 25px;
+  }
+}
+
+.hljs {
+  background-color: #fff;
+  padding: 1em;
+  font-family: monospace;
 }

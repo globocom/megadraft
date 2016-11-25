@@ -6,8 +6,6 @@
 
 import React from "react";
 
-import {Tabs, Tab} from "material-ui/Tabs";
-import FontIcon from "material-ui/FontIcon";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import {grey300, grey900, white, indigo500} from "material-ui/styles/colors";
 
@@ -40,7 +38,6 @@ class Example extends React.Component {
     ];
     this.state = {
       value: content,
-      activeTab: "a"
     };
     this.onChange = ::this.onChange;
     this.onCodeActive = ::this.onCodeActive;
@@ -53,12 +50,6 @@ class Example extends React.Component {
   componentDidMount() {
     highlightCode(this);
   }
-
-  handleChange = (tab) => {
-    this.setState({
-      activeTab: tab
-    });
-  };
 
   onChange(value) {
     this.setState({
@@ -75,12 +66,8 @@ class Example extends React.Component {
   }
 
   render() {
-    const iconEdit = <FontIcon className="material-icons">mode_edit</FontIcon>;
-    const iconCode = <FontIcon className="material-icons">code</FontIcon>;
-
-    return (
-      <Tabs value={this.state.activeTab} onChange={this.handleChange}>
-        <Tab label="Editor" value="a" icon={iconEdit}>
+    if(this.props.activeContent) {
+      return (
           <div className="tab-container-editor">
             <MegadraftEditor
               editorState={this.state.value}
@@ -88,8 +75,11 @@ class Example extends React.Component {
               onChange={this.onChange}
               keyBindings={this.keyBindings}/>
           </div>
-        </Tab>
-        <Tab label="Content JSON" onActive={this.onCodeActive} value="b" icon={iconCode}>
+      );
+    } else {
+      return (
+        <div>
+          <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/gruvbox-dark.min.css"/>
           <div className="tab-container-json">
             <pre className="jsonpreview">
               <code className="json hljs">
@@ -97,12 +87,14 @@ class Example extends React.Component {
               </code>
             </pre>
           </div>
-        </Tab>
-      </Tabs>
-    );
+        </div>
+      );
+    }
   }
 }
 
+/* global hljs */
+hljs.initHighlightingOnLoad();
 
 Example.childContextTypes = {
   muiTheme: React.PropTypes.object.isRequired

@@ -13,10 +13,33 @@ var WebpackDevServer = require("webpack-dev-server");
 var webpackConfig = require("./webpack.config.js");
 
 
-
 // The development server (the recommended option for development)
 gulp.task("default", ["dev-server"]);
 
+var host = "localhost";
+var port = 8080;
+
+// http://stackoverflow.com/questions/30225866/gulp-webpack-dev-server-callback-before-bundle-is-finished
+var hook_stream = function( stream, data, cb ) {
+  // Reference default write method
+  var old_write = stream.write;
+
+  // Clear hook function
+  var clear_hook = function() {
+    stream.write = old_write;
+  };
+
+  // New stream write with our shiny function
+  stream.write = function() {
+    // Old behaviour
+    old_write.apply( stream, arguments );
+    // Hook
+    if ( arguments[ 0 ] === data ) {
+      clear_hook();
+      cb();
+    }
+  };
+};
 
 gulp.task("sass", function () {
   return gulp.src("./src/styles/**/*.scss")
@@ -37,23 +60,24 @@ gulp.task("site-sass", function () {
     .pipe(gulp.dest("./website/styles/"));
 });
 
-
 gulp.task("site-watch", function() {
   gulp.watch("./src/styles/**/*.scss", ["site-sass"]);
   gulp.watch("./website/styles/*.scss", ["site-sass"]);
 });
 
-
 gulp.task("dev-server", function(callback) {
   gulp.start("site-sass");
   gulp.start("site-watch");
-
   // Start a webpack-dev-server
   new WebpackDevServer(webpack(webpackConfig), {
     stats: {
       colors: true
     }
-  }).listen(8080, "localhost", function(err) {
+  }).listen(port, host, function(err) {
+     hook_stream( process.stdout, 'webpack: bundle is now VALID.\n', function() {
+        gutil.log( '[dev-server]', gutil.colors.yellow( 'http://' + host + ':' + port + '/website/#/dev' ) );
+      } );
+
     if(err) throw new gutil.PluginError("webpack-dev-server", err);
   });
 });
