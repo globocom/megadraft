@@ -17,11 +17,14 @@ export default class Toolbar extends Component {
     this.state = {
       show: false,
       editingEntity: null,
-      link: ""
+      link: "",
+      error: null
     };
     this.renderButton = ::this.renderButton;
     this.cancelEntity = ::this.cancelEntity;
     this.removeEntity = ::this.removeEntity;
+    this.setError = ::this.setError;
+    this.cancelError = ::this.cancelError;
   }
 
   toggleInlineStyle(inlineStyle) {
@@ -80,6 +83,14 @@ export default class Toolbar extends Component {
     );
   }
 
+  setError(errorMsg) {
+    this.setState({error: errorMsg});
+  }
+
+  cancelError() {
+    this.setState({error: null});
+  }
+
   setBarPosition() {
     const editor = this.props.editor;
     const toolbar = this.refs.toolbar;
@@ -91,12 +102,12 @@ export default class Toolbar extends Component {
 
     if (selectionCoords &&
         !this.state.position ||
-        this.state.position.top !== selectionCoords.offsetTop ||
+        this.state.position.bottom !== selectionCoords.offsetBottom ||
         this.state.position.left !== selectionCoords.offsetLeft) {
       this.setState({
         show: true,
         position: {
-          top: selectionCoords.offsetTop,
+          bottom: selectionCoords.offsetBottom,
           left: selectionCoords.offsetLeft
         }
       });
@@ -111,7 +122,8 @@ export default class Toolbar extends Component {
         this.setState({
           show: false,
           editingEntity: null,
-          link: ""
+          link: "",
+          error: null
         });
       }
     }
@@ -171,7 +183,8 @@ export default class Toolbar extends Component {
   cancelEntity() {
     this.props.editor && this.props.editor.focus();
     this.setState({
-      editingEntity: null
+      editingEntity: null,
+      error: null
     });
   }
   renderEntityInput(entityType) {
@@ -182,8 +195,9 @@ export default class Toolbar extends Component {
     const Component = this.props.entityInputs[entityType];
     const setEntity = data => this.setEntity(entityType, data);
     let entityData = {};
+    let entity = null;
     if(this.hasEntity(entityType)) {
-      const entity = this.getCurrentEntity();
+      entity = this.getCurrentEntity();
       if(entity) {
         entityData = entity.getData();
       }
@@ -197,6 +211,9 @@ export default class Toolbar extends Component {
           onChange={this.props.onChange}
           cancelEntity={this.cancelEntity}
           removeEntity={this.removeEntity}
+          setError={this.setError}
+          cancelError={this.cancelError}
+          entity={entity}
           {...entityData}
           />
       );
@@ -217,20 +234,24 @@ export default class Toolbar extends Component {
       return null;
     }
     const toolbarClass = classNames("toolbar", {
-      "toolbar--open": this.state.show
+      "toolbar--open": this.state.show,
+      "toolbar--error": this.state.error
     });
 
     return (
       <div className={toolbarClass}
            style={this.state.position}
            ref="toolbarWrapper">
-        <div className="toolbar__wrapper" ref="toolbar">
-          {
-            this.state.editingEntity ?
-            this.renderEntityInput(this.state.editingEntity) :
-            this.renderToolList()
-          }
-          <span className="toolbar__arrow" />
+        <div style={{position: "absolute", bottom: 0}}>
+          <div className="toolbar__wrapper" ref="toolbar">
+            {
+              this.state.editingEntity ?
+              this.renderEntityInput(this.state.editingEntity) :
+              this.renderToolList()
+            }
+            <p className="toolbar__error-msg">{this.state.error}</p>
+            <span className="toolbar__arrow" />
+          </div>
         </div>
       </div>
     );

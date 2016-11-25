@@ -83,6 +83,8 @@ Every entity input component will receive the following properties:
 You can pass an object that gets assigned as the data of the entity. (see example below)
 - `removeEntity`: call this to remove the entity. It will also call `cancelEntity` afterwards.
 - `cancelEntity`: call this if you want to close the entity input and show the normal toolbar.
+- `setError`: call this to show an error msg under the input.
+- `cancelError`: call this to clear the error message.
 - `editorState`: the current draftjs `editorState`.
 - `onChange`: call this if you want to manually change the `editorState`.
 
