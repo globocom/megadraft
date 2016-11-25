@@ -39,15 +39,14 @@ export default class LinkInput extends Component {
         url: ""
       });
       this.props.cancelEntity();
-
-
+      // Force blur to work around Firefox's NS_ERROR_FAILURE
+      event.target.blur();
     } else if (event.key == "Escape") {
       event.preventDefault();
       this.setState({
         url: ""
       });
       this.props.cancelEntity();
-
     }
   }
 

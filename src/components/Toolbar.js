@@ -151,11 +151,11 @@ export default class Toolbar extends Component {
       editorState.getSelection(),
       entityKey
     );
-    this.props.onChange(
-      EditorState.forceSelection(
-        newState, editorState.getSelection()
-      )
+    const selectionState = EditorState.forceSelection(
+      newState, editorState.getSelection()
     );
+
+    this.props.onChange(selectionState);
   }
 
   removeEntity() {
