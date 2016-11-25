@@ -16,7 +16,6 @@ let expect = chai.expect;
 describe("LinkInput Component", function() {
 
   beforeEach(function() {
-
     this.cancelEntity = sinon.spy();
     this.setEntity = sinon.spy();
 
@@ -32,19 +31,20 @@ describe("LinkInput Component", function() {
   });
 
   it("should set a link entity on keypress and call cancel", function() {
-
     const input = this.wrapper.find("input");
     const inputNode = input.get(0);
+    sinon.spy(inputNode, "blur");
 
     inputNode.value = "http://www.globo.com";
     input.simulate("change");
     input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
     expect(this.setEntity).to.have.been.calledWith({url: "http://www.globo.com"});
     expect(this.cancelEntity).to.have.been.called;
+    // Work around Firefox's NS_ERROR_FAILURE
+    expect(inputNode.blur).to.have.been.called;
   });
 
   it("esc key should cancel the link", function() {
-
     const input = this.wrapper.find("input");
     const inputNode = input.get(0);
 
