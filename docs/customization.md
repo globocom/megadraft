@@ -27,7 +27,7 @@ Notice: we plan to rename this property to just `Sidebar` in future versions.
 import React from "react";
 import ReactDOM from "react-dom";
 import {MegadraftEditor, editorStateFromRaw} from "megadraft";
-import CustomSidebar from 'my/sidebar/path';
+import CustomSidebar from "my/sidebar/path";
 
 class App extends React.Component {
   constructor(props) {
@@ -57,7 +57,7 @@ class App extends React.Component {
 
 ReactDOM.render(
   <App />,
-  document.getElementById('container')
+  document.getElementById("container")
 );
 ```
 
@@ -72,7 +72,7 @@ The `sidebarRendererFn` takes a props object with the following properties:
 
 You can provide custom actions using MegadraftEditor `actions` property.
 Megadraft Toolbar provides [custom actions][custom actions] like **Bold** and
-*Italic*, additionaly you can provide your own custom actions or even add some
+*Italic*, additionally you can provide your own custom actions or even add some
 custom actions to the default ones.
 
 [custom actions]: https://github.com/globocom/megadraft/blob/master/src/actions/default.js
@@ -118,7 +118,7 @@ class UnderlineIcon extends React.Component {
 
 ReactDOM.render(
   <App />,
-  document.getElementById('container')
+  document.getElementById("container")
 );
 ```
 
@@ -132,7 +132,7 @@ you can provide a custom toolbar component as well with the `Toolbar` property:
 import React from "react";
 import ReactDOM from "react-dom";
 import {MegadraftEditor, editorStateFromRaw} from "megadraft";
-import CustomToolbar from 'my/toolbar/path';
+import CustomToolbar from "my/toolbar/path";
 
 class App extends React.Component {
   // ....
@@ -152,7 +152,7 @@ It will receive the following properties:
 - `editor`: a reference to the editor dom node.
 - `editorState`: the current draft [editorState](https://facebook.github.io/draft-js/docs/api-reference-editor-state.html).
 - `readOnly`: whether the editor is in read-only mode. Usually, you might want to hide your toolbar if this property is set.
-- `onChange`: function to pass a new editorState when a change occured.
+- `onChange`: function to pass a new editorState when a change occurred.
 - `actions`: the action items to show in the toolbar. See https://github.com/globocom/megadraft/blob/master/src/actions/default.js
 
 
@@ -160,7 +160,7 @@ It will receive the following properties:
 
 You can provide custom key bindings to Megadraft by setting the `keyBindingFn` property.
 
-Example: Call a function when user presses control s
+Example: Call a function when user presses control+s
 
 ```js
 import React from "react";
@@ -197,7 +197,7 @@ class App extends React.Component {
 
 ReactDOM.render(
   <App />,
-  document.getElementById('container')
+  document.getElementById("container")
 );
 ```
 
@@ -269,7 +269,7 @@ class App extends React.Component {
 
 ReactDOM.render(
   <App />,
-  document.getElementById('container')
+  document.getElementById("container")
 );
 ```
 

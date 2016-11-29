@@ -1,6 +1,6 @@
 # Custom Entities
 
-Draftjs provides a mechanism to annotate a section of text with metadata.
+DraftJS provides a mechanism to annotate a section of text with metadata.
 This can be links, mentions, hashtags or similar. [DraftJS' section about entities](https://facebook.github.io/draft-js/docs/advanced-topics-entities.html)
 gives you a good introduction about the topic.
 
@@ -16,10 +16,10 @@ import ReactDOM from "react-dom";
 import {MegadraftEditor, editorStateFromRaw} from "megadraft";
 
 // this is the default LinkInput that handles `LINK`-entities:
-import LinkInput from 'megadraft/lib/entity_inputs/LinkInput';
+import LinkInput from "megadraft/lib/entity_inputs/LinkInput";
 
 // you can create a custom entity input component (see below)
-import PageLinkInput from './path/to/PageLinkInput';
+import PageLinkInput from "./path/to/PageLinkInput";
 
 const entityInputs = {
   LINK: LinkInput,
@@ -68,8 +68,6 @@ class App extends React.Component {
     )
   }
 }
-
-
 ```
 
 ## Creating a custom entity input
@@ -89,8 +87,6 @@ You can pass an object that gets assigned as the data of the entity. (see exampl
 Example:
 
 ```js
-
-
 // PageLinkInput.js
 // This input renders a list of internal pages in a <select>-element
 // that an editor can pick from
@@ -128,8 +124,6 @@ export default class PageLinkInput extends React.Component {
     );
   }
 }
-
-
 ```
 
 
@@ -142,13 +136,12 @@ and provides a utils function `createTypeStrategy` to create a simple entity-typ
 
 
 ```js
-
 import React from "react";
 import ReactDOM from "react-dom";
 import {DraftJS, MegadraftEditor, editorStateFromRaw, createTypeStrategy} from "megadraft";
 
-import MyLinkComponent from './path/to/MyLinkComponent';
-import MyInternalLinkComponent from './path/to/MyInternalLinkComponent';
+import MyLinkComponent from "./path/to/MyLinkComponent";
+import MyInternalLinkComponent from "./path/to/MyInternalLinkComponent";
 
 const myDecorator = new DraftJS.CompositeDecorator([
   {
@@ -181,8 +174,9 @@ class App extends React.Component {
     )
   }
 }
+```
 
-
+```js
 // MyLinkComponent
 
 import React from "react";
@@ -197,5 +191,4 @@ export default ({entityKey, children}) => {
     </a>
   );
 };
-
 ```
