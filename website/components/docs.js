@@ -10,6 +10,7 @@ import Overview from "../../docs/overview.md";
 import Customization from "../../docs/customization.md";
 import Plugins from "../../docs/plugins.md";
 import Serializing from "../../docs/serializing.md";
+import CustomEntities from "../../docs/custom_entities.md";
 import ReactMarkdown from "react-markdown";
 
 import {highlightCode} from "./highlightCode";
@@ -19,7 +20,8 @@ const DOCS = {
   overview: Overview,
   customization: Customization,
   plugins: Plugins,
-  "saving-loading": Serializing
+  "saving-loading": Serializing,
+  "custom-entities": CustomEntities
 };
 
 
