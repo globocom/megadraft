@@ -41,7 +41,7 @@
  *
  * License: MIT
  */ }
-  .megadraft-editor .DraftEditor-root {
+  .megadraft-editor .DraftEditor-root, .megadraft-editor .toolbar {
     font-family: Open Sans, sans-serif;
     color: #181818;
     font-size: 1.125rem;
@@ -171,12 +171,33 @@
     z-index: 10; }
     .megadraft-editor .toolbar--open {
       display: block; }
+    .megadraft-editor .toolbar__error-msg {
+      margin: 0;
+      height: 0;
+      height: 0;
+      -webkit-transition: height 0.2s ease-in-out;
+      transition: height 0.2s ease-in-out; }
+    .megadraft-editor .toolbar--error .toolbar__wrapper {
+      background-color: #E83F26; }
+    .megadraft-editor .toolbar--error .toolbar__arrow {
+      border-color: #E83F26 transparent transparent; }
+    .megadraft-editor .toolbar--error .toolbar__error-msg {
+      color: #FFF;
+      margin: -8px 0 0 20px;
+      padding-bottom: 12px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      height: 28px; }
+    .megadraft-editor .toolbar--error .toolbar__button {
+      color: #FFF; }
     .megadraft-editor .toolbar__wrapper {
       background-color: #181818;
       border-radius: 4px;
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
       left: -50%;
-      position: relative; }
+      position: relative;
+      -webkit-transition: background-color 0.2s ease-in-out;
+      transition: background-color 0.2s ease-in-out; }
     .megadraft-editor .toolbar__list {
       padding: 0 8px;
       margin: 0;
@@ -192,7 +213,9 @@
       border-width: 8px;
       border-style: solid;
       border-color: #181818 transparent transparent;
-      margin-left: -8px; }
+      margin-left: -8px;
+      -webkit-transition: border-color 0.2s ease-in-out;
+      transition: border-color 0.2s ease-in-out; }
     .megadraft-editor .toolbar__item {
       display: inline-block;
       color: #ccc; }
@@ -226,6 +249,8 @@
       width: 250px; }
       .megadraft-editor .toolbar__input:focus {
         outline: none; }
+    .megadraft-editor .toolbar__input-button {
+      padding-right: 16px; }
   .megadraft-editor .block__hover {
     padding: 8px;
     margin: -8px; }
