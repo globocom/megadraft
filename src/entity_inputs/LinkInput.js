@@ -18,7 +18,7 @@ export default class LinkInput extends Component {
     this.onLinkKeyDown = ::this.onLinkKeyDown;
   }
 
-  setLink() {
+  setLink(event) {
     let {url} = this.state;
     if (!url.startsWith("http://") && !url.startsWith("https://")) {
       url = `http://${url}`;
@@ -33,12 +33,16 @@ export default class LinkInput extends Component {
 
     if (!url.match(regex)) {
       this.props.setError(__("Invalid Link"));
+      this.refs.textInput.focus();
       return;
     }
 
     this.props.setEntity({url});
 
     this.reset();
+
+    // Force blur to work around Firefox's NS_ERROR_FAILURE
+    event.target.blur();
   }
 
   reset() {
@@ -63,9 +67,7 @@ export default class LinkInput extends Component {
   onLinkKeyDown(event) {
     if (event.key == "Enter") {
       event.preventDefault();
-      this.setLink();
-      // Force blur to work around Firefox's NS_ERROR_FAILURE
-      event.target.blur();
+      this.setLink(event);
     } else if (event.key == "Escape") {
       event.preventDefault();
       this.reset();
