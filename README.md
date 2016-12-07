@@ -77,6 +77,9 @@ The Megadraft website uses a picture from
 [Stocksnap.io by Tim Marshall](https://stocksnap.io/photo/K148YZIFJ3) licensed
 under [CC0 license](https://stocksnap.io/license).
 
+Landing page uses a Megadeth picture by [Ted Van Pelt](https://flic.kr/p/7Pr94f)
+licensed under [CC-BY](https://creativecommons.org/licenses/by/2.0/).
+
 
 [plugin-generator]: https://github.com/globocom/generator-megadraft-plugin
 [docs-overview-and-usage]: http://globocom.github.io/megadraft/#/docs/overview
