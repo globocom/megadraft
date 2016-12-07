@@ -74,7 +74,7 @@ html {
 }
 
 body {
-  -webkit-font-smoothing: antialiased;
+  @include font-smoothing(on);
   color: #000;
   font-family: 'Roboto', sans-serif;
 }
