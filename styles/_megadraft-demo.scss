@@ -46,19 +46,19 @@
 }
 
 @media only screen and (max-width: 767px) {
-    .docs{
+  .docs{
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 64px;
     padding-bottom: 64px}
 }
 
-@media only screen and (-webkit-min-device-pixel-ratio: 3){
-    .docs {
-    padding-left: 65px;
-    padding-right: 65px;
-    padding-top: 95px;
-    padding-bottom: 128px;
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .docs{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 64px;
+    padding-bottom: 64px;
   }
 }
 
@@ -66,28 +66,22 @@
   h1 {
       display: block;
       font-size: 2em;
-      -webkit-margin-before: 0.67em;
-      -webkit-margin-after: 0.67em;
-      -webkit-margin-start: 0px;
-      -webkit-margin-end: 0px;
+      margin-block-end: 0.67em;
+      margin-block-start: 0.67em;
       font-weight: bold;
   }
 
   p {
       display: block;
-      -webkit-margin-before: 1em;
-      -webkit-margin-after: 1em;
-      -webkit-margin-start: 0px;
-      -webkit-margin-end: 0px;
+      margin-block-end: 1em;
+      margin-block-start: 1em;
   }
 
   h2 {
       display: block;
       font-size: 1.5em;
-      -webkit-margin-before: 0.83em;
-      -webkit-margin-after: 0.83em;
-      -webkit-margin-start: 0px;
-      -webkit-margin-end: 0px;
+      margin-block-end: 0.83em;
+      margin-block-start: 0.83em;
       font-weight: bold;
   }
 
@@ -101,16 +95,14 @@
   ul, menu, dir {
       display: block;
       list-style-type: disc;
-      -webkit-margin-before: 1em;
-      -webkit-margin-after: 1em;
-      -webkit-margin-start: 0px;
-      -webkit-margin-end: 0px;
-      -webkit-padding-start: 40px;
+      margin-block-end: 1em;
+      margin-block-start: 1em;
+      padding-inline-start: 40px;
   }
 
   li {
       display: list-item;
-      text-align: -webkit-match-parent;
+      text-align: match-parent;
   }
 
   pre {

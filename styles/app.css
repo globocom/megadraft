@@ -69,6 +69,7 @@ html {
 
 body {
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   color: #000;
   font-family: 'Roboto', sans-serif; }
 
@@ -152,33 +153,6 @@ body {
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%); }
 
-@media only screen and (-webkit-min-device-pixel-ratio: 3) {
-  .hero__call-to-action {
-    font-weight: bold;
-    font-size: 45px;
-    position: absolute;
-    bottom: -45px;
-    color: #fff;
-    cursor: pointer;
-    text-decoration: none;
-    left: 50%;
-    text-shadow: 1px 1px 3px #333;
-    -webkit-transform: translateX(-50%);
-            transform: translateX(-50%); }
-  .hero__arrow-call-to-action {
-    font-weight: bold;
-    position: relative;
-    color: #ffcf00;
-    top: -22px;
-    cursor: pointer;
-    text-decoration: none;
-    left: 50%;
-    text-shadow: 1px 1px 3px #333;
-    -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
-    height: 149px;
-    width: 147px; } }
-
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   .hero__call-to-action {
     font-weight: bold;
@@ -252,13 +226,6 @@ body {
   padding-right: 256px;
   padding-top: 95px;
   padding-bottom: 128px; }
-
-@media only screen and (-webkit-min-device-pixel-ratio: 3) {
-  .tab-container-editor {
-    padding-left: 65px;
-    padding-right: 65px;
-    padding-top: 95px;
-    padding-bottom: 128px; } }
 
 @media only screen and (max-width: 767px) {
   .tab-container-editor {
@@ -762,36 +729,36 @@ body {
     padding-top: 64px;
     padding-bottom: 64px; } }
 
-@media only screen and (-webkit-min-device-pixel-ratio: 3) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
   .docs {
-    padding-left: 65px;
-    padding-right: 65px;
-    padding-top: 95px;
-    padding-bottom: 128px; } }
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 64px;
+    padding-bottom: 64px; } }
 
 .docs h1 {
   display: block;
   font-size: 2em;
-  -webkit-margin-before: 0.67em;
   -webkit-margin-after: 0.67em;
-  -webkit-margin-start: 0px;
-  -webkit-margin-end: 0px;
+          margin-block-end: 0.67em;
+  -webkit-margin-before: 0.67em;
+          margin-block-start: 0.67em;
   font-weight: bold; }
 
 .docs p {
   display: block;
-  -webkit-margin-before: 1em;
   -webkit-margin-after: 1em;
-  -webkit-margin-start: 0px;
-  -webkit-margin-end: 0px; }
+          margin-block-end: 1em;
+  -webkit-margin-before: 1em;
+          margin-block-start: 1em; }
 
 .docs h2 {
   display: block;
   font-size: 1.5em;
-  -webkit-margin-before: 0.83em;
   -webkit-margin-after: 0.83em;
-  -webkit-margin-start: 0px;
-  -webkit-margin-end: 0px;
+          margin-block-end: 0.83em;
+  -webkit-margin-before: 0.83em;
+          margin-block-start: 0.83em;
   font-weight: bold; }
 
 .docs re, .docs xmp, .docs plaintext, .docs listing {
@@ -803,15 +770,17 @@ body {
 .docs ul, .docs menu, .docs dir {
   display: block;
   list-style-type: disc;
-  -webkit-margin-before: 1em;
   -webkit-margin-after: 1em;
-  -webkit-margin-start: 0px;
-  -webkit-margin-end: 0px;
-  -webkit-padding-start: 40px; }
+          margin-block-end: 1em;
+  -webkit-margin-before: 1em;
+          margin-block-start: 1em;
+  -webkit-padding-start: 40px;
+     -moz-padding-start: 40px;
+          padding-inline-start: 40px; }
 
 .docs li {
   display: list-item;
-  text-align: -webkit-match-parent; }
+  text-align: match-parent; }
 
 .docs pre {
   color: rgba(0, 0, 0, 0.87);
