@@ -153,10 +153,10 @@ It will receive the following properties:
 - `editorState`: the current draft [editorState](https://facebook.github.io/draft-js/docs/api-reference-editor-state.html).
 - `readOnly`: whether the editor is in read-only mode. Usually, you might want to hide your toolbar if this property is set.
 - `onChange`: function to pass a new editorState when a change occurred.
-- `actions`: the action items to show in the toolbar. See https://github.com/globocom/megadraft/blob/master/src/actions/default.js
+- `actions`: the action items to show in the toolbar. See [Megadraft actions](https://github.com/globocom/megadraft/blob/master/src/actions/default.js)
 
 
-## Keybindings
+## Keybindings
 
 You can provide custom key bindings to Megadraft by setting the `keyBindingFn` property.
 
