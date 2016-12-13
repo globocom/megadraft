@@ -25,10 +25,7 @@ export default class MegadraftEditor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      readOnly: this.props.readOnly || false,
-      softNewLines: this.props.softNewLines !== undefined
-        ? this.props.softNewLines
-        : true
+      readOnly: this.props.readOnly || false
     };
 
     this.onChange = ::this.onChange;
@@ -78,9 +75,6 @@ export default class MegadraftEditor extends Component {
     if (this.props.readOnly !== nextProps.readOnly) {
       this.setState({readOnly: nextProps.readOnly});
     }
-    if (this.props.softNewLines !== nextProps.softNewLines) {
-      this.setState({softNewLines: nextProps.softNewLines});
-    }
   }
 
   onChange(editorState) {
@@ -120,7 +114,7 @@ export default class MegadraftEditor extends Component {
   }
 
   handleReturn(event) {
-    if (!this.state.softNewLines) {
+    if (this.props.softNewLines === false) {
       return false;
     }
 
