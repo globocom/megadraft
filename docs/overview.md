@@ -13,8 +13,8 @@ npm install --save megadraft
 
 ## Usage
 
-To use it in your application you'll just need to import the Megadraft
-component and use it in your application.
+To use it in your application all you need to do is import the Megadraft
+component such as the following:
 
 ```js
 import React from "react";
