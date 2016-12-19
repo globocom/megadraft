@@ -1,7 +1,5 @@
-var webpack = require("webpack");
-var merge = require("merge");
-var path = require("path");
-
+const merge = require("merge");
+const path = require("path");
 
 const defaultConfig = {
   entry: [
@@ -18,7 +16,7 @@ const defaultConfig = {
     contentBase: "./"
   },
   resolve: {
-    extensions: [ '', '.js', '.jsx' ],
+    extensions: ["", ".js", ".jsx"],
     fallback: path.join(__dirname, "node_modules")
   },
   resolveLoader: {
@@ -36,14 +34,14 @@ const defaultConfig = {
       },
       {
         test: /\.json$/,
-        loader: 'json'
+        loader: "json"
       }
     ]
   }
 };
 
 function makeConfig (extra) {
-  var config = merge.recursive(true, defaultConfig, extra || {});
+  const config = merge.recursive(true, defaultConfig, extra || {});
 
   return config;
 }
