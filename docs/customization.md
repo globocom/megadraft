@@ -6,14 +6,16 @@ Here are the props that `MegadraftEditor` accepts:
 
 - `placeholder`: Editor's placeholder text
 - `plugins`: List of plugins to be used by the editor
-- `editorState`: DraftJS' [editorState](https://facebook.github.io/draft-js/docs/api-reference-editor-state.html)
+- `editorState`: DraftJS' [editorState][api-reference-editor-state]
 - `onChange`: Function fired when editor state changes
-- `sidebarRendererFn`: (optional) it is called to render a custom sidebar. This method must
-return a valid React element.
-- `Toolbar`: (optional) a custom toolbar component or a function that returns a rendered component
+- `sidebarRendererFn`: (optional) it is called to render a custom sidebar. This
+  method must return a valid React element.
+- `Toolbar`: (optional) a custom toolbar component or a function that returns a
+  rendered component
 - `actions`: (optional) List of actions to render in Toolbar
 - `keyBindings`: (optional) Custom key bindings
-- `handleBlockNotFound`: (optional) called when the `editorState` contains a block for a plugin that is no longer available
+- `handleBlockNotFound`: (optional) called when the `editorState` contains a
+  block for a plugin that is no longer available
 
 Check the following sections for more info.
 
@@ -74,8 +76,6 @@ You can provide custom actions using MegadraftEditor `actions` property.
 Megadraft Toolbar provides [custom actions][custom actions] like **Bold** and
 *Italic*, additionally you can provide your own custom actions or even add some
 custom actions to the default ones.
-
-[custom actions]: https://github.com/globocom/megadraft/blob/master/src/actions/default.js
 
 Example: Add an underline action.
 
@@ -150,15 +150,18 @@ class App extends React.Component {
 It will receive the following properties:
 
 - `editor`: a reference to the editor dom node.
-- `editorState`: the current draft [editorState](https://facebook.github.io/draft-js/docs/api-reference-editor-state.html).
-- `readOnly`: whether the editor is in read-only mode. Usually, you might want to hide your toolbar if this property is set.
+- `editorState`: the current draft [editorState][api-reference-editor-state].
+- `readOnly`: whether the editor is in read-only mode. Usually, you might want
+  to hide your toolbar if this property is set.
 - `onChange`: function to pass a new editorState when a change occurred.
-- `actions`: the action items to show in the toolbar. See [Megadraft actions](https://github.com/globocom/megadraft/blob/master/src/actions/default.js)
+- `actions`: the action items to show in the toolbar. See [Megadraft
+  actions][custom actions]
 
 
 ## Keybindings
 
-You can provide custom key bindings to Megadraft by setting the `keyBindingFn` property.
+You can provide custom key bindings to Megadraft by setting the `keyBindingFn`
+property.
 
 Example: Call a function when user presses control+s
 
@@ -210,14 +213,17 @@ is missing.
 This behavior is customizable using the `handleBlockNotFound` prop. It takes a
 [ContentBlock][ContentBlock] object and should return either of the following:
 
-* `null`: this will delegate the block rendering to DraftJS, resulting in an empty paragraph
-* a [valid plugin][plugins] with a `blockComponent` property to render the fallback interface
+* `null`: this will delegate the block rendering to DraftJS, resulting in an
+  empty paragraph
+* a [valid plugin][plugins] with a `blockComponent` property to render the
+  fallback interface
 
 
 [ContentBlock]: https://facebook.github.io/draft-js/docs/api-reference-content-block.html#content
 [plugins]: http://globocom.github.io/megadraft/#/docs/plugins?_k=h3n0a5
 
-The following example renders a `pre` element for the unregistered `missing-plugin` atomic block.
+The following example renders a `pre` element for the unregistered
+`missing-plugin` atomic block.
 
 ```js
 import React from "react";
@@ -273,3 +279,5 @@ ReactDOM.render(
 );
 ```
 
+[api-reference-editor-state]: https://facebook.github.io/draft-js/docs/api-reference-editor-state.html
+[custom actions]: https://github.com/globocom/megadraft/blob/master/src/actions/default.js

@@ -47,10 +47,9 @@ ReactDOM.render(
 );
 ```
 
-Then link the main css (dist/css/megadraft.css) on your page, you can use the Sass
-source on your build, if you wish.
+Then link the main css (dist/css/megadraft.css) on your page, you can use the
+Sass source on your build, if you wish.
 
 ```html
 <link href="node_modules/megadraft/dist/css/megadraft.css" rel="stylesheet">
 ```
-
