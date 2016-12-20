@@ -801,5 +801,15 @@ body {
 .docs a {
   color: #000; }
 
+.docs code:not(.hljs) {
+  background-color: #FFF;
+  border-radius: 2px;
+  border: 1px solid #CCC;
+  padding: 1px 4px;
+  color: #d14;
+  margin: 0 2px;
+  font-family: monospace;
+  box-shadow: rgba(0, 0, 0, 0.08) 0 1px 1px; }
+
 .content {
   background-color: #fafafa; }
