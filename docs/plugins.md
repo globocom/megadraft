@@ -21,8 +21,9 @@ class Example extends React.Component {
 There is a [Yeoman Megadraft Plugin Generator][plugin-generator] that helps
 creating the basic boilerplate code for a new plugin.
 
-The following commands will install [Yeoman][yeoman], the plugin generator and will run
-the generator. A few questions will be asked and the code will be generated.
+The following commands will install [Yeoman][yeoman], the plugin generator and
+will run the generator. A few questions will be asked and the code will be
+generated.
 
 ```sh
 npm install -g yo
@@ -45,8 +46,8 @@ export default {
 };
 ```
 
-Megadraft comes with [built-in plugins][repo-plugins], and you can look for
-more Megadraft plugins on [Globo.com's organization page][github-globocom].
+Megadraft comes with [built-in plugins][repo-plugins], and you can look for more
+Megadraft plugins on [Globo.com's organization page][github-globocom].
 
 
 ### buttonComponent
@@ -58,8 +59,8 @@ sidebar, it receives the following props that can be useful:
 - `editorState`: Current editorState;
 - `className`: A css class-name to be applied on the element.
 
-In the example below, we show a button that creates an image block using
-a DraftJS' entity:
+In the example below, we show a button that creates an image block using a
+DraftJS' entity:
 
 ```js
 import React, {Component} from "react";
@@ -90,8 +91,8 @@ export default class BlockButton extends Component {
 
 ### blockComponent
 
-When defined, blockComponent will be rendered everytime Megadraft encounters
-an atomic block with the same `type` of the plugin.
+When defined, blockComponent will be rendered everytime Megadraft encounters an
+atomic block with the same `type` of the plugin.
 
 In the example below, we render an `img` tag with the `src` from the above
 example:
