@@ -91,8 +91,8 @@ export default class BlockButton extends Component {
 
 ### blockComponent
 
-When defined, blockComponent will be rendered everytime Megadraft encounters an
-atomic block with the same `type` of the plugin.
+When defined, `blockComponent` will be rendered everytime Megadraft encounters
+an atomic block with the same `type` of the plugin.
 
 In the example below, we render an `img` tag with the `src` from the above
 example:

@@ -22,7 +22,7 @@ Check the following sections for more info.
 
 ## Sidebar
 
-You can provide your custom sidebar passing sidebarRendererFn prop.
+You can provide your custom sidebar passing `sidebarRendererFn` prop.
 Notice: we plan to rename this property to just `Sidebar` in future versions.
 
 ```js
