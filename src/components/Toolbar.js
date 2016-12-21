@@ -155,9 +155,9 @@ export default class Toolbar extends Component {
     return false;
   }
 
-  setEntity(entityType, data, mutability) {
+  setEntity(entityType, data, mutability = "MUTABLE") {
     const {editorState} = this.props;
-    const entityKey = Entity.create(entityType, mutability || "MUTABLE", data);
+    const entityKey = Entity.create(entityType, mutability, data);
     const newState = RichUtils.toggleLink(
       editorState,
       editorState.getSelection(),
