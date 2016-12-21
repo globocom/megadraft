@@ -1,13 +1,15 @@
 # Custom Entities
 
-DraftJS provides a mechanism to annotate a section of text with metadata.
-This can be links, mentions, hashtags or similar. [DraftJS' section about entities](https://facebook.github.io/draft-js/docs/advanced-topics-entities.html)
-gives you a good introduction about the topic.
+DraftJS provides a mechanism to annotate a section of text with metadata. This
+can be links, mentions, hashtags or similar. [DraftJS' section about
+entities][advanced-topics-entities] gives you a good introduction about the
+topic.
 
-Megadraft ships with a default entity "LINK" and an according action in the toolbar
-that allows a user to type in an url.
+Megadraft ships with a default entity "LINK" and an according action in the
+toolbar that allows a user to type in an url.
 
-You can customize these entities with the `entityInputs`-property and a custom set of actions:
+You can customize these entities with the `entityInputs`-property and a custom
+set of actions:
 
 
 ```js
@@ -72,15 +74,19 @@ class App extends React.Component {
 
 ## Creating a custom entity input
 
-You can create your own entity input component which gets rendered in the toolbar if corresponding action is selected.
+You can create your own entity input component which gets rendered in the
+toolbar if corresponding action is selected.
 
 Every entity input component will receive the following properties:
 
 - `entityType`: the entity type (string) like `LINK` or `INTERNAL_PAGE_LINK`
 - `setEntity`: call this function to set the entity on the current selection.
-You can pass an object that gets assigned as the data of the entity. (see example below)
-- `removeEntity`: call this to remove the entity. It will also call `cancelEntity` afterwards.
-- `cancelEntity`: call this if you want to close the entity input and show the normal toolbar.
+  You can pass an object that gets assigned as the data of the entity. (see
+  example below)
+- `removeEntity`: call this to remove the entity. It will also call
+  `cancelEntity` afterwards.
+- `cancelEntity`: call this if you want to close the entity input and show the
+  normal toolbar.
 - `setError`: call this to show an error msg under the input.
 - `cancelError`: call this to clear the error message.
 - `editorState`: the current draftjs `editorState`.
@@ -131,10 +137,12 @@ export default class PageLinkInput extends React.Component {
 
 ## Rendering a custom entity:
 
-In order to render custom entities, you need to define [Decorators](https://facebook.github.io/draft-js/docs/advanced-topics-decorators.html#content).
+In order to render custom entities, you need to define
+[Decorators][advanced-topics-decorators].
 
-Megadraft allows you to specify a custom decorator in the `editorStateFromRaw` function
-and provides a utils function `createTypeStrategy` to create a simple entity-type strategy.
+Megadraft allows you to specify a custom decorator in the `editorStateFromRaw`
+function and provides a utils function `createTypeStrategy` to create a simple
+entity-type strategy.
 
 
 ```js
@@ -194,3 +202,6 @@ export default ({entityKey, children}) => {
   );
 };
 ```
+
+[advanced-topics-decorators]: https://facebook.github.io/draft-js/docs/advanced-topics-decorators.html#content
+[advanced-topics-entities]: https://facebook.github.io/draft-js/docs/advanced-topics-entities.html
