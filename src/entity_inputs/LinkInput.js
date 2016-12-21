@@ -37,7 +37,7 @@ export default class LinkInput extends Component {
       return;
     }
 
-    this.props.setEntity({url}, "MUTABLE");
+    this.props.setEntity({url});
 
     this.reset();
 
