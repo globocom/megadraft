@@ -35,6 +35,7 @@ class BlockStyles extends Component {
             <li key={item.type} className="sidemenu__item">
               <Button
                 className="sidemenu__button"
+                title={item.title}
                 editorState={this.props.editorState}
                 onChange={this.onChange}/>
             </li>
