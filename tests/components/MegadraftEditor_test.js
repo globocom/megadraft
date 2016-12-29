@@ -7,7 +7,7 @@
 import React from "react";
 import chai from "chai";
 import sinon from "sinon";
-import {Editor} from "draft-js";
+import {Editor, EditorState} from "draft-js";
 import {mount} from "enzyme";
 
 import MegadraftEditor from "../../src/components/MegadraftEditor";
@@ -235,6 +235,77 @@ describe("MegadraftEditor Component", () => {
     );
     const component = wrapper.get(0);
     expect(component.handleReturn({shiftKey: true})).to.be.equal(false);
+  });
+
+  it("is capable of adding a new block when try to add a soft break before an exist one", function() {
+    const SOFT_BREAK_ON_BEGINING = {
+      "entityMap": {},
+      "blocks": [
+        {
+          "key": "ag6qs",
+          "text": "\nHello World!",
+          "type": "unstyled",
+          "depth": 0,
+          "inlineStyleRanges": [],
+          "entityRanges": []
+        }
+      ]
+    };
+
+    kba = sinon.spy();
+    const keyBindings = [
+      {name: "save", isKeyBound: (e) => {return e.keyCode === 83 && e.ctrlKey;}, action: kba}
+    ];
+
+    this.editorState = editorStateFromRaw(SOFT_BREAK_ON_BEGINING);
+
+    this.wrapper = mount(
+      <MegadraftEditor
+        editorState={this.editorState}
+        onChange={this.onChange}
+        keyBindings={keyBindings}/>
+    );
+    this.component = this.wrapper.get(0);
+
+    const addedASoftBreak = this.component.handleReturn({shiftKey: true});
+
+    expect(addedASoftBreak).to.be.false;
+  });
+
+  it("is capable of adding a new block when try to add a soft break after an exist one", function() {
+    const SOFT_BREAK_ON_END = {
+      "entityMap": {},
+      "blocks": [
+        {
+          "key": "ag6qs",
+          "text": "Hello World!\n",
+          "type": "unstyled",
+          "depth": 0,
+          "inlineStyleRanges": [],
+          "entityRanges": []
+        }
+      ]
+    };
+
+    kba = sinon.spy();
+    const keyBindings = [
+      {name: "save", isKeyBound: (e) => {return e.keyCode === 83 && e.ctrlKey;}, action: kba}
+    ];
+
+    this.editorState = EditorState.moveFocusToEnd(editorStateFromRaw(SOFT_BREAK_ON_END));
+
+    this.wrapper = mount(
+      <MegadraftEditor
+        editorState={this.editorState}
+        onChange={this.onChange}
+        keyBindings={keyBindings}/>
+    );
+
+    this.component = this.wrapper.get(0);
+
+    const addedASoftBreak = this.component.handleReturn({shiftKey: true});
+
+    expect(addedASoftBreak).to.be.false;
   });
 
   it("recognizes external key binding", function() {

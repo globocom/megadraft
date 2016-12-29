@@ -123,6 +123,19 @@ export default class MegadraftEditor extends Component {
     }
 
     const {editorState} = this.props;
+
+    const currentContent = editorState.getCurrentContent();
+    const currentSelection = editorState.getSelection();
+    const contentBlock = currentContent.getBlockMap().get(currentSelection.getFocusKey());
+    const contentText = contentBlock.getText();
+
+    console.log(currentSelection.focusOffset);
+
+    if (contentText.charAt(currentSelection.focusOffset -1) == "\n" ||
+        contentText.charAt(currentSelection.focusOffset) == "\n"){
+      return false;
+    }
+
     const newState = RichUtils.insertSoftNewline(editorState);
     this.props.onChange(newState);
     return true;
