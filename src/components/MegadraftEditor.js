@@ -129,8 +129,6 @@ export default class MegadraftEditor extends Component {
     const contentBlock = currentContent.getBlockMap().get(currentSelection.getFocusKey());
     const contentText = contentBlock.getText();
 
-    console.log(currentSelection.focusOffset);
-
     if (contentText.charAt(currentSelection.focusOffset -1) == "\n" ||
         contentText.charAt(currentSelection.focusOffset) == "\n"){
       return false;
