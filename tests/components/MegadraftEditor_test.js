@@ -292,7 +292,7 @@ describe("MegadraftEditor Component", () => {
       {name: "save", isKeyBound: (e) => {return e.keyCode === 83 && e.ctrlKey;}, action: kba}
     ];
 
-    this.editorState = EditorState.moveFocusToEnd(editorStateFromRaw(SOFT_BREAK_ON_END));
+    this.editorState = EditorState.moveSelectionToEnd(editorStateFromRaw(SOFT_BREAK_ON_END));
 
     this.wrapper = mount(
       <MegadraftEditor
