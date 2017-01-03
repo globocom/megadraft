@@ -125,6 +125,10 @@ export default class MegadraftEditor extends Component {
     return true;
   }
 
+  focus() {
+    this.refs.draft.focus();
+  }
+
   setReadOnly(readOnly) {
     this.setState({readOnly});
   }
@@ -197,6 +201,7 @@ export default class MegadraftEditor extends Component {
             onChange: this.onChange
           })}
           <Editor
+            ref="draft"
             readOnly={this.state.readOnly}
             plugins={plugins}
             blockRenderMap={this.props.blockRenderMap}
