@@ -11,7 +11,9 @@
   this).__ = (x) => x;
 
 import React, {Component} from "react";
-import {Editor, RichUtils, getDefaultKeyBinding} from "draft-js";
+import {Editor, RichUtils, getDefaultKeyBinding, Modifier, EditorState, genKey, ContentBlock, SelectionState, ContentState} from "draft-js";
+import Immutable from "immutable";
+
 
 import DefaultToolbar from "./Toolbar";
 import Sidebar from "./Sidebar";
@@ -119,7 +121,61 @@ export default class MegadraftEditor extends Component {
     }
 
     if (!event.shiftKey) {
-      return false;
+      const {editorState} = this.props;
+      const selection = editorState.getSelection()
+      const contentState = editorState.getCurrentContent()
+      const currentBlock = contentState.getBlockForKey(selection.getEndKey())
+      const endOffset = selection.getEndOffset()
+      const atEndOfBlock = (endOffset === currentBlock.getLength())
+
+      if (atEndOfBlock) {
+        const {List} = Immutable;
+        const emptyBlockKey = genKey()
+
+        const emptyBlock = new ContentBlock({
+          key: emptyBlockKey,
+          text: "",
+          type: "unstyled",
+          depth: 0,
+          characterList: List(),
+        })
+        const blockMap = contentState.getBlockMap()
+
+        const blocksBefore = blockMap.toSeq().takeUntil(function (v) {
+          return v === currentBlock
+        })
+        const blocksAfter = blockMap.toSeq().skipUntil(function (v) {
+          return v === currentBlock
+        }).rest()
+
+        let augmentedBlocks
+        let focusKey
+
+        augmentedBlocks = [
+          [currentBlock.getKey(), currentBlock],
+          [emptyBlockKey, emptyBlock],
+        ]
+
+        focusKey = emptyBlockKey
+        const newBlocks = blocksBefore.concat(augmentedBlocks, blocksAfter).toOrderedMap()
+        const newContentState = contentState.merge({
+            blockMap: newBlocks,
+            selectionBefore: selection,
+            selectionAfter: selection.merge({
+              anchorKey: focusKey,
+              anchorOffset: 0,
+              focusKey: focusKey,
+              focusOffset: 0,
+              isBackward: false
+            })
+          })
+
+        const noStyle = Immutable.OrderedSet([])
+        const resetState =  EditorState.push(editorState, newContentState, 'split-block')
+        const noStyleState = EditorState.setInlineStyleOverride(resetState, noStyle)
+        this.props.onChange(noStyleState);
+        return true;
+      }
     }
 
     const {editorState} = this.props;
