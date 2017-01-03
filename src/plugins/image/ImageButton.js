@@ -30,7 +30,7 @@ export default class BlockButton extends Component {
 
   render() {
     return (
-      <button className={this.props.className} type="button" onClick={this.onClick}>
+      <button className={this.props.className} type="button" onClick={this.onClick} title={this.props.title}>
         <icons.ImageIcon className="sidemenu__button__icon" />
       </button>
     );
