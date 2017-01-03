@@ -37,6 +37,8 @@ A plugin should have the following structure:
 
 ```js
 export default {
+  // Friendly plugin name
+  title: "Image",
   // A unique plugin name used to identify the plugin and its blocks
   type: "image",
   // React component to be rendered in the block sidebar
