@@ -24,6 +24,8 @@ class BlockStyles extends Component {
     this.onOpenClick = ::this.onOpenClick;
     this.onCloseRequest = ::this.onCloseRequest;
     this.onChange = ::this.onChange;
+    this.modalClose = ::this.modalClose;
+    this.onClickLabel = ::this.onClickLabel;
   }
 
   onChange(editorState) {
@@ -37,6 +39,14 @@ class BlockStyles extends Component {
 
   onCloseRequest(){
     this.setState({isOpen: false});
+  }
+
+  modalClose(){
+    this.setState({isOpen: false});
+  }
+
+  onClickLabel(e){
+    this.refs.myButton.onClick(e);
   }
 
   render() {
@@ -72,12 +82,17 @@ class BlockStyles extends Component {
               {this.props.plugins.slice(2).map((item) => {
                 const Button = item.buttonComponent;
                 return (
-                  <li key={item.type} className="modal__item">
+                  <li key={item.type} className="modal__item" onClick={this.modalClose}>
                     <Button
+                      ref="myButton"
                       className="modal__button"
                       title={item.title}
                       editorState={this.props.editorState}
                       onChange={this.onChange}/>
+                    <p  onClick={this.onClickLabel}
+                        className="modal__button__label">
+                    {item.title}
+                  </p>
                   </li>
                 );
               })}

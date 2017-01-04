@@ -36,9 +36,22 @@
             display: inline-block;
             background-color: #181818;
 
-             &:hover {
-              background-color: #0669de;
-            }
+        }
+
+        &__label {
+            width: 50px;
+            height: 34px;
+            font-family: Open Sans, sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 25px;
+            text-align: end;
+            color: #3c3c3c;
+            cursor: pointer;
+            z-index:10;
+            margin-top: -8px;
         }
     }
 
@@ -59,22 +72,23 @@
             transition: all 0.1s ease-in-out;
             background-color: #181818;
 
-            &:hover {
-              backgroun-color: #0669de;
-            }
-        }
-
-        &:hover {
-            &:before {
-                transform: scale(1.125);
-            }
         }
     }
 
     &__item {
         height: 40px;
         margin-left: 40px;
-        margin-bottom: 64px;
+        margin-bottom: 60px;
         margin-right: 40px;
+
+        &:hover {
+          .modal__button__label{
+            color: #0669de;
+          }
+
+          .modal__button:before {
+            background-color: #0669de;
+          }
+        }
     }
 }
