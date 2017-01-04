@@ -47,7 +47,7 @@ class BlockStyles extends Component {
     return (
       <div>
       <ul className={className}>
-        {this.props.plugins.map((item) => {
+        {this.props.plugins.slice(0,2).map((item) => {
           const Button = item.buttonComponent;
           return (
             <li key={item.type} className="sidemenu__item">
@@ -63,20 +63,18 @@ class BlockStyles extends Component {
         </button>
       </ul>
 
-      <Modal title="Blocos de conteúdo" isOpen={this.state.isOpen} onCloseRequest={this.onCloseRequest}>
+      <Modal className="modal"
+            title="Blocos de conteúdo"
+            isOpen={this.state.isOpen}
+            onCloseRequest={this.onCloseRequest}>
           <ModalBody>
-            <ul className={className}>
-              {this.props.plugins.map((item) => {
+            <ul className="modal__items">
+              {this.props.plugins.slice(2).map((item) => {
                 const Button = item.buttonComponent;
                 return (
-                  <li key={item.type} className="sidemenu__item">
+                  <li key={item.type} className="modal__item">
                     <Button
-                      className="sidemenu__button"
-                      title={item.title}
-                      editorState={this.props.editorState}
-                      onChange={this.onChange}/>
-                      <Button
-                      className="sidemenu__button"
+                      className="modal__button"
                       title={item.title}
                       editorState={this.props.editorState}
                       onChange={this.onChange}/>
