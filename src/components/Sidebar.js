@@ -11,15 +11,32 @@ import icons from "../icons";
 
 import "setimmediate";
 
+import Modal, {ModalBody} from "backstage-modal";
+
 
 class BlockStyles extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isOpen: false
+    };
+
+    this.onOpenClick = ::this.onOpenClick;
+    this.onCloseRequest = ::this.onCloseRequest;
     this.onChange = ::this.onChange;
   }
 
   onChange(editorState) {
     this.props.onChange(editorState);
+  }
+
+  onOpenClick(e){
+    e.preventDefault();
+    this.setState({isOpen: true});
+  }
+
+  onCloseRequest(){
+    this.setState({isOpen: false});
   }
 
   render() {
@@ -28,6 +45,7 @@ class BlockStyles extends Component {
     });
 
     return (
+      <div>
       <ul className={className}>
         {this.props.plugins.map((item) => {
           const Button = item.buttonComponent;
@@ -41,7 +59,34 @@ class BlockStyles extends Component {
             </li>
           );
         })}
+        <button className="sidemenu__button" onClick={this.onOpenClick}>
+        </button>
       </ul>
+
+      <Modal title="Blocos de conteúdo" isOpen={this.state.isOpen} onCloseRequest={this.onCloseRequest}>
+          <ModalBody>
+            <ul className={className}>
+              {this.props.plugins.map((item) => {
+                const Button = item.buttonComponent;
+                return (
+                  <li key={item.type} className="sidemenu__item">
+                    <Button
+                      className="sidemenu__button"
+                      title={item.title}
+                      editorState={this.props.editorState}
+                      onChange={this.onChange}/>
+                      <Button
+                      className="sidemenu__button"
+                      title={item.title}
+                      editorState={this.props.editorState}
+                      onChange={this.onChange}/>
+                  </li>
+                );
+              })}
+            </ul>
+          </ModalBody>
+      </Modal>
+      </div>
     );
   }
 }
