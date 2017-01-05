@@ -15,6 +15,7 @@
     position: relative;
     width: 36px;
     text-align: left;
+    z-index: 10;
 
     &__button {
         border: 0;
@@ -39,19 +40,19 @@
         }
 
         &__label {
-            width: 50px;
-            height: 34px;
             font-family: Open Sans, sans-serif;
+            width: 63px;
+            height: 16px;
             font-size: 14px;
             font-weight: normal;
             font-style: normal;
             font-stretch: normal;
-            line-height: 25px;
-            text-align: end;
+            line-height: 1.14;
             color: #3c3c3c;
+            text-align: center;
             cursor: pointer;
             z-index:10;
-            margin-top: -8px;
+            margin-top: 1px;
         }
     }
 
@@ -80,6 +81,7 @@
         margin-left: 40px;
         margin-bottom: 60px;
         margin-right: 40px;
+        cursor: pointer;
 
         &:hover {
           .modal__button__label{

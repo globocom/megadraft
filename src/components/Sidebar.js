@@ -34,10 +34,12 @@ class BlockStyles extends Component {
 
   onOpenClick(e){
     e.preventDefault();
+    document.body.style.overflowY = "hidden";
     this.setState({isOpen: true});
   }
 
   onCloseRequest(){
+    document.body.style.overflowY = "auto";
     this.setState({isOpen: false});
   }
 
@@ -57,7 +59,7 @@ class BlockStyles extends Component {
     return (
       <div>
       <ul className={className}>
-        {this.props.plugins.slice(0,2).map((item) => {
+        {this.props.plugins.slice(0,3).map((item) => {
           const Button = item.buttonComponent;
           return (
             <li key={item.type} className="sidemenu__item">
@@ -69,35 +71,40 @@ class BlockStyles extends Component {
             </li>
           );
         })}
+        {this.props.plugins.length > 3 ?
         <button className="sidemenu__button" onClick={this.onOpenClick}>
+        <icons.MoreIcon className="sidemenu__button__icon" />
         </button>
+        : null}
       </ul>
 
       <Modal className="modal"
             title="Blocos de conteúdo"
             isOpen={this.state.isOpen}
             onCloseRequest={this.onCloseRequest}>
-          <ModalBody>
-            <ul className="modal__items">
-              {this.props.plugins.slice(2).map((item) => {
-                const Button = item.buttonComponent;
-                return (
-                  <li key={item.type} className="modal__item" onClick={this.modalClose}>
-                    <Button
-                      ref="myButton"
-                      className="modal__button"
-                      title={item.title}
-                      editorState={this.props.editorState}
-                      onChange={this.onChange}/>
-                    <p  onClick={this.onClickLabel}
-                        className="modal__button__label">
-                    {item.title}
-                  </p>
-                  </li>
-                );
-              })}
-            </ul>
-          </ModalBody>
+        <ModalBody>
+          <ul className="modal__items">
+            {this.props.plugins.slice(3).map((item) => {
+              const Button = item.buttonComponent;
+              return (
+                <li key={item.type}
+                  className="modal__item"
+                  onClick={this.modalClose}>
+                  <Button
+                    ref="myButton"
+                    className="modal__button"
+                    title={item.title}
+                    editorState={this.props.editorState}
+                    onChange={this.onChange}/>
+                  <p onClick={this.onClickLabel}
+                      className="modal__button__label">
+                  {item.title}
+                </p>
+                </li>
+              );
+            })}
+          </ul>
+        </ModalBody>
       </Modal>
       </div>
     );

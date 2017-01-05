@@ -7,9 +7,11 @@
 import React, {Component} from "react";
 import chai from "chai";
 import {mount} from "enzyme";
+import sinon from "sinon";
 
 import Sidebar,
   {ToggleButton, SideMenu} from "../../src/components/Sidebar";
+import Modal from "backstage-modal";
 import image from "../../src/plugins/image/plugin";
 import {editorStateFromRaw} from "../../src/utils";
 import DEFAULT_PLUGINS from "../../src/plugins/default.js";
@@ -23,6 +25,7 @@ class SidebarWrapper extends Component {
     super(props);
     this.state = {...props};
     this.plugins = this.props.plugins || DEFAULT_PLUGINS;
+    this.fakePlugins = this.plugins.concat(this.plugins)
     this.onChange = ::this.onChange;
   }
 
@@ -45,6 +48,38 @@ class SidebarWrapper extends Component {
 }
 
 
+class SidebarWithModalWrapper extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {...props};
+    this.plugins = this.props.plugins || DEFAULT_PLUGINS;
+    this.fakePlugins = this.plugins.concat(this.plugins)
+    console.log(this.fakePlugins);
+    for(var i=0; i<4; i++){
+      this.fakePlugins[i].type = sinon.stub().returns("plugin" + 1);
+    }
+    console.log(this.fake)
+    this.onChange = ::this.onChange;
+  }
+
+  onChange(editorState) {
+    this.setState({editorState: editorState});
+  }
+
+  render() {
+    return (
+      <div ref="editor">
+        <Sidebar
+          ref="sidebar"
+          plugins={this.fakePlugins}
+          editorState={this.state.editorState}
+          readOnly={this.props.readOnly}
+          onChange={this.onChange} />
+      </div>
+    );
+  }
+}
+
 describe("Sidebar Component", function() {
   beforeEach(function() {
     const INITIAL_CONTENT = {
@@ -64,6 +99,9 @@ describe("Sidebar Component", function() {
     this.editorState = editorStateFromRaw(INITIAL_CONTENT);
     this.wrapper = mount(
       <SidebarWrapper editorState={this.editorState}/>
+    );
+    this.wrapper2 = mount(
+      <SidebarWithModalWrapper editorState={this.editorState}/>
     );
   });
 
@@ -131,5 +169,39 @@ describe("Sidebar Component", function() {
       }
     });
     expect(data.get("src")).to.be.equal("http://www.globo.com");
+  });
+
+  it.only("should has a modal button when there is 4 plugins", function() {
+    const toggleButton = this.wrapper2.find(ToggleButton);
+    const domButton = toggleButton.find("button");
+
+    domButton.simulate("click");
+
+    const menu = this.wrapper2.find(SideMenu);
+    const domMenu = menu.find("button");
+    const domModalButton = domMenu.at(4);
+    domModalButton.simulate("click");
+
+    const modal = this.wrapper2.find(Modal);
+    const domModal = modal.find("Modal");
+    expect(domModal.prop("className")).to.be.equal("modal");
+  });
+
+  it("should not have a modal button with less than 4 plugins", function() {
+    const toggleButton = this.wrapper.find(ToggleButton);
+    const domButton = toggleButton.find("button");
+
+    domButton.simulate("click");
+
+    const menu = this.wrapper.find(SideMenu);
+    const domMenu = menu.find("button");
+    const domModalButton = domMenu.at(4);
+
+
+    domModalButton.simulate("click");
+
+    const modal = this.wrapper.find(Modal);
+    const domModal = modal.find("Modal");
+    expect(domModal.prop("className")).to.be.equal("modal");
   });
 });
