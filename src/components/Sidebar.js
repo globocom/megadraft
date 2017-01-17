@@ -11,7 +11,7 @@ import icons from "../icons";
 
 import "setimmediate";
 
-import Modal, {ModalBody} from "backstage-modal";
+import ModalPluginList from "./ModalPluginList";
 
 
 class BlockStyles extends Component {
@@ -22,10 +22,8 @@ class BlockStyles extends Component {
     };
 
     this.onOpenClick = ::this.onOpenClick;
-    this.onCloseRequest = ::this.onCloseRequest;
     this.onChange = ::this.onChange;
-    this.modalClose = ::this.modalClose;
-    this.onClickLabel = ::this.onClickLabel;
+    this.handleModal = :: this.handleModal;
   }
 
   onChange(editorState) {
@@ -38,17 +36,8 @@ class BlockStyles extends Component {
     this.setState({isOpen: true});
   }
 
-  onCloseRequest(){
-    document.body.style.overflowY = "auto";
-    this.setState({isOpen: false});
-  }
-
-  modalClose(){
-    this.setState({isOpen: false});
-  }
-
-  onClickLabel(e){
-    this.refs.myButton.onClick(e);
+  handleModal() {
+    this.setState({ isOpen: !this.state.isOpen});
   }
 
   render() {
@@ -78,34 +67,15 @@ class BlockStyles extends Component {
         : null}
       </ul>
 
-      <Modal className="modal"
-            title="Blocos de conteúdo"
-            isOpen={this.state.isOpen}
-            onCloseRequest={this.onCloseRequest}>
-        <ModalBody>
-          <ul className="modal__items">
-            {this.props.plugins.slice(3).map((item) => {
-              const Button = item.buttonComponent;
-              return (
-                <li key={item.type}
-                  className="modal__item"
-                  onClick={this.modalClose}>
-                  <Button
-                    ref="myButton"
-                    className="modal__button"
-                    title={item.title}
-                    editorState={this.props.editorState}
-                    onChange={this.onChange}/>
-                  <p onClick={this.onClickLabel}
-                      className="modal__button__label">
-                  {item.title}
-                </p>
-                </li>
-              );
-            })}
-          </ul>
-        </ModalBody>
-      </Modal>
+      {this.props.plugins.length > 3 ?
+      <ModalPluginList
+        handleModal={this.handleModal}
+        isOpen={this.state.isOpen}
+        plugins={this.props.plugins}
+        onCloseRequest={this.props.onClose}
+        onChange={this.onChange}
+        editorState={this.props.editorState} />
+        : null }
       </div>
     );
   }

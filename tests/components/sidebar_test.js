@@ -7,11 +7,12 @@
 import React, {Component} from "react";
 import chai from "chai";
 import {mount} from "enzyme";
-import sinon from "sinon";
+import cp from 'utils-copy';
 
 import Sidebar,
   {ToggleButton, SideMenu} from "../../src/components/Sidebar";
 import Modal from "backstage-modal";
+import ModalPluginList from "../../src/components/ModalPluginList";
 import image from "../../src/plugins/image/plugin";
 import {editorStateFromRaw} from "../../src/utils";
 import DEFAULT_PLUGINS from "../../src/plugins/default.js";
@@ -25,7 +26,6 @@ class SidebarWrapper extends Component {
     super(props);
     this.state = {...props};
     this.plugins = this.props.plugins || DEFAULT_PLUGINS;
-    this.fakePlugins = this.plugins.concat(this.plugins)
     this.onChange = ::this.onChange;
   }
 
@@ -53,12 +53,11 @@ class SidebarWithModalWrapper extends Component {
     super(props);
     this.state = {...props};
     this.plugins = this.props.plugins || DEFAULT_PLUGINS;
-    this.fakePlugins = this.plugins.concat(this.plugins)
-    console.log(this.fakePlugins);
+    this.fakeAux = cp(this.plugins);
+    this.fakePlugins = this.fakeAux.concat(this.plugins)
     for(var i=0; i<4; i++){
-      this.fakePlugins[i].type = sinon.stub().returns("plugin" + 1);
+      this.fakePlugins[i].type = "plugin" + i;
     }
-    console.log(this.fake)
     this.onChange = ::this.onChange;
   }
 
@@ -171,7 +170,7 @@ describe("Sidebar Component", function() {
     expect(data.get("src")).to.be.equal("http://www.globo.com");
   });
 
-  it.only("should has a modal button when there is 4 plugins", function() {
+  it("should has a modal button when there is 4 plugins", function() {
     const toggleButton = this.wrapper2.find(ToggleButton);
     const domButton = toggleButton.find("button");
 
@@ -197,11 +196,21 @@ describe("Sidebar Component", function() {
     const domMenu = menu.find("button");
     const domModalButton = domMenu.at(4);
 
+    expect(domModalButton.component).to.be.equal(null);
+  });
 
-    domModalButton.simulate("click");
+  it("should has plugins in modal if it's avaiable", function() {
+    const toggleButton = this.wrapper2.find(ToggleButton);
+    const domButton = toggleButton.find("button");
 
-    const modal = this.wrapper.find(Modal);
-    const domModal = modal.find("Modal");
-    expect(domModal.prop("className")).to.be.equal("modal");
+    domButton.simulate("click");
+
+    const menu = this.wrapper2.find(SideMenu);
+    const domMenu = menu.find("button");
+    const domModalButton = domMenu.at(4);
+
+    const modal = this.wrapper2.find(ModalPluginList);
+    const items = modal.prop("plugins").length
+    expect(items).to.be.at.least(1);
   });
 });
