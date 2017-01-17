@@ -149,6 +149,9 @@ class Page extends React.Component {
               <MenuItem primaryText="Plugins"
                   onTouchTap= {this.handleRequestClose}
                   containerElement={<Link to="/docs/plugins"/>}/>
+              <MenuItem primaryText="Custom Entities"
+                  onTouchTap= {this.handleRequestClose}
+                  containerElement={<Link to="/docs/custom-entities"/>}/>
               <MenuItem primaryText="Saving & Loading"
                   onTouchTap= {this.handleRequestClose}
                   containerElement={<Link to="/docs/saving-loading"/>}/>
