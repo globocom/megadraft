@@ -211,7 +211,6 @@ describe("MegadraftEditor Component", () => {
     );
     const component = wrapper.get(0);
     expect(component.handleReturn({shiftKey: true})).to.be.equal(false);
-    expect(this.onChange.called).to.be.equal(false);
   });
 
   it("recognizes external key binding", function() {
