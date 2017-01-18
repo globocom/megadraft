@@ -24,7 +24,6 @@ import DEFAULT_ENTITY_INPUTS from "../entity_inputs/default";
 export default class MegadraftEditor extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       readOnly: this.props.readOnly || false
     };
@@ -115,6 +114,10 @@ export default class MegadraftEditor extends Component {
   }
 
   handleReturn(event) {
+    if (this.props.softNewLines === false) {
+      return false;
+    }
+
     if (!event.shiftKey) {
       return false;
     }

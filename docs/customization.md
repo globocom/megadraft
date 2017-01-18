@@ -16,7 +16,7 @@ Here are the props that `MegadraftEditor` accepts:
 - `keyBindings`: (optional) Custom key bindings
 - `handleBlockNotFound`: (optional) called when the `editorState` contains a
   block for a plugin that is no longer available
-
+- `softNewLines`: (optional) boolean, default true. Insert soft new line when user type "shift + enter".
 Check the following sections for more info.
 
 

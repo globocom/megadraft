@@ -202,6 +202,17 @@ describe("MegadraftEditor Component", () => {
     expect(text).to.be.equal("\nHello World!");
   });
 
+  it("does not insert soft line breaks if option set to false", function () {
+    const wrapper = mount(
+      <MegadraftEditor
+        editorState={this.editorState}
+        onChange={this.onChange}
+        softNewLines={false} />
+    );
+    const component = wrapper.get(0);
+    expect(component.handleReturn({shiftKey: true})).to.be.equal(false);
+  });
+
   it("recognizes external key binding", function() {
     const defaultKeyBinding = {keyCode: 66, ctrlKey: true};
     expect(this.component.externalKeyBindings(defaultKeyBinding)).to.equal("bold");
