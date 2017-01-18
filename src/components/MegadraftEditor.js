@@ -185,7 +185,25 @@ export default class MegadraftEditor extends Component {
   }
 
   render() {
-    const {editorState, stripPastedStyles, spellCheck} = this.props;
+    const {
+      editorState,
+      stripPastedStyles,
+      spellCheck,
+      placeholder,
+      textAlignment,
+      blockRenderMap,
+      customStyleMap,
+      customStyleFn,
+      tabIndex,
+      handleBeforeInput,
+      handlePastedText,
+      handlePastedFiles,
+      handleDroppedFiles,
+      handleDrop,
+      onEscape,
+      onUpArrow,
+      onDownArrow,
+    } = this.props;
     const plugins = this.plugins;
 
     return (
@@ -204,7 +222,7 @@ export default class MegadraftEditor extends Component {
             ref="draft"
             readOnly={this.state.readOnly}
             plugins={plugins}
-            blockRenderMap={this.props.blockRenderMap}
+            blockRenderMap={blockRenderMap}
             blockRendererFn={this.mediaBlockRenderer}
             blockStyleFn={this.blockStyleFn}
             onTab={this.onTab}
@@ -214,7 +232,19 @@ export default class MegadraftEditor extends Component {
             spellCheck={spellCheck}
             keyBindingFn={this.externalKeyBindings}
             editorState={editorState}
-            placeholder={this.props.placeholder}
+            placeholder={placeholder}
+            textAlignment={textAlignment}
+            customStyleMap={customStyleMap}
+            customStyleFn={customStyleFn}
+            tabIndex={tabIndex}
+            handleBeforeInput={handleBeforeInput}
+            handlePastedText={handlePastedText}
+            handlePastedFiles={handlePastedFiles}
+            handleDroppedFiles={handleDroppedFiles}
+            handleDrop={handleDrop}
+            onEscape={onEscape}
+            onUpArrow={onUpArrow}
+            onDownArrow={onDownArrow}
             onChange={this.onChange} />
           {this.renderToolbar({
             editor: this.refs.editor,
