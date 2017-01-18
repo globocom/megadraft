@@ -11,7 +11,7 @@ import icons from "../icons";
 
 import "setimmediate";
 
-import ModalPluginList from "./ModalPluginList";
+import PluginsModal from "./PluginsModal";
 
 
 class BlockStyles extends Component {
@@ -68,7 +68,7 @@ class BlockStyles extends Component {
       </ul>
 
       {this.props.plugins.length > 3 ?
-      <ModalPluginList
+      <PluginsModal
         handleModal={this.handleModal}
         isOpen={this.state.isOpen}
         plugins={this.props.plugins}

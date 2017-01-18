@@ -8,26 +8,22 @@ import React, {Component} from "react";
 
 import "setimmediate";
 
-import Modal from "backstage-modal";
-import ModalList from "./ModalList"
+import { ModalBody } from "backstage-modal";
+import ModalPluginItem from "./ModalPluginItem";
 
 
 export default class ModalPluginList extends Component {
   constructor(props) {
     super(props);
-    this.onCloseRequest = ::this.onCloseRequest;
     this.onChange = ::this.onChange;
+    this.modalClose = ::this.modalClose;
   }
 
   onChange(editorState) {
     this.props.onChange(editorState);
   }
 
-  onCloseRequest() {
-    if(!this.props.isOpen) {
-      return;
-    }
-    document.body.style.overflowY = "auto";
+  modalClose() {
     this.props.handleModal();
   }
 
@@ -35,17 +31,13 @@ export default class ModalPluginList extends Component {
 
     return (
       <div>
-        <Modal
-          className="modal"
-          title="Blocos de conteúdo"
-          isOpen={this.props.isOpen}
-          onCloseRequest={this.onCloseRequest}>
-            <ModalList
-              handleModal={this.onCloseRequest}
+        <ModalBody>
+            <ModalPluginItem
+              handleModal={this.modalClose}
               plugins={this.props.plugins}
               onChange={this.onChange}
-              editorState={this.props.editorState} />
-        </Modal>
+              editorState={this.props.editorState}/>
+        </ModalBody>
       </div>
     );
   }

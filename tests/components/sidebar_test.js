@@ -7,12 +7,11 @@
 import React, {Component} from "react";
 import chai from "chai";
 import {mount} from "enzyme";
-import cp from 'utils-copy';
+import cp from "utils-copy";
 
 import Sidebar,
   {ToggleButton, SideMenu} from "../../src/components/Sidebar";
-import Modal from "backstage-modal";
-import ModalPluginList from "../../src/components/ModalPluginList";
+import PluginsModal from "../../src/components/PluginsModal";
 import image from "../../src/plugins/image/plugin";
 import {editorStateFromRaw} from "../../src/utils";
 import DEFAULT_PLUGINS from "../../src/plugins/default.js";
@@ -54,8 +53,8 @@ class SidebarWithModalWrapper extends Component {
     this.state = {...props};
     this.plugins = this.props.plugins || DEFAULT_PLUGINS;
     this.fakeAux = cp(this.plugins);
-    this.fakePlugins = this.fakeAux.concat(this.plugins)
-    for(var i=0; i<4; i++){
+    this.fakePlugins = this.fakeAux.concat(this.plugins);
+    for(let i=0; i<4; i++){
       this.fakePlugins[i].type = "plugin" + i;
     }
     this.onChange = ::this.onChange;
@@ -181,7 +180,7 @@ describe("Sidebar Component", function() {
     const domModalButton = domMenu.at(4);
     domModalButton.simulate("click");
 
-    const modal = this.wrapper2.find(Modal);
+    const modal = this.wrapper2.find(PluginsModal);
     const domModal = modal.find("Modal");
     expect(domModal.prop("className")).to.be.equal("modal");
   });
@@ -209,8 +208,10 @@ describe("Sidebar Component", function() {
     const domMenu = menu.find("button");
     const domModalButton = domMenu.at(4);
 
-    const modal = this.wrapper2.find(ModalPluginList);
-    const items = modal.prop("plugins").length
+    domModalButton.simulate("click");
+
+    const modal = this.wrapper2.find(PluginsModal);
+    const items = modal.prop("plugins").length;
     expect(items).to.be.at.least(1);
   });
 });

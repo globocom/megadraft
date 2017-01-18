@@ -7,10 +7,10 @@
 import React, {Component} from "react";
 import chai from "chai";
 import { mount } from "enzyme";
-import cp from 'utils-copy';
+import cp from "utils-copy";
 
-import Modal, { ModalBody } from "backstage-modal";
-import ModalList from "../../src/components/ModalList";
+import { ModalBody } from "backstage-modal";
+import ModalPluginList from "../../src/components/ModalPluginList";
 import DEFAULT_PLUGINS from "../../src/plugins/default.js";
 
 let expect = chai.expect;
@@ -20,8 +20,8 @@ class ModalWithPlugins extends Component {
     super(props);
     this.plugins = this.props.plugins || DEFAULT_PLUGINS;
     this.fakeAux = cp(this.plugins);
-    this.fakePlugins = this.fakeAux.concat(this.plugins)
-    for(var i=0; i<4; i++){
+    this.fakePlugins = this.fakeAux.concat(this.plugins);
+    for(let i=0; i<4; i++){
       this.fakePlugins[i].title = "plugin" + i;
       this.fakePlugins[i].type = "plugin" + i;
     }
@@ -35,7 +35,7 @@ class ModalWithPlugins extends Component {
   render() {
     return (
       <div ref="editor">
-        <ModalList
+        <ModalPluginList
               handleModal={this.handleModal}
               plugins={this.fakePlugins}
               onChange={this.onChange}
@@ -56,24 +56,23 @@ describe("Sidebar Component", function() {
   it("should has plugins inside modal", function() {
     const modal = this.wrapper.find(ModalBody);
 
-    const plugin = modal.find("li")
-
+    const plugin = modal.find("li");
     expect(plugin).to.have.length(1);
   });
 
   it("should has the 4th plugin inside modal", function() {
     const modal = this.wrapper.find(ModalBody);
 
-    const plugin = modal.find("VideoButton")
+    const plugin = modal.find("VideoButton");
 
-    expect(plugin.props()).have.deep.property("title", "plugin3")
+    expect(plugin.props()).have.deep.property("title", "plugin3");
   });
 
   it("should be a real plugin", function() {
     const modal = this.wrapper.find(ModalBody);
 
-    const plugin = modal.find("VideoButton")
+    const plugin = modal.find("VideoButton");
 
-    expect(plugin).to.have.length(1)
+    expect(plugin).to.have.length(1);
   });
-})
+});
