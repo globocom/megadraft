@@ -17,6 +17,7 @@ import PluginsModal from "./PluginsModal";
 class BlockStyles extends Component {
   constructor(props) {
     super(props);
+    debugger;
     this.state = {
       isOpen: false
     };
@@ -44,11 +45,13 @@ class BlockStyles extends Component {
     const className = classNames("sidemenu__items", {
       "sidemenu__items--open": this.props.open
     });
+    const pluginsSidebar = this.props.numberPlugins ?
+    this.props.numberPlugins : this.props.plugins.length
 
     return (
       <div>
       <ul className={className}>
-        {this.props.plugins.slice(0,3).map((item) => {
+        {this.props.plugins.slice(0,pluginsSidebar).map((item) => {
           const Button = item.buttonComponent;
           return (
             <li key={item.type} className="sidemenu__item">
@@ -60,14 +63,14 @@ class BlockStyles extends Component {
             </li>
           );
         })}
-        {this.props.plugins.length > 3 ?
+        {this.props.plugins.length > pluginsSidebar ?
         <button className="sidemenu__button" onClick={this.onOpenClick}>
         <icons.MoreIcon className="sidemenu__button__icon" />
         </button>
         : null}
       </ul>
 
-      {this.props.plugins.length > 3 ?
+      {this.props.plugins.length > pluginsSidebar ?
       <PluginsModal
         handleModal={this.handleModal}
         isOpen={this.state.isOpen}
@@ -128,7 +131,8 @@ export class SideMenu extends Component {
           editorState={this.props.editorState}
           plugins={this.props.plugins}
           open={this.state.open}
-          onChange={this.onChange}/>
+          onChange={this.onChange}
+          numberPlugins={this.props.numberPlugins}/>
       </li>
     );
   }
@@ -215,7 +219,8 @@ export default class SideBar extends Component {
             <SideMenu
               editorState={this.props.editorState}
               onChange={this.onChange}
-              plugins={this.getValidSidebarPlugins()}/>
+              plugins={this.getValidSidebarPlugins()}
+              numberPlugins={this.props.numberPlugins}/>
           </ul>
         </div>
       </div>

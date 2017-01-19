@@ -52,11 +52,12 @@ class SidebarWithModalWrapper extends Component {
     super(props);
     this.state = {...props};
     this.plugins = this.props.plugins || DEFAULT_PLUGINS;
-    this.fakeAux = cp(this.plugins);
-    this.fakePlugins = this.fakeAux.concat(this.plugins);
+    this.fakeAux = cp(this.plugins.slice(0,2));
+    this.fakePlugins = this.fakeAux.concat(this.plugins.slice(0,2));
     for(let i=0; i<4; i++){
       this.fakePlugins[i].type = "plugin" + i;
     }
+    this.numberPlugins = 3;
     this.onChange = ::this.onChange;
   }
 
@@ -72,7 +73,8 @@ class SidebarWithModalWrapper extends Component {
           plugins={this.fakePlugins}
           editorState={this.state.editorState}
           readOnly={this.props.readOnly}
-          onChange={this.onChange} />
+          onChange={this.onChange}
+          numberPlugins={this.numberPlugins} />
       </div>
     );
   }

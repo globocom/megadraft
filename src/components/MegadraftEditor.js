@@ -295,7 +295,8 @@ export default class MegadraftEditor extends Component {
             plugins: this.plugins,
             editorState: this.props.editorState,
             readOnly: this.state.readOnly,
-            onChange: this.onChange
+            onChange: this.onChange,
+            numberPlugins: 3,
           })}
           <Editor
             {...this.props}

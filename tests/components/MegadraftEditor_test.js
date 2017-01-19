@@ -544,7 +544,8 @@ describe("MegadraftEditor Component", () => {
       plugins: component.plugins,
       onChange: component.onChange,
       editorState: this.editorState,
-      readOnly: false
+      readOnly: false,
+      numberPlugins: 3
     };
     expect(renderCustomSidebar.calledWith(expectedProps)).to.be.true;
   });
