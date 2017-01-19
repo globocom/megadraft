@@ -288,3 +288,48 @@ ReactDOM.render(
 
 [api-reference-editor-state]: https://facebook.github.io/draft-js/docs/api-reference-editor-state.html
 [custom actions]: https://github.com/globocom/megadraft/blob/master/src/actions/default.js
+
+
+### Modal
+
+There's a modal option in the sidebar that can show plugins inside. By default Megadraft shows the modal option after 3 plugins added to the sidebar. If it's preferable this option can be not used. Just need to pass `null` in the option `numberPlugins` of `renderSidebar` as example above. In the second case it's needed to adjust the css class `sidemenu__items--open` `max-height` to turn more than 3 plugins visible.
+
+```js
+<div className="megadraft">
+        <div
+          className="megadraft-editor"
+          id="megadraft-editor"
+          ref="editor">
+          {this.renderSidebar({
+            plugins,
+            editorState,
+            readOnly: this.state.readOnly,
+            onChange: this.onChange,
+            numberPlugins: null,
+          })}
+          <Editor
+            readOnly={this.state.readOnly}
+            plugins={plugins}
+            blockRenderMap={this.props.blockRenderMap}
+            blockRendererFn={this.mediaBlockRenderer}
+            blockStyleFn={this.blockStyleFn}
+            onTab={this.onTab}
+            handleKeyCommand={this.handleKeyCommand}
+            handleReturn={this.handleReturn}
+            stripPastedStyles={stripPastedStyles}
+            spellCheck={spellCheck}
+            keyBindingFn={this.externalKeyBindings}
+            editorState={editorState}
+            placeholder={this.props.placeholder}
+            onChange={this.onChange} />
+          {this.renderToolbar({
+            editor: this.refs.editor,
+            editorState,
+            readOnly: this.state.readOnly,
+            onChange: this.onChange,
+            actions: this.actions,
+            entityInputs: this.entityInputs
+          })}
+        </div>
+      </div>
+```
