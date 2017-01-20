@@ -185,27 +185,6 @@ export default class MegadraftEditor extends Component {
   }
 
   render() {
-    const {
-      editorState,
-      stripPastedStyles,
-      spellCheck,
-      placeholder,
-      textAlignment,
-      blockRenderMap,
-      customStyleMap,
-      customStyleFn,
-      tabIndex,
-      handleBeforeInput,
-      handlePastedText,
-      handlePastedFiles,
-      handleDroppedFiles,
-      handleDrop,
-      onEscape,
-      onUpArrow,
-      onDownArrow,
-    } = this.props;
-    const plugins = this.plugins;
-
     return (
       <div className="megadraft">
         <div
@@ -213,42 +192,27 @@ export default class MegadraftEditor extends Component {
           id="megadraft-editor"
           ref="editor">
           {this.renderSidebar({
-            plugins,
-            editorState,
+            plugins: this.plugins,
+            editorState: this.props.editorState,
             readOnly: this.state.readOnly,
             onChange: this.onChange
           })}
           <Editor
+            {...this.props}
             ref="draft"
             readOnly={this.state.readOnly}
-            plugins={plugins}
-            blockRenderMap={blockRenderMap}
+            plugins={this.plugins}
             blockRendererFn={this.mediaBlockRenderer}
             blockStyleFn={this.blockStyleFn}
             onTab={this.onTab}
             handleKeyCommand={this.handleKeyCommand}
             handleReturn={this.handleReturn}
-            stripPastedStyles={stripPastedStyles}
-            spellCheck={spellCheck}
             keyBindingFn={this.externalKeyBindings}
-            editorState={editorState}
-            placeholder={placeholder}
-            textAlignment={textAlignment}
-            customStyleMap={customStyleMap}
-            customStyleFn={customStyleFn}
-            tabIndex={tabIndex}
-            handleBeforeInput={handleBeforeInput}
-            handlePastedText={handlePastedText}
-            handlePastedFiles={handlePastedFiles}
-            handleDroppedFiles={handleDroppedFiles}
-            handleDrop={handleDrop}
-            onEscape={onEscape}
-            onUpArrow={onUpArrow}
-            onDownArrow={onDownArrow}
-            onChange={this.onChange} />
+            onChange={this.onChange}
+          />
           {this.renderToolbar({
             editor: this.refs.editor,
-            editorState,
+            editorState: this.props.editorState,
             readOnly: this.state.readOnly,
             onChange: this.onChange,
             actions: this.actions,
