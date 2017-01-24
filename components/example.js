@@ -65,31 +65,38 @@ class Example extends React.Component {
     highlightCode(this);
   }
 
-  render() {
-    if(this.props.activeContent) {
-      return (
-          <div className="tab-container-editor">
-            <MegadraftEditor
-              editorState={this.state.value}
-              placeholder="Text"
-              onChange={this.onChange}
-              keyBindings={this.keyBindings}/>
-          </div>
-      );
-    } else {
-      return (
-        <div>
-          <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/gruvbox-dark.min.css"/>
-          <div className="tab-container-json">
-            <pre className="jsonpreview">
-              <code className="json hljs">
-                {editorStateToJSON(this.state.value)}
-              </code>
-            </pre>
-          </div>
+  renderEditor() {
+    return (
+      <div className="tab-container-editor">
+        <MegadraftEditor
+          editorState={this.state.value}
+          placeholder="Text"
+          onChange={this.onChange}
+          keyBindings={this.keyBindings}/>
+      </div>
+    );
+  }
+
+  renderJsonPreview() {
+    return (
+      <div>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/gruvbox-dark.min.css"/>
+        <div className="tab-container-json">
+          <pre className="jsonpreview">
+            <code className="json hljs">
+              {editorStateToJSON(this.state.value)}
+            </code>
+          </pre>
         </div>
-      );
+      </div>
+    );
+  }
+
+  render() {
+    if (this.props.activeContent) {
+      this.renderEditor();
     }
+    return this.renderJsonPreview();
   }
 }
 
