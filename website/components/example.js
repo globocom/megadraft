@@ -94,7 +94,7 @@ class Example extends React.Component {
 
   render() {
     if (this.props.activeContent) {
-      this.renderEditor();
+      return this.renderEditor();
     }
     return this.renderJsonPreview();
   }
