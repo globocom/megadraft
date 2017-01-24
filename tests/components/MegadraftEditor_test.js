@@ -111,6 +111,30 @@ describe("MegadraftEditor Component", () => {
     expect(items).to.have.length(1);
   });
 
+  it("passes extra props to the draft-js editor", function() {
+    const handlePastedText = (text) => { console.log(text); };
+    const wrapper = mount(
+      <MegadraftEditor
+        editorState={this.editorState}
+        onChange={this.onChange}
+        handlePastedText={handlePastedText}
+      />
+    );
+    expect(wrapper.ref("draft").props().handlePastedText).to.equal(handlePastedText);
+  });
+
+  it("cant overridde megadraft props via extra props", function() {
+    const blockRendererFn = (text) => { console.log(text); };
+    const wrapper = mount(
+      <MegadraftEditor
+        editorState={this.editorState}
+        onChange={this.onChange}
+        blockRendererFn={blockRendererFn}
+      />
+    );
+    expect(wrapper.ref("draft").props().blockRendererFn).to.not.equal(blockRendererFn);
+  });
+
   describe("mediaBlockRenderer", function () {
     it("ignores non-atomic blocks", function() {
       const block = {getType: function() {return "metal";}};
