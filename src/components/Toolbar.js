@@ -103,7 +103,8 @@ export default class Toolbar extends Component {
     if (selectionCoords &&
         !this.state.position ||
         this.state.position.bottom !== selectionCoords.offsetBottom ||
-        this.state.position.left !== selectionCoords.offsetLeft) {
+        this.state.position.left !== selectionCoords.offsetLeft ||
+        !this.state.show) {
       this.setState({
         show: true,
         position: {
