@@ -281,3 +281,46 @@ ReactDOM.render(
 
 [api-reference-editor-state]: https://facebook.github.io/draft-js/docs/api-reference-editor-state.html
 [custom actions]: https://github.com/globocom/megadraft/blob/master/src/actions/default.js
+
+
+## Reset Block Style
+
+Megadraft allows to reset blocks style and inlineStyle on new paragraph or inside a list. By default the block and inline style aren't reset.
+
+To turn on this feature, just pass the prop `resetStyleNewLine` as `true`, and to choose which block dont need block style reset, pass the block type as props of `MegadraftEditor`.Example:
+
+```js
+import React from "react";
+import ReactDOM from "react-dom";
+import {MegadraftEditor, editorStateFromRaw} from "megadraft";
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {editorState: editorStateFromRaw(null)};
+    this.onChange = ::this.onChange;
+    this.noResetStylesTypes = ["ordered-list-item", "unordered-list-item"];
+    this.resetStyleNewLine = true;
+
+  }
+
+  onChange(editorState) {
+    this.setState({editorState});
+  }
+
+  render() {
+    return (
+      <MegadraftEditor
+        editorState={this.state.editorState}
+        onChange={this.onChange}
+        noResetStylesTypes={this.noResetStylesTypes}
+        resetStyleNewLine={this.resetStyleNewLine} />
+    )
+  }
+}
+
+ReactDOM.render(
+  <App />,
+  document.getElementById("container")
+);
+```

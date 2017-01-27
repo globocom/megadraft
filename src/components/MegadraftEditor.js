@@ -55,7 +55,6 @@ export default class MegadraftEditor extends Component {
     this.pluginsByType = this.getPluginsByType();
 
     this.keyBindings = this.props.keyBindings || [];
-    this.whiteBlockList = this.props.noResetList;
 
   }
 
@@ -136,7 +135,7 @@ export default class MegadraftEditor extends Component {
     const emptyBlock = new ContentBlock({
       key: emptyBlockKey,
       text: "",
-      type: this.whiteBlockList[blockTypeIndex] || "unstyled",
+      type: this.props.noResetStyleTypes[blockTypeIndex] || "unstyled",
       depth: 0,
       characterList: List(),
       inlineStyleRanges: [],
@@ -190,9 +189,11 @@ export default class MegadraftEditor extends Component {
       const currentBlock = contentState.getBlockForKey(selection.getEndKey());
       const endOffset = selection.getEndOffset();
       const atEndOfBlock = (endOffset === currentBlock.getLength());
-      const blockTypeIndex = this.whiteBlockList.indexOf(currentBlock.type);
+      const noResetStyleTypes = this.props.noResetStyleTypes;
+      const blockTypeIndex = noResetStyleTypes.indexOf(currentBlock.type);
+      const resetStyleNewLine = this.props.resetStyleNewLine;
 
-      if (atEndOfBlock) {
+      if (atEndOfBlock && resetStyleNewLine) {
         if(blockTypeIndex > -1) {
           this.resetBlockStyle( editorState,
               selection,
@@ -211,6 +212,7 @@ export default class MegadraftEditor extends Component {
           return true;
         }
       }
+      return false;
     }
 
     const {editorState} = this.props;

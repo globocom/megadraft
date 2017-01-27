@@ -40,7 +40,8 @@ class Example extends React.Component {
     this.keyBindings = [
         { name: "save", isKeyBound: (e) => { return e.keyCode === 83 && e.ctrlKey; }, action: () => { this.onSave(); } }
     ];
-    this.noResetList = ["ordered-list-item", "unordered-list-item"];
+    this.noResetStyleTypes = ["ordered-list-item", "unordered-list-item"];
+    this.resetStyleNewLine = false;
     this.state = {
       value: content,
     };
@@ -79,7 +80,8 @@ class Example extends React.Component {
           placeholder="Text"
           onChange={this.onChange}
           keyBindings={this.keyBindings}
-		  noResetList={this.noResetList}/>
+          noResetStyleTypes={this.noResetStyleTypes}
+          resetStyleNewLine={this.resetStyleNewLine}/>
       </div>
     );
   }
@@ -100,30 +102,8 @@ class Example extends React.Component {
   }
 
   render() {
-    if(this.props.activeContent) {
-      return (
-          <div className="tab-container-editor">
-            <MegadraftEditor
-              editorState={this.state.value}
-              placeholder="Text"
-              onChange={this.onChange}
-              keyBindings={this.keyBindings}
-              noResetList={this.noResetList}/>
-          </div>
-      );
-    } else {
-      return (
-        <div>
-          <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/gruvbox-dark.min.css"/>
-          <div className="tab-container-json">
-            <pre className="jsonpreview">
-              <code className="json hljs">
-                {editorStateToJSON(this.state.value)}
-              </code>
-            </pre>
-          </div>
-        </div>
-      );
+    if (this.props.activeContent) {
+      return this.renderEditor();
     }
     return this.renderJsonPreview();
   }

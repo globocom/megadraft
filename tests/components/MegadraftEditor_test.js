@@ -45,7 +45,8 @@ export default class MegadraftEditorWrapper extends Component {
         editorState={this.state.editorState}
         onChange={this.props.onChange}
         keyBindings={this.props.keyBindings}
-        resetBlocks={this.props.resetBlocks}/>
+        noResetStyleTypes={this.props.noResetStyleTypes}
+        resetStyleNewLine={this.props.resetStyleNewLine}/>
     );
   }
 }
@@ -131,7 +132,9 @@ describe("MegadraftEditor Component", () => {
     const keyBindings = [
       {name: "save", isKeyBound: (e) => {return e.keyCode === 83 && e.ctrlKey;}, action: kba}
     ];
-    const resetBlocks = ["ordered-list-item", "unordered-list-item"];
+    const noResetStyleTypes = ["ordered-list-item", "unordered-list-item"];
+    const resetStyleOn = true;
+    const resetStyleOff = false;
 
     this.onChange = sinon.spy();
     this.editorState = editorStateFromRaw(INITIAL_CONTENT);
@@ -143,12 +146,22 @@ describe("MegadraftEditor Component", () => {
     );
     this.component = this.wrapper.get(0);
 
-    this.wrapper2 = mount(
+    this.wrapperWithReset = mount(
       <MegadraftEditorWrapper
         editorState={this.editorState}
         onChange={this.onChange}
         keyBindings={keyBindings}
-        resetBlocks={resetBlocks}/>
+        noResetStyleTypes={noResetStyleTypes}
+        resetStyleNewLine={resetStyleOn}/>
+    );
+
+    this.wrapperWithoutReset = mount(
+      <MegadraftEditorWrapper
+        editorState={this.editorState}
+        onChange={this.onChange}
+        keyBindings={keyBindings}
+        noResetStyleTypes={noResetStyleTypes}
+        resetStyleNewLine={resetStyleOff}/>
     );
   });
 
@@ -165,7 +178,7 @@ describe("MegadraftEditor Component", () => {
     expect(items).to.have.length(1);
   });
 
-it("passes extra props to the draft-js editor", function() {
+  it("passes extra props to the draft-js editor", function() {
     const handlePastedText = (text) => { console.log(text); };
     const wrapper = mount(
       <MegadraftEditor
@@ -189,16 +202,16 @@ it("passes extra props to the draft-js editor", function() {
     expect(wrapper.ref("draft").props().blockRendererFn).to.not.equal(blockRendererFn);
   });
 
-  it("reset style in new block", function() {
+  it("reset style in new block if resetStyle is true", function() {
     const blockKey = "ag6qs";
     replaceSelection({
       anchorOffset: 12,
       focusOffset: 12,
-    }, this.wrapper2, blockKey);
+    }, this.wrapperWithReset, blockKey);
 
     const emptyList = new List();
 
-    const editor = this.wrapper2.find(MegadraftEditor);
+    const editor = this.wrapperWithReset.find(MegadraftEditor);
 
     editor.node.handleReturn({shiftKey:false});
 
@@ -213,11 +226,11 @@ it("passes extra props to the draft-js editor", function() {
     replaceSelection({
       anchorOffset: 14,
       focusOffset: 14,
-    }, this.wrapper2, blockKey);
+    }, this.wrapperWithReset, blockKey);
 
     const emptyList = new List();
 
-    const editor = this.wrapper2.find(MegadraftEditor);
+    const editor = this.wrapperWithReset.find(MegadraftEditor);
 
     editor.node.handleReturn({shiftKey:false});
 
@@ -232,9 +245,9 @@ it("passes extra props to the draft-js editor", function() {
     replaceSelection({
       anchorOffset: 14,
       focusOffset: 14,
-    }, this.wrapper2, blockKey);
+    }, this.wrapperWithReset, blockKey);
 
-    const editor = this.wrapper2.find(MegadraftEditor);
+    const editor = this.wrapperWithReset.find(MegadraftEditor);
 
     editor.node.handleReturn({shiftKey:false});
 
@@ -242,6 +255,18 @@ it("passes extra props to the draft-js editor", function() {
     const newBlock = content.getBlockAfter("bqjdr");
 
     expect(newBlock.type).to.be.equal("ordered-list-item");
+  });
+
+  it("should not reset style if resetStyle is false", function() {
+    const blockKey = "ag6qs";
+    replaceSelection({
+      anchorOffset: 12,
+      focusOffset: 12,
+    }, this.wrapperWithoutReset, blockKey);
+
+    const editor = this.wrapperWithoutReset.find(MegadraftEditor);
+
+    expect(editor.node.handleReturn({shiftKey:false})).to.be.equal(false);
   });
 
   describe("mediaBlockRenderer", function () {
