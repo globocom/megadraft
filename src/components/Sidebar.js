@@ -17,7 +17,6 @@ import PluginsModal from "./PluginsModal";
 class BlockStyles extends Component {
   constructor(props) {
     super(props);
-    debugger;
     this.state = {
       isOpen: false
     };
@@ -46,7 +45,7 @@ class BlockStyles extends Component {
       "sidemenu__items--open": this.props.open
     });
     const pluginsSidebar = this.props.numberPlugins ?
-    this.props.numberPlugins : this.props.plugins.length
+    this.props.numberPlugins : this.props.plugins.length;
 
     return (
       <div>

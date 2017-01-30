@@ -40,6 +40,7 @@ export default class ModalPluginItem extends Component {
       className="modal__item"
       onClick={this.modalClose}>
         <Button
+          ref="myButton"
           className="modal__button"
           title={item.title}
           editorState={this.props.editorState}

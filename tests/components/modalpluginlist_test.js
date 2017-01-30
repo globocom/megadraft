@@ -21,7 +21,7 @@ class ModalWithPlugins extends Component {
     this.plugins = this.props.plugins || DEFAULT_PLUGINS;
     this.fakeAux = cp(this.plugins.slice(0,2));
     this.fakePlugins = this.fakeAux.concat(this.plugins.slice(0,2));
-    for(let i=0; i<4; i++){
+    for(let i=0; i<3; i++){
       this.fakePlugins[i].title = "plugin" + i;
       this.fakePlugins[i].type = "plugin" + i;
     }
@@ -65,15 +65,15 @@ describe("Sidebar Component", function() {
   it("should has the 4th plugin inside modal", function() {
     const modal = this.wrapper.find(ModalBody);
 
-    const plugin = modal.find("BlockButton");
+    const plugin = modal.find("VideoButton");
 
-    expect(plugin.props()).have.deep.property("title", "plugin3");
+    expect(plugin.props()).have.deep.property("title", "Video");
   });
 
   it("should be a real plugin", function() {
     const modal = this.wrapper.find(ModalBody);
 
-    const plugin = modal.find("BlockButton");
+    const plugin = modal.find("VideoButton");
 
     expect(plugin).to.have.length(1);
   });
