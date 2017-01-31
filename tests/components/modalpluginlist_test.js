@@ -37,10 +37,10 @@ class ModalWithPlugins extends Component {
     return (
       <div ref="editor">
         <ModalPluginList
-              handleModal={this.handleModal}
-              plugins={this.fakePlugins}
-              onChange={this.onChange}
-              editorState={this.props.editorState} />
+          handleModal={this.handleModal}
+          plugins={this.fakePlugins}
+          onChange={this.onChange}
+          editorState={this.props.editorState} />
       </div>
     );
   }

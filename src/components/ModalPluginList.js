@@ -6,8 +6,6 @@
 
 import React, {Component} from "react";
 
-import "setimmediate";
-
 import { ModalBody } from "backstage-modal";
 import ModalPluginItem from "./ModalPluginItem";
 
@@ -24,7 +22,7 @@ export default class ModalPluginList extends Component {
   }
 
   modalClose() {
-    this.props.handleModal();
+    this.props.toggleModalVisibility();
   }
 
   render() {
@@ -32,11 +30,12 @@ export default class ModalPluginList extends Component {
     return (
       <div>
         <ModalBody>
-            <ModalPluginItem
-              handleModal={this.modalClose}
-              plugins={this.props.plugins}
-              onChange={this.onChange}
-              editorState={this.props.editorState}/>
+          <ModalPluginItem
+            toggleModalVisibility={this.modalClose}
+            plugins={this.props.plugins}
+            onChange={this.onChange}
+            editorState={this.props.editorState}
+          />
         </ModalBody>
       </div>
     );

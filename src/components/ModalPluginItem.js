@@ -6,8 +6,6 @@
 
 import React, {Component} from "react";
 
-import "setimmediate";
-
 
 export default class ModalPluginItem extends Component {
   constructor(props) {
@@ -22,7 +20,7 @@ export default class ModalPluginItem extends Component {
   }
 
   modalClose(e) {
-    this.props.handleModal();
+    this.props.toggleModalVisibility();
   }
 
   handleClick(e) {
@@ -31,28 +29,28 @@ export default class ModalPluginItem extends Component {
 
   render() {
     return (
-    <ul className="modal__items">
-    {this.props.plugins.slice(3).map((item) => {
-      const Button = item.buttonComponent;
-      return (
-    <li
-      key={item.type}
-      className="modal__item"
-      onClick={this.modalClose}>
-        <Button
-          ref="myButton"
-          className="modal__button"
-          title={item.title}
-          editorState={this.props.editorState}
-          onChange={this.onChange} />
-        <p
-          onClick={this.handleClick}
-          className="modal__button__label">
-          {item.title}
-        </p>
-    </li>
-      );
-    })}
+    <ul className="megadraft-modal__items">
+      {this.props.plugins.slice(3).map((item) => {
+        const Button = item.buttonComponent;
+        return (
+        <li
+          key={item.type}
+          className="megadraft-modal__item"
+          onClick={this.modalClose}>
+          <Button
+            ref="myButton"
+            className="megadraft-modal__button"
+            title={item.title}
+            editorState={this.props.editorState}
+            onChange={this.onChange} />
+          <p
+            onClick={this.handleClick}
+            className="megadraft-modal__button__label">
+            {item.title}
+          </p>
+        </li>
+        );
+      })}
     </ul>
     );
   }

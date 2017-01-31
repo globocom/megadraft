@@ -46,6 +46,8 @@ class Example extends React.Component {
     };
     this.onChange = ::this.onChange;
     this.onCodeActive = ::this.onCodeActive;
+
+    this.sideBarMaxNumberPlugins = null;
   }
 
   getChildContext() {
@@ -79,7 +81,9 @@ class Example extends React.Component {
           placeholder="Text"
           onChange={this.onChange}
           keyBindings={this.keyBindings}
-          resetStyleNewLine={this.resetStyleNewLine}/>
+		  resetStyleNewLine={this.resetStyleNewLine}/>
+          sideBarMaxNumberPlugins={this.sideBarMaxNumberPlugins}
+          />
       </div>
     );
   }

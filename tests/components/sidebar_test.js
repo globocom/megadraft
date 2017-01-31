@@ -57,7 +57,7 @@ class SidebarWithModalWrapper extends Component {
     for(let i=0; i<4; i++){
       this.fakePlugins[i].type = "plugin" + i;
     }
-    this.numberPlugins = 3;
+    this.sideBarMaxNumberPlugins = 3;
     this.onChange = ::this.onChange;
   }
 
@@ -74,7 +74,7 @@ class SidebarWithModalWrapper extends Component {
           editorState={this.state.editorState}
           readOnly={this.props.readOnly}
           onChange={this.onChange}
-          numberPlugins={this.numberPlugins} />
+          sideBarMaxNumberPlugins={this.sideBarMaxNumberPlugins} />
       </div>
     );
   }
@@ -100,7 +100,7 @@ describe("Sidebar Component", function() {
     this.wrapper = mount(
       <SidebarWrapper editorState={this.editorState}/>
     );
-    this.wrapper2 = mount(
+    this.wrapperSidebarModal = mount(
       <SidebarWithModalWrapper editorState={this.editorState}/>
     );
   });
@@ -139,7 +139,7 @@ describe("Sidebar Component", function() {
 
   it("has the menu hidden by default", function() {
     const menu = this.wrapper.find(SideMenu);
-    const domMenu = menu.find("ul");
+    const domMenu = menu.find("button").at(0);
     expect(domMenu.hasClass("sidemenu__items--open")).to.be.false;
   });
 
@@ -150,8 +150,8 @@ describe("Sidebar Component", function() {
     domButton.simulate("click");
 
     const menu = this.wrapper.find(SideMenu);
-    const domMenu = menu.find("ul");
-    expect(domMenu.hasClass("sidemenu__items--open")).to.be.true;
+    const domMenu = menu.find("button").at(0);
+    expect(domMenu.hasClass("sidemenu__button--open")).to.be.true;
   });
 
   it("is possible to click on the button", function() {
@@ -172,19 +172,19 @@ describe("Sidebar Component", function() {
   });
 
   it("should has a modal button when there is 4 plugins", function() {
-    const toggleButton = this.wrapper2.find(ToggleButton);
+    const toggleButton = this.wrapperSidebarModal.find(ToggleButton);
     const domButton = toggleButton.find("button");
 
     domButton.simulate("click");
 
-    const menu = this.wrapper2.find(SideMenu);
+    const menu = this.wrapperSidebarModal.find(SideMenu);
     const domMenu = menu.find("button");
     const domModalButton = domMenu.at(4);
     domModalButton.simulate("click");
 
-    const modal = this.wrapper2.find(PluginsModal);
+    const modal = this.wrapperSidebarModal.find(PluginsModal);
     const domModal = modal.find("Modal");
-    expect(domModal.prop("className")).to.be.equal("modal");
+    expect(domModal.prop("className")).to.be.equal("megadraft-modal");
   });
 
   it("should not have a modal button with less than 4 plugins", function() {
@@ -201,18 +201,18 @@ describe("Sidebar Component", function() {
   });
 
   it("should has plugins in modal if it's avaiable", function() {
-    const toggleButton = this.wrapper2.find(ToggleButton);
+    const toggleButton = this.wrapperSidebarModal.find(ToggleButton);
     const domButton = toggleButton.find("button");
 
     domButton.simulate("click");
 
-    const menu = this.wrapper2.find(SideMenu);
+    const menu = this.wrapperSidebarModal.find(SideMenu);
     const domMenu = menu.find("button");
     const domModalButton = domMenu.at(4);
 
     domModalButton.simulate("click");
 
-    const modal = this.wrapper2.find(PluginsModal);
+    const modal = this.wrapperSidebarModal.find(PluginsModal);
     const items = modal.prop("plugins").length;
     expect(items).to.be.at.least(1);
   });

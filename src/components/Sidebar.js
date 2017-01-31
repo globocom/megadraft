@@ -21,63 +21,76 @@ class BlockStyles extends Component {
       isOpen: false
     };
 
-    this.onOpenClick = ::this.onOpenClick;
+    this.onModalOpenClick = ::this.onModalOpenClick;
     this.onChange = ::this.onChange;
-    this.handleModal = :: this.handleModal;
+    this.toggleModalVisibility = :: this.toggleModalVisibility;
+
+    this.numberOfPlugins = this.props.plugins.length;
   }
 
   onChange(editorState) {
     this.props.onChange(editorState);
   }
 
-  onOpenClick(e){
+  onModalOpenClick(e){
     e.preventDefault();
-    document.body.style.overflowY = "hidden";
+    document.body.classList.add("megadraft-modal--open");
     this.setState({isOpen: true});
   }
 
-  handleModal() {
+  toggleModalVisibility() {
     this.setState({ isOpen: !this.state.isOpen});
   }
 
-  render() {
-    const className = classNames("sidemenu__items", {
-      "sidemenu__items--open": this.props.open
-    });
-    const pluginsSidebar = this.props.numberPlugins ?
-    this.props.numberPlugins : this.props.plugins.length;
-
+  renderModal() {
     return (
-      <div>
-      <ul className={className}>
-        {this.props.plugins.slice(0,pluginsSidebar).map((item) => {
-          const Button = item.buttonComponent;
-          return (
-            <li key={item.type} className="sidemenu__item">
-              <Button
-                className="sidemenu__button"
-                title={item.title}
-                editorState={this.props.editorState}
-                onChange={this.onChange}/>
-            </li>
-          );
-        })}
-        {this.props.plugins.length > pluginsSidebar ?
-        <button className="sidemenu__button" onClick={this.onOpenClick}>
-        <icons.MoreIcon className="sidemenu__button__icon" />
-        </button>
-        : null}
-      </ul>
-
-      {this.props.plugins.length > pluginsSidebar ?
       <PluginsModal
-        handleModal={this.handleModal}
+        toggleModalVisibility={this.toggleModalVisibility}
         isOpen={this.state.isOpen}
         plugins={this.props.plugins}
         onCloseRequest={this.props.onClose}
         onChange={this.onChange}
         editorState={this.props.editorState} />
-        : null }
+    );
+  }
+
+  renderModalButton() {
+    return (
+      <button className="sidemenu__button" onClick={this.onModalOpenClick}>
+        <icons.MoreIcon className="sidemenu__button__icon" />
+      </button>
+    );
+  }
+
+  render() {
+    const sideBarMaxNumberPlugins = this.props.sideBarMaxNumberPlugins ?
+    this.props.sideBarMaxNumberPlugins : this.props.plugins.length;
+
+    const sidemenuMaxHeight = {
+      maxHeight: this.props.open? `${(sideBarMaxNumberPlugins + 1) * 48}px`: 0,
+    };
+
+    // We should hide the modal if the number of plugins < max
+    const hasModal = this.props.plugins.length > sideBarMaxNumberPlugins;
+
+    return (
+      <div>
+        <ul style={sidemenuMaxHeight} className="sidemenu__items">
+          {this.props.plugins.slice(0, sideBarMaxNumberPlugins).map((item) => {
+            const Button = item.buttonComponent;
+            return (
+              <li key={item.type} className="sidemenu__item">
+                <Button
+                  className="sidemenu__button"
+                  title={item.title}
+                  editorState={this.props.editorState}
+                  onChange={this.onChange}/>
+              </li>
+            );
+          })}
+          {hasModal ? this.renderModalButton() : null}
+        </ul>
+          {hasModal ? this.renderModal() : null }
       </div>
     );
   }
@@ -131,7 +144,7 @@ export class SideMenu extends Component {
           plugins={this.props.plugins}
           open={this.state.open}
           onChange={this.onChange}
-          numberPlugins={this.props.numberPlugins}/>
+          sideBarMaxNumberPlugins={this.props.sideBarMaxNumberPlugins}/>
       </li>
     );
   }
@@ -219,7 +232,7 @@ export default class SideBar extends Component {
               editorState={this.props.editorState}
               onChange={this.onChange}
               plugins={this.getValidSidebarPlugins()}
-              numberPlugins={this.props.numberPlugins}/>
+              sideBarMaxNumberPlugins={this.props.sideBarMaxNumberPlugins}/>
           </ul>
         </div>
       </div>

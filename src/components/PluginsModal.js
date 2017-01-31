@@ -6,8 +6,6 @@
 
 import React, {Component} from "react";
 
-import "setimmediate";
-
 import Modal from "backstage-modal";
 import ModalPluginList from "./ModalPluginList";
 
@@ -27,8 +25,8 @@ export default class PluginsModal extends Component {
     if(!this.props.isOpen) {
       return;
     }
-    document.body.style.overflowY = "auto";
-    this.props.handleModal();
+    document.body.classList.remove("megadraft-modal--open");
+    this.props.toggleModalVisibility();
   }
 
   render() {
@@ -36,15 +34,16 @@ export default class PluginsModal extends Component {
     return (
       <div>
         <Modal
-          className="modal"
+          className="megadraft-modal"
           title="Blocos de conteúdo"
           isOpen={this.props.isOpen}
           onCloseRequest={this.onCloseRequest}>
-            <ModalPluginList
-              handleModal={this.onCloseRequest}
-              plugins={this.props.plugins}
-              onChange={this.onChange}
-              editorState={this.props.editorState} />
+          <ModalPluginList
+            toggleModalVisibility={this.onCloseRequest}
+            plugins={this.props.plugins}
+            onChange={this.onChange}
+            editorState={this.props.editorState}
+          />
         </Modal>
       </div>
     );

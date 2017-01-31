@@ -11,11 +11,19 @@
   margin: -12px 0 0 -12px;
 }
 
-.modal {
+.megadraft-modal {
     position: relative;
     width: 36px;
     text-align: left;
     z-index: 10;
+
+    &--open{
+      overflow-y: hidden;
+    }
+
+    &--close{
+      overflow-y: auto;
+    }
 
     &__button {
         border: 0;
@@ -66,7 +74,7 @@
         }
     }
 
-    &__items .modal__button {
+    &__items .megadraft-modal__button {
         background: none;
 
         &:before {
@@ -84,13 +92,13 @@
         cursor: pointer;
 
         &:hover {
-          .modal__button__label{
-            color: #0669de;
-          }
+            .megadraft-modal__button__label{
+              color: #0669de;
+            }
 
-          .modal__button:before {
-            background-color: #0669de;
-          }
+            .megadraft-modal__button:before {
+              background-color: #0669de;
+            }
         }
     }
 }
