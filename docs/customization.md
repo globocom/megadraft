@@ -290,19 +290,51 @@ ReactDOM.render(
 [custom actions]: https://github.com/globocom/megadraft/blob/master/src/actions/default.js
 
 
-### Modal
+### Handling too many plugins
 
-There's a modal option in the sidebar that can show plugins inside. By default Megadraft doesn't show the modal. To turn on this option just pass the desirable number (as example above) of plugins you want to show in sidebar to the prop `sideBarMaxNumberPlugins`. If it's preferable this option can be not used. Just need to pass `null` in the option `sideBarMaxNumberPlugins` of `renderSidebar`.
+By default, plugin buttons are shown on a vertical sidebar. This may be a bit
+cumbersome when there is a lot of enabled plugins.
+
+To overcome this, the prop `maxSidebarButtons` limits the number of buttons
+displayed on the sidebar. When the limit is reached an extra button will appear
+and when clicked it will open a modal window with the full button list.
+
+Passing a number to the `maxSidebarButtons` prop will limit the number of
+buttons displayed on the sidebar.
+
+Omitting this prop or passing a `null` value forces all buttons to be displayed
+on the sidebar.
 
 ```js
+import React from "react";
+import ReactDOM from "react-dom";
+import {MegadraftEditor, editorStateFromRaw} from "megadraft";
 
-this.sideBarMaxNumberPlugins = 3;
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {editorState: editorStateFromRaw(null)};
+    this.onChange = ::this.onChange;
+    this.maxSidebarButtons = 3;
 
-<MegadraftEditor
-  editorState={this.state.value}
-  placeholder="Text"
-  onChange={this.onChange}
-  keyBindings={this.keyBindings}
-  sideBarMaxNumberPlugins={this.sideBarMaxNumberPlugins}
-/>
+  }
+
+  onChange(editorState) {
+    this.setState({editorState});
+  }
+
+  render() {
+    return (
+      <MegadraftEditor
+        editorState={this.state.editorState}
+        onChange={this.onChange}
+        maxSidebarButtons={this.maxSidebarButtons}
+    )
+  }
+}
+
+ReactDOM.render(
+  <App />,
+  document.getElementById("container")
+);
 ```

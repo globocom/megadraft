@@ -57,7 +57,7 @@ class SidebarWithModalWrapper extends Component {
     for(let i=0; i<4; i++){
       this.fakePlugins[i].type = "plugin" + i;
     }
-    this.sideBarMaxNumberPlugins = 3;
+    this.maxSidebarButtons = 3;
     this.onChange = ::this.onChange;
   }
 
@@ -74,7 +74,7 @@ class SidebarWithModalWrapper extends Component {
           editorState={this.state.editorState}
           readOnly={this.props.readOnly}
           onChange={this.onChange}
-          sideBarMaxNumberPlugins={this.sideBarMaxNumberPlugins} />
+          maxSidebarButtons={this.maxSidebarButtons} />
       </div>
     );
   }

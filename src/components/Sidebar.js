@@ -25,7 +25,6 @@ class BlockStyles extends Component {
     this.onChange = ::this.onChange;
     this.toggleModalVisibility = :: this.toggleModalVisibility;
 
-    this.numberOfPlugins = this.props.plugins.length;
   }
 
   onChange(editorState) {
@@ -63,20 +62,20 @@ class BlockStyles extends Component {
   }
 
   render() {
-    const sideBarMaxNumberPlugins = this.props.sideBarMaxNumberPlugins ?
-    this.props.sideBarMaxNumberPlugins : this.props.plugins.length;
+    const maxSidebarButtons = this.props.maxSidebarButtons ?
+    this.props.maxSidebarButtons : this.props.plugins.length;
 
     const sidemenuMaxHeight = {
-      maxHeight: this.props.open? `${(sideBarMaxNumberPlugins + 1) * 48}px`: 0,
+      maxHeight: this.props.open? `${(maxSidebarButtons + 1) * 48}px`: 0,
     };
 
     // We should hide the modal if the number of plugins < max
-    const hasModal = this.props.plugins.length > sideBarMaxNumberPlugins;
+    const hasModal = this.props.plugins.length > maxSidebarButtons;
 
     return (
       <div>
         <ul style={sidemenuMaxHeight} className="sidemenu__items">
-          {this.props.plugins.slice(0, sideBarMaxNumberPlugins).map((item) => {
+          {this.props.plugins.slice(0, maxSidebarButtons).map((item) => {
             const Button = item.buttonComponent;
             return (
               <li key={item.type} className="sidemenu__item">
@@ -144,7 +143,7 @@ export class SideMenu extends Component {
           plugins={this.props.plugins}
           open={this.state.open}
           onChange={this.onChange}
-          sideBarMaxNumberPlugins={this.props.sideBarMaxNumberPlugins}/>
+          maxSidebarButtons={this.props.maxSidebarButtons}/>
       </li>
     );
   }
@@ -232,7 +231,7 @@ export default class SideBar extends Component {
               editorState={this.props.editorState}
               onChange={this.onChange}
               plugins={this.getValidSidebarPlugins()}
-              sideBarMaxNumberPlugins={this.props.sideBarMaxNumberPlugins}/>
+              maxSidebarButtons={this.props.maxSidebarButtons}/>
           </ul>
         </div>
       </div>

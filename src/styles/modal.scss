@@ -13,7 +13,8 @@
 
 .megadraft-modal {
     position: relative;
-    width: 36px;
+    width: 528px;
+    height: 393px;
     text-align: left;
     z-index: 10;
 
@@ -60,7 +61,7 @@
             text-align: center;
             cursor: pointer;
             z-index:10;
-            margin-top: 1px;
+            padding-top: 9px;
         }
     }
 
@@ -68,10 +69,7 @@
         flex-wrap: wrap;
         display: flex;
         justify-content: flex-start;
-
-        &--open {
-            max-height: 116px;
-        }
+        margin: 0.5rem -1.5rem;
     }
 
     &__items .megadraft-modal__button {
@@ -85,10 +83,9 @@
     }
 
     &__item {
-        height: 40px;
-        margin-left: 40px;
-        margin-bottom: 60px;
-        margin-right: 40px;
+        line-height: 0px;
+        height: 58px;
+        margin: 0 53px 78px;
         cursor: pointer;
 
         &:hover {

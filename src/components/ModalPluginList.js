@@ -13,12 +13,7 @@ import ModalPluginItem from "./ModalPluginItem";
 export default class ModalPluginList extends Component {
   constructor(props) {
     super(props);
-    this.onChange = ::this.onChange;
     this.modalClose = ::this.modalClose;
-  }
-
-  onChange(editorState) {
-    this.props.onChange(editorState);
   }
 
   modalClose() {
@@ -28,16 +23,14 @@ export default class ModalPluginList extends Component {
   render() {
 
     return (
-      <div>
-        <ModalBody>
-          <ModalPluginItem
-            toggleModalVisibility={this.modalClose}
-            plugins={this.props.plugins}
-            onChange={this.onChange}
-            editorState={this.props.editorState}
-          />
-        </ModalBody>
-      </div>
+      <ModalBody>
+        <ModalPluginItem
+          toggleModalVisibility={this.modalClose}
+          plugins={this.props.plugins}
+          onChange={this.props.onChange}
+          editorState={this.props.editorState}
+        />
+      </ModalBody>
     );
   }
 }

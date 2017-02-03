@@ -10,42 +10,37 @@ import React, {Component} from "react";
 export default class ModalPluginItem extends Component {
   constructor(props) {
     super(props);
-    this.onChange = ::this.onChange;
-    this.modalClose = ::this.modalClose;
     this.handleClick = ::this.handleClick;
-  }
-
-  onChange(editorState) {
-    this.props.onChange(editorState);
-  }
-
-  modalClose(e) {
-    this.props.toggleModalVisibility();
+    this.closeModal = ::this.closeModal;
   }
 
   handleClick(e) {
-    this.refs.myButton.onClick(e);
+    this.myButton.onClick(e);
+  }
+
+  closeModal() {
+    this.props.toggleModalVisibility();
   }
 
   render() {
     return (
     <ul className="megadraft-modal__items">
-      {this.props.plugins.slice(3).map((item) => {
+      {this.props.plugins.map((item) => {
         const Button = item.buttonComponent;
         return (
         <li
           key={item.type}
           className="megadraft-modal__item"
-          onClick={this.modalClose}>
+          onClick={this.closeModal} >
           <Button
-            ref="myButton"
+            ref={(button)=>{this.myButton = button;}}
             className="megadraft-modal__button"
             title={item.title}
             editorState={this.props.editorState}
-            onChange={this.onChange} />
+            onChange={this.props.onChange} />
           <p
-            onClick={this.handleClick}
-            className="megadraft-modal__button__label">
+            className="megadraft-modal__button__label"
+            onClick={this.handleClick} >
             {item.title}
           </p>
         </li>

@@ -47,7 +47,7 @@ class Example extends React.Component {
     this.onChange = ::this.onChange;
     this.onCodeActive = ::this.onCodeActive;
 
-    this.sideBarMaxNumberPlugins = null;
+    this.maxSidebarButtons = null;
   }
 
   getChildContext() {

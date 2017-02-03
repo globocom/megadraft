@@ -21,7 +21,7 @@ class ModalWithPlugins extends Component {
     this.plugins = this.props.plugins || DEFAULT_PLUGINS;
     this.fakeAux = cp(this.plugins.slice(0,2));
     this.fakePlugins = this.fakeAux.concat(this.plugins.slice(0,2));
-    for(let i=0; i<3; i++){
+    for(let i=0; i<4; i++){
       this.fakePlugins[i].title = "plugin" + i;
       this.fakePlugins[i].type = "plugin" + i;
     }
@@ -46,7 +46,7 @@ class ModalWithPlugins extends Component {
   }
 }
 
-describe("Sidebar Component", function() {
+describe("Sidebar Modal Component", function() {
   beforeEach(function() {
     this.wrapper = mount(
       <ModalWithPlugins />
@@ -62,12 +62,12 @@ describe("Sidebar Component", function() {
     expect(plugin.length).to.be.at.least(1);
   });
 
-  it("should has the 4th plugin inside modal", function() {
+  it("should has the all plugins inside modal", function() {
     const modal = this.wrapper.find(ModalBody);
 
-    const plugin = modal.find("VideoButton");
+    const plugin = modal.find(".megadraft-modal__item");
 
-    expect(plugin.props()).have.deep.property("title", "Video");
+    expect(plugin).to.have.length(4);
   });
 
   it("should be a real plugin", function() {
@@ -75,6 +75,6 @@ describe("Sidebar Component", function() {
 
     const plugin = modal.find("VideoButton");
 
-    expect(plugin).to.have.length(1);
+    expect(plugin.length).to.be.at.least(1);
   });
 });

@@ -133,7 +133,7 @@ describe("MegadraftEditor Component", () => {
     const resetStyleOn = true;
     const resetStyleOff = false;
 
-    this.sideBarMaxNumberPlugins = null;
+    this.maxSidebarButtons = null;
     this.onChange = sinon.spy();
     this.editorState = editorStateFromRaw(INITIAL_CONTENT);
     this.wrapper = mount(
@@ -537,7 +537,7 @@ describe("MegadraftEditor Component", () => {
       <MegadraftEditor
         editorState={this.editorState}
         onChange={this.onChange}
-        sideBarMaxNumberPlugins= {this.sideBarMaxNumberPlugins}
+        maxSidebarButtons= {this.maxSidebarButtons}
         sidebarRendererFn={renderCustomSidebar} />
     );
 
@@ -547,7 +547,7 @@ describe("MegadraftEditor Component", () => {
       onChange: component.onChange,
       editorState: this.editorState,
       readOnly: false,
-      sideBarMaxNumberPlugins: this.sideBarMaxNumberPlugins
+      maxSidebarButtons: this.maxSidebarButtons
     };
     expect(renderCustomSidebar.calledWith(expectedProps)).to.be.true;
   });
