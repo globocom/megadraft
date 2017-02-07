@@ -813,3 +813,66 @@ body {
 
 .content {
   background-color: #fafafa; }
+
+/*
+ * Copyright (c) 2016, Globo.com (https://github.com/globocom)
+ *
+ * License: MIT
+ */
+/*
+ * Copyright (c) 2016, Globo.com (https://github.com/globocom)
+ *
+ * License: MIT
+ */
+.related-articles {
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2);
+  margin-top: 16px;
+  display: table;
+  table-layout: fixed;
+  width: 100%; }
+
+.related-articles:first-child {
+  margin-top: 0; }
+
+.related-articles:hover .related-articles__trash {
+  width: 40px; }
+
+.related-articles:hover .related-articles__inputs {
+  padding-right: 16px; }
+
+.related-articles__inputs {
+  display: table-cell;
+  padding: 16px 24px 24px 24px;
+  -webkit-transition: padding 0.35s ease-in-out;
+  transition: padding 0.35s ease-in-out; }
+
+.related-articles__trash {
+  border-radius: 2px;
+  box-shadow: -1px 0 0 0 #dddddd;
+  color: #999;
+  cursor: pointer;
+  display: table-cell;
+  line-height: 0;
+  overflow: hidden;
+  -webkit-transition: width 0.35s ease-in-out;
+  transition: width 0.35s ease-in-out;
+  vertical-align: middle;
+  width: 0; }
+
+.related-articles__trash:hover {
+  color: #000; }
+
+.related-articles__add-new-wrapper {
+  height: 16px;
+  margin: 24px 0 8px 0; }
+
+.related-articles__add-new {
+  color: #0669de;
+  float: right;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.3rem;
+  text-decoration: none;
+  text-transform: uppercase; }
