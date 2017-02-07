@@ -40,8 +40,7 @@ class Example extends React.Component {
     this.keyBindings = [
         { name: "save", isKeyBound: (e) => { return e.keyCode === 83 && e.ctrlKey; }, action: () => { this.onSave(); } }
     ];
-    this.noResetStyleTypes = ["ordered-list-item", "unordered-list-item"];
-    this.resetStyleNewLine = false;
+    this.resetStyleNewLine = true;
     this.state = {
       value: content,
     };
@@ -80,7 +79,6 @@ class Example extends React.Component {
           placeholder="Text"
           onChange={this.onChange}
           keyBindings={this.keyBindings}
-          noResetStyleTypes={this.noResetStyleTypes}
           resetStyleNewLine={this.resetStyleNewLine}/>
       </div>
     );

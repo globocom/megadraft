@@ -30,6 +30,9 @@ import DEFAULT_PLUGINS from "../plugins/default";
 import DEFAULT_ACTIONS from "../actions/default";
 import DEFAULT_ENTITY_INPUTS from "../entity_inputs/default";
 
+const NO_RESET_STYLE_DEFAULT = ["ordered-list-item", "unordered-list-item"];
+
+
 export default class MegadraftEditor extends Component {
   constructor(props) {
     super(props);
@@ -51,6 +54,8 @@ export default class MegadraftEditor extends Component {
     this.actions = this.props.actions || DEFAULT_ACTIONS;
     this.plugins = this.getValidPlugins();
     this.entityInputs = this.props.entityInputs || DEFAULT_ENTITY_INPUTS;
+    this.blocksWithoutStyleReset = (this.props.blocksWithoutStyleReset ||
+                                    NO_RESET_STYLE_DEFAULT);
 
     this.pluginsByType = this.getPluginsByType();
 
@@ -128,14 +133,14 @@ export default class MegadraftEditor extends Component {
    * License: MIT
    */
    //Based on https://github.com/icelab/draft-js-block-breakout-plugin
-  resetBlockStyle(editorState, selection, contentState, currentBlock, blockTypeIndex) {
+  resetBlockStyle(editorState, selection, contentState, currentBlock, blockType) {
     const {List} = Immutable;
     const emptyBlockKey = genKey();
 
     const emptyBlock = new ContentBlock({
       key: emptyBlockKey,
       text: "",
-      type: this.props.noResetStyleTypes[blockTypeIndex] || "unstyled",
+      type: blockType,
       depth: 0,
       characterList: List(),
       inlineStyleRanges: [],
@@ -149,15 +154,12 @@ export default class MegadraftEditor extends Component {
       return v === currentBlock;
     }).rest();
 
-    let augmentedBlocks;
-    let focusKey;
-
-    augmentedBlocks = [
+    const augmentedBlocks = [
       [currentBlock.getKey(), currentBlock],
       [emptyBlockKey, emptyBlock],
     ];
 
-    focusKey = emptyBlockKey;
+    const focusKey = emptyBlockKey;
     const newBlocks = blocksBefore.concat(augmentedBlocks, blocksAfter).toOrderedMap();
     const newContentState = contentState.merge({
       blockMap: newBlocks,
@@ -189,28 +191,18 @@ export default class MegadraftEditor extends Component {
       const currentBlock = contentState.getBlockForKey(selection.getEndKey());
       const endOffset = selection.getEndOffset();
       const atEndOfBlock = (endOffset === currentBlock.getLength());
-      const noResetStyleTypes = this.props.noResetStyleTypes;
-      const blockTypeIndex = noResetStyleTypes.indexOf(currentBlock.type);
       const resetStyleNewLine = this.props.resetStyleNewLine;
+      const noReset = this.blocksWithoutStyleReset.includes(currentBlock.type);
 
       if (atEndOfBlock && resetStyleNewLine) {
-        if(blockTypeIndex > -1) {
-          this.resetBlockStyle( editorState,
-              selection,
-              contentState,
-              currentBlock,
-              blockTypeIndex
-          );
-          return true;
-        } else {
-          this.resetBlockStyle(editorState,
+        const blockType = noReset? currentBlock.type: "unstyled";
+        this.resetBlockStyle(editorState,
             selection,
             contentState,
             currentBlock,
-            null
-          );
-          return true;
-        }
+            blockType
+        );
+        return true;
       }
       return false;
     }
