@@ -138,6 +138,47 @@ export default {
         }
       ],
       "data": {}
+    },
+    {
+      "key": "6i98s",
+      "text": "Sample plugin",
+      "type": "header-two",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "5kvgb",
+      "text": "",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "articles": [
+          {
+            "key": "d759h",
+            "title": "Related Articles plugin example",
+            "link": "https://github.com/globocom/megadraft-related-articles-plugin"
+          },
+          {
+            "key": "don8q",
+            "title": "Writing custom plugins",
+            "link": "http://megadraft.io/#/docs/plugins"
+          }
+        ],
+        "type": "related-articles"
+      }
+    },
+    {
+      "key": "3q8fu",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
     }
   ]
 };
