@@ -196,11 +196,12 @@ export default class MegadraftEditor extends Component {
 
       if (atEndOfBlock && resetStyleNewLine) {
         const blockType = noReset ? currentBlock.type : "unstyled";
-        this.resetBlockStyle(editorState,
-            selection,
-            contentState,
-            currentBlock,
-            blockType
+        this.resetBlockStyle(
+          editorState,
+          selection,
+          contentState,
+          currentBlock,
+          blockType
         );
         return true;
       }
