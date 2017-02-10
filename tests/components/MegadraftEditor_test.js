@@ -18,8 +18,10 @@ import {editorStateFromRaw} from "../../src/utils";
 import image from "../../src/plugins/image/plugin";
 import NotFoundPlugin from "../../src/plugins/not-found/plugin";
 
+
 let expect = chai.expect;
 let kba = function keyBindingAction() {};
+
 
 function replaceSelection(newSelection, wrapper, blockKey) {
   const selectionState = SelectionState.createEmpty(blockKey);
