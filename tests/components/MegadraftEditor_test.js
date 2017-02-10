@@ -274,7 +274,7 @@ describe("MegadraftEditor Component", () => {
   it("should not reset style if resetStyle is false", function() {
     const blockKey = "ag6qs";
     replaceSelection(
-      {anchorOffset: 12, focusOffset: 12}
+      {anchorOffset: 12, focusOffset: 12},
       this.wrapperWithoutReset,
       blockKey
     );
