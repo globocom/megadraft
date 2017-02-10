@@ -25,7 +25,6 @@ function replaceSelection(newSelection, wrapper, blockKey) {
   const selectionState = SelectionState.createEmpty(blockKey);
   const updatedSelection = selectionState.merge(newSelection);
   const oldState = wrapper.state("editorState");
-
   const editorState = EditorState.forceSelection(oldState, updatedSelection);
 
   wrapper.setState({editorState: editorState});
