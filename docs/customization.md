@@ -16,7 +16,14 @@ Here are the props that `MegadraftEditor` accepts:
 - `keyBindings`: (optional) Custom key bindings
 - `handleBlockNotFound`: (optional) called when the `editorState` contains a
   block for a plugin that is no longer available
-- `softNewLines`: (optional) boolean, default true. Insert soft new line when user type "shift + enter".
+- `softNewLines`: (optional) boolean, default true. Insert soft new line when
+  user type "shift + enter".
+- `resetStyleNewLine`: (optional) boolean, default false. Editor will reset
+  styles when a new paragraph is created.
+- `blocksWithoutStyleReset`: (optional) list, defaults to
+  `['ordered-list-item', 'unordered-list-item']`. Tells the editor which
+  blocks won't have its types reset if `resetStyleNewLine` is `true`.
+
 Check the following sections for more info.
 
 

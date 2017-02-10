@@ -40,6 +40,7 @@ class Example extends React.Component {
     this.keyBindings = [
         { name: "save", isKeyBound: (e) => { return e.keyCode === 83 && e.ctrlKey; }, action: () => { this.onSave(); } }
     ];
+    this.resetStyleNewLine = true;
     this.state = {
       value: content,
     };
@@ -77,7 +78,8 @@ class Example extends React.Component {
           editorState={this.state.value}
           placeholder="Text"
           onChange={this.onChange}
-          keyBindings={this.keyBindings}/>
+          keyBindings={this.keyBindings}
+          resetStyleNewLine={this.resetStyleNewLine}/>
       </div>
     );
   }

@@ -11,7 +11,16 @@
   this).__ = (x) => x;
 
 import React, {Component} from "react";
-import {Editor, RichUtils, getDefaultKeyBinding} from "draft-js";
+import {
+    Editor,
+    RichUtils,
+    getDefaultKeyBinding,
+    EditorState,
+    genKey,
+    ContentBlock
+} from "draft-js";
+import Immutable from "immutable";
+
 
 import DefaultToolbar from "./Toolbar";
 import Sidebar from "./Sidebar";
@@ -20,6 +29,9 @@ import notFoundPlugin from "../plugins/not-found/plugin";
 import DEFAULT_PLUGINS from "../plugins/default";
 import DEFAULT_ACTIONS from "../actions/default";
 import DEFAULT_ENTITY_INPUTS from "../entity_inputs/default";
+
+const NO_RESET_STYLE_DEFAULT = ["ordered-list-item", "unordered-list-item"];
+
 
 export default class MegadraftEditor extends Component {
   constructor(props) {
@@ -42,6 +54,8 @@ export default class MegadraftEditor extends Component {
     this.actions = this.props.actions || DEFAULT_ACTIONS;
     this.plugins = this.getValidPlugins();
     this.entityInputs = this.props.entityInputs || DEFAULT_ENTITY_INPUTS;
+    this.blocksWithoutStyleReset = (this.props.blocksWithoutStyleReset ||
+                                    NO_RESET_STYLE_DEFAULT);
 
     this.pluginsByType = this.getPluginsByType();
 
@@ -113,12 +127,84 @@ export default class MegadraftEditor extends Component {
     return false;
   }
 
+  /*
+   * Copyright (c) 2016 Icelab
+   *
+   * License: MIT
+   */
+   //Based on https://github.com/icelab/draft-js-block-breakout-plugin
+  resetBlockStyle(editorState, selection, contentState, currentBlock, blockType) {
+    const {List} = Immutable;
+    const emptyBlockKey = genKey();
+
+    const emptyBlock = new ContentBlock({
+      key: emptyBlockKey,
+      text: "",
+      type: blockType,
+      depth: 0,
+      characterList: List(),
+      inlineStyleRanges: [],
+    });
+    const blockMap = contentState.getBlockMap();
+
+    const blocksBefore = blockMap.toSeq().takeUntil(function (v) {
+      return v === currentBlock;
+    });
+    const blocksAfter = blockMap.toSeq().skipUntil(function (v) {
+      return v === currentBlock;
+    }).rest();
+
+    const augmentedBlocks = [
+      [currentBlock.getKey(), currentBlock],
+      [emptyBlockKey, emptyBlock],
+    ];
+
+    const focusKey = emptyBlockKey;
+    const newBlocks = blocksBefore.concat(augmentedBlocks, blocksAfter).toOrderedMap();
+    const newContentState = contentState.merge({
+      blockMap: newBlocks,
+      selectionBefore: selection,
+      selectionAfter: selection.merge({
+        anchorKey: focusKey,
+        anchorOffset: 0,
+        focusKey: focusKey,
+        focusOffset: 0,
+        isBackward: false
+      })
+    });
+
+    const noStyle = Immutable.OrderedSet([]);
+    const resetState = EditorState.push(editorState, newContentState, "split-block");
+    const noStyleState = EditorState.setInlineStyleOverride(resetState, noStyle);
+    this.props.onChange(noStyleState);
+  }
+
   handleReturn(event) {
     if (this.props.softNewLines === false) {
       return false;
     }
 
     if (!event.shiftKey) {
+      const {editorState} = this.props;
+      const selection = editorState.getSelection();
+      const contentState = editorState.getCurrentContent();
+      const currentBlock = contentState.getBlockForKey(selection.getEndKey());
+      const endOffset = selection.getEndOffset();
+      const atEndOfBlock = (endOffset === currentBlock.getLength());
+      const resetStyleNewLine = this.props.resetStyleNewLine;
+      const noReset = this.blocksWithoutStyleReset.includes(currentBlock.type);
+
+      if (atEndOfBlock && resetStyleNewLine) {
+        const blockType = noReset ? currentBlock.type : "unstyled";
+        this.resetBlockStyle(
+          editorState,
+          selection,
+          contentState,
+          currentBlock,
+          blockType
+        );
+        return true;
+      }
       return false;
     }
 
