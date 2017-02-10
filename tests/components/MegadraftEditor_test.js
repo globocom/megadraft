@@ -39,7 +39,6 @@ class MegadraftEditorWrapper extends Component {
   }
 
   render() {
-
     return (
       <MegadraftEditor
         editorState={this.state.editorState}
@@ -53,7 +52,6 @@ class MegadraftEditorWrapper extends Component {
 
 
 describe("MegadraftEditor Component", () => {
-
   class FakeAtomicBlock {
     constructor(type){
       this.type = type;
@@ -203,10 +201,11 @@ describe("MegadraftEditor Component", () => {
 
   it("reset blockStyle in new block if resetStyle is true", function() {
     const blockKey = "ag6qs";
-    replaceSelection({
-      anchorOffset: 12,
-      focusOffset: 12,
-    }, this.wrapperWithReset, blockKey);
+    replaceSelection(
+      {anchorOffset: 12, focusOffset: 12},
+      this.wrapperWithReset,
+      blockKey
+    );
 
     const editor = this.wrapperWithReset.find(MegadraftEditor);
 
@@ -220,10 +219,11 @@ describe("MegadraftEditor Component", () => {
 
   it("reset inlineStyle in new block if resetStyle is true", function() {
     const blockKey = "ag6qs";
-    replaceSelection({
-      anchorOffset: 12,
-      focusOffset: 12,
-    }, this.wrapperWithReset, blockKey);
+    replaceSelection(
+      {anchorOffset: 12, focusOffset: 12},
+      this.wrapperWithReset,
+      blockKey
+    );
 
     const editor = this.wrapperWithReset.find(MegadraftEditor);
 
@@ -237,10 +237,11 @@ describe("MegadraftEditor Component", () => {
 
   it("reset inlineStyles if in blocksWithoutStyleReset", function() {
     const blockKey = "bqjdr";
-    replaceSelection({
-      anchorOffset: 14,
-      focusOffset: 14,
-    }, this.wrapperWithReset, blockKey);
+    replaceSelection(
+      {anchorOffset: 14, focusOffset: 14},
+      this.wrapperWithReset,
+      blockKey
+    );
 
     const editor = this.wrapperWithReset.find(MegadraftEditor);
 
@@ -254,10 +255,11 @@ describe("MegadraftEditor Component", () => {
 
   it("reset style should not change list type", function() {
     const blockKey = "bqjdr";
-    replaceSelection({
-      anchorOffset: 14,
-      focusOffset: 14,
-    }, this.wrapperWithReset, blockKey);
+    replaceSelection(
+      {anchorOffset: 14, focusOffset: 14},
+      this.wrapperWithReset,
+      blockKey
+    );
 
     const editor = this.wrapperWithReset.find(MegadraftEditor);
 
@@ -271,10 +273,11 @@ describe("MegadraftEditor Component", () => {
 
   it("should not reset style if resetStyle is false", function() {
     const blockKey = "ag6qs";
-    replaceSelection({
-      anchorOffset: 12,
-      focusOffset: 12,
-    }, this.wrapperWithoutReset, blockKey);
+    replaceSelection(
+      {anchorOffset: 12, focusOffset: 12}
+      this.wrapperWithoutReset,
+      blockKey
+    );
 
     const editor = this.wrapperWithoutReset.find(MegadraftEditor);
 
