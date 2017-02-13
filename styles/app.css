@@ -272,6 +272,86 @@ body {
  *
  * License: MIT
  */
+/*
+ * Copyright (c) 2016, Globo.com (https://github.com/globocom)
+ *
+ * License: MIT
+ */
+.sidemenu__button__icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -12px 0 0 -12px; }
+
+.megadraft-modal {
+  position: relative;
+  width: 528px;
+  height: 393px;
+  text-align: left;
+  z-index: 10; }
+  .megadraft-modal--open {
+    overflow-y: hidden; }
+  .megadraft-modal--close {
+    overflow-y: auto; }
+  .megadraft-modal__button {
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0;
+    padding: 0;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    position: relative;
+    background: none;
+    width: 64px;
+    height: 64px; }
+    .megadraft-modal__button:before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      border-radius: 100%;
+      display: inline-block;
+      background-color: #181818; }
+    .megadraft-modal__button__label {
+      font-family: Open Sans, sans-serif;
+      width: 63px;
+      height: 16px;
+      font-size: 14px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.14;
+      color: #3c3c3c;
+      text-align: center;
+      cursor: pointer;
+      z-index: 10;
+      padding-top: 9px; }
+  .megadraft-modal__items {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    margin: 0.5rem -1.5rem; }
+  .megadraft-modal__items .megadraft-modal__button {
+    background: none; }
+    .megadraft-modal__items .megadraft-modal__button:before {
+      -webkit-transition: all 0.1s ease-in-out;
+      transition: all 0.1s ease-in-out;
+      background-color: #181818; }
+  .megadraft-modal__item {
+    line-height: 0px;
+    height: 58px;
+    margin: 0 53px 78px;
+    cursor: pointer; }
+    .megadraft-modal__item:hover .megadraft-modal__button__label {
+      color: #0669de; }
+    .megadraft-modal__item:hover .megadraft-modal__button:before {
+      background-color: #0669de; }
+
 .megadraft-editor {
   position: relative;
   /*
@@ -414,8 +494,6 @@ body {
       max-height: 0;
       width: 36px;
       text-align: center; }
-      .megadraft-editor .sidemenu__items--open {
-        max-height: 116px; }
     .megadraft-editor .sidemenu__items .sidemenu__button {
       background: none; }
       .megadraft-editor .sidemenu__items .sidemenu__button:before {
