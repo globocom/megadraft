@@ -61,7 +61,7 @@ export function getSelectionCoords(editor, toolbar) {
             + (rangeWidth / 2);
   const offsetTop = rangeBounds.top - editorBounds.top - (toolbarHeight + 14);
   const offsetBottom = editorBounds.bottom - rangeBounds.top + 14;
-  return { offsetLeft, offsetTop, offsetBottom };
+  return {offsetLeft, offsetTop, offsetBottom};
 }
 
 export function createTypeStrategy(type) {

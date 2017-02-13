@@ -38,7 +38,7 @@ class BlockStyles extends Component {
   }
 
   toggleModalVisibility() {
-    this.setState({ isOpen: !this.state.isOpen});
+    this.setState({isOpen: !this.state.isOpen});
   }
 
   renderModal() {

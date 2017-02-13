@@ -8,7 +8,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {withRouter, hashHistory, Router, Route, IndexRoute, Link} from "react-router";
 import Scroll from "react-scroll";
-import { StickyContainer, Sticky } from "react-sticky";
+import {StickyContainer, Sticky} from "react-sticky";
 
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import FlatButton from "material-ui/FlatButton";
