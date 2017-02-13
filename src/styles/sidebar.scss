@@ -76,10 +76,6 @@
         max-height: 0;
         width: 36px;
         text-align: center;
-
-        &--open {
-            max-height: 116px;
-        }
     }
 
     &__items .sidemenu__button {
@@ -96,7 +92,6 @@
             }
         }
     }
-
 
     &__item {
         height: 40px;

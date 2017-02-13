@@ -23,6 +23,11 @@ Here are the props that `MegadraftEditor` accepts:
 - `blocksWithoutStyleReset`: (optional) list, defaults to
   `['ordered-list-item', 'unordered-list-item']`. Tells the editor which
   blocks won't have its types reset if `resetStyleNewLine` is `true`.
+- `maxSidebarButtons`:  (optional) Limits the number of buttons
+  displayed on the sidebar. When the limit is reached an extra button will appear
+  and when clicked it will open a modal window with the full button list.
+- `modalOptions`: (optional) object, height and width of the modal.
+  Check the following sections for more info.
 
 Check the following sections for more info.
 
@@ -276,6 +281,59 @@ class App extends React.Component {
         editorState={this.state.editorState}
         onChange={this.onChange}
         handleBlockNotFound={this.handleBlockNotFound} />
+    )
+  }
+}
+
+ReactDOM.render(
+  <App />,
+  document.getElementById("container")
+);
+```
+
+### Handling too many plugins
+
+By default, plugin buttons are shown on a vertical sidebar. This may be a bit
+cumbersome when there is a lot of enabled plugins.
+
+To overcome this, the prop `maxSidebarButtons` limits the number of buttons
+displayed on the sidebar. When the limit is reached an extra button will appear
+and when clicked it will open a modal window with the full button list.
+
+Passing a number to the `maxSidebarButtons` prop will limit the number of
+buttons displayed on the sidebar.
+
+Omitting this prop or passing a `null` value forces all buttons to be displayed
+on the sidebar.
+
+You can set the width and height of modal via props too. Passing the prop
+`modalOptions`, see below. Default values are `width:528` and `height:393`.
+
+```js
+import React from "react";
+import ReactDOM from "react-dom";
+import {MegadraftEditor, editorStateFromRaw} from "megadraft";
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {editorState: editorStateFromRaw(null)};
+    this.onChange = ::this.onChange;
+    this.maxSidebarButtons = 3;
+    this.modalOptions = {width:528, height:393};
+  }
+
+  onChange(editorState) {
+    this.setState({editorState});
+  }
+
+  render() {
+    return (
+      <MegadraftEditor
+        editorState={this.state.editorState}
+        onChange={this.onChange}
+        maxSidebarButtons={this.maxSidebarButtons}
+        modalOptions={this.modalOptions}
     )
   }
 }

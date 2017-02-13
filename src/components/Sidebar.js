@@ -11,37 +11,89 @@ import icons from "../icons";
 
 import "setimmediate";
 
+import PluginsModal from "./PluginsModal";
+
 
 class BlockStyles extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isOpen: false
+    };
+
+    this.onModalOpenClick = ::this.onModalOpenClick;
     this.onChange = ::this.onChange;
+    this.toggleModalVisibility = ::this.toggleModalVisibility;
+    this.renderButton = ::this.renderButton;
   }
 
   onChange(editorState) {
     this.props.onChange(editorState);
   }
 
-  render() {
-    const className = classNames("sidemenu__items", {
-      "sidemenu__items--open": this.props.open
-    });
+  onModalOpenClick(e){
+    e.preventDefault();
+    document.body.classList.add("megadraft-modal--open");
+    this.setState({isOpen: true});
+  }
+
+  toggleModalVisibility() {
+    this.setState({ isOpen: !this.state.isOpen});
+  }
+
+  renderModal() {
+    return (
+      <PluginsModal
+        toggleModalVisibility={this.toggleModalVisibility}
+        isOpen={this.state.isOpen}
+        plugins={this.props.plugins}
+        onCloseRequest={this.props.onClose}
+        onChange={this.onChange}
+        editorState={this.props.editorState}
+        modalOptions={this.props.modalOptions}/>
+    );
+  }
+
+  renderModalButton() {
+    return (
+      <button className="sidemenu__button" onClick={this.onModalOpenClick}>
+        <icons.MoreIcon className="sidemenu__button__icon" />
+      </button>
+    );
+  }
+
+  renderButton(item){
+    const Button = item.buttonComponent;
 
     return (
-      <ul className={className}>
-        {this.props.plugins.map((item) => {
-          const Button = item.buttonComponent;
-          return (
-            <li key={item.type} className="sidemenu__item">
-              <Button
-                className="sidemenu__button"
-                title={item.title}
-                editorState={this.props.editorState}
-                onChange={this.onChange}/>
-            </li>
-          );
-        })}
-      </ul>
+      <li key={item.type} className="sidemenu__item">
+        <Button
+          className="sidemenu__button"
+          title={item.title}
+          editorState={this.props.editorState}
+          onChange={this.onChange}/>
+      </li>
+    );
+  }
+
+  render() {
+    const maxSidebarButtons = this.props.maxSidebarButtons ? this.props.maxSidebarButtons : this.props.plugins.length;
+
+    const sidemenuMaxHeight = {
+      maxHeight: this.props.open? `${(maxSidebarButtons + 1) * 48}px`: 0,
+    };
+
+    // We should hide the modal if the number of plugins < max
+    const hasModal = this.props.plugins.length > maxSidebarButtons;
+
+    return (
+      <div>
+        <ul style={sidemenuMaxHeight} className="sidemenu__items">
+          {this.props.plugins.slice(0, maxSidebarButtons).map(this.renderButton)}
+          {hasModal ? this.renderModalButton() : null}
+        </ul>
+        {hasModal ? this.renderModal() : null }
+      </div>
     );
   }
 }
@@ -93,7 +145,9 @@ export class SideMenu extends Component {
           editorState={this.props.editorState}
           plugins={this.props.plugins}
           open={this.state.open}
-          onChange={this.onChange}/>
+          onChange={this.onChange}
+          maxSidebarButtons={this.props.maxSidebarButtons}
+          modalOptions={this.props.modalOptions} />
       </li>
     );
   }
@@ -180,7 +234,9 @@ export default class SideBar extends Component {
             <SideMenu
               editorState={this.props.editorState}
               onChange={this.onChange}
-              plugins={this.getValidSidebarPlugins()}/>
+              plugins={this.getValidSidebarPlugins()}
+              maxSidebarButtons={this.props.maxSidebarButtons}
+              modalOptions={this.props.modalOptions} />
           </ul>
         </div>
       </div>

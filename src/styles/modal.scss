@@ -1,0 +1,99 @@
+/*
+ * Copyright (c) 2016, Globo.com (https://github.com/globocom)
+ *
+ * License: MIT
+ */
+
+.sidemenu__button__icon{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -12px 0 0 -12px;
+}
+
+.megadraft-modal {
+  position: relative;
+  width: 528px;
+  height: 393px;
+  text-align: left;
+  z-index: 10;
+
+  &--open{
+    overflow-y: hidden;
+  }
+
+  &--close{
+    overflow-y: auto;
+  }
+
+  &__button {
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0;
+    padding: 0;
+    transition: all 0.5s ease;
+    position: relative;
+    background: none;
+    width: 64px;
+    height: 64px;
+
+    &:before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      border-radius: 100%;
+      display: inline-block;
+      background-color: #181818;
+    }
+
+    &__label {
+      font-family: Open Sans, sans-serif;
+      width: 63px;
+      height: 16px;
+      font-size: 14px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.14;
+      color: #3c3c3c;
+      text-align: center;
+      cursor: pointer;
+      z-index:10;
+      padding-top: 9px;
+    }
+  }
+
+  &__items {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: flex-start;
+    margin: 0.5rem -1.5rem;
+  }
+
+  &__items .megadraft-modal__button {
+    background: none;
+
+    &:before {
+      transition: all 0.1s ease-in-out;
+      background-color: #181818;
+    }
+  }
+
+  &__item {
+    line-height: 0px;
+    height: 58px;
+    margin: 0 53px 78px;
+    cursor: pointer;
+
+    &:hover {
+      .megadraft-modal__button__label{
+        color: #0669de;
+      }
+
+      .megadraft-modal__button:before {
+        background-color: #0669de;
+      }
+    }
+  }
+}
