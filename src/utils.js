@@ -6,7 +6,6 @@
  */
 
 import {
-  Entity,
   convertToRaw,
   convertFromRaw,
   EditorState,
@@ -65,13 +64,13 @@ export function getSelectionCoords(editor, toolbar) {
 }
 
 export function createTypeStrategy(type) {
-  return (contentBlock, callback) => {
+  return (contentBlock, callback, contentState) => {
     contentBlock.findEntityRanges(
       (character) => {
         const entityKey = character.getEntity();
         return (
           entityKey !== null &&
-          Entity.get(entityKey).getType() === type
+          contentState.getEntity(entityKey).getType() === type
         );
       },
       callback

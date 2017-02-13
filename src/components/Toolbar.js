@@ -141,9 +141,10 @@ export default class Toolbar extends Component {
   }
 
   getCurrentEntity() {
+    const contentState = this.props.editorState.getCurrentContent();
     const entityKey = this.getCurrentEntityKey();
     if(entityKey) {
-      return Entity.get(entityKey);
+      return contentState.getEntity(entityKey);
     }
     return null;
   }
