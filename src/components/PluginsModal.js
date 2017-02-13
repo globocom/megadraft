@@ -14,6 +14,9 @@ export default class PluginsModal extends Component {
   constructor(props) {
     super(props);
     this.onCloseRequest = ::this.onCloseRequest;
+    this.modalOptions = this.props.modalOptions ? this.props.modalOptions : {};
+    this.modalWidth = this.modalOptions.width || 528;
+    this.modalHeight = this.modalOptions.height || 393;
   }
 
   onCloseRequest() {
@@ -25,15 +28,15 @@ export default class PluginsModal extends Component {
   }
 
   render() {
-
+    /* global __ */
     return (
       <Modal
         className="megadraft-modal"
-        title="Blocos de conteúdo"
+        title={__("Blocks")}
         isOpen={this.props.isOpen}
         onCloseRequest={this.onCloseRequest}
-        width={528}
-        height={393} >
+        width={this.modalWidth}
+        height={this.modalHeight} >
         <ModalPluginList
           toggleModalVisibility={this.onCloseRequest}
           plugins={this.props.plugins}

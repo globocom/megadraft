@@ -58,6 +58,7 @@ class SidebarWithModalWrapper extends Component {
       this.fakePlugins[i].type = "plugin" + i;
     }
     this.maxSidebarButtons = 3;
+    this.modalOptions = {width: 500, height: 300};
     this.onChange = ::this.onChange;
   }
 
@@ -74,7 +75,8 @@ class SidebarWithModalWrapper extends Component {
           editorState={this.state.editorState}
           readOnly={this.props.readOnly}
           onChange={this.onChange}
-          maxSidebarButtons={this.maxSidebarButtons} />
+          maxSidebarButtons={this.maxSidebarButtons}
+          modalOptions={this.modalOptions}/>
       </div>
     );
   }
@@ -215,5 +217,37 @@ describe("Sidebar Component", function() {
     const modal = this.wrapperSidebarModal.find(PluginsModal);
     const items = modal.prop("plugins").length;
     expect(items).to.be.at.least(1);
+  });
+
+  it("should has modal with props width", function() {
+    const toggleButton = this.wrapperSidebarModal.find(ToggleButton);
+    const domButton = toggleButton.find("button");
+    domButton.simulate("click");
+
+    const menu = this.wrapperSidebarModal.find(SideMenu);
+    const domMenu = menu.find("button");
+    const domModalButton = domMenu.at(4);
+
+    domModalButton.simulate("click");
+    const modal = this.wrapperSidebarModal.find(PluginsModal);
+    const domModal = modal.find("Modal");
+
+    expect(domModal.prop("width")).to.be.exist;
+  });
+
+  it("should has modal with props width", function() {
+    const toggleButton = this.wrapperSidebarModal.find(ToggleButton);
+    const domButton = toggleButton.find("button");
+    domButton.simulate("click");
+
+    const menu = this.wrapperSidebarModal.find(SideMenu);
+    const domMenu = menu.find("button");
+    const domModalButton = domMenu.at(4);
+    domModalButton.simulate("click");
+
+    const modal = this.wrapperSidebarModal.find(PluginsModal);
+    const domModal = modal.find("Modal");
+
+    expect(domModal.prop("height")).to.be.exist;
   });
 });

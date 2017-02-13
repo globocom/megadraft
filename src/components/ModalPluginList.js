@@ -6,7 +6,7 @@
 
 import React, {Component} from "react";
 
-import { ModalBody } from "backstage-modal";
+import {ModalBody} from "backstage-modal";
 import ModalPluginItem from "./ModalPluginItem";
 
 

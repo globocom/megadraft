@@ -12,6 +12,7 @@ export default class ModalPluginItem extends Component {
     super(props);
     this.handleClick = ::this.handleClick;
     this.closeModal = ::this.closeModal;
+    this.renderButton = ::this.renderButton;
   }
 
   handleClick(e) {
@@ -22,31 +23,34 @@ export default class ModalPluginItem extends Component {
     this.props.toggleModalVisibility();
   }
 
+  renderButton(item) {
+    const Button = item.buttonComponent;
+
+    return (
+      <li
+        key={item.type}
+        className="megadraft-modal__item"
+        onClick={this.closeModal} >
+        <Button
+          ref={(button)=>{this.myButton = button;}}
+          className="megadraft-modal__button"
+          title={item.title}
+          editorState={this.props.editorState}
+          onChange={this.props.onChange} />
+        <p
+          className="megadraft-modal__button__label"
+          onClick={this.handleClick} >
+          {item.title}
+        </p>
+      </li>
+    );
+  }
+
   render() {
     return (
-    <ul className="megadraft-modal__items">
-      {this.props.plugins.map((item) => {
-        const Button = item.buttonComponent;
-        return (
-        <li
-          key={item.type}
-          className="megadraft-modal__item"
-          onClick={this.closeModal} >
-          <Button
-            ref={(button)=>{this.myButton = button;}}
-            className="megadraft-modal__button"
-            title={item.title}
-            editorState={this.props.editorState}
-            onChange={this.props.onChange} />
-          <p
-            className="megadraft-modal__button__label"
-            onClick={this.handleClick} >
-            {item.title}
-          </p>
-        </li>
-        );
-      })}
-    </ul>
+      <ul className="megadraft-modal__items">
+        {this.props.plugins.map(this.renderButton)}
+      </ul>
     );
   }
 }

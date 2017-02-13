@@ -23,8 +23,8 @@ class BlockStyles extends Component {
 
     this.onModalOpenClick = ::this.onModalOpenClick;
     this.onChange = ::this.onChange;
-    this.toggleModalVisibility = :: this.toggleModalVisibility;
-
+    this.toggleModalVisibility = ::this.toggleModalVisibility;
+    this.renderButton = ::this.renderButton;
   }
 
   onChange(editorState) {
@@ -49,7 +49,8 @@ class BlockStyles extends Component {
         plugins={this.props.plugins}
         onCloseRequest={this.props.onClose}
         onChange={this.onChange}
-        editorState={this.props.editorState} />
+        editorState={this.props.editorState}
+        modalOptions={this.props.modalOptions}/>
     );
   }
 
@@ -61,9 +62,22 @@ class BlockStyles extends Component {
     );
   }
 
+  renderButton(item){
+    const Button = item.buttonComponent;
+
+    return (
+      <li key={item.type} className="sidemenu__item">
+        <Button
+          className="sidemenu__button"
+          title={item.title}
+          editorState={this.props.editorState}
+          onChange={this.onChange}/>
+      </li>
+    );
+  }
+
   render() {
-    const maxSidebarButtons = this.props.maxSidebarButtons ?
-    this.props.maxSidebarButtons : this.props.plugins.length;
+    const maxSidebarButtons = this.props.maxSidebarButtons ? this.props.maxSidebarButtons : this.props.plugins.length;
 
     const sidemenuMaxHeight = {
       maxHeight: this.props.open? `${(maxSidebarButtons + 1) * 48}px`: 0,
@@ -75,21 +89,10 @@ class BlockStyles extends Component {
     return (
       <div>
         <ul style={sidemenuMaxHeight} className="sidemenu__items">
-          {this.props.plugins.slice(0, maxSidebarButtons).map((item) => {
-            const Button = item.buttonComponent;
-            return (
-              <li key={item.type} className="sidemenu__item">
-                <Button
-                  className="sidemenu__button"
-                  title={item.title}
-                  editorState={this.props.editorState}
-                  onChange={this.onChange}/>
-              </li>
-            );
-          })}
+          {this.props.plugins.slice(0, maxSidebarButtons).map(this.renderButton)}
           {hasModal ? this.renderModalButton() : null}
         </ul>
-          {hasModal ? this.renderModal() : null }
+        {hasModal ? this.renderModal() : null }
       </div>
     );
   }
@@ -143,7 +146,8 @@ export class SideMenu extends Component {
           plugins={this.props.plugins}
           open={this.state.open}
           onChange={this.onChange}
-          maxSidebarButtons={this.props.maxSidebarButtons}/>
+          maxSidebarButtons={this.props.maxSidebarButtons}
+          modalOptions={this.props.modalOptions} />
       </li>
     );
   }
@@ -231,7 +235,8 @@ export default class SideBar extends Component {
               editorState={this.props.editorState}
               onChange={this.onChange}
               plugins={this.getValidSidebarPlugins()}
-              maxSidebarButtons={this.props.maxSidebarButtons}/>
+              maxSidebarButtons={this.props.maxSidebarButtons}
+              modalOptions={this.props.modalOptions} />
           </ul>
         </div>
       </div>

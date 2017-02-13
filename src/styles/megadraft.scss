@@ -4,6 +4,8 @@
  * License: MIT
  */
 
+@import "modal.scss";
+
 .megadraft-editor {
     position: relative;
 
@@ -16,7 +18,4 @@
     @import "dropdown.scss";
 
     @import "media.scss";
-
 }
-
-@import "modal.scss";
