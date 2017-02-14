@@ -5,7 +5,7 @@
  */
 
 import React, {Component} from "react";
-import {EditorState, SelectionState, Entity} from "draft-js";
+import {EditorState, SelectionState} from "draft-js";
 import chai from "chai";
 import {mount} from "enzyme";
 
@@ -238,7 +238,7 @@ describe("Toolbar Component", function() {
         const contentState = this.wrapper.state("editorState").getCurrentContent();
         const blockWithLinkAtBeginning = contentState.getBlockForKey("ag6qs");
         const linkKey = blockWithLinkAtBeginning.getEntityAt(0);
-        const linkInstance = Entity.get(linkKey);
+        const linkInstance = contentState.getEntity(linkKey);
         const {url} = linkInstance.getData();
 
         expect(url).to.be.equal("http://www.globo.com");

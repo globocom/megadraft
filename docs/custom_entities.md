@@ -194,7 +194,8 @@ import {DraftJS} from "draft-js";
 
 
 export default ({entityKey, children}) => {
-  const {url} = DraftJS.Entity.get(this.props.entityKey).getData();
+  const contentState = this.props.contentState;
+  const {url} = contentState.getEntity(this.props.entityKey).getData();
   return (
     <a className="editor__link" href={url} title={url}>
       {children}
