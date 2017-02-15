@@ -286,7 +286,7 @@ body {
 .megadraft-modal {
   position: relative;
   width: 528px;
-  height: 393px;
+  height: 394px;
   text-align: left;
   z-index: 10; }
   .megadraft-modal--open {
@@ -304,7 +304,15 @@ body {
     position: relative;
     background: none;
     width: 64px;
-    height: 64px; }
+    height: 64px;
+    margin-left: 32px; }
+    .megadraft-modal__button .sidemenu__button__icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -16px 0 0 -16px;
+      width: 32px;
+      height: 32px; }
     .megadraft-modal__button:before {
       content: "";
       width: 100%;
@@ -313,9 +321,10 @@ body {
       display: inline-block;
       background-color: #181818; }
     .megadraft-modal__button__label {
+      margin: 0;
       font-family: Open Sans, sans-serif;
-      width: 63px;
-      height: 16px;
+      width: 129px;
+      height: 40px;
       font-size: 14px;
       font-weight: normal;
       font-style: normal;
@@ -345,8 +354,9 @@ body {
   .megadraft-modal__item {
     line-height: 0px;
     height: 58px;
-    margin: 0 53px 78px;
-    cursor: pointer; }
+    margin: 0 71px 78px 17px;
+    cursor: pointer;
+    width: 82px; }
     .megadraft-modal__item:hover .megadraft-modal__button__label {
       color: #0669de; }
     .megadraft-modal__item:hover .megadraft-modal__button:before {
