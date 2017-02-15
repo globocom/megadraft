@@ -14,7 +14,7 @@
 .megadraft-modal {
   position: relative;
   width: 528px;
-  height: 393px;
+  height: 394px;
   text-align: left;
   z-index: 10;
 
@@ -37,6 +37,16 @@
     background: none;
     width: 64px;
     height: 64px;
+    margin-left: 32px;
+
+    .sidemenu__button__icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -16px 0 0 -16px;
+      width: 32px;
+      height: 32px;
+    }
 
     &:before {
       content: "";
@@ -48,9 +58,10 @@
     }
 
     &__label {
+      margin: 0;
       font-family: Open Sans, sans-serif;
-      width: 63px;
-      height: 16px;
+      width: 129px;
+      height: 40px;
       font-size: 14px;
       font-weight: normal;
       font-style: normal;
@@ -83,8 +94,9 @@
   &__item {
     line-height: 0px;
     height: 58px;
-    margin: 0 53px 78px;
+    margin: 0 71px 78px 17px;
     cursor: pointer;
+    width: 82px;
 
     &:hover {
       .megadraft-modal__button__label{

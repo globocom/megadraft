@@ -16,7 +16,7 @@ export default class PluginsModal extends Component {
     this.onCloseRequest = ::this.onCloseRequest;
     this.modalOptions = this.props.modalOptions ? this.props.modalOptions : {};
     this.modalWidth = this.modalOptions.width || 528;
-    this.modalHeight = this.modalOptions.height || 393;
+    this.modalHeight = this.modalOptions.height || 394;
   }
 
   onCloseRequest() {
