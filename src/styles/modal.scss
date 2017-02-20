@@ -79,7 +79,7 @@
     flex-wrap: wrap;
     display: flex;
     justify-content: flex-start;
-    margin: 0.5rem -1.5rem;
+    margin: -24px;
   }
 
   &__items .megadraft-modal__button {
@@ -95,6 +95,7 @@
     line-height: 0px;
     height: 58px;
     margin: 0 71px 78px 17px;
+    padding-top: 31px;
     cursor: pointer;
     width: 82px;
 
