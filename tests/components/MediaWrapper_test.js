@@ -16,9 +16,10 @@ let expect = chai.expect;
 describe("MediaWrapper", function() {
   beforeEach(function() {
     this.setReadOnly = sinon.spy();
+    this.setInitialReadOnly = sinon.spy();
 
     this.wrapper = mount(
-      <MediaWrapper setReadOnly={this.setReadOnly}>
+      <MediaWrapper setReadOnly={this.setReadOnly} setInitialReadOnly={this.setInitialReadOnly}>
         <input type="text" />
       </MediaWrapper>
     );
@@ -31,8 +32,8 @@ describe("MediaWrapper", function() {
     expect(this.setReadOnly.calledWith(true)).to.be.true;
   });
 
-  it("disables readOnly on input blur", function () {
+  it("restores readOnly on input blur", function () {
     this.input.simulate("blur");
-    expect(this.setReadOnly.calledWith(false)).to.be.true;
+    expect(this.setInitialReadOnly.called).to.be.true;
   });
 });
