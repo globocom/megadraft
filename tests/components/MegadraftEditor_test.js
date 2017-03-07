@@ -492,6 +492,8 @@ describe("MegadraftEditor Component", () => {
   });
 
   it("renders only valid plugins", function() {
+    console.warn = sinon.spy();
+
     const invalidPlugin = {
       buttonComponent: {},
       blockComponent: {}
