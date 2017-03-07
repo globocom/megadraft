@@ -327,7 +327,7 @@ export default class MegadraftEditor extends Component {
             blockStyleFn={this.blockStyleFn}
             onTab={this.onTab}
             handleKeyCommand={this.handleKeyCommand}
-            handleReturn={this.handleReturn}
+            handleReturn={this.props.handleReturn || this.handleReturn}
             keyBindingFn={this.externalKeyBindings}
             onChange={this.onChange}
           />
