@@ -1,6 +1,6 @@
 {
   "name": "megadraft",
-  "version": "0.4.17",
+  "version": "0.4.18",
   "description": "Rich Text editor built on top of draft.js",
   "main": "lib/Megadraft.js",
   "dependencies": {
