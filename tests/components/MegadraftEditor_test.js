@@ -304,7 +304,10 @@ describe("MegadraftEditor Component", () => {
           "plugin": image,
           "onChange": this.component.onChange,
           "editorState": this.editorState,
-          "setReadOnly": this.component.setReadOnly
+          "setReadOnly": this.component.setReadOnly,
+          "getReadOnly": this.component.getReadOnly,
+          "setInitialReadOnly": this.component.setInitialReadOnly,
+          "getInitialReadOnly": this.component.getInitialReadOnly,
         }
       });
     });
@@ -320,7 +323,10 @@ describe("MegadraftEditor Component", () => {
           "plugin": NotFoundPlugin,
           "onChange": this.component.onChange,
           "editorState": this.editorState,
-          "setReadOnly": this.component.setReadOnly
+          "setReadOnly": this.component.setReadOnly,
+          "getReadOnly": this.component.getReadOnly,
+          "setInitialReadOnly": this.component.setInitialReadOnly,
+          "getInitialReadOnly": this.component.getInitialReadOnly,
         }
       });
     });
@@ -341,7 +347,10 @@ describe("MegadraftEditor Component", () => {
           "plugin": customFallbackPlugin,
           "onChange": this.component.onChange,
           "editorState": this.editorState,
-          "setReadOnly": this.component.setReadOnly
+          "setReadOnly": this.component.setReadOnly,
+          "getReadOnly": this.component.getReadOnly,
+          "setInitialReadOnly": this.component.setInitialReadOnly,
+          "getInitialReadOnly": this.component.getInitialReadOnly,
         }
       });
     });

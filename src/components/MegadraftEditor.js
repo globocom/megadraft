@@ -48,6 +48,9 @@ export default class MegadraftEditor extends Component {
     this.handleReturn = ::this.handleReturn;
 
     this.setReadOnly = ::this.setReadOnly;
+    this.getReadOnly = ::this.getReadOnly;
+    this.getInitialReadOnly = ::this.getInitialReadOnly;
+    this.setInitialReadOnly = ::this.setInitialReadOnly;
 
     this.externalKeyBindings = ::this.externalKeyBindings;
 
@@ -233,6 +236,19 @@ export default class MegadraftEditor extends Component {
     this.setState({readOnly});
   }
 
+  getReadOnly() {
+    return this.state.readOnly;
+  }
+
+  getInitialReadOnly() {
+    return this.props.readOnly || false;
+  }
+
+  setInitialReadOnly() {
+    let readOnly = this.props.readOnly || false;
+    this.setState({readOnly});
+  }
+
   handleBlockNotFound(block) {
     if (this.props.handleBlockNotFound) {
       return this.props.handleBlockNotFound(block);
@@ -259,7 +275,10 @@ export default class MegadraftEditor extends Component {
         plugin: plugin,
         onChange: this.onChange,
         editorState: this.props.editorState,
-        setReadOnly: this.setReadOnly
+        setReadOnly: this.setReadOnly,
+        getReadOnly: this.getReadOnly,
+        getInitialReadOnly: this.getInitialReadOnly,
+        setInitialReadOnly: this.setInitialReadOnly
       }
     };
   }
