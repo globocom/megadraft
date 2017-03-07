@@ -18,8 +18,21 @@ class Example extends React.Component {
     super(props);
     // Here's the content you stored in the base
     // const myContent = load_from_db();
-    const myContent = {"entityMap": {}, "blocks": []};
-    const editorState = editorStateFromRaw(INITIAL_CONTENT);
+    const myContent = {
+      "entityMap": {},
+      "blocks": [
+        {
+          "key": "ag6qs",
+          "text": "",
+          "type": "unstyled",
+          "depth": 0,
+          "inlineStyleRanges": [],
+          "entityRanges": [],
+          "data": {}
+        }
+      ]
+    };
+    const editorState = editorStateFromRaw(myContent);
     this.state = {editorState};
     this.onChange = ::this.onChange;
     this.onSaveClick = ::this.onSaveClick;
