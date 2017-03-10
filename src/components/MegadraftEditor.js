@@ -337,7 +337,8 @@ export default class MegadraftEditor extends Component {
             readOnly: this.state.readOnly,
             onChange: this.onChange,
             actions: this.actions,
-            entityInputs: this.entityInputs
+            entityInputs: this.entityInputs,
+            onToolbarShowRequest: this.props.onToolbarShowRequest,
           })}
         </div>
       </div>

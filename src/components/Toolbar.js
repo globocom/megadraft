@@ -12,6 +12,12 @@ import {getSelectionCoords} from "../utils";
 
 
 export default class Toolbar extends Component {
+  static defaultProps = {
+    onToolbarShowRequest() {
+      return !this.editorState.getSelection().isCollapsed();
+    },
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -116,7 +122,7 @@ export default class Toolbar extends Component {
   }
 
   componentDidUpdate() {
-    if (!this.props.editorState.getSelection().isCollapsed()) {
+    if (this.props.onToolbarShowRequest()) {
       return this.setBarPosition();
     } else {
       if (this.state.show) {
