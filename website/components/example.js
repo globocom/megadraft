@@ -37,6 +37,7 @@ class Example extends React.Component {
   constructor(props) {
     super(props);
     const content = editorStateFromRaw(INITIAL_CONTENT);
+    const content2 = editorStateFromRaw(INITIAL_CONTENT);
     this.keyBindings = [{
       name: "save",
       isKeyBound: (e) => {return e.keyCode === 83 && e.ctrlKey;},
@@ -45,8 +46,10 @@ class Example extends React.Component {
     this.resetStyleNewLine = true;
     this.state = {
       value: content,
+      value2: content2,
     };
     this.onChange = ::this.onChange;
+    this.onChange2 = ::this.onChange2;
     this.onCodeActive = ::this.onCodeActive;
     this.maxSidebarButtons = null;
   }
@@ -65,6 +68,12 @@ class Example extends React.Component {
     });
   }
 
+  onChange2(value2) {
+    this.setState({
+      value2
+    });
+  }
+
   onSave() {
     console.log("save");
   }
@@ -74,16 +83,35 @@ class Example extends React.Component {
   }
 
   renderEditor() {
+    const containerStyle = {
+      display: 'flex',
+      justifyContent: 'space-between'
+    };
+    const columnStyle = {
+      width: '40%'
+    };
     return (
       <div className="tab-container-editor">
-        <MegadraftEditor
-          plugins={[image, video, relatedArticles]}
-          editorState={this.state.value}
-          placeholder="Text"
-          onChange={this.onChange}
-          keyBindings={this.keyBindings}
-          resetStyleNewLine={this.resetStyleNewLine}
-          maxSidebarButtons={this.maxSidebarButtons}/>
+        <div style={containerStyle}>
+          <div style={columnStyle}>
+            <MegadraftEditor
+              plugins={[image, video, relatedArticles]}
+              editorState={this.state.value}
+              placeholder="Text"
+              onChange={this.onChange}
+              resetStyleNewLine={this.resetStyleNewLine}
+              maxSidebarButtons={this.maxSidebarButtons}/>
+          </div>
+          <div style={columnStyle}>
+            <MegadraftEditor
+              plugins={[image, video, relatedArticles]}
+              editorState={this.state.value2}
+              placeholder="Text 2"
+              onChange={this.onChange2}
+              resetStyleNewLine={this.resetStyleNewLine}
+              maxSidebarButtons={this.maxSidebarButtons}/>
+          </div>
+        </div>
       </div>
     );
   }
