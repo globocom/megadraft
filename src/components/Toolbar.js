@@ -8,7 +8,7 @@ import React, {Component} from "react";
 import {EditorState, RichUtils} from "draft-js";
 import classNames from "classnames";
 import ToolbarItem from "./ToolbarItem";
-import {getSelectionCoords} from "../utils";
+import {getSelectionCoords, getSelectedBlockElement} from "../utils";
 
 
 export default class Toolbar extends Component {
@@ -97,14 +97,25 @@ export default class Toolbar extends Component {
     const selectionCoords = getSelectionCoords(editor, toolbar);
 
     if (!selectionCoords) {
-      return null;
+      return;
     }
 
-    if (selectionCoords &&
-        !this.state.position ||
-        this.state.position.bottom !== selectionCoords.offsetBottom ||
-        this.state.position.left !== selectionCoords.offsetLeft ||
-        !this.state.show) {
+    const newState = {
+      show: true,
+      position: {
+        bottom: selectionCoords.offsetBottom,
+        left: selectionCoords.offsetLeft
+      }
+    };
+
+    const shouldUpdatePosition = (
+      !this.state.position ||
+      this.state.position.bottom !== newState.position.bottom ||
+      this.state.position.left !== newState.position.left ||
+      this.state.show !== newState.show
+    );
+
+    if (shouldUpdatePosition) {
       this.setState({
         show: true,
         position: {
@@ -116,17 +127,23 @@ export default class Toolbar extends Component {
   }
 
   componentDidUpdate() {
-    if (!this.props.editorState.getSelection().isCollapsed()) {
-      return this.setBarPosition();
-    } else {
-      if (this.state.show) {
-        this.setState({
-          show: false,
-          editingEntity: null,
-          link: "",
-          error: null
-        });
-      }
+    const currentBlock = getSelectedBlockElement();
+    const editorContainsSelection = this.props.editor.contains(currentBlock);
+    const isCollapsed = this.props.editorState.getSelection().isCollapsed();
+    const shouldShow = (editorContainsSelection && !isCollapsed);
+
+    if (shouldShow) {
+      this.setBarPosition();
+      return;
+    }
+
+    if (this.state.show) {
+      this.setState({
+        show: false,
+        editingEntity: null,
+        link: "",
+        error: null
+      });
     }
   }
 

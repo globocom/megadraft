@@ -311,6 +311,7 @@ export default class MegadraftEditor extends Component {
           id="megadraft-editor"
           ref="editor">
           {this.renderSidebar({
+            editor: this.refs.editor,
             plugins: this.plugins,
             editorState: this.props.editorState,
             readOnly: this.state.readOnly,

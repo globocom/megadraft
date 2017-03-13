@@ -30,18 +30,21 @@ export function editorStateFromRaw(rawContent, decorator = defaultDecorator) {
   }
 }
 
-export function getSelectedBlockElement(range) {
-  let node = range.startContainer;
+export function getSelectedBlockElement() {
+  // Finds the block parent of the current selection
+  // https://github.com/facebook/draft-js/issues/45
+  const selection = window.getSelection();
+  if (selection.rangeCount === 0) {
+    return null;
+  }
+  let node = selection.getRangeAt(0).startContainer;
+
   do {
-    const nodeIsDataBlock = node.getAttribute
-                            ? node.getAttribute("data-block")
-                            : null;
-    if (nodeIsDataBlock) {
+    if (node.getAttribute && node.getAttribute("data-block") == "true") {
       return node;
     }
     node = node.parentNode;
-  } while (node !== null);
-  return null;
+  } while (node != null);
 }
 
 export function getSelectionCoords(editor, toolbar) {
