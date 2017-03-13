@@ -338,7 +338,7 @@ export default class MegadraftEditor extends Component {
             onChange: this.onChange,
             actions: this.actions,
             entityInputs: this.entityInputs,
-            onToolbarShowRequest: this.props.onToolbarShowRequest,
+            shouldDisplayToolbarFn: this.props.shouldDisplayToolbarFn,
           })}
         </div>
       </div>

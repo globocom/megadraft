@@ -28,8 +28,8 @@ Here are the props that `MegadraftEditor` accepts:
   and when clicked it will open a modal window with the full button list.
 - `modalOptions`: (optional) object, height and width of the modal.
   Check the following sections for more info.
-- `onToolbarShowRequest`: (optional) Predicate function fired when
-  editor state changes
+- `shouldDisplayToolbarFn`: (optional) Boolean-valued function fired when
+  editor state changes. It allows to control whether or not the Toolbar should be shown.
 
 Check the following sections for more info.
 
