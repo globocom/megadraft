@@ -40,7 +40,7 @@ export default class BlockInput extends Component {
     return (
       <div className="block__input__row">
         <div className="block__input__wrapper">
-          <input {...props} defaultValue={value} type="text" className={className} onDrop={this._handleDrop}/>
+          <input {...props} value={value} type="text" className={className} onDrop={this._handleDrop}/>
           <icons.EditIcon className="block__input__icon" />
         </div>
         {this.renderError(error)}
