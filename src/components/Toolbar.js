@@ -56,7 +56,7 @@ export default class Toolbar extends Component {
 
     switch(item.type) {
       case "custom": {
-        toggle = item.action;
+        toggle = () => item.action(this.props.editorState);
         break;
       }
       case "inline": {
