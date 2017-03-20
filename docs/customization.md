@@ -136,6 +136,20 @@ ReactDOM.render(
 );
 ```
 
+You can also provide a fully custom action :
+
+```js
+const custom_actions = [
+  {
+    type: 'custom',
+    icon: OwnIcon,
+    action() {
+      // Here goes the code triggered on button click
+    },
+  },
+]
+```
+
 
 ## Toolbar component
 
