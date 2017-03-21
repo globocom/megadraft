@@ -110,14 +110,14 @@ class App extends React.Component {
   }
 
   render() {
-    const custom_actions = actions.concat([
+    const customActions = actions.concat([
       {type: "inline", label: "U", style: "UNDERLINE", icon: UnderlineIcon}
     ]);
     return (
       <MegadraftEditor
         editorState={this.state.editorState}
         onChange={this.onChange}
-        actions={custom_actions}/>
+        actions={customActions}/>
     )
   }
 }
@@ -136,18 +136,18 @@ ReactDOM.render(
 );
 ```
 
-You can also provide a fully custom action :
+You can also provide a fully custom action:
 
 ```js
-const custom_actions = [
+const customActions = [
   {
-    type: 'custom',
+    type: "custom",
     icon: OwnIcon,
     action() {
       // Here goes the code triggered on button click
     },
   },
-]
+];
 ```
 
 
