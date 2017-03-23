@@ -55,6 +55,10 @@ export default class Toolbar extends Component {
     let key = item.label;
 
     switch(item.type) {
+      case "custom": {
+        toggle = () => item.action(this.props.editorState);
+        break;
+      }
       case "inline": {
         current = this.props.editorState.getCurrentInlineStyle();
         toggle = () => this.toggleInlineStyle(item.style);
@@ -243,6 +247,7 @@ export default class Toolbar extends Component {
     if(this.props.readOnly) {
       return null;
     }
+
     const toolbarClass = classNames("toolbar", {
       "toolbar--open": this.state.show,
       "toolbar--error": this.state.error
