@@ -874,7 +874,6 @@ body {
   -webkit-margin-before: 1em;
           margin-block-start: 1em;
   -webkit-padding-start: 40px;
-     -moz-padding-start: 40px;
           padding-inline-start: 40px; }
 
 .docs li {
