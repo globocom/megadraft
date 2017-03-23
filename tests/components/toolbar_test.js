@@ -7,6 +7,7 @@
 import React, {Component} from "react";
 import {EditorState, SelectionState} from "draft-js";
 import chai from "chai";
+import sinon from "sinon";
 import {mount} from "enzyme";
 
 import Toolbar from "../../src/components/Toolbar";
@@ -93,7 +94,8 @@ describe("Toolbar Component", function() {
       {type: "separator"},
       {type: "block", label: "H2", style: "header-two", icon: "svg"},
       {type: "entity", label: "Link", style: "link", entity: "LINK", icon: "svg"},
-      {type: "entity", label: "File", style: "link", entity: "FILE_LINK", icon: "svg"}
+      {type: "entity", label: "File", style: "link", entity: "FILE_LINK", icon: "svg"},
+      {type: "custom", icon: "svg", action: sinon.spy()}
     ];
 
     this.entityInputs = {
@@ -153,6 +155,16 @@ describe("Toolbar Component", function() {
           .getType();
 
         expect(current).to.be.equal("header-two");
+      });
+
+      it("triggers custom action", function() {
+        const items = this.wrapper.find(ToolbarItem);
+        const customItem = items.at(5);
+        const button = customItem.find("button");
+
+        button.simulate("click");
+
+        expect(this.actions[5].action).to.have.been.called;
       });
     });
 
