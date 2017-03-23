@@ -161,10 +161,12 @@ describe("Toolbar Component", function() {
         const items = this.wrapper.find(ToolbarItem);
         const customItem = items.at(5);
         const button = customItem.find("button");
+        const editorState = this.wrapper.state("editorState");
 
         button.simulate("click");
 
         expect(this.actions[5].action).to.have.been.called;
+        expect(this.actions[5].action).to.have.been.calledWith(editorState);
       });
     });
 
