@@ -598,7 +598,7 @@ describe("MegadraftEditor Component", () => {
     const toolbar = this.wrapper.find(Toolbar);
     // editor is undefined :-/
     //expect(toolbar.prop("editor")).to.equal(this.component.refs.editor);
-    expect(toolbar.prop("actions")).to.equal(this.component.actions);
+    expect(toolbar.prop("actions")).to.equal(this.component.props.actions);
     expect(toolbar.prop("entityInputs")).to.equal(this.component.entityInputs);
     expect(toolbar.prop("onChange")).to.equal(this.component.onChange);
     expect(toolbar.prop("editorState")).to.equal(this.editorState);
@@ -624,7 +624,7 @@ describe("MegadraftEditor Component", () => {
     );
     const toolbar = wrapper.find(MyCustomToolbar);
     expect(toolbar).to.have.length(1);
-    expect(toolbar.prop("actions")).to.equal(this.component.actions);
+    expect(toolbar.prop("actions")).to.equal(this.component.props.actions);
     expect(toolbar.prop("entityInputs")).to.equal(this.component.entityInputs);
     expect(toolbar.prop("editorState")).to.equal(this.editorState);
     expect(toolbar.prop("readOnly")).to.equal(false);

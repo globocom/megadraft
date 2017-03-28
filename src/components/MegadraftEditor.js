@@ -34,6 +34,10 @@ const NO_RESET_STYLE_DEFAULT = ["ordered-list-item", "unordered-list-item"];
 
 
 export default class MegadraftEditor extends Component {
+  static defaultProps = {
+    actions: DEFAULT_ACTIONS,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -54,7 +58,6 @@ export default class MegadraftEditor extends Component {
 
     this.externalKeyBindings = ::this.externalKeyBindings;
 
-    this.actions = this.props.actions || DEFAULT_ACTIONS;
     this.plugins = this.getValidPlugins();
     this.entityInputs = this.props.entityInputs || DEFAULT_ENTITY_INPUTS;
     this.blocksWithoutStyleReset = (this.props.blocksWithoutStyleReset ||
@@ -336,7 +339,7 @@ export default class MegadraftEditor extends Component {
             editorState: this.props.editorState,
             readOnly: this.state.readOnly,
             onChange: this.onChange,
-            actions: this.actions,
+            actions: this.props.actions,
             entityInputs: this.entityInputs,
             shouldDisplayToolbarFn: this.props.shouldDisplayToolbarFn,
           })}
