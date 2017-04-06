@@ -12,7 +12,7 @@ import {mount} from "enzyme";
 
 import Media from "../../src/components/Media";
 import {editorStateFromRaw} from "../../src/utils";
-import DEFAULT_PLUGINS from "../../src/plugins/default";
+import DEFAULT_ATOMIC_BLOCKS from "../../src/atomicBlocks/default";
 
 
 chai.use(sinonChai);
@@ -47,7 +47,7 @@ describe("Media Component", function() {
 
     this.blockProps = sinon.spy();
     this.blockProps.editorState = this.editorState;
-    this.blockProps.plugin = DEFAULT_PLUGINS[0];
+    this.blockProps.atomicBlock = DEFAULT_ATOMIC_BLOCKS[0];
     this.blockProps.onChange = sinon.spy();
     this.blockProps.setRea = sinon.spy();
 

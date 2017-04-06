@@ -9,7 +9,7 @@ import chai from "chai";
 import sinon from "sinon";
 import {mount} from "enzyme";
 
-import ImageBlock from "../../../src/plugins/image/ImageBlock";
+import ImageBlock from "../../../src/atomicBlocks/image/ImageBlock";
 import icons from "../../../src/icons";
 
 
@@ -32,7 +32,7 @@ describe("ImageBlock", function() {
       {key: "medium", icon: icons.MediaMediumIcon, label: "MEDIUM"}
     ];
     const defaultDisplay = "medium";
-    const blockProps = {plugin: {options: {displayOptions, defaultDisplay}}};
+    const blockProps = {atomicBlock: {options: {displayOptions, defaultDisplay}}};
 
     this.wrapper = mount(
       <ImageBlock container={this} blockProps={blockProps} data={this.data} />

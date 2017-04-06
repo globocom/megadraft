@@ -11,11 +11,11 @@ import cp from "utils-copy";
 
 import Sidebar,
   {ToggleButton, SideMenu} from "../../src/components/Sidebar";
-import PluginsModal from "../../src/components/PluginsModal";
-import image from "../../src/plugins/image/plugin";
+import AtomicBlocksModal from "../../src/components/AtomicBlocksModal";
+import image from "../../src/atomicBlocks/image";
 import {editorStateFromRaw} from "../../src/utils";
-import DEFAULT_PLUGINS from "../../src/plugins/default.js";
-import ImageButton from "../../src/plugins/image/ImageButton";
+import DEFAULT_ATOMIC_BLOCKS from "../../src/atomicBlocks/default.js";
+import ImageButton from "../../src/atomicBlocks/image/ImageButton";
 
 let expect = chai.expect;
 
@@ -24,7 +24,7 @@ class SidebarWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {...props};
-    this.plugins = this.props.plugins || DEFAULT_PLUGINS;
+    this.atomicBlocks = this.props.atomicBlocks || DEFAULT_ATOMIC_BLOCKS;
     this.onChange = ::this.onChange;
   }
 
@@ -37,7 +37,7 @@ class SidebarWrapper extends Component {
       <div ref="editor">
         <Sidebar
           ref="sidebar"
-          plugins={this.plugins}
+          atomicBlocks={this.atomicBlocks}
           editorState={this.state.editorState}
           readOnly={this.props.readOnly}
           onChange={this.onChange} />
@@ -51,11 +51,11 @@ class SidebarWithModalWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {...props};
-    this.plugins = this.props.plugins || DEFAULT_PLUGINS;
-    this.fakeAux = cp(this.plugins.slice(0,2));
-    this.fakePlugins = this.fakeAux.concat(this.plugins.slice(0,2));
+    this.atomicBlocks = this.props.atomicBlocks || DEFAULT_ATOMIC_BLOCKS;
+    this.fakeAux = cp(this.atomicBlocks.slice(0,2));
+    this.fakeAtomicBlocks = this.fakeAux.concat(this.atomicBlocks.slice(0,2));
     for(let i=0; i<4; i++){
-      this.fakePlugins[i].type = "plugin" + i;
+      this.fakeAtomicBlocks[i].type = "atomicBlock" + i;
     }
     this.maxSidebarButtons = 3;
     this.modalOptions = {width: 500, height: 300};
@@ -71,7 +71,7 @@ class SidebarWithModalWrapper extends Component {
       <div ref="editor">
         <Sidebar
           ref="sidebar"
-          plugins={this.fakePlugins}
+          atomicBlocks={this.fakeAtomicBlocks}
           editorState={this.state.editorState}
           readOnly={this.props.readOnly}
           onChange={this.onChange}
@@ -121,22 +121,22 @@ describe("Sidebar Component", function() {
     expect(sidebar.html()).to.be.null;
   });
 
-  it("renders enabled plugins", function() {
+  it("renders enabled atomicBlocks", function() {
     const button = this.wrapper.find(image.buttonComponent);
     expect(button).to.have.length(1);
   });
 
-  it("renders only valid plugins", function() {
-    const invalidPlugin = {
-      type: "invalid-plugin",
+  it("renders only valid atomicBlocks", function() {
+    const invalidAtomicBlock = {
+      type: "invalid-atomicBlock",
       blockComponent: {}
     };
-    const plugins = [image, invalidPlugin];
+    const atomicBlocks = [image, invalidAtomicBlock];
     const wrapper = mount(
-      <SidebarWrapper editorState={this.editorState} plugins={plugins} />
+      <SidebarWrapper editorState={this.editorState} atomicBlocks={atomicBlocks} />
     );
     const sidemenu = wrapper.find(SideMenu);
-    expect(sidemenu.prop("plugins")).to.have.length(1);
+    expect(sidemenu.prop("atomicBlocks")).to.have.length(1);
   });
 
   it("has the menu hidden by default", function() {
@@ -173,7 +173,7 @@ describe("Sidebar Component", function() {
     expect(data.get("src")).to.be.equal("http://www.globo.com");
   });
 
-  it("should has a modal button when there is 4 plugins", function() {
+  it("should has a modal button when there is 4 atomicBlocks", function() {
     const toggleButton = this.wrapperSidebarModal.find(ToggleButton);
     const domButton = toggleButton.find("button");
 
@@ -184,12 +184,12 @@ describe("Sidebar Component", function() {
     const domModalButton = domMenu.at(4);
     domModalButton.simulate("click");
 
-    const modal = this.wrapperSidebarModal.find(PluginsModal);
+    const modal = this.wrapperSidebarModal.find(AtomicBlocksModal);
     const domModal = modal.find("Modal");
     expect(domModal.prop("className")).to.be.equal("megadraft-modal");
   });
 
-  it("should not have a modal button with less than 4 plugins", function() {
+  it("should not have a modal button with less than 4 atomicBlocks", function() {
     const toggleButton = this.wrapper.find(ToggleButton);
     const domButton = toggleButton.find("button");
 
@@ -202,7 +202,7 @@ describe("Sidebar Component", function() {
     expect(domModalButton.component).to.be.equal(null);
   });
 
-  it("should has plugins in modal if it's avaiable", function() {
+  it("should has atomicBlocks in modal if it's avaiable", function() {
     const toggleButton = this.wrapperSidebarModal.find(ToggleButton);
     const domButton = toggleButton.find("button");
 
@@ -214,8 +214,8 @@ describe("Sidebar Component", function() {
 
     domModalButton.simulate("click");
 
-    const modal = this.wrapperSidebarModal.find(PluginsModal);
-    const items = modal.prop("plugins").length;
+    const modal = this.wrapperSidebarModal.find(AtomicBlocksModal);
+    const items = modal.prop("atomicBlocks").length;
     expect(items).to.be.at.least(1);
   });
 
@@ -229,7 +229,7 @@ describe("Sidebar Component", function() {
     const domModalButton = domMenu.at(4);
 
     domModalButton.simulate("click");
-    const modal = this.wrapperSidebarModal.find(PluginsModal);
+    const modal = this.wrapperSidebarModal.find(AtomicBlocksModal);
     const domModal = modal.find("Modal");
 
     expect(domModal.prop("width")).to.be.exist;
@@ -245,7 +245,7 @@ describe("Sidebar Component", function() {
     const domModalButton = domMenu.at(4);
     domModalButton.simulate("click");
 
-    const modal = this.wrapperSidebarModal.find(PluginsModal);
+    const modal = this.wrapperSidebarModal.find(AtomicBlocksModal);
     const domModal = modal.find("Modal");
 
     expect(domModal.prop("height")).to.be.exist;

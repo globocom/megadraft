@@ -17,8 +17,8 @@ import {highlightCode} from "./highlightCode";
 import INITIAL_CONTENT from "./contentExample";
 
 import relatedArticles from "megadraft-related-articles-plugin";
-import image from "../../src/plugins/image/plugin";
-import video from "../../src/plugins/video/plugin";
+import image from "../../src/atomicBlocks/image";
+import video from "../../src/atomicBlocks/video";
 
 
 const muiTheme = getMuiTheme({
@@ -78,7 +78,7 @@ class Example extends React.Component {
     return (
       <div className="tab-container-editor">
         <MegadraftEditor
-          plugins={[image, video, relatedArticles]}
+          atomicBlocks={[image, video, relatedArticles]}
           editorState={this.state.value}
           placeholder="Text"
           onChange={this.onChange}

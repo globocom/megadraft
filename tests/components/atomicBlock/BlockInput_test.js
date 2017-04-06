@@ -8,7 +8,7 @@ import React from "react";
 import chai from "chai";
 import {mount} from "enzyme";
 
-import {BlockInput} from "../../../src/components/plugin";
+import {BlockInput} from "../../../src/components/atomicBlock";
 
 let expect = chai.expect;
 

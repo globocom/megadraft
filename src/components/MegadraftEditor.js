@@ -26,8 +26,8 @@ import Immutable from "immutable";
 import DefaultToolbar from "./Toolbar";
 import Sidebar from "./Sidebar";
 import Media from "./Media";
-import notFoundPlugin from "../plugins/not-found/plugin";
-import DEFAULT_PLUGINS from "../plugins/default";
+import notFoundAtomicBlock from "../atomicBlocks/not-found";
+import DEFAULT_ATOMIC_BLOCKS from "../atomicBlocks/default";
 import DEFAULT_ACTIONS from "../actions/default";
 import DEFAULT_ENTITY_INPUTS from "../entity_inputs/default";
 
@@ -59,37 +59,37 @@ export default class MegadraftEditor extends Component {
 
     this.externalKeyBindings = ::this.externalKeyBindings;
 
-    this.plugins = this.getValidPlugins();
+    this.atomicBlocks = this.getValidAtomicBlocks();
     this.entityInputs = this.props.entityInputs || DEFAULT_ENTITY_INPUTS;
     this.blocksWithoutStyleReset = (this.props.blocksWithoutStyleReset ||
                                     NO_RESET_STYLE_DEFAULT);
 
-    this.pluginsByType = this.getPluginsByType();
+    this.atomicBlocksByType = this.getAtomicBlocksByType();
 
     this.keyBindings = this.props.keyBindings || [];
 
   }
 
-  getValidPlugins() {
-    let plugins = [];
-    for (let plugin of this.props.plugins || DEFAULT_PLUGINS) {
-      if (!plugin || typeof plugin.type !== "string") {
-        console.warn("Plugin: Missing `type` field. Details: ", plugin);
+  getValidAtomicBlocks() {
+    let atomicBlocks = [];
+    for (let atomicBlock of this.props.atomicBlocks || DEFAULT_ATOMIC_BLOCKS) {
+      if (!atomicBlock || typeof atomicBlock.type !== "string") {
+        console.warn("AtomicBlock: Missing `type` field. Details: ", atomicBlock);
         continue;
       }
-      plugins.push(plugin);
+      atomicBlocks.push(atomicBlock);
     }
-    return plugins;
+    return atomicBlocks;
   }
 
-  getPluginsByType() {
-    let pluginsByType = {};
+  getAtomicBlocksByType() {
+    let atomicBlocksByType = {};
 
-    for (let plugin of this.plugins) {
-      pluginsByType[plugin.type] = plugin;
+    for (let atomicBlock of this.atomicBlocks) {
+      atomicBlocksByType[atomicBlock.type] = atomicBlock;
     }
 
-    return pluginsByType;
+    return atomicBlocksByType;
   }
 
   componentWillReceiveProps(nextProps){
@@ -258,7 +258,7 @@ export default class MegadraftEditor extends Component {
     if (this.props.handleBlockNotFound) {
       return this.props.handleBlockNotFound(block);
     }
-    return notFoundPlugin;
+    return notFoundAtomicBlock;
   }
 
   mediaBlockRenderer(block) {
@@ -268,8 +268,8 @@ export default class MegadraftEditor extends Component {
 
     const type = block.getData().toObject().type;
 
-    let plugin = this.pluginsByType[type] || this.handleBlockNotFound(block);
-    if (!plugin) {
+    let atomicBlock = this.atomicBlocksByType[type] || this.handleBlockNotFound(block);
+    if (!atomicBlock) {
       return null;
     }
 
@@ -277,7 +277,12 @@ export default class MegadraftEditor extends Component {
       component: Media,
       editable: false,
       props: {
-        plugin: plugin,
+        atomicBlock: atomicBlock,
+        // TODO: temporary compatibility for old plugins
+        get plugin() {
+          console.warn("Megadraft will remove `blockProps.plugin` prop from future versions, please use `blockProps.atomicBlock` instead");
+          return atomicBlock;
+        },
         onChange: this.onChange,
         editorState: this.props.editorState,
         setReadOnly: this.setReadOnly,
@@ -316,7 +321,7 @@ export default class MegadraftEditor extends Component {
           id="megadraft-editor"
           ref="editor">
           {this.renderSidebar({
-            plugins: this.plugins,
+            atomicBlocks: this.atomicBlocks,
             editorState: this.props.editorState,
             readOnly: this.state.readOnly,
             onChange: this.onChange,
@@ -327,7 +332,7 @@ export default class MegadraftEditor extends Component {
             {...this.props}
             ref="draft"
             readOnly={this.state.readOnly}
-            plugins={this.plugins}
+            atomicBlocks={this.atomicBlocks}
             blockRendererFn={this.mediaBlockRenderer}
             blockStyleFn={this.props.blockStyleFn || this.blockStyleFn}
             onTab={this.onTab}
