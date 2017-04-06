@@ -11,7 +11,7 @@ import {
   BlockData,
   BlockInput,
   CommonBlock
-} from "../../components/plugin";
+} from "../../components/atomicBlock";
 
 import icons from "../../icons";
 

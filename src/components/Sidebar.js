@@ -11,7 +11,7 @@ import icons from "../icons";
 
 import "setimmediate";
 
-import PluginsModal from "./PluginsModal";
+import AtomicBlocksModal from "./AtomicBlocksModal";
 
 
 class BlockStyles extends Component {
@@ -43,10 +43,10 @@ class BlockStyles extends Component {
 
   renderModal() {
     return (
-      <PluginsModal
+      <AtomicBlocksModal
         toggleModalVisibility={this.toggleModalVisibility}
         isOpen={this.state.isOpen}
-        plugins={this.props.plugins}
+        atomicBlocks={this.props.atomicBlocks}
         onCloseRequest={this.props.onClose}
         onChange={this.onChange}
         editorState={this.props.editorState}
@@ -77,21 +77,21 @@ class BlockStyles extends Component {
   }
 
   render() {
-    const maxSidebarButtons = this.props.maxSidebarButtons ? this.props.maxSidebarButtons : this.props.plugins.length;
+    const maxSidebarButtons = this.props.maxSidebarButtons ? this.props.maxSidebarButtons : this.props.atomicBlocks.length;
 
     const sidemenuMaxHeight = {
       maxHeight: this.props.open? `${(maxSidebarButtons + 1) * 48}px`: 0,
     };
 
     // We should hide the modal if the number of plugins < max
-    const hasModal = this.props.plugins.length > maxSidebarButtons;
+    const hasModal = this.props.atomicBlocks.length > maxSidebarButtons;
     const className = classNames("sidemenu__items", {
       "sidemenu__items--open": this.props.open
     });
     return (
       <div>
         <ul style={sidemenuMaxHeight} className={className}>
-          {this.props.plugins.slice(0, maxSidebarButtons).map(this.renderButton)}
+          {this.props.atomicBlocks.slice(0, maxSidebarButtons).map(this.renderButton)}
           {hasModal ? this.renderModalButton() : null}
         </ul>
         {hasModal ? this.renderModal() : null }
@@ -148,7 +148,7 @@ export class SideMenu extends Component {
 
         <BlockStyles
           editorState={this.props.editorState}
-          plugins={this.props.plugins}
+          atomicBlocks={this.props.atomicBlocks}
           open={this.state.open}
           onChange={this.onChange}
           maxSidebarButtons={this.props.maxSidebarButtons}
@@ -183,15 +183,15 @@ export default class SideBar extends Component {
     this.onChange = ::this.onChange;
   }
 
-  getValidSidebarPlugins() {
-    let plugins = [];
-    for (let plugin of this.props.plugins) {
-      if (!plugin.buttonComponent || typeof plugin.buttonComponent !== "function") {
+  getValidSidebarAtomicBlocks() {
+    let atomicBlocks = [];
+    for (let atomicBlock of this.props.atomicBlocks) {
+      if (!atomicBlock.buttonComponent || typeof atomicBlock.buttonComponent !== "function") {
         continue;
       }
-      plugins.push(plugin);
+      atomicBlocks.push(atomicBlock);
     }
-    return plugins;
+    return atomicBlocks;
   }
 
   onChange(editorState) {
@@ -239,7 +239,7 @@ export default class SideBar extends Component {
             <SideMenu
               editorState={this.props.editorState}
               onChange={this.onChange}
-              plugins={this.getValidSidebarPlugins()}
+              atomicBlocks={this.getValidSidebarAtomicBlocks()}
               maxSidebarButtons={this.props.maxSidebarButtons}
               modalOptions={this.props.modalOptions} />
           </ul>

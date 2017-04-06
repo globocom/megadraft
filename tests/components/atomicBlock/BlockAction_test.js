@@ -10,7 +10,7 @@ import sinon from "sinon";
 import {mount} from "enzyme";
 
 import icons from "../../../src/icons";
-import BlockAction from "../../../src/components/plugin/BlockAction";
+import BlockAction from "../../../src/components/atomicBlock/BlockAction";
 
 let expect = chai.expect;
 

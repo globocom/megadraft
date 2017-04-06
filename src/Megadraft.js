@@ -11,7 +11,7 @@ import Media from "./components/Media";
 import MegadraftEditor from "./components/MegadraftEditor";
 import MegadraftIcons from "./icons";
 import MegadraftMediaMessage from "./components/MediaMessage";
-import * as MegadraftPlugin from "./components/plugin";
+import * as MegadraftAtomicBlock from "./components/atomicBlock";
 import Sidebar from "./components/Sidebar";
 import Toolbar from "./components/Toolbar";
 import * as utils from "./utils";
@@ -26,7 +26,7 @@ const Megadraft = {
   MegadraftEditor: MegadraftEditor,
   MegadraftIcons: MegadraftIcons,
   MegadraftMediaMessage: MegadraftMediaMessage,
-  MegadraftPlugin: MegadraftPlugin,
+  MegadraftAtomicBlock: MegadraftAtomicBlock,
   Sidebar: Sidebar,
   Toolbar: Toolbar
 };

@@ -8,39 +8,39 @@ import React, {Component} from "react";
 import chai from "chai";
 import sinon from "sinon";
 import {mount} from "enzyme";
-import cp from "utils-copy";
 
 import {ModalBody} from "backstage-modal";
-import ModalPluginList from "../../src/components/ModalPluginList";
-import DEFAULT_PLUGINS from "../../src/plugins/default.js";
+import AtomicBlocksModalList from "../../src/components/AtomicBlocksModalList";
+import DEFAULT_ATOMIC_BLOCKS from "../../src/atomicBlocks/default.js";
 
 let expect = chai.expect;
 
-class ModalWithPlugins extends Component {
-  constructor(props) {
-    super(props);
-    this.plugins = this.props.plugins || DEFAULT_PLUGINS;
-    this.fakeAux = cp(this.plugins.slice(0,2));
-    this.fakePlugins = this.fakeAux.concat(this.plugins.slice(0,2));
-    for(let i=0; i<4; i++){
-      this.fakePlugins[i].title = "plugin" + i;
-      this.fakePlugins[i].type = "plugin" + i;
-    }
-    this.onChange = ::this.onChange;
+const baseAtomicBlock = DEFAULT_ATOMIC_BLOCKS[0];
 
+class ModalWithAtomicBlocks extends Component {
+  generateAtomicBlocks() {
+    let atomicBlocks = [];
+    for (let i=0; i<4; i++) {
+      atomicBlocks.push(Object.assign({}, baseAtomicBlock, {
+        title: "atomicBlock" + i,
+        type: "atomicBlock" + i
+      }));
+    }
+    return atomicBlocks;
   }
 
-  onChange(editorState) {
+  onChange = (editorState) => {
     this.props.onChange(editorState);
     this.setState({editorState: editorState});
   }
 
   render() {
+    const atomicBlocks = this.generateAtomicBlocks();
     return (
       <div ref="editor">
-        <ModalPluginList
+        <AtomicBlocksModalList
           handleModal={this.handleModal}
-          plugins={this.fakePlugins}
+          atomicBlocks={atomicBlocks}
           onChange={this.onChange}
           toggleModalVisibility={this.props.toggleModalVisibility}
           editorState={this.props.editorState} />
@@ -50,51 +50,49 @@ class ModalWithPlugins extends Component {
 }
 
 describe("Sidebar Modal Component", function() {
-
   beforeEach(function() {
     this.onChangeSpy = sinon.spy();
     this.toggleModalVisibilitySpy = sinon.spy();
 
     this.wrapper = mount(
-      <ModalWithPlugins onChange={this.onChangeSpy} toggleModalVisibility={this.toggleModalVisibilitySpy}/>
+      <ModalWithAtomicBlocks onChange={this.onChangeSpy} toggleModalVisibility={this.toggleModalVisibilitySpy}/>
     );
   });
 
-
-  it("should has plugins inside modal", function() {
+  it("should has atomicBlocks inside modal", function() {
     const modal = this.wrapper.find(ModalBody);
 
-    const plugin = modal.find("li");
+    const atomicBlock = modal.find("li");
 
-    expect(plugin.length).to.be.at.least(1);
+    expect(atomicBlock.length).to.be.at.least(1);
   });
 
-  it("should has the all plugins inside modal", function() {
+  it("should has the all atomicBlocks inside modal", function() {
     const modal = this.wrapper.find(ModalBody);
 
-    const plugin = modal.find(".megadraft-modal__item");
+    const atomicBlock = modal.find(".megadraft-modal__item");
 
-    expect(plugin).to.have.length(4);
+    expect(atomicBlock).to.have.length(4);
   });
 
-  it("should be a real plugin", function() {
+  it("should be a real atomicBlock", function() {
     const modal = this.wrapper.find(ModalBody);
 
-    const plugin = modal.find("VideoButton");
+    const atomicBlock = modal.find(baseAtomicBlock.buttonComponent);
 
-    expect(plugin.length).to.be.at.least(1);
+    expect(atomicBlock.length).to.be.at.least(1);
   });
 
   it("should callback a function received when receives onChange call", function() {
     const newEditorState = {};
-    const modal = this.wrapper.find(ModalPluginList);
+    const modal = this.wrapper.find(AtomicBlocksModalList);
     modal.getNode().onChange(newEditorState);
     expect(this.onChangeSpy).to.be.calledWith(newEditorState);
   });
 
   it("should toggle visibility when receives onChange call", function() {
     const newEditorState = {};
-    const modal = this.wrapper.find(ModalPluginList);
+    const modal = this.wrapper.find(AtomicBlocksModalList);
     modal.getNode().onChange(newEditorState);
     expect(this.toggleModalVisibilitySpy).to.be.called;
   });

@@ -11,7 +11,7 @@ import {mount} from "enzyme";
 
 import icons from "../../../src/icons";
 import Dropdown from "../../../src/components/Dropdown";
-import CommonBlock from "../../../src/components/plugin/CommonBlock";
+import CommonBlock from "../../../src/components/atomicBlock/CommonBlock";
 
 let expect = chai.expect;
 
@@ -27,7 +27,7 @@ describe("CommonBlock Component", function() {
       {key: "medium", icon: icons.MediaMediumIcon, label: "MEDIUM"}
     ];
     const defaultDisplay = "medium";
-    const blockProps = {plugin: {options: {displayOptions, defaultDisplay}}};
+    const blockProps = {atomicBlock: {options: {displayOptions, defaultDisplay}}};
 
     this.container = {
       updateData: sinon.spy()

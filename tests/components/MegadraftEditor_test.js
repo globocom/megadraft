@@ -15,8 +15,8 @@ import Media from "../../src/components/Media";
 import Sidebar from "../../src/components/Sidebar";
 import Toolbar from "../../src/components/Toolbar";
 import {editorStateFromRaw} from "../../src/utils";
-import image from "../../src/plugins/image/plugin";
-import NotFoundPlugin from "../../src/plugins/not-found/plugin";
+import image from "../../src/atomicBlocks/image";
+import NotFoundAtomicBlock from "../../src/atomicBlocks/not-found";
 
 
 let expect = chai.expect;
@@ -305,7 +305,7 @@ describe("MegadraftEditor Component", () => {
       expect(result).to.be.null;
     });
 
-    it("returns media renderer for registered plugin", function() {
+    it("returns media renderer for registered atomicBlock", function() {
       const block = new FakeAtomicBlock("image");
       const result = this.component.mediaBlockRenderer(block);
 
@@ -313,6 +313,7 @@ describe("MegadraftEditor Component", () => {
         "component": Media,
         "editable": false,
         "props": {
+          "atomicBlock": image,
           "plugin": image,
           "onChange": this.component.onChange,
           "editorState": this.editorState,
@@ -324,7 +325,7 @@ describe("MegadraftEditor Component", () => {
       });
     });
 
-    it("returns media renderer with fallback for unregistered plugin", function () {
+    it("returns media renderer with fallback for unregistered atomicBlock", function () {
       const block = new FakeAtomicBlock("unregistered");
       const result = this.component.mediaBlockRenderer(block);
 
@@ -332,7 +333,8 @@ describe("MegadraftEditor Component", () => {
         "component": Media,
         "editable": false,
         "props": {
-          "plugin": NotFoundPlugin,
+          "atomicBlock": NotFoundAtomicBlock,
+          "plugin": NotFoundAtomicBlock,
           "onChange": this.component.onChange,
           "editorState": this.editorState,
           "setReadOnly": this.component.setReadOnly,
@@ -343,11 +345,11 @@ describe("MegadraftEditor Component", () => {
       });
     });
 
-    it("returns media renderer with plugin from custom fallback", function () {
-      const customFallbackPlugin = {
+    it("returns media renderer with atomicBlock from custom fallback", function () {
+      const customFallbackAtomicBlock = {
         blockComponent: (props) => <pre>{props.data.type}</pre>
       };
-      this.wrapper.setProps({handleBlockNotFound: () => customFallbackPlugin});
+      this.wrapper.setProps({handleBlockNotFound: () => customFallbackAtomicBlock});
 
       const block = new FakeAtomicBlock("unregistered");
       const result = this.component.mediaBlockRenderer(block);
@@ -356,7 +358,8 @@ describe("MegadraftEditor Component", () => {
         "component": Media,
         "editable": false,
         "props": {
-          "plugin": customFallbackPlugin,
+          "atomicBlock": customFallbackAtomicBlock,
+          "plugin": customFallbackAtomicBlock,
           "onChange": this.component.onChange,
           "editorState": this.editorState,
           "setReadOnly": this.component.setReadOnly,
@@ -367,7 +370,7 @@ describe("MegadraftEditor Component", () => {
       });
     });
 
-    it("ignores empty plugin from custom fallback", function () {
+    it("ignores empty atomicBlock from custom fallback", function () {
       this.wrapper.setProps({handleBlockNotFound: () => null});
 
       const block = new FakeAtomicBlock("unregistered");
@@ -503,10 +506,10 @@ describe("MegadraftEditor Component", () => {
     expect(kba).to.have.been.called;
   });
 
-  it("renders only valid plugins", function() {
+  it("renders only valid atomicBlocks", function() {
     console.warn = sinon.spy();
 
-    const invalidPlugin = {
+    const invalidAtomicBlock = {
       buttonComponent: {},
       blockComponent: {}
     };
@@ -515,30 +518,30 @@ describe("MegadraftEditor Component", () => {
       <MegadraftEditor
         editorState={this.editorState}
         onChange={this.onChange}
-        plugins={[image, invalidPlugin]} />
+        atomicBlocks={[image, invalidAtomicBlock]} />
     );
     const sidebar = wrapper.find(Sidebar);
-    expect(sidebar.prop("plugins")).to.have.length(1);
+    expect(sidebar.prop("atomicBlocks")).to.have.length(1);
   });
 
   it("shows warning for missing `type` field", function() {
     console.warn = sinon.spy();
 
-    const plugin = {
+    const atomicBlock = {
       buttonComponent: {},
       blockComponent: {}
     };
-    const plugins = [plugin];
+    const atomicBlocks = [atomicBlock];
 
     mount(
       <MegadraftEditor
         editorState={this.editorState}
         onChange={this.onChange}
-        plugins={plugins} />
+        atomicBlocks={atomicBlocks} />
     );
 
     expect(console.warn.getCall(0).args[0]).to.equal(
-      "Plugin: Missing `type` field. Details: "
+      "AtomicBlock: Missing `type` field. Details: "
     );
   });
 
@@ -549,7 +552,7 @@ describe("MegadraftEditor Component", () => {
 
   it("passes required props to default sidebar", function() {
     const sidebar = this.wrapper.find(Sidebar);
-    expect(sidebar.prop("plugins")).to.equal(this.component.plugins);
+    expect(sidebar.prop("atomicBlocks")).to.equal(this.component.atomicBlocks);
     expect(sidebar.prop("onChange")).to.equal(this.component.onChange);
     expect(sidebar.prop("editorState")).to.equal(this.editorState);
     expect(sidebar.prop("readOnly")).to.equal(false);
@@ -568,7 +571,7 @@ describe("MegadraftEditor Component", () => {
 
     const component = wrapper.get(0);
     const expectedProps = {
-      plugins: component.plugins,
+      atomicBlocks: component.atomicBlocks,
       onChange: component.onChange,
       editorState: this.editorState,
       readOnly: false,
@@ -588,8 +591,8 @@ describe("MegadraftEditor Component", () => {
         );
       }
     }
-    const renderCustomSidebar = function(plugins, editorState) {
-      return <MyCustomSidebar plugins={plugins} editorState={editorState}/>;
+    const renderCustomSidebar = function(atomicBlocks, editorState) {
+      return <MyCustomSidebar atomicBlocks={atomicBlocks} editorState={editorState}/>;
     };
     const wrapper = mount(
       <MegadraftEditor

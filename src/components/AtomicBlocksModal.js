@@ -7,10 +7,10 @@
 import React, {Component} from "react";
 
 import Modal from "backstage-modal";
-import ModalPluginList from "./ModalPluginList";
+import AtomicBlocksModalList from "./AtomicBlocksModalList";
 
 
-export default class PluginsModal extends Component {
+export default class atomicBlocksModal extends Component {
   constructor(props) {
     super(props);
     this.onCloseRequest = ::this.onCloseRequest;
@@ -37,9 +37,9 @@ export default class PluginsModal extends Component {
         onCloseRequest={this.onCloseRequest}
         width={this.modalWidth}
         height={this.modalHeight} >
-        <ModalPluginList
+        <AtomicBlocksModalList
           toggleModalVisibility={this.onCloseRequest}
-          plugins={this.props.plugins}
+          atomicBlocks={this.props.atomicBlocks}
           onChange={this.props.onChange}
           editorState={this.props.editorState}
         />

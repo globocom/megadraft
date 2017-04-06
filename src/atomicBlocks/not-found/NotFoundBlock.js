@@ -9,7 +9,7 @@ import React, {Component} from "react";
 import {
   BlockContent,
   CommonBlock
-} from "../../components/plugin";
+} from "../../components/atomicBlock";
 import MediaMessage from "../../components/MediaMessage";
 import icons from "../../icons";
 
@@ -26,7 +26,7 @@ export default class NotFoundBlock extends Component {
   render(){
     /* global __ */
     const message = __(
-      "Can't show plugin, component \"{type}\" not found.").replace(
+      "Can't show atomicBlock, component \"{type}\" not found.").replace(
         "{type}", this.props.data.type);
     return (
       <CommonBlock {...this.props} actions={this.actions}>

@@ -11,11 +11,11 @@ import {
   BlockActionGroup,
   BlockControls,
   BlockWrapper
-} from "../../components/plugin";
+} from "../../components/atomicBlock";
 import {
   DEFAULT_DISPLAY_OPTIONS,
   DEFAULT_DISPLAY_KEY
-} from "../../components/plugin/defaults";
+} from "../../components/atomicBlock/defaults";
 
 
 export default class CommonBlock extends Component {
@@ -35,7 +35,7 @@ export default class CommonBlock extends Component {
       defaultDisplay: DEFAULT_DISPLAY_KEY,
       displayOptions: DEFAULT_DISPLAY_OPTIONS
     };
-    let options = this.props.blockProps.plugin.options || {};
+    let options = this.props.blockProps.atomicBlock.options || {};
     options = {...defaults, ...options};
 
     return (
