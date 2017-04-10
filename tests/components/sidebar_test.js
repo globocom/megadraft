@@ -7,14 +7,13 @@
 import React, {Component} from "react";
 import chai from "chai";
 import {mount} from "enzyme";
-import cp from "utils-copy";
 
 import Sidebar,
   {ToggleButton, SideMenu} from "../../src/components/Sidebar";
 import AtomicBlocksModal from "../../src/components/AtomicBlocksModal";
 import image from "../../src/atomicBlocks/image";
 import {editorStateFromRaw} from "../../src/utils";
-import DEFAULT_ATOMIC_BLOCKS from "../../src/atomicBlocks/default.js";
+import DEFAULT_ATOMIC_BLOCKS from "../../src/atomicBlocks/default";
 import ImageButton from "../../src/atomicBlocks/image/ImageButton";
 
 let expect = chai.expect;
@@ -46,17 +45,16 @@ class SidebarWrapper extends Component {
   }
 }
 
-
 class SidebarWithModalWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {...props};
-    this.atomicBlocks = this.props.atomicBlocks || DEFAULT_ATOMIC_BLOCKS;
-    this.fakeAux = cp(this.atomicBlocks.slice(0,2));
-    this.fakeAtomicBlocks = this.fakeAux.concat(this.atomicBlocks.slice(0,2));
-    for(let i=0; i<4; i++){
-      this.fakeAtomicBlocks[i].type = "atomicBlock" + i;
-    }
+
+    const atomicBlocksConcat = [...DEFAULT_ATOMIC_BLOCKS, ...DEFAULT_ATOMIC_BLOCKS];
+    this.atomicBlocks = atomicBlocksConcat.map((block, i) => (
+      {...block, type: `${block.type}${i}`}
+    ));
+
     this.maxSidebarButtons = 3;
     this.modalOptions = {width: 500, height: 300};
     this.onChange = ::this.onChange;
@@ -71,7 +69,7 @@ class SidebarWithModalWrapper extends Component {
       <div ref="editor">
         <Sidebar
           ref="sidebar"
-          atomicBlocks={this.fakeAtomicBlocks}
+          atomicBlocks={this.atomicBlocks}
           editorState={this.state.editorState}
           readOnly={this.props.readOnly}
           onChange={this.onChange}
