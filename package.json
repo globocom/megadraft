@@ -7,6 +7,7 @@
     "backstage-modal": "^0.2.5",
     "classnames": "^2.2.5",
     "draft-js": "0.10.1",
+    "draft-js-plugins-editor": "^2.0.0-rc2",
     "immutable": "^3.8.1",
     "setimmediate": "^1.0.4"
   },
@@ -52,7 +53,6 @@
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0",
     "svgo": "^0.6.6",
-    "utils-copy": "^1.1.1",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   },
