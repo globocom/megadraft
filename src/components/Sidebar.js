@@ -85,10 +85,12 @@ class BlockStyles extends Component {
 
     // We should hide the modal if the number of plugins < max
     const hasModal = this.props.plugins.length > maxSidebarButtons;
-
+    const className = classNames("sidemenu__items", {
+      "sidemenu__items--open": this.state.open
+    });
     return (
       <div>
-        <ul style={sidemenuMaxHeight} className="sidemenu__items">
+        <ul style={sidemenuMaxHeight} className={className}>
           {this.props.plugins.slice(0, maxSidebarButtons).map(this.renderButton)}
           {hasModal ? this.renderModalButton() : null}
         </ul>
