@@ -135,8 +135,11 @@ export class SideMenu extends Component {
   }
 
   render() {
+    const className = classNames("sidemenu", {
+      "sidemenu--open": this.state.open
+    });
     return (
-      <li className="sidemenu">
+      <li className={className}>
         <ToggleButton
           toggle={this.toggle}
           open={this.state.open} />
