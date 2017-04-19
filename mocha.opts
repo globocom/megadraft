@@ -1,4 +1,4 @@
 --compilers js:babel-core/register
 --require ./tests/helpers/setup.js
 --recursive
-tests/**/MegadraftEditor_test.js
+tests/**/*_test.js

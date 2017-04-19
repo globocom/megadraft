@@ -174,20 +174,20 @@ describe("MegadraftEditor Component", () => {
 
   });
 
-  it.skip("renders without problems", function() {
+  it("renders without problems", function() {
     expect(this.wrapper).to.have.length(1);
   });
 
-  it.skip("has the initial text", function() {
+  it("has the initial text", function() {
     expect(this.component.refs.editor.textContent).to.have.string("Hello World!");
   });
 
-  it.skip("renders Media component", function() {
+  it("renders Media component", function() {
     const items = this.wrapper.find(Media);
     expect(items).to.have.length(1);
   });
 
-  it.skip("passes extra props to the draft-js editor", function() {
+  it("passes extra props to the draft-js editor", function() {
     const handlePastedText = (text) => { console.log(text); };
     const wrapper = mount(
       <MegadraftEditor
@@ -199,7 +199,7 @@ describe("MegadraftEditor Component", () => {
     expect(wrapper.ref("draft").props().handlePastedText).to.equal(handlePastedText);
   });
 
-  it.skip("cant overridde megadraft props via extra props", function() {
+  it("cant overridde megadraft props via extra props", function() {
     const blockRendererFn = (text) => { console.log(text); };
     const wrapper = mount(
       <MegadraftEditor
@@ -211,7 +211,7 @@ describe("MegadraftEditor Component", () => {
     expect(wrapper.ref("draft").props().blockRendererFn).to.not.equal(blockRendererFn);
   });
 
-  it.skip("reset blockStyle in new block if resetStyle is true", function() {
+  it("reset blockStyle in new block if resetStyle is true", function() {
     const blockKey = "ag6qs";
     replaceSelection(
       {anchorOffset: 12, focusOffset: 12},
@@ -229,7 +229,7 @@ describe("MegadraftEditor Component", () => {
     expect(newBlock.getType()).to.be.equal("unstyled");
   });
 
-  it.skip("reset inlineStyle in new block if resetStyle is true", function() {
+  it("reset inlineStyle in new block if resetStyle is true", function() {
     const blockKey = "ag6qs";
     replaceSelection(
       {anchorOffset: 12, focusOffset: 12},
@@ -247,7 +247,7 @@ describe("MegadraftEditor Component", () => {
     expect(inlineStyle.count()).to.be.equal(0);
   });
 
-  it.skip("reset inlineStyles if in blocksWithoutStyleReset", function() {
+  it("reset inlineStyles if in blocksWithoutStyleReset", function() {
     const blockKey = "bqjdr";
     replaceSelection(
       {anchorOffset: 14, focusOffset: 14},
@@ -265,7 +265,7 @@ describe("MegadraftEditor Component", () => {
     expect(inlineStyle.count()).to.be.equal(0);
   });
 
-  it.skip("reset style should not change list type", function() {
+  it("reset style should not change list type", function() {
     const blockKey = "bqjdr";
     replaceSelection(
       {anchorOffset: 14, focusOffset: 14},
@@ -283,7 +283,7 @@ describe("MegadraftEditor Component", () => {
     expect(newBlock.type).to.be.equal("ordered-list-item");
   });
 
-  it.skip("should not reset style if resetStyle is false", function() {
+  it("should not reset style if resetStyle is false", function() {
     const blockKey = "ag6qs";
     replaceSelection(
       {anchorOffset: 12, focusOffset: 12},
@@ -297,13 +297,13 @@ describe("MegadraftEditor Component", () => {
   });
 
   describe("mediaBlockRenderer", function () {
-    it.skip("ignores non-atomic blocks", function() {
+    it("ignores non-atomic blocks", function() {
       const block = {getType: function() {return "metal";}};
       const result = this.component.mediaBlockRenderer(block);
       expect(result).to.be.null;
     });
 
-    it.skip("returns media renderer for registered plugin", function() {
+    it("returns media renderer for registered plugin", function() {
       const block = new FakeAtomicBlock("image");
       const result = this.component.mediaBlockRenderer(block);
 
@@ -322,7 +322,7 @@ describe("MegadraftEditor Component", () => {
       });
     });
 
-    it.skip("returns media renderer with fallback for unregistered plugin", function () {
+    it("returns media renderer with fallback for unregistered plugin", function () {
       const block = new FakeAtomicBlock("unregistered");
       const result = this.component.mediaBlockRenderer(block);
 
@@ -341,7 +341,7 @@ describe("MegadraftEditor Component", () => {
       });
     });
 
-    it.skip("returns media renderer with plugin from custom fallback", function () {
+    it("returns media renderer with plugin from custom fallback", function () {
       const customFallbackPlugin = {
         blockComponent: (props) => <pre>{props.data.type}</pre>
       };
@@ -365,7 +365,7 @@ describe("MegadraftEditor Component", () => {
       });
     });
 
-    it.skip("ignores empty plugin from custom fallback", function () {
+    it("ignores empty plugin from custom fallback", function () {
       this.wrapper.setProps({handleBlockNotFound: () => null});
 
       const block = new FakeAtomicBlock("unregistered");
@@ -375,18 +375,18 @@ describe("MegadraftEditor Component", () => {
     });
   });
 
-  it.skip("starts with default readOnly status", function() {
+  it("starts with default readOnly status", function() {
     const items = this.wrapper.find(Editor);
     expect(items.get(0).props.readOnly).to.be.false;
   });
 
-  it.skip("changes readOnly status", function() {
+  it("changes readOnly status", function() {
     const items = this.wrapper.find(Editor);
     this.component.setReadOnly(true);
     expect(items.get(0).props.readOnly).to.be.true;
   });
 
-  it.skip("is capable of inserting soft line breaks", function() {
+  it("is capable of inserting soft line breaks", function() {
     this.component.handleReturn({shiftKey: true});
 
     const content = this.onChange.args[0][0].getCurrentContent();
@@ -396,7 +396,7 @@ describe("MegadraftEditor Component", () => {
     expect(text).to.be.equal("\nHello World!");
   });
 
-  it.skip("does not insert soft line breaks if option set to false", function () {
+  it("does not insert soft line breaks if option set to false", function () {
     const wrapper = mount(
       <MegadraftEditor
         editorState={this.editorState}
@@ -407,7 +407,7 @@ describe("MegadraftEditor Component", () => {
     expect(component.handleReturn({shiftKey: true})).to.be.equal(false);
   });
 
-  it.skip("is capable of adding a new block when try to add a soft break before an exist one", function() {
+  it("is capable of adding a new block when try to add a soft break before an exist one", function() {
     const SOFT_BREAK_ON_BEGINING = {
       "entityMap": {},
       "blocks": [
@@ -442,7 +442,7 @@ describe("MegadraftEditor Component", () => {
     expect(addedASoftBreak).to.be.false;
   });
 
-  it.skip("is capable of adding a new block when try to add a soft break after an exist one", function() {
+  it("is capable of adding a new block when try to add a soft break after an exist one", function() {
     const SOFT_BREAK_ON_END = {
       "entityMap": {},
       "blocks": [
@@ -478,7 +478,7 @@ describe("MegadraftEditor Component", () => {
     expect(addedASoftBreak).to.be.false;
   });
 
-  it.skip("recognizes external key binding", function() {
+  it("recognizes external key binding", function() {
     const defaultKeyBinding = {keyCode: 66, ctrlKey: true};
     expect(this.component.externalKeyBindings(defaultKeyBinding)).to.equal("bold");
 
@@ -489,7 +489,7 @@ describe("MegadraftEditor Component", () => {
     expect(this.component.externalKeyBindings(externalKeyBinding)).to.equal("save");
   });
 
-  it.skip("handles external commands", function() {
+  it("handles external commands", function() {
     const defaultCommand = "bold";
     expect(this.component.handleKeyCommand(defaultCommand)).to.be.true;
 
@@ -501,7 +501,7 @@ describe("MegadraftEditor Component", () => {
     expect(kba).to.have.been.called;
   });
 
-  it.skip("renders only valid plugins", function() {
+  it("renders only valid plugins", function() {
     console.warn = sinon.spy();
 
     const invalidPlugin = {
@@ -519,7 +519,7 @@ describe("MegadraftEditor Component", () => {
     expect(sidebar.prop("plugins")).to.have.length(1);
   });
 
-  it.skip("shows warning for missing `type` field", function() {
+  it("shows warning for missing `type` field", function() {
     console.warn = sinon.spy();
 
     const plugin = {
@@ -540,12 +540,12 @@ describe("MegadraftEditor Component", () => {
     );
   });
 
-  it.skip("renders default sidebar if sidebarRendererFn not provided", function() {
+  it("renders default sidebar if sidebarRendererFn not provided", function() {
     const sidebar = this.wrapper.find(Sidebar);
     expect(sidebar).to.have.length(1);
   });
 
-  it.skip("passes required props to default sidebar", function() {
+  it("passes required props to default sidebar", function() {
     const sidebar = this.wrapper.find(Sidebar);
     expect(sidebar.prop("plugins")).to.equal(this.component.plugins);
     expect(sidebar.prop("onChange")).to.equal(this.component.onChange);
