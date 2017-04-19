@@ -250,4 +250,5 @@ describe("Sidebar Component", function() {
 
     expect(domModal.prop("height")).to.be.exist;
   });
+
 });
