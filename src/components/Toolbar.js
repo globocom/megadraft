@@ -124,16 +124,16 @@ export default class Toolbar extends Component {
         }
       }, state => {
         const minOffsetLeft = this.props.minOffsetLeft || 5;
-        const maxOffsetRight = this.props.maxOffsetRight || 5;
+        const minOffsetRight = this.props.minOffsetRight || 5;
         const toolbarDimensions = toolbar.getBoundingClientRect();
 
         if (toolbarDimensions.left < minOffsetLeft) {
           toolbar.style.left = -((toolbarDimensions.width / 2) + toolbarDimensions.left - minOffsetLeft) + "px";
           arrow.style.left = ((toolbarDimensions.width / 2) + toolbarDimensions.left - minOffsetLeft) + "px";
         }
-        if (toolbarDimensions.left + toolbarDimensions.width > window.innerWidth - maxOffsetRight) {
-          toolbar.style.left = -(toolbarDimensions.right - selectionCoords.offsetLeft + maxOffsetRight) + "px";
-          arrow.style.left = (toolbarDimensions.right - selectionCoords.offsetLeft + maxOffsetRight) + "px";
+        if (toolbarDimensions.left + toolbarDimensions.width > window.innerWidth - minOffsetRight) {
+          toolbar.style.left = -(toolbarDimensions.right - selectionCoords.offsetLeft + minOffsetRight) + "px";
+          arrow.style.left = (toolbarDimensions.right - selectionCoords.offsetLeft + minOffsetRight) + "px";
         }
       });
     }
