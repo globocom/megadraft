@@ -141,8 +141,10 @@ export default class Toolbar extends Component {
 
   componentDidUpdate() {
     // reset toolbar position every time
-    this.refs.toolbar.style.left = "";
-    this.refs.arrow.style.left = "";
+    if (this.refs.toolbar && this.refs.arrow) {
+      this.refs.toolbar.style.left = "";
+      this.refs.arrow.style.left = "";
+    }
     if (this.props.shouldDisplayToolbarFn()) {
       return this.setBarPosition();
     } else {
