@@ -104,6 +104,7 @@ export default class Toolbar extends Component {
   setBarPosition() {
     const editor = this.props.editor;
     const toolbar = this.refs.toolbar;
+    const arrow = this.refs.arrow;
     const selectionCoords = getSelectionCoords(editor, toolbar);
 
     if (!selectionCoords) {
@@ -121,11 +122,27 @@ export default class Toolbar extends Component {
           bottom: selectionCoords.offsetBottom,
           left: selectionCoords.offsetLeft
         }
+      }, state => {
+        const minOffsetLeft = this.props.minOffsetLeft || 5;
+        const maxOffsetRight = this.props.maxOffsetRight || 5;
+        const toolbarDimensions = toolbar.getBoundingClientRect();
+
+        if (toolbarDimensions.left < minOffsetLeft) {
+          toolbar.style.left = -((toolbarDimensions.width / 2) + toolbarDimensions.left - minOffsetLeft) + "px";
+          arrow.style.left = ((toolbarDimensions.width / 2) + toolbarDimensions.left - minOffsetLeft) + "px";
+        }
+        if (toolbarDimensions.left + toolbarDimensions.width > window.innerWidth - maxOffsetRight) {
+          toolbar.style.left = -(toolbarDimensions.right - selectionCoords.offsetLeft + maxOffsetRight) + "px";
+          arrow.style.left = (toolbarDimensions.right - selectionCoords.offsetLeft + maxOffsetRight) + "px";
+        }
       });
     }
   }
 
   componentDidUpdate() {
+    // reset toolbar position every time
+    this.refs.toolbar.style.left = "";
+    this.refs.arrow.style.left = "";
     if (this.props.shouldDisplayToolbarFn()) {
       return this.setBarPosition();
     } else {
@@ -265,7 +282,7 @@ export default class Toolbar extends Component {
               this.renderToolList()
             }
             <p className="toolbar__error-msg">{this.state.error}</p>
-            <span className="toolbar__arrow" />
+            <span className="toolbar__arrow" ref="arrow"/>
           </div>
         </div>
       </div>
