@@ -149,7 +149,6 @@ export class SideMenu extends Component {
       "sidemenu--horizontal": this.props.isHorizontal,
     });
 
-
     return (
       <li className={className}>
         <ToggleButton
@@ -256,7 +255,6 @@ export default class SideBar extends Component {
               maxSidebarButtons={this.props.maxSidebarButtons}
               modalOptions={this.props.modalOptions}
               isHorizontal={this.props.sidebarHorizontal}
-              onlyOnEmptyBlock={this.props.sidebarOnlyOnEmptyBlock}
               />
           </ul>
         </div>
