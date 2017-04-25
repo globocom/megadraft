@@ -201,6 +201,18 @@ describe("MegadraftEditor Component", () => {
     expect(wrapper.ref("draft").props().blockRendererFn).to.not.equal(blockRendererFn);
   });
 
+  it("allows blockStyleFn to be overridden", function() {
+    const blockStyleFn = (text) => { console.log(text); };
+    const wrapper = mount(
+      <MegadraftEditor
+        editorState={this.editorState}
+        onChange={this.onChange}
+        blockStyleFn={blockStyleFn}
+      />
+    );
+    expect(wrapper.ref("draft").props().blockStyleFn).to.equal(blockStyleFn);
+  });
+
   it("reset blockStyle in new block if resetStyle is true", function() {
     const blockKey = "ag6qs";
     replaceSelection(
