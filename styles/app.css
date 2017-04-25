@@ -299,7 +299,6 @@ body {
     cursor: pointer;
     font-size: 0;
     padding: 0;
-    -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     position: relative;
     background: none;
@@ -348,7 +347,6 @@ body {
   .megadraft-modal__items .megadraft-modal__button {
     background: none; }
     .megadraft-modal__items .megadraft-modal__button:before {
-      -webkit-transition: all 0.1s ease-in-out;
       transition: all 0.1s ease-in-out;
       background-color: #181818; }
   .megadraft-modal__item {
@@ -471,7 +469,6 @@ body {
       font-size: 0;
       padding: 0;
       width: 32px;
-      -webkit-transition: all 0.5s ease;
       transition: all 0.5s ease;
       position: relative;
       background: none; }
@@ -499,7 +496,6 @@ body {
       padding: 0;
       margin-top: 8px;
       padding-top: 2px;
-      -webkit-transition: max-height 0.5s ease;
       transition: max-height 0.5s ease;
       overflow: hidden;
       max-height: 0;
@@ -508,7 +504,6 @@ body {
     .megadraft-editor .sidemenu__items .sidemenu__button {
       background: none; }
       .megadraft-editor .sidemenu__items .sidemenu__button:before {
-        -webkit-transition: all 0.1s ease-in-out;
         transition: all 0.1s ease-in-out;
         background-color: #181818; }
       .megadraft-editor .sidemenu__items .sidemenu__button:hover:before {
@@ -528,7 +523,6 @@ body {
       margin: 0;
       height: 0;
       height: 0;
-      -webkit-transition: height 0.2s ease-in-out;
       transition: height 0.2s ease-in-out; }
     .megadraft-editor .toolbar--error .toolbar__wrapper {
       background-color: #E83F26; }
@@ -549,7 +543,6 @@ body {
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
       left: -50%;
       position: relative;
-      -webkit-transition: background-color 0.2s ease-in-out;
       transition: background-color 0.2s ease-in-out; }
     .megadraft-editor .toolbar__list {
       padding: 0 8px;
@@ -567,7 +560,6 @@ body {
       border-style: solid;
       border-color: #181818 transparent transparent;
       margin-left: -8px;
-      -webkit-transition: border-color 0.2s ease-in-out;
       transition: border-color 0.2s ease-in-out; }
     .megadraft-editor .toolbar__item {
       display: inline-block;
@@ -933,7 +925,6 @@ body {
 .related-articles__inputs {
   display: table-cell;
   padding: 16px 24px 24px 24px;
-  -webkit-transition: padding 0.35s ease-in-out;
   transition: padding 0.35s ease-in-out; }
 
 .related-articles__trash {
@@ -944,7 +935,6 @@ body {
   display: table-cell;
   line-height: 0;
   overflow: hidden;
-  -webkit-transition: width 0.35s ease-in-out;
   transition: width 0.35s ease-in-out;
   vertical-align: middle;
   width: 0; }
