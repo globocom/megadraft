@@ -123,8 +123,8 @@ export default class Toolbar extends Component {
           left: selectionCoords.offsetLeft
         }
       }, state => {
-        const minOffsetLeft = this.props.minOffsetLeft || 5;
-        const minOffsetRight = this.props.minOffsetRight || 5;
+        const minOffsetLeft = 5;
+        const minOffsetRight = 5;
         const toolbarDimensions = toolbar.getBoundingClientRect();
 
         if (toolbarDimensions.left < minOffsetLeft) {

@@ -342,8 +342,6 @@ export default class MegadraftEditor extends Component {
             actions: this.props.actions,
             entityInputs: this.entityInputs,
             shouldDisplayToolbarFn: this.props.shouldDisplayToolbarFn,
-            minOffsetLeft: this.props.minOffsetLeft,
-            minOffsetRight: this.props.minOffsetRight,
           })}
         </div>
       </div>
