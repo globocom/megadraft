@@ -651,7 +651,8 @@ describe("MegadraftEditor Component", () => {
         sidebarOnlyOnEmptyBlock={true}/>
     );
     const sidebar = wrapperWithEmptyBlock.find(Sidebar);
-    expect(sidebar.html()).to.equal("<div class=\"sidebar\"><div class=\"sidebar__menu\" style=\"top: 0px;\"><ul class=\"sidebar__sidemenu-wrapper\"><span></span></ul></div></div>");
+    const contentSidebar = sidebar.find(".sidebar__sidemenu-wrapper");
+    expect(contentSidebar.children().length).to.equal(1);
   });
   it("sould render sidebar on empty block", function () {
     const editorState = EditorState.acceptSelection(this.editorState, SelectionState.createEmpty("6i98s"));
@@ -663,6 +664,7 @@ describe("MegadraftEditor Component", () => {
         sidebarOnlyOnEmptyBlock={true}/>
     );
     const sidebar = wrapperWithEmptyBlock.find(Sidebar);
-    expect(sidebar.html()).to.equal("<div class=\"sidebar\"><div class=\"sidebar__menu\" style=\"top: 0px;\"><ul class=\"sidebar__sidemenu-wrapper\"><li class=\"sidemenu\"><button type=\"button\" class=\"sidemenu__button\"><svg class=\"sidemenu__button__icon\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><g fill=\"currentColor\" fill-rule=\"evenodd\"><path d=\"M11 6h2v12h-2z\"></path><path d=\"M18 11v2H6v-2z\"></path></g></svg></button><div><ul class=\"sidemenu__items\" style=\"max-height: 0;\"><li class=\"sidemenu__item\"><button class=\"sidemenu__button\" type=\"button\" title=\"Image\"><svg class=\"sidemenu__button__icon\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M18.222 6H5.778C4.8 6 4 6.6 4 7.333v9.334C4 17.4 4.8 18 5.778 18h12.444C19.2 18 20 17.4 20 16.667V7.333C20 6.6 19.2 6 18.222 6zm-4.084 4l-3 4.51L9 11.503 6 16h12l-3.862-6z\" fill=\"currentColor\" fill-rule=\"evenodd\"></path></svg></button></li><li class=\"sidemenu__item\"><button class=\"sidemenu__button\" type=\"button\" title=\"Video\"><svg class=\"sidemenu__button__icon\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path fill=\"currentColor\" d=\"M10 9v6l5-3-5-3zm8.222-3H5.778C4.8 6 4 6.6 4 7.333v9.334C4 17.4 4.8 18 5.778 18h12.444C19.2 18 20 17.4 20 16.667V7.333C20 6.6 19.2 6 18.222 6z\" fill-rule=\"evenodd\"></path></svg></button></li></ul></div></li></ul></div></div>");
+    const contentSidebar = sidebar.find(".sidebar__sidemenu-wrapper .sidemenu");
+    expect(contentSidebar.children().length).to.be.at.least(2);
   });
 });
