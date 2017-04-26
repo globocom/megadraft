@@ -563,6 +563,7 @@ describe("MegadraftEditor Component", () => {
         sidebarRendererFn={renderCustomSidebar}
         modalOptions={this.modalOptions}
         sidebarOnlyOnEmptyBlock={false} />
+        sidebarHorizontal={false}/>
     );
 
     const component = wrapper.get(0);
@@ -574,6 +575,7 @@ describe("MegadraftEditor Component", () => {
       maxSidebarButtons: this.maxSidebarButtons,
       modalOptions: this.modalOptions,
       onlyOnEmptyBlock: false,
+      sidebarHorizontal: false,
     };
     expect(renderCustomSidebar.calledWith(expectedProps)).to.be.true;
   });
