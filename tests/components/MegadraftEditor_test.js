@@ -552,7 +552,7 @@ describe("MegadraftEditor Component", () => {
         maxSidebarButtons= {this.maxSidebarButtons}
         sidebarRendererFn={renderCustomSidebar}
         modalOptions={this.modalOptions}
-        sidebarHorizontal={false}/>
+        horizontalSidebar={false}/>
     );
 
     const component = wrapper.get(0);
@@ -563,7 +563,7 @@ describe("MegadraftEditor Component", () => {
       readOnly: false,
       maxSidebarButtons: this.maxSidebarButtons,
       modalOptions: this.modalOptions,
-      sidebarHorizontal: false,
+      horizontalSidebar: false,
     };
     expect(renderCustomSidebar.calledWith(expectedProps)).to.be.true;
   });

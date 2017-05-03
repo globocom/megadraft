@@ -254,7 +254,7 @@ export default class SideBar extends Component {
               plugins={this.getValidSidebarPlugins()}
               maxSidebarButtons={this.props.maxSidebarButtons}
               modalOptions={this.props.modalOptions}
-              isHorizontal={this.props.sidebarHorizontal}
+              isHorizontal={this.props.horizontalSidebar}
               />
           </ul>
         </div>
