@@ -30,6 +30,9 @@ Here are the props that `MegadraftEditor` accepts:
   Check the following sections for more info.
 - `shouldDisplayToolbarFn`: (optional) Boolean-valued function fired when
   editor state changes. It allows to control whether or not the Toolbar should be shown.
+- `horizontalSidebar`: (optional) Boolean, default is false, allow to display and animate
+  the sidebar horizontally instead of the default behavior, which is vertical. This option
+  is compatible with `maxSidebarButtons`
 
 Check the following sections for more info.
 
