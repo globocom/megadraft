@@ -31,27 +31,18 @@ class ModalWithPlugins extends Component {
   }
 
   onChange(editorState) {
+    this.props.onChange(editorState);
     this.setState({editorState: editorState});
   }
 
   render() {
-    let onChange = this.onChange;
-    if (this.props.onChange) {
-      onChange = this.props.onChange;
-    }
-
-    let toggleModalVisibility = sinon.spy();
-    if (this.props.toggleModalVisibility) {
-      toggleModalVisibility = this.props.toggleModalVisibility;
-    }
-
     return (
       <div ref="editor">
         <ModalPluginList
           handleModal={this.handleModal}
           plugins={this.fakePlugins}
-          onChange={onChange}
-          toggleModalVisibility={toggleModalVisibility}
+          onChange={this.onChange}
+          toggleModalVisibility={this.props.toggleModalVisibility}
           editorState={this.props.editorState} />
       </div>
     );
@@ -59,9 +50,13 @@ class ModalWithPlugins extends Component {
 }
 
 describe("Sidebar Modal Component", function() {
+
   beforeEach(function() {
+    this.onChangeSpy = sinon.spy();
+    this.toggleModalVisibilitySpy = sinon.spy();
+
     this.wrapper = mount(
-      <ModalWithPlugins />
+      <ModalWithPlugins onChange={this.onChangeSpy} toggleModalVisibility={this.toggleModalVisibilitySpy}/>
     );
   });
 
@@ -91,24 +86,16 @@ describe("Sidebar Modal Component", function() {
   });
 
   it("should callback a function received when receives onChange call", function() {
-    const onChangeSpy = sinon.spy();
-    this.wrapper = mount(
-      <ModalWithPlugins onChange={onChangeSpy} />
-    );
     const newEditorState = {};
     const modal = this.wrapper.find(ModalPluginList);
     modal.getNode().onChange(newEditorState);
-    expect(onChangeSpy).to.be.calledWith(newEditorState);
+    expect(this.onChangeSpy).to.be.calledWith(newEditorState);
   });
 
   it("should toggle visibility when receives onChange call", function() {
-    const toggleModalVisibility = sinon.spy();
-    this.wrapper = mount(
-      <ModalWithPlugins toggleModalVisibility={toggleModalVisibility} />
-    );
     const newEditorState = {};
     const modal = this.wrapper.find(ModalPluginList);
     modal.getNode().onChange(newEditorState);
-    expect(toggleModalVisibility).to.be.called;
+    expect(this.toggleModalVisibilitySpy).to.be.called;
   });
 });
