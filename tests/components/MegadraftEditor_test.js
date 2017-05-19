@@ -189,7 +189,7 @@ describe("MegadraftEditor Component", () => {
     expect(wrapper.ref("draft").props().handlePastedText).to.equal(handlePastedText);
   });
 
-  it("cant overridde megadraft props via extra props", function() {
+  it("can't override megadraft props via extra props", function() {
     const blockRendererFn = (text) => { console.log(text); };
     const wrapper = mount(
       <MegadraftEditor
