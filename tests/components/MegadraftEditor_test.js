@@ -178,7 +178,7 @@ describe("MegadraftEditor Component", () => {
   });
 
   it("passes extra props to the draft-js editor", function() {
-    const handlePastedText = (text) => { console.log(text); };
+    const handlePastedText = (text) => { return text; };
     const wrapper = mount(
       <MegadraftEditor
         editorState={this.editorState}
@@ -190,7 +190,7 @@ describe("MegadraftEditor Component", () => {
   });
 
   it("can't override megadraft props via extra props", function() {
-    const blockRendererFn = (text) => { console.log(text); };
+    const blockRendererFn = (text) => { return text; };
     const wrapper = mount(
       <MegadraftEditor
         editorState={this.editorState}
@@ -202,7 +202,7 @@ describe("MegadraftEditor Component", () => {
   });
 
   it("allows blockStyleFn to be overridden", function() {
-    const blockStyleFn = (text) => { console.log(text); };
+    const blockStyleFn = (text) => { return text; };
     const wrapper = mount(
       <MegadraftEditor
         editorState={this.editorState}
