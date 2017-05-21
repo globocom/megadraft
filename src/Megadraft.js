@@ -17,18 +17,18 @@ import Toolbar from "./components/Toolbar";
 import * as utils from "./utils";
 
 const Megadraft = {
-  DraftJS: DraftJS,
+  DraftJS,
+  insertDataBlock,
+  Media,
+  MegadraftEditor,
+  MegadraftIcons,
+  MegadraftMediaMessage,
+  MegadraftPlugin,
+  Sidebar,
+  Toolbar,
   editorStateFromRaw: utils.editorStateFromRaw,
   editorStateToJSON: utils.editorStateToJSON,
-  createTypeStrategy: utils.createTypeStrategy,
-  insertDataBlock: insertDataBlock,
-  Media: Media,
-  MegadraftEditor: MegadraftEditor,
-  MegadraftIcons: MegadraftIcons,
-  MegadraftMediaMessage: MegadraftMediaMessage,
-  MegadraftPlugin: MegadraftPlugin,
-  Sidebar: Sidebar,
-  Toolbar: Toolbar
+  createTypeStrategy: utils.createTypeStrategy
 };
 
-module.exports = Megadraft;
+export default Megadraft;
