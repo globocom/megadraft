@@ -221,7 +221,7 @@ export default class SideBar extends Component {
     let top = element.getBoundingClientRect().top - 4 - containerTop;
     top = Math.max(0, Math.floor(top));
 
-    if (this.state.top !== top) {
+    if (this.state.top !== top && top > 0) {
       this.setState({
         top: top
       });
