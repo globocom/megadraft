@@ -16,9 +16,12 @@ let expect = chai.expect;
 describe("BlockInput Component", function() {
 
   beforeEach(function() {
+
+    this.onChange = function(e) {return e;};
+
     this.renderComponent = function (props) {
       props = props || {};
-      return mount(<BlockInput {...props} />);
+      return mount(<BlockInput onChange={this.onChange} {...props} />);
     };
   });
 
