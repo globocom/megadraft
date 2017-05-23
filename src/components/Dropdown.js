@@ -23,7 +23,8 @@ export default class Dropdown extends Component {
       })
     ),
     selected: PropTypes.string,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    disableForSingleItem: PropTypes.bool
   }
 
   constructor(props) {
@@ -40,6 +41,11 @@ export default class Dropdown extends Component {
   isEmpty() {
     const items = this.props.items || [];
     return (items.length == 0) ? true : false;
+  }
+
+  isSingleItem() {
+    const items = this.props.items || [];
+    return (items.length == 1) ? true : false;
   }
 
   onChange(selected) {
@@ -62,6 +68,9 @@ export default class Dropdown extends Component {
   }
 
   toggleDropDown(event) {
+    if(this.isSingleItem() && this.props.disableForSingleItem) {
+      return null;
+    }
     this.setState({isOpen: !this.state.isOpen});
   }
 
@@ -105,6 +114,9 @@ export default class Dropdown extends Component {
       "dropdown__arrow--open": isOpen
     });
 
+    const dropdownArrow = (<icons.DropdownArrow className={arrowClassName} />);
+    const dropdownSection = (this.isSingleItem() && this.props.disableForSingleItem) ? null : dropdownArrow;
+
     return(
       <div className={wrapperClassName} onClick={this.toggleDropDown}>
         <DropdownItem
@@ -112,7 +124,7 @@ export default class Dropdown extends Component {
           className="dropdown__item--selected"
           onMouseDown={this.preventSelection}>
 
-          <icons.DropdownArrow className={arrowClassName} />
+          {dropdownSection}
         </DropdownItem>
 
         <ul className={dropdownClassName}>

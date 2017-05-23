@@ -72,4 +72,26 @@ describe("Dropdown Component", function() {
     wrapper.simulate("click");
     expect(this.component.state("isOpen")).to.be.false;
   });
+
+  it("does not display a dropdown arrow for a single item when disableForSingleItem is true", function () {
+
+    const selected = "jazz";
+    const onChange = sinon.spy();
+    const dropdownItems = [
+      {"key": "jazz", "icon": icons.MediaBigIcon, "label": "Jazz"}
+    ];
+
+    this.disabledDropdownComponent = mount(
+      <Dropdown
+        items={dropdownItems}
+        selected={selected}
+        onChange={onChange}
+        disableForSingleItem={true} />
+    );
+
+    const wrapper = this.disabledDropdownComponent.find("div").first();
+    wrapper.simulate("click");
+    expect(this.disabledDropdownComponent.state("isOpen")).to.be.false;
+
+  });
 });

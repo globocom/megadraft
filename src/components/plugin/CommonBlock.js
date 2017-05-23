@@ -44,6 +44,7 @@ export default class CommonBlock extends Component {
           <Dropdown
             items={options.displayOptions}
             selected={data.display || options.defaultDisplay}
+            disableForSingleItem={options.disableForSingleItem}
             onChange={this._handleDisplayChange} />
 
           <BlockActionGroup items={this.props.actions} />
