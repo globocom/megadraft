@@ -16,7 +16,7 @@ export default class ModalPluginItem extends Component {
   }
 
   handleClick(e) {
-    this.myButton.onClick(e);
+    this.buttonEl.onClick(e);
   }
 
   closeModal() {
@@ -32,7 +32,7 @@ export default class ModalPluginItem extends Component {
         className="megadraft-modal__item"
         onClick={this.closeModal} >
         <Button
-          ref={(button)=>{this.myButton = button;}}
+          ref={(el)=>{this.buttonEl = el;}}
           className="megadraft-modal__button"
           title={item.title}
           editorState={this.props.editorState}

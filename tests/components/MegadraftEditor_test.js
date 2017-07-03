@@ -169,7 +169,7 @@ describe("MegadraftEditor Component", () => {
   });
 
   it("has the initial text", function() {
-    expect(this.component.refs.editor.textContent).to.have.string("Hello World!");
+    expect(this.component.editorEl.textContent).to.have.string("Hello World!");
   });
 
   it("renders Media component", function() {
@@ -186,7 +186,7 @@ describe("MegadraftEditor Component", () => {
         handlePastedText={handlePastedText}
       />
     );
-    expect(wrapper.ref("draft").props().handlePastedText).to.equal(handlePastedText);
+    expect(wrapper.find(Editor).props().handlePastedText).to.equal(handlePastedText);
   });
 
   it("can't override megadraft props via extra props", function() {
@@ -198,7 +198,7 @@ describe("MegadraftEditor Component", () => {
         blockRendererFn={blockRendererFn}
       />
     );
-    expect(wrapper.ref("draft").props().blockRendererFn).to.not.equal(blockRendererFn);
+    expect(wrapper.find(Editor).props().blockRendererFn).to.not.equal(blockRendererFn);
   });
 
   it("allows blockStyleFn to be overridden", function() {
@@ -210,7 +210,7 @@ describe("MegadraftEditor Component", () => {
         blockStyleFn={blockStyleFn}
       />
     );
-    expect(wrapper.ref("draft").props().blockStyleFn).to.equal(blockStyleFn);
+    expect(wrapper.find(Editor).props().blockStyleFn).to.equal(blockStyleFn);
   });
 
   it("reset blockStyle in new block if resetStyle is true", function() {
@@ -608,8 +608,6 @@ describe("MegadraftEditor Component", () => {
 
   it("passes required props to default toolbar", function() {
     const toolbar = this.wrapper.find(Toolbar);
-    // editor is undefined :-/
-    //expect(toolbar.prop("editor")).to.equal(this.component.refs.editor);
     expect(toolbar.prop("actions")).to.equal(this.component.props.actions);
     expect(toolbar.prop("entityInputs")).to.equal(this.component.entityInputs);
     expect(toolbar.prop("onChange")).to.equal(this.component.onChange);

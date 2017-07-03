@@ -209,7 +209,7 @@ export default class SideBar extends Component {
   }
 
   setBarPosition() {
-    const container = ReactDOM.findDOMNode(this.refs.container);
+    const container = ReactDOM.findDOMNode(this.containerEl);
 
     const element = getSelectedBlockElement();
 
@@ -233,7 +233,7 @@ export default class SideBar extends Component {
       return null;
     }
     return (
-      <div ref="container" className="sidebar">
+      <div ref={(el) => { this.containerEl = el; }} className="sidebar">
         <div style={{top: `${this.state.top}px`}} className="sidebar__menu">
           <ul className="sidebar__sidemenu-wrapper">
             <SideMenu

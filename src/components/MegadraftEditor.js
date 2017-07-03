@@ -234,7 +234,7 @@ export default class MegadraftEditor extends Component {
   }
 
   focus() {
-    this.refs.draft.focus();
+    this.draftEl.focus();
   }
 
   setReadOnly(readOnly) {
@@ -314,7 +314,7 @@ export default class MegadraftEditor extends Component {
         <div
           className="megadraft-editor"
           id="megadraft-editor"
-          ref="editor">
+          ref={(el) => { this.editorEl = el; }}>
           {this.renderSidebar({
             plugins: this.plugins,
             editorState: this.props.editorState,
@@ -325,7 +325,7 @@ export default class MegadraftEditor extends Component {
           })}
           <Editor
             {...this.props}
-            ref="draft"
+            ref={(el) => { this.draftEl = el; }}
             readOnly={this.state.readOnly}
             plugins={this.plugins}
             blockRendererFn={this.mediaBlockRenderer}
@@ -337,7 +337,7 @@ export default class MegadraftEditor extends Component {
             onChange={this.onChange}
           />
           {this.renderToolbar({
-            editor: this.refs.editor,
+            editor: this.editorEl,
             editorState: this.props.editorState,
             readOnly: this.state.readOnly,
             onChange: this.onChange,
