@@ -104,8 +104,8 @@ export default class Toolbar extends Component {
 
   setBarPosition() {
     const editor = this.props.editor;
-    const toolbar = this.refs.toolbar;
-    const arrow = this.refs.arrow;
+    const toolbar = this.toolbarEl;
+    const arrow = this.arrowEl;
     const selectionCoords = getSelectionCoords(editor, toolbar);
 
     if (!selectionCoords) {
@@ -142,9 +142,9 @@ export default class Toolbar extends Component {
 
   componentDidUpdate() {
     // reset toolbar position every time
-    if (this.refs.toolbar && this.refs.arrow) {
-      this.refs.toolbar.style.left = "";
-      this.refs.arrow.style.left = "";
+    if (this.toolbarEl && this.arrowEl) {
+      this.toolbarEl.style.left = "";
+      this.arrowEl.style.left = "";
     }
     if (this.props.shouldDisplayToolbarFn()) {
       return this.setBarPosition();
@@ -274,18 +274,16 @@ export default class Toolbar extends Component {
     });
 
     return (
-      <div className={toolbarClass}
-           style={this.state.position}
-           ref="toolbarWrapper">
+      <div className={toolbarClass} style={this.state.position}>
         <div style={{position: "absolute", bottom: 0}}>
-          <div className="toolbar__wrapper" ref="toolbar">
+          <div className="toolbar__wrapper" ref={(el) => { this.toolbarEl = el; }}>
             {
               this.state.editingEntity ?
               this.renderEntityInput(this.state.editingEntity) :
               this.renderToolList()
             }
             <p className="toolbar__error-msg">{this.state.error}</p>
-            <span className="toolbar__arrow" ref="arrow"/>
+            <span className="toolbar__arrow" ref={(el) => { this.arrowEl = el; }} />
           </div>
         </div>
       </div>
