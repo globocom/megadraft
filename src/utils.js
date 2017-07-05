@@ -77,3 +77,32 @@ export function createTypeStrategy(type) {
     );
   };
 }
+
+/**
+ * Returns a wrapper for the given function which cannot be called
+ * more often than the given interval. Every time the wrapper is called
+ * a timeout gets reset to the interval's number of ms before calling the fn.
+ *
+ * Keep attention to bind the correct context to the provided funtion using bind() or '::'!
+ *
+ * @export
+ * @param {function} fn The function to execute after the given interval.
+ * @param {number} [interval=100] The interval to wait for before calling the wrapped function.
+ * @example
+ * ```
+ * const delayedLog = delayCall(::console.log, 200);
+ * delayedLog('hans');
+ * delayedLog('heiri');
+ * // logs 'heiri' after 200ms, 'hans' won't be logged at all.
+ * ```
+ * @returns {void}
+ */
+export function delayCall(fn, interval = 100) {
+  let timeout;
+  return function (...args) {
+    if (timeout) {
+      window.clearTimeout(timeout);
+    }
+    window.setTimeout(() => fn.apply(window, args), interval);
+  };
+}
