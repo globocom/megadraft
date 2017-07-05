@@ -17,7 +17,8 @@ import {
     getDefaultKeyBinding,
     EditorState,
     genKey,
-    ContentBlock
+    ContentBlock,
+    SelectionState
 } from "draft-js";
 import Immutable from "immutable";
 
@@ -178,10 +179,11 @@ export default class MegadraftEditor extends Component {
         isBackward: false
       })
     });
-
     const noStyle = Immutable.OrderedSet([]);
     const resetState = EditorState.push(editorState, newContentState, "split-block");
-    const noStyleState = EditorState.setInlineStyleOverride(resetState, noStyle);
+    const emptySelection = SelectionState.createEmpty(emptyBlockKey);
+    const editorSelected = EditorState.forceSelection(resetState, emptySelection);
+    const noStyleState = EditorState.setInlineStyleOverride(editorSelected, noStyle);
     this.props.onChange(noStyleState);
   }
 
@@ -327,7 +329,7 @@ export default class MegadraftEditor extends Component {
             readOnly={this.state.readOnly}
             plugins={this.plugins}
             blockRendererFn={this.mediaBlockRenderer}
-            blockStyleFn={this.blockStyleFn}
+            blockStyleFn={this.props.blockStyleFn || this.blockStyleFn}
             onTab={this.onTab}
             handleKeyCommand={this.handleKeyCommand}
             handleReturn={this.props.handleReturn || this.handleReturn}

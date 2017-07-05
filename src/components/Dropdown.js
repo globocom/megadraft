@@ -57,6 +57,7 @@ export default class Dropdown extends Component {
   }
 
   preventSelection(event) {
+    window.getSelection().empty();
     event.preventDefault();
   }
 

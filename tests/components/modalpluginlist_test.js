@@ -6,6 +6,7 @@
 
 import React, {Component} from "react";
 import chai from "chai";
+import sinon from "sinon";
 import {mount} from "enzyme";
 import cp from "utils-copy";
 
@@ -30,6 +31,7 @@ class ModalWithPlugins extends Component {
   }
 
   onChange(editorState) {
+    this.props.onChange(editorState);
     this.setState({editorState: editorState});
   }
 
@@ -40,6 +42,7 @@ class ModalWithPlugins extends Component {
           handleModal={this.handleModal}
           plugins={this.fakePlugins}
           onChange={this.onChange}
+          toggleModalVisibility={this.props.toggleModalVisibility}
           editorState={this.props.editorState} />
       </div>
     );
@@ -47,9 +50,13 @@ class ModalWithPlugins extends Component {
 }
 
 describe("Sidebar Modal Component", function() {
+
   beforeEach(function() {
+    this.onChangeSpy = sinon.spy();
+    this.toggleModalVisibilitySpy = sinon.spy();
+
     this.wrapper = mount(
-      <ModalWithPlugins />
+      <ModalWithPlugins onChange={this.onChangeSpy} toggleModalVisibility={this.toggleModalVisibilitySpy}/>
     );
   });
 
@@ -76,5 +83,19 @@ describe("Sidebar Modal Component", function() {
     const plugin = modal.find("VideoButton");
 
     expect(plugin.length).to.be.at.least(1);
+  });
+
+  it("should callback a function received when receives onChange call", function() {
+    const newEditorState = {};
+    const modal = this.wrapper.find(ModalPluginList);
+    modal.getNode().onChange(newEditorState);
+    expect(this.onChangeSpy).to.be.calledWith(newEditorState);
+  });
+
+  it("should toggle visibility when receives onChange call", function() {
+    const newEditorState = {};
+    const modal = this.wrapper.find(ModalPluginList);
+    modal.getNode().onChange(newEditorState);
+    expect(this.toggleModalVisibilitySpy).to.be.called;
   });
 });

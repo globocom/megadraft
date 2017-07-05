@@ -178,7 +178,7 @@ describe("MegadraftEditor Component", () => {
   });
 
   it("passes extra props to the draft-js editor", function() {
-    const handlePastedText = (text) => { console.log(text); };
+    const handlePastedText = (text) => { return text; };
     const wrapper = mount(
       <MegadraftEditor
         editorState={this.editorState}
@@ -189,8 +189,8 @@ describe("MegadraftEditor Component", () => {
     expect(wrapper.ref("draft").props().handlePastedText).to.equal(handlePastedText);
   });
 
-  it("cant overridde megadraft props via extra props", function() {
-    const blockRendererFn = (text) => { console.log(text); };
+  it("can't override megadraft props via extra props", function() {
+    const blockRendererFn = (text) => { return text; };
     const wrapper = mount(
       <MegadraftEditor
         editorState={this.editorState}
@@ -199,6 +199,18 @@ describe("MegadraftEditor Component", () => {
       />
     );
     expect(wrapper.ref("draft").props().blockRendererFn).to.not.equal(blockRendererFn);
+  });
+
+  it("allows blockStyleFn to be overridden", function() {
+    const blockStyleFn = (text) => { return text; };
+    const wrapper = mount(
+      <MegadraftEditor
+        editorState={this.editorState}
+        onChange={this.onChange}
+        blockStyleFn={blockStyleFn}
+      />
+    );
+    expect(wrapper.ref("draft").props().blockStyleFn).to.equal(blockStyleFn);
   });
 
   it("reset blockStyle in new block if resetStyle is true", function() {

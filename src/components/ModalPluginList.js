@@ -14,10 +14,16 @@ export default class ModalPluginList extends Component {
   constructor(props) {
     super(props);
     this.modalClose = ::this.modalClose;
+    this.onChange = ::this.onChange;
   }
 
   modalClose() {
     this.props.toggleModalVisibility();
+  }
+
+  onChange() {
+    this.props.toggleModalVisibility();
+    this.props.onChange(...arguments);
   }
 
   render() {
@@ -27,7 +33,7 @@ export default class ModalPluginList extends Component {
         <ModalPluginItem
           toggleModalVisibility={this.modalClose}
           plugins={this.props.plugins}
-          onChange={this.props.onChange}
+          onChange={this.onChange}
           editorState={this.props.editorState}
         />
       </ModalBody>
