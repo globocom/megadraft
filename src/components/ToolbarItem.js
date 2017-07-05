@@ -37,7 +37,9 @@ export default class ToolbarItem extends Component {
     return (
       <li className={className}>
         <button
-          onClick={() => this.toggleAction(this.props)}
+          onClick={() => {
+            this.toggleAction(this.props);
+          }}
           type="button"
           className="toolbar__button">
           <Icon />

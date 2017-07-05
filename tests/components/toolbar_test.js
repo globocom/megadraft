@@ -41,7 +41,8 @@ export default class ToolbarWrapper extends Component {
           actions={this.props.actions}
           readOnly={this.props.readOnly}
           entityInputs={this.props.entityInputs}
-          onChange={this.onChange} />
+          onChange={this.onChange}
+          editorHasFocus={true} />
       </div>
     );
   }
