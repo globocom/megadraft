@@ -42,7 +42,8 @@ export default class MegadraftEditor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      readOnly: this.props.readOnly || false
+      readOnly: this.props.readOnly || false,
+      hasFocus: false
     };
 
     this.onChange = ::this.onChange;
@@ -51,6 +52,8 @@ export default class MegadraftEditor extends Component {
 
     this.handleKeyCommand = ::this.handleKeyCommand;
     this.handleReturn = ::this.handleReturn;
+    this.handleFocus = ::this.handleFocus;
+    this.handleBlur = ::this.handleBlur;
 
     this.setReadOnly = ::this.setReadOnly;
     this.getReadOnly = ::this.getReadOnly;
@@ -261,6 +264,18 @@ export default class MegadraftEditor extends Component {
     return notFoundPlugin;
   }
 
+  handleFocus() {
+    this.setState({
+      hasFocus: true
+    });
+  }
+
+  handleBlur() {
+    this.setState({
+      hasFocus: false
+    });
+  }
+
   mediaBlockRenderer(block) {
     if (block.getType() !== "atomic") {
       return null;
@@ -314,7 +329,10 @@ export default class MegadraftEditor extends Component {
         <div
           className="megadraft-editor"
           id="megadraft-editor"
-          ref={(el) => { this.editorEl = el; }}>
+          ref={(el) => { this.editorEl = el; }}
+          onBlur={this.handleBlur}
+          onFocus={this.handleFocus}
+        >
           {this.renderSidebar({
             plugins: this.plugins,
             editorState: this.props.editorState,
@@ -338,7 +356,9 @@ export default class MegadraftEditor extends Component {
           />
           {this.renderToolbar({
             editor: this.editorEl,
+            draft: this.refs.draft,
             editorState: this.props.editorState,
+            editorHasFocus: this.state.hasFocus,
             readOnly: this.state.readOnly,
             onChange: this.onChange,
             actions: this.props.actions,

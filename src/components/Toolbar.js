@@ -14,8 +14,11 @@ import {getSelectionCoords} from "../utils";
 export default class Toolbar extends Component {
   static defaultProps = {
     shouldDisplayToolbarFn() {
-      return !this.editorState.getSelection().isCollapsed();
+      return this.editorHasFocus && !this.editorState.getSelection().isCollapsed();
     },
+  }
+  static propTypes = {
+    editorHasFocus: React.PropTypes.bool
   }
 
   constructor(props) {
@@ -215,10 +218,11 @@ export default class Toolbar extends Component {
   }
 
   cancelEntity() {
-    this.props.editor && this.props.editor.focus();
     this.setState({
       editingEntity: null,
       error: null
+    }, () => {
+      this.props.draft && this.props.draft.focus();
     });
   }
   renderEntityInput(entityType) {
@@ -258,7 +262,7 @@ export default class Toolbar extends Component {
   }
   renderToolList() {
     return (
-      <ul className="toolbar__list" onMouseDown={(x) => {x.preventDefault();}}>
+      <ul className="toolbar__list">
         {this.props.actions.map(this.renderButton)}
       </ul>
     );
@@ -274,7 +278,14 @@ export default class Toolbar extends Component {
     });
 
     return (
-      <div className={toolbarClass} style={this.state.position}>
+      <div
+        className={toolbarClass}
+        style={this.state.position}
+        ref="toolbarWrapper"
+        onMouseDown={(e) => {
+          e.preventDefault();
+        }}
+      >
         <div style={{position: "absolute", bottom: 0}}>
           <div className="toolbar__wrapper" ref={(el) => { this.toolbarEl = el; }}>
             {
