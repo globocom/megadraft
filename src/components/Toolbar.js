@@ -52,7 +52,7 @@ export default class Toolbar extends Component {
     let current = null;
     let toggle = null;
     let active = null;
-    let key = item.label;
+    let key = item.label || `${item.type}-${position}`;
 
     switch(item.type) {
       case "custom": {
