@@ -103,6 +103,6 @@ export function delayCall(fn, interval = 100) {
     if (timeout) {
       window.clearTimeout(timeout);
     }
-    window.setTimeout(() => fn.apply(window, args), interval);
+    timeout = window.setTimeout(() => fn.apply(window, args), interval);
   };
 }

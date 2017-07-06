@@ -148,7 +148,6 @@ export default class Toolbar extends Component {
       this.refs.arrow.style.left = "";
     }
     if (this.props.shouldDisplayToolbarFn()) {
-      debugger;
       return this.setBarPosition();
     } else {
       if (this.state.show) {
