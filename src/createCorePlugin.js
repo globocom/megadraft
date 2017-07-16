@@ -10,6 +10,7 @@ import {
   EditorState,
   genKey,
   ContentBlock,
+  SelectionState,
   getDefaultKeyBinding,
 } from "draft-js";
 
@@ -174,7 +175,9 @@ export default function createCorePlugin (config = {}) {
 
       const noStyle = Immutable.OrderedSet([]);
       const resetState = EditorState.push(editorState, newContentState, "split-block");
-      const noStyleState = EditorState.setInlineStyleOverride(resetState, noStyle);
+      const emptySelection = SelectionState.createEmpty(emptyBlockKey);
+      const editorSelected = EditorState.forceSelection(resetState, emptySelection);
+      const noStyleState = EditorState.setInlineStyleOverride(editorSelected, noStyle);
       setEditorState(noStyleState);
     },
 
