@@ -31,4 +31,4 @@ const Megadraft = {
   createTypeStrategy: utils.createTypeStrategy
 };
 
-export default Megadraft;
+module.exports = Megadraft;
