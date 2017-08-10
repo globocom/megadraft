@@ -86,14 +86,14 @@ describe("Sidebar Modal Component", function() {
   it("should callback a function received when receives onChange call", function() {
     const newEditorState = {};
     const modal = this.wrapper.find(AtomicBlocksModalList);
-    modal.getNode().onChange(newEditorState);
+    modal.node.onChange(newEditorState);
     expect(this.onChangeSpy).to.be.calledWith(newEditorState);
   });
 
   it("should toggle visibility when receives onChange call", function() {
     const newEditorState = {};
     const modal = this.wrapper.find(AtomicBlocksModalList);
-    modal.getNode().onChange(newEditorState);
+    modal.node.onChange(newEditorState);
     expect(this.toggleModalVisibilitySpy).to.be.called;
   });
 });
