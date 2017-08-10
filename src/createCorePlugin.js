@@ -16,6 +16,7 @@ import {
 
 import notFoundAtomicBlock from "./atomicBlocks/not-found";
 import Media from "./components/Media";
+import {warnOnce} from "./utils";
 
 
 const NO_RESET_STYLE_DEFAULT = ["ordered-list-item", "unordered-list-item"];
@@ -56,14 +57,12 @@ export default function createCorePlugin (config = {}) {
         editable: false,
         props: {
           atomicBlock,
-          plugin: atomicBlock,
-          // TODO: warn about temporary compatibility for old plugins
-          // get plugin() {
-          //   console.warn("Megadraft will remove `blockProps.plugin` prop in future versions, please use `blockProps.atomicBlock` instead");
-          //   return atomicBlock;
-          // },
+          get plugin() {
+            warnOnce("Megadraft will remove `blockProps.plugin` prop in future versions, please use `blockProps.atomicBlock` instead");
+            return atomicBlock;
+          },
           get editorState() {
-            console.warn("Megadraft will remove `blockProps.editorState` prop in future versions, please use `blockProps.getEditorState` instead");
+            warnOnce("Megadraft will remove `blockProps.editorState` prop in future versions, please use `blockProps.getEditorState` instead");
             return getEditorState();
           },
           getEditorState,

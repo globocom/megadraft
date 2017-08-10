@@ -77,3 +77,13 @@ export function createTypeStrategy(type) {
     );
   };
 }
+
+const _warnings = [];
+
+export function warnOnce(message) {
+  if (_warnings.indexOf(message) !== -1) {
+    return;
+  }
+  _warnings.push(message);
+  console.warn(message);
+}
