@@ -96,6 +96,7 @@ function simulateReturn ({initialState, props, event={}}) {
     editorState: initialState,
     ...props
   });
+  corePlugin.initialize(PluginFunctions);
   const result = corePlugin.handleReturn(event, initialState, PluginFunctions);
 
   const setEditorStateArgs = PluginFunctions.setEditorState.args[0];
@@ -291,15 +292,18 @@ describe("createCorePlugin", () => {
     beforeEach(function () {
       this.corePlugin = createCorePlugin();
       this.editorState = editorStateFromRaw(INITIAL_CONTENT);
-      this.createPluginFunctions = (props) => {
-        return createPluginFunctions({
+      this.initializeCorePlugin = (props) => {
+        const PluginFunctions = createPluginFunctions({
           editorState: this.editorState,
           atomicBlocks: DEFAULT_ATOMIC_BLOCKS,
           setReadOnly: () => {},
           getReadOnly: () => {},
           ...props,
         });
+        this.corePlugin.initialize(PluginFunctions);
+        return PluginFunctions;
       };
+
       this.expectMediaRendererEqual = (result, PluginFunctions, props) => {
         expect(result).to.deep.equal({
           component: Media,
@@ -320,15 +324,18 @@ describe("createCorePlugin", () => {
     });
 
     it("ignores non-atomic blocks", function() {
+      this.initializeCorePlugin();
+
       const block = {getType: () => "metal"};
-      const result = this.corePlugin.blockRendererFn(block, this.createPluginFunctions());
+      const result = this.corePlugin.blockRendererFn(block);
       expect(result).to.be.null;
     });
 
     it("returns media renderer for registered atomicBlock", function() {
+      const PluginFunctions = this.initializeCorePlugin();
+
       const block = new FakeAtomicBlock("image");
-      const PluginFunctions = this.createPluginFunctions();
-      const result = this.corePlugin.blockRendererFn(block, PluginFunctions);
+      const result = this.corePlugin.blockRendererFn(block);
 
       this.expectMediaRendererEqual(result, PluginFunctions, {
         atomicBlock: image,
@@ -337,9 +344,10 @@ describe("createCorePlugin", () => {
     });
 
     it("returns media renderer with fallback for unregistered atomicBlock", function () {
+      const PluginFunctions = this.initializeCorePlugin();
+
       const block = new FakeAtomicBlock("unregistered");
-      const PluginFunctions = this.createPluginFunctions();
-      const result = this.corePlugin.blockRendererFn(block, PluginFunctions);
+      const result = this.corePlugin.blockRendererFn(block);
 
       this.expectMediaRendererEqual(result, PluginFunctions, {
         atomicBlock: NotFoundAtomicBlock,
@@ -348,15 +356,16 @@ describe("createCorePlugin", () => {
     });
 
     it("returns media renderer with atomicBlock from custom fallback", function () {
+      const PluginFunctions = this.initializeCorePlugin({
+        handleBlockNotFound: () => customFallbackAtomicBlock
+      });
+
       const customFallbackAtomicBlock = {
         blockComponent: (props) => <pre>{props.data.type}</pre>
       };
 
       const block = new FakeAtomicBlock("unregistered");
-      const PluginFunctions = this.createPluginFunctions({
-        handleBlockNotFound: () => customFallbackAtomicBlock
-      });
-      const result = this.corePlugin.blockRendererFn(block, PluginFunctions);
+      const result = this.corePlugin.blockRendererFn(block);
 
       this.expectMediaRendererEqual(result, PluginFunctions, {
         atomicBlock: customFallbackAtomicBlock,
@@ -365,11 +374,12 @@ describe("createCorePlugin", () => {
     });
 
     it("ignores empty atomicBlock from custom fallback", function () {
-      const block = new FakeAtomicBlock("unregistered");
-      const PluginFunctions = this.createPluginFunctions({
+      this.initializeCorePlugin({
         handleBlockNotFound: () => null
       });
-      const result = this.corePlugin.blockRendererFn(block, PluginFunctions);
+
+      const block = new FakeAtomicBlock("unregistered");
+      const result = this.corePlugin.blockRendererFn(block);
 
       expect(result).to.equal(null);
     });
@@ -384,6 +394,7 @@ describe("createCorePlugin", () => {
       ];
       this.editorState = editorStateFromRaw(INITIAL_CONTENT);
       this.PluginFunctions = createPluginFunctions({editorState: this.editorState, keyBindings});
+      this.corePlugin.initialize(this.PluginFunctions);
     });
 
     describe(".keyBindingFn", function () {

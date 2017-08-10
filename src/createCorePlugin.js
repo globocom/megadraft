@@ -22,7 +22,25 @@ import {warnOnce} from "./utils";
 const NO_RESET_STYLE_DEFAULT = ["ordered-list-item", "unordered-list-item"];
 
 export default function createCorePlugin (config = {}) {
+  let PluginFunctions;
+  let getProps;
+  let setEditorState;
+  let getEditorState;
+  let getReadOnly;
+  let setReadOnly;
+
   return {
+    initialize(_PluginFunctions) {
+      PluginFunctions = _PluginFunctions;
+      ({
+        getProps,
+        setEditorState,
+        getEditorState,
+        getReadOnly,
+        setReadOnly,
+      } = PluginFunctions);
+    },
+
     getAtomicBlocksByType(atomicBlocks) {
       return atomicBlocks.reduce((atomicBlocksByType, atomicBlock) => {
         atomicBlocksByType[atomicBlock.type] = atomicBlock;
@@ -30,15 +48,7 @@ export default function createCorePlugin (config = {}) {
       }, {});
     },
 
-    blockRendererFn(contentBlock, PluginFunctions) {
-      const {
-        setEditorState,
-        getEditorState,
-        getReadOnly,
-        setReadOnly,
-        getProps
-      } = PluginFunctions;
-
+    blockRendererFn(contentBlock) {
       if (contentBlock.getType() !== "atomic") {
         return null;
       }
@@ -78,7 +88,7 @@ export default function createCorePlugin (config = {}) {
       };
     },
 
-    handleBlockNotFound(contentBlock, {getProps}) {
+    handleBlockNotFound(contentBlock) {
       const {handleBlockNotFound} = getProps();
       if (handleBlockNotFound) {
         return handleBlockNotFound(contentBlock);
@@ -93,7 +103,7 @@ export default function createCorePlugin (config = {}) {
       }
     },
 
-    keyBindingFn(event, {getProps}) {
+    keyBindingFn(event) {
       const {keyBindings = []} = getProps();
 
       for (const kb of keyBindings) {
@@ -105,7 +115,7 @@ export default function createCorePlugin (config = {}) {
       return getDefaultKeyBinding(event);
     },
 
-    handleKeyCommand(command, editorState, {getProps, setEditorState}) {
+    handleKeyCommand(command) {
       const {keyBindings = []} = getProps();
 
       // external key bindings
@@ -117,7 +127,7 @@ export default function createCorePlugin (config = {}) {
         }
       }
 
-      const newState = RichUtils.handleKeyCommand(editorState, command);
+      const newState = RichUtils.handleKeyCommand(getEditorState(), command);
       if (newState) {
         setEditorState(newState);
         return "handled";
@@ -132,7 +142,7 @@ export default function createCorePlugin (config = {}) {
     * License: MIT
     */
     //Based on https://github.com/icelab/draft-js-block-breakout-plugin
-    resetBlockStyle(editorState, selection, contentState, currentBlock, blockType, setEditorState) {
+    resetBlockStyle(editorState, selection, contentState, currentBlock, blockType) {
       const {List} = Immutable;
       const emptyBlockKey = genKey();
 
@@ -180,12 +190,8 @@ export default function createCorePlugin (config = {}) {
       setEditorState(noStyleState);
     },
 
-    handleReturn(event, editorState, PluginFunctions) {
-      const {
-        setEditorState,
-        getProps
-      } = PluginFunctions;
-
+    handleReturn(event) {
+      const editorState = getEditorState();
       const props = getProps();
 
       if (props.softNewLines === false) {
@@ -210,7 +216,6 @@ export default function createCorePlugin (config = {}) {
             contentState,
             currentBlock,
             blockType,
-            setEditorState
           );
           return "handled";
         }
