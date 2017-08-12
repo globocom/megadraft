@@ -6,6 +6,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 import {withRouter, hashHistory, Router, Route, IndexRoute, Link} from "react-router";
 import Scroll from "react-scroll";
 import {StickyContainer, Sticky} from "react-sticky";
@@ -199,7 +200,7 @@ class Page extends React.Component {
 }
 
 Page.childContextTypes = {
-  muiTheme: React.PropTypes.object
+  muiTheme: PropTypes.object
 };
 
 ReactDOM.render((
