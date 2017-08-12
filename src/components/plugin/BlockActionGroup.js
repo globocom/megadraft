@@ -4,7 +4,8 @@
  * License: MIT
  */
 
-import React, {Component, PropTypes} from "react";
+import React, {Component} from "react";
+import PropTypes from "prop-types";
 
 import BlockAction from "./BlockAction";
 
@@ -12,8 +13,8 @@ import BlockAction from "./BlockAction";
 export default class BlockActionGroup extends Component {
 
   static propTypes = {
-    items: React.PropTypes.arrayOf(
-      React.PropTypes.shape({
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
         key: PropTypes.string.isRequired,
         icon: PropTypes.func.isRequired,
         action: PropTypes.func.isRequired

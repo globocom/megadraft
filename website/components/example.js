@@ -5,6 +5,7 @@
  */
 
 import React from "react";
+import PropTypes from "prop-types";
 
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import {grey300, grey900, white, indigo500} from "material-ui/styles/colors";
@@ -115,7 +116,7 @@ class Example extends React.Component {
 hljs.initHighlightingOnLoad();
 
 Example.childContextTypes = {
-  muiTheme: React.PropTypes.object.isRequired
+  muiTheme: PropTypes.object.isRequired
 };
 
 export default Example;

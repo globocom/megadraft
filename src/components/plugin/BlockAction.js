@@ -4,14 +4,14 @@
  * License: MIT
  */
 
-import React, {Component, PropTypes} from "react";
-
+import React, {Component} from "react";
+import PropTypes from "prop-types";
 
 export default
 class BlockAction extends Component {
 
   static propTypes = {
-    item: React.PropTypes.shape({
+    item: PropTypes.shape({
       key: PropTypes.string.isRequired,
       icon: PropTypes.func.isRequired,
       action: PropTypes.func.isRequired
