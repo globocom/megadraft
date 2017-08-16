@@ -84,7 +84,8 @@ class Example extends React.Component {
           onChange={this.onChange}
           keyBindings={this.keyBindings}
           resetStyleNewLine={this.resetStyleNewLine}
-          maxSidebarButtons={this.maxSidebarButtons}/>
+          maxSidebarButtons={this.maxSidebarButtons}
+        />
       </div>
     );
   }
