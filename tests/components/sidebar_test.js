@@ -9,8 +9,7 @@ import chai from "chai";
 import {mount} from "enzyme";
 import cp from "utils-copy";
 
-import Sidebar,
-  {ToggleButton, SideMenu} from "../../src/components/Sidebar";
+import Sidebar, {ToggleButton, SideMenu} from "../../src/components/Sidebar";
 import PluginsModal from "../../src/components/PluginsModal";
 import image from "../../src/plugins/image/plugin";
 import {editorStateFromRaw} from "../../src/utils";

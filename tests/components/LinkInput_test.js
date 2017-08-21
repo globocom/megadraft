@@ -28,8 +28,7 @@ describe("LinkInput Component", function() {
         cancelEntity={this.cancelEntity}
         setEntity={this.setEntity}
         setError={this.setError}
-        cancelError={this.cancelError}
-        />
+        cancelError={this.cancelError} />
     );
 
   });
