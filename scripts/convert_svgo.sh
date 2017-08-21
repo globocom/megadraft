@@ -20,7 +20,7 @@ import React from "react";
 export default class extends React.Component {
   render() {
     return (
-        $SVG_CONTENT
+      $SVG_CONTENT
     );
   }
 }
