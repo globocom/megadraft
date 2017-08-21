@@ -1,4 +1,3 @@
-const merge = require("merge");
 const path = require("path");
 
 const defaultConfig = {
@@ -16,32 +15,27 @@ const defaultConfig = {
     contentBase: "./"
   },
   resolve: {
-    extensions: ["", ".js", ".jsx"],
-    fallback: path.join(__dirname, "node_modules")
-  },
-  resolveLoader: {
-    root: path.join(__dirname, "node_modules")
+    modules: [
+      path.join(__dirname, "src"),
+      "node_modules"
+    ]
   },
   module: {
-    loaders: [
+    rules: [
       {
         exclude: /node_modules/,
-        loader: "babel"
+        loader: "babel-loader",
       },
       {
         test: /\.md$/,
-        loader: "raw"
-      },
-      {
-        test: /\.json$/,
-        loader: "json"
+        loader: "raw-loader"
       }
     ]
   }
 };
 
 function makeConfig (extra) {
-  const config = merge.recursive(true, defaultConfig, extra || {});
+  const config = Object.assign(true, defaultConfig, extra || {});
 
   return config;
 }
