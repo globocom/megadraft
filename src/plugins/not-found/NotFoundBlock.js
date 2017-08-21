@@ -26,8 +26,7 @@ export default class NotFoundBlock extends Component {
   render(){
     /* global __ */
     const message = __(
-      "Can't show plugin, component \"{type}\" not found.").replace(
-        "{type}", this.props.data.type);
+      "Can't show plugin, component \"{type}\" not found.").replace("{type}", this.props.data.type);
     return (
       <CommonBlock {...this.props} actions={this.actions}>
         <BlockContent className="block__notfound">

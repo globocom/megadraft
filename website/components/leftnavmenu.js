@@ -51,9 +51,10 @@ export default class LeftNavMenu extends React.Component {
                 <ListItem primaryText="Customization" key="customization" containerElement={<Link to="/docs/customization"/>}/>,
                 <ListItem primaryText="Custom Entities" key="custom-entities" containerElement={<Link to="/docs/custom-entities"/>}/>,
                 <ListItem primaryText="Plugins" key="plugins" containerElement={<Link to="/docs/plugins"/>}/>,
-                <ListItem primaryText="Saving & Loading"
-                          key="saving"
-                          containerElement={<Link to="/docs/saving-loading"/>}/>
+                <ListItem
+                  primaryText="Saving & Loading"
+                  key="saving"
+                  containerElement={<Link to="/docs/saving-loading"/>}/>
               ]}>Docs</ListItem>
             <ListItem primaryText="Github" href="https://github.com/globocom/megadraft" target="_blank"/>
             <ListItem primaryText="React" href="https://facebook.github.io/react" target="_blank"/>

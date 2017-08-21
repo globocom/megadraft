@@ -14,7 +14,7 @@ export default class Header extends React.Component {
   render() {
     return (
       <div className="page__header">
-      <div className="hero__container">
+        <div className="hero__container">
           <div className="hero__logo">
             <img className="hero__logo-svg" src="images/megadraft_white_version.svg" />
           </div>
@@ -28,7 +28,7 @@ export default class Header extends React.Component {
             Facebook's draft.js featuring a nice default<br />
             base of plugins and extensibility.
           </div>
-      </div>
+        </div>
       </div>
     );
   }

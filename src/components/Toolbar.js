@@ -249,7 +249,7 @@ export default class Toolbar extends Component {
           cancelError={this.cancelError}
           entity={entity}
           {...entityData}
-          />
+        />
       );
     } else {
       console.warn("unknown entity type: "+entityType);
@@ -279,8 +279,8 @@ export default class Toolbar extends Component {
           <div className="toolbar__wrapper" ref={(el) => { this.toolbarEl = el; }}>
             {
               this.state.editingEntity ?
-              this.renderEntityInput(this.state.editingEntity) :
-              this.renderToolList()
+                this.renderEntityInput(this.state.editingEntity) :
+                this.renderToolList()
             }
             <p className="toolbar__error-msg">{this.state.error}</p>
             <span className="toolbar__arrow" ref={(el) => { this.arrowEl = el; }} />
