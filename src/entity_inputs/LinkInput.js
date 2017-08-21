@@ -97,8 +97,8 @@ export default class LinkInput extends Component {
             className="toolbar__button toolbar__input-button">
             {
               this.props.entity ?
-              <icons.UnlinkIcon/> :
-              <icons.CloseIcon />
+                <icons.UnlinkIcon/> :
+                <icons.CloseIcon />
             }
           </button>
         </span>

@@ -12,13 +12,13 @@
 
 import React, {Component} from "react";
 import {
-    Editor,
-    RichUtils,
-    getDefaultKeyBinding,
-    EditorState,
-    genKey,
-    ContentBlock,
-    SelectionState
+  Editor,
+  RichUtils,
+  getDefaultKeyBinding,
+  EditorState,
+  genKey,
+  ContentBlock,
+  SelectionState
 } from "draft-js";
 import Immutable from "immutable";
 
@@ -139,7 +139,7 @@ export default class MegadraftEditor extends Component {
    *
    * License: MIT
    */
-   //Based on https://github.com/icelab/draft-js-block-breakout-plugin
+  //Based on https://github.com/icelab/draft-js-block-breakout-plugin
   resetBlockStyle(editorState, selection, contentState, currentBlock, blockType) {
     const {List} = Immutable;
     const emptyBlockKey = genKey();
