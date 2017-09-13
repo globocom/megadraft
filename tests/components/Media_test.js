@@ -74,7 +74,7 @@ describe("Media Component", function() {
     this.component.updateData({display: "big"});
 
     const editor = this.blockProps.onChange.args[0][0].toJS();
-    
+
     const lastChangeType = editor.lastChangeType;
 
     expect(lastChangeType).to.equal("change-block-data"); // checking if the last change type is the correct enum
