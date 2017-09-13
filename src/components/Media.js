@@ -5,7 +5,7 @@
  */
 
 import React, {Component} from "react";
-import {EditorState, SelectionState, Modifier, EditorChangeType} from "draft-js";
+import {EditorState, SelectionState, Modifier} from "draft-js";
 
 import MediaWrapper from "./MediaWrapper";
 
@@ -53,7 +53,7 @@ export default class Media extends Component {
     });
 
     const newContentState = Modifier.mergeBlockData(content, selection, data);
-    const newEditorState = EditorState.push(editorState, newContentState, 'change-block-data');
+    const newEditorState = EditorState.push(editorState, newContentState, "change-block-data");
 
     this.onChange(newEditorState);
   }
