@@ -66,14 +66,20 @@ describe("Media Component", function() {
     expect(this.wrapper.length).to.equal(1);
   });
 
-  it("updates data", function() {
+  it("updates data and correct change-type enum", function() {
     let data = this.block.getData();
 
     expect(data.get("display")).to.equal("medium");
 
     this.component.updateData({display: "big"});
 
-    const content = this.blockProps.onChange.args[0][0].toJS().currentContent;
+    const editor = this.blockProps.onChange.args[0][0].toJS();
+    
+    const lastChangeType = editor.lastChangeType;
+
+    expect(lastChangeType).to.equal("change-block-data"); // checking if the last change type is the correct enum
+
+    const content = editor.currentContent;
 
     const nextData = content.blockMap["9vgd"].data;
 
