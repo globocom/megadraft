@@ -4,7 +4,7 @@
   "description": "Rich Text editor built on top of draft.js",
   "main": "lib/Megadraft.js",
   "dependencies": {
-    "backstage-modal": "^0.2.5",
+    "backstage-modal": "^0.3.2",
     "classnames": "^2.2.5",
     "draft-js": "0.10.1",
     "immutable": "~3.7.4",
