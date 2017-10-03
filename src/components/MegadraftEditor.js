@@ -47,6 +47,7 @@ export default class MegadraftEditor extends Component {
     };
 
     this.onChange = ::this.onChange;
+    this.onTab = ::this.onTab;
 
     this.mediaBlockRenderer = ::this.mediaBlockRenderer;
 
