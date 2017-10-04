@@ -143,7 +143,7 @@ describe("MegadraftEditor Component", () => {
         onChange={this.onChange}
         keyBindings={keyBindings}/>
     );
-    this.component = this.wrapper.get(0);
+    this.component = this.wrapper.instance();
 
     this.wrapperWithReset = mount(
       <MegadraftEditorWrapper
@@ -223,7 +223,7 @@ describe("MegadraftEditor Component", () => {
 
     const editor = this.wrapperWithReset.find(MegadraftEditor);
 
-    editor.node.handleReturn({shiftKey:false});
+    editor.instance().handleReturn({shiftKey:false});
 
     const content = this.onChange.args[0][0].getCurrentContent();
     const newBlock = content.getBlockAfter("ag6qs");
@@ -241,7 +241,7 @@ describe("MegadraftEditor Component", () => {
 
     const editor = this.wrapperWithReset.find(MegadraftEditor);
 
-    editor.node.handleReturn({shiftKey:false});
+    editor.instance().handleReturn({shiftKey:false});
 
     const editorState = this.onChange.args[0][0];
     const inlineStyle = editorState.getCurrentInlineStyle();
@@ -259,7 +259,7 @@ describe("MegadraftEditor Component", () => {
 
     const editor = this.wrapperWithReset.find(MegadraftEditor);
 
-    editor.node.handleReturn({shiftKey:false});
+    editor.instance().handleReturn({shiftKey:false});
 
     const editorState = this.onChange.args[0][0];
     const inlineStyle = editorState.getCurrentInlineStyle();
@@ -277,7 +277,7 @@ describe("MegadraftEditor Component", () => {
 
     const editor = this.wrapperWithReset.find(MegadraftEditor);
 
-    editor.node.handleReturn({shiftKey:false});
+    editor.instance().handleReturn({shiftKey:false});
 
     const content = this.onChange.args[0][0].getCurrentContent();
     const newBlock = content.getBlockAfter("bqjdr");
@@ -295,7 +295,7 @@ describe("MegadraftEditor Component", () => {
 
     const editor = this.wrapperWithoutReset.find(MegadraftEditor);
 
-    expect(editor.node.handleReturn({shiftKey:false})).to.be.equal(false);
+    expect(editor.instance().handleReturn({shiftKey:false})).to.be.equal(false);
   });
 
   describe("mediaBlockRenderer", function () {
@@ -379,13 +379,13 @@ describe("MegadraftEditor Component", () => {
 
   it("starts with default readOnly status", function() {
     const items = this.wrapper.find(Editor);
-    expect(items.get(0).props.readOnly).to.be.false;
+    expect(items.instance().props.readOnly).to.be.false;
   });
 
   it("changes readOnly status", function() {
     const items = this.wrapper.find(Editor);
     this.component.setReadOnly(true);
-    expect(items.get(0).props.readOnly).to.be.true;
+    expect(items.instance().props.readOnly).to.be.true;
   });
 
   it("is capable of inserting soft line breaks", function() {
@@ -405,7 +405,7 @@ describe("MegadraftEditor Component", () => {
         onChange={this.onChange}
         softNewLines={false} />
     );
-    const component = wrapper.get(0);
+    const component = wrapper.instance();
     expect(component.handleReturn({shiftKey: true})).to.be.equal(false);
   });
 
@@ -437,7 +437,7 @@ describe("MegadraftEditor Component", () => {
         onChange={this.onChange}
         keyBindings={keyBindings}/>
     );
-    this.component = this.wrapper.get(0);
+    this.component = this.wrapper.instance();
 
     const addedASoftBreak = this.component.handleReturn({shiftKey: true});
 
@@ -473,7 +473,7 @@ describe("MegadraftEditor Component", () => {
         keyBindings={keyBindings}/>
     );
 
-    this.component = this.wrapper.get(0);
+    this.component = this.wrapper.instance();
 
     const addedASoftBreak = this.component.handleReturn({shiftKey: true});
 
@@ -566,7 +566,7 @@ describe("MegadraftEditor Component", () => {
         modalOptions={this.modalOptions} />
     );
 
-    const component = wrapper.get(0);
+    const component = wrapper.instance();
     const expectedProps = {
       plugins: component.plugins,
       onChange: component.onChange,

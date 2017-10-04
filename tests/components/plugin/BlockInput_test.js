@@ -39,7 +39,7 @@ describe("BlockInput Component", function() {
 
   it("renders input value", function() {
     const component = this.renderComponent({value: "non-empty"});
-    const domInput = component.find("input").get(0);
+    const domInput = component.find("input").getDOMNode();
     expect(domInput.value).to.equal("non-empty");
   });
 
@@ -51,7 +51,7 @@ describe("BlockInput Component", function() {
 
   it("renders error text when there is an error", function() {
     const component = this.renderComponent({error: "Fake error"});
-    const element = component.find(".block__input__error-text").get(0);
+    const element = component.find(".block__input__error-text").getDOMNode();
     expect(element.textContent).to.equal("Fake error");
   });
 

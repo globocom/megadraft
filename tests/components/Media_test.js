@@ -59,7 +59,7 @@ describe("Media Component", function() {
         blockProps={this.blockProps}
         block={this.block} />
     );
-    this.component = this.wrapper.get(0);
+    this.component = this.wrapper.instance();
   });
 
   it("renders without problems", function() {

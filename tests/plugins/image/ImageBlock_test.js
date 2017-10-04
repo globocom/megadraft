@@ -43,21 +43,21 @@ describe("ImageBlock", function() {
   });
 
   it("renders caption from data", function() {
-    expect(this.caption.get(0).value).to.be.equal(this.data.caption);
+    expect(this.caption.getDOMNode().value).to.be.equal(this.data.caption);
   });
 
   it("renders rightsHolder from data", function() {
-    expect(this.rights.get(0).value).to.be.equal(this.data.rightsHolder);
+    expect(this.rights.getDOMNode().value).to.be.equal(this.data.rightsHolder);
   });
 
   it("updates entity on caption change", function () {
-    this.caption.get(0).value = "new caption";
+    this.caption.getDOMNode().value = "new caption";
     this.caption.simulate("change");
     expect(this.updateData.calledWith({caption: "new caption"})).to.be.true;
   });
 
   it("updates entity on rightsHolder change", function () {
-    this.rights.get(0).value = "new rights";
+    this.rights.getDOMNode().value = "new rights";
     this.rights.simulate("change");
     expect(this.updateData.calledWith({rightsHolder: "new rights"})).to.be.true;
   });

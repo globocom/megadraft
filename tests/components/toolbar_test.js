@@ -181,6 +181,8 @@ describe("Toolbar Component", function() {
         anchorOffset: 5
       }, this.wrapper);
 
+      this.wrapper.update();
+
       const toolbarWrapper = this.wrapper.find(".toolbar");
       expect(toolbarWrapper.hasClass("toolbar--open")).to.be.true;
     });
@@ -191,10 +193,14 @@ describe("Toolbar Component", function() {
         anchorOffset: 5
       }, this.wrapper);
 
+      this.wrapper.update();
+
       replaceSelection({
         focusOffset: 0,
         anchorOffset: 0
       }, this.wrapper);
+
+      this.wrapper.update();
 
       const toolbarWrapper = this.wrapper.find(".toolbar");
       expect(toolbarWrapper.hasClass("toolbar--open")).to.be.false;
@@ -204,7 +210,7 @@ describe("Toolbar Component", function() {
       replaceSelection({focusOffset: 0, anchorOffset: 5}, this.wrapper);
 
       const toolbarWrapper = this.wrapper.find(".toolbar");
-      const toolbarWrapperNode = toolbarWrapper.get(0);
+      const toolbarWrapperNode = toolbarWrapper.getDOMNode();
 
       expect(toolbarWrapperNode.style.bottom).to.be.equal("14px");
       expect(toolbarWrapperNode.style.left).to.be.equal("0.5px");
@@ -243,8 +249,8 @@ describe("Toolbar Component", function() {
 
       it("(integration) LinkInput sets a entity on the current selection ", function() {
         this.linkButton().simulate("click");
-        const input = this.wrapper.find(LinkEntityInput).find("input");
-        const inputNode = input.get(0);
+        const input = this.wrapper.find(LinkEntityInput).find(".toolbar__input");
+        const inputNode = input.getDOMNode();
         inputNode.value = "http://www.globo.com";
         input.simulate("change");
         input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
@@ -261,8 +267,8 @@ describe("Toolbar Component", function() {
       it("(integration) LinkInput should remove an entity when ", function() {
         this.linkButton().simulate("click");
 
-        const input = this.wrapper.find(LinkEntityInput).find("input");
-        const inputNode = input.get(0);
+        const input = this.wrapper.find(LinkEntityInput).find(".toolbar__input");
+        const inputNode = input.getDOMNode();
 
         inputNode.value = "http://www.globo.com";
         input.simulate("change");
@@ -283,8 +289,8 @@ describe("Toolbar Component", function() {
       it("(integration) LinkInput should remove a link backwards", function() {
         this.linkButton().simulate("click");
 
-        const input = this.wrapper.find(LinkEntityInput).find("input");
-        const inputNode = input.get(0);
+        const input = this.wrapper.find(LinkEntityInput).find(".toolbar__input");
+        const inputNode = input.getDOMNode();
 
         inputNode.value = "www.globo.com";
         input.simulate("change");
