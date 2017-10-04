@@ -47,7 +47,7 @@
     "react-router": "3.0.5",
     "react-scroll": "^1.5.4",
     "react-sticky": "^5.0.5",
-    "react-tap-event-plugin": "2.0.1",
+    "react-tap-event-plugin": "^3.0.2",
     "react-test-renderer": "16.0.0",
     "rimraf": "^2.5.2",
     "sinon": "^1.17.4",
