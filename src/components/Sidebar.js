@@ -210,10 +210,11 @@ export default class SideBar extends Component {
 
   setBarPosition() {
     const container = ReactDOM.findDOMNode(this.containerEl);
+    const editor = container ? container.parentElement : null;
 
     const element = getSelectedBlockElement();
 
-    if (!element || !container) {
+    if (!element || !container || !editor || !editor.contains(element)) {
       return;
     }
 
