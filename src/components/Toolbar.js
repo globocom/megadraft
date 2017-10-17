@@ -5,6 +5,7 @@
  */
 
 import React, {Component} from "react";
+import PropTypes from "prop-types";
 import {EditorState, RichUtils} from "draft-js";
 import classNames from "classnames";
 import ToolbarItem from "./ToolbarItem";
@@ -18,7 +19,7 @@ export default class Toolbar extends Component {
     },
   }
   static propTypes = {
-    editorHasFocus: React.PropTypes.bool
+    editorHasFocus: PropTypes.bool
   }
 
   constructor(props) {
