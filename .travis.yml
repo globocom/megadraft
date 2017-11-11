@@ -22,6 +22,11 @@ env:
     - TEST_TYPE=unit
     - TEST_TYPE=lint
     - TEST_TYPE=build_website
+matrix:
+  exclude:
+    - node_js: "7"
+      env: TEST_TYPE=build_website
+
 cache:
   directories:
     - node_modules
