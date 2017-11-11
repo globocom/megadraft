@@ -1,6 +1,7 @@
 language: node_js
 node_js:
-  - "7.2"
+  - "7"
+  - "8"
 script:
   - |
     if [ "$TEST_TYPE" = build_website ]; then
