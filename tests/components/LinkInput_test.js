@@ -34,8 +34,8 @@ describe("LinkInput Component", function() {
   });
 
   it("should set a link entity on keypress and call cancel", function() {
-    const input = this.wrapper.find("input");
-    const inputNode = input.get(0);
+    const input = this.wrapper.find(".toolbar__input");
+    const inputNode = input.getDOMNode();
     sinon.spy(inputNode, "blur");
 
     inputNode.value = "http://www.globo.com";
@@ -48,8 +48,8 @@ describe("LinkInput Component", function() {
   });
 
   it("esc key should cancel the link", function() {
-    const input = this.wrapper.find("input");
-    const inputNode = input.get(0);
+    const input = this.wrapper.find(".toolbar__input");
+    const inputNode = input.getDOMNode();
 
     inputNode.value = "http://www.globo.com";
     input.simulate("change");
@@ -60,8 +60,8 @@ describe("LinkInput Component", function() {
 
   it("should add protocol to links", function() {
 
-    const input = this.wrapper.find("input");
-    const inputNode = input.get(0);
+    const input = this.wrapper.find(".toolbar__input");
+    const inputNode = input.getDOMNode();
 
     inputNode.value = "www.globo.com";
     input.simulate("change");
@@ -70,8 +70,8 @@ describe("LinkInput Component", function() {
   });
 
   it("should error on invalid link", function() {
-    const input = this.wrapper.find("input");
-    const inputNode = input.get(0);
+    const input = this.wrapper.find(".toolbar__input");
+    const inputNode = input.getDOMNode();
 
     inputNode.value = "globo";
     input.simulate("change");
@@ -85,8 +85,8 @@ describe("LinkInput Component", function() {
   });
 
   it("should clear error on empty input", function() {
-    const input = this.wrapper.find("input");
-    const inputNode = input.get(0);
+    const input = this.wrapper.find(".toolbar__input");
+    const inputNode = input.getDOMNode();
 
     inputNode.value = "globo";
     input.simulate("change");

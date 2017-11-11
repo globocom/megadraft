@@ -5,12 +5,16 @@
  */
 
 import jsdom from "jsdom";
+import {configure} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
 
 // set globals for mocha that make access to document and window feel
 // natural in the test environment
 global.document = jsdom.jsdom("<!doctype html><html><body></body></html>");
 global.window = global.document.defaultView;
 global.self = global;
+
+configure({adapter: new Adapter()});
 
 /**
  * Take all the properties of the window object and attach them to the mocha

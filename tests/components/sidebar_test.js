@@ -172,7 +172,7 @@ describe("Sidebar Component", function() {
     expect(data.get("src")).to.be.equal("http://www.globo.com");
   });
 
-  it("should has a modal button when there is 4 plugins", function() {
+  it("should have a modal button when there is 4 plugins", function() {
     const toggleButton = this.wrapperSidebarModal.find(ToggleButton);
     const domButton = toggleButton.find("button");
 
@@ -198,7 +198,7 @@ describe("Sidebar Component", function() {
     const domMenu = menu.find("button");
     const domModalButton = domMenu.at(4);
 
-    expect(domModalButton.component).to.be.equal(null);
+    expect(domModalButton.exists()).to.be.false;
   });
 
   it("should has plugins in modal if it's avaiable", function() {
