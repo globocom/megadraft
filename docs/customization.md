@@ -49,15 +49,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {editorState: editorStateFromRaw(null)};
-    this.onChange = ::this.onChange;
-    this.getCustomSidebar = ::this.getCustomSidebar;
   }
 
-  onChange(editorState) {
+  onChange = (editorState) => {
     this.setState({editorState});
   }
 
-  getCustomSidebar(props) {
+  getCustomSidebar = (props) => {
     return <CustomSidebar {...props} />
   }
 
@@ -102,10 +100,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {editorState: editorStateFromRaw(null)};
-    this.onChange = ::this.onChange;
   }
 
-  onChange(editorState) {
+  onChange = (editorState) =>  {
     this.setState({editorState});
   }
 
@@ -202,13 +199,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {editorState: editorStateFromRaw(null)};
-    this.onChange = ::this.onChange;
     this.keyBindings = [
         { name: "save", isKeyBound: (e) => { return e.keyCode === 83 && e.ctrlKey; }, action: () => { this.onSave(); } }
     ];
   }
 
-  onChange(editorState) {
+  onChange = (editorState) => {
     this.setState({editorState});
   }
 
@@ -278,10 +274,9 @@ class App extends React.Component {
         }
       ]
     })};
-    this.onChange = ::this.onChange;
   }
 
-  onChange(editorState) {
+  onChange = (editorState) => {
     this.setState({editorState});
   }
 
@@ -334,12 +329,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {editorState: editorStateFromRaw(null)};
-    this.onChange = ::this.onChange;
     this.maxSidebarButtons = 3;
     this.modalOptions = {width:528, height:393};
   }
 
-  onChange(editorState) {
+  onChange = (editorState) => {
     this.setState({editorState});
   }
 
