@@ -25,10 +25,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {editorState: editorStateFromRaw(null)};
-    this.onChange = ::this.onChange;
   }
 
-  onChange(editorState) {
+  onChange = (editorState) => {
     this.setState({editorState});
   }
 
