@@ -10,8 +10,10 @@ import Adapter from "enzyme-adapter-react-16";
 
 // set globals for mocha that make access to document and window feel
 // natural in the test environment
-global.document = jsdom.jsdom("<!doctype html><html><body></body></html>");
-global.window = global.document.defaultView;
+const {JSDOM} = jsdom;
+const dom = new JSDOM("<!doctype html><html><body></body></html>");
+global.document = dom.window.document;
+global.window = dom.window;
 global.self = global;
 
 configure({adapter: new Adapter()});
@@ -22,20 +24,17 @@ configure({adapter: new Adapter()});
  * Gotten from: http://jaketrent.com/post/testing-react-with-jsdom/
  * @param  {object} window: The fake window, build by jsdom
  */
-((window) => {
-  for (let key in window) {
-    if (!window.hasOwnProperty(key)) {
-      continue;
-    }
+function copyProps(src, target) {
+  const props = Object.getOwnPropertyNames(src)
+    .filter(prop => typeof target[prop] === "undefined")
+    .reduce((result, prop) => ({
+      ...result,
+      [prop]: Object.getOwnPropertyDescriptor(src, prop),
+    }), {});
+  Object.defineProperties(target, props);
+}
 
-    if (key in global) {
-      continue;
-    }
-
-    global[key] = window[key];
-  }
-})(global.window);
-
+copyProps(window, global);
 
 Object.defineProperties(global.window.HTMLElement.prototype, {
   offsetLeft: {
