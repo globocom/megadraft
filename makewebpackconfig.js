@@ -1,4 +1,5 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const defaultConfig = {
   entry: [
@@ -29,9 +30,20 @@ const defaultConfig = {
       {
         test: /\.md$/,
         loader: "raw-loader"
+      },
+      {
+        test: /\.html$/,
+        loader: "html-loader",
       }
     ]
-  }
+  },
+  plugins: [
+    // Generates an `index.html` file with the <script> injected.
+    new HtmlWebpackPlugin({
+      filename: __dirname + "/website/index.html",
+      template: __dirname + "/website/index_tpl.html",
+    }),
+  ]
 };
 
 function makeConfig (extra) {
