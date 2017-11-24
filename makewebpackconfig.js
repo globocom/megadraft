@@ -6,15 +6,11 @@ const defaultConfig = {
     "./website/index.js"
   ],
   output: {
-    path: __dirname,
+    path: __dirname + "/website/",
     publicPath: "/",
-    filename: "./website/bundle.js"
+    filename: "./bundle.js"
   },
   devtool: "source-map",
-  devServer: {
-    inline: true,
-    contentBase: "./"
-  },
   resolve: {
     modules: [
       path.join(__dirname, "src"),
