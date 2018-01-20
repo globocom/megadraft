@@ -269,15 +269,23 @@ export default class MegadraftEditor extends Component {
   }
 
   handleFocus() {
-    this.setState({
-      hasFocus: true
-    });
+    clearTimeout(this.blurTimeoutID);
+
+    if (!this.state.hasFocus) {
+      this.setState({
+        hasFocus: true
+      });
+    }
   }
 
   handleBlur() {
-    this.setState({
-      hasFocus: false
-    });
+    this.blurTimeoutID = setTimeout(() => {
+      if (this.state.hasFocus) {
+        this.setState({
+          hasFocus: false
+        });
+      }
+    }, 200);
   }
 
   mediaBlockRenderer(block) {
@@ -344,6 +352,7 @@ export default class MegadraftEditor extends Component {
             onChange: this.onChange,
             maxSidebarButtons: this.props.maxSidebarButtons,
             modalOptions: this.props.modalOptions,
+            editorHasFocus: this.state.hasFocus,
           })}
           <Editor
             {...this.props}

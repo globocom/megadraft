@@ -573,7 +573,8 @@ describe("MegadraftEditor Component", () => {
       editorState: this.editorState,
       readOnly: false,
       maxSidebarButtons: this.maxSidebarButtons,
-      modalOptions: this.modalOptions
+      modalOptions: this.modalOptions,
+      editorHasFocus: false,
     };
     expect(renderCustomSidebar.calledWith(expectedProps)).to.be.true;
   });

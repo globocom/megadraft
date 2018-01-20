@@ -39,6 +39,7 @@ class SidebarWrapper extends Component {
           plugins={this.plugins}
           editorState={this.state.editorState}
           readOnly={this.props.readOnly}
+          editorHasFocus={this.props.editorHasFocus}
           onChange={this.onChange} />
       </div>
     );
@@ -73,6 +74,7 @@ class SidebarWithModalWrapper extends Component {
           plugins={this.fakePlugins}
           editorState={this.state.editorState}
           readOnly={this.props.readOnly}
+          editorHasFocus={this.props.editorHasFocus}
           onChange={this.onChange}
           maxSidebarButtons={this.maxSidebarButtons}
           modalOptions={this.modalOptions}/>
@@ -99,10 +101,10 @@ describe("Sidebar Component", function() {
 
     this.editorState = editorStateFromRaw(INITIAL_CONTENT);
     this.wrapper = mount(
-      <SidebarWrapper editorState={this.editorState}/>
+      <SidebarWrapper editorHasFocus editorState={this.editorState}/>
     );
     this.wrapperSidebarModal = mount(
-      <SidebarWithModalWrapper editorState={this.editorState}/>
+      <SidebarWithModalWrapper editorHasFocus editorState={this.editorState}/>
     );
   });
 
@@ -132,7 +134,7 @@ describe("Sidebar Component", function() {
     };
     const plugins = [image, invalidPlugin];
     const wrapper = mount(
-      <SidebarWrapper editorState={this.editorState} plugins={plugins} />
+      <SidebarWrapper editorHasFocus editorState={this.editorState} plugins={plugins} />
     );
     const sidemenu = wrapper.find(SideMenu);
     expect(sidemenu.prop("plugins")).to.have.length(1);

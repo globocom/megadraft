@@ -109,7 +109,14 @@ export class ToggleButton extends Component {
     });
 
     return (
-      <button type="button" className={className} onClick={this.props.toggle}>
+      <button type="button"
+        ref={(el) => {this.button = el;}}
+        className={className}
+        onClick={() => {
+          this.button.focus();
+          this.props.toggle();
+        }}
+      >
         <Icon className="sidemenu__button__icon" />
       </button>
     );
@@ -230,7 +237,7 @@ export default class SideBar extends Component {
   }
 
   render() {
-    if(this.props.readOnly) {
+    if(this.props.readOnly || !this.props.editorHasFocus) {
       return null;
     }
     return (
