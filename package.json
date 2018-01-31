@@ -6,7 +6,7 @@
   "dependencies": {
     "backstage-modal": "^0.3.2",
     "classnames": "^2.2.5",
-    "draft-js": "0.10.4",
+    "draft-js": "0.10.5",
     "immutable": "~3.8.2",
     "prop-types": "^15.5.10",
     "setimmediate": "^1.0.4"
