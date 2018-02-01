@@ -9,13 +9,14 @@ import PropTypes from "prop-types";
 import {EditorState, RichUtils} from "draft-js";
 import classNames from "classnames";
 import ToolbarItem from "./ToolbarItem";
-import {getSelectionCoords} from "../utils";
+import {getSelectionCoords, delayCall} from "../utils";
 
 
 export default class Toolbar extends Component {
   static defaultProps = {
-    shouldDisplayToolbarFn() {
-      return this.editorHasFocus && !this.editorState.getSelection().isCollapsed();
+    shouldDisplayToolbarFn(props, state) {
+
+      return (props.editorHasFocus || state.editingEntity) && !props.editorState.getSelection().isCollapsed();
     },
   }
   static propTypes = {
@@ -35,6 +36,7 @@ export default class Toolbar extends Component {
     this.removeEntity = ::this.removeEntity;
     this.setError = ::this.setError;
     this.cancelError = ::this.cancelError;
+    this.setBarPosition = delayCall(::this.setBarPosition);
   }
 
   toggleInlineStyle(inlineStyle) {
@@ -150,7 +152,7 @@ export default class Toolbar extends Component {
       this.toolbarEl.style.left = "";
       this.arrowEl.style.left = "";
     }
-    if (this.props.shouldDisplayToolbarFn()) {
+    if (this.props.shouldDisplayToolbarFn(this.props, this.state)) {
       return this.setBarPosition();
     } else {
       if (this.state.show) {
