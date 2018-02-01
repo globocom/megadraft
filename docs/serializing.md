@@ -34,15 +34,13 @@ class Example extends React.Component {
     };
     const editorState = editorStateFromRaw(myContent);
     this.state = {editorState};
-    this.onChange = ::this.onChange;
-    this.onSaveClick = ::this.onSaveClick;
   }
 
-  onChange(editorState) {
+  onChange = (editorState) =>  {
     this.setState({editorState});
   }
 
-  onSaveClick() {
+  onSaveClick = () => {
     const {editorState} = this.state;
     const content = editorStateToJSON(editorState);
     // Your function to save the content

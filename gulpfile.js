@@ -72,10 +72,11 @@ gulp.task("dev-server", function(callback) {
   new WebpackDevServer(webpack(webpackConfig), {
     stats: {
       colors: true
-    }
+    },
+    contentBase: __dirname + "/website",
   }).listen(port, host, function(err) {
     hookStream( process.stdout, "webpack: bundle is now VALID.\n", function() {
-      gutil.log("[dev-server]", gutil.colors.yellow("http://" + host + ":" + port + "/website/#/dev"));
+      gutil.log("[dev-server]", gutil.colors.yellow("http://" + host + ":" + port));
     });
 
     if (err) {

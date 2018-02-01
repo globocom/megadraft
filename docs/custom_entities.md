@@ -15,7 +15,7 @@ set of actions:
 ```js
 import React from "react";
 import ReactDOM from "react-dom";
-import {MegadraftEditor, editorStateFromRaw} from "megadraft";
+import {DraftJS, MegadraftEditor, editorStateFromRaw} from "megadraft";
 
 // this is the default LinkInput that handles `LINK`-entities:
 import LinkInput from "megadraft/lib/entity_inputs/LinkInput";
@@ -51,11 +51,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {editorState: editorStateFromRaw(null, myDecorator)};
-    this.onChange = ::this.onChange;
-    this.getCustomSidebar = ::this.getCustomSidebar;
   }
 
-  onChange(editorState) {
+  onChange = (editorState) => {
     this.setState({editorState});
   }
 
@@ -102,7 +100,6 @@ Example:
 export default class PageLinkInput extends React.Component {
   constructor(props) {
     super(props);
-    this.onPageChange = ::this.onPageChange;
     // load pages from somewhere
     this.pages = [
       { url: "/home", title: "Home"},
@@ -112,7 +109,7 @@ export default class PageLinkInput extends React.Component {
     ]
   }
 
-  onPageChange(event) {
+  onPageChange = (event) => {
     const url = event.target.value;
     this.props.setEntity({url});
   }
@@ -168,10 +165,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {editorState: editorStateFromRaw(null, myDecorator)};
-    this.onChange = ::this.onChange;
   }
 
-  onChange(editorState) {
+  onChange = (editorState) => {
     this.setState({editorState});
   }
 
@@ -190,12 +186,9 @@ class App extends React.Component {
 // MyLinkComponent
 
 import React from "react";
-import {DraftJS} from "draft-js";
 
-
-export default ({entityKey, children}) => {
-  const contentState = this.props.contentState;
-  const {url} = contentState.getEntity(this.props.entityKey).getData();
+export default ({entityKey, children, contentState}) => {
+  const {url} = contentState.getEntity(entityKey).getData();
   return (
     <a className="editor__link" href={url} title={url}>
       {children}

@@ -6,6 +6,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 import {withRouter, hashHistory, Router, Route, IndexRoute, Link} from "react-router";
 import Scroll from "react-scroll";
 import {StickyContainer, Sticky} from "react-sticky";
@@ -107,91 +108,88 @@ class Page extends React.Component {
       <div>
         {this.isHome? <Header /> : null}
         <StickyContainer>
-        {this.isHome? <div>
-        <LinkScroll className="hero__call-to-action"
-            to="appbar" spy={true}
-            smooth={true}
-            duration={600}>
-          LET'S ROCK
-        <div className="hero__arrow-call-to-action">
-        <LetsRockArrow />
-        </div>
-        </LinkScroll>
-        </div>: null}
-        <Element name="appbar">
-        <Sticky style={{zIndex:1100}}>
-        <Toolbar
-          style={{background:this.state.content? white: darkBlack,
-            border: "solid 1px rgba(0, 0, 0, 0.1)"}}>
+          {this.isHome? <div>
+            <LinkScroll className="hero__call-to-action"
+              to="appbar" spy={true}
+              smooth={true}
+              duration={600}>
+              LET'S ROCK
+              <div className="hero__arrow-call-to-action">
+                <LetsRockArrow />
+              </div>
+            </LinkScroll>
+          </div>: null}
+          <Element name="appbar">
+            <Sticky style={{zIndex:1100}}>
+              <Toolbar
+                style={{background:this.state.content? white: darkBlack,
+                  border: "solid 1px rgba(0, 0, 0, 0.1)"}}>
 
-        {this.state.content ?
-        <ToolbarGroup firstChild={true} className="label">
-          <FlatButton
-              label="Home" containerElement={<Link to="/"/>}/>
-            <RaisedButton
-                onTouchTap={this.handleTouchTap}
-                label="Documentation"
-                style={{boxShadow: white}}
-            />
-            <Popover
-                open={this.state.open}
-                anchorEl={this.state.anchorEl}
-                anchorOrigin={{horizontal: "left", vertical: "bottom"}}
-                targetOrigin={{horizontal: "left", vertical: "top"}}
-                onRequestClose={this.handleRequestClose}>
-            <Menu>
-              <MenuItem primaryText="Overview & Usage"
-                  onTouchTap= {this.handleRequestClose}
-                  containerElement={<Link to="/docs/overview"/>}/>
-              <MenuItem primaryText="Customization"
-                  onTouchTap= {this.handleRequestClose}
-                  containerElement={<Link to="/docs/customization"/>}/>
-              <MenuItem primaryText="Plugins"
-                  onTouchTap= {this.handleRequestClose}
-                  containerElement={<Link to="/docs/plugins"/>}/>
-              <MenuItem primaryText="Custom Entities"
-                  onTouchTap= {this.handleRequestClose}
-                  containerElement={<Link to="/docs/custom-entities"/>}/>
-              <MenuItem primaryText="Saving & Loading"
-                  onTouchTap= {this.handleRequestClose}
-                  containerElement={<Link to="/docs/saving-loading"/>}/>
-              <Divider />
-              <MenuItem primaryText="Draft.js"
-                  onTouchTap= {this.handleRequestClose}
-                  href="http://draftjs.org" target="_blank"/>
-              <MenuItem primaryText="React"
-                  onTouchTap= {this.handleRequestClose}
-                  href="https://facebook.github.io/react/" target="_blank"/>
-              </Menu>
-            </Popover>
-          <FlatButton
-              label="Slack channel"
-              href="https://draftjs.slack.com/messages/megadraft/"
-              target="_blank"/>
-          <FlatButton
-              label="Repository"
-              href="https://github.com/globocom/megadraft"
-              target="_blank"/>
-          </ToolbarGroup>
-          : <ToolbarGroup />}
+                {this.state.content ?
+                  <ToolbarGroup firstChild={true} className="label">
+                    <FlatButton label="Home" containerElement={<Link to="/"/>}/>
+                    <RaisedButton
+                      onTouchTap={this.handleTouchTap}
+                      label="Documentation"
+                      style={{boxShadow: white}}
+                    />
+                    <Popover
+                      open={this.state.open}
+                      anchorEl={this.state.anchorEl}
+                      anchorOrigin={{horizontal: "left", vertical: "bottom"}}
+                      targetOrigin={{horizontal: "left", vertical: "top"}}
+                      onRequestClose={this.handleRequestClose}>
+                      <Menu>
+                        <MenuItem primaryText="Overview & Usage"
+                          onTouchTap= {this.handleRequestClose}
+                          containerElement={<Link to="/docs/overview"/>}/>
+                        <MenuItem primaryText="Customization"
+                          onTouchTap= {this.handleRequestClose}
+                          containerElement={<Link to="/docs/customization"/>}/>
+                        <MenuItem primaryText="Plugins"
+                          onTouchTap= {this.handleRequestClose}
+                          containerElement={<Link to="/docs/plugins"/>}/>
+                        <MenuItem primaryText="Custom Entities"
+                          onTouchTap= {this.handleRequestClose}
+                          containerElement={<Link to="/docs/custom-entities"/>}/>
+                        <MenuItem primaryText="Saving & Loading"
+                          onTouchTap= {this.handleRequestClose}
+                          containerElement={<Link to="/docs/saving-loading"/>}/>
+                        <Divider />
+                        <MenuItem primaryText="Draft.js"
+                          onTouchTap= {this.handleRequestClose}
+                          href="http://draftjs.org" target="_blank"/>
+                        <MenuItem primaryText="React"
+                          onTouchTap= {this.handleRequestClose}
+                          href="https://facebook.github.io/react/" target="_blank"/>
+                      </Menu>
+                    </Popover>
+                    <FlatButton
+                      label="Slack channel"
+                      href="https://draftjs.slack.com/messages/megadraft/"
+                      target="_blank"/>
+                    <FlatButton
+                      label="Repository"
+                      href="https://github.com/globocom/megadraft"
+                      target="_blank"/>
+                  </ToolbarGroup>
+                  : <ToolbarGroup />}
 
-          {this.isHome?
-          <ToolbarGroup>
-            <FlatButton
-                label={this.state.content? "VIEW CONTENT JSON" : "EDITOR"}
-                onClick={this.handleClick}
-                labelStyle={{color:this.state.content? darkBlack: yellow600}}/>
-          </ToolbarGroup>
-          : <ToolbarGroup />}
-        </Toolbar>
-        </Sticky>
-        </Element>
+                {this.isHome?
+                  <ToolbarGroup>
+                    <FlatButton
+                      label={this.state.content? "VIEW CONTENT JSON" : "EDITOR"}
+                      onClick={this.handleClick}
+                      labelStyle={{color:this.state.content? darkBlack: yellow600}}/>
+                  </ToolbarGroup>
+                  : <ToolbarGroup />}
+              </Toolbar>
+            </Sticky>
+          </Element>
 
-        <div
-          className={this.state.content? "": "container--dark"}>
-          {React.cloneElement(this.props.children, {activeContent: this.state.content})}
-        </div>
-
+          <div className={this.state.content? "": "container--dark"}>
+            {React.cloneElement(this.props.children, {activeContent: this.state.content})}
+          </div>
         </StickyContainer>
       </div>
     );
@@ -199,7 +197,7 @@ class Page extends React.Component {
 }
 
 Page.childContextTypes = {
-  muiTheme: React.PropTypes.object
+  muiTheme: PropTypes.object
 };
 
 ReactDOM.render((
@@ -209,8 +207,7 @@ ReactDOM.render((
       <Route path="/docs/:doc" component={Docs}/>
       <Route path="/dev" component={Example}/>
     </Route>
-  </Router>),
-  document.getElementById("react-container")
+  </Router>), document.getElementById("react-container")
 );
 
 /* global hljs */

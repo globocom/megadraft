@@ -53,7 +53,7 @@ export default class Media extends Component {
     });
 
     const newContentState = Modifier.mergeBlockData(content, selection, data);
-    const newEditorState = EditorState.push(editorState, newContentState);
+    const newEditorState = EditorState.push(editorState, newContentState, "change-block-data");
 
     this.onChange(newEditorState);
   }

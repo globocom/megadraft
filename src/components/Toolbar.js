@@ -5,6 +5,7 @@
  */
 
 import React, {Component} from "react";
+import PropTypes from "prop-types";
 import {EditorState, RichUtils} from "draft-js";
 import classNames from "classnames";
 import ToolbarItem from "./ToolbarItem";
@@ -14,8 +15,11 @@ import {getSelectionCoords, delayCall} from "../utils";
 export default class Toolbar extends Component {
   static defaultProps = {
     shouldDisplayToolbarFn() {
-      return !this.editorState.getSelection().isCollapsed();
+      return this.editorHasFocus && !this.editorState.getSelection().isCollapsed();
     },
+  }
+  static propTypes = {
+    editorHasFocus: PropTypes.bool
   }
 
   constructor(props) {
@@ -105,8 +109,8 @@ export default class Toolbar extends Component {
 
   setBarPosition() {
     const editor = this.props.editor;
-    const toolbar = this.refs.toolbar;
-    const arrow = this.refs.arrow;
+    const toolbar = this.toolbarEl;
+    const arrow = this.arrowEl;
     const selectionCoords = getSelectionCoords(editor, toolbar);
 
     if (!selectionCoords) {
@@ -143,9 +147,9 @@ export default class Toolbar extends Component {
 
   componentDidUpdate() {
     // reset toolbar position every time
-    if (this.refs.toolbar && this.refs.arrow) {
-      this.refs.toolbar.style.left = "";
-      this.refs.arrow.style.left = "";
+    if (this.toolbarEl && this.arrowEl) {
+      this.toolbarEl.style.left = "";
+      this.arrowEl.style.left = "";
     }
     if (this.props.shouldDisplayToolbarFn()) {
       return this.setBarPosition();
@@ -216,10 +220,11 @@ export default class Toolbar extends Component {
   }
 
   cancelEntity() {
-    this.props.editor && this.props.editor.focus();
     this.setState({
       editingEntity: null,
       error: null
+    }, () => {
+      this.props.draft && this.props.draft.focus();
     });
   }
   renderEntityInput(entityType) {
@@ -250,7 +255,7 @@ export default class Toolbar extends Component {
           cancelError={this.cancelError}
           entity={entity}
           {...entityData}
-          />
+        />
       );
     } else {
       console.warn("unknown entity type: "+entityType);
@@ -259,7 +264,7 @@ export default class Toolbar extends Component {
   }
   renderToolList() {
     return (
-      <ul className="toolbar__list" onMouseDown={(x) => {x.preventDefault();}}>
+      <ul className="toolbar__list">
         {this.props.actions.map(this.renderButton)}
       </ul>
     );
@@ -275,18 +280,23 @@ export default class Toolbar extends Component {
     });
 
     return (
-      <div className={toolbarClass}
-           style={this.state.position}
-           ref="toolbarWrapper">
+      <div
+        className={toolbarClass}
+        style={this.state.position}
+        ref="toolbarWrapper"
+        onMouseDown={(e) => {
+          e.preventDefault();
+        }}
+      >
         <div style={{position: "absolute", bottom: 0}}>
-          <div className="toolbar__wrapper" ref="toolbar">
+          <div className="toolbar__wrapper" ref={(el) => { this.toolbarEl = el; }}>
             {
               this.state.editingEntity ?
-              this.renderEntityInput(this.state.editingEntity) :
-              this.renderToolList()
+                this.renderEntityInput(this.state.editingEntity) :
+                this.renderToolList()
             }
             <p className="toolbar__error-msg">{this.state.error}</p>
-            <span className="toolbar__arrow" ref="arrow"/>
+            <span className="toolbar__arrow" ref={(el) => { this.arrowEl = el; }} />
           </div>
         </div>
       </div>

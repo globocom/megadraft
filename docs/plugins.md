@@ -54,7 +54,7 @@ Plugin display options can be customized by adding the following to the plugin s
 options: {
   defaultDisplay: "center",
   displayOptions: [
-    {"key": "center", "icon": MegadraftIcons.MediaMediumIcon, "label": "CENTER"}, 
+    {"key": "center", "icon": MegadraftIcons.MediaMediumIcon, "label": "CENTER"},
     {"key": "left", "icon": MegadraftIcons.MediaSmallIcon, "label": "LEFT"}]
 }
 ```
@@ -79,14 +79,11 @@ DraftJS' entity:
 
 ```js
 import React, {Component} from "react";
-import {DraftJS, insertDataBlock} from "megadraft";
+import {insertDataBlock} from "megadraft";
 
 export default class BlockButton extends Component {
-  constructor(props) {
-    this.onClick = ::this.onClick;
-  }
 
-  onClick(e) {
+  onClick = (e) => {
     e.preventDefault();
     const src = window.prompt("Enter a URL");
     const data = {"type": "image", "src": src};
@@ -130,13 +127,21 @@ Several common components can help build Megadraft plugins quickly.  In the exam
 
 ```js
 import React, {Component} from "react";
-import {MegadraftPlugin} from "megadraft";
+import {MegadraftIcons, MegadraftPlugin} from "megadraft";
 const {BlockContent, BlockData, BlockInput, CommonBlock} = MegadraftPlugin;
 
 export default class ImageBlock extends Component {
   render(){
+    const blockActions = [
+      {
+        key: 'delete',
+        icon: MegadraftIcons.DeleteIcon,
+        action: this.props.container.remove,
+      },
+    ];
+
     return (
-      <CommonBlock {...this.props}>
+      <CommonBlock actions={blockActions} {...this.props}>
         <BlockContent>
           <img src={this.props.data.src} />
         </BlockContent>

@@ -33,7 +33,7 @@ export default class LinkInput extends Component {
 
     if (!url.match(regex)) {
       this.props.setError(__("Invalid Link"));
-      this.refs.textInput.focus();
+      this.textInput.focus();
       return;
     }
 
@@ -75,7 +75,7 @@ export default class LinkInput extends Component {
   }
 
   componentDidMount() {
-    this.refs.textInput.focus();
+    this.textInput.focus();
   }
 
   render() {
@@ -83,7 +83,7 @@ export default class LinkInput extends Component {
     return (
       <div style={{whiteSpace: "nowrap"}}>
         <input
-          ref="textInput"
+          ref={(el) => { this.textInput = el; }}
           type="text"
           className="toolbar__input"
           onChange={this.onLinkChange}
@@ -97,8 +97,8 @@ export default class LinkInput extends Component {
             className="toolbar__button toolbar__input-button">
             {
               this.props.entity ?
-              <icons.UnlinkIcon/> :
-              <icons.CloseIcon />
+                <icons.UnlinkIcon/> :
+                <icons.CloseIcon />
             }
           </button>
         </span>

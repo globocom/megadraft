@@ -4,5 +4,5 @@
  * License: MIT
  */
 
-const context = require.context("./tests", true, /^.*\_test.js$/);
+const context = require.context("./tests", true, /^.*_test.js$/);
 context.keys().forEach(context);

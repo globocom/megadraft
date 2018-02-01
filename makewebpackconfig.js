@@ -1,47 +1,49 @@
-const merge = require("merge");
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const defaultConfig = {
   entry: [
     "./website/index.js"
   ],
   output: {
-    path: __dirname,
+    path: __dirname + "/website/",
     publicPath: "/",
-    filename: "./website/bundle.js"
+    filename: "./bundle.js"
   },
   devtool: "source-map",
-  devServer: {
-    inline: true,
-    contentBase: "./"
-  },
   resolve: {
-    extensions: ["", ".js", ".jsx"],
-    fallback: path.join(__dirname, "node_modules")
-  },
-  resolveLoader: {
-    root: path.join(__dirname, "node_modules")
+    modules: [
+      path.join(__dirname, "src"),
+      "node_modules"
+    ]
   },
   module: {
-    loaders: [
+    rules: [
       {
         exclude: /node_modules/,
-        loader: "babel"
+        loader: "babel-loader",
       },
       {
         test: /\.md$/,
-        loader: "raw"
+        loader: "raw-loader"
       },
       {
-        test: /\.json$/,
-        loader: "json"
+        test: /\.html$/,
+        loader: "html-loader",
       }
     ]
-  }
+  },
+  plugins: [
+    // Generates an `index.html` file with the <script> injected.
+    new HtmlWebpackPlugin({
+      filename: __dirname + "/website/index.html",
+      template: __dirname + "/website/index_tpl.html",
+    }),
+  ]
 };
 
 function makeConfig (extra) {
-  const config = merge.recursive(true, defaultConfig, extra || {});
+  const config = Object.assign(true, defaultConfig, extra || {});
 
   return config;
 }
