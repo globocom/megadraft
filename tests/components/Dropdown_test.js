@@ -5,71 +5,67 @@
  */
 
 import React from "react";
-import chai from "chai";
-import sinon from "sinon";
 import {mount} from "enzyme";
-
 
 import icons from "../../src/icons";
 import Dropdown from "../../src/components/Dropdown";
 import DropdownItem from "../../src/components/DropdownItem";
 
+describe("Dropdown Component", () => {
+  let testContext;
 
-let expect = chai.expect;
-
-
-describe("Dropdown Component", function() {
-
-  beforeEach(function() {
-    this.selected = "metal";
-    this.onChange = sinon.spy();
+  beforeEach(() => {
+    testContext = {};
+    testContext.selected = "metal";
+    testContext.onChange = jest.fn();
     const dropdownItems = [
-      {"key": "pagode", "icon": icons.MediaMediumIcon, "label": "Pagode"},
-      {"key": "metal", "icon": icons.MediaBigIcon, "label": "Metal"},
-      {"key": "samba", "icon": icons.MediaSmallIcon, "label": "Samba"}
+      {key: "pagode", icon: icons.MediaMediumIcon, label: "Pagode"},
+      {key: "metal", icon: icons.MediaBigIcon, label: "Metal"},
+      {key: "samba", icon: icons.MediaSmallIcon, label: "Samba"}
     ];
 
-    this.component = mount(
+    testContext.component = mount(
       <Dropdown
         items={dropdownItems}
-        selected={this.selected}
-        onChange={this.onChange} />
+        selected={testContext.selected}
+        onChange={testContext.onChange}
+      />
     );
   });
 
-  it("renders without problems", function() {
-    expect(this.component).to.exist;
+  it("renders without problems", () => {
+    expect(testContext.component).toBeDefined();
   });
 
-  it("renders dropdown items", function() {
-    const items = this.component.find(DropdownItem);
-    expect(items).to.have.length(4);
+  it("renders dropdown items", () => {
+    const items = testContext.component.find(DropdownItem);
+    expect(items).toHaveLength(4);
   });
 
-  it("renders default selected dropdown item", function() {
-    const selected = this.component.find(DropdownItem).first();
+  it("renders default selected dropdown item", () => {
+    const selected = testContext.component.find(DropdownItem).first();
 
     const text = selected.find("span");
-    expect(text.text()).to.equal("Metal");
+    expect(text.text()).toEqual("Metal");
   });
 
-  it("is possible to click on the dropdrown item", function() {
-    const item = this.component.find(DropdownItem).at(1);
+  it("is possible to click on the dropdrown item", () => {
+    const item = testContext.component.find(DropdownItem).at(1);
 
-    expect(this.onChange).to.not.have.been.called;
+    expect(testContext.onChange).not.toHaveBeenCalled();
 
     item.find("div").simulate("click");
 
-    expect(this.onChange).to.have.been.called;
+    expect(testContext.onChange).toHaveBeenCalled();
   });
 
-  it("toggles `isOpen` on click", function () {
-    const wrapper = this.component.find("div").first();
+  it("toggles `isOpen` on click", () => {
+    const wrapper = testContext.component.find("div").first();
 
     wrapper.simulate("click");
-    expect(this.component.state("isOpen")).to.be.true;
+    expect(testContext.component.state("isOpen")).toBeTruthy();
 
     wrapper.simulate("click");
-    expect(this.component.state("isOpen")).to.be.false;
+    expect(testContext.component.state("isOpen")).toBeFalsy();
   });
 });

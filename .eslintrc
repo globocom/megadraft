@@ -21,15 +21,17 @@
         "no-multiple-empty-lines": [2, {"max": 2}],
         "no-multi-spaces": 2,
         "camelcase": 2,
-        "mocha/no-exclusive-tests": "error"
     },
     "env": {
         "es6": true,
         "browser": true,
         "node": true,
-        "mocha": true
+        "jest": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        "plugin:jest/recommended"
+    ],
     "parserOptions": {
         "ecmaVersion": 6,
         "sourceType": "module",
@@ -40,6 +42,6 @@
     },
     "plugins": [
         "react",
-        "mocha"
+        "jest"
     ]
 }

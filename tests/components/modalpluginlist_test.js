@@ -5,8 +5,6 @@
  */
 
 import React, {Component} from "react";
-import chai from "chai";
-import sinon from "sinon";
 import {mount} from "enzyme";
 import cp from "utils-copy";
 
@@ -14,20 +12,17 @@ import {ModalBody} from "backstage-modal";
 import ModalPluginList from "../../src/components/ModalPluginList";
 import DEFAULT_PLUGINS from "../../src/plugins/default.js";
 
-let expect = chai.expect;
-
 class ModalWithPlugins extends Component {
   constructor(props) {
     super(props);
     this.plugins = this.props.plugins || DEFAULT_PLUGINS;
-    this.fakeAux = cp(this.plugins.slice(0,2));
-    this.fakePlugins = this.fakeAux.concat(this.plugins.slice(0,2));
-    for(let i=0; i<4; i++){
+    this.fakeAux = cp(this.plugins.slice(0, 2));
+    this.fakePlugins = this.fakeAux.concat(this.plugins.slice(0, 2));
+    for (let i = 0; i < 4; i++) {
       this.fakePlugins[i].title = "plugin" + i;
       this.fakePlugins[i].type = "plugin" + i;
     }
     this.onChange = ::this.onChange;
-
   }
 
   onChange(editorState) {
@@ -43,59 +38,64 @@ class ModalWithPlugins extends Component {
           plugins={this.fakePlugins}
           onChange={this.onChange}
           toggleModalVisibility={this.props.toggleModalVisibility}
-          editorState={this.props.editorState} />
+          editorState={this.props.editorState}
+        />
       </div>
     );
   }
 }
 
-describe("Sidebar Modal Component", function() {
+describe("Sidebar Modal Component", () => {
+  let testContext;
 
-  beforeEach(function() {
-    this.onChangeSpy = sinon.spy();
-    this.toggleModalVisibilitySpy = sinon.spy();
+  beforeEach(() => {
+    testContext = {};
+    testContext.onChangeSpy = jest.fn();
+    testContext.toggleModalVisibilitySpy = jest.fn();
 
-    this.wrapper = mount(
-      <ModalWithPlugins onChange={this.onChangeSpy} toggleModalVisibility={this.toggleModalVisibilitySpy}/>
+    testContext.wrapper = mount(
+      <ModalWithPlugins
+        onChange={testContext.onChangeSpy}
+        toggleModalVisibility={testContext.toggleModalVisibilitySpy}
+      />
     );
   });
 
-
-  it("should has plugins inside modal", function() {
-    const modal = this.wrapper.find(ModalBody);
+  it("should has plugins inside modal", () => {
+    const modal = testContext.wrapper.find(ModalBody);
 
     const plugin = modal.find("li");
 
-    expect(plugin.length).to.be.at.least(1);
+    expect(plugin.length).toBeGreaterThanOrEqual(1);
   });
 
-  it("should has the all plugins inside modal", function() {
-    const modal = this.wrapper.find(ModalBody);
+  it("should has the all plugins inside modal", () => {
+    const modal = testContext.wrapper.find(ModalBody);
 
     const plugin = modal.find(".megadraft-modal__item");
 
-    expect(plugin).to.have.length(4);
+    expect(plugin).toHaveLength(4);
   });
 
-  it("should be a real plugin", function() {
-    const modal = this.wrapper.find(ModalBody);
+  it("should be a real plugin", () => {
+    const modal = testContext.wrapper.find(ModalBody);
 
     const plugin = modal.find("VideoButton");
 
-    expect(plugin.length).to.be.at.least(1);
+    expect(plugin.length).toBeGreaterThanOrEqual(1);
   });
 
-  it("should callback a function received when receives onChange call", function() {
+  it("should callback a function received when receives onChange call", () => {
     const newEditorState = {};
-    const modal = this.wrapper.find(ModalPluginList);
+    const modal = testContext.wrapper.find(ModalPluginList);
     modal.instance().onChange(newEditorState);
-    expect(this.onChangeSpy).to.be.calledWith(newEditorState);
+    expect(testContext.onChangeSpy).toHaveBeenCalledWith(newEditorState);
   });
 
-  it("should toggle visibility when receives onChange call", function() {
+  it("should toggle visibility when receives onChange call", () => {
     const newEditorState = {};
-    const modal = this.wrapper.find(ModalPluginList);
+    const modal = testContext.wrapper.find(ModalPluginList);
     modal.instance().onChange(newEditorState);
-    expect(this.toggleModalVisibilitySpy).to.be.called;
+    expect(testContext.toggleModalVisibilitySpy).toHaveBeenCalled();
   });
 });

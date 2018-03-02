@@ -5,99 +5,88 @@
  */
 
 import React from "react";
-import chai from "chai";
-import sinon from "sinon";
-import sinonChai from "sinon-chai";
 import {mount} from "enzyme";
 
 import Media from "../../src/components/Media";
 import {editorStateFromRaw} from "../../src/utils";
 import DEFAULT_PLUGINS from "../../src/plugins/default";
 
+describe("Media Component", () => {
+  let testContext;
 
-chai.use(sinonChai);
-let expect = chai.expect;
-
-
-describe("Media Component", function() {
-
-  beforeEach(function() {
+  beforeEach(() => {
     const INITIAL_CONTENT = {
-      "entityMap": {},
-      "blocks": [
+      entityMap: {},
+      blocks: [
         {
-          "key": "9vgd",
-          "text": "",
-          "type": "atomic",
-          "depth": 0,
-          "inlineStyleRanges": [],
-          "entityRanges": [],
-          "data": {
-            "type": "image",
-            "src": "images/media.jpg",
-            "caption": "Picture from StockSnap.io",
-            "rightsHolder": "By Tim Marshall",
-            "display": "medium"
+          key: "9vgd",
+          text: "",
+          type: "atomic",
+          depth: 0,
+          inlineStyleRanges: [],
+          entityRanges: [],
+          data: {
+            type: "image",
+            src: "images/media.jpg",
+            caption: "Picture from StockSnap.io",
+            rightsHolder: "By Tim Marshall",
+            display: "medium"
           }
         }
       ]
     };
 
-    this.editorState = editorStateFromRaw(INITIAL_CONTENT);
+    testContext = {};
+    testContext.editorState = editorStateFromRaw(INITIAL_CONTENT);
 
-    this.blockProps = sinon.spy();
-    this.blockProps.editorState = this.editorState;
-    this.blockProps.plugin = DEFAULT_PLUGINS[0];
-    this.blockProps.onChange = sinon.spy();
-    this.blockProps.setRea = sinon.spy();
+    testContext.blockProps = {};
+    testContext.blockProps.editorState = testContext.editorState;
+    testContext.blockProps.plugin = DEFAULT_PLUGINS[0];
+    testContext.blockProps.onChange = jest.fn();
+    testContext.blockProps.setRea = jest.fn();
 
-    const currentContent = this.blockProps.editorState.getCurrentContent();
-    this.block = currentContent.getBlockForKey("9vgd");
+    const currentContent = testContext.blockProps.editorState.getCurrentContent();
+    testContext.block = currentContent.getBlockForKey("9vgd");
 
-    this.wrapper = mount(
-      <Media
-        blockProps={this.blockProps}
-        block={this.block} />
+    testContext.wrapper = mount(
+      <Media blockProps={testContext.blockProps} block={testContext.block} />
     );
-    this.component = this.wrapper.instance();
+    testContext.component = testContext.wrapper.instance();
   });
 
-  it("renders without problems", function() {
-    expect(this.wrapper.length).to.equal(1);
+  it("renders without problems", () => {
+    expect(testContext.wrapper).toHaveLength(1);
   });
 
-  it("updates data and correct change-type enum", function() {
-    let data = this.block.getData();
+  it("updates data and correct change-type enum", () => {
+    let data = testContext.block.getData();
 
-    expect(data.get("display")).to.equal("medium");
+    expect(data.get("display")).toEqual("medium");
 
-    this.component.updateData({display: "big"});
+    testContext.component.updateData({display: "big"});
 
-    const editor = this.blockProps.onChange.args[0][0].toJS();
-
+    const editor = testContext.blockProps.onChange.mock.calls[0][0].toJS();
     const lastChangeType = editor.lastChangeType;
-
-    expect(lastChangeType).to.equal("change-block-data"); // checking if the last change type is the correct enum
+    // checking if the last change type is the correct enum
+    expect(lastChangeType).toEqual("change-block-data");
 
     const content = editor.currentContent;
-
     const nextData = content.blockMap["9vgd"].data;
-
-    expect(nextData.display).to.equal("big");
+    expect(nextData.display).toEqual("big");
   });
 
-  it("refreshes editor state", function() {
-    this.component.updateData({display: "big"});
-    expect(this.blockProps.onChange).to.have.been.called;
+  it("refreshes editor state", () => {
+    testContext.component.updateData({display: "big"});
+    expect(testContext.blockProps.onChange).toHaveBeenCalled();
   });
 
-  it("removes media component", function() {
-    this.component.remove();
+  it("removes media component", () => {
+    testContext.component.remove();
 
-    const editorState = this.blockProps.onChange.getCall(0).args[0];
+    const editorState = testContext.blockProps.onChange.mock.calls[0][0];
     const currentContent = editorState.getCurrentContent();
     const block = currentContent.getBlockForKey("9vgd");
 
-    expect(block).to.be.undefined;
+    expect(block).toBeUndefined();
   });
 });

@@ -5,87 +5,88 @@
  */
 
 import React from "react";
-import chai from "chai";
-import sinon from "sinon";
 import {mount} from "enzyme";
 
 import LinkInput from "../../src/entity_inputs/LinkInput";
 
-let expect = chai.expect;
+describe("LinkInput Component", () => {
+  let testContext;
 
-describe("LinkInput Component", function() {
+  beforeEach(() => {
+    testContext = {};
+    testContext.cancelEntity = jest.fn();
+    testContext.setEntity = jest.fn();
+    testContext.setError = jest.fn();
+    testContext.cancelError = jest.fn();
 
-  beforeEach(function() {
-    this.cancelEntity = sinon.spy();
-    this.setEntity = sinon.spy();
-    this.setError = sinon.spy();
-    this.cancelError = sinon.spy();
-
-    this.wrapper = mount(
+    testContext.wrapper = mount(
       <LinkInput
         entityType="LINK"
-        editor={this.editor}
-        cancelEntity={this.cancelEntity}
-        setEntity={this.setEntity}
-        setError={this.setError}
-        cancelError={this.cancelError} />
+        editor={testContext.editor}
+        cancelEntity={testContext.cancelEntity}
+        setEntity={testContext.setEntity}
+        setError={testContext.setError}
+        cancelError={testContext.cancelError}
+      />
     );
-
   });
 
-  it("should set a link entity on keypress and call cancel", function() {
-    const input = this.wrapper.find(".toolbar__input");
+  it("should set a link entity on keypress and call cancel", () => {
+    const input = testContext.wrapper.find(".toolbar__input");
     const inputNode = input.getDOMNode();
-    sinon.spy(inputNode, "blur");
+    inputNode.blur = jest.fn();
 
     inputNode.value = "http://www.globo.com";
     input.simulate("change");
     input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
-    expect(this.setEntity).to.have.been.calledWith({url: "http://www.globo.com"});
-    expect(this.cancelEntity).to.have.been.called;
+    expect(testContext.setEntity).toHaveBeenCalledWith({
+      url: "http://www.globo.com"
+    });
+    expect(testContext.cancelEntity).toHaveBeenCalled();
     // Work around Firefox's NS_ERROR_FAILURE
-    expect(inputNode.blur).to.have.been.called;
+    expect(inputNode.blur).toHaveBeenCalled();
   });
 
-  it("esc key should cancel the link", function() {
-    const input = this.wrapper.find(".toolbar__input");
+  it("esc key should cancel the link", () => {
+    const input = testContext.wrapper.find(".toolbar__input");
     const inputNode = input.getDOMNode();
 
     inputNode.value = "http://www.globo.com";
     input.simulate("change");
     input.simulate("keyDown", {key: "Escape", keyCode: 27, which: 27});
-    expect(this.setEntity).to.not.have.been.called;
-    expect(this.cancelEntity).to.have.been.called;
+    expect(testContext.setEntity).not.toHaveBeenCalled();
+    expect(testContext.cancelEntity).toHaveBeenCalled();
   });
 
-  it("should add protocol to links", function() {
-
-    const input = this.wrapper.find(".toolbar__input");
+  it("should add protocol to links", () => {
+    const input = testContext.wrapper.find(".toolbar__input");
     const inputNode = input.getDOMNode();
 
     inputNode.value = "www.globo.com";
     input.simulate("change");
     input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
-    expect(this.setEntity).to.have.been.calledWith({url: "http://www.globo.com"});
+    expect(testContext.setEntity).toHaveBeenCalledWith({
+      url: "http://www.globo.com"
+    });
   });
 
-  it("should error on invalid link", function() {
-    const input = this.wrapper.find(".toolbar__input");
+  it("should error on invalid link", () => {
+    const input = testContext.wrapper.find(".toolbar__input");
     const inputNode = input.getDOMNode();
 
     inputNode.value = "globo";
     input.simulate("change");
     input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
-    expect(this.setError).to.have.been.calledWith("Invalid Link");
+    expect(testContext.setError).toHaveBeenCalledWith("Invalid Link");
 
     inputNode.value = "[12/12/2016] globo.com";
     input.simulate("change");
     input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
-    expect(this.setError).to.have.been.calledWith("Invalid Link");
+    expect(testContext.setError).toHaveBeenCalledWith("Invalid Link");
   });
 
-  it("should clear error on empty input", function() {
-    const input = this.wrapper.find(".toolbar__input");
+  it("should clear error on empty input", () => {
+    const input = testContext.wrapper.find(".toolbar__input");
     const inputNode = input.getDOMNode();
 
     inputNode.value = "globo";
@@ -95,7 +96,6 @@ describe("LinkInput Component", function() {
     inputNode.value = "";
     input.simulate("change");
     input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
-    expect(this.cancelError).to.have.been.called;
+    expect(testContext.cancelError).toHaveBeenCalled();
   });
-
 });
