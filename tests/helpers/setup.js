@@ -15,6 +15,7 @@ const dom = new JSDOM("<!doctype html><html><body></body></html>");
 global.document = dom.window.document;
 global.window = dom.window;
 global.self = global;
+global.performance = {};
 
 configure({adapter: new Adapter()});
 

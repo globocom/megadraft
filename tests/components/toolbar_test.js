@@ -74,8 +74,10 @@ function replaceSelection(newSelection, wrapper) {
 const FileEntityInput = (props) => <LinkInput {...props} />;
 const LinkEntityInput = (props) => <LinkInput {...props} />;
 
+
 describe("Toolbar Component", function() {
   beforeEach(function() {
+    this.clock = sinon.useFakeTimers();
     const INITIAL_CONTENT = {
       "entityMap": {},
       "blocks": [
@@ -108,6 +110,10 @@ describe("Toolbar Component", function() {
     this.wrapper = mount(
       <ToolbarWrapper editorState={this.editorState} actions={this.actions} entityInputs={this.entityInputs}/>
     );
+  });
+
+  afterEach(function() {
+    this.clock.restore();
   });
 
   describe("Toolbar", function() {
@@ -182,6 +188,7 @@ describe("Toolbar Component", function() {
         anchorOffset: 5
       }, this.wrapper);
 
+      this.clock.tick(32);
       this.wrapper.update();
 
       const toolbarWrapper = this.wrapper.find(".toolbar");
@@ -212,6 +219,7 @@ describe("Toolbar Component", function() {
 
       const toolbarWrapper = this.wrapper.find(".toolbar");
       const toolbarWrapperNode = toolbarWrapper.getDOMNode();
+      this.clock.tick(32);
 
       expect(toolbarWrapperNode.style.bottom).to.be.equal("14px");
       expect(toolbarWrapperNode.style.left).to.be.equal("0.5px");
