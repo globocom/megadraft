@@ -64,9 +64,12 @@ class BlockStyles extends Component {
 
   renderButton(item){
     const Button = item.buttonComponent;
+    const className = classNames("sidemenu__item", {
+      "sidemenu__item--horizontal": this.props.isHorizontal
+    });
 
     return (
-      <li key={item.type} className="sidemenu__item">
+      <li key={item.type} className={className}>
         <Button
           className="sidemenu__button"
           title={item.title}
@@ -78,9 +81,10 @@ class BlockStyles extends Component {
 
   render() {
     const maxSidebarButtons = this.props.maxSidebarButtons ? this.props.maxSidebarButtons : this.props.plugins.length;
+    const direction = this.props.isHorizontal ? "maxWidth" : "maxHeight";
 
-    const sidemenuMaxHeight = {
-      maxHeight: this.props.open? `${(maxSidebarButtons + 1) * 48}px`: 0,
+    const sidemenuMaxSize = {
+      [direction]: this.props.open? `${(maxSidebarButtons + (this.props.isHorizontal ? 2 : 1)) * 48}px`: 0,
     };
 
     // We should hide the modal if the number of plugins < max
@@ -88,9 +92,12 @@ class BlockStyles extends Component {
     const className = classNames("sidemenu__items", {
       "sidemenu__items--open": this.props.open
     });
+    const wrapper = classNames("sidemenu__wrapper", {
+      "sidemenu__wrapper--horizontal": this.props.isHorizontal
+    });
     return (
-      <div>
-        <ul style={sidemenuMaxHeight} className={className}>
+      <div className={wrapper}>
+        <ul style={sidemenuMaxSize} className={className}>
           {this.props.plugins.slice(0, maxSidebarButtons).map(this.renderButton)}
           {hasModal ? this.renderModalButton() : null}
         </ul>
@@ -138,8 +145,10 @@ export class SideMenu extends Component {
 
   render() {
     const className = classNames("sidemenu", {
-      "sidemenu--open": this.state.open
+      "sidemenu--open": this.state.open,
+      "sidemenu--horizontal": this.props.isHorizontal,
     });
+
     return (
       <li className={className}>
         <ToggleButton
@@ -152,7 +161,9 @@ export class SideMenu extends Component {
           open={this.state.open}
           onChange={this.onChange}
           maxSidebarButtons={this.props.maxSidebarButtons}
-          modalOptions={this.props.modalOptions} />
+          modalOptions={this.props.modalOptions}
+          isHorizontal={this.props.isHorizontal}
+          />
       </li>
     );
   }
@@ -233,6 +244,7 @@ export default class SideBar extends Component {
     if(this.props.readOnly) {
       return null;
     }
+
     return (
       <div ref={(el) => { this.containerEl = el; }} className="sidebar">
         <div style={{top: `${this.state.top}px`}} className="sidebar__menu">
@@ -242,7 +254,9 @@ export default class SideBar extends Component {
               onChange={this.onChange}
               plugins={this.getValidSidebarPlugins()}
               maxSidebarButtons={this.props.maxSidebarButtons}
-              modalOptions={this.props.modalOptions} />
+              modalOptions={this.props.modalOptions}
+              isHorizontal={this.props.horizontalSidebar}
+              />
           </ul>
         </div>
       </div>
