@@ -5,23 +5,22 @@
  */
 
 import React from "react";
-import chai from "chai";
-import sinon from "sinon";
 import {mount} from "enzyme";
 
 import icons from "../../../src/icons";
 import Dropdown from "../../../src/components/Dropdown";
 import CommonBlock from "../../../src/components/plugin/CommonBlock";
 
-let expect = chai.expect;
+describe("CommonBlock Component", () => {
+  let testContext;
 
+  beforeEach(() => {
+    testContext = {};
+    testContext.crop = jest.fn();
 
-describe("CommonBlock Component", function() {
-
-  beforeEach(function() {
-    this.crop = sinon.spy();
-
-    const actions = [{key: "crop", icon: icons.CropIcon, action: this.crop}];
+    const actions = [
+      {key: "crop", icon: icons.CropIcon, action: testContext.crop}
+    ];
     const displayOptions = [
       {key: "small", icon: icons.MediaSmallIcon, label: "SMALL"},
       {key: "medium", icon: icons.MediaMediumIcon, label: "MEDIUM"}
@@ -29,42 +28,44 @@ describe("CommonBlock Component", function() {
     const defaultDisplay = "medium";
     const blockProps = {plugin: {options: {displayOptions, defaultDisplay}}};
 
-    this.container = {
-      updateData: sinon.spy()
+    testContext.container = {
+      updateData: jest.fn()
     };
 
-    this.renderComponent = function (data) {
+    testContext.renderComponent = data => {
       return mount(
         <CommonBlock
           blockProps={blockProps}
           actions={actions}
-          container={this.container}
-          data={data} />
+          container={testContext.container}
+          data={data}
+        />
       );
     };
   });
 
-  it("renders default display option when it is empty", function() {
-    this.component = this.renderComponent({});
-    const dropdown = this.component.find(Dropdown);
-    expect(dropdown.prop("selected")).to.equal("medium");
+  it("renders default display option when it is empty", () => {
+    testContext.component = testContext.renderComponent({});
+    const dropdown = testContext.component.find(Dropdown);
+    expect(dropdown.prop("selected")).toEqual("medium");
   });
 
-  it("renders selected display option when it is present", function() {
+  it("renders selected display option when it is present", () => {
     const data = {display: "small"};
-    this.component = this.renderComponent(data);
+    testContext.component = testContext.renderComponent(data);
 
-    const dropdown = this.component.find(Dropdown);
-    expect(dropdown.prop("selected")).to.equal("small");
+    const dropdown = testContext.component.find(Dropdown);
+    expect(dropdown.prop("selected")).toEqual("small");
   });
 
-  it("updates selected display option on change", function () {
-    this.component = this.renderComponent({});
-    const dropdown = this.component.find(Dropdown);
+  it("updates selected display option on change", () => {
+    testContext.component = testContext.renderComponent({});
+    const dropdown = testContext.component.find(Dropdown);
 
     dropdown.prop("onChange")("small");
 
-    expect(this.container.updateData).to.have.been.calledWith({display: "small"});
+    expect(testContext.container.updateData).toHaveBeenCalledWith({
+      display: "small"
+    });
   });
 });
-

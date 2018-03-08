@@ -5,8 +5,6 @@
  */
 
 import React, {Component} from "react";
-import chai from "chai";
-import sinon from "sinon";
 import {Editor, EditorState, SelectionState} from "draft-js";
 import {mount} from "enzyme";
 
@@ -18,19 +16,14 @@ import {editorStateFromRaw} from "../../src/utils";
 import image from "../../src/plugins/image/plugin";
 import NotFoundPlugin from "../../src/plugins/not-found/plugin";
 
-
-let expect = chai.expect;
-let kba = function keyBindingAction() {};
-
-
-function replaceSelection(newSelection, wrapper, blockKey) {
+const replaceSelection = (newSelection, wrapper, blockKey) => {
   const selectionState = SelectionState.createEmpty(blockKey);
   const updatedSelection = selectionState.merge(newSelection);
   const oldState = wrapper.state("editorState");
   const editorState = EditorState.forceSelection(oldState, updatedSelection);
 
   wrapper.setState({editorState: editorState});
-}
+};
 
 class MegadraftEditorWrapper extends Component {
   constructor(props) {
@@ -52,6 +45,8 @@ class MegadraftEditorWrapper extends Component {
 
 
 describe("MegadraftEditor Component", () => {
+  let testContext, kba;
+
   class FakeAtomicBlock {
     constructor(type){
       this.type = type;
@@ -70,7 +65,7 @@ describe("MegadraftEditor Component", () => {
     }
   }
 
-  beforeEach(function() {
+  beforeEach(() => {
     const INITIAL_CONTENT = {
       "entityMap": {},
       "blocks": [
@@ -125,7 +120,7 @@ describe("MegadraftEditor Component", () => {
       ]
     };
 
-    kba = sinon.spy();
+    kba = jest.fn();
     const keyBindings = [
       {name: "save", isKeyBound: (e) => {return e.keyCode === 83 && e.ctrlKey;}, action: kba}
     ];
@@ -133,283 +128,284 @@ describe("MegadraftEditor Component", () => {
     const resetStyleOn = true;
     const resetStyleOff = false;
 
-    this.maxSidebarButtons = null;
-    this.modalOptions = {width: 500, height: 300};
-    this.onChange = sinon.spy();
-    this.editorState = editorStateFromRaw(INITIAL_CONTENT);
-    this.wrapper = mount(
+    testContext = {};
+    testContext.maxSidebarButtons = null;
+    testContext.modalOptions = {width: 500, height: 300};
+    testContext.onChange = jest.fn();
+    testContext.editorState = editorStateFromRaw(INITIAL_CONTENT);
+    testContext.wrapper = mount(
       <MegadraftEditor
-        editorState={this.editorState}
-        onChange={this.onChange}
+        editorState={testContext.editorState}
+        onChange={testContext.onChange}
         keyBindings={keyBindings}/>
     );
-    this.component = this.wrapper.instance();
+    testContext.component = testContext.wrapper.instance();
 
-    this.wrapperWithReset = mount(
+    testContext.wrapperWithReset = mount(
       <MegadraftEditorWrapper
-        editorState={this.editorState}
-        onChange={this.onChange}
+        editorState={testContext.editorState}
+        onChange={testContext.onChange}
         keyBindings={keyBindings}
         blocksWithoutStyleReset={blocksWithoutStyleReset}
         resetStyleNewLine={resetStyleOn}/>
     );
 
-    this.wrapperWithoutReset = mount(
+    testContext.wrapperWithoutReset = mount(
       <MegadraftEditorWrapper
-        editorState={this.editorState}
-        onChange={this.onChange}
+        editorState={testContext.editorState}
+        onChange={testContext.onChange}
         keyBindings={keyBindings}
         blocksWithoutStyleReset={blocksWithoutStyleReset}
         resetStyleNewLine={resetStyleOff}/>
     );
   });
 
-  it("renders without problems", function() {
-    expect(this.wrapper).to.have.length(1);
+  it("renders without problems", () => {
+    expect(testContext.wrapper).toHaveLength(1);
   });
 
-  it("has the initial text", function() {
-    expect(this.component.editorEl.textContent).to.have.string("Hello World!");
+  it("has the initial text", () => {
+    expect(testContext.component.editorEl.textContent).toContain("Hello World!");
   });
 
-  it("renders Media component", function() {
-    const items = this.wrapper.find(Media);
-    expect(items).to.have.length(1);
+  it("renders Media component", () => {
+    const items = testContext.wrapper.find(Media);
+    expect(items).toHaveLength(1);
   });
 
-  it("passes extra props to the draft-js editor", function() {
+  it("passes extra props to the draft-js editor", () => {
     const handlePastedText = (text) => { return text; };
     const wrapper = mount(
       <MegadraftEditor
-        editorState={this.editorState}
-        onChange={this.onChange}
+        editorState={testContext.editorState}
+        onChange={testContext.onChange}
         handlePastedText={handlePastedText}
       />
     );
-    expect(wrapper.find(Editor).props().handlePastedText).to.equal(handlePastedText);
+    expect(wrapper.find(Editor).props().handlePastedText).toEqual(handlePastedText);
   });
 
-  it("can't override megadraft props via extra props", function() {
+  it("can't override megadraft props via extra props", () => {
     const blockRendererFn = (text) => { return text; };
     const wrapper = mount(
       <MegadraftEditor
-        editorState={this.editorState}
-        onChange={this.onChange}
+        editorState={testContext.editorState}
+        onChange={testContext.onChange}
         blockRendererFn={blockRendererFn}
       />
     );
-    expect(wrapper.find(Editor).props().blockRendererFn).to.not.equal(blockRendererFn);
+    expect(wrapper.find(Editor).props().blockRendererFn).not.toEqual(blockRendererFn);
   });
 
-  it("allows blockStyleFn to be overridden", function() {
+  it("allows blockStyleFn to be overridden", () => {
     const blockStyleFn = (text) => { return text; };
     const wrapper = mount(
       <MegadraftEditor
-        editorState={this.editorState}
-        onChange={this.onChange}
+        editorState={testContext.editorState}
+        onChange={testContext.onChange}
         blockStyleFn={blockStyleFn}
       />
     );
-    expect(wrapper.find(Editor).props().blockStyleFn).to.equal(blockStyleFn);
+    expect(wrapper.find(Editor).props().blockStyleFn).toEqual(blockStyleFn);
   });
 
-  it("reset blockStyle in new block if resetStyle is true", function() {
+  it("reset blockStyle in new block if resetStyle is true", () => {
     const blockKey = "ag6qs";
     replaceSelection(
       {anchorOffset: 12, focusOffset: 12},
-      this.wrapperWithReset,
+      testContext.wrapperWithReset,
       blockKey
     );
 
-    const editor = this.wrapperWithReset.find(MegadraftEditor);
+    const editor = testContext.wrapperWithReset.find(MegadraftEditor);
 
     editor.instance().handleReturn({shiftKey:false});
 
-    const content = this.onChange.args[0][0].getCurrentContent();
+    const content = testContext.onChange.mock.calls[0][0].getCurrentContent();
     const newBlock = content.getBlockAfter("ag6qs");
 
-    expect(newBlock.getType()).to.be.equal("unstyled");
+    expect(newBlock.getType()).toEqual("unstyled");
   });
 
-  it("reset inlineStyle in new block if resetStyle is true", function() {
+  it("reset inlineStyle in new block if resetStyle is true", () => {
     const blockKey = "ag6qs";
     replaceSelection(
       {anchorOffset: 12, focusOffset: 12},
-      this.wrapperWithReset,
+      testContext.wrapperWithReset,
       blockKey
     );
 
-    const editor = this.wrapperWithReset.find(MegadraftEditor);
+    const editor = testContext.wrapperWithReset.find(MegadraftEditor);
 
     editor.instance().handleReturn({shiftKey:false});
 
-    const editorState = this.onChange.args[0][0];
+    const editorState = testContext.onChange.mock.calls[0][0];
     const inlineStyle = editorState.getCurrentInlineStyle();
 
-    expect(inlineStyle.count()).to.be.equal(0);
+    expect(inlineStyle.count()).toEqual(0);
   });
 
-  it("reset inlineStyles if in blocksWithoutStyleReset", function() {
+  it("reset inlineStyles if in blocksWithoutStyleReset", () => {
     const blockKey = "bqjdr";
     replaceSelection(
       {anchorOffset: 14, focusOffset: 14},
-      this.wrapperWithReset,
+      testContext.wrapperWithReset,
       blockKey
     );
 
-    const editor = this.wrapperWithReset.find(MegadraftEditor);
+    const editor = testContext.wrapperWithReset.find(MegadraftEditor);
 
     editor.instance().handleReturn({shiftKey:false});
 
-    const editorState = this.onChange.args[0][0];
+    const editorState = testContext.onChange.mock.calls[0][0];
     const inlineStyle = editorState.getCurrentInlineStyle();
 
-    expect(inlineStyle.count()).to.be.equal(0);
+    expect(inlineStyle.count()).toEqual(0);
   });
 
-  it("reset style should not change list type", function() {
+  it("reset style should not change list type", () => {
     const blockKey = "bqjdr";
     replaceSelection(
       {anchorOffset: 14, focusOffset: 14},
-      this.wrapperWithReset,
+      testContext.wrapperWithReset,
       blockKey
     );
 
-    const editor = this.wrapperWithReset.find(MegadraftEditor);
+    const editor = testContext.wrapperWithReset.find(MegadraftEditor);
 
     editor.instance().handleReturn({shiftKey:false});
 
-    const content = this.onChange.args[0][0].getCurrentContent();
+    const content = testContext.onChange.mock.calls[0][0].getCurrentContent();
     const newBlock = content.getBlockAfter("bqjdr");
 
-    expect(newBlock.type).to.be.equal("ordered-list-item");
+    expect(newBlock.type).toEqual("ordered-list-item");
   });
 
-  it("should not reset style if resetStyle is false", function() {
+  it("should not reset style if resetStyle is false", () => {
     const blockKey = "ag6qs";
     replaceSelection(
       {anchorOffset: 12, focusOffset: 12},
-      this.wrapperWithoutReset,
+      testContext.wrapperWithoutReset,
       blockKey
     );
 
-    const editor = this.wrapperWithoutReset.find(MegadraftEditor);
+    const editor = testContext.wrapperWithoutReset.find(MegadraftEditor);
 
-    expect(editor.instance().handleReturn({shiftKey:false})).to.be.equal(false);
+    expect(editor.instance().handleReturn({shiftKey:false})).toEqual(false);
   });
 
-  describe("mediaBlockRenderer", function () {
-    it("ignores non-atomic blocks", function() {
-      const block = {getType: function() {return "metal";}};
-      const result = this.component.mediaBlockRenderer(block);
-      expect(result).to.be.null;
+  describe("mediaBlockRenderer", () => {
+    it("ignores non-atomic blocks", () => {
+      const block = {getType: () => "metal"} ;
+      const result = testContext.component.mediaBlockRenderer(block);
+      expect(result).toBeNull();
     });
 
-    it("returns media renderer for registered plugin", function() {
+    it("returns media renderer for registered plugin", () => {
       const block = new FakeAtomicBlock("image");
-      const result = this.component.mediaBlockRenderer(block);
+      const result = testContext.component.mediaBlockRenderer(block);
 
-      expect(result).to.deep.equal({
+      expect(result).toEqual({
         "component": Media,
         "editable": false,
         "props": {
           "plugin": image,
-          "onChange": this.component.onChange,
-          "editorState": this.editorState,
-          "setReadOnly": this.component.setReadOnly,
-          "getReadOnly": this.component.getReadOnly,
-          "setInitialReadOnly": this.component.setInitialReadOnly,
-          "getInitialReadOnly": this.component.getInitialReadOnly,
+          "onChange": testContext.component.onChange,
+          "editorState": testContext.editorState,
+          "setReadOnly": testContext.component.setReadOnly,
+          "getReadOnly": testContext.component.getReadOnly,
+          "setInitialReadOnly": testContext.component.setInitialReadOnly,
+          "getInitialReadOnly": testContext.component.getInitialReadOnly,
         }
       });
     });
 
-    it("returns media renderer with fallback for unregistered plugin", function () {
+    it("returns media renderer with fallback for unregistered plugin", () => {
       const block = new FakeAtomicBlock("unregistered");
-      const result = this.component.mediaBlockRenderer(block);
+      const result = testContext.component.mediaBlockRenderer(block);
 
-      expect(result).to.deep.equal({
+      expect(result).toEqual({
         "component": Media,
         "editable": false,
         "props": {
           "plugin": NotFoundPlugin,
-          "onChange": this.component.onChange,
-          "editorState": this.editorState,
-          "setReadOnly": this.component.setReadOnly,
-          "getReadOnly": this.component.getReadOnly,
-          "setInitialReadOnly": this.component.setInitialReadOnly,
-          "getInitialReadOnly": this.component.getInitialReadOnly,
+          "onChange": testContext.component.onChange,
+          "editorState": testContext.editorState,
+          "setReadOnly": testContext.component.setReadOnly,
+          "getReadOnly": testContext.component.getReadOnly,
+          "setInitialReadOnly": testContext.component.setInitialReadOnly,
+          "getInitialReadOnly": testContext.component.getInitialReadOnly,
         }
       });
     });
 
-    it("returns media renderer with plugin from custom fallback", function () {
+    it("returns media renderer with plugin from custom fallback", () => {
       const customFallbackPlugin = {
         blockComponent: (props) => <pre>{props.data.type}</pre>
       };
-      this.wrapper.setProps({handleBlockNotFound: () => customFallbackPlugin});
+      testContext.wrapper.setProps({handleBlockNotFound: () => customFallbackPlugin});
 
       const block = new FakeAtomicBlock("unregistered");
-      const result = this.component.mediaBlockRenderer(block);
+      const result = testContext.component.mediaBlockRenderer(block);
 
-      expect(result).to.deep.equal({
+      expect(result).toEqual({
         "component": Media,
         "editable": false,
         "props": {
           "plugin": customFallbackPlugin,
-          "onChange": this.component.onChange,
-          "editorState": this.editorState,
-          "setReadOnly": this.component.setReadOnly,
-          "getReadOnly": this.component.getReadOnly,
-          "setInitialReadOnly": this.component.setInitialReadOnly,
-          "getInitialReadOnly": this.component.getInitialReadOnly,
+          "onChange": testContext.component.onChange,
+          "editorState": testContext.editorState,
+          "setReadOnly": testContext.component.setReadOnly,
+          "getReadOnly": testContext.component.getReadOnly,
+          "setInitialReadOnly": testContext.component.setInitialReadOnly,
+          "getInitialReadOnly": testContext.component.getInitialReadOnly,
         }
       });
     });
 
-    it("ignores empty plugin from custom fallback", function () {
-      this.wrapper.setProps({handleBlockNotFound: () => null});
+    it("ignores empty plugin from custom fallback", () => {
+      testContext.wrapper.setProps({handleBlockNotFound: () => null});
 
       const block = new FakeAtomicBlock("unregistered");
-      const result = this.component.mediaBlockRenderer(block);
+      const result = testContext.component.mediaBlockRenderer(block);
 
-      expect(result).to.equal(null);
+      expect(result).toEqual(null);
     });
   });
 
-  it("starts with default readOnly status", function() {
-    const items = this.wrapper.find(Editor);
-    expect(items.instance().props.readOnly).to.be.false;
+  it("starts with default readOnly status", () => {
+    const items = testContext.wrapper.find(Editor);
+    expect(items.instance().props.readOnly).toBeFalsy();
   });
 
-  it("changes readOnly status", function() {
-    const items = this.wrapper.find(Editor);
-    this.component.setReadOnly(true);
-    expect(items.instance().props.readOnly).to.be.true;
+  it("changes readOnly status", () => {
+    const items = testContext.wrapper.find(Editor);
+    testContext.component.setReadOnly(true);
+    expect(items.instance().props.readOnly).toBeTruthy();
   });
 
-  it("is capable of inserting soft line breaks", function() {
-    this.component.handleReturn({shiftKey: true});
+  it("is capable of inserting soft line breaks", () => {
+    testContext.component.handleReturn({shiftKey: true});
 
-    const content = this.onChange.args[0][0].getCurrentContent();
+    const content = testContext.onChange.mock.calls[0][0].getCurrentContent();
 
     const text = content.getFirstBlock().getText();
 
-    expect(text).to.be.equal("\nHello World!");
+    expect(text).toEqual("\nHello World!");
   });
 
-  it("does not insert soft line breaks if option set to false", function () {
+  it("does not insert soft line breaks if option set to false", () => {
     const wrapper = mount(
       <MegadraftEditor
-        editorState={this.editorState}
-        onChange={this.onChange}
+        editorState={testContext.editorState}
+        onChange={testContext.onChange}
         softNewLines={false} />
     );
     const component = wrapper.instance();
-    expect(component.handleReturn({shiftKey: true})).to.be.equal(false);
+    expect(component.handleReturn({shiftKey: true})).toEqual(false);
   });
 
-  it("is capable of adding a new block when try to add a soft break before an exist one", function() {
+  it("is capable of adding a new block when try to add a soft break before an exist one", () => {
     const SOFT_BREAK_ON_BEGINING = {
       "entityMap": {},
       "blocks": [
@@ -424,27 +420,27 @@ describe("MegadraftEditor Component", () => {
       ]
     };
 
-    kba = sinon.spy();
+    kba = jest.fn();
     const keyBindings = [
       {name: "save", isKeyBound: (e) => {return e.keyCode === 83 && e.ctrlKey;}, action: kba}
     ];
 
-    this.editorState = editorStateFromRaw(SOFT_BREAK_ON_BEGINING);
+    testContext.editorState = editorStateFromRaw(SOFT_BREAK_ON_BEGINING);
 
-    this.wrapper = mount(
+    testContext.wrapper = mount(
       <MegadraftEditor
-        editorState={this.editorState}
-        onChange={this.onChange}
+        editorState={testContext.editorState}
+        onChange={testContext.onChange}
         keyBindings={keyBindings}/>
     );
-    this.component = this.wrapper.instance();
+    testContext.component = testContext.wrapper.instance();
 
-    const addedASoftBreak = this.component.handleReturn({shiftKey: true});
+    const addedASoftBreak = testContext.component.handleReturn({shiftKey: true});
 
-    expect(addedASoftBreak).to.be.false;
+    expect(addedASoftBreak).toBeFalsy();
   });
 
-  it("is capable of adding a new block when try to add a soft break after an exist one", function() {
+  it("is capable of adding a new block when try to add a soft break after an exist one", () => {
     const SOFT_BREAK_ON_END = {
       "entityMap": {},
       "blocks": [
@@ -459,52 +455,52 @@ describe("MegadraftEditor Component", () => {
       ]
     };
 
-    kba = sinon.spy();
+    kba = jest.fn();
     const keyBindings = [
       {name: "save", isKeyBound: (e) => {return e.keyCode === 83 && e.ctrlKey;}, action: kba}
     ];
 
-    this.editorState = EditorState.moveSelectionToEnd(editorStateFromRaw(SOFT_BREAK_ON_END));
+    testContext.editorState = EditorState.moveSelectionToEnd(editorStateFromRaw(SOFT_BREAK_ON_END));
 
-    this.wrapper = mount(
+    testContext.wrapper = mount(
       <MegadraftEditor
-        editorState={this.editorState}
-        onChange={this.onChange}
+        editorState={testContext.editorState}
+        onChange={testContext.onChange}
         keyBindings={keyBindings}/>
     );
 
-    this.component = this.wrapper.instance();
+    testContext.component = testContext.wrapper.instance();
 
-    const addedASoftBreak = this.component.handleReturn({shiftKey: true});
+    const addedASoftBreak = testContext.component.handleReturn({shiftKey: true});
 
-    expect(addedASoftBreak).to.be.false;
+    expect(addedASoftBreak).toBeFalsy();
   });
 
-  it("recognizes external key binding", function() {
+  it("recognizes external key binding", () => {
     const defaultKeyBinding = {keyCode: 66, ctrlKey: true};
-    expect(this.component.externalKeyBindings(defaultKeyBinding)).to.equal("bold");
+    expect(testContext.component.externalKeyBindings(defaultKeyBinding)).toEqual("bold");
 
     const unknownKeyBinding = {keyCode: 70, ctrlKey: true};
-    expect(this.component.externalKeyBindings(unknownKeyBinding)).to.not.exist;
+    expect(testContext.component.externalKeyBindings(unknownKeyBinding)).toBeNull();
 
     const externalKeyBinding = {keyCode: 83, ctrlKey: true};
-    expect(this.component.externalKeyBindings(externalKeyBinding)).to.equal("save");
+    expect(testContext.component.externalKeyBindings(externalKeyBinding)).toEqual("save");
   });
 
-  it("handles external commands", function() {
+  it("handles external commands", () => {
     const defaultCommand = "bold";
-    expect(this.component.handleKeyCommand(defaultCommand)).to.be.true;
+    expect(testContext.component.handleKeyCommand(defaultCommand)).toBeTruthy();
 
     const unknownCommand = "foo";
-    expect(this.component.handleKeyCommand(unknownCommand)).to.be.false;
+    expect(testContext.component.handleKeyCommand(unknownCommand)).toBeFalsy();
 
     const externalCommand = "save";
-    expect(this.component.handleKeyCommand(externalCommand)).to.be.true;
-    expect(kba).to.have.been.called;
+    expect(testContext.component.handleKeyCommand(externalCommand)).toBeTruthy();
+    expect(kba).toHaveBeenCalled();
   });
 
-  it("renders only valid plugins", function() {
-    console.warn = sinon.spy();
+  it("renders only valid plugins", () => {
+    console.warn = jest.fn();
 
     const invalidPlugin = {
       buttonComponent: {},
@@ -513,16 +509,16 @@ describe("MegadraftEditor Component", () => {
 
     const wrapper = mount(
       <MegadraftEditor
-        editorState={this.editorState}
-        onChange={this.onChange}
+        editorState={testContext.editorState}
+        onChange={testContext.onChange}
         plugins={[image, invalidPlugin]} />
     );
     const sidebar = wrapper.find(Sidebar);
-    expect(sidebar.prop("plugins")).to.have.length(1);
+    expect(sidebar.prop("plugins")).toHaveLength(1);
   });
 
-  it("shows warning for missing `type` field", function() {
-    console.warn = sinon.spy();
+  it("shows warning for missing `type` field", () => {
+    console.warn = jest.fn();
 
     const plugin = {
       buttonComponent: {},
@@ -532,53 +528,53 @@ describe("MegadraftEditor Component", () => {
 
     mount(
       <MegadraftEditor
-        editorState={this.editorState}
-        onChange={this.onChange}
+        editorState={testContext.editorState}
+        onChange={testContext.onChange}
         plugins={plugins} />
     );
 
-    expect(console.warn.getCall(0).args[0]).to.equal(
+    expect(console.warn.mock.calls[0][0]).toEqual(
       "Plugin: Missing `type` field. Details: "
     );
   });
 
-  it("renders default sidebar if sidebarRendererFn not provided", function() {
-    const sidebar = this.wrapper.find(Sidebar);
-    expect(sidebar).to.have.length(1);
+  it("renders default sidebar if sidebarRendererFn not provided", () => {
+    const sidebar = testContext.wrapper.find(Sidebar);
+    expect(sidebar).toHaveLength(1);
   });
 
-  it("passes required props to default sidebar", function() {
-    const sidebar = this.wrapper.find(Sidebar);
-    expect(sidebar.prop("plugins")).to.equal(this.component.plugins);
-    expect(sidebar.prop("onChange")).to.equal(this.component.onChange);
-    expect(sidebar.prop("editorState")).to.equal(this.editorState);
-    expect(sidebar.prop("readOnly")).to.equal(false);
+  it("passes required props to default sidebar", () => {
+    const sidebar = testContext.wrapper.find(Sidebar);
+    expect(sidebar.prop("plugins")).toEqual(testContext.component.plugins);
+    expect(sidebar.prop("onChange")).toEqual(testContext.component.onChange);
+    expect(sidebar.prop("editorState")).toEqual(testContext.editorState);
+    expect(sidebar.prop("readOnly")).toBeFalsy();
   });
 
-  it("calls sidebarRendererFn if it's provided", function() {
-    const renderCustomSidebar = sinon.spy();
+  it("calls sidebarRendererFn if it's provided", () => {
+    const renderCustomSidebar = jest.fn();
     const wrapper = mount(
       <MegadraftEditor
-        editorState={this.editorState}
-        onChange={this.onChange}
-        maxSidebarButtons= {this.maxSidebarButtons}
+        editorState={testContext.editorState}
+        onChange={testContext.onChange}
+        maxSidebarButtons= {testContext.maxSidebarButtons}
         sidebarRendererFn={renderCustomSidebar}
-        modalOptions={this.modalOptions} />
+        modalOptions={testContext.modalOptions} />
     );
 
     const component = wrapper.instance();
     const expectedProps = {
       plugins: component.plugins,
       onChange: component.onChange,
-      editorState: this.editorState,
+      editorState: testContext.editorState,
       readOnly: false,
-      maxSidebarButtons: this.maxSidebarButtons,
-      modalOptions: this.modalOptions
+      maxSidebarButtons: testContext.maxSidebarButtons,
+      modalOptions: testContext.modalOptions
     };
-    expect(renderCustomSidebar.calledWith(expectedProps)).to.be.true;
+    expect(renderCustomSidebar).toBeCalledWith(expectedProps);
   });
 
-  it("renders custom sidebar if sidebarRendererFn is provided", function() {
+  it("renders custom sidebar if sidebarRendererFn is provided", () => {
     class MyCustomSidebar extends React.Component {
       render() {
         return (
@@ -588,34 +584,34 @@ describe("MegadraftEditor Component", () => {
         );
       }
     }
-    const renderCustomSidebar = function(plugins, editorState) {
+    const renderCustomSidebar = (plugins, editorState) => {
       return <MyCustomSidebar plugins={plugins} editorState={editorState}/>;
     };
     const wrapper = mount(
       <MegadraftEditor
-        editorState={this.editorState}
-        onChange={this.onChange}
+        editorState={testContext.editorState}
+        onChange={testContext.onChange}
         sidebarRendererFn={renderCustomSidebar} />
     );
     const sidebar = wrapper.find(MyCustomSidebar);
-    expect(sidebar).to.have.length(1);
+    expect(sidebar).toHaveLength(1);
   });
 
-  it("renders default toolbar if Tooolbar not provided", function() {
-    const toolbar = this.wrapper.find(Toolbar);
-    expect(toolbar).to.have.length(1);
+  it("renders default toolbar if Tooolbar not provided", () => {
+    const toolbar = testContext.wrapper.find(Toolbar);
+    expect(toolbar).toHaveLength(1);
   });
 
-  it("passes required props to default toolbar", function() {
-    const toolbar = this.wrapper.find(Toolbar);
-    expect(toolbar.prop("actions")).to.equal(this.component.props.actions);
-    expect(toolbar.prop("entityInputs")).to.equal(this.component.entityInputs);
-    expect(toolbar.prop("onChange")).to.equal(this.component.onChange);
-    expect(toolbar.prop("editorState")).to.equal(this.editorState);
-    expect(toolbar.prop("readOnly")).to.equal(false);
+  it("passes required props to default toolbar", () => {
+    const toolbar = testContext.wrapper.find(Toolbar);
+    expect(toolbar.prop("actions")).toEqual(testContext.component.props.actions);
+    expect(toolbar.prop("entityInputs")).toEqual(testContext.component.entityInputs);
+    expect(toolbar.prop("onChange")).toEqual(testContext.component.onChange);
+    expect(toolbar.prop("editorState")).toEqual(testContext.editorState);
+    expect(toolbar.prop("readOnly")).toBeFalsy();
   });
 
-  it("renders custom toolbar if Toolbar is provided", function() {
+  it("renders custom toolbar if Toolbar is provided", () => {
     class MyCustomToolbar extends React.Component {
       render() {
         return (
@@ -628,15 +624,15 @@ describe("MegadraftEditor Component", () => {
 
     const wrapper = mount(
       <MegadraftEditor
-        editorState={this.editorState}
-        onChange={this.component.onChange}
+        editorState={testContext.editorState}
+        onChange={testContext.component.onChange}
         Toolbar={MyCustomToolbar} />
     );
     const toolbar = wrapper.find(MyCustomToolbar);
-    expect(toolbar).to.have.length(1);
-    expect(toolbar.prop("actions")).to.equal(this.component.props.actions);
-    expect(toolbar.prop("entityInputs")).to.equal(this.component.entityInputs);
-    expect(toolbar.prop("editorState")).to.equal(this.editorState);
-    expect(toolbar.prop("readOnly")).to.equal(false);
+    expect(toolbar).toHaveLength(1);
+    expect(toolbar.prop("actions")).toEqual(testContext.component.props.actions);
+    expect(toolbar.prop("entityInputs")).toEqual(testContext.component.entityInputs);
+    expect(toolbar.prop("editorState")).toEqual(testContext.editorState);
+    expect(toolbar.prop("readOnly")).toBeFalsy();
   });
 });

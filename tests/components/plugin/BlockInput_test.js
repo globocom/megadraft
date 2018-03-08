@@ -5,59 +5,55 @@
  */
 
 import React from "react";
-import chai from "chai";
 import {mount} from "enzyme";
 
 import {BlockInput} from "../../../src/components/plugin";
 
-let expect = chai.expect;
+describe("BlockInput Component", () => {
+  let testContext;
 
+  beforeEach(() => {
+    testContext = {};
 
-describe("BlockInput Component", function() {
-
-  beforeEach(function() {
-
-    this.onChange = function(e) {return e;};
-
-    this.renderComponent = function (props) {
+    testContext.renderComponent = props => {
       props = props || {};
-      return mount(<BlockInput onChange={this.onChange} {...props} />);
+      return mount(<BlockInput onChange={jest.fn()} {...props} />);
     };
   });
 
-  it("uses `empty` class when value is empty", function() {
-    const component = this.renderComponent();
+  it("uses `empty` class when value is empty", () => {
+    const component = testContext.renderComponent();
     const input = component.find("input");
-    expect(input.hasClass("block__input--empty")).to.be.true;
+    expect(input.hasClass("block__input--empty")).toBeTruthy();
   });
 
-  it("disables `empty` class when there is a value", function() {
-    const component = this.renderComponent({value: "non-empty"});
+  it("disables `empty` class when there is a value", () => {
+    const component = testContext.renderComponent({value: "non-empty"});
     const input = component.find("input");
-    expect(input.hasClass("block__input--empty")).to.be.false;
+    expect(input.hasClass("block__input--empty")).toBeFalsy();
   });
 
-  it("renders input value", function() {
-    const component = this.renderComponent({value: "non-empty"});
+  it("renders input value", () => {
+    const component = testContext.renderComponent({value: "non-empty"});
     const domInput = component.find("input").getDOMNode();
-    expect(domInput.value).to.equal("non-empty");
+    expect(domInput.value).toEqual("non-empty");
   });
 
-  it("hides error text when there is no error", function() {
-    const component = this.renderComponent({value: "non-empty"});
+  it("hides error text when there is no error", () => {
+    const component = testContext.renderComponent({value: "non-empty"});
     const elements = component.find(".block__input__error-text");
-    expect(elements.length).to.equal(0);
+    expect(elements).toHaveLength(0);
   });
 
-  it("renders error text when there is an error", function() {
-    const component = this.renderComponent({error: "Fake error"});
+  it("renders error text when there is an error", () => {
+    const component = testContext.renderComponent({error: "Fake error"});
     const element = component.find(".block__input__error-text").getDOMNode();
-    expect(element.textContent).to.equal("Fake error");
+    expect(element.textContent).toEqual("Fake error");
   });
 
-  it("toggles `error` class when there is an error", function() {
-    const component = this.renderComponent({value: "non-empty"});
+  it("toggles `error` class when there is an error", () => {
+    const component = testContext.renderComponent({value: "non-empty"});
     const input = component.find("input");
-    expect(input.hasClass("block__input--error")).to.be.false;
+    expect(input.hasClass("block__input--error")).toBeFalsy();
   });
 });
