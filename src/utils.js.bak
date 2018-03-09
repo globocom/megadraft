@@ -44,41 +44,21 @@ export function getSelectedBlockElement(range) {
 
 export function getSelectionCoords(editor, toolbar) {
   const editorBounds = editor.getBoundingClientRect();
-  const win = editor.ownerDocument.defaultView || window;
-  const rangeBounds = getVisibleSelectionRect(win);
-  const toolbarHeight = toolbar.offsetHeight;
-  const toolbarWidth = toolbar.offsetWidth;
+  const rangeBounds = getVisibleSelectionRect(window);
 
   if (!rangeBounds || !toolbar) {
     return null;
   }
 
-  const minOffsetLeft = 5;
-  const minOffsetRight = 5;
-  const minOffsetTop = 5;
-
   const rangeWidth = rangeBounds.right - rangeBounds.left;
-  const arrowStyle = {};
 
-  let offsetLeft = (rangeBounds.left - editorBounds.left) + (rangeWidth / 2);
-  arrowStyle.left = '50%';
-  if (offsetLeft - toolbarWidth / 2 + editorBounds.left < minOffsetLeft) {
-    arrowStyle.left = rangeBounds.left - editorBounds.left;
-    offsetLeft = (toolbarWidth / 2) + minOffsetLeft;
-  }
-  if (offsetLeft + (toolbarWidth / 2) + editorBounds.left > win.innerWidth - minOffsetRight) {
-    arrowStyle.left = toolbarWidth + rangeBounds.right - editorBounds.right;
-    offsetLeft = win.innerWidth - editorBounds.left - (toolbarWidth / 2) - minOffsetRight;
-  }
-  let offsetTop = rangeBounds.top - editorBounds.top - 14;
-  arrowStyle.top = '100%';
-  if (offsetTop - minOffsetTop - toolbarHeight + editorBounds.top < 0) {
-    offsetTop = rangeBounds.bottom - editorBounds.top + toolbarHeight + 14;
-    arrowStyle.top = '-14px';
-    arrowStyle.transform = 'rotate(180deg)';
-  }
-
-  return {offsetLeft, offsetTop, arrowStyle};
+  const toolbarHeight = toolbar.offsetHeight;
+  // const rangeHeight = rangeBounds.bottom - rangeBounds.top;
+  const offsetLeft = (rangeBounds.left - editorBounds.left)
+            + (rangeWidth / 2);
+  const offsetTop = rangeBounds.top - editorBounds.top - (toolbarHeight + 14);
+  const offsetBottom = editorBounds.bottom - rangeBounds.top + 14;
+  return {offsetLeft, offsetTop, offsetBottom};
 }
 
 export function createTypeStrategy(type) {

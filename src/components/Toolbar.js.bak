@@ -9,13 +9,14 @@ import PropTypes from "prop-types";
 import {EditorState, RichUtils} from "draft-js";
 import classNames from "classnames";
 import ToolbarItem from "./ToolbarItem";
-import {getSelectionCoords} from "../utils";
+import {getSelectionCoords, delayCall} from "../utils";
 
 
 export default class Toolbar extends Component {
   static defaultProps = {
-    shouldDisplayToolbarFn() {
-      return this.editorHasFocus && !this.editorState.getSelection().isCollapsed();
+    shouldDisplayToolbarFn(props, state) {
+
+      return (props.editorHasFocus || state.editingEntity) && !props.editorState.getSelection().isCollapsed();
     },
   }
   static propTypes = {
@@ -112,7 +113,6 @@ export default class Toolbar extends Component {
     const toolbar = this.toolbarEl;
     const arrow = this.arrowEl;
     const selectionCoords = getSelectionCoords(editor, toolbar);
-    const toolbarDimensions = toolbar.getBoundingClientRect();
 
     if (!selectionCoords) {
       return null;
@@ -120,24 +120,39 @@ export default class Toolbar extends Component {
 
     if (selectionCoords &&
         !this.state.position ||
-        this.state.position.top !== selectionCoords.offsetTop ||
+        this.state.position.bottom !== selectionCoords.offsetBottom ||
         this.state.position.left !== selectionCoords.offsetLeft ||
-        this.state.arrowStyle !== selectionCoords.arrowStyle ||
         !this.state.show) {
       this.setState({
         show: true,
         position: {
-          top: selectionCoords.offsetTop,
+          bottom: selectionCoords.offsetBottom,
           left: selectionCoords.offsetLeft
-        },
-        arrowStyle: selectionCoords.arrowStyle
+        }
+      }, state => {
+        const minOffsetLeft = 5;
+        const minOffsetRight = 5;
+        const toolbarDimensions = toolbar.getBoundingClientRect();
+
+        if (toolbarDimensions.left < minOffsetLeft) {
+          toolbar.style.left = -((toolbarDimensions.width / 2) + toolbarDimensions.left - minOffsetLeft) + "px";
+          arrow.style.left = ((toolbarDimensions.width / 2) + toolbarDimensions.left - minOffsetLeft) + "px";
+        }
+        if (toolbarDimensions.left + toolbarDimensions.width > window.innerWidth - minOffsetRight) {
+          toolbar.style.left = -(toolbarDimensions.right - selectionCoords.offsetLeft + minOffsetRight) + "px";
+          arrow.style.left = (toolbarDimensions.right - selectionCoords.offsetLeft + minOffsetRight) + "px";
+        }
       });
     }
   }
 
-  handleSetToolbar() {
-    if (this.props.shouldDisplayToolbarFn()) {
-      this.shouldUpdatePos = false;
+  componentDidUpdate() {
+    // reset toolbar position every time
+    if (this.toolbarEl && this.arrowEl) {
+      this.toolbarEl.style.left = "";
+      this.arrowEl.style.left = "";
+    }
+    if (this.props.shouldDisplayToolbarFn(this.props, this.state)) {
       return this.setBarPosition();
     } else {
       if (this.state.show) {
@@ -148,30 +163,6 @@ export default class Toolbar extends Component {
           error: null
         });
       }
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const currentContentState = this.props.editorState.getCurrentContent()
-    const newContentState = nextProps.editorState.getCurrentContent()
-
-    if (currentContentState === newContentState) {
-      this.shouldUpdatePos = true;
-      this.setState({
-        show: true
-      });
-    }
-    else
-    {
-      this.setState({
-        show: false
-      });
-    }
-  }
-
-  componentDidUpdate() {
-    if (this.shouldUpdatePos) {
-      this.handleSetToolbar();
     }
   }
 
@@ -306,8 +297,7 @@ export default class Toolbar extends Component {
                 this.renderToolList()
             }
             <p className="toolbar__error-msg">{this.state.error}</p>
-            <span className="toolbar__arrow" ref={(el) => { this.arrowEl = el; }}
-              style={this.state.arrowStyle}/>
+            <span className="toolbar__arrow" ref={(el) => { this.arrowEl = el; }} />
           </div>
         </div>
       </div>
