@@ -61,7 +61,7 @@ export function getSelectionCoords(editor, toolbar) {
   const arrowStyle = {};
 
   let offsetLeft = (rangeBounds.left - editorBounds.left) + (rangeWidth / 2);
-  arrowStyle.left = '50%';
+  arrowStyle.left = "50%";
   if (offsetLeft - toolbarWidth / 2 + editorBounds.left < minOffsetLeft) {
     arrowStyle.left = rangeBounds.left - editorBounds.left;
     offsetLeft = (toolbarWidth / 2) + minOffsetLeft;
@@ -71,11 +71,11 @@ export function getSelectionCoords(editor, toolbar) {
     offsetLeft = win.innerWidth - editorBounds.left - (toolbarWidth / 2) - minOffsetRight;
   }
   let offsetTop = rangeBounds.top - editorBounds.top - 14;
-  arrowStyle.top = '100%';
+  arrowStyle.top = "100%";
   if (offsetTop - minOffsetTop - toolbarHeight + editorBounds.top < 0) {
     offsetTop = rangeBounds.bottom - editorBounds.top + toolbarHeight + 14;
-    arrowStyle.top = '-14px';
-    arrowStyle.transform = 'rotate(180deg)';
+    arrowStyle.top = "-14px";
+    arrowStyle.transform = "rotate(180deg)";
   }
 
   return {offsetLeft, offsetTop, arrowStyle};

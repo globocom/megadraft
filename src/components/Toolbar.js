@@ -109,9 +109,7 @@ export default class Toolbar extends Component {
   setBarPosition() {
     const editor = this.props.editor;
     const toolbar = this.toolbarEl;
-    const arrow = this.arrowEl;
     const selectionCoords = getSelectionCoords(editor, toolbar);
-    const toolbarDimensions = toolbar.getBoundingClientRect();
 
     if (!selectionCoords) {
       return null;
@@ -151,8 +149,8 @@ export default class Toolbar extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const currentContentState = this.props.editorState.getCurrentContent()
-    const newContentState = nextProps.editorState.getCurrentContent()
+    const currentContentState = this.props.editorState.getCurrentContent();
+    const newContentState = nextProps.editorState.getCurrentContent();
 
     if (currentContentState === newContentState) {
       this.shouldUpdatePos = true;
