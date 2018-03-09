@@ -35,7 +35,6 @@ export default class Toolbar extends Component {
     this.removeEntity = ::this.removeEntity;
     this.setError = ::this.setError;
     this.cancelError = ::this.cancelError;
-    this.setBarPosition = delayCall(::this.setBarPosition, 16);
   }
 
   toggleInlineStyle(inlineStyle) {
