@@ -198,10 +198,12 @@ describe("MegadraftEditor Component", () => {
   });
 
   it("allows blockRendererFn to be augmented with mediaBlockRenderer", () => {
-    const contentBlock = { getType: () => "atomic" }
-    const blockRendererFn = contentBlock => { 
+    const contentBlock = {
+      getType: () => "atomic"
+    };
+    const blockRendererFn = contentBlock => {
       const type = contentBlock.getType();
-      if (type === 'atomic') {  
+      if (type === "atomic") {
         return true;
       }
     };
