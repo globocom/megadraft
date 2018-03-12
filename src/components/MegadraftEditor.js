@@ -37,6 +37,7 @@ const NO_RESET_STYLE_DEFAULT = ["ordered-list-item", "unordered-list-item"];
 export default class MegadraftEditor extends Component {
   static defaultProps = {
     actions: DEFAULT_ACTIONS,
+    blockRendererFn: () => {},
   }
 
   constructor(props) {
@@ -281,6 +282,12 @@ export default class MegadraftEditor extends Component {
   }
 
   mediaBlockRenderer(block) {
+
+    const handled = this.props.blockRendererFn(block);
+    if (handled) {
+      return handled;
+    }
+
     if (block.getType() !== "atomic") {
       return null;
     }
@@ -350,7 +357,7 @@ export default class MegadraftEditor extends Component {
             ref={(el) => { this.draftEl = el; }}
             readOnly={this.state.readOnly}
             plugins={this.plugins}
-            blockRendererFn={this.props.blockRendererFn || this.mediaBlockRenderer}
+            blockRendererFn={this.mediaBlockRenderer}
             blockStyleFn={this.props.blockStyleFn || this.blockStyleFn}
             onTab={this.onTab}
             handleKeyCommand={this.handleKeyCommand}
