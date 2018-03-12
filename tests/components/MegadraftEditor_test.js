@@ -197,6 +197,24 @@ describe("MegadraftEditor Component", () => {
     expect(wrapper.find(Editor).props().blockRendererFn).not.toEqual(blockRendererFn);
   });
 
+  it("allows blockRendererFn to be augmented with mediaBlockRenderer", () => {
+    const contentBlock = { getType: () => "atomic" }
+    const blockRendererFn = contentBlock => { 
+      const type = contentBlock.getType();
+      if (type === 'atomic') {  
+        return true;
+      }
+    };
+    const wrapper = mount(
+      <MegadraftEditor
+        editorState={testContext.editorState}
+        onChange={testContext.onChange}
+        blockRendererFn={blockRendererFn}
+      />
+    );
+    expect(wrapper.find(Editor).props().blockRendererFn(contentBlock)).toEqual(true);
+  });
+
   it("allows blockStyleFn to be overridden", () => {
     const blockStyleFn = (text) => { return text; };
     const wrapper = mount(
