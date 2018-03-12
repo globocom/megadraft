@@ -186,6 +186,18 @@ describe("MegadraftEditor Component", () => {
   });
 
   it("can't override megadraft props via extra props", () => {
+    const handleKeyCommand = (text) => { return text; };
+    const wrapper = mount(
+      <MegadraftEditor
+        editorState={testContext.editorState}
+        onChange={testContext.onChange}
+        handleKeyCommand={handleKeyCommand}
+      />
+    );
+    expect(wrapper.find(Editor).props().handleKeyCommand).not.toEqual(handleKeyCommand);
+  });
+
+  it("allows blockRendererFn to be overridden", () => {
     const blockRendererFn = (text) => { return text; };
     const wrapper = mount(
       <MegadraftEditor
@@ -194,7 +206,7 @@ describe("MegadraftEditor Component", () => {
         blockRendererFn={blockRendererFn}
       />
     );
-    expect(wrapper.find(Editor).props().blockRendererFn).not.toEqual(blockRendererFn);
+    expect(wrapper.find(Editor).props().blockRendererFn).toEqual(blockRendererFn);
   });
 
   it("allows blockStyleFn to be overridden", () => {
