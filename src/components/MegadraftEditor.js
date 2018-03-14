@@ -117,7 +117,6 @@ export default class MegadraftEditor extends Component {
   }
 
   onTab(event) {
-    event.preventDefault();
     if (this.props.onTab) {
       this.props.onTab(event);
     }
