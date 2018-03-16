@@ -309,5 +309,6 @@ export default class Toolbar extends Component {
         </div>
       </div>
     );
+
   }
 }
