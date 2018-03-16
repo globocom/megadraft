@@ -73,9 +73,12 @@ export function getSelectionCoords(editor, toolbar) {
   let offsetTop = rangeBounds.top - editorBounds.top - 14;
   arrowStyle.top = "100%";
   if (offsetTop - minOffsetTop - toolbarHeight + editorBounds.top < 0) {
-    offsetTop = rangeBounds.bottom - editorBounds.top + toolbarHeight + 14;
-    arrowStyle.top = "-14px";
-    arrowStyle.transform = "rotate(180deg)";
+    //Always make sure that, if the range bounds does not fully exists, we keep the current coordinates
+    if (rangeBounds.bottom && !Number.isNaN(rangeBounds.bottom)) {
+      offsetTop = rangeBounds.bottom - editorBounds.top + toolbarHeight + 14;
+      arrowStyle.top = "-14px";
+      arrowStyle.transform = "rotate(180deg)";
+    }
   }
 
   return {offsetLeft, offsetTop, arrowStyle};
