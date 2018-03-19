@@ -44,7 +44,7 @@ export default class Toolbar extends Component {
     this.props.onChange(newEditorState);
   }
 
-  toggleBlockStyle(blockType) {
+  toggleBlockType(blockType) {
     this.props.onChange(
       RichUtils.toggleBlockType(this.props.editorState, blockType)
     );
@@ -78,7 +78,7 @@ export default class Toolbar extends Component {
           .getCurrentContent()
           .getBlockForKey(selection.getStartKey())
           .getType();
-        toggle = () => this.toggleBlockStyle(item.style);
+        toggle = () => this.toggleBlockType(item.style);
         active = item.style === current;
         break;
       }
