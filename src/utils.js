@@ -33,11 +33,15 @@ export function editorStateFromRaw(rawContent, decorator = defaultDecorator) {
 export function getSelectedBlockElement(range) {
   let node = range.startContainer;
   do {
-    const nodeIsDataBlock = node.getAttribute ? node.getAttribute("data-block") : null;
-    if (nodeIsDataBlock) {
-      return node;
+    try {
+      const nodeIsDataBlock = node.getAttribute ? node.getAttribute("data-block") : null;
+      if (nodeIsDataBlock) {
+        return node;
+      }
+      node = node.parentNode;
+    } catch (error) {
+      return null;
     }
-    node = node.parentNode;
   } while (node !== null);
   return null;
 }

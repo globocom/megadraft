@@ -12,7 +12,7 @@ import icons from "../icons";
 import "setimmediate";
 
 import PluginsModal from "./PluginsModal";
-
+import {getSelectedBlockElement} from "../utils";
 
 class BlockStyles extends Component {
   constructor(props) {
@@ -158,24 +158,6 @@ export class SideMenu extends Component {
   }
 }
 
-function getSelectedBlockElement() {
-  // Finds the block parent of the current selection
-  // https://github.com/facebook/draft-js/issues/45
-  const selection = window.getSelection();
-  if (selection.rangeCount === 0) {
-    return null;
-  }
-  let node = selection.getRangeAt(0).startContainer;
-
-  do {
-    if (node.getAttribute && node.getAttribute("data-block") == "true") {
-      return node;
-    }
-    node = node.parentNode;
-  } while (node != null);
-
-}
-
 export default class SideBar extends Component {
   constructor(props) {
     super(props);
@@ -212,7 +194,12 @@ export default class SideBar extends Component {
     const container = ReactDOM.findDOMNode(this.containerEl);
     const editor = container ? container.parentElement : null;
 
-    const element = getSelectedBlockElement();
+    const selection = window.getSelection();
+    if (selection.rangeCount === 0) {
+      return null;
+    }
+
+    const element = getSelectedBlockElement(selection.getRangeAt(0));
 
     if (!element || !container || !editor || !editor.contains(element)) {
       return;
