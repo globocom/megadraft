@@ -9,14 +9,13 @@ import PropTypes from "prop-types";
 import {EditorState, RichUtils} from "draft-js";
 import classNames from "classnames";
 import ToolbarItem from "./ToolbarItem";
-import {getSelectionCoords, delayCall} from "../utils";
+import {getSelectionCoords} from "../utils";
 
 
 export default class Toolbar extends Component {
   static defaultProps = {
-    shouldDisplayToolbarFn(props, state) {
-
-      return (props.editorHasFocus || state.editingEntity) && !props.editorState.getSelection().isCollapsed();
+    shouldDisplayToolbarFn() {
+      return this.editorHasFocus && !this.editorState.getSelection().isCollapsed();
     },
   }
   static propTypes = {
@@ -36,7 +35,6 @@ export default class Toolbar extends Component {
     this.removeEntity = ::this.removeEntity;
     this.setError = ::this.setError;
     this.cancelError = ::this.cancelError;
-    this.setBarPosition = delayCall(::this.setBarPosition, 16);
   }
 
   toggleInlineStyle(inlineStyle) {
@@ -111,7 +109,6 @@ export default class Toolbar extends Component {
   setBarPosition() {
     const editor = this.props.editor;
     const toolbar = this.toolbarEl;
-    const arrow = this.arrowEl;
     const selectionCoords = getSelectionCoords(editor, toolbar);
 
     if (!selectionCoords) {
@@ -120,39 +117,24 @@ export default class Toolbar extends Component {
 
     if (selectionCoords &&
         !this.state.position ||
-        this.state.position.bottom !== selectionCoords.offsetBottom ||
+        this.state.position.top !== selectionCoords.offsetTop ||
         this.state.position.left !== selectionCoords.offsetLeft ||
+        this.state.arrowStyle !== selectionCoords.arrowStyle ||
         !this.state.show) {
       this.setState({
         show: true,
         position: {
-          bottom: selectionCoords.offsetBottom,
+          top: selectionCoords.offsetTop,
           left: selectionCoords.offsetLeft
-        }
-      }, state => {
-        const minOffsetLeft = 5;
-        const minOffsetRight = 5;
-        const toolbarDimensions = toolbar.getBoundingClientRect();
-
-        if (toolbarDimensions.left < minOffsetLeft) {
-          toolbar.style.left = -((toolbarDimensions.width / 2) + toolbarDimensions.left - minOffsetLeft) + "px";
-          arrow.style.left = ((toolbarDimensions.width / 2) + toolbarDimensions.left - minOffsetLeft) + "px";
-        }
-        if (toolbarDimensions.left + toolbarDimensions.width > window.innerWidth - minOffsetRight) {
-          toolbar.style.left = -(toolbarDimensions.right - selectionCoords.offsetLeft + minOffsetRight) + "px";
-          arrow.style.left = (toolbarDimensions.right - selectionCoords.offsetLeft + minOffsetRight) + "px";
-        }
+        },
+        arrowStyle: selectionCoords.arrowStyle
       });
     }
   }
 
-  componentDidUpdate() {
-    // reset toolbar position every time
-    if (this.toolbarEl && this.arrowEl) {
-      this.toolbarEl.style.left = "";
-      this.arrowEl.style.left = "";
-    }
-    if (this.props.shouldDisplayToolbarFn(this.props, this.state)) {
+  handleSetToolbar() {
+    if (this.props.shouldDisplayToolbarFn()) {
+      this.shouldUpdatePos = false;
       return this.setBarPosition();
     } else {
       if (this.state.show) {
@@ -163,6 +145,30 @@ export default class Toolbar extends Component {
           error: null
         });
       }
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const currentContentState = this.props.editorState.getCurrentContent();
+    const newContentState = nextProps.editorState.getCurrentContent();
+
+    if (currentContentState === newContentState) {
+      this.shouldUpdatePos = true;
+      this.setState({
+        show: true
+      });
+    }
+    else
+    {
+      this.setState({
+        show: false
+      });
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.shouldUpdatePos) {
+      this.handleSetToolbar();
     }
   }
 
@@ -297,10 +303,12 @@ export default class Toolbar extends Component {
                 this.renderToolList()
             }
             <p className="toolbar__error-msg">{this.state.error}</p>
-            <span className="toolbar__arrow" ref={(el) => { this.arrowEl = el; }} />
+            <span className="toolbar__arrow" ref={(el) => { this.arrowEl = el; }}
+              style={this.state.arrowStyle}/>
           </div>
         </div>
       </div>
     );
+
   }
 }

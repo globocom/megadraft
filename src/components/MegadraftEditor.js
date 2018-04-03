@@ -330,7 +330,7 @@ export default class MegadraftEditor extends Component {
 
   renderToolbar(props) {
     const {Toolbar = DefaultToolbar} = this.props;
-    return <Toolbar {...props} />;
+    return <Toolbar {...props}/>;
   }
 
   render() {
@@ -366,7 +366,7 @@ export default class MegadraftEditor extends Component {
           />
           {this.renderToolbar({
             editor: this.editorEl,
-            draft: this.refs.draft,
+            draft: this.draftEl,
             editorState: this.props.editorState,
             editorHasFocus: this.state.hasFocus,
             readOnly: this.state.readOnly,
