@@ -20,6 +20,7 @@ class SidebarWrapper extends Component {
     super(props);
     this.state = {...props};
     this.plugins = this.props.plugins || DEFAULT_PLUGINS;
+    this.editorHasFocus = true;
     this.onChange = ::this.onChange;
   }
 
@@ -35,7 +36,8 @@ class SidebarWrapper extends Component {
           plugins={this.plugins}
           editorState={this.state.editorState}
           readOnly={this.props.readOnly}
-          onChange={this.onChange} />
+          onChange={this.onChange}
+          editorHasFocus={this.editorHasFocus} />
       </div>
     );
   }
@@ -54,6 +56,7 @@ class SidebarWithModalWrapper extends Component {
     }
     this.maxSidebarButtons = 3;
     this.modalOptions = {width: 500, height: 300};
+    this.editorHasFocus = true;
     this.onChange = ::this.onChange;
   }
 
@@ -71,7 +74,8 @@ class SidebarWithModalWrapper extends Component {
           readOnly={this.props.readOnly}
           onChange={this.onChange}
           maxSidebarButtons={this.maxSidebarButtons}
-          modalOptions={this.modalOptions}/>
+          modalOptions={this.modalOptions}
+          editorHasFocus={this.editorHasFocus} />
       </div>
     );
   }

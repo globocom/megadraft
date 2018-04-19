@@ -102,6 +102,10 @@ class BlockStyles extends Component {
 
 export class ToggleButton extends Component {
   render() {
+    if (!this.props.hasFocus) {
+      return null;
+    }
+
     const Icon = icons.CrossIcon;
 
     const className = classNames("sidemenu__button", {
@@ -109,7 +113,14 @@ export class ToggleButton extends Component {
     });
 
     return (
-      <button type="button" className={className} onClick={this.props.toggle}>
+      <button type="button"
+        ref={(el) => {this.button = el;}}
+        className={className}
+        onClick={() => {
+          this.button.focus();
+          this.props.toggle();
+        }}
+      >
         <Icon className="sidemenu__button__icon" />
       </button>
     );
@@ -144,6 +155,7 @@ export class SideMenu extends Component {
       <li className={className}>
         <ToggleButton
           toggle={this.toggle}
+          hasFocus={this.props.editorHasFocus || this.state.open}
           open={this.state.open} />
 
         <BlockStyles
@@ -229,6 +241,7 @@ export default class SideBar extends Component {
               onChange={this.onChange}
               plugins={this.getValidSidebarPlugins()}
               maxSidebarButtons={this.props.maxSidebarButtons}
+              editorHasFocus={this.props.editorHasFocus}
               modalOptions={this.props.modalOptions} />
           </ul>
         </div>
