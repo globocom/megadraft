@@ -252,6 +252,19 @@ describe("Toolbar Component", () => {
       expect(toolbarWrapperNode.style.left).toEqual(minOffsetRight + "px");
     });
 
+    it("should not throw an exception if readOnly = true while there is an exception", () => {
+      replaceSelection(
+        {
+          focusOffset: 0,
+          anchorOffset: 5
+        },
+        testContext.wrapper
+      );
+
+      testContext.wrapper.update();
+      testContext.wrapper.setProps({readOnly: true});
+    });
+
     describe("entity inputs", () => {
       beforeEach(() => {
         testContext.linkButton = () =>
