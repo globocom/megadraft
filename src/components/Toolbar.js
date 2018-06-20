@@ -15,7 +15,11 @@ import {getSelectionCoords} from "../utils";
 export default class Toolbar extends Component {
   static defaultProps = {
     shouldDisplayToolbarFn() {
-      return this.editorHasFocus && !this.editorState.getSelection().isCollapsed();
+      return (
+        this.editorHasFocus &&
+        !this.editorState.getSelection().isCollapsed() &&
+        !this.readOnly
+      );
     },
   }
   static propTypes = {
