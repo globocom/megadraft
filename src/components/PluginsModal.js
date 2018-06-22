@@ -32,7 +32,7 @@ export default class PluginsModal extends Component {
     return (
       <Modal
         className="megadraft-modal"
-        title={__("Blocks")}
+        title={__("Block List")}
         isOpen={this.props.isOpen}
         onCloseRequest={this.onCloseRequest}
         width={this.modalWidth}
