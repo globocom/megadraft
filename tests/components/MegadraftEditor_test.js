@@ -334,6 +334,7 @@ describe("MegadraftEditor Component", () => {
           "editorState": testContext.editorState,
           "setReadOnly": testContext.component.setReadOnly,
           "getReadOnly": testContext.component.getReadOnly,
+          "getEditorState": testContext.component.getEditorState,
           "setInitialReadOnly": testContext.component.setInitialReadOnly,
           "getInitialReadOnly": testContext.component.getInitialReadOnly,
         }
@@ -353,6 +354,7 @@ describe("MegadraftEditor Component", () => {
           "editorState": testContext.editorState,
           "setReadOnly": testContext.component.setReadOnly,
           "getReadOnly": testContext.component.getReadOnly,
+          "getEditorState": testContext.component.getEditorState,
           "setInitialReadOnly": testContext.component.setInitialReadOnly,
           "getInitialReadOnly": testContext.component.getInitialReadOnly,
         }
@@ -377,6 +379,7 @@ describe("MegadraftEditor Component", () => {
           "editorState": testContext.editorState,
           "setReadOnly": testContext.component.setReadOnly,
           "getReadOnly": testContext.component.getReadOnly,
+          "getEditorState": testContext.component.getEditorState,
           "setInitialReadOnly": testContext.component.setInitialReadOnly,
           "getInitialReadOnly": testContext.component.getInitialReadOnly,
         }

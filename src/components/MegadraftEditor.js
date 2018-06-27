@@ -305,12 +305,17 @@ export default class MegadraftEditor extends Component {
         plugin: plugin,
         onChange: this.onChange,
         editorState: this.props.editorState,
+        getEditorState: this.getEditorState,
         setReadOnly: this.setReadOnly,
         getReadOnly: this.getReadOnly,
         getInitialReadOnly: this.getInitialReadOnly,
         setInitialReadOnly: this.setInitialReadOnly
       }
     };
+  }
+
+  getEditorState = () => {
+    return this.props.editorState;
   }
 
   blockStyleFn(contentBlock) {
@@ -355,7 +360,6 @@ export default class MegadraftEditor extends Component {
             {...this.props}
             ref={(el) => { this.draftEl = el; }}
             readOnly={this.state.readOnly}
-            plugins={this.plugins}
             blockRendererFn={this.mediaBlockRenderer}
             blockStyleFn={this.props.blockStyleFn || this.blockStyleFn}
             onTab={this.onTab}

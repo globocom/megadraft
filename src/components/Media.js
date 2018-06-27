@@ -21,7 +21,7 @@ export default class Media extends Component {
   }
 
   remove() {
-    const {editorState} = this.props.blockProps;
+    const editorState = this.props.blockProps.getEditorState();
     const selection = editorState.getSelection();
     const content = editorState.getCurrentContent();
     const keyAfter = content.getKeyAfter(this.props.block.key);
@@ -29,9 +29,12 @@ export default class Media extends Component {
     const withoutAtomicBlock = content.merge({
       blockMap, selectionAfter: selection
     });
+
     const newState = EditorState.push(
       editorState, withoutAtomicBlock, "remove-range"
     );
+
+    // if this is not the last block
     if (keyAfter) {
       const newSelection = new SelectionState({
         anchorKey: keyAfter,
@@ -47,7 +50,7 @@ export default class Media extends Component {
   }
 
   updateData(data) {
-    const {editorState} = this.props.blockProps;
+    const editorState = this.props.blockProps.getEditorState();
     const content = editorState.getCurrentContent();
     const selection = new SelectionState({
       anchorKey: this.props.block.key,
