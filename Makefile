@@ -1,24 +1,28 @@
+NPM ?= $(shell which npm)
+YARN ?= $(shell which yarn)
+PKG_MANAGER ?= $(if $(YARN),$(YARN),$(NPM))
+
 .SILENT:
 
 setup:
-	@npm install
+	@${PKG_MANAGER} install
 
 run:
-	@npm start
+	@${PKG_MANAGER} start
 
 unit:
 	@rm -rf coverage
-	@npm run -s test
+	@${PKG_MANAGER} run -s test
 
 lint:
-	@npm run --silent lint
+	@${PKG_MANAGER} run --silent lint
 
 test:
 	@$(MAKE) lint
 	@$(MAKE) unit
 
 build:
-	@npm run --silent build
+	@${PKG_MANAGER} run --silent build
 
 show-coverage:
 	@open coverage/PhantomJS*/index.html
