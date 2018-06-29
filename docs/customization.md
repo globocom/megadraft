@@ -30,6 +30,8 @@ Here are the props that `MegadraftEditor` accepts:
   Check the following sections for more info.
 - `shouldDisplayToolbarFn`: (optional) Boolean-valued function fired when
   editor state changes. It allows to control whether or not the Toolbar should be shown.
+- `language`: (optional) Changes the language. This is a string like xx-YY,
+  where xx is a language code and YY is a country code. See [Megadraft strings][i18n-strings].
 
 Check the following sections for more info.
 
@@ -357,3 +359,4 @@ ReactDOM.render(
 
 [api-reference-editor-state]: https://facebook.github.io/draft-js/docs/api-reference-editor-state.html
 [custom actions]: https://github.com/globocom/megadraft/blob/master/src/actions/default.js
+[i18n-strings]: https://github.com/globocom/megadraft/blob/master/src/i18n.js

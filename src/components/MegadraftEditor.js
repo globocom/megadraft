@@ -8,7 +8,14 @@
 // https://github.com/megawac/async/blob/d2dd36b4558f483682f3c672630fdcb36a96d4d2/lib/async.js#L16
 ((typeof self === "object" && self.self === self && self) ||
   (typeof global === "object" && global.global === global && global) ||
-  this).__ = (x) => x;
+  this).__ = (x) => {
+  console.warn(
+    "__() has been deprecated and will be removed soon. " +
+    "You can move this code to your app, instead. __() code can be found at " +
+    "https://gist.github.com/marcelometal/768454831c0c10ee03b939187b7bebbf"
+  );
+  return x;
+};
 
 import React, {Component} from "react";
 import {
@@ -22,6 +29,8 @@ import {
 } from "draft-js";
 import Immutable from "immutable";
 
+import {I18nextProvider} from "react-i18next";
+import i18n from "../i18n";
 
 import DefaultToolbar from "./Toolbar";
 import Sidebar from "./Sidebar";
@@ -339,48 +348,51 @@ export default class MegadraftEditor extends Component {
   }
 
   render() {
+    const language = this.props.language || "en-US";
     return (
-      <div className="megadraft">
-        <div
-          className="megadraft-editor"
-          id="megadraft-editor"
-          ref={(el) => { this.editorEl = el; }}
-          onBlur={this.handleBlur}
-          onFocus={this.handleFocus}
-        >
-          {this.renderSidebar({
-            plugins: this.plugins,
-            editorState: this.props.editorState,
-            readOnly: this.state.readOnly,
-            onChange: this.onChange,
-            maxSidebarButtons: this.props.maxSidebarButtons,
-            modalOptions: this.props.modalOptions,
-          })}
-          <Editor
-            {...this.props}
-            ref={(el) => { this.draftEl = el; }}
-            readOnly={this.state.readOnly}
-            blockRendererFn={this.mediaBlockRenderer}
-            blockStyleFn={this.props.blockStyleFn || this.blockStyleFn}
-            onTab={this.onTab}
-            handleKeyCommand={this.handleKeyCommand}
-            handleReturn={this.props.handleReturn || this.handleReturn}
-            keyBindingFn={this.externalKeyBindings}
-            onChange={this.onChange}
-          />
-          {this.renderToolbar({
-            editor: this.editorEl,
-            draft: this.draftEl,
-            editorState: this.props.editorState,
-            editorHasFocus: this.state.hasFocus,
-            readOnly: this.state.readOnly,
-            onChange: this.onChange,
-            actions: this.props.actions,
-            entityInputs: this.entityInputs,
-            shouldDisplayToolbarFn: this.props.shouldDisplayToolbarFn,
-          })}
+      <I18nextProvider i18n={i18n} initialLanguage={language}>
+        <div className="megadraft">
+          <div
+            className="megadraft-editor"
+            id="megadraft-editor"
+            ref={(el) => { this.editorEl = el; }}
+            onBlur={this.handleBlur}
+            onFocus={this.handleFocus}
+          >
+            {this.renderSidebar({
+              plugins: this.plugins,
+              editorState: this.props.editorState,
+              readOnly: this.state.readOnly,
+              onChange: this.onChange,
+              maxSidebarButtons: this.props.maxSidebarButtons,
+              modalOptions: this.props.modalOptions,
+            })}
+            <Editor
+              {...this.props}
+              ref={(el) => { this.draftEl = el; }}
+              readOnly={this.state.readOnly}
+              blockRendererFn={this.mediaBlockRenderer}
+              blockStyleFn={this.props.blockStyleFn || this.blockStyleFn}
+              onTab={this.onTab}
+              handleKeyCommand={this.handleKeyCommand}
+              handleReturn={this.props.handleReturn || this.handleReturn}
+              keyBindingFn={this.externalKeyBindings}
+              onChange={this.onChange}
+            />
+            {this.renderToolbar({
+              editor: this.editorEl,
+              draft: this.draftEl,
+              editorState: this.props.editorState,
+              editorHasFocus: this.state.hasFocus,
+              readOnly: this.state.readOnly,
+              onChange: this.onChange,
+              actions: this.props.actions,
+              entityInputs: this.entityInputs,
+              shouldDisplayToolbarFn: this.props.shouldDisplayToolbarFn,
+            })}
+          </div>
         </div>
-      </div>
+      </I18nextProvider>
     );
   }
 }

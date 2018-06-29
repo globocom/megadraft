@@ -8,9 +8,10 @@ import React, {Component} from "react";
 
 import Modal from "backstage-modal";
 import ModalPluginList from "./ModalPluginList";
+import {translate} from "react-i18next";
 
 
-export default class PluginsModal extends Component {
+class PluginsModal extends Component {
   constructor(props) {
     super(props);
     this.onCloseRequest = ::this.onCloseRequest;
@@ -28,11 +29,11 @@ export default class PluginsModal extends Component {
   }
 
   render() {
-    /* global __ */
+    const {t} = this.props;
     return (
       <Modal
         className="megadraft-modal"
-        title={__("Block List")}
+        title={t("Block List")}
         isOpen={this.props.isOpen}
         onCloseRequest={this.onCloseRequest}
         width={this.modalWidth}
@@ -47,3 +48,5 @@ export default class PluginsModal extends Component {
     );
   }
 }
+
+export default translate("translations")(PluginsModal);

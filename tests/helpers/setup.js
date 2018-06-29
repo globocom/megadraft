@@ -17,8 +17,6 @@ global.performance = {};
 
 configure({adapter: new Adapter()});
 
-window.__ = arg => arg;
-
 const node = {
   getAttribute: arg => true,
   parentNode: null
