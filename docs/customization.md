@@ -95,6 +95,7 @@ Example: Add an underline action.
 import React from "react";
 import ReactDOM from "react-dom";
 import {MegadraftEditor, editorStateFromRaw} from "megadraft";
+import actions from "megadraft/lib/actions/default"
 
 class App extends React.Component {
   constructor(props) {
