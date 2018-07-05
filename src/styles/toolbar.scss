@@ -41,6 +41,9 @@
       .toolbar__button {
         color: #FFF;
       }
+      @include placeholder {
+        color: #FFF;
+      }
     }
 
     &__wrapper {

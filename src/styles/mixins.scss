@@ -1,0 +1,12 @@
+/*
+ * Copyright (c) 2018, Globo.com (https://github.com/globocom)
+ *
+ * License: MIT
+ */
+
+@mixin placeholder {
+    ::-webkit-input-placeholder {@content}
+    :-moz-placeholder           {@content}
+    ::-moz-placeholder          {@content}
+    :-ms-input-placeholder      {@content}
+}
