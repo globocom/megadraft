@@ -275,6 +275,11 @@ body {
  * License: MIT
  */
 /*
+ * Copyright (c) 2018, Globo.com (https://github.com/globocom)
+ *
+ * License: MIT
+ */
+/*
  * Copyright (c) 2016, Globo.com (https://github.com/globocom)
  *
  * License: MIT
@@ -544,6 +549,14 @@ body {
       font-weight: bold;
       height: 28px; }
     .megadraft-editor .toolbar--error .toolbar__button {
+      color: #FFF; }
+    .megadraft-editor .toolbar--error ::-webkit-input-placeholder {
+      color: #FFF; }
+    .megadraft-editor .toolbar--error :-moz-placeholder {
+      color: #FFF; }
+    .megadraft-editor .toolbar--error ::-moz-placeholder {
+      color: #FFF; }
+    .megadraft-editor .toolbar--error :-ms-input-placeholder {
       color: #FFF; }
     .megadraft-editor .toolbar__wrapper {
       background-color: #181818;
