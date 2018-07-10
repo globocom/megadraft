@@ -1,7 +1,8 @@
 language: node_js
 node_js:
-  - "7"
+  - "6"
   - "8"
+  - "10"
 script:
   - |
     if [ "$TEST_TYPE" = build_website ]; then
@@ -24,9 +25,10 @@ env:
     - TEST_TYPE=build_website
 matrix:
   exclude:
-    - node_js: "7"
+    - node_js: "6"
       env: TEST_TYPE=build_website
-
+    - node_js: "8"
+      env: TEST_TYPE=build_website
 cache:
   directories:
     - node_modules
