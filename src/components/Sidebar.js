@@ -102,7 +102,7 @@ class BlockStyles extends Component {
 
 export class ToggleButton extends Component {
   render() {
-    if (!this.props.hasFocus) {
+    if (this.props.hideSidebarOnBlur && !this.props.hasFocus) {
       return null;
     }
 
@@ -156,6 +156,7 @@ export class SideMenu extends Component {
         <ToggleButton
           toggle={this.toggle}
           hasFocus={this.props.editorHasFocus || this.state.open}
+          hideSidebarOnBlur={this.props.hideSidebarOnBlur}
           open={this.state.open} />
 
         <BlockStyles
@@ -242,6 +243,7 @@ export default class SideBar extends Component {
               plugins={this.getValidSidebarPlugins()}
               maxSidebarButtons={this.props.maxSidebarButtons}
               editorHasFocus={this.props.editorHasFocus}
+              hideSidebarOnBlur={this.props.hideSidebarOnBlur}
               modalOptions={this.props.modalOptions} />
           </ul>
         </div>

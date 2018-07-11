@@ -357,6 +357,7 @@ export default class MegadraftEditor extends Component {
 
   render() {
     const language = this.props.language || "en-US";
+    const hideSidebarOnBlur = this.props.hideSidebarOnBlur || false;
     return (
       <I18nextProvider i18n={i18n} initialLanguage={language}>
         <div className="megadraft">
@@ -375,6 +376,7 @@ export default class MegadraftEditor extends Component {
               maxSidebarButtons: this.props.maxSidebarButtons,
               modalOptions: this.props.modalOptions,
               editorHasFocus: this.state.hasFocus,
+              hideSidebarOnBlur: hideSidebarOnBlur
             })}
             <Editor
               {...this.props}

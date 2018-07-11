@@ -32,6 +32,7 @@ Here are the props that `MegadraftEditor` accepts:
   editor state changes. It allows to control whether or not the Toolbar should be shown.
 - `language`: (optional) Changes the language. This is a string like xx-YY,
   where xx is a language code and YY is a country code. See [Megadraft strings][i18n-strings].
+- `hideSidebarOnBlur`: (optional) boolean, default false. Hide Sidebar on blur.
 
 Check the following sections for more info.
 
