@@ -10,7 +10,7 @@ import {mount} from "enzyme";
 
 import MegadraftEditor from "../../src/components/MegadraftEditor";
 import Media from "../../src/components/Media";
-import Sidebar from "../../src/components/Sidebar";
+import Sidebar, {ToggleButton} from "../../src/components/Sidebar";
 import Toolbar from "../../src/components/Toolbar";
 import {editorStateFromRaw} from "../../src/utils";
 import image from "../../src/plugins/image/plugin";
@@ -592,7 +592,9 @@ describe("MegadraftEditor Component", () => {
       editorState: testContext.editorState,
       readOnly: false,
       maxSidebarButtons: testContext.maxSidebarButtons,
-      modalOptions: testContext.modalOptions
+      modalOptions: testContext.modalOptions,
+      editorHasFocus: false,
+      hideSidebarOnBlur: false,
     };
     expect(renderCustomSidebar).toBeCalledWith(expectedProps);
   });
@@ -618,6 +620,32 @@ describe("MegadraftEditor Component", () => {
     );
     const sidebar = wrapper.find(MyCustomSidebar);
     expect(sidebar).toHaveLength(1);
+  });
+
+  it("should hide sidebar on blur when editor has not focus", () => {
+    const wrapper = mount(
+      <MegadraftEditor
+        hideSidebarOnBlur={true}
+        hasFocus={false}
+        editorState={testContext.editorState}
+        onChange={testContext.onChange} />
+    );
+
+    const sidebar = wrapper.find(ToggleButton);
+    expect(sidebar.children()).toHaveLength(0);
+  });
+
+  it("should not hide sidebar on blur when editor has not focus", () => {
+    const wrapper = mount(
+      <MegadraftEditor
+        hideSidebarOnBlur={false}
+        hasFocus={false}
+        editorState={testContext.editorState}
+        onChange={testContext.onChange} />
+    );
+
+    const sidebar = wrapper.find(ToggleButton);
+    expect(sidebar.children()).toHaveLength(1);
   });
 
   it("renders default toolbar if Tooolbar not provided", () => {
