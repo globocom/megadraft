@@ -4,26 +4,26 @@
  * License: MIT
  */
 
-import React, {Component} from "react";
-import {EditorState, SelectionState} from "draft-js";
-import {mount} from "enzyme";
+import React, { Component } from "react";
+import { EditorState, SelectionState } from "draft-js";
+import { mount } from "enzyme";
 
 import Toolbar from "../../src/components/Toolbar";
 import ToolbarItem from "../../src/components/ToolbarItem";
 
-import {editorStateFromRaw} from "../../src/utils";
+import { editorStateFromRaw } from "../../src/utils";
 import Separator from "../../src/components/Separator";
 import LinkInput from "../../src/entity_inputs/LinkInput";
 
 export default class ToolbarWrapper extends Component {
   constructor(props) {
     super(props);
-    this.state = {...props};
+    this.state = { ...props };
     this.onChange = ::this.onChange;
   }
 
   onChange(editorState) {
-    this.setState({editorState: editorState});
+    this.setState({ editorState: editorState });
   }
 
   render() {
@@ -61,7 +61,7 @@ const replaceSelection = (newSelection, wrapper) => {
 
   const editorState = EditorState.forceSelection(oldState, updatedSelection);
 
-  wrapper.setState({editorState: editorState});
+  wrapper.setState({ editorState: editorState });
 };
 
 const FileEntityInput = props => <LinkInput {...props} />;
@@ -88,9 +88,9 @@ describe("Toolbar Component", () => {
     testContext = {};
     testContext.clock = jest.useFakeTimers();
     testContext.actions = [
-      {type: "inline", label: "B", style: "BOLD", icon: "svg"},
-      {type: "separator"},
-      {type: "block", label: "H2", style: "header-two", icon: "svg"},
+      { type: "inline", label: "B", style: "BOLD", icon: "svg" },
+      { type: "separator" },
+      { type: "block", label: "H2", style: "header-two", icon: "svg" },
       {
         type: "entity",
         label: "Link",
@@ -105,7 +105,7 @@ describe("Toolbar Component", () => {
         entity: "FILE_LINK",
         icon: "svg"
       },
-      {type: "custom", icon: "svg", action: jest.fn()}
+      { type: "custom", icon: "svg", action: jest.fn() }
     ];
 
     testContext.entityInputs = {
@@ -242,7 +242,10 @@ describe("Toolbar Component", () => {
     it("should center toolbar above the selection", () => {
       const minOffsetRight = 5;
 
-      replaceSelection({focusOffset: 0, anchorOffset: 5}, testContext.wrapper);
+      replaceSelection(
+        { focusOffset: 0, anchorOffset: 5 },
+        testContext.wrapper
+      );
 
       const toolbarWrapper = testContext.wrapper.find(".toolbar");
       const toolbarWrapperNode = toolbarWrapper.getDOMNode();
@@ -262,7 +265,7 @@ describe("Toolbar Component", () => {
       );
 
       testContext.wrapper.update();
-      testContext.wrapper.setProps({readOnly: true});
+      testContext.wrapper.setProps({ readOnly: true });
     });
 
     describe("entity inputs", () => {
@@ -315,7 +318,7 @@ describe("Toolbar Component", () => {
         const inputNode = input.getDOMNode();
         inputNode.value = "http://www.globo.com";
         input.simulate("change");
-        input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
+        input.simulate("keyDown", { key: "Enter", keyCode: 13, which: 13 });
 
         const contentState = testContext.wrapper
           .state("editorState")
@@ -323,7 +326,7 @@ describe("Toolbar Component", () => {
         const blockWithLinkAtBeginning = contentState.getBlockForKey("ag6qs");
         const linkKey = blockWithLinkAtBeginning.getEntityAt(0);
         const linkInstance = contentState.getEntity(linkKey);
-        const {url} = linkInstance.getData();
+        const { url } = linkInstance.getData();
 
         expect(url).toEqual("http://www.globo.com");
       });
@@ -338,7 +341,7 @@ describe("Toolbar Component", () => {
 
         inputNode.value = "http://www.globo.com";
         input.simulate("change");
-        input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
+        input.simulate("keyDown", { key: "Enter", keyCode: 13, which: 13 });
         // show dialog again
         testContext.linkButton().simulate("click");
         // click on remove
@@ -366,7 +369,7 @@ describe("Toolbar Component", () => {
 
         inputNode.value = "www.globo.com";
         input.simulate("change");
-        input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
+        input.simulate("keyDown", { key: "Enter", keyCode: 13, which: 13 });
         // show dialog again
         testContext.linkButton().simulate("click");
         // click on remove

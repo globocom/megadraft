@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import {mount} from "enzyme";
+import { mount } from "enzyme";
 
 import icons from "../../../src/icons";
 import Dropdown from "../../../src/components/Dropdown";
@@ -19,14 +19,16 @@ describe("CommonBlock Component", () => {
     testContext.crop = jest.fn();
 
     const actions = [
-      {key: "crop", icon: icons.CropIcon, action: testContext.crop}
+      { key: "crop", icon: icons.CropIcon, action: testContext.crop }
     ];
     const displayOptions = [
-      {key: "small", icon: icons.MediaSmallIcon, label: "SMALL"},
-      {key: "medium", icon: icons.MediaMediumIcon, label: "MEDIUM"}
+      { key: "small", icon: icons.MediaSmallIcon, label: "SMALL" },
+      { key: "medium", icon: icons.MediaMediumIcon, label: "MEDIUM" }
     ];
     const defaultDisplay = "medium";
-    const blockProps = {plugin: {options: {displayOptions, defaultDisplay}}};
+    const blockProps = {
+      plugin: { options: { displayOptions, defaultDisplay } }
+    };
 
     testContext.container = {
       updateData: jest.fn()
@@ -51,7 +53,7 @@ describe("CommonBlock Component", () => {
   });
 
   it("renders selected display option when it is present", () => {
-    const data = {display: "small"};
+    const data = { display: "small" };
     testContext.component = testContext.renderComponent(data);
 
     const dropdown = testContext.component.find(Dropdown);

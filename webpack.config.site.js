@@ -7,7 +7,7 @@ module.exports = makeConfig({
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
       filename: __dirname + "/website/index.html",
-      template: __dirname + "/website/index_tpl.html",
+      template: __dirname + "/website/index_tpl.html"
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.DefinePlugin({

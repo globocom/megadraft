@@ -5,10 +5,10 @@
  */
 
 import React from "react";
-import {mount} from "enzyme";
+import { mount } from "enzyme";
 
 import Media from "../../src/components/Media";
-import {editorStateFromRaw} from "../../src/utils";
+import { editorStateFromRaw } from "../../src/utils";
 import DEFAULT_PLUGINS from "../../src/plugins/default";
 
 describe("Media Component", () => {
@@ -64,7 +64,7 @@ describe("Media Component", () => {
 
     expect(data.get("display")).toEqual("medium");
 
-    testContext.component.updateData({display: "big"});
+    testContext.component.updateData({ display: "big" });
 
     const editor = testContext.blockProps.onChange.mock.calls[0][0].toJS();
     const lastChangeType = editor.lastChangeType;
@@ -77,7 +77,7 @@ describe("Media Component", () => {
   });
 
   it("refreshes editor state", () => {
-    testContext.component.updateData({display: "big"});
+    testContext.component.updateData({ display: "big" });
     expect(testContext.blockProps.onChange).toHaveBeenCalled();
   });
 

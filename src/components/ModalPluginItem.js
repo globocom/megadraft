@@ -4,8 +4,7 @@
  * License: MIT
  */
 
-import React, {Component} from "react";
-
+import React, { Component } from "react";
 
 export default class ModalPluginItem extends Component {
   constructor(props) {
@@ -30,16 +29,21 @@ export default class ModalPluginItem extends Component {
       <li
         key={item.type}
         className="megadraft-modal__item"
-        onClick={this.closeModal} >
+        onClick={this.closeModal}
+      >
         <Button
-          ref={(el)=>{this.buttonEl = el;}}
+          ref={el => {
+            this.buttonEl = el;
+          }}
           className="megadraft-modal__button"
           title={item.title}
           editorState={this.props.editorState}
-          onChange={this.props.onChange} />
+          onChange={this.props.onChange}
+        />
         <p
           className="megadraft-modal__button__label"
-          onClick={this.handleClick} >
+          onClick={this.handleClick}
+        >
           {item.title}
         </p>
       </li>

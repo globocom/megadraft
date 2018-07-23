@@ -26,12 +26,28 @@ import UnlinkIcon from "./icons/unlink";
 import CloseIcon from "./icons/close";
 import MoreIcon from "./icons/more";
 
-
 const icons = {
-  BoldIcon, ItalicIcon, ULIcon, OLIcon, H2Icon, BlockQuoteIcon, LinkIcon,
-  CrossIcon, ImageIcon, VideoIcon, EditIcon, DeleteIcon, CropIcon, MediaBigIcon,
-  MediaMediumIcon, MediaSmallIcon, DropdownArrow, ErrorIcon, UnlinkIcon,
-  CloseIcon, MoreIcon
+  BoldIcon,
+  ItalicIcon,
+  ULIcon,
+  OLIcon,
+  H2Icon,
+  BlockQuoteIcon,
+  LinkIcon,
+  CrossIcon,
+  ImageIcon,
+  VideoIcon,
+  EditIcon,
+  DeleteIcon,
+  CropIcon,
+  MediaBigIcon,
+  MediaMediumIcon,
+  MediaSmallIcon,
+  DropdownArrow,
+  ErrorIcon,
+  UnlinkIcon,
+  CloseIcon,
+  MoreIcon
 };
 
 export default icons;

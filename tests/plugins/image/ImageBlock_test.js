@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import {mount} from "enzyme";
+import { mount } from "enzyme";
 
 import ImageBlock from "../../../src/plugins/image/ImageBlock";
 import icons from "../../../src/icons";
@@ -25,11 +25,13 @@ describe("ImageBlock", () => {
     testContext.remove = jest.fn();
 
     const displayOptions = [
-      {key: "small", icon: icons.MediaSmallIcon, label: "SMALL"},
-      {key: "medium", icon: icons.MediaMediumIcon, label: "MEDIUM"}
+      { key: "small", icon: icons.MediaSmallIcon, label: "SMALL" },
+      { key: "medium", icon: icons.MediaMediumIcon, label: "MEDIUM" }
     ];
     const defaultDisplay = "medium";
-    const blockProps = {plugin: {options: {displayOptions, defaultDisplay}}};
+    const blockProps = {
+      plugin: { options: { displayOptions, defaultDisplay } }
+    };
 
     testContext.wrapper = mount(
       <ImageBlock
@@ -58,12 +60,14 @@ describe("ImageBlock", () => {
   it("updates entity on caption change", () => {
     testContext.caption.getDOMNode().value = "new caption";
     testContext.caption.simulate("change");
-    expect(testContext.updateData).toBeCalledWith({caption: "new caption"});
+    expect(testContext.updateData).toBeCalledWith({ caption: "new caption" });
   });
 
   it("updates entity on rightsHolder change", () => {
     testContext.rights.getDOMNode().value = "new rights";
     testContext.rights.simulate("change");
-    expect(testContext.updateData).toBeCalledWith({rightsHolder: "new rights"});
+    expect(testContext.updateData).toBeCalledWith({
+      rightsHolder: "new rights"
+    });
   });
 });

@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import React, {Component} from "react";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import classNames from "classnames";
@@ -12,9 +12,7 @@ import classNames from "classnames";
 import DropdownItem from "./DropdownItem";
 import icons from "../icons";
 
-
 export default class Dropdown extends Component {
-
   static propTypes = {
     items: PropTypes.arrayOf(
       PropTypes.shape({
@@ -25,7 +23,7 @@ export default class Dropdown extends Component {
     ),
     selected: PropTypes.string,
     onChange: PropTypes.func.isRequired
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -40,7 +38,7 @@ export default class Dropdown extends Component {
 
   isEmpty() {
     const items = this.props.items || [];
-    return (items.length == 0) ? true : false;
+    return items.length == 0 ? true : false;
   }
 
   onChange(selected) {
@@ -48,11 +46,13 @@ export default class Dropdown extends Component {
   }
 
   renderItem(item) {
-    return(
+    return (
       <li key={item.key}>
-        <DropdownItem item={item}
+        <DropdownItem
+          item={item}
           className="dropdown__option"
-          onClick={() => this.onChange(item.key)} />
+          onClick={() => this.onChange(item.key)}
+        />
       </li>
     );
   }
@@ -63,7 +63,7 @@ export default class Dropdown extends Component {
   }
 
   toggleDropDown(event) {
-    this.setState({isOpen: !this.state.isOpen});
+    this.setState({ isOpen: !this.state.isOpen });
   }
 
   handleDocumentClick(event) {
@@ -71,15 +71,15 @@ export default class Dropdown extends Component {
       return null;
     }
     if (!ReactDOM.findDOMNode(this).contains(event.target)) {
-      this.setState({isOpen: false});
+      this.setState({ isOpen: false });
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     document.addEventListener("click", this.handleDocumentClick, false);
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     document.removeEventListener("click", this.handleDocumentClick, false);
   }
 
@@ -88,11 +88,11 @@ export default class Dropdown extends Component {
       return null;
     }
 
-    const selectedItem = this.props.items.filter(
-      (obj) => {return obj.key === this.props.selected;}
-    )[0];
+    const selectedItem = this.props.items.filter(obj => {
+      return obj.key === this.props.selected;
+    })[0];
 
-    const {isOpen} = this.state;
+    const { isOpen } = this.state;
 
     const wrapperClassName = classNames("dropdown__wrapper", {
       "dropdown__wrapper--open": isOpen
@@ -106,13 +106,13 @@ export default class Dropdown extends Component {
       "dropdown__arrow--open": isOpen
     });
 
-    return(
+    return (
       <div className={wrapperClassName} onClick={this.toggleDropDown}>
         <DropdownItem
           item={selectedItem}
           className="dropdown__item--selected"
-          onMouseDown={this.preventSelection}>
-
+          onMouseDown={this.preventSelection}
+        >
           <icons.DropdownArrow className={arrowClassName} />
         </DropdownItem>
 

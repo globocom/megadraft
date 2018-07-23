@@ -4,28 +4,28 @@
  * License: MIT
  */
 
-import React, {Component} from "react";
-import {mount} from "enzyme";
+import React, { Component } from "react";
+import { mount } from "enzyme";
 import cp from "utils-copy";
 
-import Sidebar, {ToggleButton, SideMenu} from "../../src/components/Sidebar";
+import Sidebar, { ToggleButton, SideMenu } from "../../src/components/Sidebar";
 import PluginsModal from "../../src/components/PluginsModal";
 import image from "../../src/plugins/image/plugin";
-import {editorStateFromRaw} from "../../src/utils";
+import { editorStateFromRaw } from "../../src/utils";
 import DEFAULT_PLUGINS from "../../src/plugins/default.js";
 import ImageButton from "../../src/plugins/image/ImageButton";
 
 class SidebarWrapper extends Component {
   constructor(props) {
     super(props);
-    this.state = {...props};
+    this.state = { ...props };
     this.plugins = this.props.plugins || DEFAULT_PLUGINS;
     this.editorHasFocus = true;
     this.onChange = ::this.onChange;
   }
 
   onChange(editorState) {
-    this.setState({editorState: editorState});
+    this.setState({ editorState: editorState });
   }
 
   render() {
@@ -37,31 +37,31 @@ class SidebarWrapper extends Component {
           editorState={this.state.editorState}
           readOnly={this.props.readOnly}
           onChange={this.onChange}
-          editorHasFocus={this.editorHasFocus} />
+          editorHasFocus={this.editorHasFocus}
+        />
       </div>
     );
   }
 }
 
-
 class SidebarWithModalWrapper extends Component {
   constructor(props) {
     super(props);
-    this.state = {...props};
+    this.state = { ...props };
     this.plugins = this.props.plugins || DEFAULT_PLUGINS;
-    this.fakeAux = cp(this.plugins.slice(0,2));
-    this.fakePlugins = this.fakeAux.concat(this.plugins.slice(0,2));
-    for(let i=0; i<4; i++){
+    this.fakeAux = cp(this.plugins.slice(0, 2));
+    this.fakePlugins = this.fakeAux.concat(this.plugins.slice(0, 2));
+    for (let i = 0; i < 4; i++) {
       this.fakePlugins[i].type = "plugin" + i;
     }
     this.maxSidebarButtons = 3;
-    this.modalOptions = {width: 500, height: 300};
+    this.modalOptions = { width: 500, height: 300 };
     this.editorHasFocus = true;
     this.onChange = ::this.onChange;
   }
 
   onChange(editorState) {
-    this.setState({editorState: editorState});
+    this.setState({ editorState: editorState });
   }
 
   render() {
@@ -75,7 +75,8 @@ class SidebarWithModalWrapper extends Component {
           onChange={this.onChange}
           maxSidebarButtons={this.maxSidebarButtons}
           modalOptions={this.modalOptions}
-          editorHasFocus={this.editorHasFocus} />
+          editorHasFocus={this.editorHasFocus}
+        />
       </div>
     );
   }
@@ -85,25 +86,23 @@ describe("Sidebar Component", () => {
   let editorState, wrapper, wrapperSidebarModal;
   beforeEach(() => {
     const INITIAL_CONTENT = {
-      "entityMap": {},
-      "blocks": [
+      entityMap: {},
+      blocks: [
         {
-          "key": "ag6qs",
-          "text": "Hello World!",
-          "type": "unstyled",
-          "depth": 0,
-          "inlineStyleRanges": [],
-          "entityRanges": []
+          key: "ag6qs",
+          text: "Hello World!",
+          type: "unstyled",
+          depth: 0,
+          inlineStyleRanges: [],
+          entityRanges: []
         }
       ]
     };
 
     editorState = editorStateFromRaw(INITIAL_CONTENT);
-    wrapper = mount(
-      <SidebarWrapper editorState={editorState}/>
-    );
+    wrapper = mount(<SidebarWrapper editorState={editorState} />);
     wrapperSidebarModal = mount(
-      <SidebarWithModalWrapper editorState={editorState}/>
+      <SidebarWithModalWrapper editorState={editorState} />
     );
   });
 
@@ -115,7 +114,7 @@ describe("Sidebar Component", () => {
 
   it("renders as null when readOnly is set", () => {
     const wrapper = mount(
-      <SidebarWrapper readOnly editorState={editorState}/>
+      <SidebarWrapper readOnly editorState={editorState} />
     );
     const sidebar = wrapper.find(Sidebar);
     expect(sidebar.html()).toBeNull();
@@ -165,7 +164,7 @@ describe("Sidebar Component", () => {
 
     const contentState = wrapper.state("editorState").getCurrentContent();
     let data = null;
-    contentState.getBlockMap().forEach((block) => {
+    contentState.getBlockMap().forEach(block => {
       if (block.getType() === "atomic") {
         data = block.getData();
       }

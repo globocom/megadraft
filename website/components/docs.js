@@ -14,7 +14,7 @@ import Serializing from "../../docs/serializing.md";
 import CustomEntities from "../../docs/custom_entities.md";
 import ReactMarkdown from "react-markdown";
 
-import {highlightCode} from "./highlightCode";
+import { highlightCode } from "./highlightCode";
 
 const scroll = Scroll.animateScroll;
 
@@ -26,12 +26,10 @@ const DOCS = {
   "custom-entities": CustomEntities
 };
 
-
 export default class Docs extends React.Component {
-
   componentDidMount() {
     highlightCode(this);
-    scroll.scrollToTop({duration: 0});
+    scroll.scrollToTop({ duration: 0 });
   }
 
   componentDidUpdate() {
@@ -40,7 +38,7 @@ export default class Docs extends React.Component {
   }
 
   render() {
-    const {doc} = this.props.params;
+    const { doc } = this.props.params;
     return (
       <div className="container--light">
         <div className="page__content docs">

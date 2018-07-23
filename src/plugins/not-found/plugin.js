@@ -6,7 +6,6 @@
 
 import NotFoundBlock from "./NotFoundBlock";
 
-
 export default {
   blockComponent: NotFoundBlock,
   options: {

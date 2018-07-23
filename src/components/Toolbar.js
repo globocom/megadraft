@@ -4,13 +4,12 @@
  * License: MIT
  */
 
-import React, {Component} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {EditorState, RichUtils} from "draft-js";
+import { EditorState, RichUtils } from "draft-js";
 import classNames from "classnames";
 import ToolbarItem from "./ToolbarItem";
-import {getSelectionCoords} from "../utils";
-
+import { getSelectionCoords } from "../utils";
 
 export default class Toolbar extends Component {
   static defaultProps = {
@@ -20,11 +19,11 @@ export default class Toolbar extends Component {
         !this.editorState.getSelection().isCollapsed() &&
         !this.readOnly
       );
-    },
-  }
+    }
+  };
   static propTypes = {
     editorHasFocus: PropTypes.bool
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -42,7 +41,10 @@ export default class Toolbar extends Component {
   }
 
   toggleInlineStyle(inlineStyle) {
-    const newEditorState = RichUtils.toggleInlineStyle(this.props.editorState, inlineStyle);
+    const newEditorState = RichUtils.toggleInlineStyle(
+      this.props.editorState,
+      inlineStyle
+    );
     this.props.onChange(newEditorState);
   }
 
@@ -53,7 +55,7 @@ export default class Toolbar extends Component {
   }
 
   toggleEntity(entity) {
-    this.setState({editingEntity: entity});
+    this.setState({ editingEntity: entity });
   }
 
   renderButton(item, position) {
@@ -62,7 +64,7 @@ export default class Toolbar extends Component {
     let active = null;
     let key = item.label;
 
-    switch(item.type) {
+    switch (item.type) {
       case "custom": {
         key = "custom-" + position;
         toggle = () => item.action(this.props.editorState);
@@ -89,8 +91,8 @@ export default class Toolbar extends Component {
         break;
       }
       case "entity": {
-        const {entity = "LINK"} = item;
-        key = "entity-"+entity;
+        const { entity = "LINK" } = item;
+        key = "entity-" + entity;
         toggle = () => this.toggleEntity(entity);
         active = this.hasEntity(entity);
         break;
@@ -103,11 +105,11 @@ export default class Toolbar extends Component {
   }
 
   setError(errorMsg) {
-    this.setState({error: errorMsg});
+    this.setState({ error: errorMsg });
   }
 
   cancelError() {
-    this.setState({error: null});
+    this.setState({ error: null });
   }
 
   setBarPosition() {
@@ -119,12 +121,13 @@ export default class Toolbar extends Component {
       return null;
     }
 
-    if (selectionCoords &&
-        !this.state.position ||
-        this.state.position.top !== selectionCoords.offsetTop ||
-        this.state.position.left !== selectionCoords.offsetLeft ||
-        this.state.arrowStyle !== selectionCoords.arrowStyle ||
-        !this.state.show) {
+    if (
+      (selectionCoords && !this.state.position) ||
+      this.state.position.top !== selectionCoords.offsetTop ||
+      this.state.position.left !== selectionCoords.offsetLeft ||
+      this.state.arrowStyle !== selectionCoords.arrowStyle ||
+      !this.state.show
+    ) {
       this.setState({
         show: true,
         position: {
@@ -161,9 +164,7 @@ export default class Toolbar extends Component {
       this.setState({
         show: true
       });
-    }
-    else
-    {
+    } else {
       this.setState({
         show: false
       });
@@ -189,7 +190,7 @@ export default class Toolbar extends Component {
   getCurrentEntity() {
     const contentState = this.props.editorState.getCurrentContent();
     const entityKey = this.getCurrentEntityKey();
-    if(entityKey) {
+    if (entityKey) {
       return contentState.getEntity(entityKey);
     }
     return null;
@@ -204,9 +205,13 @@ export default class Toolbar extends Component {
   }
 
   setEntity(entityType, data, mutability = "MUTABLE") {
-    const {editorState} = this.props;
+    const { editorState } = this.props;
     const contentState = editorState.getCurrentContent();
-    const contentStateWithEntity = contentState.createEntity(entityType, mutability, data);
+    const contentStateWithEntity = contentState.createEntity(
+      entityType,
+      mutability,
+      data
+    );
     const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
     const newState = RichUtils.toggleLink(
       editorState,
@@ -214,14 +219,15 @@ export default class Toolbar extends Component {
       entityKey
     );
     const selectionState = EditorState.forceSelection(
-      newState, editorState.getSelection()
+      newState,
+      editorState.getSelection()
     );
 
     this.props.onChange(selectionState);
   }
 
   removeEntity() {
-    const {editorState} = this.props;
+    const { editorState } = this.props;
     const selection = editorState.getSelection();
     if (!selection.isCollapsed()) {
       // toggleLink should be named toggleEntity: https://github.com/facebook/draft-js/issues/737
@@ -231,29 +237,33 @@ export default class Toolbar extends Component {
   }
 
   cancelEntity() {
-    this.setState({
-      editingEntity: null,
-      error: null
-    }, () => {
-      this.props.draft && this.props.draft.focus();
-    });
+    this.setState(
+      {
+        editingEntity: null,
+        error: null
+      },
+      () => {
+        this.props.draft && this.props.draft.focus();
+      }
+    );
   }
   renderEntityInput(entityType) {
-    if(!this.props.entityInputs) {
+    if (!this.props.entityInputs) {
       console.warn("no entityInputs provided");
       return null;
     }
     const Component = this.props.entityInputs[entityType];
-    const setEntity = (data, mutability) => this.setEntity(entityType, data, mutability);
+    const setEntity = (data, mutability) =>
+      this.setEntity(entityType, data, mutability);
     let entityData = {};
     let entity = null;
-    if(this.hasEntity(entityType)) {
+    if (this.hasEntity(entityType)) {
       entity = this.getCurrentEntity();
-      if(entity) {
+      if (entity) {
         entityData = entity.getData();
       }
     }
-    if(Component) {
+    if (Component) {
       return (
         <Component
           editorState={this.props.editorState}
@@ -269,7 +279,7 @@ export default class Toolbar extends Component {
         />
       );
     } else {
-      console.warn("unknown entity type: "+entityType);
+      console.warn("unknown entity type: " + entityType);
       return null;
     }
   }
@@ -281,7 +291,7 @@ export default class Toolbar extends Component {
     );
   }
   render() {
-    if(this.props.readOnly) {
+    if (this.props.readOnly) {
       return null;
     }
 
@@ -295,24 +305,31 @@ export default class Toolbar extends Component {
         className={toolbarClass}
         style={this.state.position}
         ref="toolbarWrapper"
-        onMouseDown={(e) => {
+        onMouseDown={e => {
           e.preventDefault();
         }}
       >
-        <div style={{position: "absolute", bottom: 0}}>
-          <div className="toolbar__wrapper" ref={(el) => { this.toolbarEl = el; }}>
-            {
-              this.state.editingEntity ?
-                this.renderEntityInput(this.state.editingEntity) :
-                this.renderToolList()
-            }
+        <div style={{ position: "absolute", bottom: 0 }}>
+          <div
+            className="toolbar__wrapper"
+            ref={el => {
+              this.toolbarEl = el;
+            }}
+          >
+            {this.state.editingEntity
+              ? this.renderEntityInput(this.state.editingEntity)
+              : this.renderToolList()}
             <p className="toolbar__error-msg">{this.state.error}</p>
-            <span className="toolbar__arrow" ref={(el) => { this.arrowEl = el; }}
-              style={this.state.arrowStyle}/>
+            <span
+              className="toolbar__arrow"
+              ref={el => {
+                this.arrowEl = el;
+              }}
+              style={this.state.arrowStyle}
+            />
           </div>
         </div>
       </div>
     );
-
   }
 }

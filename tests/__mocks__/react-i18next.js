@@ -10,8 +10,8 @@ const reactI18next = require("react-i18next");
 module.exports = {
   // this mock makes sure any components using the translate HoC receive the t function as a prop
   translate: () => Component => props => <Component t={k => k} {...props} />,
-  Trans: ({children}) => children,
-  I18n: ({children}) => children(k => k, {i18n: {}}),
+  Trans: ({ children }) => children,
+  I18n: ({ children }) => children(k => k, { i18n: {} }),
 
   // mock if needed
   Interpolate: reactI18next.Interpolate,

@@ -4,11 +4,10 @@
  * License: MIT
  */
 
-import React, {Component} from "react";
+import React, { Component } from "react";
 
-import {ModalBody} from "backstage-modal";
+import { ModalBody } from "backstage-modal";
 import ModalPluginItem from "./ModalPluginItem";
-
 
 export default class ModalPluginList extends Component {
   constructor(props) {
@@ -27,7 +26,6 @@ export default class ModalPluginList extends Component {
   }
 
   render() {
-
     return (
       <ModalBody>
         <ModalPluginItem

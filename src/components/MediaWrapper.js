@@ -4,12 +4,10 @@
  * License: MIT
  */
 
-import React, {Component} from "react";
-
+import React, { Component } from "react";
 
 export default class MediaWrapper extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this._handleFocus = ::this._handleFocus;

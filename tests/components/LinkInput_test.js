@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import {mount} from "enzyme";
+import { mount } from "enzyme";
 
 import LinkInput from "../../src/entity_inputs/LinkInput";
 
@@ -38,7 +38,7 @@ describe("LinkInput Component", () => {
 
     inputNode.value = "http://www.globo.com";
     input.simulate("change");
-    input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
+    input.simulate("keyDown", { key: "Enter", keyCode: 13, which: 13 });
     expect(testContext.setEntity).toHaveBeenCalledWith({
       url: "http://www.globo.com"
     });
@@ -53,7 +53,7 @@ describe("LinkInput Component", () => {
 
     inputNode.value = "http://www.globo.com";
     input.simulate("change");
-    input.simulate("keyDown", {key: "Escape", keyCode: 27, which: 27});
+    input.simulate("keyDown", { key: "Escape", keyCode: 27, which: 27 });
     expect(testContext.setEntity).not.toHaveBeenCalled();
     expect(testContext.cancelEntity).toHaveBeenCalled();
   });
@@ -64,7 +64,7 @@ describe("LinkInput Component", () => {
 
     inputNode.value = "www.globo.com";
     input.simulate("change");
-    input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
+    input.simulate("keyDown", { key: "Enter", keyCode: 13, which: 13 });
     expect(testContext.setEntity).toHaveBeenCalledWith({
       url: "http://www.globo.com"
     });
@@ -76,12 +76,12 @@ describe("LinkInput Component", () => {
 
     inputNode.value = "globo";
     input.simulate("change");
-    input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
+    input.simulate("keyDown", { key: "Enter", keyCode: 13, which: 13 });
     expect(testContext.setError).toHaveBeenCalledWith("Invalid Link");
 
     inputNode.value = "[12/12/2016] globo.com";
     input.simulate("change");
-    input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
+    input.simulate("keyDown", { key: "Enter", keyCode: 13, which: 13 });
     expect(testContext.setError).toHaveBeenCalledWith("Invalid Link");
   });
 
@@ -91,11 +91,11 @@ describe("LinkInput Component", () => {
 
     inputNode.value = "globo";
     input.simulate("change");
-    input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
+    input.simulate("keyDown", { key: "Enter", keyCode: 13, which: 13 });
 
     inputNode.value = "";
     input.simulate("change");
-    input.simulate("keyDown", {key: "Enter", keyCode: 13, which: 13});
+    input.simulate("keyDown", { key: "Enter", keyCode: 13, which: 13 });
     expect(testContext.cancelError).toHaveBeenCalled();
   });
 });

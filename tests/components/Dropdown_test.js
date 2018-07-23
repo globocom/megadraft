@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import {mount} from "enzyme";
+import { mount } from "enzyme";
 
 import icons from "../../src/icons";
 import Dropdown from "../../src/components/Dropdown";
@@ -19,9 +19,9 @@ describe("Dropdown Component", () => {
     testContext.selected = "metal";
     testContext.onChange = jest.fn();
     const dropdownItems = [
-      {key: "pagode", icon: icons.MediaMediumIcon, label: "Pagode"},
-      {key: "metal", icon: icons.MediaBigIcon, label: "Metal"},
-      {key: "samba", icon: icons.MediaSmallIcon, label: "Samba"}
+      { key: "pagode", icon: icons.MediaMediumIcon, label: "Pagode" },
+      { key: "metal", icon: icons.MediaBigIcon, label: "Metal" },
+      { key: "samba", icon: icons.MediaSmallIcon, label: "Samba" }
     ];
 
     testContext.component = mount(

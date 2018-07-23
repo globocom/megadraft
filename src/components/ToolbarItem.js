@@ -4,11 +4,10 @@
  * License: MIT
  */
 
-import React, {Component} from "react";
+import React, { Component } from "react";
 import classNames from "classnames";
 
 import Separator from "./Separator";
-
 
 export default class ToolbarItem extends Component {
   constructor(props) {
@@ -25,9 +24,7 @@ export default class ToolbarItem extends Component {
     const Icon = this.props.item.icon;
 
     if (this.props.item.type == "separator") {
-      return (
-        <Separator />
-      );
+      return <Separator />;
     }
 
     const className = classNames("toolbar__item", {
@@ -41,7 +38,8 @@ export default class ToolbarItem extends Component {
             this.toggleAction(this.props);
           }}
           type="button"
-          className="toolbar__button">
+          className="toolbar__button"
+        >
           <Icon />
         </button>
       </li>

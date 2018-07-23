@@ -9,10 +9,10 @@ import {
   convertToRaw,
   convertFromRaw,
   EditorState,
-  getVisibleSelectionRect} from "draft-js";
+  getVisibleSelectionRect
+} from "draft-js";
 
 import defaultDecorator from "./decorators/defaultDecorator";
-
 
 export function editorStateToJSON(editorState) {
   if (editorState) {
@@ -34,7 +34,9 @@ export function getSelectedBlockElement(range) {
   let node = range.startContainer;
   do {
     try {
-      const nodeIsDataBlock = node.getAttribute ? node.getAttribute("data-block") : null;
+      const nodeIsDataBlock = node.getAttribute
+        ? node.getAttribute("data-block")
+        : null;
       if (nodeIsDataBlock) {
         return node;
       }
@@ -64,15 +66,19 @@ export function getSelectionCoords(editor, toolbar) {
   const rangeWidth = rangeBounds.right - rangeBounds.left;
   const arrowStyle = {};
 
-  let offsetLeft = (rangeBounds.left - editorBounds.left) + (rangeWidth / 2);
+  let offsetLeft = rangeBounds.left - editorBounds.left + rangeWidth / 2;
   arrowStyle.left = "50%";
   if (offsetLeft - toolbarWidth / 2 + editorBounds.left < minOffsetLeft) {
     arrowStyle.left = rangeBounds.left - editorBounds.left;
-    offsetLeft = (toolbarWidth / 2) + minOffsetLeft;
+    offsetLeft = toolbarWidth / 2 + minOffsetLeft;
   }
-  if (offsetLeft + (toolbarWidth / 2) + editorBounds.left > win.innerWidth - minOffsetRight) {
+  if (
+    offsetLeft + toolbarWidth / 2 + editorBounds.left >
+    win.innerWidth - minOffsetRight
+  ) {
     arrowStyle.left = toolbarWidth + rangeBounds.right - editorBounds.right;
-    offsetLeft = win.innerWidth - editorBounds.left - (toolbarWidth / 2) - minOffsetRight;
+    offsetLeft =
+      win.innerWidth - editorBounds.left - toolbarWidth / 2 - minOffsetRight;
   }
   let offsetTop = rangeBounds.top - editorBounds.top - 14;
   arrowStyle.top = "100%";
@@ -85,21 +91,18 @@ export function getSelectionCoords(editor, toolbar) {
     }
   }
 
-  return {offsetLeft, offsetTop, arrowStyle};
+  return { offsetLeft, offsetTop, arrowStyle };
 }
 
 export function createTypeStrategy(type) {
   return (contentBlock, callback, contentState) => {
-    contentBlock.findEntityRanges(
-      (character) => {
-        const entityKey = character.getEntity();
-        return (
-          entityKey !== null &&
-          contentState.getEntity(entityKey).getType() === type
-        );
-      },
-      callback
-    );
+    contentBlock.findEntityRanges(character => {
+      const entityKey = character.getEntity();
+      return (
+        entityKey !== null &&
+        contentState.getEntity(entityKey).getType() === type
+      );
+    }, callback);
   };
 }
 
@@ -124,7 +127,7 @@ export function createTypeStrategy(type) {
  */
 export function delayCall(fn, interval = 100) {
   let timeout;
-  return function (...args) {
+  return function(...args) {
     if (timeout) {
       window.clearTimeout(timeout);
     }

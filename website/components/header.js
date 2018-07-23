@@ -16,7 +16,10 @@ export default class Header extends React.Component {
       <div className="page__header">
         <div className="hero__container">
           <div className="hero__logo">
-            <img className="hero__logo-svg" src="images/megadraft_white_version.svg" />
+            <img
+              className="hero__logo-svg"
+              src="images/megadraft_white_version.svg"
+            />
           </div>
           <h1 className="hero__title">
             The <br />

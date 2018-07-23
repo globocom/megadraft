@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import {mount} from "enzyme";
+import { mount } from "enzyme";
 
 import MediaMessage from "../../src/components/MediaMessage";
 
@@ -30,7 +30,7 @@ describe("MediaMessage Component", () => {
   });
 
   it("hides component when there is no text", () => {
-    const component = testContext.renderComponent({text: "", type: "error"});
+    const component = testContext.renderComponent({ text: "", type: "error" });
     expect(component.children()).toHaveLength(0);
   });
 

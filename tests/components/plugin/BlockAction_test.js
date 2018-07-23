@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import {mount} from "enzyme";
+import { mount } from "enzyme";
 
 import icons from "../../../src/icons";
 import BlockAction from "../../../src/components/plugin/BlockAction";
@@ -17,7 +17,11 @@ describe("BlockAction Component", () => {
     testContext = {};
     testContext.crop = jest.fn();
 
-    const item = {key: "crop", icon: icons.CropIcon, action: testContext.crop};
+    const item = {
+      key: "crop",
+      icon: icons.CropIcon,
+      action: testContext.crop
+    };
 
     testContext.wrapper = mount(<BlockAction item={item} key={item.key} />);
   });

@@ -4,12 +4,11 @@
  * License: MIT
  */
 
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 import Modal from "backstage-modal";
 import ModalPluginList from "./ModalPluginList";
-import {translate} from "react-i18next";
-
+import { translate } from "react-i18next";
 
 class PluginsModal extends Component {
   constructor(props) {
@@ -21,7 +20,7 @@ class PluginsModal extends Component {
   }
 
   onCloseRequest() {
-    if(!this.props.isOpen) {
+    if (!this.props.isOpen) {
       return;
     }
     document.body.classList.remove("megadraft-modal--open");
@@ -29,7 +28,7 @@ class PluginsModal extends Component {
   }
 
   render() {
-    const {t} = this.props;
+    const { t } = this.props;
     return (
       <Modal
         className="megadraft-modal"
@@ -37,7 +36,8 @@ class PluginsModal extends Component {
         isOpen={this.props.isOpen}
         onCloseRequest={this.onCloseRequest}
         width={this.modalWidth}
-        height={this.modalHeight} >
+        height={this.modalHeight}
+      >
         <ModalPluginList
           toggleModalVisibility={this.onCloseRequest}
           plugins={this.props.plugins}

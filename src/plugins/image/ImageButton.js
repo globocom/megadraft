@@ -4,11 +4,10 @@
  * License: MIT
  */
 
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 import icons from "../../icons";
 import insertDataBlock from "../../insertDataBlock";
-
 
 export default class BlockButton extends Component {
   constructor(props) {
@@ -23,14 +22,19 @@ export default class BlockButton extends Component {
       return;
     }
 
-    const data = {src: src, type: "image", display: "medium"};
+    const data = { src: src, type: "image", display: "medium" };
 
     this.props.onChange(insertDataBlock(this.props.editorState, data));
   }
 
   render() {
     return (
-      <button className={this.props.className} type="button" onClick={this.onClick} title={this.props.title}>
+      <button
+        className={this.props.className}
+        type="button"
+        onClick={this.onClick}
+        title={this.props.title}
+      >
         <icons.ImageIcon className="sidemenu__button__icon" />
       </button>
     );

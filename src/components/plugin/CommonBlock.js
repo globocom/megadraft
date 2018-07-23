@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 import Dropdown from "../../components/Dropdown";
 import {
@@ -17,7 +17,6 @@ import {
   DEFAULT_DISPLAY_KEY
 } from "../../components/plugin/defaults";
 
-
 export default class CommonBlock extends Component {
   constructor(props) {
     super(props);
@@ -26,17 +25,17 @@ export default class CommonBlock extends Component {
   }
 
   _handleDisplayChange(newValue) {
-    this.props.container.updateData({display: newValue});
+    this.props.container.updateData({ display: newValue });
   }
 
-  render(){
+  render() {
     const data = this.props.data;
     const defaults = {
       defaultDisplay: DEFAULT_DISPLAY_KEY,
       displayOptions: DEFAULT_DISPLAY_OPTIONS
     };
     let options = this.props.blockProps.plugin.options || {};
-    options = {...defaults, ...options};
+    options = { ...defaults, ...options };
 
     return (
       <BlockWrapper>
@@ -44,7 +43,8 @@ export default class CommonBlock extends Component {
           <Dropdown
             items={options.displayOptions}
             selected={data.display || options.defaultDisplay}
-            onChange={this._handleDisplayChange} />
+            onChange={this._handleDisplayChange}
+          />
 
           <BlockActionGroup items={this.props.actions} />
         </BlockControls>

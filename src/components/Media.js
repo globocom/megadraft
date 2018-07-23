@@ -4,11 +4,10 @@
  * License: MIT
  */
 
-import React, {Component} from "react";
-import {EditorState, SelectionState, Modifier} from "draft-js";
+import React, { Component } from "react";
+import { EditorState, SelectionState, Modifier } from "draft-js";
 
 import MediaWrapper from "./MediaWrapper";
-
 
 export default class Media extends Component {
   constructor(props) {
@@ -27,11 +26,14 @@ export default class Media extends Component {
     const keyAfter = content.getKeyAfter(this.props.block.key);
     const blockMap = content.getBlockMap().delete(this.props.block.key);
     const withoutAtomicBlock = content.merge({
-      blockMap, selectionAfter: selection
+      blockMap,
+      selectionAfter: selection
     });
 
     const newState = EditorState.push(
-      editorState, withoutAtomicBlock, "remove-range"
+      editorState,
+      withoutAtomicBlock,
+      "remove-range"
     );
 
     // if this is not the last block
@@ -60,7 +62,11 @@ export default class Media extends Component {
     });
 
     const newContentState = Modifier.mergeBlockData(content, selection, data);
-    const newEditorState = EditorState.push(editorState, newContentState, "change-block-data");
+    const newEditorState = EditorState.push(
+      editorState,
+      newContentState,
+      "change-block-data"
+    );
 
     this.onChange(newEditorState);
   }
@@ -68,16 +74,18 @@ export default class Media extends Component {
   render() {
     // Should we use immutables?
     const data = this.props.block.getData().toJS();
-    const {plugin,
-      setInitialReadOnly,
-      setReadOnly} = this.props.blockProps;
+    const { plugin, setInitialReadOnly, setReadOnly } = this.props.blockProps;
     const Block = plugin.blockComponent;
     return (
       <MediaWrapper
         setInitialReadOnly={setInitialReadOnly}
         setReadOnly={setReadOnly}
       >
-        <Block data={data} container={this} blockProps={this.props.blockProps} />
+        <Block
+          data={data}
+          container={this}
+          blockProps={this.props.blockProps}
+        />
       </MediaWrapper>
     );
   }

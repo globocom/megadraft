@@ -14,12 +14,15 @@
 
 import Immutable from "immutable";
 
-import {genKey, EditorState, ContentBlock, Modifier, BlockMapBuilder} from "draft-js";
+import {
+  genKey,
+  EditorState,
+  ContentBlock,
+  Modifier,
+  BlockMapBuilder
+} from "draft-js";
 
-const {
-  List,
-  Map
-} = Immutable;
+const { List, Map } = Immutable;
 
 function insertDataBlock(editorState, data) {
   const contentState = editorState.getCurrentContent();
@@ -48,7 +51,6 @@ function insertDataBlock(editorState, data) {
     characterList: List(),
     data: new Map(data)
   });
-
 
   const fragmentArray = [
     block,
