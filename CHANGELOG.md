@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.5.1 - 2018-07-27
+### Added
+- `Sidebar`: Display sidebar ToggleButton only when needed, with
+  `hideSidebarOnBlur` prop.
+### Changed
+- Improving indentation with prettier + eslint + lint-staged + husky
+
 ## 0.5.0 - 2018-07-10
 ### Added
 - i18n: New prop `language` for `MegadraftEditor`, default is 'en-US'. `__()` has been deprecated and will be removed soon. You can move this code to your app, instead. `__()` code can be found at [Github Gist][i18n-code].
