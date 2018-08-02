@@ -13,11 +13,10 @@ import { getSelectionCoords } from "../utils";
 
 export default class Toolbar extends Component {
   static defaultProps = {
-    shouldDisplayToolbarFn() {
+    shouldDisplayToolbarFn(props, state) {
       return (
-        this.editorHasFocus &&
-        !this.editorState.getSelection().isCollapsed() &&
-        !this.readOnly
+        (props.editorHasFocus || state.editingEntity) &&
+        !props.editorState.getSelection().isCollapsed()
       );
     }
   };
@@ -140,7 +139,7 @@ export default class Toolbar extends Component {
   }
 
   handleSetToolbar() {
-    if (this.props.shouldDisplayToolbarFn()) {
+    if (this.props.shouldDisplayToolbarFn(this.props, this.state)) {
       this.shouldUpdatePos = false;
       return this.setBarPosition();
     } else {
