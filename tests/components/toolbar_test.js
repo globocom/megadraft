@@ -189,7 +189,10 @@ describe("Toolbar Component", () => {
 
         button.simulate("click");
 
-        expect(testContext.actions[5].action).toHaveBeenCalledWith(editorState);
+        expect(testContext.actions[5].action).toHaveBeenCalledWith(
+          editorState,
+          testContext.wrapper.find(Toolbar).props().onChange
+        );
       });
     });
 
