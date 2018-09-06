@@ -266,6 +266,7 @@ export default class Toolbar extends Component {
     if (Component) {
       return (
         <Component
+          i18n={this.props.i18n}
           editorState={this.props.editorState}
           setEntity={setEntity}
           entityType={entityType}

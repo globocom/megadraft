@@ -5,11 +5,11 @@
  */
 
 import React, { Component } from "react";
-import { translate } from "react-i18next";
 
 import { BlockContent, CommonBlock } from "../../components/plugin";
 import MediaMessage from "../../components/MediaMessage";
 import icons from "../../icons";
+import { replaceData } from "../../i18n";
 
 class NotFoundBlock extends Component {
   constructor(props) {
@@ -25,14 +25,15 @@ class NotFoundBlock extends Component {
   }
 
   render() {
-    const { t } = this.props;
-    const message = t('Can\'t show plugin, component "{{type}}" not found.', {
-      type: this.props.data.type
-    });
+    const { i18n } = this.props;
+    const text = replaceData(
+      i18n["Can't show plugin, component {{type}} not found."],
+      { type: this.props.data.type.toString() }
+    );
     return (
       <CommonBlock {...this.props} actions={this.actions}>
         <BlockContent className="block__notfound">
-          <MediaMessage text={message} type="warning" />
+          <MediaMessage text={text} type="warning" />
           <icons.ErrorIcon className="block__notfound__icon" />
         </BlockContent>
       </CommonBlock>
@@ -40,4 +41,4 @@ class NotFoundBlock extends Component {
   }
 }
 
-export default translate("translations")(NotFoundBlock);
+export default NotFoundBlock;

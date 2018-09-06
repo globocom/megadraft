@@ -7,7 +7,7 @@
 import React, { Component } from "react";
 import { mount } from "enzyme";
 import cp from "utils-copy";
-
+import i18nConfig from "../../src/i18n";
 import Sidebar, { ToggleButton, SideMenu } from "../../src/components/Sidebar";
 import PluginsModal from "../../src/components/PluginsModal";
 import image from "../../src/plugins/image/plugin";
@@ -32,6 +32,7 @@ class SidebarWrapper extends Component {
     return (
       <div ref="editor">
         <Sidebar
+          i18n={this.props.i18n}
           ref="sidebar"
           plugins={this.plugins}
           editorState={this.state.editorState}
@@ -68,6 +69,7 @@ class SidebarWithModalWrapper extends Component {
     return (
       <div ref="editor">
         <Sidebar
+          i18n={this.props.i18n}
           ref="sidebar"
           plugins={this.fakePlugins}
           editorState={this.state.editorState}
@@ -100,9 +102,14 @@ describe("Sidebar Component", () => {
     };
 
     editorState = editorStateFromRaw(INITIAL_CONTENT);
-    wrapper = mount(<SidebarWrapper editorState={editorState} />);
+    wrapper = mount(
+      <SidebarWrapper editorState={editorState} i18n={i18nConfig["en-US"]} />
+    );
     wrapperSidebarModal = mount(
-      <SidebarWithModalWrapper editorState={editorState} />
+      <SidebarWithModalWrapper
+        editorState={editorState}
+        i18n={i18nConfig["en-US"]}
+      />
     );
   });
 
@@ -114,7 +121,11 @@ describe("Sidebar Component", () => {
 
   it("renders as null when readOnly is set", () => {
     const wrapper = mount(
-      <SidebarWrapper readOnly editorState={editorState} />
+      <SidebarWrapper
+        readOnly
+        editorState={editorState}
+        i18n={i18nConfig["en-US"]}
+      />
     );
     const sidebar = wrapper.find(Sidebar);
     expect(sidebar.html()).toBeNull();
@@ -201,7 +212,7 @@ describe("Sidebar Component", () => {
     expect(domModalButton.exists()).toBeFalsy();
   });
 
-  it("should has plugins in modal if it's avaiable", () => {
+  it("should have plugins in modal if it's avaiable", () => {
     const toggleButton = wrapperSidebarModal.find(ToggleButton);
     const domButton = toggleButton.find("button");
 
@@ -218,7 +229,7 @@ describe("Sidebar Component", () => {
     expect(items).toBeGreaterThanOrEqual(1);
   });
 
-  it("should has modal with props width", () => {
+  it("should have modal with props width", () => {
     const toggleButton = wrapperSidebarModal.find(ToggleButton);
     const domButton = toggleButton.find("button");
     domButton.simulate("click");
@@ -234,7 +245,7 @@ describe("Sidebar Component", () => {
     expect(domModal.prop("width")).toBeDefined();
   });
 
-  it("should has modal with props height", () => {
+  it("should have modal with props height", () => {
     const toggleButton = wrapperSidebarModal.find(ToggleButton);
     const domButton = toggleButton.find("button");
     domButton.simulate("click");
@@ -248,5 +259,20 @@ describe("Sidebar Component", () => {
     const domModal = modal.find("Modal");
 
     expect(domModal.prop("height")).toBeDefined();
+  });
+
+  it("should have modal with props title equals to 'Block List' by default", () => {
+    const modal = wrapperSidebarModal.find(PluginsModal);
+    const domModal = modal.find("Modal");
+
+    expect(domModal.prop("title")).toEqual("Block List");
+  });
+
+  it("should be able to change the modal title via i18n", () => {
+    wrapperSidebarModal.setProps({ i18n: i18nConfig["pt-BR"] });
+    const modal = wrapperSidebarModal.find(PluginsModal);
+    const domModal = modal.find("Modal");
+
+    expect(domModal.prop("title")).toEqual("Lista de Blocos");
   });
 });

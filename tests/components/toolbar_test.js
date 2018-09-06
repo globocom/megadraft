@@ -14,6 +14,7 @@ import ToolbarItem from "../../src/components/ToolbarItem";
 import { editorStateFromRaw } from "../../src/utils";
 import Separator from "../../src/components/Separator";
 import LinkInput from "../../src/entity_inputs/LinkInput";
+import i18nConfig from "../../src/i18n";
 
 export default class ToolbarWrapper extends Component {
   constructor(props) {
@@ -30,6 +31,7 @@ export default class ToolbarWrapper extends Component {
     return (
       <div ref="editor">
         <Toolbar
+          i18n={i18nConfig["en-US"]}
           ref="toolbar"
           editor={this.refs.editor}
           editorState={this.state.editorState}
@@ -364,7 +366,6 @@ describe("Toolbar Component", () => {
 
       it("(integration) LinkInput should remove a link backwards", () => {
         testContext.linkButton().simulate("click");
-
         const input = testContext.wrapper
           .find(LinkEntityInput)
           .find(".toolbar__input");

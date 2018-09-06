@@ -15,6 +15,7 @@ import Toolbar from "../../src/components/Toolbar";
 import { editorStateFromRaw } from "../../src/utils";
 import image from "../../src/plugins/image/plugin";
 import NotFoundPlugin from "../../src/plugins/not-found/plugin";
+import i18nConfig from "../../src/i18n";
 
 const replaceSelection = (newSelection, wrapper, blockKey) => {
   const selectionState = SelectionState.createEmpty(blockKey);
@@ -34,6 +35,7 @@ class MegadraftEditorWrapper extends Component {
   render() {
     return (
       <MegadraftEditor
+        i18n={i18nConfig["en-US"]}
         editorState={this.state.editorState}
         onChange={this.props.onChange}
         keyBindings={this.props.keyBindings}
@@ -353,11 +355,11 @@ describe("MegadraftEditor Component", () => {
     it("returns media renderer for registered plugin", () => {
       const block = new FakeAtomicBlock("image");
       const result = testContext.component.mediaBlockRenderer(block);
-
       expect(result).toEqual({
         component: Media,
         editable: false,
         props: {
+          i18n: i18nConfig["en-US"],
           plugin: image,
           onChange: testContext.component.onChange,
           editorState: testContext.editorState,
@@ -378,6 +380,7 @@ describe("MegadraftEditor Component", () => {
         component: Media,
         editable: false,
         props: {
+          i18n: i18nConfig["en-US"],
           plugin: NotFoundPlugin,
           onChange: testContext.component.onChange,
           editorState: testContext.editorState,
@@ -405,6 +408,7 @@ describe("MegadraftEditor Component", () => {
         component: Media,
         editable: false,
         props: {
+          i18n: i18nConfig["en-US"],
           plugin: customFallbackPlugin,
           onChange: testContext.component.onChange,
           editorState: testContext.editorState,
@@ -650,6 +654,7 @@ describe("MegadraftEditor Component", () => {
 
     const component = wrapper.instance();
     const expectedProps = {
+      i18n: i18nConfig["en-US"],
       plugins: component.plugins,
       onChange: component.onChange,
       editorState: testContext.editorState,

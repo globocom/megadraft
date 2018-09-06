@@ -6,7 +6,6 @@
 
 import React, { Component } from "react";
 import icons from "../icons";
-import { translate } from "react-i18next";
 
 class LinkInput extends Component {
   constructor(props) {
@@ -30,10 +29,12 @@ class LinkInput extends Component {
     const expression = /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\x{00a1}\-\x{ffff}0-9]+-?)*[a-z\x{00a1}\-\x{ffff}0-9]+)(?:\.(?:[a-z\x{00a1}\-\x{ffff}0-9]+-?)*[a-z\x{00a1}\-\x{ffff}0-9]+)*(?:\.(?:[a-z\x{00a1}\-\x{ffff}]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/gi;
 
     const regex = new RegExp(expression);
-    const { t } = this.props;
+    const { i18n } = this.props;
 
     if (!url.match(regex)) {
-      this.props.setError(t("Invalid Link"));
+      const errorMsg = i18n["Invalid Link"];
+
+      this.props.setError(errorMsg);
       this.textInput.focus();
       return;
     }
@@ -80,7 +81,9 @@ class LinkInput extends Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { i18n } = this.props;
+    const msg = i18n["Type the link and press enter"];
+
     return (
       <div style={{ whiteSpace: "nowrap" }}>
         <input
@@ -92,7 +95,7 @@ class LinkInput extends Component {
           onChange={this.onLinkChange}
           value={this.state.url}
           onKeyDown={this.onLinkKeyDown}
-          placeholder={t("Type the link and press enter")}
+          placeholder={msg}
         />
         <span className="toolbar__item" style={{ verticalAlign: "bottom" }}>
           <button
@@ -108,4 +111,4 @@ class LinkInput extends Component {
   }
 }
 
-export default translate("translations")(LinkInput);
+export default LinkInput;

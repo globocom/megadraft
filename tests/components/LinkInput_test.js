@@ -8,6 +8,7 @@ import React from "react";
 import { mount } from "enzyme";
 
 import LinkInput from "../../src/entity_inputs/LinkInput";
+import i18nConfig from "../../src/i18n";
 
 describe("LinkInput Component", () => {
   let testContext;
@@ -21,6 +22,7 @@ describe("LinkInput Component", () => {
 
     testContext.wrapper = mount(
       <LinkInput
+        i18n={i18nConfig["en-US"]}
         entityType="LINK"
         editor={testContext.editor}
         cancelEntity={testContext.cancelEntity}
@@ -85,7 +87,20 @@ describe("LinkInput Component", () => {
     expect(testContext.setError).toHaveBeenCalledWith("Invalid Link");
   });
 
-  it("should clear error on empty input", () => {
+  it("should return 'Invalid Link' with a empty i18n object", () => {
+    testContext.wrapper.setProps({ i18n: {} });
+
+    const input = testContext.wrapper.find(".toolbar__input");
+    const inputNode = input.getDOMNode();
+    inputNode.value = "";
+    input.simulate("change");
+    input.simulate("keyDown", { key: "Enter", keyCode: 13, which: 13 });
+    expect(testContext.cancelError).toHaveBeenCalled();
+  });
+
+  it("should show translated error message when i18n is changed", () => {
+    testContext.wrapper.setProps({ i18n: i18nConfig["pt-BR"] });
+
     const input = testContext.wrapper.find(".toolbar__input");
     const inputNode = input.getDOMNode();
 
@@ -93,9 +108,24 @@ describe("LinkInput Component", () => {
     input.simulate("change");
     input.simulate("keyDown", { key: "Enter", keyCode: 13, which: 13 });
 
-    inputNode.value = "";
-    input.simulate("change");
-    input.simulate("keyDown", { key: "Enter", keyCode: 13, which: 13 });
-    expect(testContext.cancelError).toHaveBeenCalled();
+    expect(testContext.setError).toHaveBeenCalledWith("Link inválido");
+  });
+
+  it("should have the default message in english", () => {
+    testContext.wrapper.setProps({ i18n: i18nConfig["en-US"] });
+
+    const input = testContext.wrapper.find(".toolbar__input");
+
+    expect(input.prop("placeholder")).toEqual("Type the link and press enter");
+  });
+
+  it("should use the placeholder message in portuguese if i18n is on", () => {
+    testContext.wrapper.setProps({ i18n: i18nConfig["pt-BR"] });
+
+    const input = testContext.wrapper.find(".toolbar__input");
+
+    expect(input.prop("placeholder")).toEqual(
+      "Digite o link e pressione enter"
+    );
   });
 });
