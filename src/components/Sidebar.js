@@ -44,6 +44,7 @@ class BlockStyles extends Component {
   renderModal() {
     return (
       <PluginsModal
+        i18n={this.props.i18n}
         toggleModalVisibility={this.toggleModalVisibility}
         isOpen={this.state.isOpen}
         plugins={this.props.plugins}
@@ -170,6 +171,7 @@ export class SideMenu extends Component {
         />
 
         <BlockStyles
+          i18n={this.props.i18n}
           editorState={this.props.editorState}
           plugins={this.props.plugins}
           open={this.state.open}
@@ -259,6 +261,7 @@ export default class SideBar extends Component {
         <div style={{ top: `${this.state.top}px` }} className="sidebar__menu">
           <ul className="sidebar__sidemenu-wrapper">
             <SideMenu
+              i18n={this.props.i18n}
               editorState={this.props.editorState}
               onChange={this.onChange}
               plugins={this.getValidSidebarPlugins()}

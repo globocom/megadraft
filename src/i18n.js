@@ -4,33 +4,28 @@
  * License: MIT
  */
 
-import i18next from "i18next";
-
-i18next.init({
-  interpolation: {
-    escapeValue: false
+const i18nConfig = {
+  "en-US": {
+    "Type the link and press enter": "Type the link and press enter",
+    "Invalid Link": "Invalid Link",
+    "Can't show plugin, component {{type}} not found.":
+      "Can't show plugin, component {{type}} not found.",
+    "Block List": "Block List"
   },
-  lng: "en-US", // "en-US" | "pt-BR"
-  resources: {
-    "en-US": {
-      translations: {
-        "Type the link and press enter": "Type the link and press enter",
-        "Invalid Link": "Invalid Link",
-        'Can\'t show plugin, component "{{type}}" not found.':
-          'Can\'t show plugin, component "{{type}}" not found.',
-        "Block List": "Block List"
-      }
-    },
-    "pt-BR": {
-      translations: {
-        "Type the link and press enter": "Digite o link e pressione enter",
-        "Invalid Link": "Link inválido",
-        'Can\'t show plugin, component "{{type}}" not found.':
-          'Não é possível exibir o plugin, componente "{{type}}" não encontrado',
-        "Block List": "Lista de Blocos"
-      }
-    }
+  "pt-BR": {
+    "Type the link and press enter": "Digite o link e pressione enter",
+    "Invalid Link": "Link inválido",
+    "Can't show plugin, component {{type}} not found.":
+      "Não é possível exibir o plugin, componente {{type}} não encontrado",
+    "Block List": "Lista de Blocos"
   }
-});
+};
 
-export default i18next;
+export const replaceData = (str, data) => {
+  const rgx = /{{\s?(\w+)\s?}}/gm;
+  let msg = str;
+  msg = msg.replace(rgx, (_, key) => data[key]);
+  return msg;
+};
+
+export default i18nConfig;

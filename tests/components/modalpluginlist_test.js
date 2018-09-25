@@ -61,7 +61,7 @@ describe("Sidebar Modal Component", () => {
     );
   });
 
-  it("should has plugins inside modal", () => {
+  it("should have plugins inside modal", () => {
     const modal = testContext.wrapper.find(ModalBody);
 
     const plugin = modal.find("li");
@@ -69,7 +69,7 @@ describe("Sidebar Modal Component", () => {
     expect(plugin.length).toBeGreaterThanOrEqual(1);
   });
 
-  it("should has the all plugins inside modal", () => {
+  it("should have the all plugins inside modal", () => {
     const modal = testContext.wrapper.find(ModalBody);
 
     const plugin = modal.find(".megadraft-modal__item");

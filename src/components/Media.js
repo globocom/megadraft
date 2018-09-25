@@ -74,14 +74,21 @@ export default class Media extends Component {
   render() {
     // Should we use immutables?
     const data = this.props.block.getData().toJS();
-    const { plugin, setInitialReadOnly, setReadOnly } = this.props.blockProps;
+    const {
+      plugin,
+      setInitialReadOnly,
+      setReadOnly,
+      i18n
+    } = this.props.blockProps;
     const Block = plugin.blockComponent;
     return (
       <MediaWrapper
+        i18n={i18n}
         setInitialReadOnly={setInitialReadOnly}
         setReadOnly={setReadOnly}
       >
         <Block
+          i18n={i18n}
           data={data}
           container={this}
           blockProps={this.props.blockProps}
