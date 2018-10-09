@@ -69,14 +69,18 @@ export function getSelectionCoords(editor, toolbar) {
   let offsetLeft = rangeBounds.left - editorBounds.left + rangeWidth / 2;
   arrowStyle.left = "50%";
   if (offsetLeft - toolbarWidth / 2 + editorBounds.left < minOffsetLeft) {
-    arrowStyle.left = rangeBounds.left - editorBounds.left;
-    offsetLeft = toolbarWidth / 2 + minOffsetLeft;
+    offsetLeft = toolbarWidth / 2 - editorBounds.left + minOffsetLeft;
+    arrowStyle.left =
+      (rangeBounds.left + rangeBounds.right) / 2 - minOffsetLeft;
   }
   if (
     offsetLeft + toolbarWidth / 2 + editorBounds.left >
     win.innerWidth - minOffsetRight
   ) {
-    arrowStyle.left = toolbarWidth + rangeBounds.right - editorBounds.right;
+    arrowStyle.left =
+      rangeBounds.left -
+      (win.innerWidth - minOffsetRight - toolbarWidth) +
+      (rangeBounds.right - rangeBounds.left) / 2;
     offsetLeft =
       win.innerWidth - editorBounds.left - toolbarWidth / 2 - minOffsetRight;
   }
