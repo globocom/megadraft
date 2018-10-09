@@ -52,12 +52,11 @@ export function getSelectionCoords(editor, toolbar) {
   const editorBounds = editor.getBoundingClientRect();
   const win = editor.ownerDocument.defaultView || window;
   const rangeBounds = getVisibleSelectionRect(win);
-  const toolbarHeight = toolbar.offsetHeight;
-  const toolbarWidth = toolbar.offsetWidth;
-
   if (!rangeBounds || !toolbar) {
     return null;
   }
+  const toolbarHeight = toolbar.offsetHeight;
+  const toolbarWidth = toolbar.offsetWidth;
 
   const minOffsetLeft = 5;
   const minOffsetRight = 5;
