@@ -322,6 +322,10 @@ export default class MegadraftEditor extends Component {
     }, 200);
   }
 
+  componentWillUnmount() {
+    clearTimeout(this.blurTimeoutID);
+  }
+
   mediaBlockRenderer(block) {
     const handled = this.props.blockRendererFn(block);
     if (handled) {
