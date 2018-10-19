@@ -221,6 +221,28 @@ describe("MegadraftEditor Component", () => {
     );
   });
 
+  it("provides a default id to the wrapping div", () => {
+    const wrapper = mount(
+      <MegadraftEditor
+        editorState={testContext.editorState}
+        onChange={testContext.onChange}
+      />
+    );
+    expect(wrapper.find(".megadraft-editor").props().id).toBeDefined();
+  });
+
+  it("allows the wrapping div id to be overridden", () => {
+    const id = "custom-id";
+    const wrapper = mount(
+      <MegadraftEditor
+        editorState={testContext.editorState}
+        onChange={testContext.onChange}
+        id={id}
+      />
+    );
+    expect(wrapper.find(".megadraft-editor").props().id).toEqual(id);
+  });
+
   it("allows blockRendererFn to be augmented with mediaBlockRenderer", () => {
     const contentBlock = {
       getType: () => "atomic"
