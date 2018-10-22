@@ -387,7 +387,7 @@ export default class MegadraftEditor extends Component {
       <div className="megadraft">
         <div
           className="megadraft-editor"
-          id="megadraft-editor"
+          id={this.props.id || "megadraft-editor"}
           ref={el => {
             this.editorEl = el;
           }}
