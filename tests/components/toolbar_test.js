@@ -107,7 +107,8 @@ describe("Toolbar Component", () => {
         entity: "FILE_LINK",
         icon: "svg"
       },
-      { type: "custom", icon: "svg", action: jest.fn() }
+      { type: "custom", icon: "svg", action: jest.fn() },
+      { type: "custom", icon: "svg", action: jest.fn(), active: () => true }
     ];
 
     testContext.entityInputs = {
@@ -195,6 +196,16 @@ describe("Toolbar Component", () => {
           editorState,
           testContext.wrapper.find(Toolbar).props().onChange
         );
+      });
+      it("custom action handle the active state of button on toolbar", () => {
+        const items = testContext.wrapper.find(ToolbarItem);
+        const toolbarItem = items.at(5).find("li");
+        const toolbarItemActive = items.at(6).find("li");
+
+        expect(toolbarItem.hasClass("toolbar__item--active")).toBeFalsy();
+        expect(
+          toolbarItemActive.hasClass("toolbar__item--active")
+        ).toBeTruthy();
       });
     });
 
