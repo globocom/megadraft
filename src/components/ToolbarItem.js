@@ -22,6 +22,7 @@ export default class ToolbarItem extends Component {
 
   render() {
     const Icon = this.props.item.icon;
+    const Input = this.props.item.input;
 
     if (this.props.item.type == "separator") {
       return <Separator />;
@@ -33,15 +34,19 @@ export default class ToolbarItem extends Component {
 
     return (
       <li className={className}>
-        <button
-          onClick={() => {
-            this.toggleAction(this.props);
-          }}
-          type="button"
-          className="toolbar__button"
-        >
-          <Icon />
-        </button>
+        {Input ? (
+          <Input />
+        ) : (
+          <button
+            onClick={() => {
+              this.toggleAction(this.props);
+            }}
+            type="button"
+            className="toolbar__button"
+          >
+            <Icon />
+          </button>
+        )}
       </li>
     );
   }

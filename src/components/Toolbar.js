@@ -61,12 +61,15 @@ export default class Toolbar extends Component {
     let current = null;
     let toggle = null;
     let active = null;
+    let input = null;
     let key = item.label;
 
     switch (item.type) {
       case "custom": {
         key = "custom-" + position;
         toggle = () => item.action(this.props.editorState, this.props.onChange);
+        input = item.input &&
+          () => item.input(this.props.editorState, this.props.onChange)
         break;
       }
       case "inline": {
@@ -99,7 +102,13 @@ export default class Toolbar extends Component {
     }
 
     return (
-      <ToolbarItem key={key} active={active} toggle={toggle} item={item} />
+      <ToolbarItem
+        key={key}
+        active={active}
+        toggle={toggle}
+        item={item}
+        input={input}
+      />
     );
   }
 
