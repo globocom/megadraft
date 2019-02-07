@@ -93,7 +93,7 @@ export default class Toolbar extends Component {
         const { entity = "LINK" } = item;
         key = "entity-" + entity;
         toggle = () => this.toggleEntity(entity);
-        active = this.hasEntity(entity);
+        active = this.hasEntity(entity) || this.hasStyle(item.style);
         break;
       }
     }
@@ -193,6 +193,12 @@ export default class Toolbar extends Component {
       return contentState.getEntity(entityKey);
     }
     return null;
+  }
+
+  hasStyle(style) {
+    const current = this.props.editorState.getCurrentInlineStyle();
+    const withStyle = current.filter((val, key) => key.startsWith(style));
+    return withStyle.size > 0;
   }
 
   hasEntity(entityType) {
