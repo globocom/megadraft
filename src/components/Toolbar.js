@@ -297,7 +297,10 @@ export default class Toolbar extends Component {
     );
   }
   render() {
-    if (this.props.readOnly) {
+    if (
+      this.props.readOnly &&
+      !this.props.shouldDisplayToolbarFn(this.props, this.state)
+    ) {
       return null;
     }
 
