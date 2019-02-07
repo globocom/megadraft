@@ -40,6 +40,7 @@ export default class ToolbarWrapper extends Component {
           entityInputs={this.props.entityInputs}
           onChange={this.onChange}
           editorHasFocus={true}
+          shouldDisplayToolbarFn={this.props.shouldDisplayToolbarFn}
         />
       </div>
     );
@@ -123,6 +124,7 @@ describe("Toolbar Component", () => {
         editorState={testContext.editorState}
         actions={testContext.actions}
         entityInputs={testContext.entityInputs}
+        shouldDisplayToolbarFn={() => true}
       />
     );
   });
@@ -142,12 +144,25 @@ describe("Toolbar Component", () => {
       expect(items).toHaveLength(1);
     });
 
-    it("renders as null when readOnly is set", () => {
+    it("renders null when readOnly is set and shouldDisplayToolbarFn returns true", () => {
       const wrapper = mount(
         <ToolbarWrapper
           readOnly
           editorState={testContext.editorState}
           actions={testContext.actions}
+          shouldDisplayToolbarFn={() => true}
+        />
+      );
+      const toolbar = wrapper.find(Toolbar);
+      expect(toolbar.html()).toBeNull();
+    });
+
+    it("renders as null when readOnly is not set and shouldDisplayToolbarFn returns false", () => {
+      const wrapper = mount(
+        <ToolbarWrapper
+          editorState={testContext.editorState}
+          actions={testContext.actions}
+          shouldDisplayToolbarFn={() => false}
         />
       );
       const toolbar = wrapper.find(Toolbar);
@@ -218,50 +233,74 @@ describe("Toolbar Component", () => {
       });
     });
 
-    it("starts hidden", () => {
-      const toolbarWrapper = testContext.wrapper.find(".toolbar");
-      expect(toolbarWrapper.hasClass("toolbar--open")).toBeFalsy();
+    it("starts hidden when using default shouldDisplayToolbarFn", () => {
+      const wrapper = mount(
+        <ToolbarWrapper
+          editorState={testContext.editorState}
+          actions={testContext.actions}
+          entityInputs={testContext.entityInputs}
+        />
+      );
+      const toolbar = wrapper.find(Toolbar);
+      expect(toolbar.html()).toBeNull();
     });
 
-    it("shows after selection", () => {
+    it("shows after selection when using default shouldDisplayToolbarFn", () => {
+      const wrapper = mount(
+        <ToolbarWrapper
+          editorState={testContext.editorState}
+          actions={testContext.actions}
+          entityInputs={testContext.entityInputs}
+        />
+      );
+
       replaceSelection(
         {
           focusOffset: 0,
           anchorOffset: 5
         },
-        testContext.wrapper
+        wrapper
       );
 
-      testContext.clock.advanceTimersByTime(32);
-      testContext.wrapper.update();
+      wrapper.update();
 
-      const toolbarWrapper = testContext.wrapper.find(".toolbar");
+      const toolbar = wrapper.find(Toolbar);
+      const toolbarWrapper = wrapper.find(".toolbar");
+      expect(toolbar.html()).not.toBeNull();
       expect(toolbarWrapper.hasClass("toolbar--open")).toBeTruthy();
     });
 
-    it("should hide after deselection", () => {
+    it("should hide after deselection when using default shouldDisplayToolbarFn", () => {
+      const wrapper = mount(
+        <ToolbarWrapper
+          editorState={testContext.editorState}
+          actions={testContext.actions}
+          entityInputs={testContext.entityInputs}
+        />
+      );
+
       replaceSelection(
         {
           focusOffset: 0,
           anchorOffset: 5
         },
-        testContext.wrapper
+        wrapper
       );
 
-      testContext.wrapper.update();
+      wrapper.update();
 
       replaceSelection(
         {
           focusOffset: 0,
           anchorOffset: 0
         },
-        testContext.wrapper
+        wrapper
       );
 
-      testContext.wrapper.update();
+      wrapper.update();
 
-      const toolbarWrapper = testContext.wrapper.find(".toolbar");
-      expect(toolbarWrapper.hasClass("toolbar--open")).toBeFalsy();
+      const toolbar = wrapper.find(Toolbar);
+      expect(toolbar.html()).toBeNull();
     });
 
     it("should center toolbar above the selection", () => {
