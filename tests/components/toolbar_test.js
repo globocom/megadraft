@@ -214,6 +214,29 @@ describe("Toolbar Component", () => {
         );
       });
 
+      it("should not hide toolbar when state changes", () => {
+        const wrapper = mount(
+          <ToolbarWrapper
+            editorState={testContext.editorState}
+            actions={testContext.actions}
+            entityInputs={testContext.entityInputs}
+          />
+        );
+        replaceSelection(
+          {
+            focusOffset: 0,
+            anchorOffset: 5
+          },
+          wrapper
+        );
+        wrapper.update();
+
+        const toolbar = wrapper.find(Toolbar);
+        const nextProps = { editorState: { getCurrentContent: () => "blah" } };
+        toolbar.instance().componentWillReceiveProps(nextProps);
+        expect(toolbar.instance().state.show).toBeTruthy();
+      });
+
       it("should call preventDefault when active a state", () => {
         const event = {
           preventDefault: () => {},
