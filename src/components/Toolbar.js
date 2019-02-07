@@ -305,15 +305,17 @@ export default class Toolbar extends Component {
         className={toolbarClass}
         style={this.state.position}
         ref="toolbarWrapper"
-        onMouseDown={e => {
-          e.preventDefault();
-        }}
       >
         <div style={{ position: "absolute", bottom: 0 }}>
           <div
             className="toolbar__wrapper"
             ref={el => {
               this.toolbarEl = el;
+            }}
+            onMouseDown={e => {
+              if (e.target.localName !== "input") {
+                e.preventDefault();
+              }
             }}
           >
             {this.state.editingEntity
