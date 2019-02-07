@@ -199,6 +199,18 @@ describe("Toolbar Component", () => {
         );
       });
 
+      it("should call preventDefault when active a state", () => {
+        const event = {
+          preventDefault: () => {},
+          target: { localName: "blah" }
+        };
+        jest.spyOn(event, "preventDefault");
+
+        const wrapper = testContext.wrapper.find(".toolbar__wrapper");
+        wrapper.simulate("mouseDown", Object.assign(jest.fn(), event));
+        expect(event.preventDefault).toBeCalled();
+      });
+
       it("should change icon color to blue when active state is true", () => {
         const items = testContext.wrapper.find(ToolbarItem);
         const toolbarItem = items.at(5).find("li");
@@ -354,6 +366,18 @@ describe("Toolbar Component", () => {
         const { url } = linkInstance.getData();
 
         expect(url).toEqual("http://www.globo.com");
+      });
+
+      it("(integration) Should not call preventDefault when is a input", () => {
+        const event = {
+          preventDefault: () => {},
+          target: { localName: "input" }
+        };
+        jest.spyOn(event, "preventDefault");
+
+        const wrapper = testContext.wrapper.find(".toolbar__wrapper");
+        wrapper.simulate("mouseDown", Object.assign(jest.fn(), event));
+        expect(event.preventDefault).not.toBeCalled();
       });
 
       it("(integration) LinkInput should remove an entity when ", () => {
