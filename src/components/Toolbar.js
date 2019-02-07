@@ -161,13 +161,6 @@ export default class Toolbar extends Component {
 
     if (currentContentState === newContentState) {
       this.shouldUpdatePos = true;
-      this.setState({
-        show: true
-      });
-    } else {
-      this.setState({
-        show: false
-      });
     }
   }
 
