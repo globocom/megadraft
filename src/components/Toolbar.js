@@ -93,7 +93,7 @@ export default class Toolbar extends Component {
         const { entity = "LINK" } = item;
         key = "entity-" + entity;
         toggle = () => this.toggleEntity(entity);
-        active = this.hasEntity(entity);
+        active = this.hasEntity(entity) || this.hasStyle(item.style);
         break;
       }
     }
@@ -160,13 +160,6 @@ export default class Toolbar extends Component {
 
     if (currentContentState === newContentState) {
       this.shouldUpdatePos = true;
-      this.setState({
-        show: true
-      });
-    } else {
-      this.setState({
-        show: false
-      });
     }
   }
 
@@ -193,6 +186,12 @@ export default class Toolbar extends Component {
       return contentState.getEntity(entityKey);
     }
     return null;
+  }
+
+  hasStyle(style) {
+    const current = this.props.editorState.getCurrentInlineStyle();
+    const withStyle = current.filter((val, key) => key.startsWith(style));
+    return withStyle.size > 0;
   }
 
   hasEntity(entityType) {
@@ -291,7 +290,10 @@ export default class Toolbar extends Component {
     );
   }
   render() {
-    if (this.props.readOnly) {
+    if (
+      this.props.readOnly &&
+      !this.props.shouldDisplayToolbarFn(this.props, this.state)
+    ) {
       return null;
     }
 
@@ -305,15 +307,17 @@ export default class Toolbar extends Component {
         className={toolbarClass}
         style={this.state.position}
         ref="toolbarWrapper"
-        onMouseDown={e => {
-          e.preventDefault();
-        }}
       >
         <div style={{ position: "absolute", bottom: 0 }}>
           <div
             className="toolbar__wrapper"
             ref={el => {
               this.toolbarEl = el;
+            }}
+            onMouseDown={e => {
+              if (e.target.localName !== "input") {
+                e.preventDefault();
+              }
             }}
           >
             {this.state.editingEntity
