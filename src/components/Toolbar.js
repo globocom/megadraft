@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import { EditorState, RichUtils } from "draft-js";
 import classNames from "classnames";
 import ToolbarItem from "./ToolbarItem";
-import { getSelectionCoords } from "../utils";
+import { getSelectionCoords, getSelectedBlocksMap } from "../utils";
 
 export default class Toolbar extends Component {
   static defaultProps = {
@@ -48,9 +48,23 @@ export default class Toolbar extends Component {
   }
 
   toggleBlockType(blockType) {
-    this.props.onChange(
-      RichUtils.toggleBlockType(this.props.editorState, blockType)
+    const { editorState } = this.props;
+    const currentContentState = editorState.getCurrentContent();
+    const selectedBlockMap = getSelectedBlocksMap(editorState);
+    const newBlockMap = selectedBlockMap.map(block => {
+      if (block.get("type") !== "atomic") {
+        return block.set("type", blockType);
+      }
+      return block;
+    });
+    const newContentState = currentContentState.set("blockMap", newBlockMap);
+    const newEditorState = EditorState.push(
+      editorState,
+      newContentState,
+      "change-block-type"
     );
+
+    this.props.onChange(newEditorState);
   }
 
   toggleEntity(entity) {

@@ -137,3 +137,17 @@ export function delayCall(fn, interval = 100) {
     timeout = window.setTimeout(() => fn.apply(window, args), interval);
   };
 }
+
+// credit: https://github.com/jpuri/draftjs-utils/blob/eca1508cf74c8b05ce7d3ab39ab28247cb254d5f/js/block.js#L13
+export function getSelectedBlocksMap(editorState) {
+  const selectionState = editorState.getSelection();
+  const contentState = editorState.getCurrentContent();
+  const startKey = selectionState.getStartKey();
+  const endKey = selectionState.getEndKey();
+  const blockMap = contentState.getBlockMap();
+  return blockMap
+    .toSeq()
+    .skipUntil((_, k) => k === startKey)
+    .takeUntil((_, k) => k === endKey)
+    .concat([[endKey, blockMap.get(endKey)]]);
+}
