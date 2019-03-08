@@ -108,7 +108,8 @@ describe("Toolbar Component", () => {
         icon: "svg"
       },
       { type: "custom", icon: "svg", action: jest.fn() },
-      { type: "custom", icon: "svg", action: jest.fn(), active: () => true }
+      { type: "custom", icon: "svg", action: jest.fn(), active: () => true },
+      { type: "custom", icon: "svg", action: jest.fn(), active: () => false }
     ];
 
     testContext.entityInputs = {
@@ -201,11 +202,15 @@ describe("Toolbar Component", () => {
         const items = testContext.wrapper.find(ToolbarItem);
         const toolbarItem = items.at(5).find("li");
         const toolbarItemActive = items.at(6).find("li");
+        const toolbarItemInactive = items.at(7).find("li");
 
         expect(toolbarItem.hasClass("toolbar__item--active")).toBeFalsy();
         expect(
           toolbarItemActive.hasClass("toolbar__item--active")
         ).toBeTruthy();
+        expect(
+          toolbarItemInactive.hasClass("toolbar__item--active")
+        ).toBeFalsy();
       });
     });
 
