@@ -198,19 +198,23 @@ describe("Toolbar Component", () => {
           testContext.wrapper.find(Toolbar).props().onChange
         );
       });
-      it("custom action handle the active state of button on toolbar", () => {
+
+      it("should change icon color to blue when active state is true", () => {
         const items = testContext.wrapper.find(ToolbarItem);
         const toolbarItem = items.at(5).find("li");
-        const toolbarItemActive = items.at(6).find("li");
-        const toolbarItemInactive = items.at(7).find("li");
-
         expect(toolbarItem.hasClass("toolbar__item--active")).toBeFalsy();
-        expect(
-          toolbarItemActive.hasClass("toolbar__item--active")
-        ).toBeTruthy();
-        expect(
-          toolbarItemInactive.hasClass("toolbar__item--active")
-        ).toBeFalsy();
+      });
+
+      it("should not change icon color when there is no active handle", () => {
+        const items = testContext.wrapper.find(ToolbarItem);
+        const toolbarItem = items.at(6).find("li");
+        expect(toolbarItem.hasClass("toolbar__item--active")).toBeTruthy();
+      });
+
+      it("should not change icon color to blue when active state is false", () => {
+        const items = testContext.wrapper.find(ToolbarItem);
+        const toolbarItem = items.at(7).find("li");
+        expect(toolbarItem.hasClass("toolbar__item--active")).toBeFalsy();
       });
     });
 
