@@ -67,6 +67,7 @@ export default class Toolbar extends Component {
       case "custom": {
         key = "custom-" + position;
         toggle = () => item.action(this.props.editorState, this.props.onChange);
+        active = item.active && item.active(this.props.editorState);
         break;
       }
       case "inline": {

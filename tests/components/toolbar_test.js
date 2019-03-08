@@ -107,7 +107,9 @@ describe("Toolbar Component", () => {
         entity: "FILE_LINK",
         icon: "svg"
       },
-      { type: "custom", icon: "svg", action: jest.fn() }
+      { type: "custom", icon: "svg", action: jest.fn() },
+      { type: "custom", icon: "svg", action: jest.fn(), active: () => true },
+      { type: "custom", icon: "svg", action: jest.fn(), active: () => false }
     ];
 
     testContext.entityInputs = {
@@ -195,6 +197,24 @@ describe("Toolbar Component", () => {
           editorState,
           testContext.wrapper.find(Toolbar).props().onChange
         );
+      });
+
+      it("should change icon color to blue when active state is true", () => {
+        const items = testContext.wrapper.find(ToolbarItem);
+        const toolbarItem = items.at(5).find("li");
+        expect(toolbarItem.hasClass("toolbar__item--active")).toBeFalsy();
+      });
+
+      it("should not change icon color when there is no active handle", () => {
+        const items = testContext.wrapper.find(ToolbarItem);
+        const toolbarItem = items.at(6).find("li");
+        expect(toolbarItem.hasClass("toolbar__item--active")).toBeTruthy();
+      });
+
+      it("should not change icon color to blue when active state is false", () => {
+        const items = testContext.wrapper.find(ToolbarItem);
+        const toolbarItem = items.at(7).find("li");
+        expect(toolbarItem.hasClass("toolbar__item--active")).toBeFalsy();
       });
     });
 

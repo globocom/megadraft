@@ -168,6 +168,9 @@ const customActions = [
     action() {
       // Here goes the code triggered on button click
     },
+    active() {
+      // Return a Boolean to handle the active state of button on Toolbar.
+    }
   },
 ];
 ```
