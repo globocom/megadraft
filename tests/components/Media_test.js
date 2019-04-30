@@ -10,6 +10,8 @@ import { mount } from "enzyme";
 import Media from "../../src/components/Media";
 import { editorStateFromRaw } from "../../src/utils";
 import DEFAULT_PLUGINS from "../../src/plugins/default";
+import i18nConfig from "../../src/i18n";
+import errorPlugin from "../../tests/plugins/error/plugin";
 
 describe("Media Component", () => {
   let testContext;
@@ -49,22 +51,28 @@ describe("Media Component", () => {
     const currentContent = testContext.blockProps.editorState.getCurrentContent();
     testContext.block = currentContent.getBlockForKey("9vgd");
 
-    testContext.wrapper = mount(
-      <Media blockProps={testContext.blockProps} block={testContext.block} />
-    );
-    testContext.component = testContext.wrapper.instance();
+    testContext.renderComponent = props => {
+      props = {
+        blockProps: testContext.blockProps,
+        block: testContext.block
+      };
+      return mount(<Media {...props} />);
+    };
   });
 
   it("renders without problems", () => {
-    expect(testContext.wrapper).toHaveLength(1);
+    const component = testContext.renderComponent();
+    expect(component).toHaveLength(1);
   });
 
   it("updates data and correct change-type enum", () => {
+    const component = testContext.renderComponent();
     let data = testContext.block.getData();
 
     expect(data.get("display")).toEqual("medium");
 
-    testContext.component.updateData({ display: "big" });
+    const instance = component.instance();
+    instance.updateData({ display: "big" });
 
     const editor = testContext.blockProps.onChange.mock.calls[0][0].toJS();
     const lastChangeType = editor.lastChangeType;
@@ -77,17 +85,35 @@ describe("Media Component", () => {
   });
 
   it("refreshes editor state", () => {
-    testContext.component.updateData({ display: "big" });
+    const component = testContext.renderComponent();
+    const instance = component.instance();
+    instance.updateData({ display: "big" });
     expect(testContext.blockProps.onChange).toHaveBeenCalled();
   });
 
   it("removes media component", () => {
-    testContext.component.remove();
+    const component = testContext.renderComponent();
+    const instance = component.instance();
+    instance.remove();
 
     const editorState = testContext.blockProps.onChange.mock.calls[0][0];
     const currentContent = editorState.getCurrentContent();
     const block = currentContent.getBlockForKey("9vgd");
 
     expect(block).toBeUndefined();
+  });
+
+  describe("ErrorBoundary", () => {
+    it("renders with problems", () => {
+      const blockProps = {};
+      blockProps.editorState = testContext.editorState;
+      blockProps.plugin = errorPlugin;
+      blockProps.i18n = i18nConfig["en-US"];
+      blockProps.onChange = jest.fn();
+      blockProps.getEditorState = () => testContext.editorState;
+
+      const component = testContext.renderComponent({ blockProps });
+      expect(component.find("ErrorBoundary")).toHaveLength(1);
+    });
   });
 });
