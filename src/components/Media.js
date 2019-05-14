@@ -7,6 +7,7 @@
 import React, { Component } from "react";
 import { EditorState, SelectionState, Modifier } from "draft-js";
 
+import ErrorBoundary from "./ErrorBoundary";
 import MediaWrapper from "./MediaWrapper";
 
 export default class Media extends Component {
@@ -82,18 +83,20 @@ export default class Media extends Component {
     } = this.props.blockProps;
     const Block = plugin.blockComponent;
     return (
-      <MediaWrapper
-        i18n={i18n}
-        setInitialReadOnly={setInitialReadOnly}
-        setReadOnly={setReadOnly}
-      >
-        <Block
+      <ErrorBoundary {...this.props} i18n={i18n} data={data} container={this}>
+        <MediaWrapper
           i18n={i18n}
-          data={data}
-          container={this}
-          blockProps={this.props.blockProps}
-        />
-      </MediaWrapper>
+          setInitialReadOnly={setInitialReadOnly}
+          setReadOnly={setReadOnly}
+        >
+          <Block
+            i18n={i18n}
+            data={data}
+            container={this}
+            blockProps={this.props.blockProps}
+          />
+        </MediaWrapper>
+      </ErrorBoundary>
     );
   }
 }
