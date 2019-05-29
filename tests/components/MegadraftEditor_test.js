@@ -686,7 +686,7 @@ describe("MegadraftEditor Component", () => {
       editorHasFocus: false,
       hideSidebarOnBlur: false
     };
-    expect(renderCustomSidebar).toBeCalledWith(expectedProps);
+    expect(renderCustomSidebar).toHaveBeenCalledWith(expectedProps);
   });
 
   it("renders custom sidebar if sidebarRendererFn is provided", () => {

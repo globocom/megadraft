@@ -246,7 +246,7 @@ describe("Toolbar Component", () => {
 
         const wrapper = testContext.wrapper.find(".toolbar__wrapper");
         wrapper.simulate("mouseDown", Object.assign(jest.fn(), event));
-        expect(event.preventDefault).toBeCalled();
+        expect(event.preventDefault).toHaveBeenCalled();
       });
 
       it("should change icon color to blue when active state is true", () => {
@@ -439,7 +439,7 @@ describe("Toolbar Component", () => {
 
         const wrapper = testContext.wrapper.find(".toolbar__wrapper");
         wrapper.simulate("mouseDown", Object.assign(jest.fn(), event));
-        expect(event.preventDefault).not.toBeCalled();
+        expect(event.preventDefault).not.toHaveBeenCalled();
       });
 
       it("(integration) LinkInput should remove an entity when ", () => {

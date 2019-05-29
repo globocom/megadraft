@@ -7,10 +7,12 @@
 import React from "react";
 import { Link } from "react-router";
 
-import Divider from "material-ui/Divider";
-import Drawer from "material-ui/Drawer";
-import { List, ListItem } from "material-ui/List";
-import Subheader from "material-ui/Subheader";
+import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListSubheader from "@material-ui/core/ListSubheader";
+
 import { darkBlack } from "material-ui/styles/colors";
 
 export default class LeftNavMenu extends React.Component {
@@ -48,7 +50,7 @@ export default class LeftNavMenu extends React.Component {
           </List>
           <Divider />
           <List>
-            <Subheader>Resources</Subheader>
+            <ListSubheader>Resources</ListSubheader>
             <ListItem
               primaryTogglesNestedList={true}
               nestedItems={[
