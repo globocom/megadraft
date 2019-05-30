@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const defaultConfig = {
+  mode: process.env.NODE_ENV || "production",
   entry: ["./website/index.js"],
   output: {
     path: __dirname + "/website/",

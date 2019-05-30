@@ -66,8 +66,9 @@
     "rimraf": "^2.5.2",
     "svgo": "^1.0.3",
     "utils-copy": "^1.1.1",
-    "webpack": "^3.5.5",
-    "webpack-dev-server": "^2.7.1"
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.4.1"
   },
   "peerDependencies": {
     "react": "^15.6.1 || ^16.1.0",

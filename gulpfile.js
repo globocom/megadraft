@@ -87,6 +87,7 @@ const devServer = gulp.parallel([siteSass, siteWatch], function devServer() {
 
 exports.sass = sass;
 exports["sass-copy"] = sassCopy;
+exports["site-sass"] = siteSass;
 exports["site-watch"] = siteWatch;
 exports["dev-server"] = devServer;
 
