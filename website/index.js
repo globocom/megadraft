@@ -64,38 +64,40 @@ class Page extends React.Component {
     return (
       <ThemeProvider theme={theme}>
         <Header />
-        <LinkScroll
-          className="hero__call-to-action"
-          to="appbar"
-          spy={true}
-          smooth={true}
-          duration={600}
-        >
-          LET'S ROCK
-          <div className="hero__arrow-call-to-action">
-            <LetsRockArrow />
+        <StickyContainer>
+          <LinkScroll
+            className="hero__call-to-action"
+            to="appbar"
+            spy={true}
+            smooth={true}
+            duration={600}
+          >
+            LET'S ROCK
+            <div className="hero__arrow-call-to-action">
+              <LetsRockArrow />
+            </div>
+          </LinkScroll>
+
+          <MenuBar
+            showLeft={!!content}
+            background={content ? common.white : common.black}
+          >
+            <Grid container justify="flex-end">
+              <Button
+                onClick={this.handleClick}
+                style={{
+                  color: content ? "inherit" : yellow[600]
+                }}
+              >
+                {content ? "VIEW CONTENT JSON" : "EDITOR"}
+              </Button>
+            </Grid>
+          </MenuBar>
+
+          <div className={content ? "" : "container--dark"}>
+            <Example activeContent={content} />
           </div>
-        </LinkScroll>
-
-        <MenuBar
-          showLeft={!!content}
-          background={content ? common.white : common.black}
-        >
-          <Grid container justify="flex-end">
-            <Button
-              onClick={this.handleClick}
-              style={{
-                color: content ? "inherit" : yellow[600]
-              }}
-            >
-              {content ? "VIEW CONTENT JSON" : "EDITOR"}
-            </Button>
-          </Grid>
-        </MenuBar>
-
-        <div className={content ? "" : "container--dark"}>
-          <Example activeContent={content} />
-        </div>
+        </StickyContainer>
       </ThemeProvider>
     );
   }
@@ -103,12 +105,10 @@ class Page extends React.Component {
 
 ReactDOM.render(
   <HashRouter history={hashHistory}>
-    <StickyContainer>
-      <Switch>
-        <Route path="/docs/:doc" component={Docs} />
-        <Route path="/" component={Page} exact />
-      </Switch>
-    </StickyContainer>
+    <Switch>
+      <Route path="/docs/:doc" component={Docs} />
+      <Route path="/" component={Page} exact />
+    </Switch>
   </HashRouter>,
   document.getElementById("react-container")
 );
