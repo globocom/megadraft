@@ -44,8 +44,8 @@ export default class Docs extends React.Component {
     const { doc } = match.params;
     return (
       <div>
-        <MenuBar showLeft={true} />
         <StickyContainer>
+          <MenuBar showLeft={true} />
           <div className="container--light">
             <div className="page__content docs">
               <ReactMarkdown source={DOCS[doc]} />
