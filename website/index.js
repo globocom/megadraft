@@ -13,8 +13,7 @@ import { StickyContainer } from "react-sticky";
 
 import { ThemeProvider } from "@material-ui/styles";
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import { common, yellow } from "@material-ui/core/colors";
+import { common } from "@material-ui/core/colors";
 
 import MenuBar from "./components/menubar";
 import Docs from "./components/docs";
@@ -23,6 +22,7 @@ import Example from "./components/example";
 import Header from "./components/header";
 import { highlightCode } from "./components/highlightCode";
 import LetsRockArrow from "./components/icons/arrow-down";
+import ToggleButton from "./components/toggleButton";
 
 const LinkScroll = Scroll.Link;
 const scroller = Scroll.scroller;
@@ -83,14 +83,12 @@ class Page extends React.Component {
             background={content ? common.white : common.black}
           >
             <Grid container justify="flex-end">
-              <Button
+              <ToggleButton
                 onClick={this.handleClick}
-                style={{
-                  color: content ? "inherit" : yellow[600]
-                }}
+                color={content ? "inherit" : "yellow"}
               >
                 {content ? "VIEW CONTENT JSON" : "EDITOR"}
-              </Button>
+              </ToggleButton>
             </Grid>
           </MenuBar>
 
