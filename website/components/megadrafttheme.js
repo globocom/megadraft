@@ -4,15 +4,15 @@
  * License: MIT
  */
 
-import Spacing from "material-ui/styles/spacing";
-import zIndex from "material-ui/styles/zIndex";
-import { darkBlack, grey900 } from "material-ui/styles/colors";
+import { grey } from "@material-ui/core/colors";
 
-export default {
-  spacing: Spacing,
-  zIndex: zIndex,
+import { createMuiTheme } from "@material-ui/core/styles";
+
+const theme = createMuiTheme({
   palette: {
-    primary1Color: darkBlack,
-    accent1Color: grey900
+    primary1Color: grey[900],
+    accent1Color: grey[900]
   }
-};
+});
+
+export default theme;

@@ -6,7 +6,6 @@
     "react/react-in-jsx-scope": 2,
 
     "curly": [2],
-    "linebreak-style": [2, "unix"],
     "no-unused-vars": [2, {"vars": "all", "args": "none"}],
     "no-console": [0],
     "prettier/prettier": "error"

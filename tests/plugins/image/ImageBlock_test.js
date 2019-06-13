@@ -60,13 +60,15 @@ describe("ImageBlock", () => {
   it("updates entity on caption change", () => {
     testContext.caption.getDOMNode().value = "new caption";
     testContext.caption.simulate("change");
-    expect(testContext.updateData).toBeCalledWith({ caption: "new caption" });
+    expect(testContext.updateData).toHaveBeenCalledWith({
+      caption: "new caption"
+    });
   });
 
   it("updates entity on rightsHolder change", () => {
     testContext.rights.getDOMNode().value = "new rights";
     testContext.rights.simulate("change");
-    expect(testContext.updateData).toBeCalledWith({
+    expect(testContext.updateData).toHaveBeenCalledWith({
       rightsHolder: "new rights"
     });
   });

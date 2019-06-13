@@ -6,14 +6,11 @@
 
 const gulp = require("gulp");
 const gutil = require("gulp-util");
-const sass = require("gulp-sass");
+const gulpSass = require("gulp-sass");
 const autoprefixer = require("gulp-autoprefixer");
 const webpack = require("webpack");
 const WebpackDevServer = require("webpack-dev-server");
 const webpackConfig = require("./webpack.config.js");
-
-// The development server (the recommended option for development)
-gulp.task("default", ["dev-server"]);
 
 const host = "localhost";
 const port = 8080;
@@ -40,34 +37,34 @@ const hookStream = function(stream, data, cb) {
   };
 };
 
-gulp.task("sass", function() {
+function sass() {
   return gulp
     .src("./src/styles/**/*.scss")
-    .pipe(sass.sync({ outputStyle: "expanded" }).on("error", sass.logError))
+    .pipe(
+      gulpSass.sync({ outputStyle: "expanded" }).on("error", gulpSass.logError)
+    )
     .pipe(autoprefixer())
     .pipe(gulp.dest("./dist/css"));
-});
+}
 
-gulp.task("sass-copy", function() {
+function sassCopy() {
   return gulp.src("./src/styles/**/*.scss").pipe(gulp.dest("./lib/styles"));
-});
+}
 
-gulp.task("site-sass", function() {
+function siteSass(done) {
   return gulp
     .src("./website/styles/*.scss")
-    .pipe(sass.sync().on("error", sass.logError))
+    .pipe(gulpSass.sync().on("error", gulpSass.logError))
     .pipe(autoprefixer())
     .pipe(gulp.dest("./website/styles/"));
-});
+}
 
-gulp.task("site-watch", function() {
-  gulp.watch("./src/styles/**/*.scss", ["site-sass"]);
-  gulp.watch("./website/styles/*.scss", ["site-sass"]);
-});
+function siteWatch() {
+  gulp.watch("./src/styles/**/*.scss", siteSass);
+  gulp.watch("./website/styles/*.scss", siteSass);
+}
 
-gulp.task("dev-server", function(callback) {
-  gulp.start("site-sass");
-  gulp.start("site-watch");
+const devServer = gulp.parallel([siteSass, siteWatch], function devServer() {
   // Start a webpack-dev-server
   new WebpackDevServer(webpack(webpackConfig), {
     stats: {
@@ -87,3 +84,12 @@ gulp.task("dev-server", function(callback) {
     }
   });
 });
+
+exports.sass = sass;
+exports["sass-copy"] = sassCopy;
+exports["site-sass"] = siteSass;
+exports["site-watch"] = siteWatch;
+exports["dev-server"] = devServer;
+
+// The development server (the recommended option for development)
+exports.default = devServer;

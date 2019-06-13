@@ -6,7 +6,9 @@
 
 import React from "react";
 import Scroll from "react-scroll";
+import { StickyContainer } from "react-sticky";
 
+import MenuBar from "./menubar";
 import Overview from "../../docs/overview.md";
 import Customization from "../../docs/customization.md";
 import Plugins from "../../docs/plugins.md";
@@ -38,12 +40,18 @@ export default class Docs extends React.Component {
   }
 
   render() {
-    const { doc } = this.props.params;
+    const { match } = this.props;
+    const { doc } = match.params;
     return (
-      <div className="container--light">
-        <div className="page__content docs">
-          <ReactMarkdown source={DOCS[doc]} />
-        </div>
+      <div>
+        <StickyContainer>
+          <MenuBar showLeft={true} />
+          <div className="container--light">
+            <div className="page__content docs">
+              <ReactMarkdown source={DOCS[doc]} />
+            </div>
+          </div>
+        </StickyContainer>
       </div>
     );
   }

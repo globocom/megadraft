@@ -5,10 +5,6 @@
  */
 
 import React from "react";
-import PropTypes from "prop-types";
-
-import getMuiTheme from "material-ui/styles/getMuiTheme";
-import { grey300, grey900, white, indigo500 } from "material-ui/styles/colors";
 
 import { MegadraftEditor } from "../../src/Megadraft";
 import { editorStateToJSON, editorStateFromRaw } from "../../src/utils";
@@ -19,18 +15,6 @@ import INITIAL_CONTENT from "./contentExample";
 import relatedArticles from "megadraft-related-articles-plugin";
 import image from "../../src/plugins/image/plugin";
 import video from "../../src/plugins/video/plugin";
-
-const muiTheme = getMuiTheme({
-  fontFamily: "Roboto, sans-serif",
-  tabs: {
-    textColor: grey300,
-    selectedTextColor: grey900
-  },
-  palette: {
-    primary1Color: white,
-    accent1Color: indigo500
-  }
-});
 
 class Example extends React.Component {
   constructor(props) {
@@ -52,12 +36,7 @@ class Example extends React.Component {
       value: content
     };
     this.onChange = ::this.onChange;
-    this.onCodeActive = ::this.onCodeActive;
     this.maxSidebarButtons = null;
-  }
-
-  getChildContext() {
-    return { muiTheme: getMuiTheme(muiTheme) };
   }
 
   componentDidMount() {
@@ -72,10 +51,6 @@ class Example extends React.Component {
 
   onSave() {
     console.log("save");
-  }
-
-  onCodeActive() {
-    highlightCode(this);
   }
 
   renderEditor() {
@@ -122,9 +97,5 @@ class Example extends React.Component {
 
 /* global hljs */
 hljs.initHighlightingOnLoad();
-
-Example.childContextTypes = {
-  muiTheme: PropTypes.object.isRequired
-};
 
 export default Example;
