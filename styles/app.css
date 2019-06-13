@@ -62,12 +62,10 @@ table {
     Base styles
 */
 html {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box; }
+  box-sizing: border-box; }
 
 *, *::before, *::after {
-  -webkit-box-sizing: inherit;
-          box-sizing: inherit; }
+  box-sizing: inherit; }
 
 body {
   -webkit-font-smoothing: antialiased;
@@ -152,8 +150,7 @@ body {
   text-decoration: none;
   left: 50%;
   text-shadow: 1px 1px 3px #333;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%); }
+  transform: translateX(-50%); }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   .hero__call-to-action {
@@ -166,8 +163,7 @@ body {
     text-decoration: none;
     left: 50%;
     text-shadow: 1px 1px 3px #333;
-    -webkit-transform: translateX(-50%);
-            transform: translateX(-50%); }
+    transform: translateX(-50%); }
   .hero__arrow-call-to-action {
     font-weight: bold;
     position: relative;
@@ -177,8 +173,7 @@ body {
     text-decoration: none;
     left: 50%;
     text-shadow: 1px 1px 3px #333;
-    -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
+    transform: translateX(-50%);
     height: 149px;
     width: 147px; } }
 
@@ -193,8 +188,7 @@ body {
     text-decoration: none;
     left: 50%;
     text-shadow: 1px 1px 3px #333;
-    -webkit-transform: translateX(-50%);
-            transform: translateX(-50%); }
+    transform: translateX(-50%); }
   .hero__arrow-call-to-action {
     font-weight: bold;
     position: relative;
@@ -204,8 +198,7 @@ body {
     text-decoration: none;
     left: 50%;
     text-shadow: 1px 1px 3px #333;
-    -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
+    transform: translateX(-50%);
     height: 149px;
     width: 147px; } }
 
@@ -218,8 +211,7 @@ body {
   text-decoration: none;
   left: 50%;
   text-shadow: 1px 1px 3px #333;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
   height: 100px;
   width: 68px; }
 
@@ -306,7 +298,6 @@ body {
     cursor: pointer;
     font-size: 0;
     padding: 0;
-    -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     position: relative;
     background: none;
@@ -343,19 +334,13 @@ body {
       z-index: 10;
       padding-top: 9px; }
   .megadraft-modal__items {
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    display: -webkit-box;
-    display: -ms-flexbox;
+    flex-wrap: wrap;
     display: flex;
-    -webkit-box-pack: start;
-        -ms-flex-pack: start;
-            justify-content: flex-start;
+    justify-content: flex-start;
     margin: -24px; }
   .megadraft-modal__items .megadraft-modal__button {
     background: none; }
     .megadraft-modal__items .megadraft-modal__button:before {
-      -webkit-transition: all 0.1s ease-in-out;
       transition: all 0.1s ease-in-out;
       background-color: #181818; }
   .megadraft-modal__item {
@@ -483,7 +468,6 @@ body {
       font-size: 0;
       padding: 0;
       width: 32px;
-      -webkit-transition: all 0.5s ease;
       transition: all 0.5s ease;
       position: relative;
       background: none;
@@ -498,8 +482,7 @@ body {
         .megadraft-editor .sidemenu__button:before:hover {
           background-color: #333333; }
       .megadraft-editor .sidemenu__button--open {
-        -webkit-transform: rotate(45deg);
-                transform: rotate(45deg); }
+        transform: rotate(45deg); }
         .megadraft-editor .sidemenu__button--open:before {
           background-color: #0669de; }
       .megadraft-editor .sidemenu__button__icon {
@@ -512,7 +495,6 @@ body {
       padding: 0;
       margin-top: 8px;
       padding-top: 2px;
-      -webkit-transition: max-height 0.5s ease;
       transition: max-height 0.5s ease;
       overflow: hidden;
       max-height: 0;
@@ -521,12 +503,10 @@ body {
     .megadraft-editor .sidemenu__items .sidemenu__button {
       background: none; }
       .megadraft-editor .sidemenu__items .sidemenu__button:before {
-        -webkit-transition: all 0.1s ease-in-out;
         transition: all 0.1s ease-in-out;
         background-color: #181818; }
       .megadraft-editor .sidemenu__items .sidemenu__button:hover:before {
-        -webkit-transform: scale(1.125);
-                transform: scale(1.125); }
+        transform: scale(1.125); }
     .megadraft-editor .sidemenu__item {
       height: 40px; }
   .megadraft-editor .toolbar {
@@ -541,7 +521,6 @@ body {
       margin: 0;
       height: 0;
       height: 0;
-      -webkit-transition: height 0.2s ease-in-out;
       transition: height 0.2s ease-in-out; }
     .megadraft-editor .toolbar--error .toolbar__wrapper {
       background-color: #E83F26; }
@@ -567,11 +546,9 @@ body {
     .megadraft-editor .toolbar__wrapper {
       background-color: #181818;
       border-radius: 4px;
-      -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
-              box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
       left: -50%;
       position: relative;
-      -webkit-transition: background-color 0.2s ease-in-out;
       transition: background-color 0.2s ease-in-out; }
     .megadraft-editor .toolbar__list {
       padding: 0 8px;
@@ -589,7 +566,6 @@ body {
       border-style: solid;
       border-color: #181818 transparent transparent;
       margin-left: -8px;
-      -webkit-transition: border-color 0.2s ease-in-out;
       transition: border-color 0.2s ease-in-out; }
     .megadraft-editor .toolbar__item {
       display: inline-block;
@@ -640,8 +616,7 @@ body {
     background-color: #fff;
     border-radius: 3px;
     border: solid 1px #ddd;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-            box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1); }
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1); }
   .megadraft-editor .block__controls {
     overflow: auto;
     padding: 8px; }
@@ -753,8 +728,7 @@ body {
     font-weight: bold;
     z-index: 10; }
     .megadraft-editor .dropdown__wrapper--open {
-      -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-              box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
       color: #333; }
   .megadraft-editor .dropdown {
     display: none;
@@ -768,8 +742,7 @@ body {
     margin-left: 5px;
     vertical-align: middle; }
     .megadraft-editor .dropdown__arrow--open {
-      -webkit-transform: rotate(180deg);
-              transform: rotate(180deg); }
+      transform: rotate(180deg); }
   .megadraft-editor .dropdown__option {
     color: #999; }
     .megadraft-editor .dropdown__option:hover {
@@ -906,8 +879,7 @@ body {
 
 .docs pre {
   color: rgba(0, 0, 0, 0.87);
-  -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
-          box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
   border-radius: 2px;
   background-color: #FFF; }
 
@@ -922,8 +894,7 @@ body {
   color: #d14;
   margin: 0 2px;
   font-family: monospace;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.08) 0 1px 1px;
-          box-shadow: rgba(0, 0, 0, 0.08) 0 1px 1px; }
+  box-shadow: rgba(0, 0, 0, 0.08) 0 1px 1px; }
 
 .content {
   background-color: #fafafa; }
@@ -941,8 +912,7 @@ body {
 .related-articles {
   background-color: #fff;
   border-radius: 2px;
-  -webkit-box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2);
   margin-top: 16px;
   display: table;
   table-layout: fixed;
@@ -960,19 +930,16 @@ body {
 .related-articles__inputs {
   display: table-cell;
   padding: 16px 24px 24px 24px;
-  -webkit-transition: padding 0.35s ease-in-out;
   transition: padding 0.35s ease-in-out; }
 
 .related-articles__trash {
   border-radius: 2px;
-  -webkit-box-shadow: -1px 0 0 0 #dddddd;
-          box-shadow: -1px 0 0 0 #dddddd;
+  box-shadow: -1px 0 0 0 #dddddd;
   color: #999;
   cursor: pointer;
   display: table-cell;
   line-height: 0;
   overflow: hidden;
-  -webkit-transition: width 0.35s ease-in-out;
   transition: width 0.35s ease-in-out;
   vertical-align: middle;
   width: 0; }
