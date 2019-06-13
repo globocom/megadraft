@@ -17,6 +17,7 @@ module.exports = makeConfig({
     })
   ],
   output: {
+    path: __dirname,
     filename: "./bundle.[chunkhash:8].js"
   }
 });
