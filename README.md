@@ -89,3 +89,5 @@ licensed under [CC-BY](https://creativecommons.org/licenses/by/2.0/).
 [docs-saving-loading]: http://globocom.github.io/megadraft/#/docs/saving-loading
 [megadraft-slack]: https://draftjs.slack.com/messages/megadraft/
 [draftjs-slack]: https://draftjs.herokuapp.com
+
+My changes. 
