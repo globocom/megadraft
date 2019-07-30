@@ -39,6 +39,18 @@ describe("BlockInput Component", () => {
     expect(domInput.value).toEqual("non-empty");
   });
 
+  it("renders input as default type attribute", () => {
+    const component = testContext.renderComponent({});
+    const input = component.find("input");
+    expect(input.prop("type")).toEqual("text");
+  });
+
+  it("renders input as custom type attribute", () => {
+    const component = testContext.renderComponent({ type: "url" });
+    const input = component.find("input");
+    expect(input.prop("type")).toEqual("url");
+  });
+
   it("hides error text when there is no error", () => {
     const component = testContext.renderComponent({ value: "non-empty" });
     const elements = component.find(".block__input__error-text");
