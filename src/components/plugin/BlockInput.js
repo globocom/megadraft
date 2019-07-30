@@ -40,7 +40,7 @@ export default class BlockInput extends Component {
           <input
             {...props}
             value={value}
-            type="text"
+            type={props.type || "text"}
             className={className}
             onDrop={this._handleDrop}
           />
