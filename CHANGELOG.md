@@ -4,10 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.6.6 - 2019-07-31
+### Added
+- Allow BlockInput component to be rendered with custom `type` attribute (#244)
+
 ## 0.6.5 - 2019-05-23
-###Fixed
+### Fixed
 - Conditionally prevent default on toolbar mousedown when not input (#233)
-###Modified
+### Modified
 - Allow optional shouldDisplayToolbarFn more control over rendering the toolbar (#233)
 - Remove state changes in component will receive props (#233)
 
