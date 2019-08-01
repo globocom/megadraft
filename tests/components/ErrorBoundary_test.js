@@ -44,4 +44,17 @@ describe("ErrorBoundary Component", () => {
       "Something went wrong in component 'foo'. My Error"
     );
   });
+
+  it("renders error if component type is not defined", () => {
+    const props = {
+      i18n: i18nConfig["en-US"],
+      container: { remove: jest.fn() },
+      data: {}
+    };
+    const component = testContext.renderComponent(props);
+    component.setState({ errorInfo: true });
+    expect(component.find("MediaMessage").props().text).toEqual(
+      "Something went wrong with the component type."
+    );
+  });
 });

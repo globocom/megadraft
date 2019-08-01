@@ -8,6 +8,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import icons from "../../../src/icons";
 import NotFoundBlock from "../../../src/plugins/not-found/NotFoundBlock";
+import i18nConfig from "../../../src/i18n";
 
 describe("NotFoundBlock Component", () => {
   let testContext;
@@ -17,10 +18,7 @@ describe("NotFoundBlock Component", () => {
 
     testContext.renderComponent = props => {
       props = props || {
-        i18n: {
-          "Can't show plugin, component {{type}} not found.":
-            "Can't show plugin, component {{type}} not found."
-        },
+        i18n: i18nConfig["en-US"],
         container: { remove: jest.fn() },
         data: { type: "foo" }
       };
@@ -42,6 +40,17 @@ describe("NotFoundBlock Component", () => {
     const wrapper = testContext.renderComponent();
     expect(wrapper.find("MediaMessage").props().text).toEqual(
       "Can't show plugin, component foo not found."
+    );
+  });
+  it("should render message even without a type", () => {
+    const props = {
+      i18n: i18nConfig["en-US"],
+      container: { remove: jest.fn() },
+      data: {}
+    };
+    const wrapper = testContext.renderComponent(props);
+    expect(wrapper.find("MediaMessage").props().text).toEqual(
+      "Can't show plugin, component not found."
     );
   });
 });
