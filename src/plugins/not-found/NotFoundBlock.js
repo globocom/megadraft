@@ -25,11 +25,14 @@ class NotFoundBlock extends Component {
   }
 
   render() {
-    const { i18n } = this.props;
-    const text = replaceData(
-      i18n["Can't show plugin, component {{type}} not found."],
-      { type: this.props.data.type.toString() }
-    );
+    const {
+      i18n,
+      data: { type }
+    } = this.props;
+    const errorMsg = type
+      ? "Can't show plugin, component {{type}} not found."
+      : "Can't show plugin, component not found.";
+    const text = replaceData(i18n[errorMsg], { type: type && type.toString() });
     return (
       <CommonBlock {...this.props} actions={this.actions}>
         <BlockContent className="block__notfound">
