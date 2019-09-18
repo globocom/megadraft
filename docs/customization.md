@@ -54,6 +54,7 @@ Here are the props that `MegadraftEditor` accepts:
            "Block List": "Block List"
         }
 - `hideSidebarOnBlur`: (optional) boolean, default false. Hide Sidebar on blur.
+- `movableBlocks`: (optional) boolean, default false. Allows reorder blocks.
 
 Check the following sections for more info.
 
