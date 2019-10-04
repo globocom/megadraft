@@ -155,7 +155,7 @@ export default class Toolbar extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const currentContentState = this.props.editorState.getCurrentContent();
     const newContentState = nextProps.editorState.getCurrentContent();
 

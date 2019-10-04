@@ -233,7 +233,7 @@ describe("Toolbar Component", () => {
 
         const toolbar = wrapper.find(Toolbar);
         const nextProps = { editorState: { getCurrentContent: () => "blah" } };
-        toolbar.instance().componentWillReceiveProps(nextProps);
+        toolbar.instance().UNSAFE_componentWillReceiveProps(nextProps);
         expect(toolbar.instance().state.show).toBeTruthy();
       });
 
