@@ -106,10 +106,12 @@ export default class MegadraftEditor extends Component {
     return pluginsByType;
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (this.props.readOnly !== nextProps.readOnly) {
-      this.setState({ readOnly: nextProps.readOnly });
+  static getDerivedStateFromProps(props, state) {
+    if (state.readOnly !== props.readOnly) {
+      return { readOnly: props.readOnly };
     }
+
+    return null;
   }
 
   onChange(editorState) {
