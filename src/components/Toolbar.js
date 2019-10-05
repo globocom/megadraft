@@ -30,7 +30,9 @@ export default class Toolbar extends Component {
       show: false,
       editingEntity: null,
       link: "",
-      error: null
+      error: null,
+      shouldUpdatePos: false,
+      currentContentState: props.editorState
     };
     this.renderButton = ::this.renderButton;
     this.cancelEntity = ::this.cancelEntity;
@@ -141,7 +143,7 @@ export default class Toolbar extends Component {
 
   handleSetToolbar() {
     if (this.props.shouldDisplayToolbarFn(this.props, this.state)) {
-      this.shouldUpdatePos = false;
+      this.setState({ shouldUpdatePos: false });
       return this.setBarPosition();
     } else {
       if (this.state.show) {
@@ -155,17 +157,23 @@ export default class Toolbar extends Component {
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const currentContentState = this.props.editorState.getCurrentContent();
-    const newContentState = nextProps.editorState.getCurrentContent();
+  static getDerivedStateFromProps(props, state) {
+    const currentContentState =
+      state.currentContentState.getCurrentContent &&
+      state.currentContentState.getCurrentContent();
+    const newContentState =
+      props.editorState.getCurrentContent &&
+      props.editorState.getCurrentContent();
 
     if (currentContentState === newContentState) {
-      this.shouldUpdatePos = true;
+      return { currentContentState: newContentState, shouldUpdatePos: true };
     }
+
+    return null;
   }
 
   componentDidUpdate() {
-    if (this.shouldUpdatePos) {
+    if (this.state.shouldUpdatePos) {
       this.handleSetToolbar();
     }
   }

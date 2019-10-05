@@ -231,10 +231,9 @@ describe("Toolbar Component", () => {
         );
         wrapper.update();
 
-        const toolbar = wrapper.find(Toolbar);
         const nextProps = { editorState: { getCurrentContent: () => "blah" } };
-        toolbar.instance().UNSAFE_componentWillReceiveProps(nextProps);
-        expect(toolbar.instance().state.show).toBeTruthy();
+        wrapper.setProps("children", () => <ToolbarWrapper {...nextProps} />);
+        expect(wrapper.state().show).not.toBeDefined(); // Undefined means that state didn`t change
       });
 
       it("should call preventDefault when active a state", () => {
