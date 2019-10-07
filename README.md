@@ -1,5 +1,12 @@
-# Megadraft [![Build Status](https://secure.travis-ci.org/globocom/megadraft.png?branch=master)](https://travis-ci.org/globocom/megadraft) [![npm version](https://img.shields.io/npm/v/megadraft.svg?style=flat)](https://www.npmjs.com/package/megadraft)
-
+<p align="center"> 
+<a href=http://megadraft.io/#/><img src="/website/images/md-logo-opm.svg" width=200px;/> 
+<br>                                                                           
+<a href="https://travis-ci.org/globocom/megadraft"><img src="https://secure.travis-ci.org/globocom/megadraft.png?branch=master"/></a>
+<a href="https://www.npmjs.com/package/megadraft"><img src="https://img.shields.io/npm/v/megadraft.svg?style=flat"/></a>
+</br>                                                                                                            
+</p>
+                                                                                                                 
+# Megadraft
 Rich Text editor built on top of [Facebook's draft.js](https://github.com/facebook/draft-js)
 
 ## Discussion and Support
@@ -48,8 +55,10 @@ Megadraft depends on [Sass](http://sass-lang.com/) to build style assets.
 
 ## Importing the default styles
 
-Megadraft ships with a default styling available at this location in the installed package: node_modules/megadraft/dist/css/megadraft.css.
-
+Megadraft ships with a default styling available at this location in the installed package:
+```
+node_modules/megadraft/dist/css/megadraft.css
+```
 
 ## Documentation
 
