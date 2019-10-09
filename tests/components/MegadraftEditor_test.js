@@ -461,6 +461,7 @@ describe("MegadraftEditor Component", () => {
   it("changes readOnly status", () => {
     const items = testContext.wrapper.find(Editor);
     testContext.component.setReadOnly(true);
+
     expect(items.instance().props.readOnly).toBeTruthy();
   });
 
