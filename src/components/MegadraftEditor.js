@@ -107,11 +107,12 @@ export default class MegadraftEditor extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
+    if (props.readOnly === undefined) {
+      return null;
+    }
     if (state.readOnly !== props.readOnly) {
       return { readOnly: props.readOnly };
     }
-
-    return null;
   }
 
   onChange(editorState) {

@@ -166,7 +166,11 @@ export default class Toolbar extends Component {
       props.editorState.getCurrentContent();
 
     if (currentContentState === newContentState) {
-      return { currentContentState: newContentState, shouldUpdatePos: true };
+      return {
+        ...state,
+        currentContentState: newContentState,
+        shouldUpdatePos: true
+      };
     }
 
     return null;
