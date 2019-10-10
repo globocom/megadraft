@@ -15,6 +15,7 @@ import {
 import defaultDecorator from "./decorators/defaultDecorator";
 
 export function editorStateToJSON(editorState) {
+  "use strict";
   if (editorState) {
     const content = editorState.getCurrentContent();
     return JSON.stringify(convertToRaw(content), null, 2);
@@ -22,6 +23,7 @@ export function editorStateToJSON(editorState) {
 }
 
 export function editorStateFromRaw(rawContent, decorator = defaultDecorator) {
+  "use strict";
   if (rawContent) {
     const content = convertFromRaw(rawContent);
     return EditorState.createWithContent(content, decorator);
@@ -31,6 +33,7 @@ export function editorStateFromRaw(rawContent, decorator = defaultDecorator) {
 }
 
 export function getSelectedBlockElement(range) {
+  "use strict";
   let node = range.startContainer;
   do {
     try {
@@ -49,6 +52,7 @@ export function getSelectedBlockElement(range) {
 }
 
 export function getSelectionCoords(editor, toolbar) {
+  "use strict";
   const editorBounds = editor.getBoundingClientRect();
   const win = editor.ownerDocument.defaultView || window;
   const rangeBounds = getVisibleSelectionRect(win);
@@ -98,6 +102,7 @@ export function getSelectionCoords(editor, toolbar) {
 }
 
 export function createTypeStrategy(type) {
+  "use strict";
   return (contentBlock, callback, contentState) => {
     contentBlock.findEntityRanges(character => {
       const entityKey = character.getEntity();
@@ -129,6 +134,7 @@ export function createTypeStrategy(type) {
  * @returns {void}
  */
 export function delayCall(fn, interval = 100) {
+  "use strict";
   let timeout;
   return function(...args) {
     if (timeout) {
