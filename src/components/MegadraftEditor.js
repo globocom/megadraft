@@ -387,10 +387,39 @@ export default class MegadraftEditor extends Component {
   render() {
     const hideSidebarOnBlur = this.props.hideSidebarOnBlur || false;
     const i18n = this.props.i18n[this.props.language];
+    let classEditor = "megadraft-editor";
+    let contentState = this.props.editorState.getCurrentContent();
+
+    // If the user changes block type before entering any text, we can
+    // either style the placeholder or hide it.
+    // Class with styling to spacing placeholder.
+    if (!contentState.hasText()) {
+      switch (
+        contentState
+          .getBlockMap()
+          .first()
+          .getType()
+      ) {
+        case "ordered-list-item":
+        case "unordered-list-item":
+          classEditor += " placeholder-list";
+          break;
+        case "header-two":
+          classEditor += " placeholder-header-two";
+          break;
+        case "blockquote":
+          classEditor += " placeholder-blockquote";
+          break;
+        default:
+          classEditor += "";
+          break;
+      }
+    }
+
     return (
       <div className="megadraft">
         <div
-          className="megadraft-editor"
+          className={classEditor}
           id={this.props.id || "megadraft-editor"}
           ref={el => {
             this.editorEl = el;
