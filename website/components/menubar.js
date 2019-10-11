@@ -17,6 +17,7 @@ const scroller = Scroll.scroller;
 class MenuBar extends Component {
   constructor(props) {
     super(props);
+    this.buttoDocumentation = React.createRef();
     this.state = {
       open: false,
       content: true
@@ -26,12 +27,19 @@ class MenuBar extends Component {
   handleTouchTap = event => {
     // This prevents ghost click.
     event.preventDefault();
-    scroller.scrollTo("appbar", { duration: 300, smooth: true });
 
-    this.setState({
-      open: true,
-      anchorEl: event.currentTarget
+    scroller.scrollTo("appbar", {
+      duration: 300,
+      smooth: true
     });
+
+    // Active submenu in current position of buttonDocumentation with ref element.
+    setTimeout(() => {
+      this.setState({
+        open: true,
+        anchorEl: this.buttoDocumentation.current
+      });
+    }, 301);
   };
 
   handleRequestClose = () => {
@@ -64,6 +72,7 @@ class MenuBar extends Component {
                         Home
                       </Button>
                       <Button
+                        ref={this.buttoDocumentation}
                         onClick={this.handleTouchTap}
                         style={{ boxShadow: common.white }}
                       >
