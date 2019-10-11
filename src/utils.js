@@ -91,13 +91,11 @@ export function getSelectionCoords(editor, toolbar) {
   arrowStyle.top = "100%";
   if (offsetTop - minOffsetTop - toolbarHeight + editorBounds.top < 0) {
     //Always make sure that, if the range bounds does not fully exists, we keep the current coordinates
-    if (rangeBounds.bottom && !Number.isNaN(rangeBounds.bottom)) {
+  } else if (rangeBounds.bottom && !Number.isNaN(rangeBounds.bottom)) {
       offsetTop = rangeBounds.bottom - editorBounds.top + toolbarHeight + 14;
       arrowStyle.top = "-14px";
       arrowStyle.transform = "rotate(180deg)";
     }
-  }
-
   return { offsetLeft, offsetTop, arrowStyle };
 }
 
