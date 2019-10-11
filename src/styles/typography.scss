@@ -56,6 +56,26 @@
     z-index: 0;
 }
 
+&.placeholder-list {
+  .public-DraftEditorPlaceholder-root {
+    left: 50px;
+    top: 5px;
+  }
+}
+
+&.placeholder-header-two {
+  .public-DraftEditorPlaceholder-root {
+    top: 2px;
+  }
+}
+
+&.placeholder-blockquote {
+  .public-DraftEditorPlaceholder-root {
+    left: 20px;
+    top: 7px;
+  }
+}
+
 blockquote {
     border-left: 2px solid #ddd;
     color: #999;
