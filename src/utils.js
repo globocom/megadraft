@@ -94,6 +94,8 @@ export function getSelectionCoords(editor, toolbar) {
     }
   }
 
+  offsetLeft < 50 ? (offsetLeft = offsetLeft + 75) : offsetLeft;
+
   return { offsetLeft, offsetTop, arrowStyle };
 }
 
