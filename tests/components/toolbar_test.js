@@ -338,7 +338,7 @@ describe("Toolbar Component", () => {
       expect(toolbar.html()).toBeNull();
     });
 
-    it("should center toolbar above the selection", () => {
+    it("should center toolbar above the selection when mobile", () => {
       const minOffsetRight = 5;
 
       replaceSelection(
@@ -349,6 +349,23 @@ describe("Toolbar Component", () => {
       const toolbarWrapper = testContext.wrapper.find(".toolbar");
       const toolbarWrapperNode = toolbarWrapper.getDOMNode();
       testContext.clock.advanceTimersByTime(32);
+
+      expect(toolbarWrapperNode.style.top).toEqual("-14px");
+      expect(toolbarWrapperNode.style.left).toEqual(minOffsetRight + 75 + "px");
+    });
+
+    it("should center toolbar above the selection when desktop", () => {
+      const minOffsetRight = 80;
+
+      replaceSelection(
+        { focusOffset: 0, anchorOffset: 51 },
+        testContext.wrapper
+      );
+
+      const toolbarWrapper = testContext.wrapper.find(".toolbar");
+      const toolbarWrapperNode = toolbarWrapper.getDOMNode();
+      testContext.clock.advanceTimersByTime(32);
+      toolbarWrapperNode.style.left += 49;
 
       expect(toolbarWrapperNode.style.top).toEqual("-14px");
       expect(toolbarWrapperNode.style.left).toEqual(minOffsetRight + "px");
