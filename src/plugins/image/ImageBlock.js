@@ -24,6 +24,10 @@ export default class ImageBlock extends Component {
     this._handleCaptionChange = ::this._handleCaptionChange;
     this._handleRightsHolderChange = ::this._handleRightsHolderChange;
 
+    this.state = {
+      isSelected: false
+    };
+
     this.actions = [
       {
         key: "delete",
@@ -45,8 +49,16 @@ export default class ImageBlock extends Component {
 
   render() {
     return (
-      <CommonBlock {...this.props} actions={this.actions}>
-        <BlockContent>
+      <CommonBlock
+        {...this.props}
+        actions={this.actions}
+        style={this.state.isSelected ? ImageBlockStyle.selected : {}}
+      >
+        <BlockContent
+          tabIndex={0}
+          onFocus={() => this.setState({ isSelected: true })}
+          onBlur={() => this.setState({ isSelected: false })}
+        >
           <img style={ImageBlockStyle.image} src={this.props.data.src} alt="" />
         </BlockContent>
 
