@@ -39,15 +39,17 @@ export default class CommonBlock extends Component {
 
     return (
       <BlockWrapper>
-        <BlockControls>
-          <Dropdown
-            items={options.displayOptions}
-            selected={data.display || options.defaultDisplay}
-            onChange={this._handleDisplayChange}
-          />
+        {!this.props.blockProps.getReadOnly() && (
+          <BlockControls>
+            <Dropdown
+              items={options.displayOptions}
+              selected={data.display || options.defaultDisplay}
+              onChange={this._handleDisplayChange}
+            />
 
-          <BlockActionGroup items={this.props.actions} />
-        </BlockControls>
+            <BlockActionGroup items={this.props.actions} />
+          </BlockControls>
+        )}
 
         {this.props.children}
       </BlockWrapper>
