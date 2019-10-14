@@ -38,7 +38,7 @@ export default class CommonBlock extends Component {
     options = { ...defaults, ...options };
 
     return (
-      <BlockWrapper>
+      <BlockWrapper style={this.props.style}>
         <BlockControls>
           <Dropdown
             items={options.displayOptions}
