@@ -37,9 +37,13 @@ export default class CommonBlock extends Component {
     let options = this.props.blockProps.plugin.options || {};
     options = { ...defaults, ...options };
 
+    const readOnly = this.props.blockProps
+      ? this.props.blockProps.getReadOnly()
+      : false;
+
     return (
-      <BlockWrapper readOnly={this.props.blockProps.getReadOnly()}>
-        {!this.props.blockProps.getReadOnly() && (
+      <BlockWrapper readOnly={readOnly}>
+        {!readOnly && (
           <BlockControls>
             <Dropdown
               items={options.displayOptions}
