@@ -38,7 +38,7 @@ export default class CommonBlock extends Component {
     options = { ...defaults, ...options };
 
     return (
-      <BlockWrapper>
+      <BlockWrapper readOnly={this.props.blockProps.getReadOnly()}>
         {!this.props.blockProps.getReadOnly() && (
           <BlockControls>
             <Dropdown
