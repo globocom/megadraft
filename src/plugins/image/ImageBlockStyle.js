@@ -9,5 +9,8 @@ export default {
     display: "inline-block", // Eliminates whitespace between block and data fields block
     maxWidth: "100%",
     verticalAlign: "middle"
+  },
+  selected: {
+    border: "2px solid #1d69de"
   }
 };
