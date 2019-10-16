@@ -31,7 +31,8 @@ export default class BlockInput extends Component {
       "block__input--empty": !value,
       "block__input--error": error,
       [`block__input--${styles.padding}-padding`]: styles.padding,
-      [`block__input--${styles.text}-text`]: styles.text
+      [`block__input--${styles.text}-text`]: styles.text,
+      "block__input--readonly": props.readOnly
     });
 
     return (

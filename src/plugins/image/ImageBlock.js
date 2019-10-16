@@ -44,6 +44,10 @@ export default class ImageBlock extends Component {
   }
 
   render() {
+    const readOnly = this.props.blockProps
+      ? this.props.blockProps.getReadOnly()
+      : false;
+
     return (
       <CommonBlock {...this.props} actions={this.actions}>
         <BlockContent>
@@ -55,12 +59,14 @@ export default class ImageBlock extends Component {
             placeholder="Caption"
             value={this.props.data.caption}
             onChange={this._handleCaptionChange}
+            readOnly={readOnly}
           />
 
           <BlockInput
             placeholder="Rights Holder"
             value={this.props.data.rightsHolder}
             onChange={this._handleRightsHolderChange}
+            readOnly={readOnly}
           />
         </BlockData>
       </CommonBlock>

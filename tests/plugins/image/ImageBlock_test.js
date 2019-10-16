@@ -30,7 +30,8 @@ describe("ImageBlock", () => {
     ];
     const defaultDisplay = "medium";
     const blockProps = {
-      plugin: { options: { displayOptions, defaultDisplay } }
+      plugin: { options: { displayOptions, defaultDisplay } },
+      getReadOnly: jest.fn()
     };
 
     testContext.wrapper = mount(
