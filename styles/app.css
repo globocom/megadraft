@@ -608,6 +608,9 @@ body {
     .megadraft-editor .block__hover:hover {
       background-color: #eee;
       border-radius: 4px; }
+  .megadraft-editor .block__hover--readonly {
+    padding: 8px;
+    margin: -8px; }
   .megadraft-editor .block__wrapper {
     -webkit-user-select: none;
        -moz-user-select: none;
@@ -649,7 +652,7 @@ body {
       width: 100%;
       height: 0;
       border-top: 1px solid rgba(0, 0, 0, 0.1);
-      content: "";
+      content: '';
       left: 0; }
     .megadraft-editor .block__content:before {
       top: 0; }
@@ -719,6 +722,14 @@ body {
       color: #ff351e;
       margin-top: 6px;
       font-size: 0.75rem; }
+    .megadraft-editor .block__input--readonly, .megadraft-editor .block__input--readonly.block__input--empty, .megadraft-editor .block__input--readonly:hover {
+      border: none; }
+    .megadraft-editor .block__input--readonly:hover + svg.block__input__icon {
+      display: none; }
+    .megadraft-editor .block__input--readonly:focus {
+      border: none; }
+    .megadraft-editor .block__input--readonly:focus + svg.block__input__icon {
+      display: none; }
   .megadraft-editor .dropdown__wrapper {
     border-radius: 2px;
     position: absolute;
