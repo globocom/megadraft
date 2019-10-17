@@ -37,8 +37,15 @@ export default class CommonBlock extends Component {
     let options = this.props.blockProps.plugin.options || {};
     options = { ...defaults, ...options };
 
+    const propsForward = (({ style, tabIndex, onFocus, onBlur }) => ({
+      style,
+      tabIndex,
+      onFocus,
+      onBlur
+    }))(this.props);
+
     return (
-      <BlockWrapper style={this.props.style}>
+      <BlockWrapper propsForward={propsForward}>
         <BlockControls>
           <Dropdown
             items={options.displayOptions}
