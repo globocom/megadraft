@@ -8,9 +8,10 @@ import React, { Component } from "react";
 
 export default class BlockWrapper extends Component {
   render() {
+    const { style, ...propsForward } = this.props.propsForward;
     return (
-      <div className="block__hover">
-        <div className="block__wrapper" style={this.props.style}>
+      <div className="block__hover" {...propsForward}>
+        <div className="block__wrapper" style={style}>
           {this.props.children}
         </div>
       </div>
