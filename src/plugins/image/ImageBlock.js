@@ -44,9 +44,7 @@ export default class ImageBlock extends Component {
   }
 
   render() {
-    const readOnly = this.props.blockProps
-      ? this.props.blockProps.getReadOnly()
-      : false;
+    const readOnly = this.props.blockProps.getInitialReadOnly();
 
     return (
       <CommonBlock {...this.props} actions={this.actions}>
