@@ -53,12 +53,11 @@ export default class ImageBlock extends Component {
         {...this.props}
         actions={this.actions}
         style={this.state.isSelected ? ImageBlockStyle.selected : {}}
+        tabIndex={0}
+        onFocus={() => this.setState({ isSelected: true })}
+        onBlur={() => this.setState({ isSelected: false })}
       >
-        <BlockContent
-          tabIndex={0}
-          onFocus={() => this.setState({ isSelected: true })}
-          onBlur={() => this.setState({ isSelected: false })}
-        >
+        <BlockContent>
           <img style={ImageBlockStyle.image} src={this.props.data.src} alt="" />
         </BlockContent>
 
