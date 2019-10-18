@@ -4,10 +4,10 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React from "react";
 
-export default class BlockControls extends Component {
-  render() {
-    return <div className="block__controls">{this.props.children}</div>;
-  }
-}
+const BlockControls = (...props) => {
+  return <div className="block__controls">{props.children}</div>;
+};
+
+export default BlockControls;

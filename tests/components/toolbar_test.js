@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React, { useState, useRef } from "react";
 import { EditorState, SelectionState } from "draft-js";
 import { mount } from "enzyme";
 
@@ -16,36 +16,31 @@ import Separator from "../../src/components/Separator";
 import LinkInput from "../../src/entity_inputs/LinkInput";
 import i18nConfig from "../../src/i18n";
 
-export default class ToolbarWrapper extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { ...props };
-    this.onChange = ::this.onChange;
-  }
+const ToolbarWrapper = (...props) => {
+  const [editorState, setEditorState] = useState();
+  const editor = useRef();
 
-  onChange(editorState) {
-    this.setState({ editorState: editorState });
-  }
+  const onChange = editorState => {
+    setEditorState(editorState);
+  };
 
-  render() {
-    return (
-      <div ref="editor">
-        <Toolbar
-          i18n={i18nConfig["en-US"]}
-          ref="toolbar"
-          editor={this.refs.editor}
-          editorState={this.state.editorState}
-          actions={this.props.actions}
-          readOnly={this.props.readOnly}
-          entityInputs={this.props.entityInputs}
-          onChange={this.onChange}
-          editorHasFocus={true}
-          shouldDisplayToolbarFn={this.props.shouldDisplayToolbarFn}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div ref={editor}>
+      <Toolbar
+        i18n={i18nConfig["en-US"]}
+        ref="toolbar"
+        editor={editor}
+        editorState={editorState}
+        actions={props.actions}
+        readOnly={props.readOnly}
+        entityInputs={props.entityInputs}
+        onChange={onChange}
+        editorHasFocus={true}
+        shouldDisplayToolbarFn={props.shouldDisplayToolbarFn}
+      />
+    </div>
+  );
+};
 
 const draft = require("draft-js");
 
