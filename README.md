@@ -14,7 +14,7 @@ Checkout our website with a [live demo](http://globocom.github.io/megadraft/)!
 
 To run the development server and see the examples:
 
-```
+```bash
 git clone https://github.com/globocom/megadraft.git
 cd megadraft/
 make setup
@@ -25,19 +25,19 @@ Then visit http://localhost:8080/#/dev on your browser.
 
 To run local tests:
 
-```
+```bash
 make unit
 ```
 
 To lint local source files:
 
-```
+```bash
 make lint
 ```
 
 To run tests and lint:
 
-```
+```bash
 make test
 ```
 
