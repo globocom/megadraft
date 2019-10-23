@@ -28,7 +28,7 @@ describe("CommonBlock Component", () => {
     const defaultDisplay = "medium";
     const blockProps = {
       plugin: { options: { displayOptions, defaultDisplay } },
-      getReadOnly: jest.fn()
+      getInitialReadOnly: jest.fn()
     };
 
     testContext.container = {

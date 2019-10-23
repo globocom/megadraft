@@ -23,16 +23,21 @@ export default class BlockInput extends Component {
   }
 
   render() {
-    let { value, error, styles, ...props } = this.props;
-    styles = styles || {};
+    let {
+      value,
+      error,
+      styles: { padding, text } = {},
+      readOnly,
+      ...props
+    } = this.props;
 
     let className = classNames({
       block__input: true,
       "block__input--empty": !value,
       "block__input--error": error,
-      [`block__input--${styles.padding}-padding`]: styles.padding,
-      [`block__input--${styles.text}-text`]: styles.text,
-      "block__input--readonly": props.readOnly
+      [`block__input--${padding}-padding`]: padding,
+      [`block__input--${text}-text`]: text,
+      "block__input--readonly": readOnly
     });
 
     return (
@@ -44,6 +49,7 @@ export default class BlockInput extends Component {
             type={props.type || "text"}
             className={className}
             onDrop={this._handleDrop}
+            readOnly={readOnly}
           />
           <icons.EditIcon className="block__input__icon" />
         </div>

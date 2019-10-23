@@ -46,7 +46,7 @@ describe("Media Component", () => {
     testContext.blockProps.plugin = DEFAULT_PLUGINS[0];
     testContext.blockProps.onChange = jest.fn();
     testContext.blockProps.setRea = jest.fn();
-    testContext.blockProps.getReadOnly = jest.fn();
+    testContext.blockProps.getInitialReadOnly = jest.fn();
     testContext.blockProps.getEditorState = () => testContext.editorState;
 
     const currentContent = testContext.blockProps.editorState.getCurrentContent();
