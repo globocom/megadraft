@@ -49,6 +49,7 @@ export default class BlockInput extends Component {
             type={props.type || "text"}
             className={className}
             onDrop={this._handleDrop}
+            readOnly={readOnly}
           />
           <icons.EditIcon className="block__input__icon" />
         </div>
