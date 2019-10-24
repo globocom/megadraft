@@ -65,6 +65,8 @@ Megadraft ships with a default styling available at this location in the install
 Checkout the [docs][docs-plugins] for information about plugin structure.
 To help in this process there is a [Yeoman Megadraft Plugin Generator][plugin-generator].
 
+## Contributing
+Check out our [contributing guide](https://www.github.com/globocom/megadraft/blob/master/CONTRIBUTING.md) for more details.
 
 ## License
 
