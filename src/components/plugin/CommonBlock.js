@@ -39,8 +39,18 @@ export default class CommonBlock extends Component {
 
     const readOnly = this.props.blockProps.getInitialReadOnly();
 
+    const propsForward = (({ style, tabIndex, onFocus, onBlur }) => ({
+      style,
+      tabIndex,
+      onFocus,
+      onBlur
+    }))(this.props);
+
     return (
-      <BlockWrapper readOnly={readOnly}>
+      <BlockWrapper
+        readOnly={readOnly}
+        propsForward={readOnly ? {} : propsForward}
+      >
         {!readOnly && (
           <BlockControls>
             <Dropdown
