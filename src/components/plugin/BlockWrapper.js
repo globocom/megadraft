@@ -8,13 +8,18 @@ import React, { Component } from "react";
 
 export default class BlockWrapper extends Component {
   render() {
+    const { style = {}, ...propsForward } = this.props.propsForward;
+
     return (
       <div
         className={
           this.props.readOnly ? "block__hover--readonly" : "block__hover"
         }
+        {...propsForward}
       >
-        <div className="block__wrapper">{this.props.children}</div>
+        <div className="block__wrapper" style={style}>
+          {this.props.children}
+        </div>
       </div>
     );
   }
