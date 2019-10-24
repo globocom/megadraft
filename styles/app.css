@@ -425,6 +425,14 @@ body {
     color: #999;
     position: absolute;
     z-index: 0; }
+  .megadraft-editor.placeholder-list .public-DraftEditorPlaceholder-root {
+    left: 50px;
+    top: 5px; }
+  .megadraft-editor.placeholder-header-two .public-DraftEditorPlaceholder-root {
+    top: 2px; }
+  .megadraft-editor.placeholder-blockquote .public-DraftEditorPlaceholder-root {
+    left: 20px;
+    top: 7px; }
   .megadraft-editor blockquote {
     border-left: 2px solid #ddd;
     color: #999;
