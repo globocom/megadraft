@@ -62,7 +62,7 @@ Megadraft ships with a default styling available at this location in the install
 
 ## Plugins
 
-Checkout the [docs][docs-plugins] for information about plugin structure.
+Check out the [docs][docs-plugins] for information about plugin structure.
 To help in this process there is a [Yeoman Megadraft Plugin Generator][plugin-generator].
 
 
@@ -77,7 +77,7 @@ The Megadraft website uses a picture from
 [Stocksnap.io by Tim Marshall](https://stocksnap.io/photo/K148YZIFJ3) licensed
 under [CC0 license](https://stocksnap.io/license).
 
-Landing page uses a Megadeth picture by [Ted Van Pelt](https://flic.kr/p/7Pr94f)
+The Landing page uses a Megadeth picture by [Ted Van Pelt](https://flic.kr/p/7Pr94f)
 licensed under [CC-BY](https://creativecommons.org/licenses/by/2.0/).
 
 
