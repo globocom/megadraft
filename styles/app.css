@@ -392,6 +392,11 @@ body {
  * Copyright (c) 2016, Globo.com (https://github.com/globocom)
  *
  * License: MIT
+ */
+  /*
+ * Copyright (c) 2019, Globo.com (https://github.com/globocom)
+ *
+ * License: MIT
  */ }
   .megadraft-editor .DraftEditor-root, .megadraft-editor .toolbar {
     font-family: Open Sans, sans-serif;
@@ -408,7 +413,7 @@ body {
   .megadraft-editor .paragraph + .paragraph {
     margin-top: 40px; }
   .megadraft-editor .public-DraftEditor-content figure {
-    margin: 40px 0; }
+    margin: 0; }
   .megadraft-editor .public-DraftStyleDefault-ul {
     list-style-type: disc; }
   .megadraft-editor .public-DraftStyleDefault-ol {
@@ -416,7 +421,6 @@ body {
   .megadraft-editor .public-DraftStyleDefault-ol,
   .megadraft-editor .public-DraftStyleDefault-ul {
     line-height: 2;
-    margin: 24px 0 40px 0;
     padding-left: 40px; }
   .megadraft-editor .public-DraftStyleDefault-ol li,
   .megadraft-editor .public-DraftStyleDefault-ul li {
@@ -447,7 +451,7 @@ body {
     font-size: 1.5rem;
     letter-spacing: -0.056rem;
     line-height: 2rem;
-    margin: 64px 0 24px 0; }
+    margin-right: 24px; }
   .megadraft-editor h2:first-child {
     margin-top: 0; }
   .megadraft-editor .editor__link {
@@ -796,6 +800,54 @@ body {
     font-size: 12px;
     line-height: 16px;
     font-weight: bold; }
+  .megadraft-editor .move-control {
+    border: 8px solid rgba(238, 238, 238, 0);
+    border-radius: 4px;
+    display: flex;
+    transition: margin 0.3s; }
+  .megadraft-editor .move-control:hover {
+    border: 8px solid #eeeeee;
+    background-color: #eeeeee; }
+  .megadraft-editor .move-control:hover .options {
+    border: 8px solid #eeeeee;
+    opacity: 1; }
+  .megadraft-editor .move-control__target {
+    width: 100%;
+    background-color: white; }
+  .megadraft-editor .move-control--swapped {
+    margin-left: -8px; }
+  .megadraft-editor .options--swapped {
+    margin-left: 8px !important; }
+  .megadraft-editor .options {
+    width: 40px;
+    height: 76px;
+    margin: -8px -40px -8px 0;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #eee;
+    opacity: 0;
+    transition: margin 0.3s; }
+  .megadraft-editor .options__button {
+    border: 0;
+    cursor: pointer;
+    height: 24px;
+    width: 24px;
+    font-size: 0;
+    padding: 0;
+    outline: none;
+    background: none; }
+  .megadraft-editor .options__button:hover:enabled {
+    background: rgba(33, 33, 33, 0.08);
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-radius: 50%; }
+  .megadraft-editor .options__button:active:enabled {
+    background: rgba(33, 33, 33, 0.16); }
+  .megadraft-editor .options__button--up {
+    transform: rotate(180deg); }
+  .megadraft-editor .megadraft-block {
+    padding-bottom: 40px; }
 
 .jsonpreview {
   font-family: monospace;
