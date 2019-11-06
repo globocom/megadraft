@@ -27,7 +27,7 @@
 }
 
 .public-DraftEditor-content figure {
-    margin: 40px 0;
+    margin: 0;
 }
 
 .public-DraftStyleDefault-ul {
@@ -41,7 +41,6 @@
 .public-DraftStyleDefault-ol,
 .public-DraftStyleDefault-ul {
     line-height: 2;
-    margin: 24px 0 40px 0;
     padding-left: 40px;
 }
 
@@ -94,7 +93,7 @@ h2 {
     font-size: 1.5rem;
     letter-spacing: -0.056rem;
     line-height: 2rem;
-    margin: 64px 0 24px 0;
+    margin-right: 24px;
 }
 
 h2:first-child {

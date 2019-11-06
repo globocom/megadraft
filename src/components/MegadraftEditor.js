@@ -27,13 +27,17 @@ import {
   EditorState,
   genKey,
   ContentBlock,
-  SelectionState
+  SelectionState,
+  DefaultDraftBlockRenderMap
 } from "draft-js";
 import Immutable from "immutable";
 
 import DefaultToolbar from "./Toolbar";
 import Sidebar from "./Sidebar";
 import Media from "./Media";
+import MoveControl from "./MoveControl";
+import MegadraftBlock from "./MegadraftBlock";
+import { swapDataUp, swapDataDown } from "../swapDataBlock";
 import i18nConfig from "../i18n";
 import notFoundPlugin from "../plugins/not-found/plugin";
 import DEFAULT_PLUGINS from "../plugins/default";
@@ -54,7 +58,8 @@ export default class MegadraftEditor extends Component {
     super(props);
     this.state = {
       readOnly: this.props.readOnly || false,
-      hasFocus: false
+      hasFocus: false,
+      scrollRef: ""
     };
 
     this.onChange = ::this.onChange;
@@ -82,6 +87,25 @@ export default class MegadraftEditor extends Component {
     this.pluginsByType = this.getPluginsByType();
 
     this.keyBindings = this.props.keyBindings || [];
+
+    this.extendedBlockRenderMap = Immutable.OrderedMap().withMutations(r => {
+      for (let [blockType, data] of DefaultDraftBlockRenderMap.entrySeq()) {
+        r.set(blockType, {
+          ...data,
+          wrapper: this.props.movableBlocks ? (
+            <MoveControl
+              wrapper={data.wrapper}
+              swapUp={this.swapUp}
+              swapDown={this.swapDown}
+              isFirstBlock={this.isFirstBlock}
+              isLastBlock={this.isLastBlock}
+            />
+          ) : (
+            <MegadraftBlock wrapper={data.wrapper} />
+          )
+        });
+      }
+    });
   }
 
   getValidPlugins() {
@@ -354,6 +378,31 @@ export default class MegadraftEditor extends Component {
     clearTimeout(this.blurTimeoutID);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.editorState !== this.props.editorState) {
+      const control = document.querySelector(`[id*="${this.state.scrollRef}"]`);
+
+      if (control) {
+        const options = control.querySelector(".options");
+        const swapEffect = () => {
+          options.classList.toggle("options--swapped");
+          control.classList.toggle("move-control--swapped");
+        };
+
+        control.scrollIntoView({ block: "center" });
+        window.scroll(0, window.pageYOffset - control.clientHeight / 2);
+
+        swapEffect();
+
+        setTimeout(() => {
+          swapEffect();
+        }, 300);
+
+        this.setState({ scrollRef: "" });
+      }
+    }
+  }
+
   mediaBlockRenderer(block) {
     const handled = this.props.blockRendererFn(block);
     if (handled) {
@@ -412,6 +461,34 @@ export default class MegadraftEditor extends Component {
     return <Toolbar {...props} />;
   }
 
+  swapUp = currentKey => {
+    const newEditorState = swapDataUp({
+      editorState: this.props.editorState,
+      currentKey
+    });
+    this.onChange(newEditorState);
+    this.setState({ scrollRef: currentKey });
+  };
+
+  swapDown = currentKey => {
+    const newEditorState = swapDataDown({
+      editorState: this.props.editorState,
+      currentKey
+    });
+    this.onChange(newEditorState);
+    this.setState({ scrollRef: currentKey });
+  };
+
+  isFirstBlock = currentKey => {
+    const contentState = this.props.editorState.getCurrentContent();
+    return contentState.getFirstBlock().getKey() === currentKey;
+  };
+
+  isLastBlock = currentKey => {
+    const contentState = this.props.editorState.getCurrentContent();
+    return contentState.getLastBlock().getKey() === currentKey;
+  };
+
   render() {
     const hideSidebarOnBlur = this.props.hideSidebarOnBlur || false;
     const i18n = this.props.i18n[this.props.language];
@@ -453,6 +530,7 @@ export default class MegadraftEditor extends Component {
             handleReturn={this.props.handleReturn || this.handleReturn}
             keyBindingFn={this.externalKeyBindings}
             onChange={this.onChange}
+            blockRenderMap={this.extendedBlockRenderMap}
           />
           {this.renderToolbar({
             i18n: i18n,
