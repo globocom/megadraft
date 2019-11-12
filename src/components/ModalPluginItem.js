@@ -6,7 +6,10 @@
 
 import React, { Component } from "react";
 
-export default class ModalPluginItem extends Component {
+import { withActions } from "./ActionsProvider";
+import { PLUGINS_MODAL_ADD_PLUGIN } from "../constants";
+
+class ModalPluginItem extends Component {
   constructor(props) {
     super(props);
     this.handleClick = ::this.handleClick;
@@ -29,7 +32,13 @@ export default class ModalPluginItem extends Component {
       <li
         key={item.type}
         className="megadraft-modal__item"
-        onClick={this.closeModal}
+        onClick={() => {
+          this.props.onAction({
+            type: PLUGINS_MODAL_ADD_PLUGIN,
+            pluginName: item.title
+          });
+          this.closeModal();
+        }}
       >
         <Button
           ref={el => {
@@ -58,3 +67,5 @@ export default class ModalPluginItem extends Component {
     );
   }
 }
+
+export default withActions(ModalPluginItem);

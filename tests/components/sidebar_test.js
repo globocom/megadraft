@@ -9,11 +9,18 @@ import { mount } from "enzyme";
 import cp from "utils-copy";
 import i18nConfig from "../../src/i18n";
 import Sidebar, { ToggleButton, SideMenu } from "../../src/components/Sidebar";
+import ActionsProvider from "../../src/components/ActionsProvider";
 import PluginsModal from "../../src/components/PluginsModal";
 import image from "../../src/plugins/image/plugin";
 import { editorStateFromRaw } from "../../src/utils";
 import DEFAULT_PLUGINS from "../../src/plugins/default.js";
 import ImageButton from "../../src/plugins/image/ImageButton";
+import {
+  SIDEBAR_EXPAND,
+  SIDEBAR_SHRINK,
+  SIDEBAR_CLICK_MORE,
+  SIDEBAR_ADD_PLUGIN
+} from "../../src/constants";
 
 class SidebarWrapper extends Component {
   constructor(props) {
@@ -22,6 +29,7 @@ class SidebarWrapper extends Component {
     this.plugins = this.props.plugins || DEFAULT_PLUGINS;
     this.editorHasFocus = true;
     this.onChange = ::this.onChange;
+    this.onAction = jest.fn();
   }
 
   onChange(editorState) {
@@ -31,15 +39,17 @@ class SidebarWrapper extends Component {
   render() {
     return (
       <div ref="editor">
-        <Sidebar
-          i18n={this.props.i18n}
-          ref="sidebar"
-          plugins={this.plugins}
-          editorState={this.state.editorState}
-          readOnly={this.props.readOnly}
-          onChange={this.onChange}
-          editorHasFocus={this.editorHasFocus}
-        />
+        <ActionsProvider onAction={this.onAction}>
+          <Sidebar
+            i18n={this.props.i18n}
+            ref="sidebar"
+            plugins={this.plugins}
+            editorState={this.state.editorState}
+            readOnly={this.props.readOnly}
+            onChange={this.onChange}
+            editorHasFocus={this.editorHasFocus}
+          />
+        </ActionsProvider>
       </div>
     );
   }
@@ -59,6 +69,7 @@ class SidebarWithModalWrapper extends Component {
     this.modalOptions = { width: 500, height: 300 };
     this.editorHasFocus = true;
     this.onChange = ::this.onChange;
+    this.onAction = jest.fn();
   }
 
   onChange(editorState) {
@@ -68,17 +79,19 @@ class SidebarWithModalWrapper extends Component {
   render() {
     return (
       <div ref="editor">
-        <Sidebar
-          i18n={this.props.i18n}
-          ref="sidebar"
-          plugins={this.fakePlugins}
-          editorState={this.state.editorState}
-          readOnly={this.props.readOnly}
-          onChange={this.onChange}
-          maxSidebarButtons={this.maxSidebarButtons}
-          modalOptions={this.modalOptions}
-          editorHasFocus={this.editorHasFocus}
-        />
+        <ActionsProvider onAction={this.onAction}>
+          <Sidebar
+            i18n={this.props.i18n}
+            ref="sidebar"
+            plugins={this.fakePlugins}
+            editorState={this.state.editorState}
+            readOnly={this.props.readOnly}
+            onChange={this.onChange}
+            maxSidebarButtons={this.maxSidebarButtons}
+            modalOptions={this.modalOptions}
+            editorHasFocus={this.editorHasFocus}
+          />
+        </ActionsProvider>
       </div>
     );
   }
@@ -166,6 +179,22 @@ describe("Sidebar Component", () => {
     expect(domMenu.hasClass("sidemenu__button--open")).toBeTruthy();
   });
 
+  it("should call onAction prop on the menu on click", () => {
+    const toggleButton = wrapper.find(ToggleButton);
+    const domButton = toggleButton.find("button");
+    const onActionCall = wrapper.instance().onAction.mock.calls;
+
+    domButton.simulate("click");
+
+    const expectedOpenCall = { type: SIDEBAR_EXPAND };
+    expect(onActionCall[0][0]).toEqual(expectedOpenCall);
+
+    domButton.simulate("click");
+
+    const expectedCloseCall = { type: SIDEBAR_SHRINK };
+    expect(onActionCall[1][0]).toEqual(expectedCloseCall);
+  });
+
   it("is possible to click on the button", () => {
     const toggleButton = wrapper.find(ImageButton);
     const domButton = toggleButton.find("button");
@@ -197,6 +226,43 @@ describe("Sidebar Component", () => {
     const modal = wrapperSidebarModal.find(PluginsModal);
     const domModal = modal.find("Modal");
     expect(domModal.prop("className")).toEqual("megadraft-modal");
+  });
+
+  it("should call onAction prop on add plugin click", () => {
+    const toggleButton = wrapper.find(ToggleButton);
+    const domButton = toggleButton.find("button");
+    const onActionCall = wrapper.instance().onAction.mock.calls;
+
+    domButton.simulate("click");
+
+    const domPluginButton = wrapper
+      .find(SideMenu)
+      .find("li ul li")
+      .first();
+
+    domPluginButton.simulate("click", { target: { name: 0 } });
+
+    const expectedCall = {
+      type: SIDEBAR_ADD_PLUGIN,
+      pluginName: "Image"
+    };
+    expect(onActionCall[1][0]).toEqual(expectedCall);
+  });
+
+  it("should call onAction prop on show all plugins button click", () => {
+    const toggleButton = wrapperSidebarModal.find(ToggleButton);
+    const domButton = toggleButton.find("button");
+    const onActionCall = wrapperSidebarModal.instance().onAction.mock.calls;
+
+    domButton.simulate("click");
+
+    const menu = wrapperSidebarModal.find(SideMenu);
+    const domMenu = menu.find("button");
+    const domModalButton = domMenu.at(4);
+    domModalButton.simulate("click");
+
+    const expectedOpenCall = { type: SIDEBAR_CLICK_MORE };
+    expect(onActionCall[1][0]).toEqual(expectedOpenCall);
   });
 
   it("should not have a modal button with less than 4 plugins", () => {
