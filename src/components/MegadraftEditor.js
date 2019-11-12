@@ -43,8 +43,11 @@ import notFoundPlugin from "../plugins/not-found/plugin";
 import DEFAULT_PLUGINS from "../plugins/default";
 import DEFAULT_ACTIONS from "../actions/default";
 import DEFAULT_ENTITY_INPUTS from "../entity_inputs/default";
+import ActionsProvider from "./ActionsProvider";
 
 const NO_RESET_STYLE_DEFAULT = ["ordered-list-item", "unordered-list-item"];
+
+const noop = () => {};
 
 export default class MegadraftEditor extends Component {
   static defaultProps = {
@@ -87,6 +90,8 @@ export default class MegadraftEditor extends Component {
     this.pluginsByType = this.getPluginsByType();
 
     this.keyBindings = this.props.keyBindings || [];
+
+    this.onAction = this.props.onAction || noop;
 
     this.extendedBlockRenderMap = Immutable.OrderedMap().withMutations(r => {
       for (let [blockType, data] of DefaultDraftBlockRenderMap.entrySeq()) {
@@ -497,54 +502,56 @@ export default class MegadraftEditor extends Component {
 
     return (
       <div className={classEditor}>
-        <div
-          className={this.handleClassEditor(identifierEditor)}
-          id={this.props.id || identifierEditor}
-          ref={el => {
-            this.editorEl = el;
-          }}
-          onBlur={this.handleBlur}
-          onFocus={this.handleFocus}
-        >
-          {this.renderSidebar({
-            i18n: i18n,
-            plugins: this.plugins,
-            editorState: this.props.editorState,
-            readOnly: this.state.readOnly,
-            onChange: this.onChange,
-            maxSidebarButtons: this.props.maxSidebarButtons,
-            modalOptions: this.props.modalOptions,
-            editorHasFocus: this.state.hasFocus,
-            hideSidebarOnBlur: hideSidebarOnBlur
-          })}
-          <Editor
-            {...this.props}
+        <ActionsProvider onAction={this.props.onAction}>
+          <div
+            className={this.handleClassEditor(identifierEditor)}
+            id={this.props.id || identifierEditor}
             ref={el => {
-              this.draftEl = el;
+              this.editorEl = el;
             }}
-            readOnly={this.state.readOnly}
-            blockRendererFn={this.mediaBlockRenderer}
-            blockStyleFn={this.props.blockStyleFn || this.blockStyleFn}
-            onTab={this.onTab}
-            handleKeyCommand={this.handleKeyCommand}
-            handleReturn={this.props.handleReturn || this.handleReturn}
-            keyBindingFn={this.externalKeyBindings}
-            onChange={this.onChange}
-            blockRenderMap={this.extendedBlockRenderMap}
-          />
-          {this.renderToolbar({
-            i18n: i18n,
-            editor: this.editorEl,
-            draft: this.draftEl,
-            editorState: this.props.editorState,
-            editorHasFocus: this.state.hasFocus,
-            readOnly: this.state.readOnly,
-            onChange: this.onChange,
-            actions: this.props.actions,
-            entityInputs: this.entityInputs,
-            shouldDisplayToolbarFn: this.props.shouldDisplayToolbarFn
-          })}
-        </div>
+            onBlur={this.handleBlur}
+            onFocus={this.handleFocus}
+          >
+            {this.renderSidebar({
+              i18n: i18n,
+              plugins: this.plugins,
+              editorState: this.props.editorState,
+              readOnly: this.state.readOnly,
+              onChange: this.onChange,
+              maxSidebarButtons: this.props.maxSidebarButtons,
+              modalOptions: this.props.modalOptions,
+              editorHasFocus: this.state.hasFocus,
+              hideSidebarOnBlur: hideSidebarOnBlur
+            })}
+            <Editor
+              {...this.props}
+              ref={el => {
+                this.draftEl = el;
+              }}
+              readOnly={this.state.readOnly}
+              blockRendererFn={this.mediaBlockRenderer}
+              blockStyleFn={this.props.blockStyleFn || this.blockStyleFn}
+              onTab={this.onTab}
+              handleKeyCommand={this.handleKeyCommand}
+              handleReturn={this.props.handleReturn || this.handleReturn}
+              keyBindingFn={this.externalKeyBindings}
+              onChange={this.onChange}
+              blockRenderMap={this.extendedBlockRenderMap}
+            />
+            {this.renderToolbar({
+              i18n: i18n,
+              editor: this.editorEl,
+              draft: this.draftEl,
+              editorState: this.props.editorState,
+              editorHasFocus: this.state.hasFocus,
+              readOnly: this.state.readOnly,
+              onChange: this.onChange,
+              actions: this.props.actions,
+              entityInputs: this.entityInputs,
+              shouldDisplayToolbarFn: this.props.shouldDisplayToolbarFn
+            })}
+          </div>
+        </ActionsProvider>
       </div>
     );
   }

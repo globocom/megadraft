@@ -8,6 +8,7 @@ Here are the props that `MegadraftEditor` accepts:
 - `plugins`: List of plugins to be used by the editor
 - `editorState`: DraftJS' [editorState][api-reference-editor-state]
 - `onChange`: Function fired when editor state changes
+- `onAction`: (optional) Function fired when the following actions are executed: `SIDEBAR_EXPAND`, `SIDEBAR_SHRINK`, `SIDEBAR_CLICK_MORE`, `SIDEBAR_ADD_PLUGIN`, `PLUGINS_MODAL_CLOSE`, `PLUGINS_MODAL_ADD_PLUGIN`
 - `sidebarRendererFn`: (optional) it is called to render a custom sidebar. This
   method must return a valid React element.
 - `Toolbar`: (optional) a custom toolbar component or a function that returns a

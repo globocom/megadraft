@@ -9,6 +9,9 @@ import React, { Component } from "react";
 import Modal from "backstage-modal";
 import ModalPluginList from "./ModalPluginList";
 
+import { withActions } from "./ActionsProvider";
+import { PLUGINS_MODAL_CLOSE } from "../constants";
+
 class PluginsModal extends Component {
   constructor(props) {
     super(props);
@@ -23,6 +26,7 @@ class PluginsModal extends Component {
       return;
     }
     document.body.classList.remove("megadraft-modal--open");
+    this.props.onAction({ type: PLUGINS_MODAL_CLOSE });
     this.props.toggleModalVisibility();
   }
 
@@ -49,4 +53,4 @@ class PluginsModal extends Component {
   }
 }
 
-export default PluginsModal;
+export default withActions(PluginsModal);

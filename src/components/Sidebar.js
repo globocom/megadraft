@@ -9,12 +9,21 @@ import ReactDOM from "react-dom";
 import classNames from "classnames";
 import icons from "../icons";
 
+import {
+  SIDEBAR_ADD_PLUGIN,
+  SIDEBAR_EXPAND,
+  SIDEBAR_SHRINK,
+  SIDEBAR_CLICK_MORE
+} from "../constants";
+
+import { withActions } from "./ActionsProvider";
+
 import "setimmediate";
 
 import PluginsModal from "./PluginsModal";
 import { getSelectedBlockElement } from "../utils";
 
-class BlockStyles extends Component {
+class BlockStylesComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,7 +67,13 @@ class BlockStyles extends Component {
 
   renderModalButton() {
     return (
-      <button className="sidemenu__button" onClick={this.onModalOpenClick}>
+      <button
+        className="sidemenu__button"
+        onClick={e => {
+          this.props.onAction({ type: SIDEBAR_CLICK_MORE });
+          this.onModalOpenClick(e);
+        }}
+      >
         <icons.MoreIcon className="sidemenu__button__icon" />
       </button>
     );
@@ -68,7 +83,16 @@ class BlockStyles extends Component {
     const Button = item.buttonComponent;
 
     return (
-      <li key={item.type} className="sidemenu__item">
+      <li
+        key={item.type}
+        className="sidemenu__item"
+        onClick={() => {
+          this.props.onAction({
+            type: SIDEBAR_ADD_PLUGIN,
+            pluginName: item.title
+          });
+        }}
+      >
         <Button
           className="sidemenu__button"
           title={item.title}
@@ -106,6 +130,7 @@ class BlockStyles extends Component {
     );
   }
 }
+export const BlockStyles = withActions(BlockStylesComponent);
 
 export class ToggleButton extends Component {
   render() {
@@ -137,7 +162,7 @@ export class ToggleButton extends Component {
   }
 }
 
-export class SideMenu extends Component {
+class SideMenuComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -152,6 +177,9 @@ export class SideMenu extends Component {
   }
 
   toggle() {
+    this.props.onAction({
+      type: this.state.open ? SIDEBAR_SHRINK : SIDEBAR_EXPAND
+    });
     this.setState({
       open: !this.state.open
     });
@@ -183,6 +211,7 @@ export class SideMenu extends Component {
     );
   }
 }
+export const SideMenu = withActions(SideMenuComponent);
 
 export default class SideBar extends Component {
   constructor(props) {
