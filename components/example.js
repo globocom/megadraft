@@ -39,6 +39,10 @@ class Example extends React.Component {
     this.maxSidebarButtons = null;
   }
 
+  onAction = args => {
+    console.log("onAction fired with args:", args);
+  };
+
   componentDidMount() {
     highlightCode(this);
   }
@@ -64,6 +68,7 @@ class Example extends React.Component {
           keyBindings={this.keyBindings}
           resetStyleNewLine={this.resetStyleNewLine}
           maxSidebarButtons={this.maxSidebarButtons}
+          onAction={this.onAction}
         />
       </div>
     );
