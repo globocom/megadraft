@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.6.11 - 2019-11-12
+### Added
+- Enable reorder blocks (#272)
+- Add the hability to listen sidebar/plugins actions (#273)
+
 ## 0.6.10 - 2019-10-24
 ### Fixed
 - Bad rendering when attempting to remove a blockquote (#187)
