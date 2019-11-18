@@ -13,7 +13,6 @@ import Button from "@material-ui/core/Button";
 
 const Element = Scroll.Element;
 const scroller = Scroll.scroller;
-const scrollEvents = Scroll.Events;
 
 const MenuBar = props => {
   const { background = common.white, showLeft, children } = props;
@@ -25,14 +24,10 @@ const MenuBar = props => {
     event.preventDefault();
 
     scroller.scrollTo("appbar", { duration: 300, smooth: true });
-    scrollEvents.scrollEvent.register("end", () => {
-      setShowMenuDropdown(true);
-    });
+    setTimeout(() => setShowMenuDropdown(true), 300);
   };
 
-  const handleRequestClose = () => {
-    setShowMenuDropdown(false);
-  };
+  const handleRequestClose = () => setShowMenuDropdown(false);
 
   return (
     <Element name="appbar">
