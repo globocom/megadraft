@@ -502,7 +502,7 @@ export default class MegadraftEditor extends Component {
 
     return (
       <div className={classEditor}>
-        <ActionsProvider onAction={this.props.onAction}>
+        <ActionsProvider onAction={this.onAction}>
           <div
             className={this.handleClassEditor(identifierEditor)}
             id={this.props.id || identifierEditor}
