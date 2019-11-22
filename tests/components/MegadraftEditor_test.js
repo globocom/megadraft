@@ -695,6 +695,40 @@ describe("MegadraftEditor Component", () => {
     expect(sidebar.prop("readOnly")).toBeFalsy();
   });
 
+  it("should have a default function to onAction prop", () => {
+    const wrapper = mount(
+      <MegadraftEditor
+        editorState={testContext.editorState}
+        onChange={testContext.onChange}
+      />
+    );
+
+    const onAction = wrapper.instance().onAction;
+    const sideMenuComponent = wrapper.find("SideMenuComponent");
+
+    expect(onAction).toBeDefined();
+    expect(typeof onAction).toBe("function");
+    expect(sideMenuComponent.prop("onAction")).toEqual(onAction);
+  });
+
+  it("should pass a custom onAction prop to Sidebar", () => {
+    const customOnAction = jest.fn();
+    const wrapper = mount(
+      <MegadraftEditor
+        editorState={testContext.editorState}
+        onChange={testContext.onChange}
+        onAction={customOnAction}
+      />
+    );
+
+    const onAction = wrapper.instance().onAction;
+    const sideMenuComponent = wrapper.find("SideMenuComponent");
+
+    expect(onAction).toBeDefined();
+    expect(onAction).toEqual(customOnAction);
+    expect(sideMenuComponent.prop("onAction")).toEqual(customOnAction);
+  });
+
   it("calls sidebarRendererFn if it's provided", () => {
     const renderCustomSidebar = jest.fn();
     const wrapper = mount(
