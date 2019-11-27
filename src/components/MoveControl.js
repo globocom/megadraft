@@ -50,6 +50,34 @@ const Control = ({ children, id, onClickUp, onClickDown, isFirst, isLast }) => (
   </div>
 );
 
+const Controlled = ({
+  keySwapUp,
+  keySwapDown,
+  isFirstBlock,
+  isLastBlock,
+  swapUp,
+  swapDown,
+  children
+}) => {
+  const onClickUp = () => swapUp(keySwapUp);
+  const onClickDown = () => swapDown(keySwapDown);
+  const isFirst = isFirstBlock(keySwapUp);
+  const isLast = isLastBlock(keySwapDown);
+
+  return (
+    <MegadraftBlock>
+      <Control
+        id={
+          keySwapUp !== keySwapDown ? `${keySwapUp}-${keySwapDown}` : keySwapUp
+        }
+        {...{ onClickUp, onClickDown, isFirst, isLast }}
+      >
+        {children}
+      </Control>
+    </MegadraftBlock>
+  );
+};
+
 export default ({
   wrapper,
   swapUp,
@@ -62,39 +90,26 @@ export default ({
   const firstChildKey = arrayChildren[0].props.children.key;
   const lastChildKey =
     arrayChildren[arrayChildren.length - 1].props.children.key;
-  const Controlled = ({ keySwapUp, keySwapDown, children }) => {
-    const onClickUp = () => swapUp(keySwapUp);
-    const onClickDown = () => swapDown(keySwapDown);
-    const isFirst = isFirstBlock(keySwapUp);
-    const isLast = isLastBlock(keySwapDown);
-
-    return (
-      <MegadraftBlock>
-        <Control
-          id={
-            keySwapUp !== keySwapDown
-              ? `${keySwapUp}-${keySwapDown}`
-              : keySwapUp
-          }
-          {...{ onClickUp, onClickDown, isFirst, isLast }}
-        >
-          {children}
-        </Control>
-      </MegadraftBlock>
-    );
-  };
 
   const controlledChildren = React.Children.map(children, child => {
     const currentKey = child.props.children.key;
     return (
-      <Controlled keySwapUp={currentKey} keySwapDown={currentKey}>
+      <Controlled
+        keySwapUp={currentKey}
+        keySwapDown={currentKey}
+        {...{ swapUp, swapDown, isFirstBlock, isLastBlock }}
+      >
         {child}
       </Controlled>
     );
   });
 
   return wrapper ? (
-    <Controlled keySwapUp={firstChildKey} keySwapDown={lastChildKey}>
+    <Controlled
+      keySwapUp={firstChildKey}
+      keySwapDown={lastChildKey}
+      {...{ swapUp, swapDown, isFirstBlock, isLastBlock }}
+    >
       {React.cloneElement(wrapper, [], children)}
     </Controlled>
   ) : (
