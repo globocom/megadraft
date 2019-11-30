@@ -16,6 +16,7 @@ import { editorStateFromRaw } from "../../src/utils";
 import image from "../../src/plugins/image/plugin";
 import NotFoundPlugin from "../../src/plugins/not-found/plugin";
 import i18nConfig from "../../src/i18n";
+import { BLOCK_SWAP_UP, BLOCK_SWAP_DOWN } from "../../src/constants";
 
 const replaceSelection = (newSelection, wrapper, blockKey) => {
   const selectionState = SelectionState.createEmpty(blockKey);
@@ -30,6 +31,7 @@ class MegadraftEditorWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = { ...props };
+    this.onAction = jest.fn();
   }
 
   render() {
@@ -41,6 +43,8 @@ class MegadraftEditorWrapper extends Component {
         keyBindings={this.props.keyBindings}
         blocksWithoutStyleReset={this.props.blocksWithoutStyleReset}
         resetStyleNewLine={this.props.resetStyleNewLine}
+        onAction={this.onAction}
+        movableBlocks={this.props.movableBlocks}
       />
     );
   }
@@ -974,6 +978,36 @@ describe("MegadraftEditor Component", () => {
         .map(node => node.prop("data-testid"));
 
       expect(actual).toEqual(expected);
+    });
+
+    it("should call onAction prop clicking the up control", () => {
+      const wrapper = mount(
+        <MegadraftEditorWrapper
+          editorState={testContext.editorState}
+          onChange={testContext.onChange}
+          movableBlocks
+        />
+      );
+      const onActionCall = wrapper.instance().onAction.mock.calls;
+
+      wrapper.find('[data-testid="swap-up-kst0"]').simulate("click");
+      const expectedUpCall = { type: BLOCK_SWAP_UP, blockId: "kst0" };
+      expect(onActionCall[0][0]).toEqual(expectedUpCall);
+    });
+
+    it("should call onAction prop clicking the down control", () => {
+      const wrapper = mount(
+        <MegadraftEditorWrapper
+          editorState={testContext.editorState}
+          onChange={testContext.onChange}
+          movableBlocks
+        />
+      );
+      const onActionCall = wrapper.instance().onAction.mock.calls;
+
+      wrapper.find('[data-testid="swap-down-kst0"]').simulate("click");
+      const expectedDownCall = { type: BLOCK_SWAP_DOWN, blockId: "kst0" };
+      expect(onActionCall[0][0]).toEqual(expectedDownCall);
     });
   });
 });
