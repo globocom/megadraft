@@ -75,6 +75,18 @@
   }
 }
 
+&.movable {
+  .public-DraftEditorPlaceholder-root {
+    padding: 8px 0 0 8px;
+  }
+}
+
+&.movable.placeholder-blockquote {
+  .public-DraftEditorPlaceholder-root {
+    padding: 20px 0 0 10px;
+  }
+}
+
 blockquote {
     border-left: 2px solid #ddd;
     color: #999;

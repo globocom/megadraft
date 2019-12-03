@@ -13,7 +13,6 @@
 
 .move-control:hover {
   border: 8px solid rgba(238, 238, 238, 1);
-  background-color: rgba(238, 238, 238, 1);
 }
 
 .move-control:hover .options {
@@ -21,9 +20,16 @@
   opacity: 1;
 }
 
+.options:hover {
+ background-color: rgba(238, 238, 238, 1);
+}
+
 .move-control__target {
   width: 100%;
-  background-color: white;
+}
+
+.move-control--atomic:hover {
+  background-color: rgba(238, 238, 238, 1);
 }
 
 .move-control--swapped {
