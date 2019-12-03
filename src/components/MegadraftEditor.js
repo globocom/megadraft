@@ -104,6 +104,7 @@ export default class MegadraftEditor extends Component {
               swapDown={this.swapDown}
               isFirstBlock={this.isFirstBlock}
               isLastBlock={this.isLastBlock}
+              isAtomic={blockType === "atomic"}
             />
           ) : (
             <MegadraftBlock wrapper={data.wrapper} />
@@ -352,7 +353,9 @@ export default class MegadraftEditor extends Component {
   }
 
   handleClassEditor(identifier) {
-    let classEditor = identifier;
+    let classEditor = this.props.movableBlocks
+      ? `${identifier} movable`
+      : identifier;
     let contentState = this.props.editorState.getCurrentContent();
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it.
