@@ -62,7 +62,10 @@ export default class MegadraftEditor extends Component {
     this.state = {
       readOnly: this.props.readOnly || false,
       hasFocus: false,
-      scrollRef: ""
+      scrollRef: "",
+      swapUp: false,
+      swapDown: false,
+      didSwap: false
     };
 
     this.onChange = ::this.onChange;
@@ -383,8 +386,22 @@ export default class MegadraftEditor extends Component {
     clearTimeout(this.blurTimeoutID);
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.editorState !== this.props.editorState) {
+  componentDidUpdate() {
+    if (this.state.swapUp || this.state.swapDown) {
+      const swapFunction = this.state.swapUp ? swapDataUp : swapDataDown;
+
+      const newEditorState = swapFunction({
+        editorState: this.props.editorState,
+        currentKey: this.state.scrollRef
+      });
+
+      this.onChange(newEditorState);
+      this.setState({
+        didSwap: true,
+        swapUp: false,
+        swapDown: false
+      });
+    } else if (this.state.didSwap) {
       const control = document.querySelector(`[id*="${this.state.scrollRef}"]`);
 
       if (control) {
@@ -393,6 +410,9 @@ export default class MegadraftEditor extends Component {
           options.classList.toggle("options--swapped");
           control.classList.toggle("move-control--swapped");
         };
+
+        const input = control.querySelector("[type=text]");
+        input && input.focus();
 
         control.scrollIntoView({ block: "center" });
         window.scroll(0, window.pageYOffset - control.clientHeight / 2);
@@ -403,7 +423,10 @@ export default class MegadraftEditor extends Component {
           swapEffect();
         }, 300);
 
-        this.setState({ scrollRef: "" });
+        this.setState({
+          didSwap: false,
+          scrollRef: ""
+        });
       }
     }
   }
@@ -467,21 +490,27 @@ export default class MegadraftEditor extends Component {
   }
 
   swapUp = currentKey => {
-    const newEditorState = swapDataUp({
-      editorState: this.props.editorState,
-      currentKey
+    document.activeElement.blur();
+
+    this.forceUpdate(() => {
+      this.setState({
+        swapUp: true,
+        swapDown: false,
+        scrollRef: currentKey
+      });
     });
-    this.onChange(newEditorState);
-    this.setState({ scrollRef: currentKey });
   };
 
   swapDown = currentKey => {
-    const newEditorState = swapDataDown({
-      editorState: this.props.editorState,
-      currentKey
+    document.activeElement.blur();
+
+    this.forceUpdate(() => {
+      this.setState({
+        swapUp: false,
+        swapDown: true,
+        scrollRef: currentKey
+      });
     });
-    this.onChange(newEditorState);
-    this.setState({ scrollRef: currentKey });
   };
 
   isFirstBlock = currentKey => {
