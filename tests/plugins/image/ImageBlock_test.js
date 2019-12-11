@@ -23,6 +23,7 @@ describe("ImageBlock", () => {
     testContext.setReadOnly = jest.fn();
     testContext.updateData = jest.fn();
     testContext.remove = jest.fn();
+    testContext.setState = jest.fn();
 
     const displayOptions = [
       { key: "small", icon: icons.MediaSmallIcon, label: "SMALL" },
@@ -72,5 +73,15 @@ describe("ImageBlock", () => {
     expect(testContext.updateData).toHaveBeenCalledWith({
       rightsHolder: "new rights"
     });
+  });
+
+  it("change selection state on focus and on blur", () => {
+    expect(testContext.wrapper.state("isSelected")).toBeFalsy();
+
+    testContext.wrapper.simulate("focus");
+    expect(testContext.wrapper.state("isSelected")).toBeTruthy();
+
+    testContext.wrapper.simulate("blur");
+    expect(testContext.wrapper.state("isSelected")).toBeFalsy();
   });
 });
