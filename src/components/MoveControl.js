@@ -7,7 +7,6 @@
 import React from "react";
 import icons from "../icons";
 import MegadraftBlock from "./MegadraftBlock";
-import { withActions } from "./ActionsProvider";
 
 import { BLOCK_SWAP_UP, BLOCK_SWAP_DOWN } from "../constants";
 
@@ -60,9 +59,13 @@ const Control = ({
   onClickDown,
   isFirst,
   isLast,
-  onAction
+  onAction,
+  isAtomic
 }) => (
-  <div className="move-control" id={`move-control-${id}`}>
+  <div
+    className={`move-control ${isAtomic && "move-control--atomic"}`}
+    id={`move-control-${id}`}
+  >
     <div className="move-control__target" data-testid={`block-${id}`}>
       {children}
     </div>
@@ -79,10 +82,11 @@ const Controlled = ({
   keySwapDown,
   isFirstBlock,
   isLastBlock,
+  isAtomic,
   swapUp,
   swapDown,
-  children,
-  onAction
+  onAction,
+  children
 }) => {
   const onClickUp = () => swapUp(keySwapUp);
   const onClickDown = () => swapDown(keySwapDown);
@@ -95,7 +99,7 @@ const Controlled = ({
         id={
           keySwapUp !== keySwapDown ? `${keySwapUp}-${keySwapDown}` : keySwapUp
         }
-        {...{ onClickUp, onClickDown, isFirst, isLast, onAction }}
+        {...{ onClickUp, onClickDown, isFirst, isLast, onAction, isAtomic }}
       >
         {children}
       </Control>
@@ -103,44 +107,43 @@ const Controlled = ({
   );
 };
 
-export default withActions(
-  ({
-    wrapper,
-    swapUp,
-    swapDown,
-    children,
-    isFirstBlock,
-    isLastBlock,
-    onAction
-  }) => {
-    const arrayChildren = React.Children.toArray(children);
-    const firstChildKey = arrayChildren[0].props.children.key;
-    const lastChildKey =
-      arrayChildren[arrayChildren.length - 1].props.children.key;
+export default ({
+  wrapper,
+  swapUp,
+  swapDown,
+  children,
+  isFirstBlock,
+  isLastBlock,
+  onAction,
+  isAtomic
+}) => {
+  const arrayChildren = React.Children.toArray(children);
+  const firstChildKey = arrayChildren[0].props.children.key;
+  const lastChildKey =
+    arrayChildren[arrayChildren.length - 1].props.children.key;
 
-    const controlledChildren = React.Children.map(children, child => {
-      const currentKey = child.props.children.key;
-      return (
-        <Controlled
-          keySwapUp={currentKey}
-          keySwapDown={currentKey}
-          {...{ swapUp, swapDown, isFirstBlock, isLastBlock, onAction }}
-        >
-          {child}
-        </Controlled>
-      );
-    });
-
-    return wrapper ? (
+  const controlledChildren = React.Children.map(children, child => {
+    const currentKey = child.props.children.key;
+    return (
       <Controlled
-        keySwapUp={firstChildKey}
-        keySwapDown={lastChildKey}
-        {...{ swapUp, swapDown, isFirstBlock, isLastBlock, onAction }}
+        keySwapUp={currentKey}
+        keySwapDown={currentKey}
+        {...{ swapUp, swapDown, isFirstBlock, isLastBlock, onAction, isAtomic }}
       >
-        {React.cloneElement(wrapper, [], children)}
+        {child}
       </Controlled>
-    ) : (
-      controlledChildren
     );
-  }
-);
+  });
+
+  return wrapper ? (
+    <Controlled
+      keySwapUp={firstChildKey}
+      keySwapDown={lastChildKey}
+      {...{ swapUp, swapDown, isFirstBlock, isLastBlock, onAction }}
+    >
+      {React.cloneElement(wrapper, [], children)}
+    </Controlled>
+  ) : (
+    controlledChildren
+  );
+};

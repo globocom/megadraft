@@ -43,11 +43,9 @@ import notFoundPlugin from "../plugins/not-found/plugin";
 import DEFAULT_PLUGINS from "../plugins/default";
 import DEFAULT_ACTIONS from "../actions/default";
 import DEFAULT_ENTITY_INPUTS from "../entity_inputs/default";
-import ActionsProvider from "./ActionsProvider";
+import ActionsProvider, { defaultAction } from "./ActionsProvider";
 
 const NO_RESET_STYLE_DEFAULT = ["ordered-list-item", "unordered-list-item"];
-
-const noop = () => {};
 
 export default class MegadraftEditor extends Component {
   static defaultProps = {
@@ -62,7 +60,10 @@ export default class MegadraftEditor extends Component {
     this.state = {
       readOnly: this.props.readOnly || false,
       hasFocus: false,
-      scrollRef: ""
+      scrollRef: "",
+      swapUp: false,
+      swapDown: false,
+      didSwap: false
     };
 
     this.onChange = ::this.onChange;
@@ -91,7 +92,7 @@ export default class MegadraftEditor extends Component {
 
     this.keyBindings = this.props.keyBindings || [];
 
-    this.onAction = this.props.onAction || noop;
+    this.onAction = this.props.onAction || defaultAction;
 
     this.extendedBlockRenderMap = Immutable.OrderedMap().withMutations(r => {
       for (let [blockType, data] of DefaultDraftBlockRenderMap.entrySeq()) {
@@ -104,6 +105,8 @@ export default class MegadraftEditor extends Component {
               swapDown={this.swapDown}
               isFirstBlock={this.isFirstBlock}
               isLastBlock={this.isLastBlock}
+              onAction={this.onAction}
+              isAtomic={blockType === "atomic"}
             />
           ) : (
             <MegadraftBlock wrapper={data.wrapper} />
@@ -352,7 +355,9 @@ export default class MegadraftEditor extends Component {
   }
 
   handleClassEditor(identifier) {
-    let classEditor = identifier;
+    let classEditor = this.props.movableBlocks
+      ? `${identifier} movable`
+      : identifier;
     let contentState = this.props.editorState.getCurrentContent();
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it.
@@ -383,8 +388,22 @@ export default class MegadraftEditor extends Component {
     clearTimeout(this.blurTimeoutID);
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.editorState !== this.props.editorState) {
+  componentDidUpdate() {
+    if (this.state.swapUp || this.state.swapDown) {
+      const swapFunction = this.state.swapUp ? swapDataUp : swapDataDown;
+
+      const newEditorState = swapFunction({
+        editorState: this.props.editorState,
+        currentKey: this.state.scrollRef
+      });
+
+      this.onChange(newEditorState);
+      this.setState({
+        didSwap: true,
+        swapUp: false,
+        swapDown: false
+      });
+    } else if (this.state.didSwap) {
       const control = document.querySelector(`[id*="${this.state.scrollRef}"]`);
 
       if (control) {
@@ -393,6 +412,9 @@ export default class MegadraftEditor extends Component {
           options.classList.toggle("options--swapped");
           control.classList.toggle("move-control--swapped");
         };
+
+        const input = control.querySelector("[type=text]");
+        input && input.focus();
 
         control.scrollIntoView({ block: "center" });
         window.scroll(0, window.pageYOffset - control.clientHeight / 2);
@@ -403,7 +425,10 @@ export default class MegadraftEditor extends Component {
           swapEffect();
         }, 300);
 
-        this.setState({ scrollRef: "" });
+        this.setState({
+          didSwap: false,
+          scrollRef: ""
+        });
       }
     }
   }
@@ -467,21 +492,27 @@ export default class MegadraftEditor extends Component {
   }
 
   swapUp = currentKey => {
-    const newEditorState = swapDataUp({
-      editorState: this.props.editorState,
-      currentKey
+    document.activeElement.blur();
+
+    this.forceUpdate(() => {
+      this.setState({
+        swapUp: true,
+        swapDown: false,
+        scrollRef: currentKey
+      });
     });
-    this.onChange(newEditorState);
-    this.setState({ scrollRef: currentKey });
   };
 
   swapDown = currentKey => {
-    const newEditorState = swapDataDown({
-      editorState: this.props.editorState,
-      currentKey
+    document.activeElement.blur();
+
+    this.forceUpdate(() => {
+      this.setState({
+        swapUp: false,
+        swapDown: true,
+        scrollRef: currentKey
+      });
     });
-    this.onChange(newEditorState);
-    this.setState({ scrollRef: currentKey });
   };
 
   isFirstBlock = currentKey => {
