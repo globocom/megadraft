@@ -7,42 +7,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default class ActionsProvider extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+export const defaultAction = () => {};
 
-  getChildContext() {
-    return {
-      onAction: this.props.onAction
-    };
-  }
+export const ActionsContext = React.createContext({ onAction: defaultAction });
 
-  render() {
-    return this.props.children;
-  }
-}
+const ActionsProvider = ({ onAction = defaultAction, children }) => (
+  <ActionsContext.Provider value={{ onAction }}>
+    {children}
+  </ActionsContext.Provider>
+);
 
-ActionsProvider.childContextTypes = {
+ActionsProvider.propTypes = {
   onAction: PropTypes.func
 };
 
-export function withActions(WrappedComponent) {
-  class WithActionsHOC extends React.Component {
-    constructor(props) {
-      super(props);
-    }
-
-    render() {
-      return (
-        <WrappedComponent onAction={this.context.onAction} {...this.props} />
-      );
-    }
-  }
-
-  WithActionsHOC.contextTypes = {
-    onAction: PropTypes.func
-  };
-
-  return WithActionsHOC;
-}
+export default ActionsProvider;
