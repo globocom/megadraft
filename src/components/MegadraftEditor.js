@@ -47,8 +47,6 @@ import ActionsProvider from "./ActionsProvider";
 
 const NO_RESET_STYLE_DEFAULT = ["ordered-list-item", "unordered-list-item"];
 
-const noop = () => {};
-
 export default class MegadraftEditor extends Component {
   static defaultProps = {
     actions: DEFAULT_ACTIONS,
@@ -91,7 +89,7 @@ export default class MegadraftEditor extends Component {
 
     this.keyBindings = this.props.keyBindings || [];
 
-    this.onAction = this.props.onAction || noop;
+    this.onAction = this.props.onAction;
 
     this.extendedBlockRenderMap = Immutable.OrderedMap().withMutations(r => {
       for (let [blockType, data] of DefaultDraftBlockRenderMap.entrySeq()) {

@@ -9,10 +9,12 @@ import React, { Component } from "react";
 import Modal from "backstage-modal";
 import ModalPluginList from "./ModalPluginList";
 
-import { withActions } from "./ActionsProvider";
+import { ActionsContext } from "./ActionsProvider";
 import { PLUGINS_MODAL_CLOSE } from "../constants";
 
-class PluginsModal extends Component {
+export default class PluginsModal extends Component {
+  static contextType = ActionsContext;
+
   constructor(props) {
     super(props);
     this.onCloseRequest = ::this.onCloseRequest;
@@ -26,7 +28,7 @@ class PluginsModal extends Component {
       return;
     }
     document.body.classList.remove("megadraft-modal--open");
-    this.props.onAction({ type: PLUGINS_MODAL_CLOSE });
+    this.context.onAction({ type: PLUGINS_MODAL_CLOSE });
     this.props.toggleModalVisibility();
   }
 
@@ -52,5 +54,3 @@ class PluginsModal extends Component {
     );
   }
 }
-
-export default withActions(PluginsModal);

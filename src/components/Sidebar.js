@@ -16,14 +16,16 @@ import {
   SIDEBAR_CLICK_MORE
 } from "../constants";
 
-import { withActions } from "./ActionsProvider";
+import { ActionsContext } from "./ActionsProvider";
 
 import "setimmediate";
 
 import PluginsModal from "./PluginsModal";
 import { getSelectedBlockElement } from "../utils";
 
-class BlockStylesComponent extends Component {
+class BlockStyles extends Component {
+  static contextType = ActionsContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -70,7 +72,7 @@ class BlockStylesComponent extends Component {
       <button
         className="sidemenu__button"
         onClick={e => {
-          this.props.onAction({ type: SIDEBAR_CLICK_MORE });
+          this.context.onAction({ type: SIDEBAR_CLICK_MORE });
           this.onModalOpenClick(e);
         }}
       >
@@ -87,7 +89,7 @@ class BlockStylesComponent extends Component {
         key={item.type}
         className="sidemenu__item"
         onClick={() => {
-          this.props.onAction({
+          this.context.onAction({
             type: SIDEBAR_ADD_PLUGIN,
             pluginName: item.title
           });
@@ -130,7 +132,6 @@ class BlockStylesComponent extends Component {
     );
   }
 }
-export const BlockStyles = withActions(BlockStylesComponent);
 
 export class ToggleButton extends Component {
   render() {
@@ -162,7 +163,9 @@ export class ToggleButton extends Component {
   }
 }
 
-class SideMenuComponent extends Component {
+export class SideMenu extends Component {
+  static contextType = ActionsContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -177,7 +180,7 @@ class SideMenuComponent extends Component {
   }
 
   toggle() {
-    this.props.onAction({
+    this.context.onAction({
       type: this.state.open ? SIDEBAR_SHRINK : SIDEBAR_EXPAND
     });
     this.setState({
@@ -211,7 +214,6 @@ class SideMenuComponent extends Component {
     );
   }
 }
-export const SideMenu = withActions(SideMenuComponent);
 
 export default class SideBar extends Component {
   constructor(props) {

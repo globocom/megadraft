@@ -6,10 +6,12 @@
 
 import React, { Component } from "react";
 
-import { withActions } from "./ActionsProvider";
+import { ActionsContext } from "./ActionsProvider";
 import { PLUGINS_MODAL_ADD_PLUGIN } from "../constants";
 
-class ModalPluginItem extends Component {
+export default class ModalPluginItem extends Component {
+  static contextType = ActionsContext;
+
   constructor(props) {
     super(props);
     this.handleClick = ::this.handleClick;
@@ -33,7 +35,7 @@ class ModalPluginItem extends Component {
         key={item.type}
         className="megadraft-modal__item"
         onClick={() => {
-          this.props.onAction({
+          this.context.onAction({
             type: PLUGINS_MODAL_ADD_PLUGIN,
             pluginName: item.title
           });
@@ -67,5 +69,3 @@ class ModalPluginItem extends Component {
     );
   }
 }
-
-export default withActions(ModalPluginItem);
