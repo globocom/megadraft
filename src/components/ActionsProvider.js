@@ -7,11 +7,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const noop = () => {};
+export const defaultAction = () => {};
 
-export const ActionsContext = React.createContext({ onAction: noop });
+export const ActionsContext = React.createContext({ onAction: defaultAction });
 
-const ActionsProvider = ({ onAction = noop, children }) => (
+const ActionsProvider = ({ onAction = defaultAction, children }) => (
   <ActionsContext.Provider value={{ onAction }}>
     {children}
   </ActionsContext.Provider>

@@ -43,7 +43,7 @@ import notFoundPlugin from "../plugins/not-found/plugin";
 import DEFAULT_PLUGINS from "../plugins/default";
 import DEFAULT_ACTIONS from "../actions/default";
 import DEFAULT_ENTITY_INPUTS from "../entity_inputs/default";
-import ActionsProvider from "./ActionsProvider";
+import ActionsProvider, { defaultAction } from "./ActionsProvider";
 
 const NO_RESET_STYLE_DEFAULT = ["ordered-list-item", "unordered-list-item"];
 
@@ -89,7 +89,7 @@ export default class MegadraftEditor extends Component {
 
     this.keyBindings = this.props.keyBindings || [];
 
-    this.onAction = this.props.onAction;
+    this.onAction = this.props.onAction || defaultAction;
 
     this.extendedBlockRenderMap = Immutable.OrderedMap().withMutations(r => {
       for (let [blockType, data] of DefaultDraftBlockRenderMap.entrySeq()) {
@@ -102,6 +102,7 @@ export default class MegadraftEditor extends Component {
               swapDown={this.swapDown}
               isFirstBlock={this.isFirstBlock}
               isLastBlock={this.isLastBlock}
+              onAction={this.onAction}
             />
           ) : (
             <MegadraftBlock wrapper={data.wrapper} />

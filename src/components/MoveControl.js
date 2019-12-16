@@ -4,15 +4,20 @@
  * License: MIT
  */
 
-import React, { useContext } from "react";
+import React from "react";
 import icons from "../icons";
 import MegadraftBlock from "./MegadraftBlock";
-import { ActionsContext } from "./ActionsProvider";
 
 import { BLOCK_SWAP_UP, BLOCK_SWAP_DOWN } from "../constants";
 
-const Options = ({ onClickUp, onClickDown, id, disableUp, disableDown }) => {
-  const { onAction } = useContext(ActionsContext);
+const Options = ({
+  onClickUp,
+  onClickDown,
+  id,
+  disableUp,
+  disableDown,
+  onAction
+}) => {
   const onPointerDown = e => {
     e.preventDefault();
     e.stopPropagation();
@@ -47,13 +52,21 @@ const Options = ({ onClickUp, onClickDown, id, disableUp, disableDown }) => {
   );
 };
 
-const Control = ({ children, id, onClickUp, onClickDown, isFirst, isLast }) => (
+const Control = ({
+  children,
+  id,
+  onClickUp,
+  onClickDown,
+  isFirst,
+  isLast,
+  onAction
+}) => (
   <div className="move-control" id={`move-control-${id}`}>
     <div className="move-control__target" data-testid={`block-${id}`}>
       {children}
     </div>
     <Options
-      {...{ id, onClickUp, onClickDown }}
+      {...{ id, onClickUp, onClickDown, onAction }}
       disableUp={isFirst}
       disableDown={isLast}
     />
@@ -67,6 +80,7 @@ const Controlled = ({
   isLastBlock,
   swapUp,
   swapDown,
+  onAction,
   children
 }) => {
   const onClickUp = () => swapUp(keySwapUp);
@@ -80,7 +94,7 @@ const Controlled = ({
         id={
           keySwapUp !== keySwapDown ? `${keySwapUp}-${keySwapDown}` : keySwapUp
         }
-        {...{ onClickUp, onClickDown, isFirst, isLast }}
+        {...{ onClickUp, onClickDown, isFirst, isLast, onAction }}
       >
         {children}
       </Control>
@@ -94,7 +108,8 @@ export default ({
   swapDown,
   children,
   isFirstBlock,
-  isLastBlock
+  isLastBlock,
+  onAction
 }) => {
   const arrayChildren = React.Children.toArray(children);
   const firstChildKey = arrayChildren[0].props.children.key;
@@ -107,7 +122,7 @@ export default ({
       <Controlled
         keySwapUp={currentKey}
         keySwapDown={currentKey}
-        {...{ swapUp, swapDown, isFirstBlock, isLastBlock }}
+        {...{ swapUp, swapDown, isFirstBlock, isLastBlock, onAction }}
       >
         {child}
       </Controlled>
@@ -118,7 +133,7 @@ export default ({
     <Controlled
       keySwapUp={firstChildKey}
       keySwapDown={lastChildKey}
-      {...{ swapUp, swapDown, isFirstBlock, isLastBlock }}
+      {...{ swapUp, swapDown, isFirstBlock, isLastBlock, onAction }}
     >
       {React.cloneElement(wrapper, [], children)}
     </Controlled>
