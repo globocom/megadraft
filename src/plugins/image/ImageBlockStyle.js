@@ -11,6 +11,6 @@ export default {
     verticalAlign: "middle"
   },
   selected: {
-    border: "2px solid #1d69de"
+    outline: "auto #1d69de"
   }
 };
