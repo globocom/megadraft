@@ -437,6 +437,10 @@ body {
   .megadraft-editor.placeholder-blockquote .public-DraftEditorPlaceholder-root {
     left: 20px;
     top: 7px; }
+  .megadraft-editor.movable .public-DraftEditorPlaceholder-root {
+    padding: 8px 0 0 8px; }
+  .megadraft-editor.movable.placeholder-blockquote .public-DraftEditorPlaceholder-root {
+    padding: 20px 0 0 10px; }
   .megadraft-editor blockquote {
     border-left: 2px solid #ddd;
     color: #999;
@@ -806,14 +810,14 @@ body {
     display: flex;
     transition: margin 0.3s; }
   .megadraft-editor .move-control:hover {
-    border: 8px solid #eeeeee;
-    background-color: #eeeeee; }
+    border: 8px solid #eeeeee; }
   .megadraft-editor .move-control:hover .options {
     border: 8px solid #eeeeee;
     opacity: 1; }
   .megadraft-editor .move-control__target {
-    width: 100%;
-    background-color: white; }
+    width: 100%; }
+  .megadraft-editor .move-control--atomic:hover {
+    background-color: #eeeeee; }
   .megadraft-editor .move-control--swapped {
     margin-left: -8px; }
   .megadraft-editor .options--swapped {
