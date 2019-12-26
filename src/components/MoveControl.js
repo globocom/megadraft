@@ -59,9 +59,13 @@ const Control = ({
   onClickDown,
   isFirst,
   isLast,
-  onAction
+  onAction,
+  isAtomic
 }) => (
-  <div className="move-control" id={`move-control-${id}`}>
+  <div
+    className={`move-control ${isAtomic && "move-control--atomic"}`}
+    id={`move-control-${id}`}
+  >
     <div className="move-control__target" data-testid={`block-${id}`}>
       {children}
     </div>
@@ -78,6 +82,7 @@ const Controlled = ({
   keySwapDown,
   isFirstBlock,
   isLastBlock,
+  isAtomic,
   swapUp,
   swapDown,
   onAction,
@@ -94,7 +99,7 @@ const Controlled = ({
         id={
           keySwapUp !== keySwapDown ? `${keySwapUp}-${keySwapDown}` : keySwapUp
         }
-        {...{ onClickUp, onClickDown, isFirst, isLast, onAction }}
+        {...{ onClickUp, onClickDown, isFirst, isLast, onAction, isAtomic }}
       >
         {children}
       </Control>
@@ -109,7 +114,8 @@ export default ({
   children,
   isFirstBlock,
   isLastBlock,
-  onAction
+  onAction,
+  isAtomic
 }) => {
   const arrayChildren = React.Children.toArray(children);
   const firstChildKey = arrayChildren[0].props.children.key;
@@ -122,7 +128,7 @@ export default ({
       <Controlled
         keySwapUp={currentKey}
         keySwapDown={currentKey}
-        {...{ swapUp, swapDown, isFirstBlock, isLastBlock, onAction }}
+        {...{ swapUp, swapDown, isFirstBlock, isLastBlock, onAction, isAtomic }}
       >
         {child}
       </Controlled>
