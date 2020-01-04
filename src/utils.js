@@ -65,23 +65,35 @@ export function getSelectionCoords(editor, toolbar) {
   const rangeWidth = rangeBounds.right - rangeBounds.left;
   const arrowStyle = {};
 
-  let offsetLeft = rangeBounds.left - editorBounds.left + rangeWidth / 2;
+  let offsetLeft =
+    rangeBounds.left - editorBounds.left + rangeWidth / 2 - toolbarWidth / 2;
+
   arrowStyle.left = "50%";
-  if (offsetLeft - toolbarWidth / 2 + editorBounds.left < minOffsetLeft) {
-    offsetLeft = toolbarWidth / 2 - editorBounds.left + minOffsetLeft;
+
+  //When the left distance of the selection is less than the width of the toolbar.
+  if (offsetLeft + editorBounds.left < minOffsetLeft) {
+    offsetLeft =
+      toolbarWidth / 2 - editorBounds.left + minOffsetLeft - toolbarWidth / 2;
     arrowStyle.left =
       (rangeBounds.left + rangeBounds.right) / 2 - minOffsetLeft;
   }
+  //When the right distance of the selection is less than the width of the toolbar.
   if (
-    offsetLeft + toolbarWidth / 2 + editorBounds.left >
+    rangeBounds.left +
+      rangeWidth / 2 +
+      toolbarWidth / 2 +
+      minOffsetLeft +
+      minOffsetRight >
     win.innerWidth - minOffsetRight
   ) {
-    arrowStyle.left =
-      rangeBounds.left -
-      (win.innerWidth - minOffsetRight - toolbarWidth) +
-      (rangeBounds.right - rangeBounds.left) / 2;
     offsetLeft =
-      win.innerWidth - editorBounds.left - toolbarWidth / 2 - minOffsetRight;
+      win.innerWidth +
+      editorBounds.left -
+      toolbarWidth -
+      minOffsetRight -
+      toolbarWidth / 2;
+    arrowStyle.left =
+      rangeBounds.left - editorBounds.left + rangeWidth / 2 - offsetLeft;
   }
   let offsetTop = rangeBounds.top - editorBounds.top - 14;
   arrowStyle.top = "100%";
