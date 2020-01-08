@@ -32,7 +32,7 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.1",
     "es6-shim": "^0.35.0",
-    "eslint": "^5.16.0",
+    "eslint": "^6.8.0",
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-jest": "^22.6.4",
     "eslint-plugin-prettier": "^3.1.0",
