@@ -72,8 +72,7 @@ export function getSelectionCoords(editor, toolbar) {
 
   //When the left distance of the selection is less than the width of the toolbar.
   if (offsetLeft + editorBounds.left < minOffsetLeft) {
-    offsetLeft =
-      toolbarWidth / 2 - editorBounds.left + minOffsetLeft - toolbarWidth / 2;
+    offsetLeft = editorBounds.left + minOffsetLeft;
     arrowStyle.left =
       (rangeBounds.left + rangeBounds.right) / 2 - minOffsetLeft;
   }
@@ -87,16 +86,13 @@ export function getSelectionCoords(editor, toolbar) {
     win.innerWidth - minOffsetRight
   ) {
     offsetLeft =
-      win.innerWidth +
-      editorBounds.left -
-      toolbarWidth -
-      minOffsetRight -
-      toolbarWidth / 2;
+      win.visualViewport.width -
+      (toolbarWidth + minOffsetRight + editorBounds.left);
     arrowStyle.left =
       rangeBounds.left - editorBounds.left + rangeWidth / 2 - offsetLeft;
   }
   let offsetTop = rangeBounds.top - editorBounds.top - 14;
-  arrowStyle.top = "100%";
+  arrowStyle.top = "97%";
   if (offsetTop - minOffsetTop - toolbarHeight + editorBounds.top < 0) {
     //Always make sure that, if the range bounds does not fully exists, we keep the current coordinates
     if (rangeBounds.bottom && !Number.isNaN(rangeBounds.bottom)) {
@@ -104,6 +100,11 @@ export function getSelectionCoords(editor, toolbar) {
       arrowStyle.top = "-14px";
       arrowStyle.transform = "rotate(180deg)";
     }
+  }
+  //When the selection is on extreme left
+  if ((rangeBounds.left + rangeWidth) / 2 < 10) {
+    offsetLeft = 0;
+    arrowStyle.left = (rangeBounds.left + rangeWidth) / 2;
   }
 
   return { offsetLeft, offsetTop, arrowStyle };
