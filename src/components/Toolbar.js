@@ -113,30 +113,36 @@ export default class Toolbar extends Component {
   }
 
   setBarPosition() {
-    const editor = this.props.editor;
-    const toolbar = this.toolbarEl;
-    const selectionCoords = getSelectionCoords(editor, toolbar);
+    this.setState(
+      {
+        show: true
+      },
+      () => {
+        const editor = this.props.editor;
+        const toolbar = this.toolbarEl;
+        const selectionCoords = getSelectionCoords(editor, toolbar);
 
-    if (!selectionCoords) {
-      return null;
-    }
+        if (!selectionCoords) {
+          return null;
+        }
 
-    if (
-      (selectionCoords && !this.state.position) ||
-      this.state.position.top !== selectionCoords.offsetTop ||
-      this.state.position.left !== selectionCoords.offsetLeft ||
-      this.state.arrowStyle !== selectionCoords.arrowStyle ||
-      !this.state.show
-    ) {
-      this.setState({
-        show: true,
-        position: {
-          top: selectionCoords.offsetTop,
-          left: selectionCoords.offsetLeft
-        },
-        arrowStyle: selectionCoords.arrowStyle
-      });
-    }
+        if (
+          (selectionCoords && !this.state.position) ||
+          this.state.position.top !== selectionCoords.offsetTop ||
+          this.state.position.left !== selectionCoords.offsetLeft ||
+          this.state.arrowStyle !== selectionCoords.arrowStyle ||
+          !this.state.show
+        ) {
+          this.setState({
+            position: {
+              top: selectionCoords.offsetTop,
+              left: selectionCoords.offsetLeft
+            },
+            arrowStyle: selectionCoords.arrowStyle
+          });
+        }
+      }
+    );
   }
 
   handleSetToolbar() {
