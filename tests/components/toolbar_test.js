@@ -52,8 +52,8 @@ const draft = require("draft-js");
 draft.getVisibleSelectionRect = () => {
   return {
     top: 0,
-    left: 0,
-    right: 1
+    left: 100,
+    right: 100
   };
 };
 
@@ -79,7 +79,8 @@ describe("Toolbar Component", () => {
       blocks: [
         {
           key: "ag6qs",
-          text: "Hello World!",
+          text:
+            "Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World! Hello World!",
           type: "unstyled",
           depth: 0,
           inlineStyleRanges: [],
@@ -339,19 +340,22 @@ describe("Toolbar Component", () => {
     });
 
     it("should center toolbar above the selection", () => {
-      const minOffsetRight = 5;
-
       replaceSelection(
-        { focusOffset: 0, anchorOffset: 5 },
+        {
+          focusOffset: 20,
+          anchorOffset: 10
+        },
         testContext.wrapper
       );
+
+      testContext.wrapper.update();
 
       const toolbarWrapper = testContext.wrapper.find(".toolbar");
       const toolbarWrapperNode = toolbarWrapper.getDOMNode();
       testContext.clock.advanceTimersByTime(32);
 
       expect(toolbarWrapperNode.style.top).toEqual("-14px");
-      expect(toolbarWrapperNode.style.left).toEqual(minOffsetRight + "px");
+      expect(toolbarWrapperNode.style.left).toEqual("100px");
     });
 
     it("should not throw an exception if readOnly = true while there is an exception", () => {
