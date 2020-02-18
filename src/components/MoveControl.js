@@ -24,30 +24,36 @@ const Options = ({
   };
   return (
     <div className="options">
-      <button
+      <div
         data-testid={`swap-up-${id}`}
-        className="options__button options__button--up"
+        className={
+          disableUp
+            ? "options__button options__button--up options__button--disabled"
+            : "options__button options__button--up"
+        }
         onClick={() => {
           onAction({ type: BLOCK_SWAP_UP, blockId: id });
           onClickUp();
         }}
-        disabled={disableUp}
         onPointerDown={onPointerDown}
       >
         <icons.DropdownArrow />
-      </button>
-      <button
+      </div>
+      <div
         data-testid={`swap-down-${id}`}
-        className="options__button"
+        className={
+          disableDown
+            ? "options__button options__button--disabled"
+            : "options__button"
+        }
         onClick={() => {
           onAction({ type: BLOCK_SWAP_DOWN, blockId: id });
           onClickDown();
         }}
-        disabled={disableDown}
         onPointerDown={onPointerDown}
       >
         <icons.DropdownArrow />
-      </button>
+      </div>
     </div>
   );
 };
