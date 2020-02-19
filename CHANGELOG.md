@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.6.16 - 2019-02-18
+### Fixed
+- Copied text with movableBlocks active has extra empty spaces on Chrome (#302)
+
 ## 0.6.15 - 2019-12-26
 ### Fixed
 - Focus loss in plugins with react-select dependency (#288)
