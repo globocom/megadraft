@@ -858,22 +858,26 @@ body {
     background-color: #eee;
     opacity: 0;
     -webkit-transition: margin 0.3s;
-    transition: margin 0.3s; }
+    transition: margin 0.3s;
+    cursor: default; }
   .megadraft-editor .options__button {
     border: 0;
-    cursor: pointer;
     height: 24px;
     width: 24px;
     font-size: 0;
     padding: 0;
     outline: none;
-    background: none; }
-  .megadraft-editor .options__button:hover:enabled {
+    background: none;
+    cursor: pointer; }
+  .megadraft-editor .options__button--disabled {
+    pointer-events: none;
+    opacity: 0.5; }
+  .megadraft-editor .options__button:hover {
     background: rgba(33, 33, 33, 0.08);
     -webkit-transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     border-radius: 50%; }
-  .megadraft-editor .options__button:active:enabled {
+  .megadraft-editor .options__button:active {
     background: rgba(33, 33, 33, 0.16); }
   .megadraft-editor .options__button--up {
     -webkit-transform: rotate(180deg);
