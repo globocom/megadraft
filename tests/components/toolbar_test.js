@@ -441,6 +441,18 @@ describe("Toolbar Component", () => {
         wrapper.simulate("mouseDown", Object.assign(jest.fn(), event));
         expect(event.preventDefault).not.toHaveBeenCalled();
       });
+      
+      it("(integration) Should not call preventDefault when is a select", () => {
+        const event = {
+          preventDefault: () => {},
+          target: { localName: "select" }
+        };
+        jest.spyOn(event, "preventDefault");
+
+        const wrapper = testContext.wrapper.find(".toolbar__wrapper");
+        wrapper.simulate("mouseDown", Object.assign(jest.fn(), event));
+        expect(event.preventDefault).not.toHaveBeenCalled();
+      });
 
       it("(integration) LinkInput should remove an entity when ", () => {
         testContext.linkButton().simulate("click");
