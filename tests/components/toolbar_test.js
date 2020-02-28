@@ -441,7 +441,7 @@ describe("Toolbar Component", () => {
         wrapper.simulate("mouseDown", Object.assign(jest.fn(), event));
         expect(event.preventDefault).not.toHaveBeenCalled();
       });
-      
+
       it("(integration) Should not call preventDefault when is a select", () => {
         const event = {
           preventDefault: () => {},
