@@ -148,7 +148,7 @@ export default class MegadraftEditor extends Component {
     this.props.onChange(editorState);
   }
 
-  externalKeyBindings(e): string {
+  externalKeyBindings(e) {
     for (const kb of this.keyBindings) {
       if (kb.isKeyBound(e)) {
         return kb.name;
