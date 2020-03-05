@@ -310,7 +310,10 @@ export default class Toolbar extends Component {
               this.toolbarEl = el;
             }}
             onMouseDown={e => {
-              if (e.target.localName !== "input") {
+              if (
+                e.target.localName !== "input" &&
+                e.target.localName !== "select"
+              ) {
                 e.preventDefault();
               }
             }}
