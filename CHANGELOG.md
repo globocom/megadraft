@@ -4,7 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 0.6.16 - 2019-02-18
+## 0.7.0 - 2020-03-05
+### Fixed
+- Mispositioning toolbar (#294)
+- Avoid preventDefault in Toolbar for select input (#270)
+### Modified
+- Update draft-js version to 0.11.4 (#297)
+- docs(overview): Improve usage docs (#301)
+- Prevent `false` from being appended into Control's component className (#307)
+- Remove return type annotation on method `externalKeyBindings` (#306)
+
+## 0.6.16 - 2020-02-18
 ### Fixed
 - Copied text with movableBlocks active has extra empty spaces on Chrome (#302)
 
