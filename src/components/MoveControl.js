@@ -5,6 +5,7 @@
  */
 
 import React from "react";
+import classNames from "classnames";
 import icons from "../icons";
 import MegadraftBlock from "./MegadraftBlock";
 
@@ -69,7 +70,7 @@ const Control = ({
   isAtomic
 }) => (
   <div
-    className={`move-control ${isAtomic && "move-control--atomic"}`}
+    className={classNames("move-control", isAtomic && "move-control--atomic")}
     id={`move-control-${id}`}
   >
     <div className="move-control__target" data-testid={`block-${id}`}>
