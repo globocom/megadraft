@@ -4,6 +4,8 @@ about: Found a bug? Let us know! 🐛
 
 ---
 
+# -- Bug Report --
+
 ## Expected Behavior
 <!--- Tell us what should happen -->
 
