@@ -55,33 +55,33 @@
     z-index: 0;
 }
 
-&.placeholder-list {
+.placeholder-list {
   .public-DraftEditorPlaceholder-root {
     left: 50px;
     top: 5px;
   }
 }
 
-&.placeholder-header-two {
+.placeholder-header-two {
   .public-DraftEditorPlaceholder-root {
     top: 2px;
   }
 }
 
-&.placeholder-blockquote {
+.placeholder-blockquote {
   .public-DraftEditorPlaceholder-root {
     left: 20px;
     top: 7px;
   }
 }
 
-&.movable {
+.movable {
   .public-DraftEditorPlaceholder-root {
     padding: 8px 0 0 8px;
   }
 }
 
-&.movable.placeholder-blockquote {
+.movable.placeholder-blockquote {
   .public-DraftEditorPlaceholder-root {
     padding: 20px 0 0 10px;
   }
