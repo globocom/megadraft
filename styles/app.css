@@ -439,17 +439,17 @@ body {
     color: #999;
     position: absolute;
     z-index: 0; }
-  .megadraft-editor.placeholder-list .public-DraftEditorPlaceholder-root {
+  .megadraft-editor .placeholder-list .public-DraftEditorPlaceholder-root {
     left: 50px;
     top: 5px; }
-  .megadraft-editor.placeholder-header-two .public-DraftEditorPlaceholder-root {
+  .megadraft-editor .placeholder-header-two .public-DraftEditorPlaceholder-root {
     top: 2px; }
-  .megadraft-editor.placeholder-blockquote .public-DraftEditorPlaceholder-root {
+  .megadraft-editor .placeholder-blockquote .public-DraftEditorPlaceholder-root {
     left: 20px;
     top: 7px; }
-  .megadraft-editor.movable .public-DraftEditorPlaceholder-root {
+  .megadraft-editor .movable .public-DraftEditorPlaceholder-root {
     padding: 8px 0 0 8px; }
-  .megadraft-editor.movable.placeholder-blockquote .public-DraftEditorPlaceholder-root {
+  .megadraft-editor .movable.placeholder-blockquote .public-DraftEditorPlaceholder-root {
     padding: 20px 0 0 10px; }
   .megadraft-editor blockquote {
     border-left: 2px solid #ddd;
