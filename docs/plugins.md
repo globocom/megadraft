@@ -64,7 +64,6 @@ If you do not want to display your plugin on the sidebar as an option to add but
 Megadraft comes with [built-in plugins][repo-plugins], and you can look for more
 Megadraft plugins on [Globo.com's organization page][github-globocom].
 
-
 ### buttonComponent
 
 The button component, if defined, is rendered as a button on Megadraft's
@@ -78,18 +77,17 @@ In the example below, we show a button that creates an image block using a
 DraftJS' entity:
 
 ```js
-import React, {Component} from "react";
-import {insertDataBlock} from "megadraft";
+import React, { Component } from "react";
+import { insertDataBlock } from "megadraft";
 
 export default class BlockButton extends Component {
-
-  onClick = (e) => {
+  onClick = e => {
     e.preventDefault();
     const src = window.prompt("Enter a URL");
-    const data = {"type": "image", "src": src};
+    const data = { type: "image", src: src };
     // Calls the onChange method with the new state.
     this.props.onChange(insertDataBlock(this.props.editorState, data));
-  }
+  };
 
   render() {
     return (
@@ -110,34 +108,32 @@ In the example below, we render an `img` tag with the `src` from the above
 example:
 
 ```js
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 export default class ImageBlock extends Component {
-  render(){
-    return (
-      <img src={this.props.data.src} />
-    );
+  render() {
+    return <img src={this.props.data.src} />;
   }
 }
 ```
 
 ### CommonBlock
 
-Several common components can help build Megadraft plugins quickly.  In the example below, we render a CommonBlock with BlockContent containing an `img` tag with the `src` from above.
+Several common components can help build Megadraft plugins quickly. In the example below, we render a CommonBlock with BlockContent containing an `img` tag with the `src` from above.
 
 ```js
-import React, {Component} from "react";
-import {MegadraftIcons, MegadraftPlugin} from "megadraft";
-const {BlockContent, BlockData, BlockInput, CommonBlock} = MegadraftPlugin;
+import React, { Component } from "react";
+import { MegadraftIcons, MegadraftPlugin } from "megadraft";
+const { BlockContent, BlockData, BlockInput, CommonBlock } = MegadraftPlugin;
 
 export default class ImageBlock extends Component {
-  render(){
+  render() {
     const blockActions = [
       {
-        key: 'delete',
+        key: "delete",
         icon: MegadraftIcons.DeleteIcon,
-        action: this.props.container.remove,
-      },
+        action: this.props.container.remove
+      }
     ];
 
     return (
@@ -156,6 +152,7 @@ export default class ImageBlock extends Component {
 ```
 
 ### Props received by blockComponent
+
 - `data`: Any data passed into `insertDataBlock` function after `editorState`
 - `container`: Instance of [Media Component](https://github.com/globocom/megadraft/blob/master/src/components/Media.js) with helper functions `remove` to remove the block from `editorState` and `updateData` to update plugin data
 - `blockProps`: Object containing `editorState`, ReadOnly getters & setters from `MegadraftEditor`, `onChange` as a proxy to `container.updateData`, as well as the defined `plugin` object structure.

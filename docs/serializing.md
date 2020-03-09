@@ -11,7 +11,11 @@ comes with two auxiliary functions to help in the process:
 In the example below, we use those functions to save and initialize the editor:
 
 ```js
-import {MegadraftEditor, editorStateFromRaw, editorStateToJSON} from "megadraft";
+import {
+  MegadraftEditor,
+  editorStateFromRaw,
+  editorStateToJSON
+} from "megadraft";
 
 class Example extends React.Component {
   constructor(props) {
@@ -19,47 +23,45 @@ class Example extends React.Component {
     // Here's the content you stored in the base
     // const myContent = load_from_db();
     const myContent = {
-      "entityMap": {},
-      "blocks": [
+      entityMap: {},
+      blocks: [
         {
-          "key": "ag6qs",
-          "text": "",
-          "type": "unstyled",
-          "depth": 0,
-          "inlineStyleRanges": [],
-          "entityRanges": [],
-          "data": {}
+          key: "ag6qs",
+          text: "",
+          type: "unstyled",
+          depth: 0,
+          inlineStyleRanges: [],
+          entityRanges: [],
+          data: {}
         }
       ]
     };
     const editorState = editorStateFromRaw(myContent);
-    this.state = {editorState};
+    this.state = { editorState };
   }
 
-  onChange = (editorState) =>  {
-    this.setState({editorState});
-  }
+  onChange = editorState => {
+    this.setState({ editorState });
+  };
 
   onSaveClick = () => {
-    const {editorState} = this.state;
+    const { editorState } = this.state;
     const content = editorStateToJSON(editorState);
     // Your function to save the content
     // save_my_content(content);
     console.log(content);
-  }
+  };
 
   render() {
     return (
       <div>
         <MegadraftEditor
           editorState={this.state.editorState}
-          onChange={this.onChange} />
-        <button onClick={this.onSaveClick}>
-          Save
-        </button>
+          onChange={this.onChange}
+        />
+        <button onClick={this.onSaveClick}>Save</button>
       </div>
     );
   }
 }
-
 ```

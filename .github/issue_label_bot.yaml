@@ -1,5 +1,4 @@
 label-alias:
-  bug: 'kind/bug'
-  enhancement: 'enhancement'
-  question: 'question'
-  
+  bug: "kind/bug"
+  enhancement: "enhancement"
+  question: "question"

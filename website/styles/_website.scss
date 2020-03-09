@@ -28,7 +28,7 @@ $hit-color: #ffcf00;
   &__content {
     margin: auto;
     color: #333;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 16px;
     line-height: 1.6;
     word-wrap: break-word;
@@ -56,11 +56,11 @@ $hit-color: #ffcf00;
 
   &__title {
     color: $hit-color;
-    font-family:'Abril Fatface', sans-serif;
+    font-family: "Abril Fatface", sans-serif;
     font-weight: normal;
     font-size: 8vmax;
     line-height: 0.9;
-    letter-spacing: -.04em;
+    letter-spacing: -0.04em;
     text-align: left;
     margin-bottom: 20px;
   }
@@ -68,7 +68,7 @@ $hit-color: #ffcf00;
   &__description {
     color: #fff;
     font-size: calc(14px + 0.72vw);
-    letter-spacing: -.035em;
+    letter-spacing: -0.035em;
     line-height: 1.4;
     text-shadow: 1px 1px 3px #333;
   }
@@ -86,21 +86,21 @@ $hit-color: #ffcf00;
     transform: translateX(-50%);
   }
 
-  @media only screen and (min-device-width: 320px) and (max-device-width: 480px){
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     &__call-to-action {
-        font-weight: bold;
-        font-size: 45px;
-        position: absolute;
-        bottom: -45px;
-        color: #fff;
-        cursor: pointer;
-        text-decoration: none;
-        left: 50%;
-        text-shadow: 1px 1px 3px #333;
-        transform: translateX(-50%);
-      }
+      font-weight: bold;
+      font-size: 45px;
+      position: absolute;
+      bottom: -45px;
+      color: #fff;
+      cursor: pointer;
+      text-decoration: none;
+      left: 50%;
+      text-shadow: 1px 1px 3px #333;
+      transform: translateX(-50%);
+    }
 
-     &__arrow-call-to-action {
+    &__arrow-call-to-action {
       font-weight: bold;
       position: relative;
       color: $hit-color;
@@ -117,19 +117,19 @@ $hit-color: #ffcf00;
 
   @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     &__call-to-action {
-        font-weight: bold;
-        font-size: 45px;
-        position: absolute;
-        bottom: -45px;
-        color: #fff;
-        cursor: pointer;
-        text-decoration: none;
-        left: 50%;
-        text-shadow: 1px 1px 3px #333;
-        transform: translateX(-50%);
-      }
+      font-weight: bold;
+      font-size: 45px;
+      position: absolute;
+      bottom: -45px;
+      color: #fff;
+      cursor: pointer;
+      text-decoration: none;
+      left: 50%;
+      text-shadow: 1px 1px 3px #333;
+      transform: translateX(-50%);
+    }
 
-     &__arrow-call-to-action {
+    &__arrow-call-to-action {
       font-weight: bold;
       position: relative;
       color: $hit-color;
@@ -160,11 +160,11 @@ $hit-color: #ffcf00;
 }
 
 .tab-container-editor {
-    padding-left: 256px;
-    padding-right: 256px;
-    padding-top: 95px;
-    padding-bottom: 128px;
-  }
+  padding-left: 256px;
+  padding-right: 256px;
+  padding-top: 95px;
+  padding-bottom: 128px;
+}
 
 @media only screen and (max-width: 767px) {
   .tab-container-editor {
@@ -181,7 +181,8 @@ $hit-color: #ffcf00;
   padding-right: 256px;
   padding-top: 64px;
   padding-bottom: 128px;
-  /*padding-left: 80px;*/ }
+  /*padding-left: 80px;*/
+}
 
 @media only screen and (max-width: 1000px) {
   .tab-container-json {
@@ -190,7 +191,8 @@ $hit-color: #ffcf00;
     padding-right: 0px;
     padding-top: 64px;
     padding-bottom: 256px;
-    /*padding-left: 80px;*/ }
+    /*padding-left: 80px;*/
+  }
 
   .hljs {
     background-color: #fff;

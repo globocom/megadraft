@@ -6,7 +6,7 @@
     "react/react-in-jsx-scope": 2,
 
     "curly": [2],
-    "no-unused-vars": [2, {"vars": "all", "args": "none"}],
+    "no-unused-vars": [2, { "vars": "all", "args": "none" }],
     "no-console": [0],
     "prettier/prettier": "error"
   },
@@ -16,11 +16,7 @@
     "node": true,
     "jest": true
   },
-  "extends": [
-    "eslint:recommended",
-    "plugin:jest/recommended",
-    "prettier"
-  ],
+  "extends": ["eslint:recommended", "plugin:jest/recommended", "prettier"],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
@@ -29,9 +25,5 @@
       "experimentalObjectRestSpread": true
     }
   },
-  "plugins": [
-    "jest",
-    "prettier",
-    "react"
-  ]
+  "plugins": ["jest", "prettier", "react"]
 }

@@ -45,31 +45,26 @@ make test
 
 Megadraft depends on [Sass](http://sass-lang.com/) to build style assets.
 
-
 ## Importing the default styles
 
 Megadraft ships with a default styling available at this location in the installed package: node_modules/megadraft/dist/css/megadraft.css.
 
-
 ## Documentation
 
-* [Overview & Usage][docs-overview-and-usage]
-* [Customization][docs-customization]
-* [Custom Entities][docs-custom-entities]
-* [Plugins][docs-plugins]
-* [Saving & Loading][docs-saving-loading]
-
+- [Overview & Usage][docs-overview-and-usage]
+- [Customization][docs-customization]
+- [Custom Entities][docs-custom-entities]
+- [Plugins][docs-plugins]
+- [Saving & Loading][docs-saving-loading]
 
 ## Plugins
 
 Check out the [docs][docs-plugins] for information about plugin structure.
 To help in this process there is a [Yeoman Megadraft Plugin Generator][plugin-generator].
 
-
 ## License
 
 Megadraft is licensed under the [MIT license](LICENSE).
-
 
 ## Third Party
 
@@ -79,7 +74,6 @@ under [CC0 license](https://stocksnap.io/license).
 
 The Landing page uses a Megadeth picture by [Ted Van Pelt](https://flic.kr/p/7Pr94f)
 licensed under [CC-BY](https://creativecommons.org/licenses/by/2.0/).
-
 
 [plugin-generator]: https://github.com/globocom/generator-megadraft-plugin
 [docs-overview-and-usage]: http://globocom.github.io/megadraft/#/docs/overview

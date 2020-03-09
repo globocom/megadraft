@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2016, Globo.com (https://github.com/globocom)
  *
@@ -8,125 +7,125 @@
 @import "_mixins.scss";
 
 .toolbar {
-    background: yellow;
+  background: yellow;
+  height: 0;
+  position: absolute;
+  display: none;
+  z-index: 10;
+
+  &--open {
+    display: block;
+  }
+
+  &__error-msg {
+    margin: 0;
     height: 0;
+    height: 0;
+    transition: height 0.2s ease-in-out;
+  }
+
+  &--error {
+    .toolbar__wrapper {
+      background-color: #e83f26;
+    }
+    .toolbar__arrow {
+      border-color: #e83f26 transparent transparent;
+    }
+    .toolbar__error-msg {
+      color: #fff;
+      margin: -8px 0 0 20px;
+      padding-bottom: 12px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      height: 28px;
+    }
+    .toolbar__button {
+      color: #fff;
+    }
+    @include placeholder {
+      color: #fff;
+    }
+  }
+
+  &__wrapper {
+    background-color: #181818;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
+    position: relative;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  &__list {
+    padding: 0 8px;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  &__arrow {
+    display: inline-block;
+    top: 100%;
+    left: 50%;
+    height: 0;
+    width: 0;
     position: absolute;
-    display: none;
-    z-index: 10;
+    pointer-events: none;
+    border-width: 8px;
+    border-style: solid;
+    border-color: #181818 transparent transparent;
+    margin-left: -8px;
+    transition: border-color 0.2s ease-in-out;
+  }
 
-    &--open {
-        display: block;
+  &__item {
+    display: inline-block;
+    color: #ccc;
+
+    &:hover {
+      color: #fff;
     }
 
-    &__error-msg {
-        margin: 0;
-        height: 0;
-        height: 0;
-        transition: height 0.2s ease-in-out;
-    }
+    &--active {
+      color: #3192e7;
 
-    &--error {
-      .toolbar__wrapper {
-        background-color: #E83F26;
-      }
-      .toolbar__arrow {
-        border-color: #E83F26 transparent transparent;
-      }
-      .toolbar__error-msg {
-        color: #FFF;
-        margin: -8px 0 0 20px;
-        padding-bottom: 12px;
-        font-size: 0.75rem;
-        font-weight: bold;
-        height: 28px;
-      }
-      .toolbar__button {
-        color: #FFF;
-      }
-      @include placeholder {
-        color: #FFF;
+      &:hover {
+        color: #3192e7;
       }
     }
 
-    &__wrapper {
-        background-color: #181818;
-        border-radius: 4px;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
-        position: relative;
-        transition: background-color 0.2s ease-in-out;
+    &--separator {
+      border-right: 1px solid #333;
+      height: 20px;
+      margin: 0 8px;
     }
+  }
 
-    &__list {
-        padding: 0 8px;
-        margin: 0;
-        white-space: nowrap;
+  &__button {
+    padding: 0;
+    color: inherit;
+    cursor: pointer;
+    border: 0;
+    height: 56px;
+    width: 40px;
+    background: transparent;
+  }
+
+  &__input {
+    background-color: transparent;
+    border: none;
+    color: #fafafa;
+    font-size: 0.875rem;
+    height: auto;
+    line-height: 1.2rem;
+    margin: 0;
+    padding: 20px;
+    width: 250px;
+
+    &:focus {
+      outline: none;
     }
+  }
 
-    &__arrow {
-        display: inline-block;
-        top: 100%;
-        left: 50%;
-        height: 0;
-        width: 0;
-        position: absolute;
-        pointer-events: none;
-        border-width: 8px;
-        border-style: solid;
-        border-color: #181818 transparent transparent;
-        margin-left: -8px;
-        transition: border-color 0.2s ease-in-out;
-    }
-
-    &__item {
-        display: inline-block;
-        color: #ccc;
-
-        &:hover {
-            color: #fff;
-        }
-
-        &--active {
-            color: #3192e7;
-
-            &:hover {
-                color: #3192e7;
-            }
-        }
-
-        &--separator {
-            border-right: 1px solid #333;
-            height: 20px;
-            margin: 0 8px
-        }
-    }
-
-    &__button {
-        padding: 0;
-        color: inherit;
-        cursor: pointer;
-        border: 0;
-        height: 56px;
-        width: 40px;
-        background: transparent;
-    }
-
-    &__input {
-        background-color: transparent;
-        border: none;
-        color: #fafafa;
-        font-size: 0.875rem;
-        height: auto;
-        line-height: 1.2rem;
-        margin: 0;
-        padding: 20px;
-        width: 250px;
-
-        &:focus {
-            outline: none;
-        }
-    }
-
-    &__input-button {
-        padding-right: 16px;
-    }
+  &__input-button {
+    padding-right: 16px;
+  }
 }

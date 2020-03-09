@@ -11,11 +11,10 @@ toolbar that allows a user to type in an url.
 You can customize these entities with the `entityInputs`-property and a custom
 set of actions:
 
-
 ```js
 import React from "react";
 import ReactDOM from "react-dom";
-import {DraftJS, MegadraftEditor, editorStateFromRaw} from "megadraft";
+import { DraftJS, MegadraftEditor, editorStateFromRaw } from "megadraft";
 
 // this is the default LinkInput that handles `LINK`-entities:
 import LinkInput from "megadraft/lib/entity_inputs/LinkInput";
@@ -26,36 +25,61 @@ import PageLinkInput from "./path/to/PageLinkInput";
 const entityInputs = {
   LINK: LinkInput,
   INTERNAL_PAGE_LINK: PageLinkInput
-}
+};
 
 const actions = [
-  {type: "inline", label: "B", style: "BOLD", icon: icons.BoldIcon},
-  {type: "inline", label: "I", style: "ITALIC", icon: icons.ItalicIcon},
+  { type: "inline", label: "B", style: "BOLD", icon: icons.BoldIcon },
+  { type: "inline", label: "I", style: "ITALIC", icon: icons.ItalicIcon },
   // these actions correspond with the entityInputs above
-  {type: "entity", label: "Link", style: "link", entity: "LINK", icon: icons.LinkIcon},
-  {type: "entity", label: "Page Link", style: "link", entity: "INTERNAL_PAGE_LINK", icon: MyPageLinkIcon},
+  {
+    type: "entity",
+    label: "Link",
+    style: "link",
+    entity: "LINK",
+    icon: icons.LinkIcon
+  },
+  {
+    type: "entity",
+    label: "Page Link",
+    style: "link",
+    entity: "INTERNAL_PAGE_LINK",
+    icon: MyPageLinkIcon
+  },
 
-  {type: "separator"},
-  {type: "block", label: "UL", style: "unordered-list-item", icon: icons.ULIcon},
-  {type: "block", label: "OL", style: "ordered-list-item", icon: icons.OLIcon},
-  {type: "block", label: "H2", style: "header-two", icon: icons.H2Icon},
-  {type: "block", label: "QT", style: "blockquote", icon: icons.BlockQuoteIcon}
+  { type: "separator" },
+  {
+    type: "block",
+    label: "UL",
+    style: "unordered-list-item",
+    icon: icons.ULIcon
+  },
+  {
+    type: "block",
+    label: "OL",
+    style: "ordered-list-item",
+    icon: icons.OLIcon
+  },
+  { type: "block", label: "H2", style: "header-two", icon: icons.H2Icon },
+  {
+    type: "block",
+    label: "QT",
+    style: "blockquote",
+    icon: icons.BlockQuoteIcon
+  }
 ];
 
-const myDecorator = new DraftJS.CompositeDecorator(
-  // see section "Rendering a custom entity" below
-)
-
+const myDecorator = new DraftJS.CompositeDecorator();
+// see section "Rendering a custom entity" below
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {editorState: editorStateFromRaw(null, myDecorator)};
+    this.state = { editorState: editorStateFromRaw(null, myDecorator) };
   }
 
-  onChange = (editorState) => {
-    this.setState({editorState});
-  }
+  onChange = editorState => {
+    this.setState({ editorState });
+  };
 
   render() {
     return (
@@ -64,8 +88,8 @@ class App extends React.Component {
         onChange={this.onChange}
         actions={actions}
         entityInputs={entityInputs}
-        />
-    )
+      />
+    );
   }
 }
 ```
@@ -102,35 +126,32 @@ export default class PageLinkInput extends React.Component {
     super(props);
     // load pages from somewhere
     this.pages = [
-      { url: "/home", title: "Home"},
-      { url: "/about", title: "About"},
-      { url: "/my/subpage", title: "Subpage"},
+      { url: "/home", title: "Home" },
+      { url: "/about", title: "About" },
+      { url: "/my/subpage", title: "Subpage" }
       // ...
-    ]
+    ];
   }
 
-  onPageChange = (event) => {
+  onPageChange = event => {
     const url = event.target.value;
-    this.props.setEntity({url});
-  }
+    this.props.setEntity({ url });
+  };
 
   render() {
     return (
       <select className="toolbar__input" onChange={this.onPageChange}>
         <option>Please select page...</option>
-        {
-          this.pages.map(
-            ({url, title}, index) => (
-              <option key={index} value={url}>{title}</option>
-            )
-          )
-        }
+        {this.pages.map(({ url, title }, index) => (
+          <option key={index} value={url}>
+            {title}
+          </option>
+        ))}
       </select>
     );
   }
 }
 ```
-
 
 ## Rendering a custom entity:
 
@@ -141,11 +162,15 @@ Megadraft allows you to specify a custom decorator in the `editorStateFromRaw`
 function and provides a utils function `createTypeStrategy` to create a simple
 entity-type strategy.
 
-
 ```js
 import React from "react";
 import ReactDOM from "react-dom";
-import {DraftJS, MegadraftEditor, editorStateFromRaw, createTypeStrategy} from "megadraft";
+import {
+  DraftJS,
+  MegadraftEditor,
+  editorStateFromRaw,
+  createTypeStrategy
+} from "megadraft";
 
 import MyLinkComponent from "./path/to/MyLinkComponent";
 import MyInternalLinkComponent from "./path/to/MyInternalLinkComponent";
@@ -153,31 +178,32 @@ import MyInternalLinkComponent from "./path/to/MyInternalLinkComponent";
 const myDecorator = new DraftJS.CompositeDecorator([
   {
     strategy: createTypeStrategy("LINK"),
-    component: MyLinkComponent,
+    component: MyLinkComponent
   },
   {
     strategy: createTypeStrategy("INTERNAL_PAGE_LINK"),
-    component: MyInternalLinkComponent,
+    component: MyInternalLinkComponent
   }
-])
+]);
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {editorState: editorStateFromRaw(null, myDecorator)};
+    this.state = { editorState: editorStateFromRaw(null, myDecorator) };
   }
 
-  onChange = (editorState) => {
-    this.setState({editorState});
-  }
+  onChange = editorState => {
+    this.setState({ editorState });
+  };
 
   render() {
     return (
       <MegadraftEditor
         // ....
         editorState={this.state.editorState}
-        onChange={this.onChange}/>
-    )
+        onChange={this.onChange}
+      />
+    );
   }
 }
 ```
@@ -187,8 +213,8 @@ class App extends React.Component {
 
 import React from "react";
 
-export default ({entityKey, children, contentState}) => {
-  const {url} = contentState.getEntity(entityKey).getData();
+export default ({ entityKey, children, contentState }) => {
+  const { url } = contentState.getEntity(entityKey).getData();
   return (
     <a className="editor__link" href={url} title={url}>
       {children}

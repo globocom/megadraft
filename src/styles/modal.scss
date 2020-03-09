@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-.sidemenu__button__icon{
+.sidemenu__button__icon {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -18,11 +18,11 @@
   text-align: left;
   z-index: 10;
 
-  &--open{
+  &--open {
     overflow-y: hidden;
   }
 
-  &--close{
+  &--close {
     overflow-y: auto;
   }
 
@@ -70,7 +70,7 @@
       color: #3c3c3c;
       text-align: center;
       cursor: pointer;
-      z-index:10;
+      z-index: 10;
       padding-top: 9px;
     }
   }
@@ -100,7 +100,7 @@
     width: 82px;
 
     &:hover {
-      .megadraft-modal__button__label{
+      .megadraft-modal__button__label {
         color: #0669de;
       }
 
