@@ -65,6 +65,14 @@ Megadraft ships with a default styling available at this location in the install
 Check out the [docs][docs-plugins] for information about plugin structure.
 To help in this process there is a [Yeoman Megadraft Plugin Generator][plugin-generator].
 
+## Contributing
+
+Development of Megadraft happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving Megadraft.
+
+### [Contributing Guide](CONTRIBUTING.md)
+
+Read our [contributing guide](CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to Megadraft.
+
 
 ## License
 
