@@ -71,8 +71,8 @@ export function getSelectionCoords(editor, toolbar) {
   arrowStyle.left = "50%";
 
   //When the left distance of the selection is less than the width of the toolbar.
-  if (offsetLeft + editorBounds.left < minOffsetLeft) {
-    offsetLeft = editorBounds.left + minOffsetLeft;
+  if (rangeBounds.left + rangeWidth / 2 - toolbarWidth / 2 < minOffsetLeft) {
+    offsetLeft = minOffsetLeft - editorBounds.left;
     arrowStyle.left =
       (rangeBounds.left + rangeBounds.right) / 2 - minOffsetLeft;
   }
