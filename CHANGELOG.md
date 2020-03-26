@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.7.1 - 2020-03-26
+### Fixed
+- Fixed sass error
+- Toolbar Left Positioning (#310)
+### Modified
+- Enabling movableBlocks in Website demo
+- Bump acorn from 5.7.3 to 5.7.4
+
 ## 0.7.0 - 2020-03-05
 ### Fixed
 - Mispositioning toolbar (#294)
