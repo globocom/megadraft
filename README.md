@@ -21,7 +21,7 @@ make setup
 make run
 ```
 
-Then visit http://localhost:8080/#/dev on your browser.
+Then visit http://localhost:8080/#/ on your browser.
 
 To run local tests:
 
