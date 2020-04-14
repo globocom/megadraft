@@ -838,6 +838,18 @@ describe("MegadraftEditor Component", () => {
       );
     };
 
+    it("should not render MoveControl when readOnly is present", () => {
+      const wrapper = mount(
+        <MegadraftEditor
+          editorState={testContext.editorState}
+          onChange={testContext.onChange}
+          readOnly
+          movableBlocks
+        />
+      );
+      expect(wrapper.find(".move-control").exists()).toBeFalsy();
+    });
+
     it("with the top block by clicking the up control", () => {
       const expected = [
           "block-kst0",
