@@ -98,19 +98,20 @@ export default class MegadraftEditor extends Component {
       for (let [blockType, data] of DefaultDraftBlockRenderMap.entrySeq()) {
         r.set(blockType, {
           ...data,
-          wrapper: this.props.movableBlocks ? (
-            <MoveControl
-              wrapper={data.wrapper}
-              swapUp={this.swapUp}
-              swapDown={this.swapDown}
-              isFirstBlock={this.isFirstBlock}
-              isLastBlock={this.isLastBlock}
-              onAction={this.onAction}
-              isAtomic={blockType === "atomic"}
-            />
-          ) : (
-            <MegadraftBlock wrapper={data.wrapper} />
-          )
+          wrapper:
+            !this.props.readOnly && this.props.movableBlocks ? (
+              <MoveControl
+                wrapper={data.wrapper}
+                swapUp={this.swapUp}
+                swapDown={this.swapDown}
+                isFirstBlock={this.isFirstBlock}
+                isLastBlock={this.isLastBlock}
+                onAction={this.onAction}
+                isAtomic={blockType === "atomic"}
+              />
+            ) : (
+              <MegadraftBlock wrapper={data.wrapper} />
+            )
         });
       }
     });
