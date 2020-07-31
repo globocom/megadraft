@@ -188,18 +188,17 @@
 
   // Read Only
   &--readonly,
-  &--readonly.block__input--empty,
-  &--readonly:hover {
+  &--readonly:focus,
+  &--readonly:hover,
+  &--readonly.block__input--empty {
     border: none;
-  }
-  &--readonly:hover + svg.block__input__icon {
-    display: none;
-  }
 
-  &--readonly:focus {
-    border: none;
-  }
-  &--readonly:focus + svg.block__input__icon {
-    display: none;
+    &::placeholder {
+      color: transparent;
+    }
+
+    & + svg.block__input__icon {
+      display: none;
+    }
   }
 }
