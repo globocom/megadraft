@@ -52,18 +52,22 @@ export default class MegadraftEditor extends Component {
     actions: DEFAULT_ACTIONS,
     blockRendererFn: () => {},
     i18n: i18nConfig,
-    language: "en-US"
+    language: "en-US",
+    readOnly: false
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      readOnly: this.props.readOnly || false,
+      readOnly: this.props.readOnly,
       hasFocus: false,
       scrollRef: "",
       swapUp: false,
       swapDown: false,
-      didSwap: false
+      didSwap: false,
+      extendedBlockRenderMap: this.createExtendedBlockRenderMap(
+        this.props.readOnly
+      )
     };
 
     this.onChange = ::this.onChange;
@@ -93,20 +97,22 @@ export default class MegadraftEditor extends Component {
     this.keyBindings = this.props.keyBindings || [];
 
     this.onAction = this.props.onAction || defaultAction;
+  }
 
-    this.extendedBlockRenderMap = Immutable.OrderedMap().withMutations(r => {
+  createExtendedBlockRenderMap(readOnly) {
+    return Immutable.OrderedMap().withMutations(r => {
       for (let [blockType, data] of DefaultDraftBlockRenderMap.entrySeq()) {
         r.set(blockType, {
           ...data,
           wrapper:
-            !this.props.readOnly && this.props.movableBlocks ? (
+            !readOnly && this.props.movableBlocks ? (
               <MoveControl
                 wrapper={data.wrapper}
                 swapUp={this.swapUp}
                 swapDown={this.swapDown}
                 isFirstBlock={this.isFirstBlock}
                 isLastBlock={this.isLastBlock}
-                onAction={this.onAction}
+                onAction={this.props.onAction || defaultAction}
                 isAtomic={blockType === "atomic"}
               />
             ) : (
@@ -137,12 +143,6 @@ export default class MegadraftEditor extends Component {
     }
 
     return pluginsByType;
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.readOnly !== nextProps.readOnly) {
-      this.setState({ readOnly: nextProps.readOnly });
-    }
   }
 
   onChange(editorState) {
@@ -390,6 +390,15 @@ export default class MegadraftEditor extends Component {
   }
 
   componentDidUpdate() {
+    if (this.props.readOnly !== this.state.readOnly) {
+      this.setState({
+        readOnly: this.props.readOnly,
+        extendedBlockRenderMap: this.createExtendedBlockRenderMap(
+          this.props.readOnly
+        )
+      });
+    }
+
     if (this.state.swapUp || this.state.swapDown) {
       const swapFunction = this.state.swapUp ? swapDataUp : swapDataDown;
 
@@ -568,7 +577,7 @@ export default class MegadraftEditor extends Component {
               handleReturn={this.props.handleReturn || this.handleReturn}
               keyBindingFn={this.externalKeyBindings}
               onChange={this.onChange}
-              blockRenderMap={this.extendedBlockRenderMap}
+              blockRenderMap={this.state.extendedBlockRenderMap}
             />
             {this.renderToolbar({
               i18n: i18n,
