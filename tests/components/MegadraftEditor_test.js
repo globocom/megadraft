@@ -491,14 +491,14 @@ describe("MegadraftEditor Component", () => {
   });
 
   it("starts with default readOnly status", () => {
-    const items = testContext.wrapper.find(Editor);
-    expect(items.instance().props.readOnly).toBeFalsy();
+    const editor = testContext.wrapper;
+    expect(editor.instance().state.readOnly).toBeFalsy();
   });
 
   it("changes readOnly status", () => {
-    const items = testContext.wrapper.find(Editor);
-    testContext.component.setReadOnly(true);
-    expect(items.instance().props.readOnly).toBeTruthy();
+    const editor = testContext.wrapper;
+    editor.setProps({ readOnly: true });
+    expect(editor.instance().state.readOnly).toBeTruthy();
   });
 
   it("is capable of inserting soft line breaks", () => {
