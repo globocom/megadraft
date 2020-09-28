@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.7.3 - 2020-09-28
+### Fixed
+- Store extendedBlockRenderMap in state so it can be updated when readOnly changes its value (#325)
+### Modified
+- Bump http-proxy from 1.18.0 to 1.18.1
+- Bump node-sass from 4.13.0 to 4.14.1
+- Bump elliptic from 6.5.2 to 6.5.3 (#321)
+- Bump lodash from 4.17.15 to 4.17.19
+- Bump websocket-extensions from 0.1.3 to 0.1.4 (#316)
+
 ## 0.7.2 - 2020-04-14
 ### Fixed
 - Fixed movableBlocks when readOnly is enabled
