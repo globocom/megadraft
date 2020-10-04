@@ -11,6 +11,9 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+
+@import "./variables.scss";
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -75,8 +78,8 @@ html {
 
 body {
   @include font-smoothing(on);
-  color: #000;
   font-family: 'Roboto', sans-serif;
+  color: $color-black;
 }
 
 :focus {

@@ -4,7 +4,9 @@
  * License: MIT
  */
 
-.sidemenu__button__icon{
+@import "./variables.scss";
+
+.sidemenu__button__icon {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -18,17 +20,17 @@
   text-align: left;
   z-index: 10;
 
-  &--open{
+  &--open {
     overflow-y: hidden;
   }
 
-  &--close{
+  &--close {
     overflow-y: auto;
   }
 
   &__button {
     border: 0;
-    color: #fff;
+    color: $color-white;
     cursor: pointer;
     font-size: 0;
     padding: 0;
@@ -54,7 +56,7 @@
       height: 100%;
       border-radius: 100%;
       display: inline-block;
-      background-color: #181818;
+      background-color: $color-grey-700;
     }
 
     &__label {
@@ -67,10 +69,10 @@
       font-style: normal;
       font-stretch: normal;
       line-height: 1.14;
-      color: #3c3c3c;
+      color: $color-grey-500;
       text-align: center;
       cursor: pointer;
-      z-index:10;
+      z-index: 10;
       padding-top: 9px;
     }
   }
@@ -87,7 +89,7 @@
 
     &:before {
       transition: all 0.1s ease-in-out;
-      background-color: #181818;
+      background-color: $color-grey-700;
     }
   }
 
@@ -100,12 +102,12 @@
     width: 82px;
 
     &:hover {
-      .megadraft-modal__button__label{
-        color: #0669de;
+      .megadraft-modal__button__label {
+        color: $color-blue-200;
       }
 
       .megadraft-modal__button:before {
-        background-color: #0669de;
+        background-color: $color-blue-200;
       }
     }
   }

@@ -4,16 +4,18 @@
  * License: MIT
  */
 
+@import "./variables.scss";
+
 .media__message {
   &--error {
-    background-color: #e83f26;
-    color: #fff;
+    background-color: $color-red-200;
+    color: $color-white;
   }
 
   &--warning {
-    background-color: #fff7d8;
-    color: #b59223;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: $color-yellow-100;
+    color: $color-yellow-300;
+    border-bottom: 1px solid rgba($color-black, 0.1);
   }
 }
 

@@ -4,37 +4,37 @@
  * License: MIT
  */
 
-@import '../../src/styles/megadraft.scss';
+@import "../../src/styles/megadraft.scss";
+@import "./variables.scss";
 
 .jsonpreview {
-    font-family: monospace;
-    color: #333;
-    background-color: #ebdbb2;
-    font-size:16px;;
+  font-family: monospace;
+  color: $color-grey-300;
+  background-color: $color-yellow-50;
+  font-size: 16px;
 }
 
 .public-DraftEditor-content {
-    min-height: 300px;
-    outline: none;
+  min-height: 300px;
+  outline: none;
 }
 
 .public-DraftEditor-content {
-    min-height: 300px;
-    outline: none;
+  min-height: 300px;
+  outline: none;
 }
 
-
-.container--light{
-  background-color: #fff;
+.container--light {
+  background-color: $color-white;
 }
 
-.container--dark{
-  background-color: #282828;
+.container--dark {
+  background-color: $color-grey-500;
 }
 
-.appbar--fixed{
-  color:red;
-  background:red;
+.appbar--fixed {
+  color: $color-red-100;
+  background: $color-red-100;
 }
 
 .docs {
@@ -42,19 +42,20 @@
   padding-right: 256px;
   padding-top: 64px;
   padding-bottom: 64px;
-  background-color: #fafafa;
+  background-color: $color-grey-50;
 }
 
 @media only screen and (max-width: 767px) {
-  .docs{
+  .docs {
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 64px;
-    padding-bottom: 64px}
+    padding-bottom: 64px;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
-  .docs{
+  .docs {
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 64px;
@@ -64,78 +65,80 @@
 
 .docs {
   h1 {
-      display: block;
-      font-size: 2em;
-      margin-block-end: 0.67em;
-      margin-block-start: 0.67em;
-      font-weight: bold;
+    display: block;
+    font-size: 2em;
+    margin-block-end: 0.67em;
+    margin-block-start: 0.67em;
+    font-weight: bold;
   }
 
   p {
-      display: block;
-      margin-block-end: 1em;
-      margin-block-start: 1em;
+    display: block;
+    margin-block-end: 1em;
+    margin-block-start: 1em;
   }
 
   h2 {
-      display: block;
-      font-size: 1.2em;
-      margin-block-end: 0.83em;
-      margin-block-start: 0.83em;
-      font-weight: bold;
+    display: block;
+    font-size: 1.2em;
+    margin-block-end: 0.83em;
+    margin-block-start: 0.83em;
+    font-weight: bold;
   }
 
   h3 {
-      display: block;
-      font-size: 1.2em;
-      margin-block-end: 0.83em;
-      margin-block-start: 0.83em;
-      font-weight: bold;
+    display: block;
+    font-size: 1.2em;
+    margin-block-end: 0.83em;
+    margin-block-start: 0.83em;
+    font-weight: bold;
   }
 
   re, xmp, plaintext, listing {
-      display: block;
-      font-family: monospace;
-      white-space: pre;
-      margin: 1em 0px 1em;
+    display: block;
+    font-family: monospace;
+    white-space: pre;
+    margin: 1em 0 1em;
   }
 
-  ul, menu, dir {
-      display: block;
-      list-style-type: disc;
-      margin-block-end: 1em;
-      margin-block-start: 1em;
-      padding-inline-start: 40px;
+  ul,
+  menu,
+  dir {
+    display: block;
+    list-style-type: disc;
+    margin-block-end: 1em;
+    margin-block-start: 1em;
+    padding-inline-start: 40px;
   }
 
   li {
-      display: list-item;
-      text-align: match-parent;
+    display: list-item;
+    text-align: match-parent;
   }
 
   pre {
-      color: rgba(0, 0, 0, 0.87);
-      box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
-      border-radius: 2px;
-      background-color: #FFF;
+    color: rgba($color-black, 0.87);
+    box-shadow: rgba($color-black, 0.12) 0 1px 6px;
+    border-radius: 2px;
+    background-color: $color-white;
   }
 
   a {
-    color: #000;
+    color: $color-black;
   }
 
   code:not(.hljs) {
-    background-color: #FFF;
+    background-color: $color-white;
     border-radius: 2px;
-    border: 1px solid #CCC;
+    border: 1px solid $color-grey-200;
     padding: 1px 4px;
-    color: #d14;
+    color: $color-red-200;
     margin: 0 2px;
     font-family: monospace;
-    box-shadow: rgba(0, 0, 0, 0.08) 0 1px 1px;
+    box-shadow: rgba($color-black, 0.08) 0 1px 1px;
   }
 }
 
 .content {
-  background-color: #fafafa;
+  background-color: $color-grey-50;
 }

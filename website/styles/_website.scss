@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-$hit-color: #ffcf00;
+@import "./variables.scss";
 
 .page {
   &__body {
@@ -27,8 +27,8 @@ $hit-color: #ffcf00;
 
   &__content {
     margin: auto;
-    color: #333;
-    font-family: 'Roboto', sans-serif;
+    color: $color-grey-300;
+    font-family: "Roboto", sans-serif;
     font-size: 16px;
     line-height: 1.6;
     word-wrap: break-word;
@@ -46,7 +46,7 @@ $hit-color: #ffcf00;
     &-svg {
       width: 100%;
       height: 100%;
-      fill: #fff;
+      fill: $color-white;
     }
   }
 
@@ -55,22 +55,22 @@ $hit-color: #ffcf00;
   }
 
   &__title {
-    color: $hit-color;
-    font-family:'Abril Fatface', sans-serif;
+    color: $color-yellow-100;
+    font-family: "Abril Fatface", sans-serif;
     font-weight: normal;
     font-size: 8vmax;
     line-height: 0.9;
-    letter-spacing: -.04em;
+    letter-spacing: -0.04em;
     text-align: left;
     margin-bottom: 20px;
   }
 
   &__description {
-    color: #fff;
+    color: $color-white;
     font-size: calc(14px + 0.72vw);
-    letter-spacing: -.035em;
+    letter-spacing: -0.035em;
     line-height: 1.4;
-    text-shadow: 1px 1px 3px #333;
+    text-shadow: 1px 1px 3px $color-grey-300;
   }
 
   &__call-to-action {
@@ -78,37 +78,37 @@ $hit-color: #ffcf00;
     font-size: 20px;
     position: absolute;
     bottom: -66px;
-    color: #fff;
+    color: $color-white;
     cursor: pointer;
     text-decoration: none;
     left: 50%;
-    text-shadow: 1px 1px 3px #333;
+    text-shadow: 1px 1px 3px $color-grey-300;
     transform: translateX(-50%);
   }
 
-  @media only screen and (min-device-width: 320px) and (max-device-width: 480px){
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
     &__call-to-action {
-        font-weight: bold;
-        font-size: 45px;
-        position: absolute;
-        bottom: -45px;
-        color: #fff;
-        cursor: pointer;
-        text-decoration: none;
-        left: 50%;
-        text-shadow: 1px 1px 3px #333;
-        transform: translateX(-50%);
-      }
+      font-weight: bold;
+      font-size: 45px;
+      position: absolute;
+      bottom: -45px;
+      color: $color-white;
+      cursor: pointer;
+      text-decoration: none;
+      left: 50%;
+      text-shadow: 1px 1px 3px $color-grey-300;
+      transform: translateX(-50%);
+    }
 
-     &__arrow-call-to-action {
+    &__arrow-call-to-action {
       font-weight: bold;
       position: relative;
-      color: $hit-color;
+      color: $color-yellow-100;
       top: -22px;
       cursor: pointer;
       text-decoration: none;
       left: 50%;
-      text-shadow: 1px 1px 3px #333;
+      text-shadow: 1px 1px 3px $color-grey-300;
       transform: translateX(-50%);
       height: 149px;
       width: 147px;
@@ -117,27 +117,27 @@ $hit-color: #ffcf00;
 
   @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     &__call-to-action {
-        font-weight: bold;
-        font-size: 45px;
-        position: absolute;
-        bottom: -45px;
-        color: #fff;
-        cursor: pointer;
-        text-decoration: none;
-        left: 50%;
-        text-shadow: 1px 1px 3px #333;
-        transform: translateX(-50%);
-      }
+      font-weight: bold;
+      font-size: 45px;
+      position: absolute;
+      bottom: -45px;
+      color: $color-white;
+      cursor: pointer;
+      text-decoration: none;
+      left: 50%;
+      text-shadow: 1px 1px 3px $color-grey-300;
+      transform: translateX(-50%);
+    }
 
-     &__arrow-call-to-action {
+    &__arrow-call-to-action {
       font-weight: bold;
       position: relative;
-      color: $hit-color;
+      color: $color-yellow-100;
       top: -22px;
       cursor: pointer;
       text-decoration: none;
       left: 50%;
-      text-shadow: 1px 1px 3px #333;
+      text-shadow: 1px 1px 3px $color-grey-300;
       transform: translateX(-50%);
       height: 149px;
       width: 147px;
@@ -147,12 +147,12 @@ $hit-color: #ffcf00;
   &__arrow-call-to-action {
     font-weight: bold;
     position: relative;
-    color: $hit-color;
+    color: $color-yellow-100;
     top: -15px;
     cursor: pointer;
     text-decoration: none;
     left: 50%;
-    text-shadow: 1px 1px 3px #333;
+    text-shadow: 1px 1px 3px $color-grey-300;
     transform: translateX(-50%);
     height: 100px;
     width: 68px;
@@ -160,11 +160,11 @@ $hit-color: #ffcf00;
 }
 
 .tab-container-editor {
-    padding-left: 256px;
-    padding-right: 256px;
-    padding-top: 95px;
-    padding-bottom: 128px;
-  }
+  padding-left: 256px;
+  padding-right: 256px;
+  padding-top: 95px;
+  padding-bottom: 128px;
+}
 
 @media only screen and (max-width: 767px) {
   .tab-container-editor {
@@ -176,24 +176,26 @@ $hit-color: #ffcf00;
 }
 
 .tab-container-json {
-  background-color: #282828;
+  background-color: $color-grey-500;
   padding-left: 256px;
   padding-right: 256px;
   padding-top: 64px;
   padding-bottom: 128px;
-  /*padding-left: 80px;*/ }
+  /*padding-left: 80px;*/
+}
 
 @media only screen and (max-width: 1000px) {
   .tab-container-json {
-    background-color: #282828;
+    background-color: $color-grey-500;
     padding-left: 0px;
     padding-right: 0px;
     padding-top: 64px;
     padding-bottom: 256px;
-    /*padding-left: 80px;*/ }
+    /*padding-left: 80px;*/
+  }
 
   .hljs {
-    background-color: #fff;
+    background-color: $color-white;
     padding: 1em;
     font-family: monospace;
     font-size: 25px;
@@ -201,7 +203,7 @@ $hit-color: #ffcf00;
 }
 
 .hljs {
-  background-color: #fff;
+  background-color: $color-white;
   padding: 1em;
   font-family: monospace;
   font-size: 14px;

@@ -6,53 +6,56 @@
 
 /* Sorry, not using BEM here, we are using drafjs structure */
 
-.DraftEditor-root, .toolbar {
-    font-family: Open Sans, sans-serif;
-    color: #181818;
-    font-size: 1.125rem;
-    letter-spacing: -0.037rem;
-    line-height: 1.75rem;
-    position: relative;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+@import "./variables.scss";
+
+.DraftEditor-root,
+.toolbar {
+  font-family: Open Sans, sans-serif;
+  color: $color-grey-700;
+  font-size: 1.125rem;
+  letter-spacing: -0.037rem;
+  line-height: 1.75rem;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .DraftEditor-editorContainer {
-    position: relative;
-    z-index: 1;
+  position: relative;
+  z-index: 1;
 }
 
 .paragraph + .paragraph {
-    margin-top: 40px;
+  margin-top: 40px;
 }
 
 .public-DraftEditor-content figure {
-    margin: 0;
+  margin: 0;
 }
 
 .public-DraftStyleDefault-ul {
-    list-style-type: disc;
+  list-style-type: disc;
 }
 
 .public-DraftStyleDefault-ol {
-    list-style-type: decimal;
+  list-style-type: decimal;
 }
 
 .public-DraftStyleDefault-ol,
 .public-DraftStyleDefault-ul {
-    line-height: 2;
-    padding-left: 40px;
+  line-height: 2;
+  padding-left: 40px;
 }
 
 .public-DraftStyleDefault-ol li,
 .public-DraftStyleDefault-ul li {
-    padding-left: 10px;
+  padding-left: 10px;
 }
 
 .public-DraftEditorPlaceholder-root {
-    color: #999;
-    position: absolute;
-    z-index: 0;
+  color: $color-grey-400;
+  position: absolute;
+  z-index: 0;
 }
 
 .placeholder-list {
@@ -88,24 +91,24 @@
 }
 
 blockquote {
-    border-left: 2px solid #ddd;
-    color: #999;
-    font-style: italic;
-    margin: 12px 0 40px 0;
-    padding: 6px 0 5px 18px;
+  border-left: 2px solid $color-grey-200;
+  color: $color-grey-400;
+  font-style: italic;
+  margin: 12px 0 40px 0;
+  padding: 6px 0 5px 18px;
 }
 
 .paragraph + blockquote {
-    margin-top: 40px
+  margin-top: 40px;
 }
 
 h2 {
-    font-family: Open Sans, Sans-serif;
-    font-weight: 700;
-    font-size: 1.5rem;
-    letter-spacing: -0.056rem;
-    line-height: 2rem;
-    margin-right: 24px;
+  font-family: Open Sans, Sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.056rem;
+  line-height: 2rem;
+  margin-right: 24px;
 }
 
 h2:first-child {
@@ -113,7 +116,7 @@ h2:first-child {
 }
 
 .editor__link {
-    color: #3192e7;
-    text-decoration: none;
-    cursor: pointer;
+  color: $color-blue-100;
+  text-decoration: none;
+  cursor: pointer;
 }

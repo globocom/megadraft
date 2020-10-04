@@ -4,12 +4,14 @@
  * License: MIT
  */
 
+@import "./variables.scss";
+
 .block__hover {
   padding: 8px;
   margin: -8px;
 
   &:hover {
-    background-color: #eee;
+    background-color: $color-grey-100;
     border-radius: 4px;
   }
 }
@@ -21,10 +23,10 @@
 
 .block__wrapper {
   user-select: none;
-  background-color: #fff;
+  background-color: $color-white;
   border-radius: 3px;
-  border: solid 1px #ddd;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  border: solid 1px $color-grey-200;
+  box-shadow: 0 1px 1px 0 rgba($color-black, 0.1);
 }
 
 .block__controls {
@@ -33,7 +35,7 @@
 }
 
 .block__action-group {
-  color: #999;
+  color: $color-grey-400;
   float: right;
   list-style: none;
   margin: 0;
@@ -49,7 +51,7 @@
   font-size: 0;
 
   &:hover {
-    color: #000;
+    color: $color-black;
   }
 
   &__icon {
@@ -58,7 +60,7 @@
 }
 
 .block__content {
-  background-color: #eee;
+  background-color: $color-grey-100;
   line-height: 100px;
   text-align: center;
   position: relative;
@@ -72,8 +74,8 @@
     position: absolute;
     width: 100%;
     height: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    content: '';
+    border-top: 1px solid rgba($color-black, 0.1);
+    content: "";
     left: 0;
   }
   &:before {
@@ -86,7 +88,7 @@
 
 .block__notfound {
   &__icon {
-    color: #999;
+    color: $color-grey-400;
     vertical-align: middle;
     width: 64px;
     height: 64px;
@@ -97,13 +99,13 @@
 .block__data {
   padding: 16px;
   padding-top: 8px;
-  background-color: #fff;
+  background-color: $color-white;
 }
 
 .block__input {
   border: 0;
   border-bottom: 1px dashed transparent;
-  color: #333;
+  color: $color-grey-600;
   display: block;
   padding: 8px 0;
   width: 100%;
@@ -138,7 +140,7 @@
 
   // Non-empty
   &:hover {
-    border-color: #999;
+    border-color: $color-grey-400;
   }
   &:hover + svg.block__input__icon {
     display: inline-block;
@@ -146,7 +148,7 @@
 
   // Editing
   &:focus {
-    border-color: #0072de;
+    border-color: $color-blue-200;
     border-style: solid;
   }
   &:focus + svg.block__input__icon {
@@ -155,17 +157,17 @@
 
   // Empty
   &:placeholder {
-    color: #999;
+    color: $color-grey-400;
   }
   &--empty {
-    border-color: #ccc;
+    border-color: $color-grey-300;
 
     :hover {
-      border-color: #999;
+      border-color: $color-grey-400;
     }
   }
   &--empty + svg.block__input__icon {
-    color: #999;
+    color: $color-grey-400;
     display: inline-block;
   }
 
@@ -173,15 +175,15 @@
   &--error,
   &--error.block__input--empty,
   &--error:hover {
-    border-color: #ff351e;
+    border-color: $color-red-100;
     border-style: solid;
   }
   &--error + svg.block__input__icon {
-    color: #ff351e;
+    color: $color-red-100;
     display: inline-block;
   }
   &__error-text {
-    color: #ff351e;
+    color: $color-red-100;
     margin-top: 6px;
     font-size: 0.75rem;
   }

@@ -4,19 +4,21 @@
  * License: MIT
  */
 
+@import "./variables.scss";
+
 .move-control {
-  border: 8px solid rgba(238, 238, 238, 0);
+  border: 8px solid rgba($color-black, 0);
   border-radius: 4px;
   display: flex;
   transition: margin 0.3s;
 }
 
 .move-control:hover {
-  border: 8px solid rgba(238, 238, 238, 1);
+  border: 8px solid rgba($color-black, 1);
 }
 
 .move-control:hover .options {
-  border: 8px solid rgba(238, 238, 238, 1);
+  border: 8px solid rgba($color-black, 1);
   opacity: 1;
 }
 
@@ -25,7 +27,7 @@
 }
 
 .move-control--atomic:hover {
-  background-color: rgba(238, 238, 238, 1);
+  background-color: rgba($color-black, 1);
 }
 
 .move-control--swapped {
@@ -44,7 +46,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #eee;
+  background-color: $color-grey-100;
   opacity: 0;
   transition: margin 0.3s;
   cursor: default;
@@ -67,13 +69,13 @@
 }
 
 .options__button:hover {
-  background: rgba(33,33,33,0.08);
+  background: rgba($color-grey-800, 0.08);
   transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   border-radius: 50%;
 }
 
 .options__button:active {
-  background: rgba(33,33,33,0.16); 
+  background: rgba($color-grey-800, 0.16);
 }
 
 .options__button--up {
