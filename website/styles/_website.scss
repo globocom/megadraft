@@ -27,9 +27,9 @@ $hit-color: #ffcf00;
 
   &__content {
     margin: auto;
-    color: #333;
+    color: #404040;
     font-family: 'Roboto', sans-serif;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1.6;
     word-wrap: break-word;
   }
@@ -41,7 +41,7 @@ $hit-color: #ffcf00;
     height: 185px;
     position: absolute;
     right: 3.4%;
-    top: 50px;
+    top: 70px;
 
     &-svg {
       width: 100%;
@@ -61,12 +61,12 @@ $hit-color: #ffcf00;
     font-size: 8vmax;
     line-height: 0.9;
     letter-spacing: -.04em;
-    text-align: left;
+    text-align: center;
     margin-bottom: 20px;
   }
 
   &__description {
-    color: #fff;
+    color: #ccc;
     font-size: calc(14px + 0.72vw);
     letter-spacing: -.035em;
     line-height: 1.4;
@@ -75,7 +75,7 @@ $hit-color: #ffcf00;
 
   &__call-to-action {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 30px;
     position: absolute;
     bottom: -66px;
     color: #fff;
@@ -185,7 +185,7 @@ $hit-color: #ffcf00;
 
 @media only screen and (max-width: 1000px) {
   .tab-container-json {
-    background-color: #282828;
+    background-color: #353535;
     padding-left: 0px;
     padding-right: 0px;
     padding-top: 64px;
@@ -193,7 +193,7 @@ $hit-color: #ffcf00;
     /*padding-left: 80px;*/ }
 
   .hljs {
-    background-color: #fff;
+    background-color: #ccc;
     padding: 1em;
     font-family: monospace;
     font-size: 25px;
@@ -201,7 +201,7 @@ $hit-color: #ffcf00;
 }
 
 .hljs {
-  background-color: #fff;
+  background-color: #ccc;
   padding: 1em;
   font-family: monospace;
   font-size: 14px;
