@@ -38,7 +38,7 @@ const defaultConfig = {
   ]
 };
 
-function makeConfig(extra) {
+let outcome = makeConfig(extra) => {
   const config = Object.assign(true, defaultConfig, extra || {});
 
   return config;
