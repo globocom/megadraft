@@ -22,6 +22,18 @@
 
     @import "move-control.scss";
 
+  &.placeholder-hide {
+    .public-DraftEditorPlaceholder-root {
+      visibility: hidden;
+    }
+  }
+
+  &.movable {
+    .public-DraftEditorPlaceholder-root {
+      padding: 8px 0 0 8px;
+    }
+  }
+
     .megadraft-block {
         padding-bottom: 40px;
     }
