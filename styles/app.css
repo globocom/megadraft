@@ -439,18 +439,6 @@ body {
     color: #999;
     position: absolute;
     z-index: 0; }
-  .megadraft-editor .placeholder-list .public-DraftEditorPlaceholder-root {
-    left: 50px;
-    top: 5px; }
-  .megadraft-editor .placeholder-header-two .public-DraftEditorPlaceholder-root {
-    top: 2px; }
-  .megadraft-editor .placeholder-blockquote .public-DraftEditorPlaceholder-root {
-    left: 20px;
-    top: 7px; }
-  .megadraft-editor .movable .public-DraftEditorPlaceholder-root {
-    padding: 8px 0 0 8px; }
-  .megadraft-editor .movable.placeholder-blockquote .public-DraftEditorPlaceholder-root {
-    padding: 20px 0 0 10px; }
   .megadraft-editor blockquote {
     border-left: 2px solid #ddd;
     color: #999;
@@ -881,6 +869,10 @@ body {
   .megadraft-editor .options__button--up {
     -webkit-transform: rotate(180deg);
             transform: rotate(180deg); }
+  .megadraft-editor.placeholder-hide .public-DraftEditorPlaceholder-root {
+    visibility: hidden; }
+  .megadraft-editor.movable .public-DraftEditorPlaceholder-root {
+    padding: 8px 0 0 8px; }
   .megadraft-editor .megadraft-block {
     padding-bottom: 40px; }
 
