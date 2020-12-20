@@ -81,7 +81,7 @@
     "build:lib": "babel src/ -d lib/",
     "build": "npm run build:lib && gulp sass && gulp sass-copy",
     "prepublish": "npm run build",
-    "site": "webpack --config webpack.config.site.js --optimize-minimize && gulp site-sass",
+    "site": "webpack --config webpack.config.site.js && gulp site-sass",
     "lint": "eslint ./*.js src tests website",
     "lint:watch": "esw -w src tests website",
     "watch": "babel -d lib/ src/ --watch",
