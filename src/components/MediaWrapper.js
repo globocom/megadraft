@@ -16,7 +16,13 @@ export default class MediaWrapper extends Component {
 
   _handleFocus() {
     // temporarily set the editor to readonly
-    this.props.setReadOnly(true);
+    if (
+      typeof this.props.options === "undefined" ||
+      typeof this.props.options.alwaysCustomizable === "undefined" ||
+      !this.props.options.alwaysCustomizable
+    ) {
+      this.props.setReadOnly(true);
+    }
   }
 
   _handleBlur() {
