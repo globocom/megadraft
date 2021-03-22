@@ -88,13 +88,13 @@ export default class Media extends Component {
           i18n={i18n}
           setInitialReadOnly={setInitialReadOnly}
           setReadOnly={setReadOnly}
-          options={plugin.options}
         >
           <Block
             i18n={i18n}
             data={data}
             container={this}
             blockProps={this.props.blockProps}
+            setReadOnly={setReadOnly}
           />
         </MediaWrapper>
       </ErrorBoundary>
