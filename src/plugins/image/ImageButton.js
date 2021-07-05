@@ -12,7 +12,7 @@ import insertDataBlock from "../../insertDataBlock";
 export default class BlockButton extends Component {
   constructor(props) {
     super(props);
-    this.onClick = ::this.onClick;
+    this.onClick = this.onClick.bind(this);
   }
 
   onClick(e) {

@@ -10,8 +10,8 @@ export default class MediaWrapper extends Component {
   constructor(props) {
     super(props);
 
-    this._handleFocus = ::this._handleFocus;
-    this._handleBlur = ::this._handleBlur;
+    this._handleFocus = this._handleFocus.bind(this);
+    this._handleBlur = this._handleBlur.bind(this);
   }
 
   _handleFocus() {

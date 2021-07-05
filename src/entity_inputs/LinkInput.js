@@ -13,8 +13,8 @@ class LinkInput extends Component {
     this.state = {
       url: (props && props.url) || ""
     };
-    this.onLinkChange = ::this.onLinkChange;
-    this.onLinkKeyDown = ::this.onLinkKeyDown;
+    this.onLinkChange = this.onLinkChange.bind(this);
+    this.onLinkKeyDown = this.onLinkKeyDown.bind(this);
   }
 
   setLink(event) {

@@ -21,8 +21,8 @@ export default class ImageBlock extends Component {
   constructor(props) {
     super(props);
 
-    this._handleCaptionChange = ::this._handleCaptionChange;
-    this._handleRightsHolderChange = ::this._handleRightsHolderChange;
+    this._handleCaptionChange = this._handleCaptionChange.bind(this);
+    this._handleRightsHolderChange = this._handleRightsHolderChange.bind(this);
 
     this.actions = [
       {

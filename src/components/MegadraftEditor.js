@@ -66,22 +66,22 @@ export default class MegadraftEditor extends Component {
       didSwap: false
     };
 
-    this.onChange = ::this.onChange;
-    this.onTab = ::this.onTab;
+    this.onChange = this.onChange.bind(this);
+    this.onTab = this.onTab.bind(this);
 
-    this.mediaBlockRenderer = ::this.mediaBlockRenderer;
+    this.mediaBlockRenderer = this.mediaBlockRenderer.bind(this);
 
-    this.handleKeyCommand = ::this.handleKeyCommand;
-    this.handleReturn = ::this.handleReturn;
-    this.handleFocus = ::this.handleFocus;
-    this.handleBlur = ::this.handleBlur;
+    this.handleKeyCommand = this.handleKeyCommand.bind(this);
+    this.handleReturn = this.handleReturn.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
 
-    this.setReadOnly = ::this.setReadOnly;
-    this.getReadOnly = ::this.getReadOnly;
-    this.getInitialReadOnly = ::this.getInitialReadOnly;
-    this.setInitialReadOnly = ::this.setInitialReadOnly;
+    this.setReadOnly = this.setReadOnly.bind(this);
+    this.getReadOnly = this.getReadOnly.bind(this);
+    this.getInitialReadOnly = this.getInitialReadOnly.bind(this);
+    this.setInitialReadOnly = this.setInitialReadOnly.bind(this);
 
-    this.externalKeyBindings = ::this.externalKeyBindings;
+    this.externalKeyBindings = this.externalKeyBindings.bind(this);
 
     this.plugins = this.getValidPlugins();
     this.entityInputs = this.props.entityInputs || DEFAULT_ENTITY_INPUTS;

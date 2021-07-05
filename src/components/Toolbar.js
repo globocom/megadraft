@@ -32,11 +32,11 @@ export default class Toolbar extends Component {
       link: "",
       error: null
     };
-    this.renderButton = ::this.renderButton;
-    this.cancelEntity = ::this.cancelEntity;
-    this.removeEntity = ::this.removeEntity;
-    this.setError = ::this.setError;
-    this.cancelError = ::this.cancelError;
+    this.renderButton = this.renderButton.bind(this);
+    this.cancelEntity = this.cancelEntity.bind(this);
+    this.removeEntity = this.removeEntity.bind(this);
+    this.setError = this.setError.bind(this);
+    this.cancelError = this.cancelError.bind(this);
   }
 
   toggleInlineStyle(inlineStyle) {

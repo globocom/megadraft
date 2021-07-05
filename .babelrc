@@ -1,14 +1,9 @@
 {
-  "presets": ["@babel/preset-react", "@babel/env"],
-  "plugins": [
-    "@babel/plugin-transform-modules-commonjs",
-    "@babel/plugin-transform-flow-strip-types",
-    "@babel/plugin-proposal-function-bind",
-    "@babel/plugin-proposal-class-properties",
-    [
-      "@babel/plugin-proposal-decorators", {
-        "decoratorsBeforeExport": true
-      }
-    ]
+  "presets": [
+    "@babel/preset-react",
+    ["@babel/preset-env", {
+      "modules": "cjs",
+      "shippedProposals": true
+    }]
   ]
 }

@@ -21,7 +21,7 @@ export default class CommonBlock extends Component {
   constructor(props) {
     super(props);
 
-    this._handleDisplayChange = ::this._handleDisplayChange;
+    this._handleDisplayChange = this._handleDisplayChange.bind(this);
   }
 
   _handleDisplayChange(newValue) {
