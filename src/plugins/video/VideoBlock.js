@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React from "react";
 
 import {
   BlockContent,
@@ -17,45 +17,33 @@ import icons from "../../icons";
 
 import VideoBlockStyle from "./VideoBlockStyle";
 
-export default class VideoBlock extends Component {
-  constructor(props) {
-    super(props);
+export default function VideoBlock(props) {
+  const { container, data } = props;
+  const actions = [
+    {
+      key: "delete",
+      icon: icons.DeleteIcon,
+      action: container.remove
+    }
+  ];
 
-    this._handleCaptionChange = this._handleCaptionChange.bind(this);
-
-    this.actions = [
-      {
-        key: "delete",
-        icon: icons.DeleteIcon,
-        action: this.props.container.remove
-      }
-    ];
+  function _handleCaptionChange(event) {
+    container.updateData({ caption: event.target.value });
   }
 
-  _handleCaptionChange(event) {
-    this.props.container.updateData({ caption: event.target.value });
-  }
+  return (
+    <CommonBlock {...props} actions={actions}>
+      <BlockContent>
+        <video controls style={VideoBlockStyle.video} src={data.src} alt="" />
+      </BlockContent>
 
-  render() {
-    return (
-      <CommonBlock {...this.props} actions={this.actions}>
-        <BlockContent>
-          <video
-            controls
-            style={VideoBlockStyle.video}
-            src={this.props.data.src}
-            alt=""
-          />
-        </BlockContent>
-
-        <BlockData>
-          <BlockInput
-            placeholder="Caption"
-            value={this.props.data.caption}
-            onChange={this._handleCaptionChange}
-          />
-        </BlockData>
-      </CommonBlock>
-    );
-  }
+      <BlockData>
+        <BlockInput
+          placeholder="Caption"
+          value={data.caption}
+          onChange={_handleCaptionChange}
+        />
+      </BlockData>
+    </CommonBlock>
+  );
 }
