@@ -6,7 +6,7 @@
 
 import jsdom from "jsdom";
 import { configure } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 
 const { JSDOM } = jsdom;
 const dom = new JSDOM("<!doctype html><html><body></body></html>");

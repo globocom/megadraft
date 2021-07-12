@@ -29,7 +29,7 @@
     "babel-plugin-transform-function-bind": "^6.22.0",
     "babel-preset-stage-0": "^6.24.1",
     "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
     "enzyme-to-json": "^3.3.1",
     "es6-shim": "^0.35.0",
     "eslint": "^6.8.0",
@@ -53,8 +53,8 @@
     "megadraft-related-articles-plugin": "0.2.5",
     "prettier": "^1.19.1",
     "raw-loader": "^2.0.0",
-    "react": "16.14.0",
-    "react-dom": "16.14.0",
+    "react": "17.0.02",
+    "react-dom": "17.0.02",
     "react-markdown": "^4.0.8",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
@@ -71,8 +71,8 @@
     "webpack-dev-server": "^3.11.0"
   },
   "peerDependencies": {
-    "react": "^16.1.0",
-    "react-dom": "^16.1.0"
+    "react": ">=16.1.0 <18",
+    "react-dom": ">=16.1.0 <18"
   },
   "scripts": {
     "start": "gulp dev-server",
