@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.7.5 - 2021-07-12
+## Modified
+- Bump react and react-dom dependencies to support versions up to 18.
+
 ## 0.7.4 - 2020-10-08
 ## Bugfix
 - Revert "Store extendedBlockRenderMap in state so it can be updated when readOnly changes its value (#325)" as a bug was found
