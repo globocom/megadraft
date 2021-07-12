@@ -71,8 +71,8 @@
     "webpack-dev-server": "^3.11.0"
   },
   "peerDependencies": {
-    "react": "17.0.02",
-    "react-dom": "17.0.02"
+    "react": ">=16.1.0 18",
+    "react-dom": ">=16.1.0 18"
   },
   "scripts": {
     "start": "gulp dev-server",
