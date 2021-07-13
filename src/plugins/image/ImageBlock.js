@@ -19,43 +19,61 @@ import ImageBlockStyle from "./ImageBlockStyle";
 
 export default function ImageBlock(props) {
   const { container, blockProps, data } = props;
+  const { updateData, remove } = container;
+  const { getInitialReadOnly } = blockProps;
   const actions = [
     {
       key: "delete",
       icon: icons.DeleteIcon,
-      action: container.remove
+      action: remove
     }
   ];
-  const readOnly = blockProps.getInitialReadOnly();
+  const readOnly = getInitialReadOnly();
 
-  function _handleCaptionChange(event) {
+  function handleCaptionChange(event) {
     event.stopPropagation();
-    container.updateData({ caption: event.target.value });
+    updateData({ caption: event.target.value });
   }
 
-  function _handleRightsHolderChange(event) {
+  function handleRightsHolderChange(event) {
     event.stopPropagation();
-    container.updateData({ rightsHolder: event.target.value });
+    updateData({ rightsHolder: event.target.value });
+  }
+
+  function handleImageClick(event) {
+    event.preventDefault();
+
+    const src = window.prompt("Enter an URL");
+    if (!src) {
+      return;
+    }
+
+    updateData({ src });
   }
 
   return (
     <CommonBlock {...props} actions={actions}>
       <BlockContent>
-        <img style={ImageBlockStyle.image} src={data.src} alt="" />
+        <img
+          style={ImageBlockStyle.image}
+          src={data.src}
+          alt={data.caption}
+          onClick={handleImageClick}
+        />
       </BlockContent>
 
       <BlockData>
         <BlockInput
           placeholder="Caption"
           value={data.caption}
-          onChange={_handleCaptionChange}
+          onChange={handleCaptionChange}
           readOnly={readOnly}
         />
 
         <BlockInput
           placeholder="Rights Holder"
           value={data.rightsHolder}
-          onChange={_handleRightsHolderChange}
+          onChange={handleRightsHolderChange}
           readOnly={readOnly}
         />
       </BlockData>

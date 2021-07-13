@@ -14,7 +14,7 @@ export default function BlockButton(props) {
 
   function onClick(event) {
     event.preventDefault();
-    const src = window.prompt("Enter a URL");
+    const src = window.prompt("Enter an URL");
     if (!src) {
       return;
     }
