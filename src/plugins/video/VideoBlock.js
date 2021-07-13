@@ -19,29 +19,47 @@ import VideoBlockStyle from "./VideoBlockStyle";
 
 export default function VideoBlock(props) {
   const { container, data } = props;
+  const { updateData, remove } = container;
   const actions = [
     {
       key: "delete",
       icon: icons.DeleteIcon,
-      action: container.remove
+      action: remove
     }
   ];
 
-  function _handleCaptionChange(event) {
-    container.updateData({ caption: event.target.value });
+  function handleCaptionChange(event) {
+    updateData({ caption: event.target.value });
+  }
+
+  function handleVideoClick(event) {
+    event.preventDefault();
+
+    const src = window.prompt("Enter an URL");
+    if (!src) {
+      return;
+    }
+
+    updateData({ src });
   }
 
   return (
     <CommonBlock {...props} actions={actions}>
       <BlockContent>
-        <video controls style={VideoBlockStyle.video} src={data.src} alt="" />
+        <video
+          controls
+          style={VideoBlockStyle.video}
+          src={data.src}
+          alt={data.caption}
+          onClick={handleVideoClick}
+        />
       </BlockContent>
 
       <BlockData>
         <BlockInput
           placeholder="Caption"
           value={data.caption}
-          onChange={_handleCaptionChange}
+          onChange={handleCaptionChange}
         />
       </BlockData>
     </CommonBlock>
