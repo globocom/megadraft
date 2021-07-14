@@ -28,7 +28,7 @@ class SidebarWrapper extends Component {
     this.state = { ...props };
     this.plugins = this.props.plugins || DEFAULT_PLUGINS;
     this.editorHasFocus = true;
-    this.onChange = ::this.onChange;
+    this.onChange = this.onChange.bind(this);
     this.onAction = jest.fn();
   }
 
@@ -68,7 +68,7 @@ class SidebarWithModalWrapper extends Component {
     this.maxSidebarButtons = 3;
     this.modalOptions = { width: 500, height: 300 };
     this.editorHasFocus = true;
-    this.onChange = ::this.onChange;
+    this.onChange = this.onChange.bind(this);
     this.onAction = jest.fn();
   }
 

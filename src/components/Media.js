@@ -14,8 +14,8 @@ export default class Media extends Component {
   constructor(props) {
     super(props);
 
-    this.remove = ::this.remove;
-    this.updateData = ::this.updateData;
+    this.remove = this.remove.bind(this);
+    this.updateData = this.updateData.bind(this);
 
     this.onChange = this.props.blockProps.onChange;
   }

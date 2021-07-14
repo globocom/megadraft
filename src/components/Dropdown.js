@@ -30,10 +30,10 @@ export default class Dropdown extends Component {
     this.state = {
       isOpen: false
     };
-    this.handleDocumentClick = ::this.handleDocumentClick;
-    this.toggleDropDown = ::this.toggleDropDown;
-    this.preventSelection = ::this.preventSelection;
-    this.renderItem = ::this.renderItem;
+    this.handleDocumentClick = this.handleDocumentClick.bind(this);
+    this.toggleDropDown = this.toggleDropDown.bind(this);
+    this.preventSelection = this.preventSelection.bind(this);
+    this.renderItem = this.renderItem.bind(this);
   }
 
   isEmpty() {

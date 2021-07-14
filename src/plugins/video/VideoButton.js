@@ -4,39 +4,33 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React from "react";
 
 import icons from "../../icons";
 import insertDataBlock from "../../insertDataBlock";
 
-export default class VideoButton extends Component {
-  constructor(props) {
-    super(props);
-    this.onClick = ::this.onClick;
-  }
+export default function VideoButton(props) {
+  const { onChange, editorState, className, title } = props;
 
-  onClick(e) {
-    e.preventDefault();
-    const src = window.prompt("Enter a URL");
+  function onClick(event) {
+    event.preventDefault();
+    const src = window.prompt("Enter an URL");
     if (!src) {
       return;
     }
 
-    const data = { src: src, type: "video", display: "small" };
+    const data = {
+      src,
+      type: "video",
+      display: "small"
+    };
 
-    this.props.onChange(insertDataBlock(this.props.editorState, data));
+    onChange(insertDataBlock(editorState, data));
   }
 
-  render() {
-    return (
-      <button
-        className={this.props.className}
-        type="button"
-        onClick={this.onClick}
-        title={this.props.title}
-      >
-        <icons.VideoIcon className="sidemenu__button__icon" />
-      </button>
-    );
-  }
+  return (
+    <button className={className} type="button" onClick={onClick} title={title}>
+      <icons.VideoIcon className="sidemenu__button__icon" />
+    </button>
+  );
 }

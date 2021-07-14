@@ -12,8 +12,8 @@ import ModalPluginItem from "./ModalPluginItem";
 export default class ModalPluginList extends Component {
   constructor(props) {
     super(props);
-    this.modalClose = ::this.modalClose;
-    this.onChange = ::this.onChange;
+    this.modalClose = this.modalClose.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   modalClose() {

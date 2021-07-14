@@ -22,7 +22,7 @@ class ModalWithPlugins extends Component {
       this.fakePlugins[i].title = "plugin" + i;
       this.fakePlugins[i].type = "plugin" + i;
     }
-    this.onChange = ::this.onChange;
+    this.onChange = this.onChange.bind(this);
   }
 
   onChange(editorState) {

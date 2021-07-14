@@ -14,9 +14,9 @@ export default class ModalPluginItem extends Component {
 
   constructor(props) {
     super(props);
-    this.handleClick = ::this.handleClick;
-    this.closeModal = ::this.closeModal;
-    this.renderButton = ::this.renderButton;
+    this.handleClick = this.handleClick.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.renderButton = this.renderButton.bind(this);
   }
 
   handleClick(e) {

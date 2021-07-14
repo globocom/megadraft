@@ -4,31 +4,28 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React from "react";
 
-export default class MediaWrapper extends Component {
-  constructor(props) {
-    super(props);
+/*
+ * MediaWrapper component avoids Draft JS bugs when a custom block component
+ * is being updated by setting the editor's readOnly flag to true
+ *
+ * https://draftjs.org/docs/advanced-topics-block-components/#recommendations-and-other-notes
+ */
+export default function MediaWrapper(props) {
+  const { setReadOnly, setInitialReadOnly, children } = props;
 
-    this._handleFocus = ::this._handleFocus;
-    this._handleBlur = ::this._handleBlur;
+  function handleFocus() {
+    setReadOnly(true);
   }
 
-  _handleFocus() {
-    // temporarily set the editor to readonly
-    this.props.setReadOnly(true);
+  function handleBlur() {
+    setInitialReadOnly();
   }
 
-  _handleBlur() {
-    // restore readonly to its original state
-    this.props.setInitialReadOnly();
-  }
-
-  render() {
-    return (
-      <div onBlur={this._handleBlur} onFocus={this._handleFocus}>
-        {this.props.children}
-      </div>
-    );
-  }
+  return (
+    <div onBlur={handleBlur} onFocus={handleFocus}>
+      {children}
+    </div>
+  );
 }

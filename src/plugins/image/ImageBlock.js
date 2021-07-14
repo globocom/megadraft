@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React from "react";
 
 import {
   BlockContent,
@@ -17,57 +17,66 @@ import icons from "../../icons";
 
 import ImageBlockStyle from "./ImageBlockStyle";
 
-export default class ImageBlock extends Component {
-  constructor(props) {
-    super(props);
+export default function ImageBlock(props) {
+  const { container, blockProps, data } = props;
+  const { updateData, remove } = container;
+  const { getInitialReadOnly } = blockProps;
+  const actions = [
+    {
+      key: "delete",
+      icon: icons.DeleteIcon,
+      action: remove
+    }
+  ];
+  const readOnly = getInitialReadOnly();
 
-    this._handleCaptionChange = ::this._handleCaptionChange;
-    this._handleRightsHolderChange = ::this._handleRightsHolderChange;
-
-    this.actions = [
-      {
-        key: "delete",
-        icon: icons.DeleteIcon,
-        action: this.props.container.remove
-      }
-    ];
-  }
-
-  _handleCaptionChange(event) {
+  function handleCaptionChange(event) {
     event.stopPropagation();
-    this.props.container.updateData({ caption: event.target.value });
+    updateData({ caption: event.target.value });
   }
 
-  _handleRightsHolderChange(event) {
+  function handleRightsHolderChange(event) {
     event.stopPropagation();
-    this.props.container.updateData({ rightsHolder: event.target.value });
+    updateData({ rightsHolder: event.target.value });
   }
 
-  render() {
-    const readOnly = this.props.blockProps.getInitialReadOnly();
+  function handleImageClick(event) {
+    event.preventDefault();
 
-    return (
-      <CommonBlock {...this.props} actions={this.actions}>
-        <BlockContent>
-          <img style={ImageBlockStyle.image} src={this.props.data.src} alt="" />
-        </BlockContent>
+    const src = window.prompt("Enter an URL");
+    if (!src) {
+      return;
+    }
 
-        <BlockData>
-          <BlockInput
-            placeholder="Caption"
-            value={this.props.data.caption}
-            onChange={this._handleCaptionChange}
-            readOnly={readOnly}
-          />
-
-          <BlockInput
-            placeholder="Rights Holder"
-            value={this.props.data.rightsHolder}
-            onChange={this._handleRightsHolderChange}
-            readOnly={readOnly}
-          />
-        </BlockData>
-      </CommonBlock>
-    );
+    updateData({ src });
   }
+
+  return (
+    <CommonBlock {...props} actions={actions}>
+      <BlockContent>
+        <img
+          style={ImageBlockStyle.image}
+          src={data.src}
+          alt={data.caption}
+          onClick={handleImageClick}
+        />
+      </BlockContent>
+
+      <BlockData>
+        <BlockInput
+          placeholder="Caption"
+          value={data.caption}
+          onChange={handleCaptionChange}
+          readOnly={readOnly}
+        />
+
+        <BlockInput
+          placeholder="Rights Holder"
+          value={data.rightsHolder}
+          onChange={handleRightsHolderChange}
+          readOnly={readOnly}
+        />
+      </BlockData>
+    </CommonBlock>
+  );
 }

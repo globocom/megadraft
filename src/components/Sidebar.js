@@ -32,10 +32,10 @@ class BlockStyles extends Component {
       isOpen: false
     };
 
-    this.onModalOpenClick = ::this.onModalOpenClick;
-    this.onChange = ::this.onChange;
-    this.toggleModalVisibility = ::this.toggleModalVisibility;
-    this.renderButton = ::this.renderButton;
+    this.onModalOpenClick = this.onModalOpenClick.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.toggleModalVisibility = this.toggleModalVisibility.bind(this);
+    this.renderButton = this.renderButton.bind(this);
   }
 
   onChange(editorState) {
@@ -171,8 +171,8 @@ export class SideMenu extends Component {
     this.state = {
       open: false
     };
-    this.toggle = ::this.toggle;
-    this.onChange = ::this.onChange;
+    this.toggle = this.toggle.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   onChange(editorState) {
@@ -219,7 +219,7 @@ export default class SideBar extends Component {
   constructor(props) {
     super(props);
     this.state = { top: 0 };
-    this.onChange = ::this.onChange;
+    this.onChange = this.onChange.bind(this);
   }
 
   getValidSidebarPlugins() {

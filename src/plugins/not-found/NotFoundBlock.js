@@ -4,44 +4,38 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React from "react";
 
 import { BlockContent, CommonBlock } from "../../components/plugin";
 import MediaMessage from "../../components/MediaMessage";
 import icons from "../../icons";
 import { replaceData } from "../../i18n";
 
-class NotFoundBlock extends Component {
-  constructor(props) {
-    super(props);
+export default function NotFoundBlock(props) {
+  const {
+    container,
+    i18n,
+    data: { type }
+  } = props;
+  const actions = [
+    {
+      key: "delete",
+      icon: icons.DeleteIcon,
+      action: container.remove
+    }
+  ];
 
-    this.actions = [
-      {
-        key: "delete",
-        icon: icons.DeleteIcon,
-        action: this.props.container.remove
-      }
-    ];
-  }
+  const errorMsg = type
+    ? "Can't show plugin, component {{type}} not found."
+    : "Can't show plugin, component not found.";
+  const text = replaceData(i18n[errorMsg], { type: type && type.toString() });
 
-  render() {
-    const {
-      i18n,
-      data: { type }
-    } = this.props;
-    const errorMsg = type
-      ? "Can't show plugin, component {{type}} not found."
-      : "Can't show plugin, component not found.";
-    const text = replaceData(i18n[errorMsg], { type: type && type.toString() });
-    return (
-      <CommonBlock {...this.props} actions={this.actions}>
-        <BlockContent className="block__notfound">
-          <MediaMessage text={text} type="warning" />
-          <icons.ErrorIcon className="block__notfound__icon" />
-        </BlockContent>
-      </CommonBlock>
-    );
-  }
+  return (
+    <CommonBlock {...props} actions={actions}>
+      <BlockContent className="block__notfound">
+        <MediaMessage text={text} type="warning" />
+        <icons.ErrorIcon className="block__notfound__icon" />
+      </BlockContent>
+    </CommonBlock>
+  );
 }
-
-export default NotFoundBlock;
