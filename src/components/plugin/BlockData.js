@@ -4,10 +4,10 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React from "react";
 
-export default class BlockData extends Component {
-  render() {
-    return <div className="block__data">{this.props.children}</div>;
-  }
+export default function BlockData(props) {
+  const { children } = props;
+
+  return <div className="block__data">{children}</div>;
 }

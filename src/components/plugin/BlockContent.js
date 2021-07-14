@@ -4,15 +4,21 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React from "react";
 import classNames from "classnames";
 
-export default class BlockContent extends Component {
-  render() {
-    let className = classNames("block__content", {
-      [`block__content--${this.props.className}`]: this.props.className
-    });
+function BEMClassName(block, element, modifier) {
+  return classNames(`${block}__${element}`, {
+    [`${block}__${element}--${modifier}`]: modifier
+  });
+}
 
-    return <div className={className}>{this.props.children}</div>;
-  }
+export default function BlockContent(props) {
+  const { className, children } = props;
+
+  return (
+    <div className={BEMClassName("block", "content", className)}>
+      {children}
+    </div>
+  );
 }

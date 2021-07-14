@@ -4,31 +4,27 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import BlockAction from "./BlockAction";
 
-export default class BlockActionGroup extends Component {
-  static propTypes = {
-    items: PropTypes.arrayOf(
-      PropTypes.shape({
-        key: PropTypes.string.isRequired,
-        icon: PropTypes.func.isRequired,
-        action: PropTypes.func.isRequired
-      })
-    )
-  };
+export default function BlockActionGroup(props) {
+  const { items } = props;
 
-  renderItem(item) {
+  function renderItem(item) {
     return <BlockAction item={item} key={item.key} />;
   }
 
-  render() {
-    return (
-      <ul className="block__action-group">
-        {this.props.items.map(this.renderItem)}
-      </ul>
-    );
-  }
+  return <ul className="block__action-group">{items.map(renderItem)}</ul>;
 }
+
+BlockActionGroup.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      icon: PropTypes.func.isRequired,
+      action: PropTypes.func.isRequired
+    })
+  )
+};

@@ -4,18 +4,14 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React from "react";
 
-export default class BlockWrapper extends Component {
-  render() {
-    return (
-      <div
-        className={
-          this.props.readOnly ? "block__hover--readonly" : "block__hover"
-        }
-      >
-        <div className="block__wrapper">{this.props.children}</div>
-      </div>
-    );
-  }
+export default function BlockWrapper(props) {
+  const { readOnly, children } = props;
+
+  return (
+    <div className={readOnly ? "block__hover--readonly" : "block__hover"}>
+      <div className="block__wrapper">{children}</div>
+    </div>
+  );
 }

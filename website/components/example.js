@@ -44,6 +44,7 @@ function Editor(props) {
         maxSidebarButtons={null}
         onAction={onAction}
         movableBlocks={true}
+        maxSidebarButtons={2}
       />
     </div>
   );

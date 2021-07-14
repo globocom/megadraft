@@ -4,24 +4,24 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
-export default class BlockAction extends Component {
-  static propTypes = {
-    item: PropTypes.shape({
-      key: PropTypes.string.isRequired,
-      icon: PropTypes.func.isRequired,
-      action: PropTypes.func.isRequired
-    })
-  };
+export default function BlockAction(props) {
+  const { item } = props;
+  const { icon: Icon, action } = item;
 
-  render() {
-    const Icon = this.props.item.icon;
-    return (
-      <li className="block__action" onClick={this.props.item.action}>
-        <Icon className="block__action__icon" />
-      </li>
-    );
-  }
+  return (
+    <li className="block__action" onClick={action}>
+      <Icon className="block__action__icon" />
+    </li>
+  );
 }
+
+BlockAction.propTypes = {
+  item: PropTypes.shape({
+    key: PropTypes.string.isRequired,
+    icon: PropTypes.func.isRequired,
+    action: PropTypes.func.isRequired
+  })
+};

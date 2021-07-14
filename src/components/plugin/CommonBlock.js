@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React from "react";
 
 import Dropdown from "../../components/Dropdown";
 import {
@@ -17,44 +17,36 @@ import {
   DEFAULT_DISPLAY_KEY
 } from "../../components/plugin/defaults";
 
-export default class CommonBlock extends Component {
-  constructor(props) {
-    super(props);
+const DEFAULT_OPTIONS = {
+  defaultDisplay: DEFAULT_DISPLAY_KEY,
+  displayOptions: DEFAULT_DISPLAY_OPTIONS
+};
 
-    this._handleDisplayChange = this._handleDisplayChange.bind(this);
+export default function CommonBlock(props) {
+  const { container, data, blockProps, actions, children } = props;
+  const { plugin, getInitialReadOnly } = blockProps;
+  const { options: pluginOptions = {} } = plugin;
+  const options = { ...DEFAULT_OPTIONS, ...pluginOptions };
+  const readOnly = getInitialReadOnly();
+
+  function handleDisplayChange(display) {
+    container.updateData({ display });
   }
 
-  _handleDisplayChange(newValue) {
-    this.props.container.updateData({ display: newValue });
-  }
+  return (
+    <BlockWrapper readOnly={readOnly}>
+      {!readOnly && (
+        <BlockControls>
+          <Dropdown
+            items={options.displayOptions}
+            selected={data.display || options.defaultDisplay}
+            onChange={handleDisplayChange}
+          />
+          <BlockActionGroup items={actions} />
+        </BlockControls>
+      )}
 
-  render() {
-    const data = this.props.data;
-    const defaults = {
-      defaultDisplay: DEFAULT_DISPLAY_KEY,
-      displayOptions: DEFAULT_DISPLAY_OPTIONS
-    };
-    let options = this.props.blockProps.plugin.options || {};
-    options = { ...defaults, ...options };
-
-    const readOnly = this.props.blockProps.getInitialReadOnly();
-
-    return (
-      <BlockWrapper readOnly={readOnly}>
-        {!readOnly && (
-          <BlockControls>
-            <Dropdown
-              items={options.displayOptions}
-              selected={data.display || options.defaultDisplay}
-              onChange={this._handleDisplayChange}
-            />
-
-            <BlockActionGroup items={this.props.actions} />
-          </BlockControls>
-        )}
-
-        {this.props.children}
-      </BlockWrapper>
-    );
-  }
+      {children}
+    </BlockWrapper>
+  );
 }
