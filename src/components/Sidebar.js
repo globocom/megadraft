@@ -119,7 +119,7 @@ class BlockStyles extends Component {
     const className = classNames("sidemenu__items", {
       "sidemenu__items--open": this.props.open
     });
-    return (
+    return this.props.open ? (
       <div>
         <ul style={sidemenuMaxHeight} className={className}>
           {this.props.plugins
@@ -129,7 +129,7 @@ class BlockStyles extends Component {
         </ul>
         {hasModal ? this.renderModal() : null}
       </div>
-    );
+    ) : null;
   }
 }
 
@@ -156,6 +156,7 @@ export class ToggleButton extends Component {
           this.button.focus();
           this.props.toggle();
         }}
+        aria-label={this.props.open ? "Close menu" : "Add new"}
       >
         <Icon className="sidemenu__button__icon" />
       </button>
