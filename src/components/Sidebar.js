@@ -105,7 +105,7 @@ class BlockStyles extends Component {
     );
   }
 
-  render() {
+  getSidemenuMaxValues() {
     const maxSidebarButtons = this.props.maxSidebarButtons
       ? this.props.maxSidebarButtons
       : this.props.plugins.length;
@@ -113,6 +113,15 @@ class BlockStyles extends Component {
     const sidemenuMaxHeight = {
       maxHeight: this.props.open ? `${(maxSidebarButtons + 1) * 48}px` : 0
     };
+
+    return { maxSidebarButtons, sidemenuMaxHeight };
+  }
+
+  render() {
+    const {
+      maxSidebarButtons,
+      sidemenuMaxHeight
+    } = this.getSidemenuMaxValues();
 
     // We should hide the modal if the number of plugins < max
     const hasModal = this.props.plugins.length > maxSidebarButtons;
