@@ -87,6 +87,18 @@ describe("LinkInput Component", () => {
     expect(testContext.setError).toHaveBeenCalledWith("Invalid Link");
   });
 
+  it("should support underscored subdomains links", () => {
+    const input = testContext.wrapper.find(".toolbar__input");
+    const inputNode = input.getDOMNode();
+
+    inputNode.value = "https://has_underscore.example.com/";
+    input.simulate("change");
+    input.simulate("keyDown", { key: "Enter", keyCode: 13, which: 13 });
+    expect(testContext.setEntity).toHaveBeenCalledWith({
+      url: "https://has_underscore.example.com/"
+    });
+  });
+
   it("should return 'Invalid Link' with a empty i18n object", () => {
     testContext.wrapper.setProps({ i18n: {} });
 
