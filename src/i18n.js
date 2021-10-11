@@ -27,9 +27,9 @@ const i18nConfig = {
       "Não é possível exibir o plugin, componente não encontrado",
     "Block List": "Lista de Blocos",
     "Something went wrong in component '{{type}}'. {{error}}":
-      "Algo esta errado no componente '{{type}}'. {{error}}",
+      "Algo está errado no componente '{{type}}'. {{error}}",
     "Something went wrong with the component type.":
-      "Algo esta errado com o tipo do componente"
+      "Algo está errado com o tipo do componente"
   }
 };
 
