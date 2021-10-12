@@ -13,7 +13,7 @@ export default function BlockButton(props) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { onChange, editorState, className, title } = props;
 
-  function onClick() {
+  function handleOnDialogOpen() {
     setIsDialogOpen(true);
   }
 
@@ -26,12 +26,13 @@ export default function BlockButton(props) {
       <button
         className={className}
         type="button"
-        onClick={onClick}
+        onClick={handleOnDialogOpen}
         title={title}
       >
         <icons.ImageIcon className="sidemenu__button__icon" />
       </button>
       <DialogMedia
+        typeMedia="image"
         onChange={onChange}
         editorState={editorState}
         onClose={handleOnDialogClose}
