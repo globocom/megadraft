@@ -4,22 +4,19 @@
  * License: MIT
  */
 
-import React, { useState } from "react";
+import React from "react";
 
 import icons from "../../icons";
 import { DialogMedia } from "../../components/DialogMedia";
+import { useDialogMedia } from "../../hooks/useDialogMedia";
 
 export default function VideoButton(props) {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { onChange, editorState, className, title } = props;
-
-  function handleOnDialogOpen() {
-    setIsDialogOpen(true);
-  }
-
-  function handleOnDialogClose() {
-    isDialogOpen && setIsDialogOpen(false);
-  }
+  const {
+    isDialogOpen,
+    handleOnDialogOpen,
+    handleOnDialogClose
+  } = useDialogMedia();
 
   return (
     <>
