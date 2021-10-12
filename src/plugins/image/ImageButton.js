@@ -4,29 +4,39 @@
  * License: MIT
  */
 
-import React from "react";
+import React, { useState } from "react";
 
 import icons from "../../icons";
-import insertDataBlock from "../../insertDataBlock";
+import { DialogMedia } from "../../components/DialogMedia";
 
 export default function BlockButton(props) {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { onChange, editorState, className, title } = props;
 
-  function onClick(event) {
-    event.preventDefault();
-    const src = window.prompt("Enter an URL");
-    if (!src) {
-      return;
-    }
+  function onClick() {
+    setIsDialogOpen(true);
+  }
 
-    const data = { src: src, type: "image", display: "medium" };
-
-    onChange(insertDataBlock(editorState, data));
+  function handleOnDialogClose() {
+    isDialogOpen && setIsDialogOpen(false);
   }
 
   return (
-    <button className={className} type="button" onClick={onClick} title={title}>
-      <icons.ImageIcon className="sidemenu__button__icon" />
-    </button>
+    <>
+      <button
+        className={className}
+        type="button"
+        onClick={onClick}
+        title={title}
+      >
+        <icons.ImageIcon className="sidemenu__button__icon" />
+      </button>
+      <DialogMedia
+        onChange={onChange}
+        editorState={editorState}
+        onClose={handleOnDialogClose}
+        isOpen={isDialogOpen}
+      />
+    </>
   );
 }

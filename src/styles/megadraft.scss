@@ -6,21 +6,22 @@
 
 @import "_mixins.scss";
 @import "modal.scss";
+@import "dialog-media.scss";
 
 .megadraft-editor {
-    position: relative;
+  position: relative;
 
-    @import 'typography.scss';
+  @import "typography.scss";
 
-    @import 'sidebar.scss';
+  @import "sidebar.scss";
 
-    @import 'toolbar.scss';
-    @import "block.scss";
-    @import "dropdown.scss";
+  @import "toolbar.scss";
+  @import "block.scss";
+  @import "dropdown.scss";
 
-    @import "media.scss";
+  @import "media.scss";
 
-    @import "move-control.scss";
+  @import "move-control.scss";
 
   &.placeholder-hide {
     .public-DraftEditorPlaceholder-root {
@@ -34,7 +35,7 @@
     }
   }
 
-    .megadraft-block {
-        padding-bottom: 40px;
-    }
+  .megadraft-block {
+    padding-bottom: 40px;
+  }
 }
