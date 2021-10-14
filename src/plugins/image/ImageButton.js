@@ -12,6 +12,7 @@ import { useDialogMedia } from "../../hooks/useDialogMedia";
 
 export default function BlockButton(props) {
   const { onChange, editorState, className, title } = props;
+
   const {
     isDialogOpen,
     handleOnDialogOpen,
