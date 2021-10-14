@@ -4,27 +4,25 @@
  * License: MIT
  */
 
-import React from "react";
+import React, { useState } from "react";
 
 import icons from "../../icons";
 import { DialogMedia } from "../../components/DialogMedia";
-import { useDialogMedia } from "../../hooks/useDialogMedia";
 
 export default function BlockButton(props) {
   const { onChange, editorState, className, title } = props;
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
-  const {
-    isDialogOpen,
-    handleOnDialogOpen,
-    handleOnDialogClose
-  } = useDialogMedia();
+  function onClickButton() {
+    isOpenModal ? setIsOpenModal(false) : setIsOpenModal(true);
+  }
 
   return (
     <>
       <button
         className={className}
         type="button"
-        onClick={handleOnDialogOpen}
+        onClick={onClickButton}
         title={title}
       >
         <icons.ImageIcon className="sidemenu__button__icon" />
@@ -33,8 +31,8 @@ export default function BlockButton(props) {
         typeMedia="image"
         onChange={onChange}
         editorState={editorState}
-        onClose={handleOnDialogClose}
-        isOpen={isDialogOpen}
+        onClose={onClickButton}
+        isOpen={isOpenModal}
       />
     </>
   );
