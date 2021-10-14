@@ -16,13 +16,10 @@ create_js_file()
 
 import React from "react";
 
-
-export default class extends React.Component {
-  render() {
-    return (
-      $SVG_CONTENT
-    );
-  }
+export default function () {
+  return (
+    $SVG_CONTENT
+  );
 }
 EOF
 }
