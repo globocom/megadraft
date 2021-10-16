@@ -67,7 +67,6 @@ export default class MegadraftEditor extends Component {
     };
 
     this.onChange = this.onChange.bind(this);
-    this.onTab = this.onTab.bind(this);
 
     this.mediaBlockRenderer = this.mediaBlockRenderer.bind(this);
 
@@ -156,12 +155,6 @@ export default class MegadraftEditor extends Component {
       }
     }
     return getDefaultKeyBinding(e);
-  }
-
-  onTab(event) {
-    if (this.props.onTab) {
-      this.props.onTab(event);
-    }
   }
 
   handleKeyCommand(command) {
@@ -558,7 +551,6 @@ export default class MegadraftEditor extends Component {
               readOnly={this.state.readOnly}
               blockRendererFn={this.mediaBlockRenderer}
               blockStyleFn={this.props.blockStyleFn || this.blockStyleFn}
-              onTab={this.onTab}
               handleKeyCommand={this.handleKeyCommand}
               handleReturn={this.props.handleReturn || this.handleReturn}
               keyBindingFn={this.externalKeyBindings}
