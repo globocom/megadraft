@@ -4,15 +4,13 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React from "react";
 import classNames from "classnames";
 
-export default class BlockContent extends Component {
-  render() {
-    let className = classNames("block__content", {
-      [`block__content--${this.props.className}`]: this.props.className
-    });
+export default function BlockContent(props) {
+  const className = classNames("block__content", {
+    [`block__content--${props.className}`]: props.className
+  });
 
-    return <div className={className}>{this.props.children}</div>;
-  }
+  return <div className={className}>{props.children}</div>;
 }
