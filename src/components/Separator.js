@@ -4,10 +4,8 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React from "react";
 
-export default class Separator extends Component {
-  render() {
-    return <li className="toolbar__item toolbar__item--separator" />;
-  }
+export default function Separator() {
+  return <li className="toolbar__item toolbar__item--separator" />;
 }
