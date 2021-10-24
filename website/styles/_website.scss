@@ -84,7 +84,7 @@
     transform: translateX(-50%);
   }
 
-  @media only screen and (min-device-width: 320px) and (max-device-width: 480px){
+  @media only #{$media-min320} and (max-device-width: 480px){
     &__call-to-action {
         font-weight: bold;
         font-size: 45px;
@@ -113,7 +113,7 @@
     }
   }
 
-  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  @media only #{$media-min768} and (max-device-width: 1024px) {
     &__call-to-action {
         font-weight: bold;
         font-size: 45px;
@@ -164,7 +164,7 @@
     padding-bottom: 128px;
   }
 
-@media only screen and (max-width: 767px) {
+@media only #{$media-max767} {
   .tab-container-editor {
     padding-left: 65px;
     padding-right: 65px;
@@ -179,16 +179,16 @@
   padding-right: 256px;
   padding-top: 64px;
   padding-bottom: 128px;
-  /*padding-left: 80px;*/ }
+}
 
-@media only screen and (max-width: 1000px) {
+@media only #{$media-max1000} {
   .tab-container-json {
     background-color: $gray-400;
     padding-left: 0px;
     padding-right: 0px;
     padding-top: 64px;
     padding-bottom: 256px;
-    /*padding-left: 80px;*/ }
+  }
 
   .hljs {
     background-color: $white;

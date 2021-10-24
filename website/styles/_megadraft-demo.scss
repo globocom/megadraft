@@ -44,7 +44,7 @@
   background-color: $gray-050;
 }
 
-@media only screen and (max-width: 767px) {
+@media only #{$media-max767} {
   .docs{
     padding-left: 20px;
     padding-right: 20px;
