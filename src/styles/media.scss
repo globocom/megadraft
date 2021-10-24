@@ -6,13 +6,13 @@
 
 .media__message {
   &--error {
-    background-color: #e83f26;
-    color: #fff;
+    background-color: $red-550;
+    color: $white;
   }
 
   &--warning {
     background-color: #fff7d8;
-    color: #b59223;
+    color: $yellow-500;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
 }
