@@ -25,16 +25,16 @@
 
 
 .container--light{
-  background-color: #fff;
+  background-color: $white;
 }
 
 .container--dark{
-  background-color: #282828;
+  background-color: $gray-400;
 }
 
 .appbar--fixed{
-  color:red;
-  background:red;
+  color: $red;
+  background: $red;
 }
 
 .docs {
@@ -42,7 +42,7 @@
   padding-right: 256px;
   padding-top: 64px;
   padding-bottom: 64px;
-  background-color: #fafafa;
+  background-color: $gray-050;
 }
 
 @media only screen and (max-width: 767px) {
@@ -117,19 +117,19 @@
       color: rgba(0, 0, 0, 0.87);
       box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
       border-radius: 2px;
-      background-color: #FFF;
+      background-color: $white;
   }
 
   a {
-    color: #000;
+    color: $black;
   }
 
   code:not(.hljs) {
-    background-color: #FFF;
+    background-color: $white;
     border-radius: 2px;
-    border: 1px solid #CCC;
+    border: 1px solid $gray-100;
     padding: 1px 4px;
-    color: #d14;
+    color: $code-color;
     margin: 0 2px;
     font-family: monospace;
     box-shadow: rgba(0, 0, 0, 0.08) 0 1px 1px;
@@ -137,5 +137,5 @@
 }
 
 .content {
-  background-color: #fafafa;
+  background-color: $gray-050;
 }

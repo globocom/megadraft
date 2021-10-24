@@ -4,8 +4,6 @@
  * License: MIT
  */
 
-$hit-color: #ffcf00;
-
 .page {
   &__body {
     margin: 0 auto;
@@ -27,7 +25,7 @@ $hit-color: #ffcf00;
 
   &__content {
     margin: auto;
-    color: #333;
+    color: $gray-300;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.6;
@@ -46,7 +44,7 @@ $hit-color: #ffcf00;
     &-svg {
       width: 100%;
       height: 100%;
-      fill: #fff;
+      fill: $white;
     }
   }
 
@@ -66,11 +64,11 @@ $hit-color: #ffcf00;
   }
 
   &__description {
-    color: #fff;
+    color: $white;
     font-size: calc(14px + 0.72vw);
     letter-spacing: -.035em;
     line-height: 1.4;
-    text-shadow: 1px 1px 3px #333;
+    text-shadow: 1px 1px 3px $gray-300;
   }
 
   &__call-to-action {
@@ -78,11 +76,11 @@ $hit-color: #ffcf00;
     font-size: 20px;
     position: absolute;
     bottom: -66px;
-    color: #fff;
+    color: $white;
     cursor: pointer;
     text-decoration: none;
     left: 50%;
-    text-shadow: 1px 1px 3px #333;
+    text-shadow: 1px 1px 3px $gray-300;
     transform: translateX(-50%);
   }
 
@@ -92,11 +90,11 @@ $hit-color: #ffcf00;
         font-size: 45px;
         position: absolute;
         bottom: -45px;
-        color: #fff;
+        color: $white;
         cursor: pointer;
         text-decoration: none;
         left: 50%;
-        text-shadow: 1px 1px 3px #333;
+        text-shadow: 1px 1px 3px $gray-300;
         transform: translateX(-50%);
       }
 
@@ -108,7 +106,7 @@ $hit-color: #ffcf00;
       cursor: pointer;
       text-decoration: none;
       left: 50%;
-      text-shadow: 1px 1px 3px #333;
+      text-shadow: 1px 1px 3px $gray-300;
       transform: translateX(-50%);
       height: 149px;
       width: 147px;
@@ -121,11 +119,11 @@ $hit-color: #ffcf00;
         font-size: 45px;
         position: absolute;
         bottom: -45px;
-        color: #fff;
+        color: $white;
         cursor: pointer;
         text-decoration: none;
         left: 50%;
-        text-shadow: 1px 1px 3px #333;
+        text-shadow: 1px 1px 3px $gray-300;
         transform: translateX(-50%);
       }
 
@@ -137,7 +135,7 @@ $hit-color: #ffcf00;
       cursor: pointer;
       text-decoration: none;
       left: 50%;
-      text-shadow: 1px 1px 3px #333;
+      text-shadow: 1px 1px 3px $gray-300;
       transform: translateX(-50%);
       height: 149px;
       width: 147px;
@@ -152,7 +150,7 @@ $hit-color: #ffcf00;
     cursor: pointer;
     text-decoration: none;
     left: 50%;
-    text-shadow: 1px 1px 3px #333;
+    text-shadow: 1px 1px 3px $gray-300;
     transform: translateX(-50%);
     height: 100px;
     width: 68px;
@@ -176,7 +174,7 @@ $hit-color: #ffcf00;
 }
 
 .tab-container-json {
-  background-color: #282828;
+  background-color: $gray-400;
   padding-left: 256px;
   padding-right: 256px;
   padding-top: 64px;
@@ -185,7 +183,7 @@ $hit-color: #ffcf00;
 
 @media only screen and (max-width: 1000px) {
   .tab-container-json {
-    background-color: #282828;
+    background-color: $gray-400;
     padding-left: 0px;
     padding-right: 0px;
     padding-top: 64px;
@@ -193,7 +191,7 @@ $hit-color: #ffcf00;
     /*padding-left: 80px;*/ }
 
   .hljs {
-    background-color: #fff;
+    background-color: $white;
     padding: 1em;
     font-family: monospace;
     font-size: 25px;
@@ -201,7 +199,7 @@ $hit-color: #ffcf00;
 }
 
 .hljs {
-  background-color: #fff;
+  background-color: $white;
   padding: 1em;
   font-family: monospace;
   font-size: 14px;
