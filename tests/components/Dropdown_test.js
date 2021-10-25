@@ -15,15 +15,15 @@ describe("Dropdown Component", () => {
   let testContext;
 
   beforeEach(() => {
-    testContext = {};
-    testContext.selected = "metal";
-    testContext.onChange = jest.fn();
     const dropdownItems = [
       { key: "pagode", icon: icons.MediaMediumIcon, label: "Pagode" },
       { key: "metal", icon: icons.MediaBigIcon, label: "Metal" },
       { key: "samba", icon: icons.MediaSmallIcon, label: "Samba" }
     ];
 
+    testContext = {};
+    testContext.selected = "metal";
+    testContext.onChange = jest.fn();
     testContext.component = mount(
       <Dropdown
         items={dropdownItems}
@@ -59,13 +59,23 @@ describe("Dropdown Component", () => {
     expect(testContext.onChange).toHaveBeenCalled();
   });
 
-  it("toggles `isOpen` on click", () => {
+  it("toggles dropdown on click", () => {
     const wrapper = testContext.component.find("div").first();
 
     wrapper.simulate("click");
-    expect(testContext.component.state("isOpen")).toBeTruthy();
+    expect(
+      testContext.component
+        .find("div")
+        .first()
+        .hasClass("dropdown__wrapper--open")
+    ).toEqual(true);
 
     wrapper.simulate("click");
-    expect(testContext.component.state("isOpen")).toBeFalsy();
+    expect(
+      testContext.component
+        .find("div")
+        .first()
+        .hasClass("dropdown__wrapper--open")
+    ).toEqual(false);
   });
 });
