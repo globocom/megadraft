@@ -59,7 +59,6 @@ Megadraft ships with a default styling available at this location in the install
 * [Plugins][docs-plugins]
 * [Saving & Loading][docs-saving-loading]
 
-
 ## Plugins
 
 Check out the [docs][docs-plugins] for information about plugin structure.
@@ -73,11 +72,9 @@ Development of Megadraft happens in the open on GitHub, and we are grateful to t
 
 Read our [contributing guide](CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to Megadraft.
 
-
 ## License
 
 Megadraft is licensed under the [MIT license](LICENSE).
-
 
 ## Third Party
 
