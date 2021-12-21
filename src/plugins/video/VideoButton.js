@@ -7,30 +7,34 @@
 import React from "react";
 
 import icons from "../../icons";
-import insertDataBlock from "../../insertDataBlock";
+import { DialogMedia } from "../../components/DialogMedia";
+import { useDialogMedia } from "../../hooks/useDialogMedia";
 
 export default function VideoButton(props) {
   const { onChange, editorState, className, title } = props;
-
-  function onClick(event) {
-    event.preventDefault();
-    const src = window.prompt("Enter an URL");
-    if (!src) {
-      return;
-    }
-
-    const data = {
-      src,
-      type: "video",
-      display: "small"
-    };
-
-    onChange(insertDataBlock(editorState, data));
-  }
+  const {
+    isDialogOpen,
+    handleOnDialogOpen,
+    handleOnDialogClose
+  } = useDialogMedia();
 
   return (
-    <button className={className} type="button" onClick={onClick} title={title}>
-      <icons.VideoIcon className="sidemenu__button__icon" />
-    </button>
+    <>
+      <button
+        className={className}
+        type="button"
+        onClick={handleOnDialogOpen}
+        title={title}
+      >
+        <icons.VideoIcon className="sidemenu__button__icon" />
+      </button>
+      <DialogMedia
+        typeMedia="video"
+        onChange={onChange}
+        editorState={editorState}
+        onClose={handleOnDialogClose}
+        isOpen={isDialogOpen}
+      />
+    </>
   );
 }
