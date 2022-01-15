@@ -39,7 +39,7 @@ const hookStream = function(stream, data, cb) {
 
 function sass() {
   return gulp
-    .src("./src/styles/**/*.scss")
+    .src("./src/styles/megadraft.scss")
     .pipe(
       gulpSass.sync({ outputStyle: "expanded" }).on("error", gulpSass.logError)
     )
