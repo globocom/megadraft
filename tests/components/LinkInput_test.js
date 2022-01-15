@@ -16,21 +16,29 @@ describe("LinkInput Component", () => {
   beforeEach(() => {
     testContext = {};
     testContext.cancelEntity = jest.fn();
+    testContext.cancelError = jest.fn();
     testContext.setEntity = jest.fn();
     testContext.setError = jest.fn();
-    testContext.cancelError = jest.fn();
 
     testContext.wrapper = mount(
       <LinkInput
-        i18n={i18nConfig["en-US"]}
-        entityType="LINK"
-        editor={testContext.editor}
         cancelEntity={testContext.cancelEntity}
+        cancelError={testContext.cancelError}
+        editor={testContext.editor}
+        entityType="LINK"
+        i18n={i18nConfig["en-US"]}
         setEntity={testContext.setEntity}
         setError={testContext.setError}
-        cancelError={testContext.cancelError}
+        url={"globo.io"}
       />
     );
+  });
+
+  it("url received by props should be in the input value", () => {
+    const input = testContext.wrapper.find(".toolbar__input");
+    const inputNode = input.getDOMNode();
+
+    expect(inputNode.value).toEqual("globo.io");
   });
 
   it("should set a link entity on keypress and call cancel", () => {
