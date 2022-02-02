@@ -5,18 +5,18 @@
  */
 
 .move-control {
-  border: 8px solid rgba(238, 238, 238, 0);
+  border: 8px solid $transparent;
   border-radius: 4px;
   display: flex;
   transition: margin 0.3s;
 }
 
 .move-control:hover {
-  border: 8px solid rgba(238, 238, 238, 1);
+  border: 8px solid $gray-100;
 }
 
 .move-control:hover .options {
-  border: 8px solid rgba(238, 238, 238, 1);
+  border: 8px solid $gray-100;
   opacity: 1;
 }
 
@@ -25,7 +25,7 @@
 }
 
 .move-control--atomic:hover {
-  background-color: rgba(238, 238, 238, 1);
+  background-color: $gray-100;
 }
 
 .move-control--swapped {
