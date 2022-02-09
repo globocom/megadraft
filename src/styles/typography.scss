@@ -8,7 +8,7 @@
 
 .DraftEditor-root, .toolbar {
     font-family: Open Sans, sans-serif;
-    color: #181818;
+    color: $gray-900;
     font-size: 1.125rem;
     letter-spacing: -0.037rem;
     line-height: 1.75rem;
@@ -50,14 +50,14 @@
 }
 
 .public-DraftEditorPlaceholder-root {
-    color: #999;
+    color: $gray-300;
     position: absolute;
     z-index: 0;
 }
 
 blockquote {
-    border-left: 2px solid #ddd;
-    color: #999;
+    border-left: 2px solid $gray-200;
+    color: $gray-300;
     font-style: italic;
     margin: 12px 0 40px 0;
     padding: 6px 0 5px 18px;
@@ -81,7 +81,7 @@ h2:first-child {
 }
 
 .editor__link {
-    color: #3192e7;
+    color: $blue-400;
     text-decoration: none;
     cursor: pointer;
 }
