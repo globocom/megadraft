@@ -152,7 +152,7 @@ body {
   text-shadow: 1px 1px 3px #333;
   transform: translateX(-50%); }
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+@media only screen and (min-width: 320px) and (max-device-width: 480px) {
   .hero__call-to-action {
     font-weight: bold;
     font-size: 45px;
@@ -177,7 +177,7 @@ body {
     height: 149px;
     width: 147px; } }
 
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-device-width: 1024px) {
   .hero__call-to-action {
     font-weight: bold;
     font-size: 45px;
@@ -233,8 +233,7 @@ body {
   padding-left: 256px;
   padding-right: 256px;
   padding-top: 64px;
-  padding-bottom: 128px;
-  /*padding-left: 80px;*/ }
+  padding-bottom: 128px; }
 
 @media only screen and (max-width: 1000px) {
   .tab-container-json {
@@ -242,8 +241,7 @@ body {
     padding-left: 0px;
     padding-right: 0px;
     padding-top: 64px;
-    padding-bottom: 256px;
-    /*padding-left: 80px;*/ }
+    padding-bottom: 256px; }
   .hljs {
     background-color: #fff;
     padding: 1em;
@@ -484,7 +482,7 @@ body {
         display: inline-block;
         background-color: #181818; }
         .megadraft-editor .sidemenu__button:before:hover {
-          background-color: #333333; }
+          background-color: #333; }
       .megadraft-editor .sidemenu__button--open {
         transform: rotate(45deg); }
         .megadraft-editor .sidemenu__button--open:before {
@@ -527,26 +525,26 @@ body {
       height: 0;
       transition: height 0.2s ease-in-out; }
     .megadraft-editor .toolbar--error .toolbar__wrapper {
-      background-color: #E83F26; }
+      background-color: #e83f26; }
     .megadraft-editor .toolbar--error .toolbar__arrow {
-      border-color: #E83F26 transparent transparent; }
+      border-color: #e83f26 transparent transparent; }
     .megadraft-editor .toolbar--error .toolbar__error-msg {
-      color: #FFF;
+      color: #fff;
       margin: -8px 0 0 20px;
       padding-bottom: 12px;
       font-size: 0.75rem;
       font-weight: bold;
       height: 28px; }
     .megadraft-editor .toolbar--error .toolbar__button {
-      color: #FFF; }
+      color: #fff; }
     .megadraft-editor .toolbar--error ::-webkit-input-placeholder {
-      color: #FFF; }
+      color: #fff; }
     .megadraft-editor .toolbar--error :-moz-placeholder {
-      color: #FFF; }
+      color: #fff; }
     .megadraft-editor .toolbar--error ::-moz-placeholder {
-      color: #FFF; }
+      color: #fff; }
     .megadraft-editor .toolbar--error :-ms-input-placeholder {
-      color: #FFF; }
+      color: #fff; }
     .megadraft-editor .toolbar__wrapper {
       background-color: #181818;
       border-radius: 4px;
@@ -792,19 +790,19 @@ body {
     line-height: 16px;
     font-weight: bold; }
   .megadraft-editor .move-control {
-    border: 8px solid rgba(238, 238, 238, 0);
+    border: 8px solid transparent;
     border-radius: 4px;
     display: flex;
     transition: margin 0.3s; }
   .megadraft-editor .move-control:hover {
-    border: 8px solid #eeeeee; }
+    border: 8px solid #eee; }
   .megadraft-editor .move-control:hover .options {
-    border: 8px solid #eeeeee;
+    border: 8px solid #eee;
     opacity: 1; }
   .megadraft-editor .move-control__target {
     width: 100%; }
   .megadraft-editor .move-control--atomic:hover {
-    background-color: #eeeeee; }
+    background-color: #eee; }
   .megadraft-editor .move-control--swapped {
     margin-left: -8px; }
   .megadraft-editor .options--swapped {
@@ -850,7 +848,7 @@ body {
 
 .jsonpreview {
   font-family: monospace;
-  color: #333;
+  color: #999;
   background-color: #ebdbb2;
   font-size: 16px; }
 
@@ -951,15 +949,15 @@ body {
   color: rgba(0, 0, 0, 0.87);
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
   border-radius: 2px;
-  background-color: #FFF; }
+  background-color: #fff; }
 
 .docs a {
   color: #000; }
 
 .docs code:not(.hljs) {
-  background-color: #FFF;
+  background-color: #fff;
   border-radius: 2px;
-  border: 1px solid #CCC;
+  border: 1px solid #eee;
   padding: 1px 4px;
   color: #d14;
   margin: 0 2px;
