@@ -6,7 +6,7 @@
 
 const gulp = require("gulp");
 const gutil = require("gulp-util");
-const gulpSass = require("gulp-sass");
+const gulpSass = require("gulp-sass")(require("sass"));
 const autoprefixer = require("gulp-autoprefixer");
 const webpack = require("webpack");
 const WebpackDevServer = require("webpack-dev-server");
