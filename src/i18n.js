@@ -30,6 +30,19 @@ const i18nConfig = {
       "Algo está errado no componente '{{type}}'. {{error}}",
     "Something went wrong with the component type.":
       "Algo está errado com o tipo do componente."
+  },
+  "es-ES": {
+    "Type the link and press enter": "Escribe el enlace y presiona enter",
+    "Invalid Link": "Enlace no válido",
+    "Can't show plugin, component {{type}} not found.":
+      "No se puede mostrar el complemento, no se encontró el componente {{type}}.",
+    "Can't show plugin, component not found.":
+      "No se puede mostrar el complemento, componente no encontrado.",
+    "Block List": "Lista de bloqueos",
+    "Something went wrong in component '{{type}}'. {{error}}":
+      "Algo salió mal en el componente '{{type}}'. {{error}}",
+    "Something went wrong with the component type.":
+      "Algo salió mal con el tipo de componente."
   }
 };
 
