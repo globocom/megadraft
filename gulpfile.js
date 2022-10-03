@@ -6,7 +6,7 @@
 
 const gulp = require("gulp");
 const gutil = require("gulp-util");
-const gulpSass = require("gulp-sass")(require("sass"));
+const gulpSass = require("gulp-sass");
 const autoprefixer = require("gulp-autoprefixer");
 const webpack = require("webpack");
 const WebpackDevServer = require("webpack-dev-server");
@@ -14,6 +14,8 @@ const webpackConfig = require("./webpack.config.js");
 
 const host = "localhost";
 const port = 8080;
+
+gulpSass.compiler = require("sass");
 
 // http://stackoverflow.com/questions/30225866/gulp-webpack-dev-server-callback-before-bundle-is-finished
 const hookStream = function(stream, data, cb) {
