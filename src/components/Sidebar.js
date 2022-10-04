@@ -105,7 +105,7 @@ class BlockStyles extends Component {
     );
   }
 
-  render() {
+  getSidemenuMaxValues() {
     const maxSidebarButtons = this.props.maxSidebarButtons
       ? this.props.maxSidebarButtons
       : this.props.plugins.length;
@@ -114,12 +114,21 @@ class BlockStyles extends Component {
       maxHeight: this.props.open ? `${(maxSidebarButtons + 1) * 48}px` : 0
     };
 
+    return { maxSidebarButtons, sidemenuMaxHeight };
+  }
+
+  render() {
+    const {
+      maxSidebarButtons,
+      sidemenuMaxHeight
+    } = this.getSidemenuMaxValues();
+
     // We should hide the modal if the number of plugins < max
     const hasModal = this.props.plugins.length > maxSidebarButtons;
     const className = classNames("sidemenu__items", {
       "sidemenu__items--open": this.props.open
     });
-    return (
+    return this.props.open ? (
       <div>
         <ul style={sidemenuMaxHeight} className={className}>
           {this.props.plugins
@@ -129,7 +138,7 @@ class BlockStyles extends Component {
         </ul>
         {hasModal ? this.renderModal() : null}
       </div>
-    );
+    ) : null;
   }
 }
 
@@ -156,6 +165,7 @@ export class ToggleButton extends Component {
           this.button.focus();
           this.props.toggle();
         }}
+        aria-label={this.props.open ? "Close menu" : "Add new"}
       >
         <Icon className="sidemenu__button__icon" />
       </button>

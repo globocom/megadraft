@@ -19,7 +19,7 @@ export default class Header extends React.Component {
             <img
               className="hero__logo-svg"
               src="images/megadraft_white_version.svg"
-              alt="Logo Megadraft"
+              alt="Megadraft logo"
             />
           </div>
           <h1 className="hero__title">
