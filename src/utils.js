@@ -25,9 +25,9 @@ export function editorStateFromRaw(rawContent, decorator = defaultDecorator) {
   if (rawContent) {
     const content = convertFromRaw(rawContent);
     return EditorState.createWithContent(content, decorator);
-  } else {
-    return EditorState.createEmpty(decorator);
   }
+
+  return EditorState.createEmpty(decorator);
 }
 
 export function getSelectedBlockElement(range) {

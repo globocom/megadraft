@@ -27,7 +27,7 @@
 
     &__button {
         border: 0;
-        color: #fff;
+        color: $white;
         cursor: pointer;
         height: 32px;
         font-size: 0;
@@ -43,10 +43,10 @@
             height: 100%;
             border-radius: 100%;
             display: inline-block;
-            background-color: #181818;
+            background-color: $gray-900;
 
             &:hover {
-              background-color: #333333;
+              background-color: $gray-600;
             }
         }
 
@@ -54,7 +54,7 @@
             transform: rotate(45deg);
 
             &:before {
-                background-color: #0669de;
+                background-color: $blue-600;
             }
         }
 
@@ -83,7 +83,7 @@
 
         &:before {
             transition: all 0.1s ease-in-out;
-            background-color: #181818;
+            background-color: $gray-900;
         }
 
         &:hover {

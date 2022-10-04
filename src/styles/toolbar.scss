@@ -8,7 +8,7 @@
 @import "_mixins.scss";
 
 .toolbar {
-    background: yellow;
+    background: $yellow-400;
     height: 0;
     position: absolute;
     display: none;
@@ -27,13 +27,13 @@
 
     &--error {
       .toolbar__wrapper {
-        background-color: #E83F26;
+        background-color: $red-550;
       }
       .toolbar__arrow {
-        border-color: #E83F26 transparent transparent;
+        border-color: $red-550 transparent transparent;
       }
       .toolbar__error-msg {
-        color: #FFF;
+        color: $white;
         margin: -8px 0 0 20px;
         padding-bottom: 12px;
         font-size: 0.75rem;
@@ -41,15 +41,15 @@
         height: 28px;
       }
       .toolbar__button {
-        color: #FFF;
+        color: $white;
       }
       @include placeholder {
-        color: #FFF;
+        color: $white;
       }
     }
 
     &__wrapper {
-        background-color: #181818;
+        background-color: $gray-900;
         border-radius: 4px;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
         position: relative;
@@ -72,29 +72,29 @@
         pointer-events: none;
         border-width: 8px;
         border-style: solid;
-        border-color: #181818 transparent transparent;
+        border-color: $gray-900 transparent transparent;
         margin-left: -8px;
         transition: border-color 0.2s ease-in-out;
     }
 
     &__item {
         display: inline-block;
-        color: #ccc;
+        color: $gray-250;
 
         &:hover {
-            color: #fff;
+            color: $white;
         }
 
         &--active {
-            color: #3192e7;
+            color: $blue-400;
 
             &:hover {
-                color: #3192e7;
+                color: $blue-400;
             }
         }
 
         &--separator {
-            border-right: 1px solid #333;
+            border-right: 1px solid $gray-600;
             height: 20px;
             margin: 0 8px
         }
@@ -113,7 +113,7 @@
     &__input {
         background-color: transparent;
         border: none;
-        color: #fafafa;
+        color: $gray-050;
         font-size: 0.875rem;
         height: auto;
         line-height: 1.2rem;

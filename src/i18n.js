@@ -30,6 +30,46 @@ const i18nConfig = {
       "Algo está errado no componente '{{type}}'. {{error}}",
     "Something went wrong with the component type.":
       "Algo está errado com o tipo do componente."
+  },
+  "fr-FR": {
+    "Type the link and press enter": "Tapez le lien et appuyez sur Entrée",
+    "Invalid Link": "Lien invalide",
+    "Can't show plugin, component {{type}} not found.":
+      "Impossible d'afficher le plug-in, composant {{type}} introuvable.",
+    "Can't show plugin, component not found.":
+      "Impossible d'afficher le plug-in, composant introuvable.",
+    "Block List": "Liste de blocage",
+    "Something went wrong in component '{{type}}'. {{error}}":
+      "Une erreur s'est produite dans le composant '{{type}}'. {{error}}",
+    "Something went wrong with the component type.":
+      "Une erreur s'est produite avec le type de composant."
+  },
+  "de-DE": {
+    "Type the link and press enter":
+      "Geben Sie den Link ein und drücken Sie die Eingabetaste",
+    "Invalid Link": "Ungültiger Link",
+    "Can't show plugin, component {{type}} not found.":
+      "Plugin kann nicht angezeigt werden, Komponente {{type}} nicht gefunden.",
+    "Can't show plugin, component not found.":
+      "Plugin kann nicht angezeigt werden, Komponente nicht gefunden.",
+    "Block List": "Blockliste",
+    "Something went wrong in component '{{type}}'. {{error}}":
+      "In Komponente '{{type}}' ist ein Fehler aufgetreten. {{error}}",
+    "Something went wrong with the component type.":
+      "Beim Komponententyp ist etwas schief gelaufen."
+  },
+  "tr-TR": {
+    "Type the link and press enter": "Linki yazınız ve enter tuşuna basınız",
+    "Invalid Link": "Geçersiz Link",
+    "Can't show plugin, component {{type}} not found.":
+      "Eklenti gösterilemiyor, {{type}} bileşeni bulunamadı.",
+    "Can't show plugin, component not found.":
+      "Eklenti gösterilemiyor, bileşen bulunamadı.",
+    "Block List": "Blok Listesi",
+    "Something went wrong in component '{{type}}'. {{error}}":
+      "Bileşen içerisinde hata mevcuttur '{{type}}'. {{error}}",
+    "Something went wrong with the component type.":
+      "Bileşen tipiyle ilgili hata mevcuttur."
   }
 };
 
