@@ -71,6 +71,7 @@ class Page extends React.Component {
             spy={true}
             smooth={true}
             duration={600}
+            href="#MenuBar"
           >
             LET'S ROCK
             <div className="hero__arrow-call-to-action">
