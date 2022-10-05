@@ -25,7 +25,7 @@ const Options = ({
   };
   return (
     <div className="options">
-      <div
+      <button
         data-testid={`swap-up-${id}`}
         className={
           disableUp
@@ -37,10 +37,13 @@ const Options = ({
           onClickUp();
         }}
         onPointerDown={onPointerDown}
+        type="button"
+        role="button"
+        aria-label="Button action move up block content of text editor"
       >
         <icons.DropdownArrow />
-      </div>
-      <div
+      </button>
+      <button
         data-testid={`swap-down-${id}`}
         className={
           disableDown
@@ -52,9 +55,12 @@ const Options = ({
           onClickDown();
         }}
         onPointerDown={onPointerDown}
+        type="button"
+        role="button"
+        aria-label="Button action move down block content of text editor"
       >
         <icons.DropdownArrow />
-      </div>
+      </button>
     </div>
   );
 };
