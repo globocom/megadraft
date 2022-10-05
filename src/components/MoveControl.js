@@ -11,6 +11,26 @@ import MegadraftBlock from "./MegadraftBlock";
 
 import { BLOCK_SWAP_UP, BLOCK_SWAP_DOWN } from "../constants";
 
+const ButtonOption = ({ id, className, onClick, arialLabel }) => {
+  const onPointerDown = e => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+  return (
+    <button
+      data-testid={`swap-up-${id}`}
+      className={className}
+      onClick={onClick}
+      onPointerDown={onPointerDown}
+      type="button"
+      role="button"
+      aria-label={arialLabel}
+    >
+      <icons.DropdownArrow />
+    </button>
+  );
+};
+
 const Options = ({
   onClickUp,
   onClickDown,
@@ -19,14 +39,11 @@ const Options = ({
   disableDown,
   onAction
 }) => {
-  const onPointerDown = e => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
   return (
     <div className="options">
-      <button
-        data-testid={`swap-up-${id}`}
+      <ButtonOption
+        id={`swap-up-${id}`}
+        arialLabel="Button action move up block content of text editor"
         className={
           disableUp
             ? "options__button options__button--up options__button--disabled"
@@ -36,15 +53,11 @@ const Options = ({
           onAction({ type: BLOCK_SWAP_UP, blockId: id });
           onClickUp();
         }}
-        onPointerDown={onPointerDown}
-        type="button"
-        role="button"
-        aria-label="Button action move up block content of text editor"
-      >
-        <icons.DropdownArrow />
-      </button>
-      <button
-        data-testid={`swap-down-${id}`}
+        buttonIcon={<icons.DropdownArrow />}
+      />
+      <ButtonOption
+        id={`swap-down-${id}`}
+        arialLabel="Button action move down block content of text editor"
         className={
           disableDown
             ? "options__button options__button--disabled"
@@ -54,13 +67,7 @@ const Options = ({
           onAction({ type: BLOCK_SWAP_DOWN, blockId: id });
           onClickDown();
         }}
-        onPointerDown={onPointerDown}
-        type="button"
-        role="button"
-        aria-label="Button action move down block content of text editor"
-      >
-        <icons.DropdownArrow />
-      </button>
+      />
     </div>
   );
 };
