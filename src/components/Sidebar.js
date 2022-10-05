@@ -7,21 +7,21 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import classNames from "classnames";
-import icons from "../icons";
+import icons from "icons";
 
 import {
   SIDEBAR_ADD_PLUGIN,
   SIDEBAR_EXPAND,
   SIDEBAR_SHRINK,
   SIDEBAR_CLICK_MORE
-} from "../constants";
+} from "constants";
 
 import { ActionsContext } from "./ActionsProvider";
 
 import "setimmediate";
 
 import PluginsModal from "./PluginsModal";
-import { getSelectedBlockElement } from "../utils";
+import { getSelectedBlockElement } from "utils";
 
 class BlockStyles extends Component {
   static contextType = ActionsContext;

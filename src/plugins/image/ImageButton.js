@@ -6,8 +6,8 @@
 
 import React from "react";
 
-import icons from "../../icons";
-import insertDataBlock from "../../insertDataBlock";
+import icons from "icons";
+import insertDataBlock from "insertDataBlock";
 
 export default function BlockButton(props) {
   const { onChange, editorState, className, title } = props;

@@ -37,12 +37,12 @@ import Sidebar from "./Sidebar";
 import Media from "./Media";
 import MoveControl from "./MoveControl";
 import MegadraftBlock from "./MegadraftBlock";
-import { swapDataUp, swapDataDown } from "../swapDataBlock";
-import i18nConfig from "../i18n";
-import notFoundPlugin from "../plugins/not-found/plugin";
-import DEFAULT_PLUGINS from "../plugins/default";
-import DEFAULT_ACTIONS from "../actions/default";
-import DEFAULT_ENTITY_INPUTS from "../entity_inputs/default";
+import { swapDataUp, swapDataDown } from "swapDataBlock";
+import i18nConfig from "i18n";
+import notFoundPlugin from "plugins/not-found/plugin";
+import DEFAULT_PLUGINS from "plugins/default";
+import DEFAULT_ACTIONS from "actions/default";
+import DEFAULT_ENTITY_INPUTS from "entity_inputs/default";
 import ActionsProvider, { defaultAction } from "./ActionsProvider";
 
 const NO_RESET_STYLE_DEFAULT = ["ordered-list-item", "unordered-list-item"];

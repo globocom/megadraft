@@ -10,7 +10,7 @@ import Modal from "backstage-modal";
 import ModalPluginList from "./ModalPluginList";
 
 import { ActionsContext } from "./ActionsProvider";
-import { PLUGINS_MODAL_CLOSE } from "../constants";
+import { PLUGINS_MODAL_CLOSE } from "constants";
 
 export default class PluginsModal extends Component {
   static contextType = ActionsContext;

@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import icons from "../../icons";
+import icons from "icons";
 
 export const DEFAULT_DISPLAY_OPTIONS = [
   { key: "small", icon: icons.MediaSmallIcon, label: "SMALL" },

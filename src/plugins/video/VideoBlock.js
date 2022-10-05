@@ -11,9 +11,9 @@ import {
   BlockData,
   BlockInput,
   CommonBlock
-} from "../../components/plugin";
+} from "components/plugin";
 
-import icons from "../../icons";
+import icons from "icons";
 
 import VideoBlockStyle from "./VideoBlockStyle";
 

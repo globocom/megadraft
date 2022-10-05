@@ -6,16 +6,16 @@
 
 import React from "react";
 
-import Dropdown from "../../components/Dropdown";
+import Dropdown from "components/Dropdown";
 import {
   BlockActionGroup,
   BlockControls,
   BlockWrapper
-} from "../../components/plugin";
+} from "components/plugin";
 import {
   DEFAULT_DISPLAY_OPTIONS,
   DEFAULT_DISPLAY_KEY
-} from "../../components/plugin/defaults";
+} from "components/plugin/defaults";
 
 export default function CommonBlock(props) {
   function _handleDisplayChange(newValue) {
