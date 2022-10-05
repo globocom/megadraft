@@ -24,3 +24,6 @@ checks:
   return-statements:
     config:
       threshold: 4
+
+exclude_paths:
+  - "src/plugins"
