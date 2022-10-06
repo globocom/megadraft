@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import icons from "../icons";
+import icons from "icons";
 
 export default [
   { type: "inline", label: "B", style: "BOLD", icon: icons.BoldIcon },

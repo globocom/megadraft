@@ -5,7 +5,7 @@
  */
 
 import React, { useRef, useState } from "react";
-import icons from "../icons";
+import icons from "icons";
 
 const addHttpPrefix = url => {
   if (!url.startsWith("http://") && !url.startsWith("https://")) {

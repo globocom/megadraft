@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import { EditorState, RichUtils } from "draft-js";
 import classNames from "classnames";
 import ToolbarItem from "./ToolbarItem";
-import { getSelectionCoords } from "../utils";
+import { getSelectionCoords } from "utils";
 
 export default class Toolbar extends Component {
   static defaultProps = {

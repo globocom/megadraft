@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 
 import DropdownItem from "./DropdownItem";
-import icons from "../icons";
+import icons from "icons";
 
 const Dropdown = ({ items = [], selected, onChange }) => {
   const wrapperRef = useRef(null);

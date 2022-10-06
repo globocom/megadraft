@@ -6,10 +6,10 @@
 
 import React from "react";
 import classNames from "classnames";
-import icons from "../icons";
+import icons from "icons";
 import MegadraftBlock from "./MegadraftBlock";
 
-import { BLOCK_SWAP_UP, BLOCK_SWAP_DOWN } from "../constants";
+import { BLOCK_SWAP_UP, BLOCK_SWAP_DOWN } from "constants";
 
 const Options = ({
   onClickUp,
