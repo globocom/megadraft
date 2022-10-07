@@ -300,10 +300,6 @@ export default class MegadraftEditor extends Component {
     return true;
   }
 
-  focus() {
-    this.draftEl.focus();
-  }
-
   setReadOnly(readOnly) {
     this.setState({ readOnly });
   }
