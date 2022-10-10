@@ -6,12 +6,13 @@
 
 import React from "react";
 
-export default function Link(props) {
-  const contentState = props.contentState;
-  const { url } = contentState.getEntity(props.entityKey).getData();
+const Link = ({ contentState, entityKey, children }) => {
+  const { url } = contentState.getEntity(entityKey).getData();
   return (
     <a className="editor__link" href={url} title={url}>
-      {props.children}
+      {children}
     </a>
   );
-}
+};
+
+export default Link;

@@ -15,6 +15,7 @@ import errorPlugin from "../../tests/plugins/error/plugin";
 
 describe("Media Component", () => {
   let testContext;
+  let pluginComponent;
 
   beforeEach(() => {
     const INITIAL_CONTENT = {
@@ -59,6 +60,8 @@ describe("Media Component", () => {
       };
       return mount(<Media {...props} />);
     };
+
+    pluginComponent = testContext.blockProps.plugin.blockComponent;
   });
 
   it("renders without problems", () => {
@@ -68,12 +71,14 @@ describe("Media Component", () => {
 
   it("updates data and correct change-type enum", () => {
     const component = testContext.renderComponent();
+
+    const { updateData } = component.find(pluginComponent).props().container;
+
     let data = testContext.block.getData();
 
     expect(data.get("display")).toEqual("medium");
 
-    const instance = component.instance();
-    instance.updateData({ display: "big" });
+    updateData({ display: "big" });
 
     const editor = testContext.blockProps.onChange.mock.calls[0][0].toJS();
     const lastChangeType = editor.lastChangeType;
@@ -87,15 +92,15 @@ describe("Media Component", () => {
 
   it("refreshes editor state", () => {
     const component = testContext.renderComponent();
-    const instance = component.instance();
-    instance.updateData({ display: "big" });
+    const { updateData } = component.find(pluginComponent).props().container;
+    updateData({ display: "big" });
     expect(testContext.blockProps.onChange).toHaveBeenCalled();
   });
 
   it("removes media component", () => {
     const component = testContext.renderComponent();
-    const instance = component.instance();
-    instance.remove();
+    const { remove } = component.find(pluginComponent).props().container;
+    remove();
 
     const editorState = testContext.blockProps.onChange.mock.calls[0][0];
     const currentContent = editorState.getCurrentContent();
