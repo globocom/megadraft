@@ -4,12 +4,14 @@
  * License: MIT
  */
 
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
 export const defaultAction = () => {};
 
 export const ActionsContext = React.createContext({ onAction: defaultAction });
+
+export const useActions = () => useContext(ActionsContext);
 
 const ActionsProvider = ({ onAction = defaultAction, children }) => (
   <ActionsContext.Provider value={{ onAction }}>

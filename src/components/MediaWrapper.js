@@ -12,20 +12,20 @@ import React from "react";
  *
  * https://draftjs.org/docs/advanced-topics-block-components/#recommendations-and-other-notes
  */
-export default function MediaWrapper(props) {
-  const { setReadOnly, setInitialReadOnly, children } = props;
-
-  function handleFocus() {
+const MediaWrapper = ({ setReadOnly, setInitialReadOnly, children }) => {
+  const handleFocus = () => {
     setReadOnly(true);
-  }
+  };
 
-  function handleBlur() {
+  const handleBlur = () => {
     setInitialReadOnly();
-  }
+  };
 
   return (
     <div onBlur={handleBlur} onFocus={handleFocus}>
       {children}
     </div>
   );
-}
+};
+
+export default MediaWrapper;
