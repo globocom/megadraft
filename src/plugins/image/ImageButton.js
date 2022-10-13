@@ -4,13 +4,10 @@
  * License: MIT
  */
 
-import React from "react";
-
 import icons from "../../icons";
 import insertDataBlock from "../../insertDataBlock";
 
-export default function BlockButton(props) {
-  const { onChange, editorState, className, title } = props;
+export default function BlockButton({ onChange, editorState, className, title }) {
 
   function onClick(event) {
     event.preventDefault();

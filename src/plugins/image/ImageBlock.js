@@ -4,8 +4,6 @@
  * License: MIT
  */
 
-import React from "react";
-
 import {
   BlockContent,
   BlockData,
@@ -17,8 +15,7 @@ import icons from "../../icons";
 
 import ImageBlockStyle from "./ImageBlockStyle";
 
-export default function ImageBlock(props) {
-  const { container, blockProps, data } = props;
+export default function ImageBlock({ container, blockProps, data }) {
   const { updateData, remove } = container;
   const { getInitialReadOnly } = blockProps;
   const actions = [
