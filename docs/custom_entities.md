@@ -197,5 +197,5 @@ export default ({entityKey, children, contentState}) => {
 };
 ```
 
-[advanced-topics-decorators]: https://facebook.github.io/draft-js/docs/advanced-topics-decorators.html#content
-[advanced-topics-entities]: https://facebook.github.io/draft-js/docs/advanced-topics-entities.html
+[advanced-topics-decorators]: https://draftjs.org/docs/advanced-topics-decorators/
+[advanced-topics-entities]: https://draftjs.org/docs/advanced-topics-entities/
