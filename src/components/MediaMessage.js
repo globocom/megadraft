@@ -7,18 +7,20 @@
 import React from "react";
 import classNames from "classnames";
 
-export default function MediaMessage(props) {
-  if (props.text) {
-    const errorType = props.type ? props.type : "info";
+const MediaMessage = ({ text, type }) => {
+  if (text) {
+    const errorType = type || "info";
     const messageClassName = classNames(
       `media__message media__message--${errorType}`
     );
     return (
       <div className={messageClassName}>
-        <div className="media__message-text">{props.text}</div>
+        <div className="media__message-text">{text}</div>
       </div>
     );
   }
 
   return null;
-}
+};
+
+export default MediaMessage;

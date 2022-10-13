@@ -4,53 +4,53 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React, { useCallback } from "react";
 
 import Modal from "backstage-modal";
 import ModalPluginList from "./ModalPluginList";
 
-import { ActionsContext } from "./ActionsProvider";
 import { PLUGINS_MODAL_CLOSE } from "../constants";
 
-export default class PluginsModal extends Component {
-  static contextType = ActionsContext;
+import { useActions } from "./ActionsProvider";
 
-  constructor(props) {
-    super(props);
-    this.onCloseRequest = this.onCloseRequest.bind(this);
-    this.modalOptions = this.props.modalOptions ? this.props.modalOptions : {};
-    this.modalWidth = this.modalOptions.width || 528;
-    this.modalHeight = this.modalOptions.height || 394;
-  }
+const PluginsModal = ({
+  i18n,
+  isOpen,
+  toggleModalVisibility,
+  plugins,
+  onChange,
+  editorState,
+  modalOptions = {}
+}) => {
+  const { onAction } = useActions();
+  const { width: modalWidth = 528, height: modalHeight = 394 } = modalOptions;
 
-  onCloseRequest() {
-    if (!this.props.isOpen) {
+  const onCloseRequest = useCallback(() => {
+    if (!isOpen) {
       return;
     }
     document.body.classList.remove("megadraft-modal--open");
-    this.context.onAction({ type: PLUGINS_MODAL_CLOSE });
-    this.props.toggleModalVisibility();
-  }
+    onAction({ type: PLUGINS_MODAL_CLOSE });
+    toggleModalVisibility();
+  }, [onAction, toggleModalVisibility, isOpen]);
 
-  render() {
-    const { i18n } = this.props;
+  return (
+    <Modal
+      className="megadraft-modal"
+      title={i18n["Block List"]}
+      isOpen={isOpen}
+      onCloseRequest={onCloseRequest}
+      width={modalWidth}
+      height={modalHeight}
+    >
+      <ModalPluginList
+        toggleModalVisibility={onCloseRequest}
+        plugins={plugins}
+        onChange={onChange}
+        editorState={editorState}
+      />
+    </Modal>
+  );
+};
 
-    return (
-      <Modal
-        className="megadraft-modal"
-        title={i18n["Block List"]}
-        isOpen={this.props.isOpen}
-        onCloseRequest={this.onCloseRequest}
-        width={this.modalWidth}
-        height={this.modalHeight}
-      >
-        <ModalPluginList
-          toggleModalVisibility={this.onCloseRequest}
-          plugins={this.props.plugins}
-          onChange={this.props.onChange}
-          editorState={this.props.editorState}
-        />
-      </Modal>
-    );
-  }
-}
+export default PluginsModal;
