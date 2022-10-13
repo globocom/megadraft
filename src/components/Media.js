@@ -4,28 +4,29 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React, { useMemo, useCallback } from "react";
 import { EditorState, SelectionState, Modifier } from "draft-js";
 
 import ErrorBoundary from "./ErrorBoundary";
 import MediaWrapper from "./MediaWrapper";
 
-export default class Media extends Component {
-  constructor(props) {
-    super(props);
+const Media = ({ blockProps, block, ...rest }) => {
+  const { plugin, setInitialReadOnly, setReadOnly, i18n } = blockProps;
 
-    this.remove = this.remove.bind(this);
-    this.updateData = this.updateData.bind(this);
+  const Block = useMemo(() => {
+    return plugin.blockComponent;
+  }, [plugin]);
 
-    this.onChange = this.props.blockProps.onChange;
-  }
+  const data = useMemo(() => {
+    return block.getData().toJS();
+  }, [block]);
 
-  remove() {
-    const editorState = this.props.blockProps.getEditorState();
+  const remove = useCallback(() => {
+    const editorState = blockProps.getEditorState();
     const selection = editorState.getSelection();
     const content = editorState.getCurrentContent();
-    const keyAfter = content.getKeyAfter(this.props.block.key);
-    const blockMap = content.getBlockMap().delete(this.props.block.key);
+    const keyAfter = content.getKeyAfter(block.key);
+    const blockMap = content.getBlockMap().delete(block.key);
     const withoutAtomicBlock = content.merge({
       blockMap,
       selectionAfter: selection
@@ -43,60 +44,59 @@ export default class Media extends Component {
         anchorKey: keyAfter,
         anchorOffset: 0,
         focusKey: keyAfter,
-        focusOffset: this.props.block.getLength()
+        focusOffset: block.getLength()
       });
       const newEditorState = EditorState.forceSelection(newState, newSelection);
-      this.onChange(newEditorState);
+      blockProps.onChange(newEditorState);
     } else {
-      this.onChange(newState);
+      blockProps.onChange(newState);
     }
-  }
+  }, [blockProps, block]);
 
-  updateData(data) {
-    const editorState = this.props.blockProps.getEditorState();
-    const content = editorState.getCurrentContent();
-    const selection = new SelectionState({
-      anchorKey: this.props.block.key,
-      anchorOffset: 0,
-      focusKey: this.props.block.key,
-      focusOffset: this.props.block.getLength()
-    });
+  const updateData = useCallback(
+    data => {
+      const editorState = blockProps.getEditorState();
+      const content = editorState.getCurrentContent();
+      const selection = new SelectionState({
+        anchorKey: block.key,
+        anchorOffset: 0,
+        focusKey: block.key,
+        focusOffset: block.getLength()
+      });
 
-    const newContentState = Modifier.mergeBlockData(content, selection, data);
-    const newEditorState = EditorState.push(
-      editorState,
-      newContentState,
-      "change-block-data"
-    );
+      const newContentState = Modifier.mergeBlockData(content, selection, data);
+      const newEditorState = EditorState.push(
+        editorState,
+        newContentState,
+        "change-block-data"
+      );
 
-    this.onChange(newEditorState);
-  }
+      blockProps.onChange(newEditorState);
+    },
+    [block, blockProps]
+  );
 
-  render() {
-    // Should we use immutables?
-    const data = this.props.block.getData().toJS();
-    const {
-      plugin,
-      setInitialReadOnly,
-      setReadOnly,
-      i18n
-    } = this.props.blockProps;
-    const Block = plugin.blockComponent;
-    return (
-      <ErrorBoundary {...this.props} i18n={i18n} data={data} container={this}>
-        <MediaWrapper
+  return (
+    <ErrorBoundary
+      {...{ blockProps, block, ...rest }}
+      i18n={i18n}
+      data={data}
+      container={{ updateData, remove }}
+    >
+      <MediaWrapper
+        i18n={i18n}
+        setInitialReadOnly={setInitialReadOnly}
+        setReadOnly={setReadOnly}
+      >
+        <Block
           i18n={i18n}
-          setInitialReadOnly={setInitialReadOnly}
-          setReadOnly={setReadOnly}
-        >
-          <Block
-            i18n={i18n}
-            data={data}
-            container={this}
-            blockProps={this.props.blockProps}
-          />
-        </MediaWrapper>
-      </ErrorBoundary>
-    );
-  }
-}
+          data={data}
+          container={{ updateData, remove }}
+          blockProps={blockProps}
+        />
+      </MediaWrapper>
+    </ErrorBoundary>
+  );
+};
+
+export default Media;
