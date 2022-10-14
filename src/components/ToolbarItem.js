@@ -4,45 +4,41 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React from "react";
 import classNames from "classnames";
 
 import Separator from "./Separator";
 
-export default class ToolbarItem extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  toggleAction(action) {
+const ToolbarItem = props => {
+  const toggleAction = action => {
     if (action.toggle) {
       action.toggle(!action.active);
     }
+  };
+
+  const Icon = props.item.icon;
+
+  if (props.item.type == "separator") {
+    return <Separator />;
   }
 
-  render() {
-    const Icon = this.props.item.icon;
+  const className = classNames("toolbar__item", {
+    "toolbar__item--active": props.active
+  });
 
-    if (this.props.item.type == "separator") {
-      return <Separator />;
-    }
+  return (
+    <li className={className}>
+      <button
+        onClick={() => {
+          toggleAction(props);
+        }}
+        type="button"
+        className="toolbar__button"
+      >
+        <Icon />
+      </button>
+    </li>
+  );
+};
 
-    const className = classNames("toolbar__item", {
-      "toolbar__item--active": this.props.active
-    });
-
-    return (
-      <li className={className}>
-        <button
-          onClick={() => {
-            this.toggleAction(this.props);
-          }}
-          type="button"
-          className="toolbar__button"
-        >
-          <Icon />
-        </button>
-      </li>
-    );
-  }
-}
+export default ToolbarItem;
