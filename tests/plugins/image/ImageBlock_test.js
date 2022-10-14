@@ -4,7 +4,6 @@
  * License: MIT
  */
 
-import React from "react";
 import { mount } from "enzyme";
 
 import ImageBlock from "../../../src/plugins/image/ImageBlock";

@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 
 import Modal from "backstage-modal";
 import ModalPluginList from "./ModalPluginList";

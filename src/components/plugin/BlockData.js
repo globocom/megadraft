@@ -4,8 +4,6 @@
  * License: MIT
  */
 
-import React from "react";
-
 export default function BlockData(props) {
   return <div className="block__data">{props.children}</div>;
 }

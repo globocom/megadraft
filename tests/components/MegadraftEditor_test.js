@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import React, { Component, useState } from "react";
+import { Component, useState } from "react";
 import { Editor, EditorState, SelectionState } from "draft-js";
 import { mount } from "enzyme";
 
@@ -727,7 +727,7 @@ describe("MegadraftEditor Component", () => {
   });
 
   it("renders custom sidebar if sidebarRendererFn is provided", () => {
-    class MyCustomSidebar extends React.Component {
+    class MyCustomSidebar extends Component {
       render() {
         return (
           <div>
@@ -797,7 +797,7 @@ describe("MegadraftEditor Component", () => {
   });
 
   it("renders custom toolbar if Toolbar is provided", () => {
-    class MyCustomToolbar extends React.Component {
+    class MyCustomToolbar extends Component {
       render() {
         return (
           <div>
@@ -852,11 +852,11 @@ describe("MegadraftEditor Component", () => {
 
     it("with the top block by clicking the up control", () => {
       const expected = [
-          "block-kst0",
-          "block-ag6qs",
-          "block-bqjdr-1sd0p",
-          "block-9vgd"
-        ],
+        "block-kst0",
+        "block-ag6qs",
+        "block-bqjdr-1sd0p",
+        "block-9vgd"
+      ],
         wrapper = mount(<MegadraftEditorSwap />);
 
       wrapper.find('[data-testid="swap-up-kst0"]').simulate("click");
@@ -870,11 +870,11 @@ describe("MegadraftEditor Component", () => {
 
     it("with the bottom block by clicking the down control", () => {
       const expected = [
-          "block-kst0",
-          "block-ag6qs",
-          "block-bqjdr-1sd0p",
-          "block-9vgd"
-        ],
+        "block-kst0",
+        "block-ag6qs",
+        "block-bqjdr-1sd0p",
+        "block-9vgd"
+      ],
         wrapper = mount(<MegadraftEditorSwap />);
 
       wrapper.find('[data-testid="swap-down-ag6qs"]').simulate("click");
@@ -888,11 +888,11 @@ describe("MegadraftEditor Component", () => {
 
     it("with all list-items with the top block by clicking the up control", () => {
       const expected = [
-          "block-ag6qs",
-          "block-bqjdr-1sd0p",
-          "block-kst0",
-          "block-9vgd"
-        ],
+        "block-ag6qs",
+        "block-bqjdr-1sd0p",
+        "block-kst0",
+        "block-9vgd"
+      ],
         wrapper = mount(<MegadraftEditorSwap />);
 
       wrapper.find('[data-testid="swap-up-bqjdr-1sd0p"]').simulate("click");
@@ -906,11 +906,11 @@ describe("MegadraftEditor Component", () => {
 
     it("with all list-items with the bottom block by clicking the down control", () => {
       const expected = [
-          "block-ag6qs",
-          "block-kst0",
-          "block-9vgd",
-          "block-bqjdr-1sd0p"
-        ],
+        "block-ag6qs",
+        "block-kst0",
+        "block-9vgd",
+        "block-bqjdr-1sd0p"
+      ],
         wrapper = mount(<MegadraftEditorSwap />);
 
       wrapper.find('[data-testid="swap-down-bqjdr-1sd0p"]').simulate("click");
@@ -924,11 +924,11 @@ describe("MegadraftEditor Component", () => {
 
     it("ignores inexistent target when clicking the up control in first block", () => {
       const expected = [
-          "block-ag6qs",
-          "block-kst0",
-          "block-bqjdr-1sd0p",
-          "block-9vgd"
-        ],
+        "block-ag6qs",
+        "block-kst0",
+        "block-bqjdr-1sd0p",
+        "block-9vgd"
+      ],
         wrapper = mount(<MegadraftEditorSwap />);
 
       wrapper.find('[data-testid="swap-up-ag6qs"]').simulate("click");
@@ -942,11 +942,11 @@ describe("MegadraftEditor Component", () => {
 
     it("ignores inexistent target when clicking the down control in last block", () => {
       const expected = [
-          "block-ag6qs",
-          "block-kst0",
-          "block-bqjdr-1sd0p",
-          "block-9vgd"
-        ],
+        "block-ag6qs",
+        "block-kst0",
+        "block-bqjdr-1sd0p",
+        "block-9vgd"
+      ],
         wrapper = mount(<MegadraftEditorSwap />);
 
       wrapper.find('[data-testid="swap-down-9vgd"]').simulate("click");

@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import { Component } from "react";
 import { EditorState, SelectionState } from "draft-js";
 import { mount } from "enzyme";
 
@@ -240,7 +240,7 @@ describe("Toolbar Component", () => {
 
       it("should call preventDefault when active a state", () => {
         const event = {
-          preventDefault: () => {},
+          preventDefault: () => { },
           target: { localName: "blah" }
         };
         jest.spyOn(event, "preventDefault");
@@ -436,7 +436,7 @@ describe("Toolbar Component", () => {
 
       it("(integration) Should not call preventDefault when is a input", () => {
         const event = {
-          preventDefault: () => {},
+          preventDefault: () => { },
           target: { localName: "input" }
         };
         jest.spyOn(event, "preventDefault");
@@ -448,7 +448,7 @@ describe("Toolbar Component", () => {
 
       it("(integration) Should not call preventDefault when is a select", () => {
         const event = {
-          preventDefault: () => {},
+          preventDefault: () => { },
           target: { localName: "select" }
         };
         jest.spyOn(event, "preventDefault");

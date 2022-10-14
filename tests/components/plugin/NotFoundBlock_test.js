@@ -4,7 +4,6 @@
  * License: MIT
  */
 
-import React from "react";
 import { shallow } from "enzyme";
 import icons from "../../../src/icons";
 import NotFoundBlock from "../../../src/plugins/not-found/NotFoundBlock";

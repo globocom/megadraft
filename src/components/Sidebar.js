@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import { Component } from "react";
 import ReactDOM from "react-dom";
 import classNames from "classnames";
 import icons from "../icons";

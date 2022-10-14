@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import icons from "../icons";
 
 const addHttpPrefix = url => {

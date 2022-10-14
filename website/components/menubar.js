@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { Sticky } from "react-sticky";
 import Scroll from "react-scroll";
 import { Link } from "react-router-dom";

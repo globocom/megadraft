@@ -4,8 +4,6 @@
  * License: MIT
  */
 
-import React from "react";
-
 import Dropdown from "../../components/Dropdown";
 import {
   BlockActionGroup,

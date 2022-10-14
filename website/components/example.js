@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { MegadraftEditor } from "../../src/Megadraft";
 import { editorStateToJSON, editorStateFromRaw } from "../../src/utils";

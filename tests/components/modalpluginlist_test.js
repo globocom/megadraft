@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import { Component } from "react";
 import { mount } from "enzyme";
 import cp from "utils-copy";
 

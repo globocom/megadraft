@@ -4,7 +4,6 @@
  * License: MIT
  */
 
-import React from "react";
 import { mount } from "enzyme";
 
 import Media from "../../src/components/Media";

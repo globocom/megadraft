@@ -4,8 +4,6 @@
  * License: MIT
  */
 
-import React from "react";
-
 export default function ArrowDown() {
   return (
     <svg viewBox="0 0 24 24">

@@ -4,8 +4,6 @@
  * License: MIT
  */
 
-import React from "react";
-
 export default function BlockWrapper(props) {
   return (
     <div className={props.readOnly ? "block__hover--readonly" : "block__hover"}>

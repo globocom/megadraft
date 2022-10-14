@@ -4,8 +4,6 @@
  * License: MIT
  */
 
-import React from "react";
-
 /*
  * MediaWrapper component avoids Draft JS bugs when a custom block component
  * is being updated by setting the editor's readOnly flag to true

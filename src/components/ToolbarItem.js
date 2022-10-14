@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import { Component } from "react";
 import classNames from "classnames";
 
 import Separator from "./Separator";

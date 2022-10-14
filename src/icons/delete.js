@@ -4,8 +4,6 @@
  * License: MIT
  */
 
-import React from "react";
-
 export default function Delete(props) {
   return (
     <svg {...props} width="24" height="24" viewBox="0 0 24 24">

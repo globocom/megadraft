@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import { Component } from "react";
 
 import { ModalBody } from "backstage-modal";
 import ModalPluginItem from "./ModalPluginItem";

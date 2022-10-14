@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import React, { useMemo, useCallback } from "react";
+import { useMemo, useCallback } from "react";
 import { EditorState, SelectionState, Modifier } from "draft-js";
 
 import ErrorBoundary from "./ErrorBoundary";

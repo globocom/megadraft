@@ -4,8 +4,6 @@
  * License: MIT
  */
 
-import React from "react";
-
 import { BlockContent, CommonBlock } from "../../components/plugin";
 import MediaMessage from "../../components/MediaMessage";
 import icons from "../../icons";

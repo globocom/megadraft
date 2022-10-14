@@ -4,7 +4,6 @@
  * License: MIT
  */
 
-import React from "react";
 import PropTypes from "prop-types";
 
 import BlockAction from "./BlockAction";

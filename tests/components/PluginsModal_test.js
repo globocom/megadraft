@@ -3,8 +3,6 @@
  *
  * License: MIT
  */
-
-import React from "react";
 import { mount } from "enzyme";
 
 import image from "../../src/plugins/image/plugin";

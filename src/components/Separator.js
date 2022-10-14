@@ -4,8 +4,6 @@
  * License: MIT
  */
 
-import React from "react";
-
 export default function Separator() {
   return <li className="toolbar__item toolbar__item--separator" />;
 }

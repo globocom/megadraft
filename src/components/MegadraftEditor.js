@@ -13,13 +13,13 @@
 ).__ = x => {
   console.warn(
     "__() has been deprecated and will be removed soon. " +
-      "You can move this code to your app, instead. __() code can be found at " +
-      "https://gist.github.com/marcelometal/768454831c0c10ee03b939187b7bebbf"
+    "You can move this code to your app, instead. __() code can be found at " +
+    "https://gist.github.com/marcelometal/768454831c0c10ee03b939187b7bebbf"
   );
   return x;
 };
 
-import React, { Component } from "react";
+import { Component } from "react";
 import {
   Editor,
   RichUtils,
@@ -50,7 +50,7 @@ const NO_RESET_STYLE_DEFAULT = ["ordered-list-item", "unordered-list-item"];
 export default class MegadraftEditor extends Component {
   static defaultProps = {
     actions: DEFAULT_ACTIONS,
-    blockRendererFn: () => {},
+    blockRendererFn: () => { },
     i18n: i18nConfig,
     language: "en-US"
   };
@@ -202,12 +202,12 @@ export default class MegadraftEditor extends Component {
     });
     const blockMap = contentState.getBlockMap();
 
-    const blocksBefore = blockMap.toSeq().takeUntil(function(v) {
+    const blocksBefore = blockMap.toSeq().takeUntil(function (v) {
       return v === currentBlock;
     });
     const blocksAfter = blockMap
       .toSeq()
-      .skipUntil(function(v) {
+      .skipUntil(function (v) {
         return v === currentBlock;
       })
       .rest();
@@ -358,10 +358,10 @@ export default class MegadraftEditor extends Component {
     // Class with styling to spacing placeholder.
     if (!contentState.hasText()) {
       switch (
-        contentState
-          .getBlockMap()
-          .first()
-          .getType()
+      contentState
+        .getBlockMap()
+        .first()
+        .getType()
       ) {
         case "ordered-list-item":
         case "unordered-list-item":

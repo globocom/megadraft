@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import { Component } from "react";
 
 import { ActionsContext } from "./ActionsProvider";
 import { PLUGINS_MODAL_ADD_PLUGIN } from "../constants";

@@ -4,7 +4,6 @@
  * License: MIT
  */
 
-import React from "react";
 import classNames from "classnames";
 
 import icons from "../../icons";
