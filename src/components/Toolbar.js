@@ -197,10 +197,7 @@ export default class Toolbar extends Component {
 
   hasEntity(entityType) {
     const entity = this.getCurrentEntity();
-    if (entity && entity.getType() === entityType) {
-      return true;
-    }
-    return false;
+    return entity && entity.getType() === entityType;
   }
 
   setEntity(entityType, data, mutability = "MUTABLE") {
