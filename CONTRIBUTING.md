@@ -7,8 +7,8 @@ We love your input! We want to make contributing to this project as easy and tra
 * Proposing new features
 * Becoming a maintainer
 
-## We use [Github Flow](https://guides.github.com/introduction/flow/index.html), so all code changes happen through Pull Requests
-Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://guides.github.com/introduction/flow/index.html)). We actively welcome your pull requests:
+## We use [Github Flow](https://docs.github.com/en/get-started/quickstart/github-flow), so all code changes happen through Pull Requests
+Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://docs.github.com/en/get-started/quickstart/github-flow)). We actively welcome your pull requests:
 
 1.  Fork the repo and create your branch from `master`.
 2.  If you've added code that should be tested, add tests.
