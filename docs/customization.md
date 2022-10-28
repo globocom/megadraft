@@ -7,19 +7,19 @@ Here are the props that `MegadraftEditor` accepts:
 - `placeholder`: Editor's placeholder text
 - `plugins`: List of plugins to be used by the editor
 - `editorState`: DraftJS' [editorState][api-reference-editor-state]
-- `onChange`: Function fired when editor state changes
+- `onChange`: Function fired when editor states changes
 - `onAction`: (optional) Function fired when the following actions are executed: `SIDEBAR_EXPAND`, `SIDEBAR_SHRINK`, `SIDEBAR_CLICK_MORE`, `SIDEBAR_ADD_PLUGIN`, `PLUGINS_MODAL_CLOSE`, `PLUGINS_MODAL_ADD_PLUGIN`
 - `sidebarRendererFn`: (optional) it is called to render a custom sidebar. This
   method must return a valid React element.
 - `Toolbar`: (optional) a custom toolbar component or a function that returns a
   rendered component
-- `actions`: (optional) List of actions to render in Toolbar
+- `actions`: (optional) List of actions to render in the Toolbar
 - `keyBindings`: (optional) Custom key bindings
 - `handleBlockNotFound`: (optional) called when the `editorState` contains a
   block for a plugin that is no longer available
-- `softNewLines`: (optional) boolean, default true. Insert soft new line when
-  user type "shift + enter".
-- `resetStyleNewLine`: (optional) boolean, default false. Editor will reset
+- `softNewLines`: (optional) boolean, default true. Insert a soft new line when
+  the user type "shift + enter".
+- `resetStyleNewLine`: (optional) boolean, default false.An editor will reset
   styles when a new paragraph is created.
 - `blocksWithoutStyleReset`: (optional) list, defaults to
   `['ordered-list-item', 'unordered-list-item']`. Tells the editor which
@@ -335,7 +335,7 @@ ReactDOM.render(
 ### Handling too many plugins
 
 By default, plugin buttons are shown on a vertical sidebar. This may be a bit
-cumbersome when there is a lot of enabled plugins.
+cumbersome when there are a lot of enabled plugins.
 
 To overcome this, the prop `maxSidebarButtons` limits the number of buttons
 displayed on the sidebar. When the limit is reached an extra button will appear
