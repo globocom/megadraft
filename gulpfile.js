@@ -3,7 +3,7 @@
  *
  * License: MIT
  */
-
+const path = require("path");
 const gulp = require("gulp");
 const gutil = require("gulp-util");
 const gulpSass = require("gulp-sass")(require("sass"));
@@ -66,12 +66,19 @@ function siteWatch() {
 
 const devServer = gulp.parallel([siteSass, siteWatch], function devServer() {
   // Start a webpack-dev-server
-  new WebpackDevServer(webpack(webpackConfig), {
-    stats: {
-      colors: true
+  new WebpackDevServer(
+    {
+      port: port,
+      host: host,
+      devMiddleware: {
+        stats: {
+          colors: true
+        }
+      },
+      static: path.resolve(__dirname + "/website")
     },
-    contentBase: __dirname + "/website"
-  }).listen(port, host, function(err) {
+    webpack(webpackConfig)
+  ).start(function(err) {
     hookStream(process.stdout, "webpack: bundle is now VALID.\n", function() {
       gutil.log(
         "[dev-server]",

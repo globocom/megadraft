@@ -3,15 +3,18 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const defaultConfig = {
   mode: process.env.NODE_ENV || "production",
-  entry: ["./website/index.js"],
+  entry: path.resolve("./website/index.js"),
   output: {
-    path: __dirname + "/website/",
+    path: path.resolve(__dirname, "website"),
     publicPath: "/",
-    filename: "./bundle.js"
+    filename: "bundle.js"
   },
   devtool: "source-map",
   resolve: {
-    modules: [path.join(__dirname, "src"), "node_modules"]
+    modules: [path.resolve(__dirname, "src"), path.resolve("./node_modules")],
+    alias: {
+      megadraft: path.resolve(__dirname, "src/Megadraft.js")
+    }
   },
   module: {
     rules: [
@@ -25,9 +28,21 @@ const defaultConfig = {
       },
       {
         test: /\.html$/,
-        loader: "html-loader"
+        use: {
+          loader: "html-loader",
+          options: {
+            minimize: {
+              caseSensitive: false
+            }
+          }
+        }
       }
     ]
+  },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
   },
   plugins: [
     // Generates an `index.html` file with the <script> injected.
