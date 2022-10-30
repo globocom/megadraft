@@ -14,7 +14,6 @@ set of actions:
 
 ```js
 import React from "react";
-import ReactDOM from "react-dom";
 import {DraftJS, MegadraftEditor, editorStateFromRaw} from "megadraft";
 
 // this is the default LinkInput that handles `LINK`-entities:
@@ -144,7 +143,6 @@ entity-type strategy.
 
 ```js
 import React from "react";
-import ReactDOM from "react-dom";
 import {DraftJS, MegadraftEditor, editorStateFromRaw, createTypeStrategy} from "megadraft";
 
 import MyLinkComponent from "./path/to/MyLinkComponent";

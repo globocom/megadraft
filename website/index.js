@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 
 import { hashHistory, Route, Switch, HashRouter } from "react-router-dom";
 import Scroll from "react-scroll";
@@ -101,14 +101,14 @@ class Page extends React.Component {
   }
 }
 
-ReactDOM.render(
+const root = createRoot(document.getElementById("react-container"));
+root.render(
   <HashRouter history={hashHistory}>
     <Switch>
       <Route path="/docs/:doc" component={Docs} />
       <Route path="/" component={Page} exact />
     </Switch>
-  </HashRouter>,
-  document.getElementById("react-container")
+  </HashRouter>
 );
 
 /* global hljs */

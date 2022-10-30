@@ -67,7 +67,7 @@ Notice: we plan to rename this property to just `Sidebar` in future versions.
 
 ```js
 import React from "react";
-import ReactDOM from "react-dom";
+import {createRoot} from "react-dom/client";
 import {MegadraftEditor, editorStateFromRaw} from "megadraft";
 import CustomSidebar from "my/sidebar/path";
 
@@ -95,10 +95,8 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById("container")
-);
+const root = createRoot(document.getElementById("container"));
+root.render(<App />);
 ```
 
 The `sidebarRendererFn` takes a props object with the following properties:
@@ -119,7 +117,7 @@ Example: Add an underline action.
 
 ```js
 import React from "react";
-import ReactDOM from "react-dom";
+import {createRoot} from "react-dom/client";
 import {MegadraftEditor, editorStateFromRaw} from "megadraft";
 import actions from "megadraft/lib/actions/default"
 
@@ -154,10 +152,8 @@ class UnderlineIcon extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById("container")
-);
+const root = createRoot(document.getElementById("container"));
+root.render(<App />);
 ```
 
 You can also provide a fully custom action:
@@ -185,7 +181,6 @@ you can provide a custom toolbar component as well with the `Toolbar` property:
 
 ```js
 import React from "react";
-import ReactDOM from "react-dom";
 import {MegadraftEditor, editorStateFromRaw} from "megadraft";
 import CustomToolbar from "my/toolbar/path";
 
@@ -222,7 +217,7 @@ Example: Call a function when user presses control+s
 
 ```js
 import React from "react";
-import ReactDOM from "react-dom";
+import {createRoot} from "react-dom/client";
 import {MegadraftEditor, editorStateFromRaw} from "megadraft";
 
 class App extends React.Component {
@@ -252,10 +247,8 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById("container")
-);
+const root = createRoot(document.getElementById("container"));
+root.render(<App />);
 ```
 
 ## Handling Missing Plugin (`handleBlockNotFound`)
@@ -281,7 +274,7 @@ The following example renders a `pre` element for the unregistered
 
 ```js
 import React from "react";
-import ReactDOM from "react-dom";
+import {createRoot} from "react-dom/client";
 import {MegadraftEditor, editorStateFromRaw} from "megadraft";
 
 class App extends React.Component {
@@ -326,10 +319,8 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById("container")
-);
+const root = createRoot(document.getElementById("container"));
+root.render(<App />);
 ```
 
 ### Handling too many plugins
@@ -352,7 +343,7 @@ You can set the width and height of modal via props too. Passing the prop
 
 ```js
 import React from "react";
-import ReactDOM from "react-dom";
+import {createRoot} from "react-dom/client";
 import {MegadraftEditor, editorStateFromRaw} from "megadraft";
 
 class App extends React.Component {
@@ -378,10 +369,8 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById("container")
-);
+const root = createRoot(document.getElementById("container"));
+root.render(<App />);
 ```
 
 [api-reference-editor-state]: https://facebook.github.io/draft-js/docs/api-reference-editor-state.html
