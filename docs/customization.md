@@ -365,6 +365,7 @@ class App extends React.Component {
         onChange={this.onChange}
         maxSidebarButtons={this.maxSidebarButtons}
         modalOptions={this.modalOptions}
+      />
     )
   }
 }

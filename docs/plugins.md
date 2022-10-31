@@ -9,7 +9,7 @@ class Example extends React.Component {
   ...
   render() {
     return (
-      <MegadraftEditor plugins={[MyPlugin1, MyPlugin2]} .../>
+      <MegadraftEditor plugins={[MyPlugin1, MyPlugin2]} {...}/>
     );
   }
 }
