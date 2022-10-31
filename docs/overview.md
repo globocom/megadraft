@@ -18,7 +18,7 @@ component such as the following:
 
 ```js
 import React from "react";
-import ReactDOM from "react-dom";
+import {createRoot} from "react-dom/client";
 import {MegadraftEditor, editorStateFromRaw} from "megadraft";
 
 //Import megadraft.css
@@ -47,8 +47,6 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('container')
-);
+const root = createRoot(document.getElementById("container"));
+root.render(<App />);
 ```
