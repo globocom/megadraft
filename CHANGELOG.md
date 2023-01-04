@@ -4,6 +4,71 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.8.0 - 2023-01-04
+### Fixed
+- Fix: spelling of the pt-Br i18n (#354)
+- Fix: missing end dots (#357)
+- Fix: add UNSAFE_ prefix to legacy life cycle methods in React 17 (#358)
+- Fix: update outdated version of caniuse-lite (#362)
+- Fix: support for Node v16 and add for v18 (#392)
+  - Update gulp-sass (the new version does not use node-sass which needs python
+    v2 and other deprecated dependencies)
+  - Remove Node v10 from unittest workflow
+  - Update browser list db
+  - Add Node v18 to unittest workflow
+- Docs: fix github-flow url (#411)
+- Fix: replace this if-then-else flow by a single return statement (#398)
+### Modified
+- Bump ws from 5.2.2 to 5.2.3 (#348)
+- Bump path-parse from 1.0.6 to 1.0.7 (#349)
+- Bump tmpl from 1.0.4 to 1.0.5 (#351)
+- Bump url-parse from 1.5.1 to 1.5.3 (#350)
+- Convert some class components to functional (#347):
+  - Simplifies babel configuration
+  - Converts ImageBlock and ImageButton class components to function components
+  - Converts VideoBlock and VideoButton class components to function components
+  - Converts NotFoundBlock class component  to function component
+  - Refactors Editor class component into three function components
+  - Converts MediaWrapper class component to function component
+  - Enables image edit by clicking the image in ImageBlock
+  - Enables video edit by clicking the video in VideoBlock
+  - Tweaks Code Climate config
+- Update LinkInput validation regex (#353)
+- Convert some class components to functional (#356):
+  - All components from src/components/icons
+  - All components from src/components/plugin
+  - DropdownItem
+  - Link
+  - MediaMessage
+  - Separator
+- Refactor: remove method onTab as it is deprecated since Draft.js v0.11 (#360)
+- Refactor: converts the dropdown component from class to function component
+  (#361)
+- Refactor: convert LinkInput from class component to function component (#359)
+- Chore(deps): bump follow-redirects from 1.13.3 to 1.14.7 (#367)
+- Adding variables for colors and `media` queries (#363)
+- CI: Added nodejs 16.x
+- Chore(deps): bump follow-redirects from 1.14.7 to 1.14.8 (#369)
+- Chore(deps): bump url-parse from 1.5.3 to 1.5.7 (#370)
+- Chore(deps): bump url-parse from 1.5.7 to 1.5.10 (#374)
+- Chore(deps): bump minimist from 1.2.5 to 1.2.6 (#375)
+- Chore: add localizations to French, Turkish and German languages (#385)
+- Update header with alt in logo Megadraft (#390)
+- Feat: converts header and home to functional components (#393)
+- Feat: converts arrow-down icon from class to functional component (#394)
+- Added humanReadable boolean to editorStateToJSON (#333)
+- Update .gitignore (#400)
+- Refactor: migrate class component to functional (#402)
+- Refactor: migrate class component to functional (#403)
+- Update custom_entities.md (#405)
+- Refactor(components/toolbar-item): convert to functional component (#387)
+  - Docs (readme): add node version to dev steps
+  - Refactor (components/toolbar-item): convert to functional component
+- Improved customization.md (#415)
+- Upgrading react to 18.2.0 (#417)
+- Test: Test the ImageButton component (#409)
+- Chore(deps): bump decode url-component from 0.2.0 to 0.2.2 (#419)
+
 ## 0.7.5 - 2021-07-12
 ## Modified
 - Bump react and react-dom dependencies to support versions up to 18.
