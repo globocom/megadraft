@@ -158,49 +158,35 @@
 }
 
 .tab-container-editor {
-    padding-left: 256px;
-    padding-right: 256px;
-    padding-top: 95px;
-    padding-bottom: 128px;
+    padding: 95px 256px 128px;
   }
 
 @media only #{$media-max767} {
   .tab-container-editor {
-    padding-left: 65px;
-    padding-right: 65px;
-    padding-top: 95px;
-    padding-bottom: 64px;
+    padding: 95px 65px 64px;
   }
 }
 
 .tab-container-json {
   background-color: $gray-400;
-  padding-left: 256px;
-  padding-right: 256px;
-  padding-top: 64px;
-  padding-bottom: 128px;
+  padding: 64px 256px 128px;
 }
 
 @media only #{$media-max1000} {
   .tab-container-json {
     background-color: $gray-400;
-    padding-left: 0px;
-    padding-right: 0px;
-    padding-top: 64px;
-    padding-bottom: 256px;
+    padding: 64px 0 256px;
   }
 
   .hljs {
     background-color: $white;
     padding: 1em;
-    font-family: monospace;
-    font-size: 25px;
+    font: 25px monospace;
   }
 }
 
 .hljs {
   background-color: $white;
   padding: 1em;
-  font-family: monospace;
-  font-size: 14px;
+  font: 14px monospace;
 }
