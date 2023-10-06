@@ -257,7 +257,7 @@ When the `editorState` contains an atomic block that is no longer available,
 an alternative block will be rendered as a fallback to indicate that the plugin
 is missing.
 
-This behavior is customizable using the `handleBlockNotFound` prop. It takes a
+These behaviour is customizable using the `handleBlockNotFound` prop. It takes a
 [ContentBlock][ContentBlock] object and should return either of the following:
 
 * `null`: this will delegate the block rendering to DraftJS, resulting in an
