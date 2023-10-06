@@ -2,6 +2,8 @@
 
 Rich Text editor built on top of [Facebook's draft.js](https://github.com/facebook/draft-js)
 
+[Checkout this README in Brazilian Portuguese](README-BR.md)
+
 ## Discussion and Support
 
 Join the [#megadraft][megadraft-slack] channel on the DraftJS [Slack team][draftjs-slack]!
