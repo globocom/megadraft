@@ -60,6 +60,10 @@ class Page extends React.Component {
 
   render() {
     const { content } = this.state;
+    const menuBarBackground = content ? common.white : common.black;
+    const toggleButtonColor = content ? "inherit" : "yellow";
+    const toggleButtonContent = content ? "VIEW CONTENT JSON" : "EDITOR";
+    const exampleBlockClassName = content ? "" : "container--dark";
 
     return (
       <ThemeProvider theme={theme}>
@@ -78,21 +82,18 @@ class Page extends React.Component {
             </div>
           </LinkScroll>
 
-          <MenuBar
-            showLeft={!!content}
-            background={content ? common.white : common.black}
-          >
+          <MenuBar showLeft={!!content} background={menuBarBackground}>
             <Grid container justify="flex-end">
               <ToggleButton
                 onClick={this.handleClick}
-                color={content ? "inherit" : "yellow"}
+                color={toggleButtonColor}
               >
-                {content ? "VIEW CONTENT JSON" : "EDITOR"}
+                {toggleButtonContent}
               </ToggleButton>
             </Grid>
           </MenuBar>
 
-          <div className={content ? "" : "container--dark"}>
+          <div className={exampleBlockClassName}>
             <Example activeContent={content} />
           </div>
         </StickyContainer>
