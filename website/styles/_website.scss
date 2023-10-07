@@ -26,7 +26,7 @@
   &__content {
     margin: auto;
     color: $gray-300;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 16px;
     line-height: 1.6;
     word-wrap: break-word;
@@ -46,6 +46,11 @@
       height: 100%;
       fill: $white;
     }
+
+    @media screen and (max-width: 690px) {
+      width: 120px;
+      aspect-ratio: 1/1;
+    }
   }
 
   &__container {
@@ -54,11 +59,11 @@
 
   &__title {
     color: $hit-color;
-    font-family:'Abril Fatface', sans-serif;
+    font-family: "Abril Fatface", sans-serif;
     font-weight: normal;
     font-size: 8vmax;
     line-height: 0.9;
-    letter-spacing: -.04em;
+    letter-spacing: -0.04em;
     text-align: left;
     margin-bottom: 20px;
   }
@@ -66,7 +71,7 @@
   &__description {
     color: $white;
     font-size: calc(14px + 0.72vw);
-    letter-spacing: -.035em;
+    letter-spacing: -0.035em;
     line-height: 1.4;
     text-shadow: 1px 1px 3px $gray-300;
   }
@@ -84,21 +89,21 @@
     transform: translateX(-50%);
   }
 
-  @media only #{$media-min320} and (max-device-width: 480px){
+  @media only #{$media-min320} and (max-device-width: 480px) {
     &__call-to-action {
-        font-weight: bold;
-        font-size: 45px;
-        position: absolute;
-        bottom: -45px;
-        color: $white;
-        cursor: pointer;
-        text-decoration: none;
-        left: 50%;
-        text-shadow: 1px 1px 3px $gray-300;
-        transform: translateX(-50%);
-      }
+      font-weight: bold;
+      font-size: 45px;
+      position: absolute;
+      bottom: -45px;
+      color: $white;
+      cursor: pointer;
+      text-decoration: none;
+      left: 50%;
+      text-shadow: 1px 1px 3px $gray-300;
+      transform: translateX(-50%);
+    }
 
-     &__arrow-call-to-action {
+    &__arrow-call-to-action {
       font-weight: bold;
       position: relative;
       color: $hit-color;
@@ -115,19 +120,19 @@
 
   @media only #{$media-min768} and (max-device-width: 1024px) {
     &__call-to-action {
-        font-weight: bold;
-        font-size: 45px;
-        position: absolute;
-        bottom: -45px;
-        color: $white;
-        cursor: pointer;
-        text-decoration: none;
-        left: 50%;
-        text-shadow: 1px 1px 3px $gray-300;
-        transform: translateX(-50%);
-      }
+      font-weight: bold;
+      font-size: 45px;
+      position: absolute;
+      bottom: -45px;
+      color: $white;
+      cursor: pointer;
+      text-decoration: none;
+      left: 50%;
+      text-shadow: 1px 1px 3px $gray-300;
+      transform: translateX(-50%);
+    }
 
-     &__arrow-call-to-action {
+    &__arrow-call-to-action {
       font-weight: bold;
       position: relative;
       color: $hit-color;
@@ -155,14 +160,37 @@
     height: 100px;
     width: 68px;
   }
+
+  @media screen and (max-width: 690px) {
+    &__logo {
+      width: 120px;
+      aspect-ratio: 1/1;
+    }
+    &__title {
+      margin-top: 200px;
+    }
+  }
+  @media screen and (max-width: 540px) {
+    &__title {
+      font-size: 2.5rem;
+    }
+  }
+  @media screen and (max-width: 425px) {
+    &__description {
+      font-size: 0.9375rem;
+    }
+    &__call-to-action {
+      font-size: 1.5rem;
+    }
+  }
 }
 
 .tab-container-editor {
-    padding-left: 256px;
-    padding-right: 256px;
-    padding-top: 95px;
-    padding-bottom: 128px;
-  }
+  padding-left: 256px;
+  padding-right: 256px;
+  padding-top: 95px;
+  padding-bottom: 128px;
+}
 
 @media only #{$media-max767} {
   .tab-container-editor {
