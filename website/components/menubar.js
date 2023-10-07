@@ -40,6 +40,12 @@ const MenuBar = props => {
     !closeMenu && handleChangeOpenMenu();
   };
 
+  const dropDownData = {
+    documentationMenu,
+    handleRequestClose,
+    showMenuDropdown
+  };
+
   return (
     <Element name="appbar" className="appBar">
       <Sticky>
@@ -66,65 +72,7 @@ const MenuBar = props => {
                     >
                       Documentation
                     </Button>
-                    <Menu
-                      id="simple-menu"
-                      anchorEl={documentationMenu.current}
-                      open={Boolean(showMenuDropdown)}
-                      onClose={handleRequestClose}
-                    >
-                      <MenuItem
-                        onClick={handleRequestClose}
-                        component={Link}
-                        to="/docs/overview"
-                      >
-                        Overview & Usage
-                      </MenuItem>
-                      <MenuItem
-                        component={Link}
-                        onClick={handleRequestClose}
-                        to="/docs/customization"
-                      >
-                        Customization
-                      </MenuItem>
-                      <MenuItem
-                        component={Link}
-                        onClick={handleRequestClose}
-                        to="/docs/plugins"
-                      >
-                        Plugins
-                      </MenuItem>
-                      <MenuItem
-                        component={Link}
-                        onClick={handleRequestClose}
-                        to="/docs/custom-entities"
-                      >
-                        Custom Entities
-                      </MenuItem>
-                      <MenuItem
-                        component={Link}
-                        onClick={handleRequestClose}
-                        to="/docs/saving-loading"
-                      >
-                        Saving & Loading
-                      </MenuItem>
-                      <Divider />
-                      <MenuItem
-                        component={"a"}
-                        onClick={handleRequestClose}
-                        href="http://draftjs.org"
-                        target="_blank"
-                      >
-                        Draft.js
-                      </MenuItem>
-                      <MenuItem
-                        component={"a"}
-                        onClick={handleRequestClose}
-                        href="https://facebook.github.io/react/"
-                        target="_blank"
-                      >
-                        React
-                      </MenuItem>
-                    </Menu>
+                    {MenuDropDown(dropDownData)}
                     <Button
                       href="https://draftjs.slack.com/messages/megadraft/"
                       target="_blank"
@@ -172,65 +120,7 @@ const MenuBar = props => {
                   >
                     Documentation
                   </Button>
-                  <Menu
-                    id="simple-menu"
-                    anchorEl={documentationMenu.current}
-                    open={Boolean(showMenuDropdown)}
-                    onClose={handleRequestClose}
-                  >
-                    <MenuItem
-                      onClick={handleRequestClose}
-                      component={Link}
-                      to="/docs/overview"
-                    >
-                      Overview & Usage
-                    </MenuItem>
-                    <MenuItem
-                      component={Link}
-                      onClick={handleRequestClose}
-                      to="/docs/customization"
-                    >
-                      Customization
-                    </MenuItem>
-                    <MenuItem
-                      component={Link}
-                      onClick={handleRequestClose}
-                      to="/docs/plugins"
-                    >
-                      Plugins
-                    </MenuItem>
-                    <MenuItem
-                      component={Link}
-                      onClick={handleRequestClose}
-                      to="/docs/custom-entities"
-                    >
-                      Custom Entities
-                    </MenuItem>
-                    <MenuItem
-                      component={Link}
-                      onClick={handleRequestClose}
-                      to="/docs/saving-loading"
-                    >
-                      Saving & Loading
-                    </MenuItem>
-                    <Divider />
-                    <MenuItem
-                      component={"a"}
-                      onClick={handleRequestClose}
-                      href="http://draftjs.org"
-                      target="_blank"
-                    >
-                      Draft.js
-                    </MenuItem>
-                    <MenuItem
-                      component={"a"}
-                      onClick={handleRequestClose}
-                      href="https://facebook.github.io/react/"
-                      target="_blank"
-                    >
-                      React
-                    </MenuItem>
-                  </Menu>
+                  {MenuDropDown(dropDownData)}
                   <Button
                     href="https://draftjs.slack.com/messages/megadraft/"
                     target="_blank"
@@ -253,6 +143,72 @@ const MenuBar = props => {
         )}
       </Sticky>
     </Element>
+  );
+};
+
+const MenuDropDown = props => {
+  const { documentationMenu, handleRequestClose, showMenuDropdown } = props;
+
+  return (
+    <Menu
+      id="simple-menu"
+      anchorEl={documentationMenu.current}
+      open={Boolean(showMenuDropdown)}
+      onClose={handleRequestClose}
+    >
+      <MenuItem
+        onClick={handleRequestClose}
+        component={Link}
+        to="/docs/overview"
+      >
+        Overview & Usage
+      </MenuItem>
+      <MenuItem
+        component={Link}
+        onClick={handleRequestClose}
+        to="/docs/customization"
+      >
+        Customization
+      </MenuItem>
+      <MenuItem
+        component={Link}
+        onClick={handleRequestClose}
+        to="/docs/plugins"
+      >
+        Plugins
+      </MenuItem>
+      <MenuItem
+        component={Link}
+        onClick={handleRequestClose}
+        to="/docs/custom-entities"
+      >
+        Custom Entities
+      </MenuItem>
+      <MenuItem
+        component={Link}
+        onClick={handleRequestClose}
+        to="/docs/saving-loading"
+      >
+        Saving & Loading
+      </MenuItem>
+      <Divider />
+      <MenuItem
+        component={"a"}
+        onClick={handleRequestClose}
+        href="http://draftjs.org"
+        target="_blank"
+      >
+        Draft.js
+      </MenuItem>
+      <MenuItem
+        component={"a"}
+        onClick={handleRequestClose}
+        href="https://facebook.github.io/react/"
+        target="_blank"
+      >
+        React
+      </MenuItem>
+    </Menu>
   );
 };
 
