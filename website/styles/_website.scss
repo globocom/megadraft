@@ -40,6 +40,7 @@
     position: absolute;
     right: 3.4%;
     top: 50px;
+    transition: 0.3s ease-out;
 
     &-svg {
       width: 100%;
@@ -66,6 +67,7 @@
     letter-spacing: -0.04em;
     text-align: left;
     margin-bottom: 20px;
+    transition: 0.3s ease-out;
   }
 
   &__description {
@@ -74,6 +76,7 @@
     letter-spacing: -0.035em;
     line-height: 1.4;
     text-shadow: 1px 1px 3px $gray-300;
+    transition: 0.3s ease-out;
   }
 
   &__call-to-action {
@@ -231,4 +234,67 @@
   padding: 1em;
   font-family: monospace;
   font-size: 14px;
+}
+
+.appBar {
+  .dropdown-menu {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    padding: 8px 0;
+    transition: 0.3s ease-out;
+    overflow: hidden;
+    height: 260px;
+
+    &__hidden {
+      height: 53px;
+    }
+
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 600;
+      padding-bottom: 16px;
+
+      button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        border: 1px solid $black-20;
+        border-radius: 4px;
+        cursor: pointer;
+        svg {
+          width: 24px;
+          aspect-ratio: 1/1;
+          color: $black-50;
+        }
+      }
+
+      &__dark {
+        color: $white;
+        button {
+          border-color: $white-80;
+          svg {
+            color: $white-80;
+          }
+        }
+      }
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+  }
+  @media screen and (max-width: 540px) {
+    .linear-menu {
+      display: none;
+    }
+    .dropdown-menu {
+      display: flex;
+    }
+  }
 }
