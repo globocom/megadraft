@@ -72,7 +72,7 @@ const MenuBar = props => {
                     >
                       Documentation
                     </Button>
-                    {MenuDropDown(dropDownData)}
+                    <MenuDropDown {...dropDownData} />
                     <Button
                       href="https://draftjs.slack.com/messages/megadraft/"
                       target="_blank"
@@ -120,7 +120,7 @@ const MenuBar = props => {
                   >
                     Documentation
                   </Button>
-                  {MenuDropDown(dropDownData)}
+                  <MenuDropDown {...dropDownData} />
                   <Button
                     href="https://draftjs.slack.com/messages/megadraft/"
                     target="_blank"
@@ -148,7 +148,6 @@ const MenuBar = props => {
 
 const MenuDropDown = props => {
   const { documentationMenu, handleRequestClose, showMenuDropdown } = props;
-
   return (
     <Menu
       id="simple-menu"
