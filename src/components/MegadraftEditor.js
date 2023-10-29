@@ -403,7 +403,7 @@ export default class MegadraftEditor extends Component {
         };
 
         const input = control.querySelector("[type=text]");
-        input && input.focus();
+        input?.focus();
 
         control.scrollIntoView({ block: "center" });
         window.scroll(0, window.pageYOffset - control.clientHeight / 2);
