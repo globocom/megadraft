@@ -406,7 +406,7 @@ export default class MegadraftEditor extends Component {
         input && input.focus();
 
         control.scrollIntoView({ block: "center" });
-        window.scroll(0, window.pageYOffset - control.clientHeight / 2);
+        window.scroll(0, window.scrollY - control.clientHeight / 2);
 
         swapEffect();
 
