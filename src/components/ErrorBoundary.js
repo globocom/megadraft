@@ -41,8 +41,8 @@ class ErrorBoundary extends Component {
         ? "Something went wrong in component '{{type}}'. {{error}}"
         : "Something went wrong with the component type.";
       const text = replaceData(i18n[errorMsg], {
-        type: type && type.toString(),
-        error: this.state.error && this.state.error.toString()
+        type: type?.toString(),
+        error: this.state.error?.toString()
       });
       return (
         <CommonBlock {...this.props} actions={this.actions}>
