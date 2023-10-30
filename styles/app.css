@@ -127,11 +127,18 @@ body {
   position: absolute;
   right: 3.4%;
   top: 50px;
+  transition: 0.3s ease-out;
 }
 .hero__logo-svg {
   width: 100%;
   height: 100%;
   fill: #fff;
+}
+@media screen and (max-width: 690px) {
+  .hero__logo {
+    width: 120px;
+    aspect-ratio: 1/1;
+  }
 }
 .hero__container {
   margin: 130px 11.5% 0;
@@ -145,6 +152,7 @@ body {
   letter-spacing: -0.04em;
   text-align: left;
   margin-bottom: 20px;
+  transition: 0.3s ease-out;
 }
 .hero__description {
   color: #fff;
@@ -152,6 +160,7 @@ body {
   letter-spacing: -0.035em;
   line-height: 1.4;
   text-shadow: 1px 1px 3px #333;
+  transition: 0.3s ease-out;
 }
 .hero__call-to-action {
   font-weight: bold;
@@ -232,6 +241,28 @@ body {
   height: 100px;
   width: 68px;
 }
+@media screen and (max-width: 690px) {
+  .hero__logo {
+    width: 120px;
+    aspect-ratio: 1/1;
+  }
+  .hero__title {
+    margin-top: 200px;
+  }
+}
+@media screen and (max-width: 540px) {
+  .hero__title {
+    font-size: 2.5rem;
+  }
+}
+@media screen and (max-width: 425px) {
+  .hero__description {
+    font-size: 0.9375rem;
+  }
+  .hero__call-to-action {
+    font-size: 1.5rem;
+  }
+}
 
 .tab-container-editor {
   padding-left: 256px;
@@ -276,6 +307,62 @@ body {
   padding: 1em;
   font-family: monospace;
   font-size: 14px;
+}
+
+.appBar .dropdown-menu {
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  padding: 8px 0;
+  transition: 0.3s ease-out;
+  overflow: hidden;
+  height: 260px;
+}
+.appBar .dropdown-menu__hidden {
+  height: 53px;
+}
+.appBar .dropdown-menu__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  padding-bottom: 16px;
+}
+.appBar .dropdown-menu__header button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.appBar .dropdown-menu__header button svg {
+  width: 24px;
+  aspect-ratio: 1/1;
+  color: rgba(0, 0, 0, 0.5019607843);
+}
+.appBar .dropdown-menu__header__dark {
+  color: #fff;
+}
+.appBar .dropdown-menu__header__dark button {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+.appBar .dropdown-menu__header__dark button svg {
+  color: rgba(255, 255, 255, 0.8);
+}
+.appBar .dropdown-menu__list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+@media screen and (max-width: 540px) {
+  .appBar .linear-menu {
+    display: none;
+  }
+  .appBar .dropdown-menu {
+    display: flex;
+  }
 }
 
 /*
