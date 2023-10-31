@@ -189,14 +189,15 @@
 }
 
 .tab-container-editor {
-  padding-left: 256px;
-  padding-right: 256px;
+  width: min(100% - 512px, $max-width);
+  margin-inline: auto;
   padding-top: 95px;
   padding-bottom: 128px;
 }
 
 @media only #{$media-max767} {
   .tab-container-editor {
+    width: 100%;
     padding-left: 65px;
     padding-right: 65px;
     padding-top: 95px;
@@ -206,21 +207,9 @@
 
 .tab-container-json {
   background-color: $gray-400;
-  padding-left: 256px;
-  padding-right: 256px;
-  padding-top: 64px;
-  padding-bottom: 128px;
 }
 
 @media only #{$media-max1000} {
-  .tab-container-json {
-    background-color: $gray-400;
-    padding-left: 0px;
-    padding-right: 0px;
-    padding-top: 64px;
-    padding-bottom: 256px;
-  }
-
   .hljs {
     background-color: $white;
     padding: 1em;
@@ -237,6 +226,11 @@
 }
 
 .appBar {
+  .linear-menu {
+    width: min(100%, $max-width);
+    margin-inline: auto;
+  }
+
   .dropdown-menu {
     width: 100%;
     display: none;

@@ -1,6 +1,7 @@
-$media-max1000: 'screen and (max-width: 1000px)';
-$media-max767: 'screen and (max-width:767px)';
-$media-max450: 'screen and (max-width: 480px)';
+$max-width: 1920px;
+$media-max1000: "screen and (max-width: 1000px)";
+$media-max767: "screen and (max-width:767px)";
+$media-max450: "screen and (max-width: 480px)";
 
-$media-min768: 'screen and (min-width: 768px)';
-$media-min320: 'screen and (min-width: 320px)';
+$media-min768: "screen and (min-width: 768px)";
+$media-min320: "screen and (min-width: 320px)";
