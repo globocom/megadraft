@@ -265,14 +265,15 @@ body {
 }
 
 .tab-container-editor {
-  padding-left: 256px;
-  padding-right: 256px;
+  width: min(100% - 512px, 1920px);
+  margin-inline: auto;
   padding-top: 95px;
   padding-bottom: 128px;
 }
 
 @media only screen and (max-width:767px) {
   .tab-container-editor {
+    width: 100%;
     padding-left: 65px;
     padding-right: 65px;
     padding-top: 95px;
@@ -281,20 +282,9 @@ body {
 }
 .tab-container-json {
   background-color: #282828;
-  padding-left: 256px;
-  padding-right: 256px;
-  padding-top: 64px;
-  padding-bottom: 128px;
 }
 
 @media only screen and (max-width: 1000px) {
-  .tab-container-json {
-    background-color: #282828;
-    padding-left: 0px;
-    padding-right: 0px;
-    padding-top: 64px;
-    padding-bottom: 256px;
-  }
   .hljs {
     background-color: #fff;
     padding: 1em;
@@ -309,6 +299,10 @@ body {
   font-size: 14px;
 }
 
+.appBar .linear-menu {
+  width: min(100%, 1920px);
+  margin-inline: auto;
+}
 .appBar .dropdown-menu {
   width: 100%;
   display: none;
@@ -1123,27 +1117,34 @@ body {
 }
 
 .docs {
-  padding-left: 256px;
-  padding-right: 256px;
   padding-top: 64px;
   padding-bottom: 64px;
   background-color: #fafafa;
+  height: 100%;
+}
+.docs__content {
+  width: min(100% - 512px, 1920px);
+  margin-inline: auto;
 }
 
 @media only screen and (max-width:767px) {
   .docs {
-    padding-left: 20px;
-    padding-right: 20px;
     padding-top: 64px;
     padding-bottom: 64px;
+  }
+  .docs__content {
+    width: min(100% - 40px, 1920px);
+    margin-inline: auto;
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   .docs {
-    padding-left: 20px;
-    padding-right: 20px;
     padding-top: 64px;
     padding-bottom: 64px;
+  }
+  .docs__content {
+    width: min(100% - 40px, 1920px);
+    margin-inline: auto;
   }
 }
 .docs h1 {
@@ -1180,13 +1181,18 @@ body {
           margin-block-start: 0.83em;
   font-weight: bold;
 }
-.docs re, .docs xmp, .docs plaintext, .docs listing {
+.docs re,
+.docs xmp,
+.docs plaintext,
+.docs listing {
   display: block;
   font-family: monospace;
   white-space: pre;
   margin: 1em 0px 1em;
 }
-.docs ul, .docs menu, .docs dir {
+.docs ul,
+.docs menu,
+.docs dir {
   display: block;
   list-style-type: disc;
   -webkit-margin-after: 1em;

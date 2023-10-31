@@ -4,119 +4,135 @@
  * License: MIT
  */
 
-@import '../../src/styles/megadraft.scss';
+@import "../../src/styles/megadraft.scss";
 
 .jsonpreview {
-    font-family: monospace;
-    color: $gray-300;
-    background-color: $light-yellow;
-    font-size:16px;
+  font-family: monospace;
+  color: $gray-300;
+  background-color: $light-yellow;
+  font-size: 16px;
 }
 
 .public-DraftEditor-content {
-    min-height: 300px;
-    outline: none;
+  min-height: 300px;
+  outline: none;
 }
 
 .public-DraftEditor-content {
-    min-height: 300px;
-    outline: none;
+  min-height: 300px;
+  outline: none;
 }
 
-.container--light{
+.container--light {
   background-color: $white;
 }
 
-.container--dark{
+.container--dark {
   background-color: $gray-400;
 }
 
-.appbar--fixed{
+.appbar--fixed {
   color: $red;
   background: $red;
 }
 
 .docs {
-  padding-left: 256px;
-  padding-right: 256px;
   padding-top: 64px;
   padding-bottom: 64px;
   background-color: $gray-050;
+  height: 100%;
+
+  &__content {
+    width: min(100% - 512px, $max-width);
+    margin-inline: auto;
+  }
 }
 
 @media only #{$media-max767} {
-  .docs{
-    padding-left: 20px;
-    padding-right: 20px;
+  .docs {
     padding-top: 64px;
-    padding-bottom: 64px}
+    padding-bottom: 64px;
+
+    &__content {
+      width: min(100% - 40px, $max-width);
+      margin-inline: auto;
+    }
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
-  .docs{
-    padding-left: 20px;
-    padding-right: 20px;
+  .docs {
     padding-top: 64px;
     padding-bottom: 64px;
+
+    &__content {
+      width: min(100% - 40px, $max-width);
+      margin-inline: auto;
+    }
   }
 }
 
 .docs {
   h1 {
-      display: block;
-      font-size: 2em;
-      margin-block-end: 0.67em;
-      margin-block-start: 0.67em;
-      font-weight: bold;
+    display: block;
+    font-size: 2em;
+    margin-block-end: 0.67em;
+    margin-block-start: 0.67em;
+    font-weight: bold;
   }
 
   p {
-      display: block;
-      margin-block-end: 1em;
-      margin-block-start: 1em;
+    display: block;
+    margin-block-end: 1em;
+    margin-block-start: 1em;
   }
 
   h2 {
-      display: block;
-      font-size: 1.2em;
-      margin-block-end: 0.83em;
-      margin-block-start: 0.83em;
-      font-weight: bold;
+    display: block;
+    font-size: 1.2em;
+    margin-block-end: 0.83em;
+    margin-block-start: 0.83em;
+    font-weight: bold;
   }
 
   h3 {
-      display: block;
-      font-size: 1.2em;
-      margin-block-end: 0.83em;
-      margin-block-start: 0.83em;
-      font-weight: bold;
+    display: block;
+    font-size: 1.2em;
+    margin-block-end: 0.83em;
+    margin-block-start: 0.83em;
+    font-weight: bold;
   }
 
-  re, xmp, plaintext, listing {
-      display: block;
-      font-family: monospace;
-      white-space: pre;
-      margin: 1em 0px 1em;
+  re,
+  xmp,
+  plaintext,
+  listing {
+    display: block;
+    font-family: monospace;
+    white-space: pre;
+    margin: 1em 0px 1em;
   }
 
-  ul, menu, dir {
-      display: block;
-      list-style-type: disc;
-      margin-block-end: 1em;
-      margin-block-start: 1em;
-      padding-inline-start: 40px;
+  ul,
+  menu,
+  dir {
+    display: block;
+    list-style-type: disc;
+    margin-block-end: 1em;
+    margin-block-start: 1em;
+    padding-inline-start: 40px;
   }
 
   li {
-      display: list-item;
-      text-align: match-parent;
+    display: list-item;
+    text-align: match-parent;
   }
 
   pre {
-      color: rgba(0, 0, 0, 0.87);
-      box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
-      border-radius: 2px;
-      background-color: $white;
+    color: rgba(0, 0, 0, 0.87);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+    border-radius: 2px;
+    background-color: $white;
   }
 
   a {
