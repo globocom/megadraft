@@ -140,6 +140,8 @@ export default class Toolbar extends Component {
             },
             arrowStyle: selectionCoords.arrowStyle
           });
+
+          this.cancelEntity();
         }
       }
     );
