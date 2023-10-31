@@ -22,6 +22,10 @@ const MenuBar = props => {
   const [showMenuDropdown, setShowMenuDropdown] = useState(false);
   const documentationMenu = useRef(null);
   const [closeMenu, setCloseMenu] = useState(true);
+  
+  const megadraftUrl = 'https://draftjs.slack.com/messages/megadraft/';
+  const githubUrl = 'https://github.com/globocom/megadraft';
+  const targetBlank = '_blank';
 
   const handleTouchTap = event => {
     // This prevents ghost click.
@@ -74,14 +78,14 @@ const MenuBar = props => {
                     </Button>
                     <MenuDropDown {...dropDownData} />
                     <Button
-                      href="https://draftjs.slack.com/messages/megadraft/"
-                      target="_blank"
+                      href={megadraftUrl}
+                      target={targetBlank}
                     >
                       Slack channel
                     </Button>
                     <Button
-                      href="https://github.com/globocom/megadraft"
-                      target="_blank"
+                      href={githubUrl}
+                      target={targetBlank}
                     >
                       Repository
                     </Button>
@@ -122,15 +126,15 @@ const MenuBar = props => {
                   </Button>
                   <MenuDropDown {...dropDownData} />
                   <Button
-                    href="https://draftjs.slack.com/messages/megadraft/"
-                    target="_blank"
+                    href={megadraftUrl}
+                    target={targetBlank}
                     onClick={handleRequestClose}
                   >
                     Slack channel
                   </Button>
                   <Button
-                    href="https://github.com/globocom/megadraft"
-                    target="_blank"
+                    href={githubUrl}
+                    target={targetBlank}
                     onClick={handleRequestClose}
                   >
                     Repository
@@ -195,7 +199,7 @@ const MenuDropDown = props => {
         component={"a"}
         onClick={handleRequestClose}
         href="http://draftjs.org"
-        target="_blank"
+        target={targetBlank}
       >
         Draft.js
       </MenuItem>
@@ -203,7 +207,7 @@ const MenuDropDown = props => {
         component={"a"}
         onClick={handleRequestClose}
         href="https://facebook.github.io/react/"
-        target="_blank"
+        target={targetBlank}
       >
         React
       </MenuItem>
