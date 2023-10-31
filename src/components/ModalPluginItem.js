@@ -4,68 +4,62 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React, { useRef } from "react";
 
-import { ActionsContext } from "./ActionsProvider";
+import { useActions } from "./ActionsProvider";
 import { PLUGINS_MODAL_ADD_PLUGIN } from "../constants";
 
-export default class ModalPluginItem extends Component {
-  static contextType = ActionsContext;
+const ModalPluginItem = ({
+  toggleModalVisibility,
+  editorState,
+  onChange,
+  plugins
+}) => {
+  const listEl = useRef([]);
 
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-    this.renderButton = this.renderButton.bind(this);
-  }
+  const { onAction } = useActions();
 
-  handleClick(e) {
-    this.buttonEl.onClick(e);
-  }
+  const handleClick = (e, type) => listEl.current[type].children[0].onClick(e);
 
-  closeModal() {
-    this.props.toggleModalVisibility();
-  }
+  const closeModal = () => toggleModalVisibility();
 
-  renderButton(item) {
+  const renderButton = item => {
     const Button = item.buttonComponent;
 
     return (
       <li
         key={item.type}
+        ref={el => {
+          listEl.current[item.type] = el;
+        }}
         className="megadraft-modal__item"
         onClick={() => {
-          this.context.onAction({
+          onAction({
             type: PLUGINS_MODAL_ADD_PLUGIN,
             pluginName: item.title
           });
-          this.closeModal();
+          closeModal();
         }}
       >
         <Button
-          ref={el => {
-            this.buttonEl = el;
-          }}
           className="megadraft-modal__button"
           title={item.title}
-          editorState={this.props.editorState}
-          onChange={this.props.onChange}
+          editorState={editorState}
+          onChange={onChange}
         />
         <p
           className="megadraft-modal__button__label"
-          onClick={this.handleClick}
+          onClick={e => handleClick(e, item.type)}
         >
           {item.title}
         </p>
       </li>
     );
-  }
+  };
 
-  render() {
-    return (
-      <ul className="megadraft-modal__items">
-        {this.props.plugins.map(this.renderButton)}
-      </ul>
-    );
-  }
-}
+  return (
+    <ul className="megadraft-modal__items">{plugins.map(renderButton)}</ul>
+  );
+};
+
+export default ModalPluginItem;
