@@ -22,7 +22,6 @@ const MenuBar = props => {
   const [showMenuDropdown, setShowMenuDropdown] = useState(false);
   const documentationMenu = useRef(null);
   const [closeMenu, setCloseMenu] = useState(true);
-  
   const megadraftUrl = "https://draftjs.slack.com/messages/megadraft/";
   const githubUrl = "https://github.com/globocom/megadraft";
   const targetBlank = "_blank";
@@ -77,16 +76,10 @@ const MenuBar = props => {
                       Documentation
                     </Button>
                     <MenuDropDown {...dropDownData} />
-                    <Button
-                      href={megadraftUrl}
-                      target={targetBlank}
-                    >
+                    <Button href={megadraftUrl} target={targetBlank}>
                       Slack channel
                     </Button>
-                    <Button
-                      href={githubUrl}
-                      target={targetBlank}
-                    >
+                    <Button href={githubUrl} target={targetBlank}>
                       Repository
                     </Button>
                   </Grid>
@@ -152,6 +145,8 @@ const MenuBar = props => {
 
 const MenuDropDown = props => {
   const { documentationMenu, handleRequestClose, showMenuDropdown } = props;
+  const targetBlank = "_blank";
+
   return (
     <Menu
       id="simple-menu"
