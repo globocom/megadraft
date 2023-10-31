@@ -29,7 +29,14 @@ export default function VideoButton(props) {
   }
 
   return (
-    <button className={className} type="button" onClick={onClick} title={title}>
+    <button
+      className={className}
+      type="button"
+      onClick={onClick}
+      title={title}
+      role="button"
+      aria-label="Button action add video in text editor"
+    >
       <icons.VideoIcon className="sidemenu__button__icon" />
     </button>
   );

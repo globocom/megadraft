@@ -32,7 +32,7 @@ describe("BlockAction Component", () => {
   });
 
   it("is possible to click on the action item", () => {
-    const itemDOM = testContext.wrapper.find("li");
+    const itemDOM = testContext.wrapper.find("button");
 
     expect(testContext.crop).not.toHaveBeenCalled();
 

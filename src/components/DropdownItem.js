@@ -13,22 +13,25 @@ export default function DropdownItem(props) {
   const className = classNames("dropdown__item ", props.className);
 
   return (
-    <div
+    <button
       className={className}
       onClick={props.onClick}
       onMouseDown={props.onMouseDown}
       onMouseUp={props.onMouseDown}
+      {...props.attr}
+      type="button"
     >
       <Icon className="dropdown__item__icon" />
       <span className="dropdown__item__text">{props.item.label}</span>
 
       {props.children}
-    </div>
+    </button>
   );
 }
 
 DropdownItem.propTypes = {
   item: PropTypes.object.isRequired,
+  attr: PropTypes.object,
   style: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   onClick: PropTypes.func
 };
