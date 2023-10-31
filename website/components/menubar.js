@@ -23,9 +23,9 @@ const MenuBar = props => {
   const documentationMenu = useRef(null);
   const [closeMenu, setCloseMenu] = useState(true);
   
-  const megadraftUrl = 'https://draftjs.slack.com/messages/megadraft/';
-  const githubUrl = 'https://github.com/globocom/megadraft';
-  const targetBlank = '_blank';
+  const megadraftUrl = "https://draftjs.slack.com/messages/megadraft/";
+  const githubUrl = "https://github.com/globocom/megadraft";
+  const targetBlank = "_blank";
 
   const handleTouchTap = event => {
     // This prevents ghost click.
