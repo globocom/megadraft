@@ -24,7 +24,7 @@ Here are the props that `MegadraftEditor` accepts:
 - `blocksWithoutStyleReset`: (optional) list, defaults to
   `['ordered-list-item', 'unordered-list-item']`. Tells the editor which
   blocks won't have its types reset if `resetStyleNewLine` is `true`.
-- `maxSidebarButtons`:  (optional) Limits the number of buttons
+- `maxSidebarButtons`: (optional) Limits the number of buttons
   displayed on the sidebar. When the limit is reached an extra button will appear
   and when clicked it will open a modal window with the full button list.
 - `modalOptions`: (optional) object, height and width of the modal.
@@ -36,62 +36,65 @@ Here are the props that `MegadraftEditor` accepts:
   where xx is a language code and YY is a country code.
   See [Megadraft strings][i18n-strings].
 - `i18n`: (optional) A dictionary to translate the editor strings.
-   This is an object with at least one language key (one of them needs to be
-   equal to the `language` prop), this `language` is an object with four keys,
-   each of them is a string which will be translated:
+  This is an object with at least one language key (one of them needs to be
+  equal to the `language` prop), this `language` is an object with four keys,
+  each of them is a string which will be translated:
   - `"Type the link and press enter"`: A string that changes the text of the
-     link placeholder.
+    link placeholder.
   - `"Invalid Link"`: A string that changes the text of invalid links.
   - `"Can't show plugin, component {{type}} not found."`: Changes the text
-   that will appear when a plugin is missing.
+    that will appear when a plugin is missing.
   - `"Block List"`: A string that changes the block list title.
   ```js
-    //Example
-        i18n = {
-          "Type the link and press enter": "Type the link and press enter",
-          "Invalid Link": "Invalid Link",
-          "Can't show plugin, component {{type}} not found.":
-             "Can't show plugin, component {{type}} not found.",
-           "Block List": "Block List"
-        }
+  //Example
+  i18n = {
+    "Type the link and press enter": "Type the link and press enter",
+    "Invalid Link": "Invalid Link",
+    "Can't show plugin, component {{type}} not found.":
+      "Can't show plugin, component {{type}} not found.",
+    "Block List": "Block List"
+  };
+  ```
 - `hideSidebarOnBlur`: (optional) boolean, default false. Hide Sidebar on blur.
 - `movableBlocks`: (optional) boolean, default false. Allows reorder blocks.
 
 Check the following sections for more info.
-
 
 ## Sidebar
 
 You can provide your custom sidebar passing `sidebarRendererFn` prop.
 Notice: we plan to rename this property to just `Sidebar` in future versions.
 
+# Class component:
+
 ```js
 import React from "react";
-import {createRoot} from "react-dom/client";
-import {MegadraftEditor, editorStateFromRaw} from "megadraft";
+import { createRoot } from "react-dom/client";
+import { MegadraftEditor, editorStateFromRaw } from "megadraft";
 import CustomSidebar from "my/sidebar/path";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {editorState: editorStateFromRaw(null)};
+    this.state = { editorState: editorStateFromRaw(null) };
   }
 
-  onChange = (editorState) => {
-    this.setState({editorState});
-  }
+  onChange = editorState => {
+    this.setState({ editorState });
+  };
 
-  getCustomSidebar = (props) => {
-    return <CustomSidebar {...props} />
-  }
+  getCustomSidebar = props => {
+    return <CustomSidebar {...props} />;
+  };
 
   render() {
     return (
       <MegadraftEditor
         editorState={this.state.editorState}
         onChange={this.onChange}
-        sidebarRendererFn={this.getCustomSidebar}/>
-    )
+        sidebarRendererFn={this.getCustomSidebar}
+      />
+    );
   }
 }
 
@@ -99,48 +102,82 @@ const root = createRoot(document.getElementById("container"));
 root.render(<App />);
 ```
 
+# Functional component:
+
+```js
+import React, { useState } from "react";
+import { createRoot } from "react-dom/client";
+import { MegadraftEditor, editorStateFromRaw } from "megadraft";
+import CustomSidebar from "my/sidebar/path";
+
+const App = () => {
+  const [editorState, setEditorState] = useState(editorStateFromRaw(null));
+
+  const onChange = newEditorState => {
+    setEditorState(newEditorState);
+  };
+
+  const getCustomSidebar = props => {
+    return <CustomSidebar {...props} />;
+  };
+
+  return (
+    <MegadraftEditor
+      editorState={editorState}
+      onChange={onChange}
+      sidebarRendererFn={getCustomSidebar}
+    />
+  );
+};
+
+const root = createRoot(document.getElementById("container"));
+root.render(<App />);
+```
+
 The `sidebarRendererFn` takes a props object with the following properties:
 
-* `plugins`: array of valid plugins
-* `editorState`: DraftJS editorState object
-* `onChange`: handler for editorState changes
-
+- `plugins`: array of valid plugins
+- `editorState`: DraftJS editorState object
+- `onChange`: handler for editorState changes
 
 ## Toolbar Actions
 
 You can provide custom actions using MegadraftEditor `actions` property.
 Megadraft Toolbar provides [custom actions][custom actions] like **Bold** and
-*Italic*, additionally you can provide your own custom actions or even add some
+_Italic_, additionally you can provide your own custom actions or even add some
 custom actions to the default ones.
 
 Example: Add an underline action.
 
+# Class component:
+
 ```js
 import React from "react";
-import {createRoot} from "react-dom/client";
-import {MegadraftEditor, editorStateFromRaw} from "megadraft";
-import actions from "megadraft/lib/actions/default"
+import { createRoot } from "react-dom/client";
+import { MegadraftEditor, editorStateFromRaw } from "megadraft";
+import actions from "megadraft/lib/actions/default";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {editorState: editorStateFromRaw(null)};
+    this.state = { editorState: editorStateFromRaw(null) };
   }
 
-  onChange = (editorState) =>  {
-    this.setState({editorState});
-  }
+  onChange = editorState => {
+    this.setState({ editorState });
+  };
 
   render() {
     const customActions = actions.concat([
-      {type: "inline", label: "U", style: "UNDERLINE", icon: UnderlineIcon}
+      { type: "inline", label: "U", style: "UNDERLINE", icon: UnderlineIcon }
     ]);
     return (
       <MegadraftEditor
         editorState={this.state.editorState}
         onChange={this.onChange}
-        actions={customActions}/>
-    )
+        actions={customActions}
+      />
+    );
   }
 }
 
@@ -156,12 +193,44 @@ const root = createRoot(document.getElementById("container"));
 root.render(<App />);
 ```
 
+# Functional Component:
+
+```js
+import React, { useState } from "react";
+import { createRoot } from "react-dom/client";
+import { MegadraftEditor, editorStateFromRaw } from "megadraft";
+import CustomSidebar from "my/sidebar/path";
+
+const App = () => {
+  const [editorState, setEditorState] = useState(editorStateFromRaw(null));
+
+  const onChange = newEditorState => {
+    setEditorState(newEditorState);
+  };
+
+  const getCustomSidebar = props => {
+    return <CustomSidebar {...props} />;
+  };
+
+  return (
+    <MegadraftEditor
+      editorState={editorState}
+      onChange={onChange}
+      sidebarRendererFn={getCustomSidebar}
+    />
+  );
+};
+
+const root = createRoot(document.getElementById("container"));
+root.render(<App />);
+```
+
 You can also provide a fully custom action:
 
 ```js
 const customActions = [
   {
-    type: "custom",
+    type: "custom",
     icon: OwnIcon,
     action() {
       // Here goes the code triggered on button click
@@ -169,10 +238,9 @@ const customActions = [
     active() {
       // Return a Boolean to handle the active state of button on Toolbar.
     }
-  },
+  }
 ];
 ```
-
 
 ## Toolbar component
 
@@ -181,7 +249,7 @@ you can provide a custom toolbar component as well with the `Toolbar` property:
 
 ```js
 import React from "react";
-import {MegadraftEditor, editorStateFromRaw} from "megadraft";
+import { MegadraftEditor, editorStateFromRaw } from "megadraft";
 import CustomToolbar from "my/toolbar/path";
 
 class App extends React.Component {
@@ -191,8 +259,9 @@ class App extends React.Component {
       <MegadraftEditor
         editorState={this.state.editorState}
         onChange={this.onChange}
-        Toolbar={CustomToolbar}/>
-    )
+        Toolbar={CustomToolbar}
+      />
+    );
   }
 }
 ```
@@ -207,7 +276,6 @@ It will receive the following properties:
 - `actions`: the action items to show in the toolbar. See [Megadraft
   actions][custom actions]
 
-
 ## Keybindings
 
 You can provide custom key bindings to Megadraft by setting the `keyBindingFn`
@@ -215,23 +283,33 @@ property.
 
 Example: Call a function when user presses control+s
 
+# Class component:
+
 ```js
 import React from "react";
-import {createRoot} from "react-dom/client";
-import {MegadraftEditor, editorStateFromRaw} from "megadraft";
+import { createRoot } from "react-dom/client";
+import { MegadraftEditor, editorStateFromRaw } from "megadraft";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {editorState: editorStateFromRaw(null)};
+    this.state = { editorState: editorStateFromRaw(null) };
     this.keyBindings = [
-        { name: "save", isKeyBound: (e) => { return e.keyCode === 83 && e.ctrlKey; }, action: () => { this.onSave(); } }
+      {
+        name: "save",
+        isKeyBound: e => {
+          return e.keyCode === 83 && e.ctrlKey;
+        },
+        action: () => {
+          this.onSave();
+        }
+      }
     ];
   }
 
-  onChange = (editorState) => {
-    this.setState({editorState});
-  }
+  onChange = editorState => {
+    this.setState({ editorState });
+  };
 
   onSave() {
     console.log("save");
@@ -242,10 +320,50 @@ class App extends React.Component {
       <MegadraftEditor
         editorState={this.state.editorState}
         onChange={this.onChange}
-        keyBindings={this.keyBindings}/>
-    )
+        keyBindings={this.keyBindings}
+      />
+    );
   }
 }
+
+const root = createRoot(document.getElementById("container"));
+root.render(<App />);
+```
+
+# Functional component:
+
+```js
+import React, { useState } from "react";
+import { createRoot } from "react-dom/client";
+import { MegadraftEditor, editorStateFromRaw } from "megadraft";
+
+const App = () => {
+  const [editorState, setEditorState] = useState(editorStateFromRaw(null));
+
+  const keyBindings = [
+    {
+      name: "save",
+      isKeyBound: e => e.keyCode === 83 && e.ctrlKey, // Control + S
+      action: () => onSave()
+    }
+  ];
+
+  const onSave = () => {
+    console.log("save");
+  };
+
+  const onChange = newEditorState => {
+    setEditorState(newEditorState);
+  };
+
+  return (
+    <MegadraftEditor
+      editorState={editorState}
+      onChange={onChange}
+      keyBindings={keyBindings}
+    />
+  );
+};
 
 const root = createRoot(document.getElementById("container"));
 root.render(<App />);
@@ -258,54 +376,56 @@ an alternative block will be rendered as a fallback to indicate that the plugin
 is missing.
 
 This behavior is customizable using the `handleBlockNotFound` prop. It takes a
-[ContentBlock][ContentBlock] object and should return either of the following:
+[ContentBlock][contentblock] object and should return either of the following:
 
-* `null`: this will delegate the block rendering to DraftJS, resulting in an
+- `null`: this will delegate the block rendering to DraftJS, resulting in an
   empty paragraph
-* a [valid plugin][plugins] with a `blockComponent` property to render the
+- a [valid plugin][plugins] with a `blockComponent` property to render the
   fallback interface
 
-
-[ContentBlock]: https://facebook.github.io/draft-js/docs/api-reference-content-block.html#content
+[contentblock]: https://facebook.github.io/draft-js/docs/api-reference-content-block.html#content
 [plugins]: http://globocom.github.io/megadraft/#/docs/plugins?_k=h3n0a5
 
 The following example renders a `pre` element for the unregistered
 `missing-plugin` atomic block.
 
+# Class component:
+
 ```js
 import React from "react";
-import {createRoot} from "react-dom/client";
-import {MegadraftEditor, editorStateFromRaw} from "megadraft";
+import { createRoot } from "react-dom/client";
+import { MegadraftEditor, editorStateFromRaw } from "megadraft";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {editorState: editorStateFromRaw({
-      entityMap: {
-      },
-      blocks: [
-        {
-          key: "8xut",
-          text: "",
-          type: "atomic",
-          depth: 0,
-          inlineStyleRanges: [],
-          entityRanges: [],
-          data: {
-            type: "missing-plugin"
+    this.state = {
+      editorState: editorStateFromRaw({
+        entityMap: {},
+        blocks: [
+          {
+            key: "8xut",
+            text: "",
+            type: "atomic",
+            depth: 0,
+            inlineStyleRanges: [],
+            entityRanges: [],
+            data: {
+              type: "missing-plugin"
+            }
           }
-        }
-      ]
-    })};
+        ]
+      })
+    };
   }
 
-  onChange = (editorState) => {
-    this.setState({editorState});
-  }
+  onChange = editorState => {
+    this.setState({ editorState });
+  };
 
   handleBlockNotFound(block) {
     return {
-      blockComponent: (props) => <pre>plugin not found {props.data.type}</pre>
+      blockComponent: props => <pre>plugin not found {props.data.type}</pre>
     };
   }
 
@@ -314,10 +434,61 @@ class App extends React.Component {
       <MegadraftEditor
         editorState={this.state.editorState}
         onChange={this.onChange}
-        handleBlockNotFound={this.handleBlockNotFound} />
-    )
+        handleBlockNotFound={this.handleBlockNotFound}
+      />
+    );
   }
 }
+
+const root = createRoot(document.getElementById("container"));
+root.render(<App />);
+```
+
+# Functinoal component:
+
+```js
+import React, { useState } from "react";
+import { createRoot } from "react-dom/client";
+import { MegadraftEditor, editorStateFromRaw } from "megadraft";
+
+const App = () => {
+  const initialEditorState = editorStateFromRaw({
+    entityMap: {},
+    blocks: [
+      {
+        key: "8xut",
+        text: "",
+        type: "atomic",
+        depth: 0,
+        inlineStyleRanges: [],
+        entityRanges: [],
+        data: {
+          type: "missing-plugin"
+        }
+      }
+    ]
+  });
+
+  const [editorState, setEditorState] = useState(initialEditorState);
+
+  const onChange = newEditorState => {
+    setEditorState(newEditorState);
+  };
+
+  const handleBlockNotFound = block => {
+    return {
+      blockComponent: props => <pre>plugin not found {props.data.type}</pre>
+    };
+  };
+
+  return (
+    <MegadraftEditor
+      editorState={editorState}
+      onChange={onChange}
+      handleBlockNotFound={handleBlockNotFound}
+    />
+  );
+};
 
 const root = createRoot(document.getElementById("container"));
 root.render(<App />);
@@ -340,6 +511,8 @@ on the sidebar.
 
 You can set the width and height of modal via props too. Passing the prop
 `modalOptions`, see below. Default values are `width:528` and `height:393`.
+
+# Class component:
 
 ```js
 import React from "react";
@@ -368,6 +541,36 @@ class App extends React.Component {
     )
   }
 }
+
+const root = createRoot(document.getElementById("container"));
+root.render(<App />);
+```
+
+# Functional component:
+
+```js
+import React, { useState } from "react";
+import { createRoot } from "react-dom/client";
+import { MegadraftEditor, editorStateFromRaw } from "megadraft";
+
+const App = () => {
+  const [editorState, setEditorState] = useState(editorStateFromRaw(null));
+  const maxSidebarButtons = 3;
+  const modalOptions = { width: 528, height: 393 };
+
+  const onChange = newEditorState => {
+    setEditorState(newEditorState);
+  };
+
+  return (
+    <MegadraftEditor
+      editorState={editorState}
+      onChange={onChange}
+      maxSidebarButtons={maxSidebarButtons}
+      modalOptions={modalOptions}
+    />
+  );
+};
 
 const root = createRoot(document.getElementById("container"));
 root.render(<App />);
