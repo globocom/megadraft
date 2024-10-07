@@ -16,36 +16,71 @@ npm install --save megadraft
 To use it in your application all you need to do is import the Megadraft
 component such as the following:
 
+# Class Component:
+
 ```js
 import React from "react";
-import {createRoot} from "react-dom/client";
-import {MegadraftEditor, editorStateFromRaw} from "megadraft";
+import { createRoot } from "react-dom/client";
+import { MegadraftEditor, editorStateFromRaw } from "megadraft";
 
 //Import megadraft.css
-import 'megadraft/dist/css/megadraft.css'
+import "megadraft/dist/css/megadraft.css";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {editorState: editorStateFromRaw(null)};
+    this.state = { editorState: editorStateFromRaw(null) };
   }
 
-  onChange = (editorState) => {
-    this.setState({editorState});
-  }
+  onChange = editorState => {
+    this.setState({ editorState });
+  };
 
   render() {
     return (
       //Add some margin left to show plugins sidebar
-      <div style={{marginLeft: 80}}>
+      <div style={{ marginLeft: 80 }}>
         <MegadraftEditor
           editorState={this.state.editorState}
           onChange={this.onChange}
-          placeholder='Add some text'/>
+          placeholder="Add some text"
+        />
       </div>
-    )
+    );
   }
 }
+
+const root = createRoot(document.getElementById("container"));
+root.render(<App />);
+```
+
+# Functional Component:
+
+```js
+import React, { useState } from "react";
+import { createRoot } from "react-dom/client";
+import { MegadraftEditor, editorStateFromRaw } from "megadraft";
+
+// Import megadraft.css
+import "megadraft/dist/css/megadraft.css";
+
+const App = () => {
+  const [editorState, setEditorState] = useState(editorStateFromRaw(null));
+
+  const onChange = newEditorState => {
+    setEditorState(newEditorState);
+  };
+
+  return (
+    <div style={{ marginLeft: 80 }}>
+      <MegadraftEditor
+        editorState={editorState}
+        onChange={onChange}
+        placeholder="Add some text"
+      />
+    </div>
+  );
+};
 
 const root = createRoot(document.getElementById("container"));
 root.render(<App />);
