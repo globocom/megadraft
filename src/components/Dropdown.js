@@ -17,6 +17,8 @@ const Dropdown = ({ items = [], selected, onChange }) => {
   const isEmpty = items.length === 0;
   const selectedItem = items.filter(item => item.key === selected)[0];
 
+  console.log("wip");
+
   const toggleDropdown = () => setIsOpen(isOpen => !isOpen);
 
   const handleDocumentClick = event => {
