@@ -23,11 +23,11 @@ export default function Header() {
           text editor ever.
         </h1>
         <div className="hero__description">
-          Megadraft is a Rich Text editor built on top of
+          <header>Megadraft is a Rich Text editor built on top of
           <br />
           Facebook's draft.js featuring a nice default
           <br />
-          base of plugins and extensibility.
+          base of plugins and extensibility.</header>
         </div>
       </div>
     </div>
