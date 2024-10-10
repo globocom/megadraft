@@ -4,37 +4,35 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
-
+import React from "react";
 import { ModalBody } from "backstage-modal";
 import ModalPluginItem from "./ModalPluginItem";
 
-export default class ModalPluginList extends Component {
-  constructor(props) {
-    super(props);
-    this.modalClose = this.modalClose.bind(this);
-    this.onChange = this.onChange.bind(this);
-  }
+const ModalPluginList = ({
+  toggleModalVisibility,
+  plugins,
+  onChange,
+  editorState
+}) => {
+  const modalClose = () => {
+    toggleModalVisibility();
+  };
 
-  modalClose() {
-    this.props.toggleModalVisibility();
-  }
+  const handleChange = (...args) => {
+    toggleModalVisibility();
+    onChange(...args);
+  };
 
-  onChange() {
-    this.props.toggleModalVisibility();
-    this.props.onChange(...arguments);
-  }
+  return (
+    <ModalBody>
+      <ModalPluginItem
+        toggleModalVisibility={modalClose}
+        plugins={plugins}
+        onChange={handleChange}
+        editorState={editorState}
+      />
+    </ModalBody>
+  );
+};
 
-  render() {
-    return (
-      <ModalBody>
-        <ModalPluginItem
-          toggleModalVisibility={this.modalClose}
-          plugins={this.props.plugins}
-          onChange={this.onChange}
-          editorState={this.props.editorState}
-        />
-      </ModalBody>
-    );
-  }
-}
+export default ModalPluginList;
