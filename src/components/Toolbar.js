@@ -4,12 +4,12 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { EditorState, RichUtils } from "draft-js";
 import classNames from "classnames";
-import ToolbarItem from "./ToolbarItem";
+import { EditorState, RichUtils } from "draft-js";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 import { getSelectionCoords } from "../utils";
+import ToolbarItem from "./ToolbarItem";
 
 export default class Toolbar extends Component {
   static defaultProps = {

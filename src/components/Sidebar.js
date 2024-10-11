@@ -4,24 +4,24 @@
  * License: MIT
  */
 
+import classNames from "classnames";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import classNames from "classnames";
 import icons from "../icons";
 
 import {
   SIDEBAR_ADD_PLUGIN,
+  SIDEBAR_CLICK_MORE,
   SIDEBAR_EXPAND,
-  SIDEBAR_SHRINK,
-  SIDEBAR_CLICK_MORE
+  SIDEBAR_SHRINK
 } from "../constants";
 
 import { ActionsContext } from "./ActionsProvider";
 
 import "setimmediate";
 
-import PluginsModal from "./PluginsModal";
 import { getSelectedBlockElement } from "../utils";
+import PluginsModal from "./PluginsModal";
 
 class BlockStyles extends Component {
   static contextType = ActionsContext;

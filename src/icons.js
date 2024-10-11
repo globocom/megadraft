@@ -4,27 +4,27 @@
  * License: MIT
  */
 
-import BoldIcon from "./icons/bold";
-import ItalicIcon from "./icons/italic";
-import ULIcon from "./icons/ul";
-import OLIcon from "./icons/ol";
-import H2Icon from "./icons/h2";
 import BlockQuoteIcon from "./icons/blockquote";
-import LinkIcon from "./icons/link";
-import CrossIcon from "./icons/cross";
-import ImageIcon from "./icons/image";
-import VideoIcon from "./icons/video";
-import EditIcon from "./icons/edit";
-import DeleteIcon from "./icons/delete";
+import BoldIcon from "./icons/bold";
+import CloseIcon from "./icons/close";
 import CropIcon from "./icons/crop";
+import CrossIcon from "./icons/cross";
+import DeleteIcon from "./icons/delete";
+import DropdownArrow from "./icons/dropdownArrow";
+import EditIcon from "./icons/edit";
+import ErrorIcon from "./icons/error";
+import H2Icon from "./icons/h2";
+import ImageIcon from "./icons/image";
+import ItalicIcon from "./icons/italic";
+import LinkIcon from "./icons/link";
 import MediaBigIcon from "./icons/mediaBig";
 import MediaMediumIcon from "./icons/mediaMedium";
 import MediaSmallIcon from "./icons/mediaSmall";
-import DropdownArrow from "./icons/dropdownArrow";
-import ErrorIcon from "./icons/error";
-import UnlinkIcon from "./icons/unlink";
-import CloseIcon from "./icons/close";
 import MoreIcon from "./icons/more";
+import OLIcon from "./icons/ol";
+import ULIcon from "./icons/ul";
+import UnlinkIcon from "./icons/unlink";
+import VideoIcon from "./icons/video";
 
 const icons = {
   BoldIcon,

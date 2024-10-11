@@ -4,13 +4,13 @@
  * License: MIT
  */
 
-import React from "react";
 import { mount } from "enzyme";
+import React from "react";
 
 import Media from "../../src/components/Media";
-import { editorStateFromRaw } from "../../src/utils";
-import DEFAULT_PLUGINS from "../../src/plugins/default";
 import i18nConfig from "../../src/i18n";
+import DEFAULT_PLUGINS from "../../src/plugins/default";
+import { editorStateFromRaw } from "../../src/utils";
 import errorPlugin from "../../tests/plugins/error/plugin";
 
 describe("Media Component", () => {

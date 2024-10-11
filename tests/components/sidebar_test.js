@@ -4,23 +4,23 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
 import { mount } from "enzyme";
+import React, { Component } from "react";
 import cp from "utils-copy";
-import i18nConfig from "../../src/i18n";
-import Sidebar, { ToggleButton, SideMenu } from "../../src/components/Sidebar";
 import ActionsProvider from "../../src/components/ActionsProvider";
 import PluginsModal from "../../src/components/PluginsModal";
-import image from "../../src/plugins/image/plugin";
-import { editorStateFromRaw } from "../../src/utils";
+import Sidebar, { SideMenu, ToggleButton } from "../../src/components/Sidebar";
+import {
+  SIDEBAR_ADD_PLUGIN,
+  SIDEBAR_CLICK_MORE,
+  SIDEBAR_EXPAND,
+  SIDEBAR_SHRINK
+} from "../../src/constants";
+import i18nConfig from "../../src/i18n";
 import DEFAULT_PLUGINS from "../../src/plugins/default.js";
 import ImageButton from "../../src/plugins/image/ImageButton";
-import {
-  SIDEBAR_EXPAND,
-  SIDEBAR_SHRINK,
-  SIDEBAR_CLICK_MORE,
-  SIDEBAR_ADD_PLUGIN
-} from "../../src/constants";
+import image from "../../src/plugins/image/plugin";
+import { editorStateFromRaw } from "../../src/utils";
 
 class SidebarWrapper extends Component {
   constructor(props) {

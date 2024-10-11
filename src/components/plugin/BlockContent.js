@@ -4,8 +4,8 @@
  * License: MIT
  */
 
-import React from "react";
 import classNames from "classnames";
+import React from "react";
 
 export default function BlockContent(props) {
   const className = classNames("block__content", {

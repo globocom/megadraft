@@ -4,12 +4,12 @@
  * License: MIT
  */
 
-import React from "react";
 import classNames from "classnames";
+import React from "react";
 import icons from "../icons";
 import MegadraftBlock from "./MegadraftBlock";
 
-import { BLOCK_SWAP_UP, BLOCK_SWAP_DOWN } from "../constants";
+import { BLOCK_SWAP_DOWN, BLOCK_SWAP_UP } from "../constants";
 
 const Options = ({
   onClickUp,

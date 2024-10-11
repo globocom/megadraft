@@ -7,21 +7,21 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 
-import { hashHistory, Route, Switch, HashRouter } from "react-router-dom";
+import { hashHistory, HashRouter, Route, Switch } from "react-router-dom";
 import Scroll from "react-scroll";
 import { StickyContainer } from "react-sticky";
 
-import { ThemeProvider } from "@material-ui/styles";
 import Grid from "@material-ui/core/Grid";
 import { common } from "@material-ui/core/colors";
+import { ThemeProvider } from "@material-ui/styles";
 
-import MenuBar from "./components/menubar";
 import Docs from "./components/docs";
-import theme from "./components/megadrafttheme";
 import Example from "./components/example";
 import Header from "./components/header";
 import { highlightCode } from "./components/highlightCode";
 import LetsRockArrow from "./components/icons/arrow-down";
+import theme from "./components/megadrafttheme";
+import MenuBar from "./components/menubar";
 import ToggleButton from "./components/toggleButton";
 
 const LinkScroll = Scroll.Link;

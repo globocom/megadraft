@@ -4,8 +4,8 @@
  * License: MIT
  */
 
-import React from "react";
 import { mount } from "enzyme";
+import React from "react";
 
 import MediaMessage from "../../src/components/MediaMessage";
 

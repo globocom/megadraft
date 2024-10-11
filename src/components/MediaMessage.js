@@ -4,8 +4,8 @@
  * License: MIT
  */
 
-import React from "react";
 import classNames from "classnames";
+import React from "react";
 
 const MediaMessage = ({ text, type }) => {
   if (text) {

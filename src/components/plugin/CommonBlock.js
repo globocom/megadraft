@@ -13,8 +13,8 @@ import {
   BlockWrapper
 } from "../../components/plugin";
 import {
-  DEFAULT_DISPLAY_OPTIONS,
-  DEFAULT_DISPLAY_KEY
+  DEFAULT_DISPLAY_KEY,
+  DEFAULT_DISPLAY_OPTIONS
 } from "../../components/plugin/defaults";
 
 export default function CommonBlock(props) {

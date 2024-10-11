@@ -6,8 +6,8 @@
 
 import React, { Component } from "react";
 
-import { ActionsContext } from "./ActionsProvider";
 import { PLUGINS_MODAL_ADD_PLUGIN } from "../constants";
+import { ActionsContext } from "./ActionsProvider";
 
 export default class ModalPluginItem extends Component {
   static contextType = ActionsContext;

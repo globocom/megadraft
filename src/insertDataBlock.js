@@ -15,11 +15,11 @@
 import Immutable from "immutable";
 
 import {
-  genKey,
-  EditorState,
+  BlockMapBuilder,
   ContentBlock,
-  Modifier,
-  BlockMapBuilder
+  EditorState,
+  genKey,
+  Modifier
 } from "draft-js";
 
 const { List, Map } = Immutable;

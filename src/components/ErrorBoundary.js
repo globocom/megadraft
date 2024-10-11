@@ -6,10 +6,10 @@
 
 import React, { Component } from "react";
 
-import { BlockContent, CommonBlock } from "./plugin";
-import MediaMessage from "./MediaMessage";
-import icons from "../icons";
 import { replaceData } from "../i18n";
+import icons from "../icons";
+import MediaMessage from "./MediaMessage";
+import { BlockContent, CommonBlock } from "./plugin";
 
 class ErrorBoundary extends Component {
   constructor(props) {

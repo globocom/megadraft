@@ -4,8 +4,8 @@
  * License: MIT
  */
 
-import VideoButton from "./VideoButton";
 import VideoBlock from "./VideoBlock";
+import VideoButton from "./VideoButton";
 
 export default {
   title: "Video",

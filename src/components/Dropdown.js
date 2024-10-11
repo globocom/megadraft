@@ -4,12 +4,12 @@
  * License: MIT
  */
 
-import React, { useEffect, useRef, useState } from "react";
-import PropTypes from "prop-types";
 import classNames from "classnames";
+import PropTypes from "prop-types";
+import React, { useEffect, useRef, useState } from "react";
 
-import DropdownItem from "./DropdownItem";
 import icons from "../icons";
+import DropdownItem from "./DropdownItem";
 
 const Dropdown = ({ items = [], selected, onChange }) => {
   const wrapperRef = useRef(null);

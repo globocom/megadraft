@@ -4,8 +4,8 @@
  * License: MIT
  */
 
-import React from "react";
 import { mount } from "enzyme";
+import React from "react";
 
 import MediaWrapper from "../../src/components/MediaWrapper";
 

@@ -4,8 +4,8 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
 import { mount } from "enzyme";
+import React, { Component } from "react";
 import cp from "utils-copy";
 
 import { ModalBody } from "backstage-modal";

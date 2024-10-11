@@ -4,12 +4,12 @@
  * License: MIT
  */
 
-import React from "react";
 import { mount } from "enzyme";
+import React from "react";
 
-import image from "../../src/plugins/image/plugin";
-import PluginsModal from "../../src/components/PluginsModal";
 import { ActionsContext } from "../../src/components/ActionsProvider";
+import PluginsModal from "../../src/components/PluginsModal";
+import image from "../../src/plugins/image/plugin";
 
 describe("PluginsModal", () => {
   beforeEach(() => {
