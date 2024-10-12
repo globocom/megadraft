@@ -18,15 +18,16 @@ import video from "../../src/plugins/video/plugin";
 
 const initialEditorState = editorStateFromRaw(INITIAL_CONTENT);
 
+const keyBindings = [
+  {
+    name: "save",
+    isKeyBound: e => e.keyCode === 83 && e.ctrlKey,
+    action: () => console.log("save")
+  }
+];
+
 function Editor(props) {
   const { editorState, onChange } = props;
-  const keyBindings = [
-    {
-      name: "save",
-      isKeyBound: e => e.keyCode === 83 && e.ctrlKey,
-      action: () => console.log("save")
-    }
-  ];
 
   function onAction(args) {
     console.log("onAction fired with args:", args);
