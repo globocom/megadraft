@@ -1,7 +1,8 @@
 import React from "react";
+import classNames from "classnames";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-
 import { yellow } from "@material-ui/core/colors";
 
 const useStyles = makeStyles(theme => ({
@@ -18,7 +19,7 @@ const ToggleButton = ({ children, color, onClick }) => {
   return (
     <Button
       onClick={onClick}
-      className={color === "yellow" ? classes.yellow : null}
+      className={classNames({ [classes.yellow]: color === "yellow" })}
     >
       {children}
     </Button>

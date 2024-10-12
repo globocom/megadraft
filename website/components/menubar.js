@@ -1,7 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback, useMemo } from "react";
 import { Sticky } from "react-sticky";
 import Scroll from "react-scroll";
 import { Link } from "react-router-dom";
+import classNames from "classnames";
 
 import { common } from "@material-ui/core/colors";
 import Grid from "@material-ui/core/Grid";
@@ -10,7 +11,6 @@ import Divider from "@material-ui/core/Divider";
 import Menu from "@material-ui/core/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
-import { useCallback } from "react";
 
 import { Burger } from "./icons/burger";
 
@@ -23,28 +23,31 @@ const MenuBar = props => {
   const documentationMenu = useRef(null);
   const [closeMenu, setCloseMenu] = useState(true);
 
-  const handleTouchTap = event => {
+  const handleTouchTap = useCallback(event => {
     // This prevents ghost click.
     event.preventDefault();
 
     scroller.scrollTo("appbar", { duration: 300, smooth: true });
     setTimeout(() => setShowMenuDropdown(true), 300);
-  };
+  }, []);
 
   const handleChangeOpenMenu = useCallback(() => {
     setCloseMenu(prev => !prev);
   }, []);
 
-  const handleRequestClose = () => {
+  const handleRequestClose = useCallback(() => {
     setShowMenuDropdown(false);
     !closeMenu && handleChangeOpenMenu();
-  };
+  }, [closeMenu, handleChangeOpenMenu]);
 
-  const dropDownData = {
-    documentationMenu,
-    handleRequestClose,
-    showMenuDropdown
-  };
+  const dropDownData = useMemo(
+    () => ({
+      documentationMenu,
+      handleRequestClose,
+      showMenuDropdown
+    }),
+    [documentationMenu, handleRequestClose, showMenuDropdown]
+  );
 
   return (
     <Element name="appbar" className="appBar">
@@ -96,12 +99,14 @@ const MenuBar = props => {
               </Grid>
             </Grid>
             <div
-              className={`dropdown-menu ${closeMenu &&
-                "dropdown-menu__hidden"}`}
+              className={classNames("dropdown-menu", {
+                "dropdown-menu__hidden": closeMenu
+              })}
             >
               <div
-                className={`dropdown-menu__header ${!showLeft &&
-                  "dropdown-menu__header__dark"} `}
+                className={classNames("dropdown-menu__header", {
+                  "dropdown-menu__header__dark": !showLeft
+                })}
               >
                 Menu{" "}
                 <button onClick={handleChangeOpenMenu}>
