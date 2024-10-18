@@ -3,9 +3,7 @@
  *
  * License: MIT
  */
-
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import classNames from "classnames";
 import icons from "../icons";
 
@@ -23,65 +21,47 @@ import "setimmediate";
 import PluginsModal from "./PluginsModal";
 import { getSelectedBlockElement } from "../utils";
 
-class BlockStyles extends Component {
-  static contextType = ActionsContext;
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      isOpen: false
-    };
+const BlockStyles = ({ i18n, plugins, editorState, onChange, open, modalOptions, onClose }) => {
+  const context = useContext(ActionsContext); 
+  const [isOpen, setIsOpen] = useState(false); 
 
-    this.onModalOpenClick = this.onModalOpenClick.bind(this);
-    this.onChange = this.onChange.bind(this);
-    this.toggleModalVisibility = this.toggleModalVisibility.bind(this);
-    this.renderButton = this.renderButton.bind(this);
-  }
-
-  onChange(editorState) {
-    this.props.onChange(editorState);
-  }
-
-  onModalOpenClick(e) {
+  const onModalOpenClick = (e) => {
     e.preventDefault();
     document.body.classList.add("megadraft-modal--open");
-    this.setState({ isOpen: true });
-  }
+    setIsOpen(true); 
+  };
 
-  toggleModalVisibility() {
-    this.setState({ isOpen: !this.state.isOpen });
-  }
+  const toggleModalVisibility = () => {
+    setIsOpen(!isOpen); 
+  };
 
-  renderModal() {
-    return (
-      <PluginsModal
-        i18n={this.props.i18n}
-        toggleModalVisibility={this.toggleModalVisibility}
-        isOpen={this.state.isOpen}
-        plugins={this.props.plugins}
-        onCloseRequest={this.props.onClose}
-        onChange={this.onChange}
-        editorState={this.props.editorState}
-        modalOptions={this.props.modalOptions}
-      />
-    );
-  }
+  const renderModal = () => (
+    <PluginsModal
+      i18n={i18n}
+      toggleModalVisibility={toggleModalVisibility}
+      isOpen={isOpen}
+      plugins={plugins}
+      onCloseRequest={onClose}
+      onChange={onChange}
+      editorState={editorState}
+      modalOptions={modalOptions}
+    />
+  );
 
-  renderModalButton() {
-    return (
-      <button
-        className="sidemenu__button"
-        onClick={e => {
-          this.context.onAction({ type: SIDEBAR_CLICK_MORE });
-          this.onModalOpenClick(e);
-        }}
-      >
-        <icons.MoreIcon className="sidemenu__button__icon" />
-      </button>
-    );
-  }
+  const renderModalButton = () => (
+    <button
+      className="sidemenu__button"
+      onClick={(e) => {
+        context.onAction({ type: SIDEBAR_CLICK_MORE });
+        onModalOpenClick(e);
+      }}
+    >
+      <icons.MoreIcon className="sidemenu__button__icon" />
+    </button>
+  );
 
-  renderButton(item) {
+  const renderButton = (item) => {
     const Button = item.buttonComponent;
 
     return (
@@ -89,7 +69,7 @@ class BlockStyles extends Component {
         key={item.type}
         className="sidemenu__item"
         onClick={() => {
-          this.context.onAction({
+          context.onAction({
             type: SIDEBAR_ADD_PLUGIN,
             pluginName: item.title
           });
@@ -98,212 +78,158 @@ class BlockStyles extends Component {
         <Button
           className="sidemenu__button"
           title={item.title}
-          editorState={this.props.editorState}
-          onChange={this.onChange}
+          editorState={editorState}
+          onChange={onChange}
         />
       </li>
     );
+  };
+
+  const maxSidebarButtons = open ? plugins.length : 0; 
+  const sidemenuMaxHeight = { maxHeight: open ? `${(maxSidebarButtons + 1) * 48}px` : 0 };
+  const hasModal = plugins.length > maxSidebarButtons;
+  const className = classNames("sidemenu__items", { "sidemenu__items--open": open });
+
+  return (
+    <div>
+      <ul style={sidemenuMaxHeight} className={className}>
+        {plugins.slice(0, maxSidebarButtons).map(renderButton)}
+        {hasModal ? renderModalButton() : null}
+      </ul>
+      {hasModal ? renderModal() : null}
+    </div>
+  );
+};
+
+
+
+const ToggleButton = ({ toggle, hideSidebarOnBlur, hasFocus, open }) => {
+  const Icon = icons.CrossIcon;
+  const className = classNames("sidemenu__button", { "sidemenu__button--open": open });
+  const buttonRef = useRef(null); // Cria a referência com useRef
+
+  if (hideSidebarOnBlur && !hasFocus) {
+    return null; 
   }
 
-  render() {
-    const maxSidebarButtons = this.props.maxSidebarButtons
-      ? this.props.maxSidebarButtons
-      : this.props.plugins.length;
+  return (
+    <button
+      type="button"
+      ref={buttonRef} 
+      className={className}
+      onClick={() => {
+        buttonRef.current.focus(); 
+        toggle();
+      }}
+    >
+      <Icon className="sidemenu__button__icon" />
+    </button>
+  );
+};
 
-    const sidemenuMaxHeight = {
-      maxHeight: this.props.open ? `${(maxSidebarButtons + 1) * 48}px` : 0
-    };
 
-    // We should hide the modal if the number of plugins < max
-    const hasModal = this.props.plugins.length > maxSidebarButtons;
-    const className = classNames("sidemenu__items", {
-      "sidemenu__items--open": this.props.open
+
+
+const SideMenu = ({ editorHasFocus, hideSidebarOnBlur, maxSidebarButtons, i18n, editorState, plugins, onChange }) => {
+  const context = useContext(ActionsContext); 
+  const [open, setOpen] = useState(false); 
+
+  const toggle = () => {
+    context.onAction({
+      type: open ? SIDEBAR_SHRINK : SIDEBAR_EXPAND
     });
-    return (
-      <div>
-        <ul style={sidemenuMaxHeight} className={className}>
-          {this.props.plugins
-            .slice(0, maxSidebarButtons)
-            .map(this.renderButton)}
-          {hasModal ? this.renderModalButton() : null}
-        </ul>
-        {hasModal ? this.renderModal() : null}
-      </div>
-    );
-  }
-}
+    setOpen(!open); 
+  };
 
-export class ToggleButton extends Component {
-  render() {
-    if (this.props.hideSidebarOnBlur && !this.props.hasFocus) {
-      return null;
-    }
+  return (
+    <li className={classNames("sidemenu", { "sidemenu--open": open })}>
+      <ToggleButton
+        toggle={toggle}
+        hasFocus={editorHasFocus || open} 
+        hideSidebarOnBlur={hideSidebarOnBlur}
+        open={open}
+      />
+      <BlockStyles
+        i18n={i18n}
+        editorState={editorState}
+        plugins={plugins}
+        open={open}
+        onChange={onChange}
+        maxSidebarButtons={maxSidebarButtons}
+      />
+    </li>
+  );
+};
 
-    const Icon = icons.CrossIcon;
 
-    const className = classNames("sidemenu__button", {
-      "sidemenu__button--open": this.props.open
-    });
 
-    return (
-      <button
-        type="button"
-        ref={el => {
-          this.button = el;
-        }}
-        className={className}
-        onClick={() => {
-          this.button.focus();
-          this.props.toggle();
-        }}
-      >
-        <Icon className="sidemenu__button__icon" />
-      </button>
-    );
-  }
-}
 
-export class SideMenu extends Component {
-  static contextType = ActionsContext;
+const SideBar = ({ readOnly, i18n, editorState, onChange, maxSidebarButtons, editorHasFocus, hideSidebarOnBlur, modalOptions, plugins }) => {
+  const [top, setTop] = useState(0); 
+  const containerEl = useRef(null); 
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false
-    };
-    this.toggle = this.toggle.bind(this);
-    this.onChange = this.onChange.bind(this);
-  }
+  const getValidSidebarPlugins = () => {
+    return plugins.filter(plugin => plugin.buttonComponent && typeof plugin.buttonComponent === "function");
+  };
 
-  onChange(editorState) {
-    this.props.onChange(editorState);
-  }
+  const handleChange = (editorState) => {
+    onChange(editorState); 
+  };
 
-  toggle() {
-    this.context.onAction({
-      type: this.state.open ? SIDEBAR_SHRINK : SIDEBAR_EXPAND
-    });
-    this.setState({
-      open: !this.state.open
-    });
-  }
+  useEffect(() => {
+    const updatePosition = () => {
+      const container = containerEl.current; // Acesso ao container
+      const editor = container ? container.parentElement : null;
 
-  render() {
-    const className = classNames("sidemenu", {
-      "sidemenu--open": this.state.open
-    });
-    return (
-      <li className={className}>
-        <ToggleButton
-          toggle={this.toggle}
-          hasFocus={this.props.editorHasFocus || this.state.open}
-          hideSidebarOnBlur={this.props.hideSidebarOnBlur}
-          open={this.state.open}
-        />
-
-        <BlockStyles
-          i18n={this.props.i18n}
-          editorState={this.props.editorState}
-          plugins={this.props.plugins}
-          open={this.state.open}
-          onChange={this.onChange}
-          maxSidebarButtons={this.props.maxSidebarButtons}
-          modalOptions={this.props.modalOptions}
-        />
-      </li>
-    );
-  }
-}
-
-export default class SideBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { top: 0 };
-    this.onChange = this.onChange.bind(this);
-  }
-
-  getValidSidebarPlugins() {
-    let plugins = [];
-    for (let plugin of this.props.plugins) {
-      if (
-        !plugin.buttonComponent ||
-        typeof plugin.buttonComponent !== "function"
-      ) {
-        continue;
+      const selection = window.getSelection();
+      if (selection.rangeCount === 0) {
+        return null;
       }
-      plugins.push(plugin);
-    }
-    return plugins;
+
+      const element = getSelectedBlockElement(selection.getRangeAt(0)); 
+
+      if (!element || !container || !editor || !editor.contains(element)) {
+        return;
+      }
+
+      const containerTop = container.getBoundingClientRect().top - document.documentElement.clientTop;
+      let newTop = element.getBoundingClientRect().top - 4 - containerTop;
+      newTop = Math.max(0, Math.floor(newTop)); 
+
+      if (top !== newTop) {
+        setTop(newTop); 
+      }
+    };
+
+    const positionUpdater = setImmediate(updatePosition); 
+
+    return () => {
+      clearImmediate(positionUpdater); 
+    };
+  }, [top]); 
+
+  if (readOnly) {
+    return null; 
   }
 
-  onChange(editorState) {
-    this.props.onChange(editorState);
-  }
-
-  componentDidUpdate() {
-    if (this.updatingPosition) {
-      clearImmediate(this.updatingPosition);
-    }
-    this.updatingPosition = null;
-    this.updatingPosition = setImmediate(() => {
-      return this.setBarPosition();
-    });
-  }
-
-  setBarPosition() {
-    const container = ReactDOM.findDOMNode(this.containerEl);
-    const editor = container ? container.parentElement : null;
-
-    const selection = window.getSelection();
-    if (selection.rangeCount === 0) {
-      return null;
-    }
-
-    const element = getSelectedBlockElement(selection.getRangeAt(0));
-
-    if (!element || !container || !editor || !editor.contains(element)) {
-      return;
-    }
-
-    const containerTop =
-      container.getBoundingClientRect().top -
-      document.documentElement.clientTop;
-    let top = element.getBoundingClientRect().top - 4 - containerTop;
-    top = Math.max(0, Math.floor(top));
-
-    if (this.state.top !== top) {
-      this.setState({
-        top: top
-      });
-    }
-  }
-
-  render() {
-    if (this.props.readOnly) {
-      return null;
-    }
-    return (
-      <div
-        ref={el => {
-          this.containerEl = el;
-        }}
-        className="sidebar"
-      >
-        <div style={{ top: `${this.state.top}px` }} className="sidebar__menu">
-          <ul className="sidebar__sidemenu-wrapper">
-            <SideMenu
-              i18n={this.props.i18n}
-              editorState={this.props.editorState}
-              onChange={this.onChange}
-              plugins={this.getValidSidebarPlugins()}
-              maxSidebarButtons={this.props.maxSidebarButtons}
-              editorHasFocus={this.props.editorHasFocus}
-              hideSidebarOnBlur={this.props.hideSidebarOnBlur}
-              modalOptions={this.props.modalOptions}
-            />
-          </ul>
-        </div>
+  return (
+    <div ref={containerEl} className="sidebar">
+      <div style={{ top: `${top}px` }} className="sidebar__menu">
+        <ul className="sidebar__sidemenu-wrapper">
+          <SideMenu
+            i18n={i18n}
+            editorState={editorState}
+            onChange={handleChange}
+            plugins={getValidSidebarPlugins()}
+            maxSidebarButtons={maxSidebarButtons}
+            editorHasFocus={editorHasFocus}
+            hideSidebarOnBlur={hideSidebarOnBlur}
+            modalOptions={modalOptions}
+          />
+        </ul>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default SideBar;
