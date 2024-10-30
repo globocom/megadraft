@@ -10,7 +10,7 @@ Join the [#megadraft][megadraft-slack] channel on the DraftJS [Slack team][draft
 
 ## Live Example & Documentation
 
-Checkout our website with a [live demo](http://globocom.github.io/megadraft/)!
+Checkout our website with a [live demo](https://megadraft.io/)!
 
 ## Developing
 
@@ -88,7 +88,7 @@ The Landing page uses a Megadeth picture by [Ted Van Pelt](https://flic.kr/p/7Pr
 licensed under [CC-BY](https://creativecommons.org/licenses/by/2.0/).
 
 [plugin-generator]: https://github.com/globocom/generator-megadraft-plugin
-[docs-overview-and-usage]: http://globocom.github.io/megadraft/#/docs/overview
+[docs-overview-and-usage]: https://megadraft.io/#/docs/overview 
 [docs-customization]: http://globocom.github.io/megadraft/#/docs/customization
 [docs-custom-entities]: http://globocom.github.io/megadraft/#/docs/custom-entities
 [docs-plugins]: http://globocom.github.io/megadraft/#/docs/plugins
