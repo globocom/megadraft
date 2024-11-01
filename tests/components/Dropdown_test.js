@@ -3,9 +3,9 @@
  *
  * License: MIT
  */
-
 import React from "react";
-import { mount } from "enzyme";
+import { render, screen, fireEvent } from "@testing-library/react";
+import '@testing-library/jest-dom';  
 
 import icons from "../../src/icons";
 import Dropdown from "../../src/components/Dropdown";
@@ -24,7 +24,7 @@ describe("Dropdown Component", () => {
     testContext = {};
     testContext.selected = "metal";
     testContext.onChange = jest.fn();
-    testContext.component = mount(
+    render(
       <Dropdown
         items={dropdownItems}
         selected={testContext.selected}
@@ -34,48 +34,32 @@ describe("Dropdown Component", () => {
   });
 
   it("renders without problems", () => {
-    expect(testContext.component).toBeDefined();
+    expect(screen.getByText("Metal")).toBeInTheDocument();
   });
 
   it("renders dropdown items", () => {
-    const items = testContext.component.find(DropdownItem);
-    expect(items).toHaveLength(4);
+    const items = screen.getAllByRole('menuitem');  
+    expect(items).toHaveLength(3);  
   });
 
   it("renders default selected dropdown item", () => {
-    const selected = testContext.component.find(DropdownItem).first();
-
-    const text = selected.find("span");
-    expect(text.text()).toEqual("Metal");
+    const selected = screen.getByText("Metal");
+    expect(selected).toBeInTheDocument();
   });
 
-  it("is possible to click on the dropdrown item", () => {
-    const item = testContext.component.find(DropdownItem).at(1);
-
-    expect(testContext.onChange).not.toHaveBeenCalled();
-
-    item.find("div").simulate("click");
-
+  it("is possible to click on the dropdown item", () => {
+    const item = screen.getByText("Metal");
+    fireEvent.click(item);
     expect(testContext.onChange).toHaveBeenCalled();
   });
 
   it("toggles dropdown on click", () => {
-    const wrapper = testContext.component.find("div").first();
+    const wrapper = screen.getByText("Metal"); 
+    fireEvent.click(wrapper);
+    expect(wrapper.closest("div")).toHaveClass("dropdown__wrapper--open");
 
-    wrapper.simulate("click");
-    expect(
-      testContext.component
-        .find("div")
-        .first()
-        .hasClass("dropdown__wrapper--open")
-    ).toEqual(true);
-
-    wrapper.simulate("click");
-    expect(
-      testContext.component
-        .find("div")
-        .first()
-        .hasClass("dropdown__wrapper--open")
-    ).toEqual(false);
+    fireEvent.click(wrapper);
+    expect(wrapper.closest("div")).not.toHaveClass("dropdown__wrapper--open");
   });
 });
+
