@@ -6,14 +6,14 @@
 
 import DraftJS from "draft-js";
 
-import insertDataBlock from "./insertDataBlock";
 import Media from "./components/Media";
-import MegadraftEditor from "./components/MegadraftEditor";
-import MegadraftIcons from "./icons";
 import MegadraftMediaMessage from "./components/MediaMessage";
+import MegadraftEditor from "./components/MegadraftEditor";
 import * as MegadraftPlugin from "./components/plugin";
 import Sidebar from "./components/Sidebar";
 import Toolbar from "./components/Toolbar";
+import MegadraftIcons from "./icons";
+import insertDataBlock from "./insertDataBlock";
 import * as utils from "./utils";
 
 const Megadraft = {

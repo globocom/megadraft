@@ -4,9 +4,9 @@
  * License: MIT
  */
 
-import jsdom from "jsdom";
-import { configure } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+import { configure } from "enzyme";
+import jsdom from "jsdom";
 
 const { JSDOM } = jsdom;
 const dom = new JSDOM("<!doctype html><html><body></body></html>");

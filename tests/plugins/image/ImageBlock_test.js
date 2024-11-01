@@ -4,11 +4,11 @@
  * License: MIT
  */
 
-import React from "react";
 import { mount } from "enzyme";
+import React from "react";
 
-import ImageBlock from "../../../src/plugins/image/ImageBlock";
 import icons from "../../../src/icons";
+import ImageBlock from "../../../src/plugins/image/ImageBlock";
 
 describe("ImageBlock", () => {
   let testContext;

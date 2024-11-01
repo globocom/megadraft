@@ -4,8 +4,8 @@
  * License: MIT
  */
 
+import { mount, shallow } from "enzyme";
 import React from "react";
-import { shallow, mount } from "enzyme";
 
 import ImageButton from "../../../src/plugins/image/ImageButton";
 import { editorStateFromRaw } from "../../../src/utils";

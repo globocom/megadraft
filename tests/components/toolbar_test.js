@@ -4,17 +4,17 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
 import { EditorState, SelectionState } from "draft-js";
 import { mount } from "enzyme";
+import React, { Component } from "react";
 
 import Toolbar from "../../src/components/Toolbar";
 import ToolbarItem from "../../src/components/ToolbarItem";
 
-import { editorStateFromRaw } from "../../src/utils";
 import Separator from "../../src/components/Separator";
 import LinkInput from "../../src/entity_inputs/LinkInput";
 import i18nConfig from "../../src/i18n";
+import { editorStateFromRaw } from "../../src/utils";
 
 export default class ToolbarWrapper extends Component {
   constructor(props) {

@@ -4,8 +4,8 @@
  * License: MIT
  */
 
-import React from "react";
 import { mount } from "enzyme";
+import React from "react";
 
 import LinkInput from "../../src/entity_inputs/LinkInput";
 import i18nConfig from "../../src/i18n";

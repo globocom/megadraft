@@ -5,8 +5,8 @@
  */
 
 import { CompositeDecorator } from "draft-js";
-import { createTypeStrategy } from "../utils";
 import Link from "../components/Link";
+import { createTypeStrategy } from "../utils";
 
 const decorator = new CompositeDecorator([
   {

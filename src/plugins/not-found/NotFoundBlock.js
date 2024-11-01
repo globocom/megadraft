@@ -6,10 +6,10 @@
 
 import React from "react";
 
-import { BlockContent, CommonBlock } from "../../components/plugin";
 import MediaMessage from "../../components/MediaMessage";
-import icons from "../../icons";
+import { BlockContent, CommonBlock } from "../../components/plugin";
 import { replaceData } from "../../i18n";
+import icons from "../../icons";
 
 export default function NotFoundBlock(props) {
   const {

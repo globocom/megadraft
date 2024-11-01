@@ -4,8 +4,8 @@
  * License: MIT
  */
 
-import React, { useMemo, useCallback } from "react";
-import { EditorState, SelectionState, Modifier } from "draft-js";
+import { EditorState, Modifier, SelectionState } from "draft-js";
+import React, { useCallback, useMemo } from "react";
 
 import ErrorBoundary from "./ErrorBoundary";
 import MediaWrapper from "./MediaWrapper";

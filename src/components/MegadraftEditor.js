@@ -19,31 +19,31 @@
   return x;
 };
 
-import React, { Component } from "react";
 import {
-  Editor,
-  RichUtils,
-  getDefaultKeyBinding,
-  EditorState,
-  genKey,
   ContentBlock,
+  DefaultDraftBlockRenderMap,
+  Editor,
+  EditorState,
+  RichUtils,
   SelectionState,
-  DefaultDraftBlockRenderMap
+  genKey,
+  getDefaultKeyBinding
 } from "draft-js";
 import Immutable from "immutable";
+import React, { Component } from "react";
 
-import DefaultToolbar from "./Toolbar";
-import Sidebar from "./Sidebar";
-import Media from "./Media";
-import MoveControl from "./MoveControl";
-import MegadraftBlock from "./MegadraftBlock";
-import { swapDataUp, swapDataDown } from "../swapDataBlock";
-import i18nConfig from "../i18n";
-import notFoundPlugin from "../plugins/not-found/plugin";
-import DEFAULT_PLUGINS from "../plugins/default";
 import DEFAULT_ACTIONS from "../actions/default";
 import DEFAULT_ENTITY_INPUTS from "../entity_inputs/default";
+import i18nConfig from "../i18n";
+import DEFAULT_PLUGINS from "../plugins/default";
+import notFoundPlugin from "../plugins/not-found/plugin";
+import { swapDataDown, swapDataUp } from "../swapDataBlock";
 import ActionsProvider, { defaultAction } from "./ActionsProvider";
+import Media from "./Media";
+import MegadraftBlock from "./MegadraftBlock";
+import MoveControl from "./MoveControl";
+import Sidebar from "./Sidebar";
+import DefaultToolbar from "./Toolbar";
 
 const NO_RESET_STYLE_DEFAULT = ["ordered-list-item", "unordered-list-item"];
 

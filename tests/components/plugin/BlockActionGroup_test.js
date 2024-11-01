@@ -4,13 +4,13 @@
  * License: MIT
  */
 
-import React from "react";
 import { mount } from "enzyme";
+import React from "react";
 
 import icons from "../../../src/icons";
 
-import BlockActionGroup from "../../../src/components/plugin/BlockActionGroup";
 import BlockAction from "../../../src/components/plugin/BlockAction";
+import BlockActionGroup from "../../../src/components/plugin/BlockActionGroup";
 
 describe("BlockActionGroup Component", () => {
   let testContext;

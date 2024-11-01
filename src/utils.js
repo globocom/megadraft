@@ -6,8 +6,8 @@
  */
 
 import {
-  convertToRaw,
   convertFromRaw,
+  convertToRaw,
   EditorState,
   getVisibleSelectionRect
 } from "draft-js";

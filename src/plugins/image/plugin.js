@@ -4,8 +4,8 @@
  * License: MIT
  */
 
-import ImageButton from "./ImageButton";
 import ImageBlock from "./ImageBlock";
+import ImageButton from "./ImageButton";
 
 export default {
   title: "Image",

@@ -4,11 +4,11 @@
  * License: MIT
  */
 
-import React from "react";
 import { shallow } from "enzyme";
+import React from "react";
+import i18nConfig from "../../../src/i18n";
 import icons from "../../../src/icons";
 import NotFoundBlock from "../../../src/plugins/not-found/NotFoundBlock";
-import i18nConfig from "../../../src/i18n";
 
 describe("NotFoundBlock Component", () => {
   let testContext;

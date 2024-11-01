@@ -4,12 +4,12 @@
  * License: MIT
  */
 
-import React from "react";
 import { mount } from "enzyme";
+import React from "react";
 
-import icons from "../../../src/icons";
 import Dropdown from "../../../src/components/Dropdown";
 import CommonBlock from "../../../src/components/plugin/CommonBlock";
+import icons from "../../../src/icons";
 
 describe("CommonBlock Component", () => {
   let testContext;

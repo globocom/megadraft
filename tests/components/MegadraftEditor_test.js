@@ -4,19 +4,19 @@
  * License: MIT
  */
 
-import React, { Component, useState } from "react";
 import { Editor, EditorState, SelectionState } from "draft-js";
 import { mount } from "enzyme";
+import React, { Component, useState } from "react";
 
-import MegadraftEditor from "../../src/components/MegadraftEditor";
 import Media from "../../src/components/Media";
+import MegadraftEditor from "../../src/components/MegadraftEditor";
 import Sidebar, { ToggleButton } from "../../src/components/Sidebar";
 import Toolbar from "../../src/components/Toolbar";
-import { editorStateFromRaw } from "../../src/utils";
+import { BLOCK_SWAP_DOWN, BLOCK_SWAP_UP } from "../../src/constants";
+import i18nConfig from "../../src/i18n";
 import image from "../../src/plugins/image/plugin";
 import NotFoundPlugin from "../../src/plugins/not-found/plugin";
-import i18nConfig from "../../src/i18n";
-import { BLOCK_SWAP_UP, BLOCK_SWAP_DOWN } from "../../src/constants";
+import { editorStateFromRaw } from "../../src/utils";
 
 const replaceSelection = (newSelection, wrapper, blockKey) => {
   const selectionState = SelectionState.createEmpty(blockKey);
