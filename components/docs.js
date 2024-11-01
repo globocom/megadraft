@@ -8,13 +8,13 @@ import React from "react";
 import Scroll from "react-scroll";
 import { StickyContainer } from "react-sticky";
 
-import MenuBar from "./menubar";
-import Overview from "../../docs/overview.md";
+import ReactMarkdown from "react-markdown";
+import CustomEntities from "../../docs/custom_entities.md";
 import Customization from "../../docs/customization.md";
+import Overview from "../../docs/overview.md";
 import Plugins from "../../docs/plugins.md";
 import Serializing from "../../docs/serializing.md";
-import CustomEntities from "../../docs/custom_entities.md";
-import ReactMarkdown from "react-markdown";
+import MenuBar from "./menubar";
 
 import { highlightCode } from "./highlightCode";
 
