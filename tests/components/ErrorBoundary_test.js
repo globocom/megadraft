@@ -34,7 +34,7 @@ describe("ErrorBoundary Component", () => {
 
   it("renders without error", () => {
     const component = testContext.renderComponent();
-    expect(component.getElement()).toBe(null);
+    expect(component.isEmptyRender()).toBe(true);
   });
 
   it("should return the correct message", () => {
