@@ -38,6 +38,12 @@
         background: none;
         outline: none;
 
+        &:focus {
+          &:before {
+            background-color: $gray-300;
+          }
+        }
+
         &:before {
             content: "";
             width: 100%;

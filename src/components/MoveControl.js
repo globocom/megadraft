@@ -11,6 +11,26 @@ import MegadraftBlock from "./MegadraftBlock";
 
 import { BLOCK_SWAP_DOWN, BLOCK_SWAP_UP } from "../constants";
 
+const ButtonOption = ({ dataTestId, className, onClick, arialLabel }) => {
+  const onPointerDown = e => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+  return (
+    <button
+      data-testid={dataTestId}
+      className={className}
+      onClick={onClick}
+      onPointerDown={onPointerDown}
+      type="button"
+      role="button"
+      aria-label={arialLabel}
+    >
+      <icons.DropdownArrow />
+    </button>
+  );
+};
+
 const Options = ({
   onClickUp,
   onClickDown,
@@ -19,14 +39,11 @@ const Options = ({
   disableDown,
   onAction
 }) => {
-  const onPointerDown = e => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
   return (
     <div className="options">
-      <div
-        data-testid={`swap-up-${id}`}
+      <ButtonOption
+        dataTestId={`swap-up-${id}`}
+        arialLabel="Button action move up block content of text editor"
         className={
           disableUp
             ? "options__button options__button--up options__button--disabled"
@@ -36,12 +53,11 @@ const Options = ({
           onAction({ type: BLOCK_SWAP_UP, blockId: id });
           onClickUp();
         }}
-        onPointerDown={onPointerDown}
-      >
-        <icons.DropdownArrow />
-      </div>
-      <div
-        data-testid={`swap-down-${id}`}
+        buttonIcon={<icons.DropdownArrow />}
+      />
+      <ButtonOption
+        dataTestId={`swap-down-${id}`}
+        arialLabel="Button action move down block content of text editor"
         className={
           disableDown
             ? "options__button options__button--disabled"
@@ -51,10 +67,7 @@ const Options = ({
           onAction({ type: BLOCK_SWAP_DOWN, blockId: id });
           onClickDown();
         }}
-        onPointerDown={onPointerDown}
-      >
-        <icons.DropdownArrow />
-      </div>
+      />
     </div>
   );
 };

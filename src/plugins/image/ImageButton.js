@@ -25,7 +25,14 @@ export default function BlockButton(props) {
   }
 
   return (
-    <button className={className} type="button" onClick={onClick} title={title}>
+    <button
+      className={className}
+      type="button"
+      onClick={onClick}
+      title={title}
+      role="button"
+      aria-label="Button action add image in text editor"
+    >
       <icons.ImageIcon className="sidemenu__button__icon" />
     </button>
   );
