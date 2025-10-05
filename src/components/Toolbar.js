@@ -163,16 +163,14 @@ export default class Toolbar extends Component {
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
+    const prevContentState = prevProps.editorState.getCurrentContent();
     const currentContentState = this.props.editorState.getCurrentContent();
-    const newContentState = nextProps.editorState.getCurrentContent();
 
-    if (currentContentState === newContentState) {
+    if (prevContentState === currentContentState) {
       this.shouldUpdatePos = true;
     }
-  }
 
-  componentDidUpdate() {
     if (this.shouldUpdatePos) {
       this.handleSetToolbar();
     }
