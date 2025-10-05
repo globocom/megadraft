@@ -138,12 +138,6 @@ export default class MegadraftEditor extends Component {
     return pluginsByType;
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (this.props.readOnly !== nextProps.readOnly) {
-      this.setState({ readOnly: nextProps.readOnly });
-    }
-  }
-
   onChange(editorState) {
     this.props.onChange(editorState);
   }
@@ -377,7 +371,12 @@ export default class MegadraftEditor extends Component {
     clearTimeout(this.blurTimeoutID);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
+    // Handle readOnly prop changes
+    if (this.props.readOnly !== prevProps.readOnly) {
+      this.setState({ readOnly: this.props.readOnly });
+    }
+
     if (this.state.swapUp || this.state.swapDown) {
       const swapFunction = this.state.swapUp ? swapDataUp : swapDataDown;
 
