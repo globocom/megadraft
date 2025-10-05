@@ -9,6 +9,7 @@ import { EditorState, RichUtils } from "draft-js";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { getSelectionCoords } from "../utils";
+import { warn } from "../logger";
 import ToolbarItem from "./ToolbarItem";
 
 export default class Toolbar extends Component {
@@ -247,7 +248,7 @@ export default class Toolbar extends Component {
   }
   renderEntityInput(entityType) {
     if (!this.props.entityInputs) {
-      console.warn("no entityInputs provided");
+      warn("no entityInputs provided");
       return null;
     }
     const Component = this.props.entityInputs[entityType];
@@ -278,7 +279,7 @@ export default class Toolbar extends Component {
         />
       );
     } else {
-      console.warn("unknown entity type: " + entityType);
+      warn("unknown entity type", { entityType });
       return null;
     }
   }

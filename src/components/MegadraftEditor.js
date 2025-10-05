@@ -11,7 +11,7 @@
   (typeof global === "object" && global.global === global && global) ||
   this
 ).__ = x => {
-  console.warn(
+  warn(
     "__() has been deprecated and will be removed soon. " +
       "You can move this code to your app, instead. __() code can be found at " +
       "https://gist.github.com/marcelometal/768454831c0c10ee03b939187b7bebbf"
@@ -29,6 +29,7 @@ import {
   genKey,
   getDefaultKeyBinding
 } from "draft-js";
+import { warn } from "../logger";
 import Immutable from "immutable";
 import React, { Component } from "react";
 
@@ -120,7 +121,7 @@ export default class MegadraftEditor extends Component {
     let plugins = [];
     for (let plugin of this.props.plugins || DEFAULT_PLUGINS) {
       if (!plugin || typeof plugin.type !== "string") {
-        console.warn("Plugin: Missing `type` field. Details: ", plugin);
+        warn("Plugin: Missing `type` field", { plugin });
         continue;
       }
       plugins.push(plugin);
