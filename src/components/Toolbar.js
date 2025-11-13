@@ -32,6 +32,7 @@ export default class Toolbar extends Component {
       link: "",
       error: null
     };
+    this.toolbarWrapperRef = React.createRef();
     this.renderButton = this.renderButton.bind(this);
     this.cancelEntity = this.cancelEntity.bind(this);
     this.removeEntity = this.removeEntity.bind(this);
@@ -306,7 +307,7 @@ export default class Toolbar extends Component {
       <div
         className={toolbarClass}
         style={this.state.position}
-        ref="toolbarWrapper"
+        ref={this.toolbarWrapperRef}
       >
         <div style={{ position: "absolute", bottom: 0 }}>
           <div
