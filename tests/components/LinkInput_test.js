@@ -19,6 +19,7 @@ describe("LinkInput Component", () => {
     testContext.cancelError = jest.fn();
     testContext.setEntity = jest.fn();
     testContext.setError = jest.fn();
+    testContext.editor = {};
 
     testContext.wrapper = mount(
       <LinkInput
