@@ -4,14 +4,14 @@
  * License: MIT
  */
 
-import React, { useRef, useState } from "react";
+
+import React, { useRef, useState, useEffect } from "react";
 import icons from "../icons";
 
 const addHttpPrefix = url => {
   if (!url.startsWith("http://") && !url.startsWith("https://")) {
     return `http://${url}`;
   }
-
   return url;
 };
 
@@ -22,10 +22,10 @@ const cancelErrorIfEmptyUrl = (urlEvent, cancelError) => {
 };
 
 const handleKey = (event, setLink, reset) => {
-  if (event.key == "Enter") {
+  if (event.key === "Enter") {
     event.preventDefault();
     setLink(event);
-  } else if (event.key == "Escape") {
+  } else if (event.key === "Escape") {
     event.preventDefault();
     reset();
   }
@@ -36,10 +36,9 @@ const isValidUrl = url => {
   // Author: Diego Perini
   // License: MIT
   // Updated: 2018/09/12
-  const expression = /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?$/i;
+  const expression = /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?$/i;
 
   const regex = new RegExp(expression);
-
   return url.match(regex);
 };
 
@@ -55,28 +54,30 @@ export default function LinkInput({
 }) {
   const textInputRef = useRef();
   const [urlState, setUrlState] = useState(url ?? "");
+  const [isFocused, setIsFocused] = useState(false); 
+
+  useEffect(() => {
+    setUrlState(url ?? "");
+  }, [url]);
 
   const setLink = event => {
     const urlAux = addHttpPrefix(urlState);
 
     if (!isValidUrl(urlAux)) {
       const errorMsg = i18n["Invalid Link"];
-
       setError(errorMsg);
-      textInputRef.current.focus();
+      setIsFocused(true); 
       return;
     }
 
     setEntity({ url: urlAux });
     reset();
-
-    // Force blur to work around Firefox's NS_ERROR_FAILURE
-    event.target.blur();
   };
 
   const reset = () => {
     setUrlState("");
     cancelEntity();
+    setIsFocused(false);
   };
 
   const onLinkChange = event => {
@@ -102,6 +103,8 @@ export default function LinkInput({
         value={urlState}
         onKeyDown={onLinkKeyDown}
         placeholder={i18n["Type the link and press enter"]}
+        onFocus={() => setIsFocused(true)} 
+        onBlur={() => setIsFocused(false)}  
       />
       <span className="toolbar__item" style={{ verticalAlign: "bottom" }}>
         <button
