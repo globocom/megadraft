@@ -4,30 +4,26 @@
  * License: MIT
  */
 
-import React, { Component } from "react";
+import React, { useContext, useRef } from "react";
 
 import { PLUGINS_MODAL_ADD_PLUGIN } from "../constants";
 import { ActionsContext } from "./ActionsProvider";
 
-export default class ModalPluginItem extends Component {
-  static contextType = ActionsContext;
+const ModalPluginItem = props => {
+  const buttonEl = useRef(null);
+  const actionsContext = useContext(ActionsContext);
 
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-    this.renderButton = this.renderButton.bind(this);
-  }
+  const handleClick = e => {
+    if (buttonEl.current) {
+      buttonEl.current.onClick(e);
+    }
+  };
 
-  handleClick(e) {
-    this.buttonEl.onClick(e);
-  }
+  const closeModal = () => {
+    props.toggleModalVisibility();
+  };
 
-  closeModal() {
-    this.props.toggleModalVisibility();
-  }
-
-  renderButton(item) {
+  const renderButton = item => {
     const Button = item.buttonComponent;
 
     return (
@@ -35,37 +31,32 @@ export default class ModalPluginItem extends Component {
         key={item.type}
         className="megadraft-modal__item"
         onClick={() => {
-          this.context.onAction({
+          actionsContext.onAction({
             type: PLUGINS_MODAL_ADD_PLUGIN,
             pluginName: item.title
           });
-          this.closeModal();
+          closeModal();
         }}
       >
         <Button
-          ref={el => {
-            this.buttonEl = el;
-          }}
+          ref={buttonEl}
           className="megadraft-modal__button"
           title={item.title}
-          editorState={this.props.editorState}
-          onChange={this.props.onChange}
+          editorState={props.editorState}
+          onChange={props.onChange}
         />
-        <p
-          className="megadraft-modal__button__label"
-          onClick={this.handleClick}
-        >
+        <p className="megadraft-modal__button__label" onClick={handleClick}>
           {item.title}
         </p>
       </li>
     );
-  }
+  };
 
-  render() {
-    return (
-      <ul className="megadraft-modal__items">
-        {this.props.plugins.map(this.renderButton)}
-      </ul>
-    );
-  }
-}
+  return (
+    <ul className="megadraft-modal__items">
+      {props.plugins.map(renderButton)}
+    </ul>
+  );
+};
+
+export default ModalPluginItem;
