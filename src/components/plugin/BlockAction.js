@@ -11,8 +11,16 @@ export default function BlockAction(props) {
   const Icon = props.item.icon;
 
   return (
-    <li className="block__action" onClick={props.item.action}>
-      <Icon className="block__action__icon" />
+    <li className="block__action">
+      <button
+        className="block__action__btn"
+        type="button"
+        role="button"
+        aria-label={`Button action ${props.item.key} of text editor`}
+        onClick={props.item.action}
+      >
+        <Icon className="block__action__icon" />
+      </button>
     </li>
   );
 }

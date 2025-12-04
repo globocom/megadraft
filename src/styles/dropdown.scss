@@ -50,11 +50,24 @@
 }
 
 .dropdown__item {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  width: 100%;
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+
   padding: 0 8px;
   line-height: 40px;
   font-size: 0;
 
   user-select: none;
+
+  &:focus {
+    box-shadow: rgba(0, 0, 0, 0.3) 0 0 4px;
+  }
 
   &--selected {
     &:hover {

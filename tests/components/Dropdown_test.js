@@ -54,7 +54,7 @@ describe("Dropdown Component", () => {
 
     expect(testContext.onChange).not.toHaveBeenCalled();
 
-    item.find("div").simulate("click");
+    item.find("button").simulate("click");
 
     expect(testContext.onChange).toHaveBeenCalled();
   });

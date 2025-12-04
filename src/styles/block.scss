@@ -41,15 +41,29 @@
 }
 
 .block__action {
-  display: inline-block;
+  display: inline-flex;
   padding: 0 8px;
+  min-height: 40px;
   line-height: 40px;
-  cursor: pointer;
   text-align: center;
   font-size: 0;
+  align-items: center;
 
   &:hover {
     color: $black;
+  }
+
+  &__btn {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+
+    align-self: stretch;
+    justify-content: stretch;
+
+    &:focus {
+      box-shadow: rgba(0, 0, 0, 0.3) 0 0 4px;
+    }
   }
 
   &__icon {

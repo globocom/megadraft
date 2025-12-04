@@ -59,17 +59,29 @@ const Dropdown = ({ items = [], selected, onChange }) => {
         item={selectedItem}
         className="dropdown__item--selected"
         onMouseDown={preventSelection}
+        attr={{
+          role: "button",
+          "aria-label": `Dropdown option ${selectedItem.label} selected`
+        }}
       >
         <icons.DropdownArrow className={arrowClassName} />
       </DropdownItem>
 
-      <ul className={dropdownClassName}>
+      <ul
+        className={dropdownClassName}
+        role="dropdown"
+        aria-label={`Dropdown content ${isOpen ? "open" : ""}`}
+      >
         {items.map(item => (
           <li key={item.key}>
             <DropdownItem
               item={item}
               className="dropdown__option"
               onClick={() => onChange(item.key)}
+              attr={{
+                role: "button",
+                "aria-label": `Dropdown option ${item.label}`
+              }}
             />
           </li>
         ))}

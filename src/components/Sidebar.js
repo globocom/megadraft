@@ -156,6 +156,11 @@ export class ToggleButton extends Component {
           this.button.focus();
           this.props.toggle();
         }}
+        role="button"
+        aria-label={`Button for actions text editor ${
+          this.props.open ? "close" : "open"
+        }`}
+        aria-pressed={this.props.open}
       >
         <Icon className="sidemenu__button__icon" />
       </button>
