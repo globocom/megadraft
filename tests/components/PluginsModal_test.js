@@ -64,7 +64,16 @@ describe("PluginsModal", () => {
       },
       onAction
     );
-
+    
+  it("should not render modal when isOpen is false", () => {
+    const component = mountComponent({
+      isOpen: false
+    });
+  
+    // Check if the Modal has not been rendered
+    expect(component.find("Modal").exists()).toBe(false);
+  });
+  
     const { onCloseRequest } = component.find("Modal").props();
     onCloseRequest();
     expect(toggleModalVisibility).toHaveBeenCalled();
